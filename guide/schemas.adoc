@@ -1,0 +1,1 @@
+link:xsd/puf-xsd-schemas.zip[Invoice and Credit Note XSD schemas including Pagero/PUF Extension].

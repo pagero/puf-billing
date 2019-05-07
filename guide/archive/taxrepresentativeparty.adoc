@@ -1,0 +1,21 @@
+Added support for providing address to the tax representative party.
+
+Below table list information added in Invoice/cac:TaxRepresentativeParty
+
+.Elements added in TaxRepresentativeParty
+|===
+|Element |Description
+
+|cac:PostalAddress/cbc:StreetName
+|Street. The main address line in a postal address usually the street name and number.
+|cac:PostalAddress/cbc:AdditionalStreetName
+|An additional address line in a postal address that can be used to give further details supplementing the main line. Common use are secondary house number in a complex or in a building.
+|cac:PostalAddress/cbc:CityName
+|The common name of the city where the postal address is. The name is written in full rather than as a code.
+|cac:PostalAddress/cbc:PostalZone
+|Post code. The identifier for an addressable group of properties according to the relevant national postal service, such as a ZIP code or Post Code.
+|cac:PostalAddress/cbc:CountrySubentity
+|Country subdivision. For specifying a region, county, state, province etc. within a country by using text. In some countries regions or other type of country sub divisions are commonly used.
+|cac:PostalAddress/cac:Country/cbc:IdentificationCode
+|The country where the address is. The country should always be given by using ISO code 3166 alpha 2. The seller’s address country must be contained in an invoice in the form of a two letter code (ISO 3166-1 alpha-2).
+|===

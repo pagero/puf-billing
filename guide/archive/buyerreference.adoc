@@ -1,0 +1,11 @@
+In order to specify a reference used for routing purpose a new element called Buyer Reference has been added.
+
+Below table show the definition of the extension-element added.
+
+.Elements added to specify reference
+|===
+|Element |Description
+
+|Invoice/cbc:BuyerReference
+|An identifier used for internal routing, assigned by the buyer.
+|===

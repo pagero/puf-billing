@@ -1,0 +1,15 @@
+Pagero UF extends the possibility to provide "free text" in the invoice by allowing multiple notes, see example below.
+
+
+*Example* +
+_Invoice example with multiple Note_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:Note>Header text 1</cbc:Note>
+  <cbc:Note>Header text 2</cbc:Note>
+  <cbc:Note>Header text 3</cbc:Note>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

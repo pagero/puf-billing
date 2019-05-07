@@ -1,0 +1,7 @@
+==== Accounting Supplier Party/Accounting Customer Party
+
+include::accountingsuppliercustomerparty.adoc[]
+
+==== Buyer Customer Party
+
+include::buyercustomerparty.adoc[]

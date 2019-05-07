@@ -1,0 +1,110 @@
+Certain elements require the use of Pagero UF specific Code list. Below you will find the lists and where the lists are applicable.
+
+=== Code lists for coded elements
+
+.Table of the code lists used
+|===
+|Business Term |XPath |listID
+
+|Registration Data Id Type
+|`puf:RegistrationData/puf:IdType`
+|<<_puf_001_registrationdata>>
+
+|Additional Destination Address Identifier
+|`puf:ADAID/puf:IDType`
+|<<_puf_002_adaid>>
+
+|===
+
+
+==== PUF-001-REGISTRATIONDATA
+The value consist of "country code:type of value". Country code states which country the value is applicable for.
+
+|===
+|Value |Description
+
+|`IT:Ufficio`
+|Initials of the province where the Company is registered.
+
+|`IT:NumeroREA`
+|The registration number in the "companies register".
+
+|`IT:CapitaleSociale`
+|Only in the case of a company (SpA, SApA, SRL), the element must be filled in with the share capital
+
+|`IT:SocioUnico`
+|Only in the case of a joint-stock company or limited liability company, the element must be filled in to indicate if there is a single shareholder or several shareholders. +
+
+Allowed values: SU or SM +
+
+SU : Sole shareholder +
+SM : Several shareholders
+
+|`IT:StatoLiquidazione`
+|Indication of whether the Company is in liquidation or not. +
+Allowed values: LS or LN +
+
+LS : In liquidation +
+LN : Not in liquidation
+
+|`ES:Book`
+|Book in the register of the company.
+
+|`ES:RegisterOfCompaniesLocation`
+|In which register the company is located.
+
+|`ES:Sheet`
+|Sheet in the register of the company.
+
+|`ES:Folio`
+|Folio in the register of the company.
+
+|`ES:Section`
+|Section in the register of the company.
+
+|`ES:Volume`
+|Volume in the register of the company.
+
+|`ES:AdditionalRegistrationData`
+|Other registration data.
+
+|`FR:DenomSociete`
+|Legal name.
+
+|`FR:TypeSociete`
+|Type of company (for example SAS).
+
+|`FR:CapitalSocial`
+|Share capital, capital contributed to a company at the time of its creation.
+
+|`FR:RCSNumber`
+|Trade and Companies Register number.
+
+|`FR:APE`
+|Business activity classification code.
+
+|===
+
+
+==== PUF-002-ADAID
+The value consist of "country code:type of value". Country code states which country the value is applicable for.
+
+|===
+|Value |Description
+
+|`FR:ServiceCode`
+|Code of the receiving unit behind French Government portal.
+
+|`ES:OficinaContable`
+|Code for the accounting office (Oficina Contable).
+
+|`ES:OrganoGestor`
+|Code for the management agency (Órgano Gestor).
+
+|`ES:UnidadTramitadora`
+|Code for the processing authority unit (Unidad Tramitadora).
+
+|`ES:OrganoProponente`
+|Code for the proposing agency (Órgano Proponente).
+
+|===

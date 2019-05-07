@@ -1,0 +1,50 @@
+:doctitle: image:images/logo.png[float="center", width=100%] Pagero Universal Format Billing 1.0
+:name-op-en: Customer Integration, Pagero
+:minor: 1.0
+:revision: 1.0
+:toc: left
+:toclevels: 4
+:source-highlighter: coderay
+:icons: font
+:source-language: xml
+:doctype: book
+:sectanchors:
+:sectlinks:
+:sectnums:
+:nofooter:
+
+== Introduction
+
+include::guide/introduction.adoc[]
+
+== Guidelines
+
+include::guide/guidelines.adoc[]
+
+== Extended content
+
+include::guide/extendedcontent.adoc[]
+
+== Country Specific
+
+include::guide/countryspecific.adoc[]
+
+== Code lists
+
+include::guide/codelists.adoc[]
+
+== XML Schemas
+
+include::guide/schemas.adoc[]
+
+== Validation rules
+
+include::guide/schematron.adoc[]
+
+== Examples
+
+include::guide/examples.adoc[]
+
+== Support
+
+include::guide/support.adoc[]

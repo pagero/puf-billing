@@ -1,0 +1,57 @@
+Information in the following section (3.2.x) concerns the document in its entirety.
+
+==== Note
+
+include::note.adoc[]
+
+==== Order reference
+
+include::orderreference.adoc[]
+
+==== Invoice Period
+
+include::invoiceperiod.adoc[]
+
+==== Despatch document reference
+
+include::despatchdocumentreference.adoc[]
+
+==== Contract Document Reference
+
+include::contractdocumentreference.adoc[]
+
+==== Attachments
+
+include::attachment.adoc[]
+
+==== Originator Document Reference
+
+include::originatordocumentreference.adoc[]
+
+==== Delivery
+
+include::delivery.adoc[]
+
+==== Delivery Terms
+
+include::deliveryterms.adoc[]
+
+==== Payment Terms
+
+include::paymentterms.adoc[]
+
+==== Allowance Charge
+
+include::allowancecharge.adoc[]
+
+==== Tax Exchange Rate
+
+include::taxexchangerate.adoc[]
+
+==== Tax Total
+
+include::taxtotal.adoc[]
+
+==== Legal Monetary Total
+
+include::legalmonetarytotal.adoc[]

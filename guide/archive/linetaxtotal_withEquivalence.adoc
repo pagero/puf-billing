@@ -1,0 +1,33 @@
+Below table list new elements added within `Invoice/cac:InvoiceLine/cac:TaxTotal`.
+
+.Elements added in cac:InvoiceLine/cac:TaxTotal
+|===
+|Element |Description
+
+|`cac:TaxAmount`
+|The total tax amount, the sum of the tax subtotals.
+|`cac:TaxSubtotal/cbc:TaxableAmount`
+|The amount that is the base for the VAT rate applied in the subcategory.
+|`cac:TaxSubtotal/cbc:TaxAmount`
+|Tax amount of the tax sub total.
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode`
+|Tax exemption reason code.
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason`
+|Tax exemption reason description.
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:ID`
+|A code that identifies each subtotal. Each tax category must be identified with a code.
+|`cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID`
+|Tax Scheme ID. Most commonly “VAT“
+|===
+
+.Elements added in TODO: Should this exist
+|===
+|Element |Description
+
+|`puf:EquivalenceSurcharge/cbc:Percent`
+|Percentage  of equivalence surcharge
+|`puf:EquivalenceSurcharge/puf:Amount`
+|Equivalence surcharge amount assigned to items tax category
+|`puf:EquivalenceSurcharge/puf:Amount/@currencyID`
+|Currency of amount
+|===

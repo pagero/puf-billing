@@ -1,0 +1,78 @@
+In order to specify more details regarding payment terms, more information has been added to the structure `(Invoice|CreditNote)/cac:PaymentTerms`.
+
+Below table shows the definition of the extended element.
+
+.Elements added in cac:PaymentTerms
+|===
+|Element |Description
+
+|`cbc:PenaltySurchargePercent`
+|Penalty interest rate, numberic value only.
+|===
+
+*Example*
+[source,xml]
+----
+<cac:PaymentTerms>
+    <cbc:PenaltySurchargePercent>10</cbc:PenaltySurchargePercent>
+</cac:PaymentTerms>
+----
+
+Also, an extension has been created for providing additional information not supported in UBL 2.1 in order to provide further information regarding payment terms. +
+
+The UBL extension to be used for below elements is `cac:PaymentTerms/ext:UBLExtensions` and the structure used from `PUF-ExtensionComponent.xsd` is `puf:PageroExtension/puf:PaymentTermsExtension`. +
+
+See example below as well as the URI to be used for this extension.
+
+*Example*
+[source,xml]
+----
+<cac:PaymentTerms>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PaymentTermsExtension</ext:ExtensionURI> <!--1-->
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:PaymentTermsExtension/> <!--2-->
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</cac:PaymentTerms>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table shows the definition of the extended element.
+
+.Elements added in puf:PaymentTermsExtension
+|===
+|Element |Description
+
+|`puf:Penalty/cbc:Note`
+|Penalty text due to late payment, if the need of explicitly stating a penalty text separated from the regular payment terms.
+|===
+
+*Example* +
+_Penalty text provided in extension_
+[source,xml]
+----
+<cac:PaymentTerms>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PaymentTermsExtension</ext:ExtensionURI>
+          <ext:ExtensionContent>
+              <puf:PageroExtension>
+                  <puf:PaymentTermsExtension>
+                      <puf:Penalty>
+                          <cbc:Note>Penalty text due to late payment</cbc:Note>
+                      </puf:Penalty>
+                  </puf:PaymentTermsExtension>
+              </puf:PageroExtension>
+          </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</cac:PaymentTerms>
+----

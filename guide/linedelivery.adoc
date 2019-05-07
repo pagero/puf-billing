@@ -1,0 +1,31 @@
+To be able to further define delivery information, the possibility to provide it for each line has been added in the structure `Invoice/cac:InvoiceLine/cac:Delivery`.
+
+See table below for definition of the new elements.
+
+.Elements added to cac:InvoiceLine/cac:Delivery
+|===
+|Element |Description
+
+|`cbc:Quantity`
+|Delivered quantity.
+|`cbc:Quantity/@unitCode`
+|Unit of the delivered quantity.
+|`cbc:ActualDeliveryDate`
+|Date of delivery.
+|`cac:DeliveryLocation/cbc:ID`
+|ID of the delivery location.
+|`cac:DeliveryLocation/cac:Address/cbc:StreetName`
+|Street name of the delivery location.
+|`cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName`
+|Additional street name of the delivery location.
+|`cac:DeliveryLocation/cac:Address/cbc:CityName`
+|City of the delivery location.
+|`cac:DeliveryLocation/cac:Address/cbc:PostalZone`
+|Post code of the delivery location.
+|`cac:DeliveryLocation/cac:Address/cbc:CountrySubentity`
+|Province of the delivery location.
+|`cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode`
+|Country code of the delivery location.
+|`cac:DeliveryLocation/cac:Address/cac:Country/cbc:Name`
+|The country name of the delivery location.
+|===

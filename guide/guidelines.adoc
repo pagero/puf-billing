@@ -1,0 +1,42 @@
+Pagero UF builds on and fully support the http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0]. Reference to guidelines and specification can be found link:http://docs.PEPPOL.eu/poacc/billing/3.0/bis/[here]. +
+
+In areas where support for certain information is available in the existing UBL 2.1 structure, Pagero UF implements these elements.
+In other areas where there are no suitable elements in the existing UBL 2.1 schema, Pagero UF implements `UBLExtensions`.
+Since `UBLExtensions` are only available on document level the UBL had to be altered, adding the `UBLExtension` in every aggregate thus replacing the `UBL-CommonAggregateComponents-2.1.xsd` with Pagero UF altered `PUF-CommonAggregateComponents-2.1.xsd`.
+The reason for this is that there would be too many semantic rules to tie each `UBLExtension` on document level to their corresponding existing element on other levels.
+
+In the following chapters, you will find descriptions of each element that's been added in Pagero UF that is not present in the http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0].
+
+=== How to get started with Pagero Universal Format
+
+include::howtogetstarted.adoc[]
+
+=== Namespaces
+
+include::namespaces.adoc[]
+
+=== Customization and Profile ID
+
+include::customizationid.adoc[]
+
+=== Working with extensions
+
+include::workextensions.adoc[]
+
+=== Continuous development and release management
+
+Pagero UF will continuously be updated to meet new market demands. In order to support backward compatibility, the XSD schema is built with the use of "other" elements. The "other" elements in the XSD
+will prevent validation error for customers who do not frequently keep the XSD schema up-to-date.
+
+
+==== Major release
+
+A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation to users who subscribe to Pagero UF mailing list or on GitHub.
+
+
+==== Minor release
+
+A minor release will always be backward compatible and will take place without prior notice and will be implemented whenever needed. Minor releases may include bugfixes, new elements, schematron updates and other features.
+
+
+To register for Pagero UF major release notification you can create an account on https://pagero.validex.net. But urge all interested parties to follow the project on GitHub where all releases will be notified.

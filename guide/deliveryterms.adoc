@@ -1,0 +1,25 @@
+In order to define delivery terms, a new structure named `(Invoice|CreditNote)/cac:DeliveryTerms` has been added.
+
+Below table shows the definition of the added elements.
+
+.Elements added in cac:DeliveryTerms
+|===
+|Element |Description
+
+|`cbc:SpecialTerms`
+|Description of the delivery terms.
+|`cbc:LossRiskResponsibilityCode`
+|Code to identify the responsibility for the loss risk.
+|`cbc:LossRisk`
+|A description of the responsibility for the loss risk.
+|===
+
+*Example*
+[source,xml]
+----
+<cac:DeliveryTerms>
+    <cbc:SpecialTerms>Description of the delivery terms</cbc:SpecialTerms>
+    <cbc:LossRiskResponsibilityCode>Code to identify the responsibility for the loss risk.</cbc:LossRiskResponsibilityCode>
+    <cbc:LossRisk>A description of the responsibility for the loss risk.</cbc:LossRisk>
+</cac:DeliveryTerms>
+----

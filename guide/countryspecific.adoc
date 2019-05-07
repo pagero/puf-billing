@@ -1,0 +1,13 @@
+This section will provide information regarding on how to include common country specific data in Pagero UF.
+
+=== Spain
+
+include::spain.adoc[]
+
+=== France
+
+include::france.adoc[]
+
+=== Italy
+
+include::italy.adoc[]

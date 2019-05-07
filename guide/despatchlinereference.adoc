@@ -1,0 +1,30 @@
+In order to specify the despatch advice reference on line level, the `Invoice/cac:InvoiceLine/cac:DespatchLineReference`-segment has been added.
+
+.Elements added to cac:DespatchLineReference
+|===
+|Element |Description
+
+|`cbc:LineID`
+|Identification of the line in the referenced despatch advice document.
+|`cac:DocumentReference/cbc:ID`
+|Identification of the despatch advice document.
+|`cac:DocumentReference/cbc:IssueDate`
+|Date of issue of the despatch advice document referred to, date should be formatted yyyy-mm-dd.
+|===
+
+*Example* +
+_Despatch document reference ID and date_
+[source,xml]
+----
+<cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+  <cac:DespatchLineReference>
+    <cbc:LineID>1</cbc:LineID>
+      <cac:DocumentReference>
+        <cbc:ID>Despatch Document ID</cbc:ID>
+        <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+      </cac:DocumentReference>
+  </cac:DespatchLineReference>
+  <!-- Code omitted for clarity -->
+</cac:InvoiceLine>
+----

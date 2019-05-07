@@ -1,0 +1,48 @@
+To provide more detailed tax information on line level, below table list new elements added within `Invoice/cac:InvoiceLine/cac:TaxTotal` segment.
+
+.Elements added in cac:InvoiceLine/cac:TaxTotal
+|===
+|Element |Description
+
+|`cac:TaxAmount`
+|The total tax amount, the sum of the tax subtotals.
+|`cac:TaxSubtotal/cbc:TaxableAmount`
+|The amount that is the base for the VAT rate applied in the subcategory.
+|`cac:TaxSubtotal/cbc:TaxAmount`
+|Tax amount of the tax sub total.
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode`
+|Tax exemption reason code.
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason`
+|Tax exemption reason description.
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:ID`
+|A code that identifies each subtotal. Each tax category must be identified with a code, the same codes used for tax category on document level is applicable here.
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:Percent`
+|The VAT rate.
+|`cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID`
+|Tax Scheme ID. Most commonly “VAT“
+|===
+
+
+*Example* +
+_Invoice example of Tax Total on line level_
+[source,xml]
+----
+<cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+  <cac:TaxTotal>
+      <cbc:TaxAmount currencyID="EUR">37.00</cbc:TaxAmount>
+      <cac:TaxSubtotal>
+          <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+          <cbc:TaxAmount currencyID="EUR">12.00</cbc:TaxAmount>
+          <cac:TaxCategory>
+              <cbc:ID>S</cbc:ID>
+              <cbc:Percent>12</cbc:Percent>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:TaxCategory>
+      </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <!-- Code omitted for clarity -->
+</cac:InvoiceLine>
+----

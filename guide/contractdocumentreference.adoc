@@ -1,0 +1,21 @@
+To be able to specify the issue date of a referenced contract document, the `(Invoice|CreditNote)/cac:ContractDocumentReference`-segment has been extended.
+
+Below table shows the definition of the added element.
+
+.Elements added in cac:ContractDocumentReference
+|===
+|Element |Description
+
+|`cbc:IssueDate`
+|Issue date for the referenced contract document, date should be formatted yyyy-mm-dd.
+|===
+
+*Example* +
+_Contract document reference ID and date_
+[source,xml]
+----
+<cac:ContractDocumentReference>
+    <cbc:ID>Contract Document ID</cbc:ID>
+    <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+</cac:ContractDocumentReference>
+----

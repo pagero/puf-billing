@@ -1,0 +1,25 @@
+Below table lists all extension-elements added within `Invoice/cac:InvoiceLine/cac:WithholdingTaxTotal`.
+
+.Elements added in cac:InvoiceLine/cac:WithholdingTaxTotal
+|===
+|Element |Description
+
+|`cbc:TaxAmount`
+|The total tax amount that is being withheld, the sum of the tax subtotals for each tax category within the taxation scheme.
+|`cac:TaxSubtotal/cbc:TaxableAmount`
+|The amount that is the base for the VAT rate applied in the subcategory.
+|`cac:TaxSubtotal/cbc:TaxAmount`
+|The tax amount for the VAT rate.
+|`cac:TaxSubtotal/cbc:TransactionCurrencyTaxAmount`
+|If the document currency and tax currency differs, tax amount in tax currency (if needed) of the subtotal should be specified here.
+|`cac:TaxSubtotal/cbc:TransactionCurrencyTaxAmount/@currencyID`
+|Currency of the transaction currency tax amount.
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:ID`
+|A code that identifies each subtotal. Each tax category must be identified with a code.
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:ID/@schemeID`
+|A tax category identifier must have the scheme identifier attribute “UNCL5305”.
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:Percent`
+|The tax rate.
+|`cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID`
+|Tax Scheme ID. Most commonly “VAT“
+|===

@@ -1,0 +1,20 @@
+
+To indicate that Pagero Universal format is an extension of http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0] there is an added extension id after the
+standard http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0] CustomizationID.
+
+
+|===
+|Type |Element `cbc:CustomizationID` |Element `cbc:ProfileID`
+
+|*Invoice and credit note*
+|urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0
+|urn:pagero.com:puf:billing:1.0
+|===
+
+*Example of CustomizationID and ProfileID:*
+[source,xml]
+----
+<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0</cbc:CustomizationID>
+<cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+----
+NOTE: Note that "conformant" must be specified before Pagero UFs extensionId.

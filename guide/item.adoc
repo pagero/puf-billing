@@ -1,0 +1,19 @@
+Below table lists all additional elements added within `Invoice/cac:InvoiceLine/cac:Item`, these additional fields is used to assign more detailed information for the article.
+
+.Elements added in cac:InvoiceLine/cac:Item
+|===
+|Element |Description
+
+|`cac:BuyersItemIdentification/cbc:ID`
+|Identifier of the item, assigned by the buyer.
+|`cac:ManufacturersItemIdentification/cbc:ID`
+|Identifier of the item, assigned by the manufacturer.
+|`cac:ItemInstance/cbc:ManufactureDate`
+|Date of when the item was manufactured, date should be formatted yyyy-mm-dd.
+|`cac:ItemInstance/cbc:BestBeforeDate`
+|The items best before date, date should be formatted yyyy-mm-dd.
+|`cac:ItemInstance/cbc:SerialID`
+|Serial number of the item.
+|`cac:ItemInstance/cac:LotIdentification/cbc:LotNumberID`
+|Lot number identifier of the item.
+|===

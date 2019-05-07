@@ -1,0 +1,15 @@
+Pagero UF extends the possibility to provide "free text" for each line by allowing multiple notes, see example below.
+
+
+*Example* +
+_Invoice example with multiple Note on line level_
+[source,xml]
+----
+<cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+  <cbc:Note>Line text 1</cbc:Note>
+  <cbc:Note>Line text 2</cbc:Note>
+  <cbc:Note>Line text 3</cbc:Note>
+  <!-- Code omitted for clarity -->
+</cac:InvoiceLine>
+----

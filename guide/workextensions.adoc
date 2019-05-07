@@ -1,0 +1,34 @@
+In order to facilitate the use of Pagero UF specific extensions, a schema for the extensions is provided.
+The `PUF-ExtensionComponent.xsd` can be found together with the other schemas in chapter <<_xml_schemas>>. This chapter provides an overview on how to use
+extensions.
+
+To be able to use the `PUF-ExtensionComponent` a namespace must be included in the document file.
+
+*Example* +
+_Example from Invoice_
+[source,xml]
+----
+<Invoice ... xmlns:puf="urn:pagero:ExtensionComponent:1.0"> <!--1-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Note that the namespace is the same for CreditNote-root element.
+
+Depending on in which context the `UBLExtensions` are used there are different options of what types of values you are able to provide.
+To identify which context the `UBLExtensions` is in the element ExtensionURI is used. When using these Pagero extensions, the URI has the same base: `urn:pagero:ExtensionComponent:1.0:PageroExtension`. After the URI, the specific resource name is added.
+
+*Example* +
+_UBLExtension used in the Party structure._
+[source,xml]
+----
+<cac:AccountingSupplierParty>
+    <cac:Party>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+        <!-- Code omitted for clarity -->
+    </cac:Party>
+</cac:AccountingSupplierParty>
+----
+
+For detailed examples and how to use possible values in each extension please check the chapters where the Pagero UF-specific elements are described.

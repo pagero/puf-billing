@@ -1,0 +1,21 @@
+To be able to specify the _issue date_ of a referenced tender document, the `(Invoice|CreditNote)/cac:OriginatorDocumentReference`-segment has been extended.
+
+Below table shows the definition of the added element.
+
+.Elements added in cac:OriginatorDocumentReference
+|===
+|Element |Description
+
+|`cbc:IssueDate`
+|Date of issue of the referenced tender, date should be formatted yyyy-mm-dd.
+|===
+
+*Example* +
+_Originator document reference ID and date_
+[source,xml]
+----
+<cac:OriginatorDocumentReference>
+    <cbc:ID>Tender document ID</cbc:ID>
+    <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+</cac:OriginatorDocumentReference>
+----
