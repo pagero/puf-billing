@@ -491,7 +491,6 @@
             <cbc:ID schemeID="AAk">DISPA3</cbc:ID>
             <cbc:DocumentTypeCode >130</cbc:DocumentTypeCode>
         </cac:DocumentReference>
-        <cac:DocumentReference>
         <cac:DespatchLineReference>
             <cbc:LineID>1</cbc:LineID>
             <cac:DocumentReference>
