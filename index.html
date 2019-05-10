@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.6.1">
+<meta name="generator" content="Asciidoctor 1.5.8">
 <title>Pagero Universal Format Billing 1.0</title>
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -423,7 +423,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
 /*pre.CodeRay {background-color:#f7f7f8;}*/
@@ -518,7 +518,7 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1><span class="image" style="float: center"><img src="images/logo.png" alt="logo" width="100%"></span> Pagero Universal Format Billing 1.0</h1>
+<h1><span class="image center"><img src="images/logo.png" alt="logo" width="100%"></span> Pagero Universal Format Billing 1.0</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -545,7 +545,7 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel2">
 <li><a href="#_parties">3.1. Parties</a>
 <ul class="sectlevel3">
-<li><a href="#_accounting_supplier_party_accounting_customer_party">3.1.1. Accounting Supplier Party/Accounting Customer Party</a>
+<li><a href="#_accounting_supplier_partyaccounting_customer_party">3.1.1. Accounting Supplier Party/Accounting Customer Party</a>
 <ul class="sectlevel4">
 <li><a href="#_registration_data">Registration data</a></li>
 <li><a href="#_additional_destination_address_identifier_adaid">Additional Destination Address Identifier (ADAID)</a></li>
@@ -690,7 +690,7 @@ table.CodeRay td.code>pre{padding:0}
 <hr>
 <div class="sect2">
 <h3 id="_version_and_changelog"><a class="anchor" href="#_version_and_changelog"></a><a class="link" href="#_version_and_changelog">1.1. Version and Changelog</a></h3>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Version</caption>
 <colgroup>
 <col style="width: 33.3333%;">
@@ -840,7 +840,7 @@ In the xml schemas provided in chapter <a href="#_xml_schemas">XML Schemas</a> y
 <p>To indicate that Pagero Universal format is an extension of <a href="http://docs.peppol.eu/poacc/billing/3.0/">PEPPOL BIS Billing 3.0</a> there is an added extension id after the
 standard <a href="http://docs.peppol.eu/poacc/billing/3.0/">PEPPOL BIS Billing 3.0</a> CustomizationID.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1010,11 +1010,11 @@ Note that most examples are only shown for document type Invoice.
 <div class="sect2">
 <h3 id="_parties"><a class="anchor" href="#_parties"></a><a class="link" href="#_parties">3.1. Parties</a></h3>
 <div class="sect3">
-<h4 id="_accounting_supplier_party_accounting_customer_party"><a class="anchor" href="#_accounting_supplier_party_accounting_customer_party"></a><a class="link" href="#_accounting_supplier_party_accounting_customer_party">3.1.1. Accounting Supplier Party/Accounting Customer Party</a></h4>
+<h4 id="_accounting_supplier_partyaccounting_customer_party"><a class="anchor" href="#_accounting_supplier_partyaccounting_customer_party"></a><a class="link" href="#_accounting_supplier_partyaccounting_customer_party">3.1.1. Accounting Supplier Party/Accounting Customer Party</a></h4>
 <div class="paragraph">
 <p>Below table lists all additional elements added to extend the <code>(Invoice|CreditNote)/cac:AccountingSupplierParty</code> and <code>(Invoice|CreditNote)/cac:AccountingCustomerParty</code>.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. Additional elements added within cac:AccountingSupplierParty and cac:AccountingCustomerParty</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1103,7 +1103,7 @@ The UBL extension to be used for below elements is <code>cac:Party/ext:UBLExtens
 <div class="paragraph">
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 3. Elements added in puf:PartyExtension</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1227,7 +1227,7 @@ This is mostly used to public entities (e.g. government recipients). To identify
 <div class="paragraph">
 <p>Below table lists all additional elements added within <code>(Invoice|CreditNote)/cac:BuyerCustomerParty</code>.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 4. Elements added in cac:BuyerCustomerParty</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1475,7 +1475,7 @@ Please note that all e-invoice formats do not support both invoice recipient and
 <div class="paragraph">
 <p>Below show how additional element from UBL 2.1 in <code>(Invoice|CreditNote)/cac:OrderReference</code> has been used to provide the purchase order date.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 5. Elements added in cac:OrderReference</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1538,7 +1538,7 @@ Please note that all e-invoice formats do not support both invoice recipient and
 <div class="paragraph">
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 6. Elements added in puf:OrderReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1591,7 +1591,7 @@ Please note that all e-invoice formats do not support both invoice recipient and
 <div class="paragraph">
 <p>Below table shows the definition of the added element.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 7. Elements added in cac:InvoicePeriod</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1632,7 +1632,7 @@ Please note that all e-invoice formats do not support both invoice recipient and
 <div class="paragraph">
 <p>Below table shows the definition of the added element.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 8. Elements added in cac:DespatchDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1672,7 +1672,7 @@ Please note that all e-invoice formats do not support both invoice recipient and
 <div class="paragraph">
 <p>Below table shows the definition of the added element.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 9. Elements added in cac:ContractDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1783,7 +1783,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <div class="paragraph">
 <p>Below table shows the definition of the added element.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 10. Elements added in cac:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1823,7 +1823,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <div class="paragraph">
 <p>Below table shows the definition of the added element.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 11. Elements added in cac:Delivery</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1898,7 +1898,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <div class="paragraph">
 <p>Below table show the definition of the additional elements added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 12. Elements added in puf:DeliveryExtension</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -1956,7 +1956,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <div class="paragraph">
 <p>Below table shows the definition of the added elements.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 13. Elements added in cac:DeliveryTerms</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -2004,7 +2004,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <div class="paragraph">
 <p>Below table shows the definition of the extended element.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 14. Elements added in cac:PaymentTerms</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -2077,7 +2077,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <div class="paragraph">
 <p>Below table shows the definition of the extended element.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 15. Elements added in puf:PaymentTermsExtension</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -2127,7 +2127,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <div class="paragraph">
 <p>Below table lists the extension-element added within the <code>(Invoice|CreditNote)/cac:AllowanceCharge</code>-segment.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 16. Elements added in cac:AllowanceCharge</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -2160,7 +2160,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <div class="paragraph">
 <p>To be able to provide more in-depth information if tax currency is different from document currency, a new structure has been added <code>(Invoice|CreditNote)/cac:TaxExchangeRate</code>.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 17. Elements added in cac:TaxExchangeRate</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -2262,7 +2262,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <div class="paragraph">
 <p>Below table lists all additional elements added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 18. Elements added in puf:TaxSubtotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -2438,7 +2438,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <div class="paragraph">
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 19. Elements added in puf:LegalMonetaryTotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -2699,7 +2699,7 @@ See example below as well as the URI to be used for this extension.</p>
 <div class="paragraph">
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 20. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -2768,7 +2768,7 @@ See example below as well as the URI to be used for this extension.</p>
 <div class="paragraph">
 <p>If there are multiple orders that needs to be referenced, <code>cac:OrderLineReference</code> can be used. Below table shows the new elements added within the <code>Invoice/cac:InvoiceLine/cac:OrderLineReference</code>-segment.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 21. Elements added to cac:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -2846,7 +2846,7 @@ See example below as well as the URI to be used for this extension.</p>
 <div class="paragraph">
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 22. Elements added in puf:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -2905,7 +2905,7 @@ See example below as well as the URI to be used for this extension.</p>
 <div class="paragraph">
 <p>In order to specify the despatch advice reference on line level, the <code>Invoice/cac:InvoiceLine/cac:DespatchLineReference</code>-segment has been added.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 23. Elements added to cac:DespatchLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -3000,7 +3000,7 @@ See example below as well as the URI to be used for this extension.</p>
 <div class="paragraph">
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 24. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -3098,7 +3098,7 @@ See example below as well as the URI to be used for this extension.</p>
 <div class="paragraph">
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 25. Elements added to puf:LineExtension/puf:ProjectReference</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -3196,7 +3196,7 @@ See example below as well as the URI to be used for this extension.</p>
 <div class="paragraph">
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 26. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -3254,7 +3254,7 @@ See example below as well as the URI to be used for this extension.</p>
 <div class="paragraph">
 <p>See table below for definition of the new elements.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 27. Elements added to cac:InvoiceLine/cac:Delivery</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -3319,7 +3319,7 @@ See example below as well as the URI to be used for this extension.</p>
 <div class="paragraph">
 <p>To provide more detailed tax information on line level, below table list new elements added within <code>Invoice/cac:InvoiceLine/cac:TaxTotal</code> segment.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 28. Elements added in cac:InvoiceLine/cac:TaxTotal</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -3398,7 +3398,7 @@ See example below as well as the URI to be used for this extension.</p>
 <div class="paragraph">
 <p>Below table lists all additional elements added within <code>Invoice/cac:InvoiceLine/cac:Item</code>, these additional fields is used to assign more detailed information for the article.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 29. Elements added in cac:InvoiceLine/cac:Item</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -3437,6 +3437,32 @@ See example below as well as the URI to be used for this extension.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:Item&gt;</span>
+    <span class="tag">&lt;cac:BuyersItemIdentification&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>Buyers item ID<span class="tag">&lt;/cbc:ID&gt;</span>
+    <span class="tag">&lt;/cac:BuyersItemIdentification&gt;</span>
+    <span class="tag">&lt;cac:ManufacturersItemIdentification&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>Manufacturers item ID<span class="tag">&lt;/cbc:ID&gt;</span>
+    <span class="tag">&lt;/cac:ManufacturersItemIdentification&gt;</span>
+    <span class="tag">&lt;cac:ItemInstance&gt;</span>
+        <span class="tag">&lt;cbc:ManufactureDate&gt;</span>2018-01-01<span class="tag">&lt;/cbc:ManufactureDate&gt;</span>
+        <span class="tag">&lt;cbc:BestBeforeDate&gt;</span>2018-01-01<span class="tag">&lt;/cbc:BestBeforeDate&gt;</span>
+        <span class="tag">&lt;cbc:SerialID&gt;</span>123456789<span class="tag">&lt;/cbc:SerialID&gt;</span>
+        <span class="tag">&lt;cac:LotIdentification&gt;</span>
+            <span class="tag">&lt;cbc:LotNumberID&gt;</span>1111111<span class="tag">&lt;/cbc:LotNumberID&gt;</span>
+        <span class="tag">&lt;/cac:LotIdentification&gt;</span>
+    <span class="tag">&lt;/cac:ItemInstance&gt;</span>
+  <span class="tag">&lt;/cac:Item&gt;</span>
+<span class="tag">&lt;/cac:InvoiceLine&gt;</span></code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_price"><a class="anchor" href="#_price"></a><a class="link" href="#_price">3.3.11. Price</a></h4>
@@ -3488,7 +3514,7 @@ Note that the new element PriceInclAllowanceChargeAmount should include the allo
 <div class="paragraph">
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 30. Elements added to puf:PriceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
@@ -3967,7 +3993,7 @@ the extension for AccountingSupplierParty structure <a href="#_registration_data
 </div>
 <div class="sect2">
 <h3 id="_code_lists_for_coded_elements"><a class="anchor" href="#_code_lists_for_coded_elements"></a><a class="link" href="#_code_lists_for_coded_elements">5.1. Code lists for coded elements</a></h3>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 31. Table of the code lists used</caption>
 <colgroup>
 <col style="width: 33.3333%;">
@@ -3999,7 +4025,7 @@ the extension for AccountingSupplierParty structure <a href="#_registration_data
 <div class="paragraph">
 <p>The value consist of "country code:type of value". Country code states which country the value is applicable for.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4093,7 +4119,7 @@ LN : Not in liquidation</p></td>
 <div class="paragraph">
 <p>The value consist of "country code:type of value". Country code states which country the value is applicable for.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
