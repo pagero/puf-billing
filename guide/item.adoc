@@ -17,3 +17,27 @@ Below table lists all additional elements added within `Invoice/cac:InvoiceLine/
 |`cac:ItemInstance/cac:LotIdentification/cbc:LotNumberID`
 |Lot number identifier of the item.
 |===
+
+*Example*
+[source,xml]
+----
+<cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+  <cac:Item>
+    <cac:BuyersItemIdentification>
+        <cbc:ID>Buyers item ID</cbc:ID>
+    </cac:BuyersItemIdentification>
+    <cac:ManufacturersItemIdentification>
+        <cbc:ID>Manufacturers item ID</cbc:ID>
+    </cac:ManufacturersItemIdentification>
+    <cac:ItemInstance>
+        <cbc:ManufactureDate>2018-01-01</cbc:ManufactureDate>
+        <cbc:BestBeforeDate>2018-01-01</cbc:BestBeforeDate>
+        <cbc:SerialID>123456789</cbc:SerialID>
+        <cac:LotIdentification>
+            <cbc:LotNumberID>1111111</cbc:LotNumberID>
+        </cac:LotIdentification>
+    </cac:ItemInstance>
+  </cac:Item>
+</cac:InvoiceLine>
+----
