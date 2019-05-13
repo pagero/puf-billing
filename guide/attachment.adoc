@@ -1,4 +1,4 @@
-Peppol BIS Billing 3.0 there is no possibility to provide a presentation (PDF-image) of the invoice or credit note. To support presentation in Pagero UF it's possible to set the below
+In Peppol BIS Billing 3.0 there is no support for providing a presentation (PDF-image) of the invoice or credit note. To support presentation in Pagero UF it's possible to set the below
 text depending on credit note or invoice in order for the attachment to be intepreted as a presentation. For other kind of attachments, use Peppol BIS Billing 3.0 specification as reference.
 
 * *Credit notes:* Credit Note +
