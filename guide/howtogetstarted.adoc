@@ -10,6 +10,6 @@ When http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0] is impleme
 2. Change namespaces (see chapter <<_namespaces>>)
 3. Change the Customization Id and Profile Id (see chapter <<_customization_and_profile_id>>)
 4. If elements from extensions is needed see chapter <<_working_with_extensions>> how this is implemented.
-5. Before implementing additional files available in Pagero UF, validate the document with the XSD schema downloaded in step 1.
+5. Before implementing additional fields available in Pagero UF, validate the document with the XSD schema downloaded in step 1.
 
 NOTE: In the xml schemas provided in chapter <<_xml_schemas>> you will see the structure and the occurrences of every element available in Pagero UF.
