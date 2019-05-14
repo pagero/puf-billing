@@ -34,12 +34,10 @@ Below table shows the definition of the new elements added to the extension.
 
 |`cbc:ID`
 |Identification of the project reference.
-|`cbc:IssueDate`
-|Date of issue of the referenced project, date should be formatted yyyy-mm-dd.
 |===
 
 *Example* +
-_Project reference ID and date_
+_Project reference ID_
 [source,xml]
 ----
 <cac:InvoiceLine>
@@ -51,7 +49,6 @@ _Project reference ID and date_
                     <puf:LineExtension>
                         <puf:ProjectReference>
                             <cbc:ID>123456</cbc:ID>
-                            <cbc:IssueDate>2018-01-01</cbc:IssueDate>
                         </puf:ProjectReference>
                     </puf:LineExtension>
                 </puf:PageroExtension>
