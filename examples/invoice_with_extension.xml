@@ -49,11 +49,11 @@
         <cbc:IssueDate>2018-01-01</cbc:IssueDate>
     </cac:OriginatorDocumentReference>
     <cac:ContractDocumentReference>
-        <cbc:ID>Contract Number</cbc:ID>
+        <cbc:ID>Contract Reference ID</cbc:ID>
         <cbc:IssueDate>2018-12-01</cbc:IssueDate>
     </cac:ContractDocumentReference>
     <cac:ProjectReference>
-        <cbc:ID>Project ID</cbc:ID>
+        <cbc:ID>Project Reference ID</cbc:ID>
     </cac:ProjectReference>
     <cac:AccountingSupplierParty>
         <cbc:CustomerAssignedAccountID>SupplierId</cbc:CustomerAssignedAccountID>
@@ -434,14 +434,14 @@
                         <puf:LineExtension>
                             <puf:LineExclAllowanceChargeAmount currencyID="EUR">110.00</puf:LineExclAllowanceChargeAmount>
                             <puf:OriginatorDocumentReference>
-                                <cbc:ID>123456</cbc:ID>
+                                <cbc:ID>Tender Reference ID</cbc:ID>
                                 <cbc:IssueDate>2018-01-01</cbc:IssueDate>
                             </puf:OriginatorDocumentReference>
                             <puf:ProjectReference>
-                                <cbc:ID>123456</cbc:ID>
+                                <cbc:ID>Project Reference ID</cbc:ID>
                             </puf:ProjectReference>
                             <puf:ContractDocumentReference>
-                                <cbc:ID>123456</cbc:ID>
+                                <cbc:ID>Contract Reference ID</cbc:ID>
                                 <cbc:IssueDate>2018-01-01</cbc:IssueDate>
                             </puf:ContractDocumentReference>
                         </puf:LineExtension>

@@ -424,14 +424,14 @@
                         <puf:LineExtension>
                             <puf:LineExclAllowanceChargeAmount currencyID="EUR">110.00</puf:LineExclAllowanceChargeAmount>
                             <puf:OriginatorDocumentReference>
-                                <cbc:ID>123456</cbc:ID>
+                                <cbc:ID>Tender Reference ID</cbc:ID>
                                 <cbc:IssueDate>2018-01-01</cbc:IssueDate>
                             </puf:OriginatorDocumentReference>
                             <puf:ProjectReference>
-                                <cbc:ID>123456</cbc:ID>
+                                <cbc:ID>Project Reference ID</cbc:ID>
                             </puf:ProjectReference>da
                             <puf:ContractDocumentReference>
-                                <cbc:ID>123456</cbc:ID>
+                                <cbc:ID>Contract Reference ID</cbc:ID>
                                 <cbc:IssueDate>2018-01-01</cbc:IssueDate>
                             </puf:ContractDocumentReference>
                         </puf:LineExtension>
