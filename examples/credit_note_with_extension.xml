@@ -429,7 +429,6 @@
                             </puf:OriginatorDocumentReference>
                             <puf:ProjectReference>
                                 <cbc:ID>123456</cbc:ID>
-                                <cbc:IssueDate>2018-01-01</cbc:IssueDate>
                             </puf:ProjectReference>da
                             <puf:ContractDocumentReference>
                                 <cbc:ID>123456</cbc:ID>

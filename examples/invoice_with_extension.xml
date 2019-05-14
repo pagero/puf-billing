@@ -54,7 +54,6 @@
     </cac:ContractDocumentReference>
     <cac:ProjectReference>
         <cbc:ID>Project ID</cbc:ID>
-        <cbc:IssueDate>2018-01-01</cbc:IssueDate>
     </cac:ProjectReference>
     <cac:AccountingSupplierParty>
         <cbc:CustomerAssignedAccountID>SupplierId</cbc:CustomerAssignedAccountID>
@@ -440,7 +439,6 @@
                             </puf:OriginatorDocumentReference>
                             <puf:ProjectReference>
                                 <cbc:ID>123456</cbc:ID>
-                                <cbc:IssueDate>2018-01-01</cbc:IssueDate>
                             </puf:ProjectReference>
                             <puf:ContractDocumentReference>
                                 <cbc:ID>123456</cbc:ID>
@@ -481,15 +479,15 @@
         </cac:OrderLineReference>
         <cac:DocumentReference>
             <cbc:ID schemeID="AAG">DISPA</cbc:ID>
-            <cbc:DocumentTypeCode >130</cbc:DocumentTypeCode>
+            <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode>
         </cac:DocumentReference>
         <cac:DocumentReference>
             <cbc:ID schemeID="AAK">DISPA2</cbc:ID>
-            <cbc:DocumentTypeCode >130</cbc:DocumentTypeCode>
+            <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode>
         </cac:DocumentReference>
         <cac:DocumentReference>
             <cbc:ID schemeID="AAk">DISPA3</cbc:ID>
-            <cbc:DocumentTypeCode >130</cbc:DocumentTypeCode>
+            <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode>
         </cac:DocumentReference>
         <cac:DespatchLineReference>
             <cbc:LineID>1</cbc:LineID>
