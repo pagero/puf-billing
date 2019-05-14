@@ -3189,6 +3189,10 @@ See example below as well as the URI to be used for this extension.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ID of the delivery location.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cbc:ID/@schemeID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Party Identifier Scheme MUST be coded using one of the ISO 6523 ICD list.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:StreetName</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Street name of the delivery location.</p></td>
 </tr>
@@ -3218,6 +3222,35 @@ See example below as well as the URI to be used for this extension.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Invoice example of delivery on line</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:Delivery&gt;</span>
+    <span class="tag">&lt;cbc:Quantity</span> <span class="attribute-name">unitCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PCE</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1<span class="tag">&lt;/cbc:Quantity&gt;</span>
+    <span class="tag">&lt;cbc:ActualDeliveryDate&gt;</span>2019-01-25<span class="tag">&lt;/cbc:ActualDeliveryDate&gt;</span>
+    <span class="tag">&lt;cac:DeliveryLocation&gt;</span>
+        <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0088</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>0000000000000<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="tag">&lt;cac:Address&gt;</span>
+            <span class="tag">&lt;cbc:StreetName&gt;</span>Delivery Street<span class="tag">&lt;/cbc:StreetName&gt;</span>
+            <span class="tag">&lt;cbc:CityName&gt;</span>Delivery City<span class="tag">&lt;/cbc:CityName&gt;</span>
+            <span class="tag">&lt;cbc:PostalZone&gt;</span>12345<span class="tag">&lt;/cbc:PostalZone&gt;</span>
+            <span class="tag">&lt;cbc:CountrySubentity&gt;</span>Delivery Province<span class="tag">&lt;/cbc:CountrySubentity&gt;</span>
+            <span class="tag">&lt;cac:Country&gt;</span>
+                <span class="tag">&lt;cbc:IdentificationCode</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ISO3166-1:Alpha2</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>SE<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+                <span class="tag">&lt;cbc:Name&gt;</span>Sweden<span class="tag">&lt;/cbc:Name&gt;</span>
+            <span class="tag">&lt;/cac:Country&gt;</span>
+        <span class="tag">&lt;/cac:Address&gt;</span>
+    <span class="tag">&lt;/cac:DeliveryLocation&gt;</span>
+  <span class="tag">&lt;/cac:Delivery&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/cac:InvoiceLine&gt;</span></code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_tax_total_2"><a class="anchor" href="#_tax_total_2"></a><a class="link" href="#_tax_total_2">3.3.9. Tax Total</a></h4>
