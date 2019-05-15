@@ -28,15 +28,12 @@ include::workextensions.adoc[]
 Pagero UF will continuously be updated to meet new market demands. In order to support backward compatibility, the XSD schema is built with the use of "other" elements. The "other" elements in the XSD
 will prevent validation error for customers who do not frequently keep the XSD schema up-to-date.
 
-
-==== Major release
-
-A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation to users who subscribe to Pagero UF mailing list or on GitHub.
-
-
 ==== Minor release
 
 A minor release will always be backward compatible and will take place without prior notice and will be implemented whenever needed. Minor releases may include bugfixes, new elements, schematron updates and other features.
 
+==== Major release
+
+A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation to users who subscribe to Pagero UF mailing list or on GitHub.
 
 To register for Pagero UF major release notification you can create an account on https://pagero.validex.net. But urge all interested parties to follow the project on GitHub where all releases will be notified.
