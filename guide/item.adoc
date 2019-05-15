@@ -4,8 +4,6 @@ Below table lists all additional elements added within `Invoice/cac:InvoiceLine/
 |===
 |Element |Description
 
-|`cac:BuyersItemIdentification/cbc:ID`
-|Identifier of the item, assigned by the buyer.
 |`cac:ManufacturersItemIdentification/cbc:ID`
 |Identifier of the item, assigned by the manufacturer.
 |`cac:ItemInstance/cbc:ManufactureDate`
@@ -24,9 +22,6 @@ Below table lists all additional elements added within `Invoice/cac:InvoiceLine/
 <cac:InvoiceLine>
   <!-- Code omitted for clarity -->
   <cac:Item>
-    <cac:BuyersItemIdentification>
-        <cbc:ID>Buyers item ID</cbc:ID>
-    </cac:BuyersItemIdentification>
     <cac:ManufacturersItemIdentification>
         <cbc:ID>Manufacturers item ID</cbc:ID>
     </cac:ManufacturersItemIdentification>
