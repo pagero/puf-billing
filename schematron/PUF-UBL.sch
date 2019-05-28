@@ -31,6 +31,10 @@
         <rule context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:RegistrationData">
             <assert id="PUF-R002" test="puf:IDType/@listID = 'PUF-001-REGISTRATIONDATA'" flag="fatal">[PUF-R002]-Attribute listID MUST be 'PUF-001-REGISTRATIONDATA'</assert>
         </rule>
+        
+        <rule context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:ADAID">
+            <assert id="PUF-R003" test="puf:IDType/@listID = 'PUF-002-ADAID'" flag="fatal">[PUF-R003]-Attribute listID MUST be 'PUF-002-ADAID'</assert>
+        </rule>
 
         <!--Existing EN16931 rule BR-CO-16 refactored to not include withholding amount if withholding exist this is checked in Rule PUF-R003-BR-CO-16. If new values that affect payable amount these will need to be exlucded aswell-->
         <rule context="cac:LegalMonetaryTotal">
