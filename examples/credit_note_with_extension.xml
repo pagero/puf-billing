@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <CreditNote xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0">
-    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
     <cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
     <cbc:ID>123456</cbc:ID>
@@ -10,8 +9,8 @@
     <cbc:Note>Header Text 1</cbc:Note>
     <cbc:Note>Header Text 2</cbc:Note>
     <cbc:Note>Header Text 3</cbc:Note>
-    <cbc:DocumentCurrencyCode listID="ISO4217">EUR</cbc:DocumentCurrencyCode>
-    <cbc:TaxCurrencyCode listID="ISO4217">USD</cbc:TaxCurrencyCode>
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <cbc:TaxCurrencyCode>USD</cbc:TaxCurrencyCode>
     <cbc:AccountingCost>Accounting Cost</cbc:AccountingCost>
     <cbc:BuyerReference>Buyer Reference</cbc:BuyerReference>
     <cac:InvoicePeriod>
@@ -100,7 +99,7 @@
                 <cbc:PostalZone>00000</cbc:PostalZone>
                 <cbc:CountrySubentity>Province</cbc:CountrySubentity>
                 <cac:Country>
-                    <cbc:IdentificationCode listID="ISO3166-1:Alpha2">SE</cbc:IdentificationCode>
+                    <cbc:IdentificationCode>SE</cbc:IdentificationCode>
                     <cbc:Name>Sweden</cbc:Name>
                 </cac:Country>
             </cac:PostalAddress>
@@ -116,7 +115,7 @@
                 <cac:RegistrationAddress>
                     <cbc:CityName>Supplier Hometown</cbc:CityName>
                     <cac:Country>
-                        <cbc:IdentificationCode listID="ISO3166-1:Alpha2">SE</cbc:IdentificationCode>
+                        <cbc:IdentificationCode>SE</cbc:IdentificationCode>
                     </cac:Country>
                 </cac:RegistrationAddress>
             </cac:PartyLegalEntity>
@@ -170,7 +169,7 @@
                 <cbc:PostalZone>00000</cbc:PostalZone>
                 <cbc:CountrySubentity>Customer Province</cbc:CountrySubentity>
                 <cac:Country>
-                    <cbc:IdentificationCode listID="ISO3166-1:Alpha2">SE</cbc:IdentificationCode>
+                    <cbc:IdentificationCode>SE</cbc:IdentificationCode>
                     <cbc:Name>Sweden</cbc:Name>
                 </cac:Country>
             </cac:PostalAddress>
@@ -213,7 +212,7 @@
                 <cbc:PostalZone>00000</cbc:PostalZone>
                 <cbc:CountrySubentity>Buyer Province</cbc:CountrySubentity>
                 <cac:Country>
-                    <cbc:IdentificationCode listID="ISO3166-1:Alpha2">SE</cbc:IdentificationCode>
+                    <cbc:IdentificationCode>SE</cbc:IdentificationCode>
                     <cbc:Name>Sweden</cbc:Name>
                 </cac:Country>
             </cac:PostalAddress>
@@ -267,7 +266,7 @@
                 <cbc:PostalZone>55555</cbc:PostalZone>
                 <cbc:CountrySubentity>Delivery Province</cbc:CountrySubentity>
                 <cac:Country>
-                    <cbc:IdentificationCode listID="ISO3166-1:Alpha2">SE</cbc:IdentificationCode>
+                    <cbc:IdentificationCode>SE</cbc:IdentificationCode>
                     <cbc:Name>Sweden</cbc:Name>
                 </cac:Country>
             </cac:Address>
@@ -443,7 +442,7 @@
         <cbc:Note>Line text 1</cbc:Note>
         <cbc:Note>Line text 2</cbc:Note>
         <cbc:Note>Line text 3</cbc:Note>
-        <cbc:CreditedQuantity unitCode="EA" unitCodeListID="UNECERec20">1</cbc:CreditedQuantity>
+        <cbc:CreditedQuantity unitCode="EA">1</cbc:CreditedQuantity>
         <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
         <cac:OrderLineReference>
             <cbc:LineID>1</cbc:LineID>
@@ -485,7 +484,7 @@
                     <cbc:PostalZone>12345</cbc:PostalZone>
                     <cbc:CountrySubentity>Delivery Province</cbc:CountrySubentity>
                     <cac:Country>
-                        <cbc:IdentificationCode listID="ISO3166-1:Alpha2">SE</cbc:IdentificationCode>
+                        <cbc:IdentificationCode>SE</cbc:IdentificationCode>
                         <cbc:Name>Sweden</cbc:Name>
                     </cac:Country>
                 </cac:Address>
@@ -554,7 +553,7 @@
                 </ext:UBLExtension>
             </ext:UBLExtensions>
             <cbc:PriceAmount currencyID="EUR">110.00</cbc:PriceAmount>
-            <cbc:BaseQuantity unitCode="EA" unitCodeListID="UNECERec20">1</cbc:BaseQuantity>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
         </cac:Price>
     </cac:CreditNoteLine>
 </CreditNote>
