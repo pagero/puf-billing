@@ -325,7 +325,7 @@
         <cac:TaxCategory>
             <cbc:ID>Z</cbc:ID>
             <cbc:Percent>0</cbc:Percent>
-            <cbc:TaxExemptionReasonCode>Tax exemption reason code</cbc:TaxExemptionReasonCode>
+            <cbc:TaxExemptionReasonCode>vatex-eu-132-1b</cbc:TaxExemptionReasonCode>
             <cbc:TaxExemptionReason>Tax exemption reason description</cbc:TaxExemptionReason>
             <cac:TaxScheme>
                 <cbc:ID>VAT</cbc:ID>
