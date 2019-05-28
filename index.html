@@ -4100,8 +4100,107 @@ LN : Not in liquidation</p></td>
 <h2 id="_validation_rules"><a class="anchor" href="#_validation_rules"></a><a class="link" href="#_validation_rules">7. Validation rules</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>List of Pagero UF schematron validation should be added here.</p>
+<p>New validation rules has been created for Pagero UF, some EN16931 rules are in conflict with elements added in Pagero UF and has therefore been re-written to be compatible. This is indicated
+in the rule name, where the original name of the rule is stated followed by the Pagero UF rule name.</p>
 </div>
+<div class="paragraph">
+<p>To validate the files please create an account on <a href="https://pagero.validex.net" class="bare">https://pagero.validex.net</a>, the validation will take into into consideration both EN16931 rules, Peppol rules as well as added Pagero UF rules.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 32. Schematron rules added in Pagero UF</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Rule name</th>
+<th class="tableblock halign-left valign-top">Description of rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUF-R001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[PUF-R001]-Specification identifier MUST have the value 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0'.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUF-R002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[PUF-R002]-Attribute listID MUST be 'PUF-001-REGISTRATIONDATA'</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-CO-16-PUF-R003</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-CO-16-PUF-R003]-Amount due for payment (BT-115) = Invoice total amount with VAT (BT-112) - Paid amount (BT-113) - Payment in kind amount + Rounding amount (BT-114).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-S-08-PUF-R004</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-S-08-PUF-R004]-For each different value of VAT category rate (BT-119) where the VAT category code (BT-118) is "Standard rated", the VAT category taxable amount (BT-116) in a VATBReakdown (BG-23) shall equal the sum of Invoice line net amounts (BT-131) plus the sum of document level charge amounts (BT-99) minus the sum of document level allowance amounts (BT-92) where the VAT category code (BT-151, BT-102, BT-95) is “Standard rated” and the VAT rate (BT-152, BT-103, BT-96) equals the VAT category rate (BT-119).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-Z-08-PUF-R005</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-Z-08-PUF-R005]-In a VAT breakdown (BG-23) where VAT category code (BT-118) is "Zero rated" the VAT category taxable amount (BT-116) shall equal the sum of Invoice line net amount (BT-131) minus the sum of Document level allowance amounts (BT-92) plus the sum of Document level charge amounts (BT-99) where the VAT category codes (BT-151, BT-95, BT-102) are "Zero rated".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-Z-10-PUF-R006</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-Z-10-PUF-R006]-A VAT breakdown (BG-23) with VAT Category code (BT-118) "Zero rated" shall not have a VAT exemption reason code (BT-121) or VAT exemption reason text (BT-120).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-E-08-PUF-R007</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-E-08-PUF-R007]-In a VAT breakdown (BG-23) where the VAT category code (BT-118) is "Exempt from VAT" the VAT category taxable amount (BT-116) shall equal the sum of Invoice line net amounts (BT-131) minus the sum of Document level allowance amounts (BT-92) plus the sum of Document level charge amounts (BT-99) where the VAT category codes (BT-151, BT-95, BT-102) are "Exempt from VAT".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-E-10-PUF-R008</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-E-10-PUF-R008]-A VAT breakdown (BG-23) with VAT Category code (BT-118) "Exempt from VAT" shall have a VAT exemption reason code (BT-121) or a VAT exemption reason text (BT-120).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-G-08-PUF-R009</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-G-08-PUF-R009]-In a VAT breakdown (BG-23) where the VAT category code (BT-118) is "Export outside the EU" the VAT category taxable amount (BT-116) shall equal the sum of Invoice line net amounts (BT-131) minus the sum of Document level allowance amounts (BT-92) plus the sum of Document level charge amounts (BT-99) where the VAT category codes (BT-151, BT-95, BT-102) are "Export outside the EU".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-G-10-PUF-R0010</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-G-10-PUF-R0010]-A VAT breakdown (BG-23) with the VAT Category code (BT-118) "Export outside the EU" shall have a VAT exemption reason code (BT-121), meaning "Export outside the EU" or the VAT exemption reason text (BT-120) "Export outside the EU" (or the equivalent standard text in another language).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-IC-08-PUF-R011</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-IC-08-PUF-R011]-In a VAT breakdown (BG-23) where the VAT category code (BT-118) is "Intra-community supply" the VAT category taxable amount (BT-116) shall equal the sum of Invoice line net amounts (BT-131) minus the sum of Document level allowance amounts (BT-92) plus the sum of Document level charge amounts (BT-99) where the VAT category codes (BT-151, BT-95, BT-102) are "Intra-community supply".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-IC-10-PUF-R012</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-IC-10-PUF-R012]-A VAT breakdown (BG-23) with the VAT Category code (BT-118) "Intra-community supply" shall have a VAT exemption reason code (BT-121), meaning "Intra-community supply" or the VAT exemption reason text (BT-120) "Intra-community supply" (or the equivalent standard text in another language).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-O-08-PUF-R013</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-O-08-PUF-R013]-In a VAT breakdown (BG-23) where the VAT category code (BT-118) is " Not subject to VAT" the VAT category taxable amount (BT-116) shall equal the sum of Invoice line net amounts (BT-131) minus the sum of Document level allowance amounts (BT-92) plus the sum of Document level charge amounts (BT-99) where the VAT category codes (BT-151, BT-95, BT-102) are "Not subject to VAT".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-O-10-PUF-R014</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-O-10-PUF-R014]-A VAT breakdown (BG-23) with VAT Category code (BT-118) " Not subject to VAT" shall have a VAT exemption reason code (BT-121), meaning " Not subject to VAT" or a VAT exemption reason text (BT-120) " Not subject to VAT" (or the equivalent standard text in another language).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-IG-08-PUF-R015</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-IG-08-PUF-R015]-For each different value of VAT category rate (BT-119) where the VAT category code (BT-118) is "IGIC", the VAT category taxable amount (BT-116) in a VAT breakdown (BG-23) shall equal the sum of Invoice line net amounts (BT-131) plus the sum of document level charge amounts (BT-99) minus the sum of document level allowance amounts (BT-92) where the VAT category code (BT-151, BT-102, BT-95) is "IGIC" and the VAT rate (BT-152, BT-103, BT-96) equals the VAT category rate (BT-119).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-IG-10-PUF-R016</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-IG-10-PUF-R016]-A VAT breakdown (BG-23) with VAT Category code (BT-118) "IGIC" shall not have a VAT exemption reason code (BT-121) or VAT exemption reason text (BT-120).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-IP-08-PUF-R017</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-IP-08-PUF-R017]-For each different value of VAT category rate (BT-119) where the VAT category code (BT-118) is "IPSI", the VAT category taxable amount (BT-116) in a VAT breakdown (BG-23) shall equal the sum of Invoice line net amounts (BT-131) plus the sum of document level charge amounts (BT-99) minus the sum of document level allowance amounts (BT-92) where the VAT category code (BT-151, BT-102, BT-95) is "IPSI" and the VAT rate (BT-152, BT-103, BT-96) equals the VAT category rate (BT-119).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-IP-10-PUF-R018</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-IP-10-PUF-R018]-A VAT breakdown (BG-23) with VAT Category code (BT-118) "IPSI" shall not have a VAT exemption reason code (BT-121) or VAT exemption reason text (BT-120).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-AE-08-PUF-R019</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-AE-08-PUF-R019]-In a VAT breakdown (BG-23) where the VAT category code (BT-118) is "Reverse charge" the VAT category taxable amount (BT-116) shall equal the sum of Invoice line net amounts (BT-131) minus the sum of Document level allowance amounts (BT-92) plus the sum of Document level charge amounts (BT-99) where the VAT category codes (BT-151, BT-95, BT-102) are "Reverse charge".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BR-AE-10-PUF-R020</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[BR-AE-10-PUF-R020]-A VAT breakdown (BG-23) with VAT Category code (BT-118) "Reverse charge" shall have a VAT exemption reason code (BT-121), meaning "Reverse charge" or the VAT exemption reason text (BT-120) "Reverse charge" (or the equivalent standard text in another language).</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
