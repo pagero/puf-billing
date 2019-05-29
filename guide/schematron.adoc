@@ -10,15 +10,25 @@ To validate the files please create an account on https://pagero.validex.net, th
 |PUF-R001
 |[PUF-R001]-Specification identifier MUST have the value 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0'.
 |PUF-R002
-|[PUF-R002]-Attribute listID MUST be 'PUF-001-REGISTRATIONDATA'
+|[PUF-R002]-Profile identifier MUST have the value 'urn:pagero.com:puf:billing:1.0'.
 |PUF-R003
-|[PUF-R003]-Attribute listID MUST be 'PUF-002-ADAID'
+|[PUF-R003]-Attribute listID MUST be 'PUF-001-REGISTRATIONDATA'
 |PUF-R004
-|[PUF-R004]-Source currency code MUST be different from target currency code when tax exchange rate calculation is provided.
+|[PUF-R004]-Attribute listID MUST be 'PUF-002-ADAID'
 |PUF-R005
-|[PUF-R005]-If tax exchange calculation is provided the mathematic operator code MUST equal "Multiply".
+|[PUF-R005]-Source currency code MUST be different from target currency code when tax exchange rate calculation is provided.
 |PUF-R006
-|[PUF-R006]-If tax exchange calculation is provided the calculation rate MUST exist
+|[PUF-R006]-If tax exchange calculation is provided the mathematic operator code MUST equal "Multiply".
+|PUF-R007
+|[PUF-R007]-If tax exchange calculation is provided the calculation rate MUST exist
+|PUF-R008
+|[PUF-R008]-If tax exchange calculation is provided both source and target currency MUST be provided.
+|PUF-R009
+|[PUF-R009]-Value in tax chargeability MUST be one of the valid codes "S","D" or "I".
+|PUF-R010
+|[PUF-R010]-Tax currency taxable amounts currency MUST not differ from documents tax currency.
+|PUF-R011
+|[PUF-R011]-Tax currency tax amounts currency MUST not differ from documents tax currency.
 |BR-CO-16-PUF-OR001
 |[BR-CO-16-PUF-OR001]-Amount due for payment (BT-115) = Invoice total amount with VAT (BT-112) - Paid amount (BT-113) - Payment in kind amount + Rounding amount (BT-114).
 |BR-S-08-PUF-OR002
