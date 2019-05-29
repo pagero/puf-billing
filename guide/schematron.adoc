@@ -13,6 +13,12 @@ To validate the files please create an account on https://pagero.validex.net, th
 |[PUF-R002]-Attribute listID MUST be 'PUF-001-REGISTRATIONDATA'
 |PUF-R003
 |[PUF-R003]-Attribute listID MUST be 'PUF-002-ADAID'
+|PUF-R004
+|[PUF-R004]-Source currency code MUST be different from target currency code when tax exchange rate calculation is provided.
+|PUF-R005
+|[PUF-R005]-If tax exchange calculation is provided the mathematic operator code MUST equal "Multiply".
+|PUF-R006
+|[PUF-R006]-If tax exchange calculation is provided the calculation rate MUST exist
 |BR-CO-16-PUF-OR001
 |[BR-CO-16-PUF-OR001]-Amount due for payment (BT-115) = Invoice total amount with VAT (BT-112) - Paid amount (BT-113) - Payment in kind amount + Rounding amount (BT-114).
 |BR-S-08-PUF-OR002
