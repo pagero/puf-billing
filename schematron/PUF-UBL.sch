@@ -22,18 +22,51 @@
     <pattern>
         <!-- Document level -->
         <rule context="ubl-creditnote:CreditNote | ubl-invoice:Invoice">
-
-            <assert id="PUF-R001" test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0')" flag="fatal">[PUF-R001]-Specification identifier MUST have the value
-                'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0'.</assert>
-
+            <assert id="PUF-R001" test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0')" flag="fatal">[PUF-R001]-Specification identifier MUST have the value 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0'.</assert>
+            <assert id="PUF-R002" test="starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:billing:1.0')" flag="fatal">[PUF-R002]-Profile identifier MUST have the value 'urn:pagero.com:puf:billing:1.0'.</assert>
         </rule>
 
         <rule context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:RegistrationData">
-            <assert id="PUF-R002" test="puf:IDType/@listID = 'PUF-001-REGISTRATIONDATA'" flag="fatal">[PUF-R002]-Attribute listID MUST be 'PUF-001-REGISTRATIONDATA'</assert>
+            <assert id="PUF-R003" test="puf:IDType/@listID = 'PUF-001-REGISTRATIONDATA'" flag="fatal">[PUF-R003]-Attribute listID MUST be 'PUF-001-REGISTRATIONDATA'</assert>
+        </rule>
+
+        <rule context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:ADAID">
+            <assert id="PUF-R004" test="puf:IDType/@listID = 'PUF-002-ADAID'" flag="fatal">[PUF-R004]-Attribute listID MUST be 'PUF-002-ADAID'</assert>
         </rule>
         
-        <rule context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:ADAID">
-            <assert id="PUF-R003" test="puf:IDType/@listID = 'PUF-002-ADAID'" flag="fatal">[PUF-R003]-Attribute listID MUST be 'PUF-002-ADAID'</assert>
+        <rule context="cac:TaxExchangeRate">
+            <assert id="PUF-R005" test="not(normalize-space(cbc:SourceCurrencyCode/text()) = normalize-space(cbc:TargetCurrencyCode/text()))" flag="fatal">[PUF-R005]-Source currency code MUST be different from target currency code when tax exchange rate calculation is provided.</assert>
+            <assert id="PUF-R006" test="string(cbc:MathematicOperatorCode) = 'Multiply'" flag="fatal">[PUF-R006]-If tax exchange calculation is provided the mathematic operator code MUST equal "Multiply".</assert>
+            <assert id="PUF-R007" test="cbc:CalculationRate" flag="fatal">[PUF-R007]-If tax exchange calculation is provided the calculation rate MUST exist.</assert>
+            <assert id="PUF-R008" test="cbc:SourceCurrencyCode and cbc:TargetCurrencyCode" flag="fatal">[PUF-R008]-If tax exchange calculation is provided both source and target currency MUST be provided.</assert>
+        </rule>
+        
+        <rule context="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxChargeability">
+            <assert id="PUF-R009" test="cbc:TaxTypeCode = 'I' or cbc:TaxTypeCode = 'S' or cbc:TaxTypeCode = 'D'" flag="fatal">[PUF-R009]-Value in tax chargeability MUST be one of the valid codes "S","D" or "I".</assert>
+        </rule>
+        
+        <rule context="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxCurrencyTaxableAmount">
+            <assert id="PUF-R010" test="@currencyID = //cbc:TaxCurrencyCode" flag="fatal">[PUF-R010]-Tax currency taxable amounts currency MUST not differ from documents tax currency.</assert>
+        </rule>
+        
+        <rule context="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxCurrencyTaxAmount">
+            <assert id="PUF-R011" test="@currencyID = //cbc:TaxCurrencyCode" flag="fatal">[PUF-R011]-Tax currency tax amounts currency MUST not differ from documents tax currency.</assert>
+        </rule>
+        
+        <rule context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxExclusiveAmount">
+            <assert id="PUF-R012" test="@currencyID = //cbc:TaxCurrencyCode" flag="fatal">[PUF-R012]-Tax currency tax exclusive amounts currency MUST not differ from documents tax currency.</assert>
+        </rule>
+        
+        <rule context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxInclusiveAmount">
+            <assert id="PUF-R013" test="@currencyID = //cbc:TaxCurrencyCode" flag="fatal">[PUF-R013]-Tax currency tax inclusive amounts currency MUST not differ from documents tax currency.</assert>
+        </rule>
+        
+        <rule context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyPayableAmount">
+            <assert id="PUF-R014" test="@currencyID = //cbc:TaxCurrencyCode" flag="fatal">[PUF-R014]-Tax currency payable amounts currency MUST not differ from documents tax currency.</assert>
+        </rule>
+        
+        <rule context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:PaymentInKind/puf:Amount">
+            <assert id="PUF-R015" test="@currencyID = //cbc:DocumentCurrencyCode" flag="fatal">[PUF-R015]-Payment in kind amount currency MUST not differ from document currency.</assert>
         </rule>
 
         <!--Existing EN16931 rule BR-CO-16 refactored to not include withholding amount if withholding exist this is checked in Rule PUF-R003-BR-CO-16. If new values that affect payable amount these will need to be exlucded aswell-->
