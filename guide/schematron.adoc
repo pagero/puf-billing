@@ -73,4 +73,12 @@ To validate the files please create an account on https://pagero.validex.net, th
 |[BR-AE-08-PUF-OR017]-In a VAT breakdown (BG-23) where the VAT category code (BT-118) is "Reverse charge" the VAT category taxable amount (BT-116) shall equal the sum of Invoice line net amounts (BT-131) minus the sum of Document level allowance amounts (BT-92) plus the sum of Document level charge amounts (BT-99) where the VAT category codes (BT-151, BT-95, BT-102) are "Reverse charge".
 |BR-AE-10-PUF-OR018
 |[BR-AE-10-PUF-OR018]-A VAT breakdown (BG-23) with VAT Category code (BT-118) "Reverse charge" shall have a VAT exemption reason code (BT-121), meaning "Reverse charge" or the VAT exemption reason text (BT-120) "Reverse charge" (or the equivalent standard text in another language).
+|PUF-R101
+|[PUF-R101]-Line exclusive allowance and charge amount currency MUST not differ from document currency.
+|PUF-R102
+|[PUF-R102]-Price including allowance charge amount currency MUST not differ from document currency.
+|PUF-R103
+|[PUF-R103]-If Tax Subtotal exist on line, tax category percent MUST exist.
+|PUF-R104
+|[PUF-R104]-If Tax Subtotal exist on line, VAT category ID MUST exist.
 |===

@@ -15,8 +15,8 @@
     <!--
         Transaction rules
         Syntax: PUF-{NONE|REGION|VERTICAL}-RULENUMBER
-        R0XXX - Document level
-        R1XXX - Line level 
+        R0XX - Document level
+        R1XX - Line level 
     -->
 
     <pattern>
@@ -33,38 +33,38 @@
         <rule context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:ADAID">
             <assert id="PUF-R004" test="puf:IDType/@listID = 'PUF-002-ADAID'" flag="fatal">[PUF-R004]-Attribute listID MUST be 'PUF-002-ADAID'</assert>
         </rule>
-        
+
         <rule context="cac:TaxExchangeRate">
             <assert id="PUF-R005" test="not(normalize-space(cbc:SourceCurrencyCode/text()) = normalize-space(cbc:TargetCurrencyCode/text()))" flag="fatal">[PUF-R005]-Source currency code MUST be different from target currency code when tax exchange rate calculation is provided.</assert>
             <assert id="PUF-R006" test="string(cbc:MathematicOperatorCode) = 'Multiply'" flag="fatal">[PUF-R006]-If tax exchange calculation is provided the mathematic operator code MUST equal "Multiply".</assert>
             <assert id="PUF-R007" test="cbc:CalculationRate" flag="fatal">[PUF-R007]-If tax exchange calculation is provided the calculation rate MUST exist.</assert>
             <assert id="PUF-R008" test="cbc:SourceCurrencyCode and cbc:TargetCurrencyCode" flag="fatal">[PUF-R008]-If tax exchange calculation is provided both source and target currency MUST be provided.</assert>
         </rule>
-        
+
         <rule context="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxChargeability">
             <assert id="PUF-R009" test="cbc:TaxTypeCode = 'I' or cbc:TaxTypeCode = 'S' or cbc:TaxTypeCode = 'D'" flag="fatal">[PUF-R009]-Value in tax chargeability MUST be one of the valid codes "S","D" or "I".</assert>
         </rule>
-        
+
         <rule context="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxCurrencyTaxableAmount">
             <assert id="PUF-R010" test="@currencyID = //cbc:TaxCurrencyCode" flag="fatal">[PUF-R010]-Tax currency taxable amounts currency MUST not differ from documents tax currency.</assert>
         </rule>
-        
+
         <rule context="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxCurrencyTaxAmount">
             <assert id="PUF-R011" test="@currencyID = //cbc:TaxCurrencyCode" flag="fatal">[PUF-R011]-Tax currency tax amounts currency MUST not differ from documents tax currency.</assert>
         </rule>
-        
+
         <rule context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxExclusiveAmount">
             <assert id="PUF-R012" test="@currencyID = //cbc:TaxCurrencyCode" flag="fatal">[PUF-R012]-Tax currency tax exclusive amounts currency MUST not differ from documents tax currency.</assert>
         </rule>
-        
+
         <rule context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxInclusiveAmount">
             <assert id="PUF-R013" test="@currencyID = //cbc:TaxCurrencyCode" flag="fatal">[PUF-R013]-Tax currency tax inclusive amounts currency MUST not differ from documents tax currency.</assert>
         </rule>
-        
+
         <rule context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyPayableAmount">
             <assert id="PUF-R014" test="@currencyID = //cbc:TaxCurrencyCode" flag="fatal">[PUF-R014]-Tax currency payable amounts currency MUST not differ from documents tax currency.</assert>
         </rule>
-        
+
         <rule context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:PaymentInKind/puf:Amount">
             <assert id="PUF-R015" test="@currencyID = //cbc:DocumentCurrencyCode" flag="fatal">[PUF-R015]-Payment in kind amount currency MUST not differ from document currency.</assert>
         </rule>
@@ -228,6 +228,20 @@
                 >[BR-AE-08-PUF-OR017]-In a VAT breakdown (BG-23) where the VAT category code (BT-118) is "Reverse charge" the VAT category taxable amount (BT-116) shall equal the sum of Invoice line net amounts (BT-131) minus the sum of Document level allowance amounts (BT-92) plus the sum of Document level charge amounts (BT-99) where the VAT category codes (BT-151, BT-95, BT-102) are "Reverse charge".</assert>
             <assert id="BR-AE-10-PUF-OR018" flag="fatal" test="exists(cbc:TaxExemptionReason) or exists(cbc:TaxExemptionReasonCode)">[BR-AE-10-PUF-OR018]-A VAT breakdown (BG-23) with VAT Category code (BT-118) "Reverse charge" shall have a VAT exemption reason code (BT-121), meaning "Reverse charge" or the VAT exemption reason text (BT-120) "Reverse charge" (or the equivalent standard text in another language).</assert>
         </rule>
+        
+        <rule context="cac:InvoiceLine/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LineExtension/puf:LineExclAllowanceChargeAmount | cac:CreditNoteLine/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LineExtension/puf:LineExclAllowanceChargeAmount">
+            <assert id="PUF-R101" test="@currencyID = //cbc:DocumentCurrencyCode" flag="fatal">[PUF-R101]-Line exclusive allowance and charge amount currency MUST not differ from document currency.</assert>
+        </rule>
+        
+        <rule context="cac:InvoiceLine/cac:Price/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PriceExtension/puf:PriceInclAllowanceChargeAmount | cac:CreditNoteLine/cac:Price/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PriceExtension/puf:PriceInclAllowanceChargeAmount">
+            <assert id="PUF-R102" test="@currencyID = //cbc:DocumentCurrencyCode" flag="fatal">[PUF-R102]-Price including allowance charge amount currency MUST not differ from document currency.</assert>
+        </rule>
+        
+        <rule context="cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal | cac:CreditNoteLine/cac:TaxTotal/cac:TaxSubtotal">
+            <assert id="PUF-R103" test="cac:TaxCategory/cbc:Percent" flag="fatal">[PUF-R103]-If Tax Subtotal exist on line, tax category percent MUST exist.</assert>
+            <assert id="PUF-R104" test="cac:TaxCategory[cac:TaxScheme/(normalize-space(upper-case(cbc:ID))='VAT')]/cbc:ID" flag="fatal">[PUF-R104]-If Tax Subtotal exist on line, VAT category ID MUST exist.</assert>
+        </rule>
+        
     </pattern>
 
 </schema>
