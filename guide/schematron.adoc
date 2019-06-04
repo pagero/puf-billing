@@ -37,6 +37,10 @@ To validate the files please create an account on https://pagero.validex.net, th
 |[PUF-R014]-Tax currency payable amounts currency MUST not differ from documents tax currency.
 |PUF-R015
 |[PUF-R015]-Payment in kind amount currency MUST not differ from document currency.
+|PUF-R016
+|[PUF-R016]-ID type MUST be a valid type according to list PUF-001-REGISTRATIONDATA.
+|PUF-R017
+|[PUF-R016]-ID type MUST be a valid type according to list PUF-002-ADAID.
 |BR-CO-16-PUF-OR001
 |[BR-CO-16-PUF-OR001]-Amount due for payment (BT-115) = Invoice total amount with VAT (BT-112) - Paid amount (BT-113) - Payment in kind amount + Rounding amount (BT-114).
 |BR-S-08-PUF-OR002
