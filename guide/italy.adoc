@@ -33,7 +33,7 @@ _Example from invoice_
           <ext:ExtensionContent>
               <puf:PageroExtension>
                   <puf:DutyStamp>
-                      <puf:Amount>2.00</puf:Amount>
+                      <puf:Amount currencyID="EUR">2.00</puf:Amount>
                   </puf:DutyStamp>
               </puf:PageroExtension>
           </ext:ExtensionContent>
