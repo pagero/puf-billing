@@ -68,6 +68,16 @@
         <rule context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:PaymentInKind/puf:Amount">
             <assert id="PUF-R015" test="@currencyID = //cbc:DocumentCurrencyCode" flag="fatal">[PUF-R015]-Payment in kind amount currency MUST not differ from document currency.</assert>
         </rule>
+        
+        <rule context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:RegistrationData/puf:IDType">
+            <assert id="PUF-R016" test="(some $code in tokenize('IT:Ufficio IT:NumeroREA IT:CapitaleSociale IT:SocioUnico IT:StatoLiquidazione ES:Book ES:RegisterOfCompaniesLocation ES:Sheet ES:Folio ES:Section ES:Volume ES:AdditionalRegistrationData FR:DenomSociete FR:TypeSociete FR:CapitalSocial FR:RCSNumber FR:APE', '\s')
+                satisfies normalize-space(text()) = $code)" flag="fatal">ID type MUST be a valid type according to list PUF-001-REGISTRATIONDATA.</assert>
+        </rule>
+        
+        <rule context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:ADAID/puf:IDType">
+            <assert id="PUF-R017" test="(some $code in tokenize('FR:ServiceCode ES:OficinaContable ES:OrganoGestor ES:UnidadTramitadora ES:OrganoProponente', '\s')
+                satisfies normalize-space(text()) = $code)" flag="fatal">ID type MUST be a valid type according to list PUF-002-ADAID.</assert>
+        </rule>
 
         <!--Existing EN16931 rule BR-CO-16 refactored to not include withholding amount if withholding exist this is checked in Rule PUF-R003-BR-CO-16. If new values that affect payable amount these will need to be exlucded aswell-->
         <rule context="cac:LegalMonetaryTotal">
