@@ -22,7 +22,7 @@
     <pattern>
         <!-- Document level -->
         <rule context="ubl-creditnote:CreditNote | ubl-invoice:Invoice">
-            <assert id="PUF-R001" test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0')" flag="fatal">[PUF-R001]-Specification identifier MUST have the value 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0'.</assert>
+            <assert id="PUF-R001" test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0')" flag="fatal">[PUF-R001]-Customization identifier MUST have the value 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0'.</assert>
             <assert id="PUF-R002" test="starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:billing:1.0')" flag="fatal">[PUF-R002]-Profile identifier MUST have the value 'urn:pagero.com:puf:billing:1.0'.</assert>
         </rule>
 
@@ -228,20 +228,20 @@
                 >[BR-AE-08-PUF-OR017]-In a VAT breakdown (BG-23) where the VAT category code (BT-118) is "Reverse charge" the VAT category taxable amount (BT-116) shall equal the sum of Invoice line net amounts (BT-131) minus the sum of Document level allowance amounts (BT-92) plus the sum of Document level charge amounts (BT-99) where the VAT category codes (BT-151, BT-95, BT-102) are "Reverse charge".</assert>
             <assert id="BR-AE-10-PUF-OR018" flag="fatal" test="exists(cbc:TaxExemptionReason) or exists(cbc:TaxExemptionReasonCode)">[BR-AE-10-PUF-OR018]-A VAT breakdown (BG-23) with VAT Category code (BT-118) "Reverse charge" shall have a VAT exemption reason code (BT-121), meaning "Reverse charge" or the VAT exemption reason text (BT-120) "Reverse charge" (or the equivalent standard text in another language).</assert>
         </rule>
-        
+
         <rule context="cac:InvoiceLine/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LineExtension/puf:LineExclAllowanceChargeAmount | cac:CreditNoteLine/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LineExtension/puf:LineExclAllowanceChargeAmount">
             <assert id="PUF-R101" test="@currencyID = //cbc:DocumentCurrencyCode" flag="fatal">[PUF-R101]-Line exclusive allowance and charge amount currency MUST not differ from document currency.</assert>
         </rule>
-        
+
         <rule context="cac:InvoiceLine/cac:Price/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PriceExtension/puf:PriceInclAllowanceChargeAmount | cac:CreditNoteLine/cac:Price/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PriceExtension/puf:PriceInclAllowanceChargeAmount">
             <assert id="PUF-R102" test="@currencyID = //cbc:DocumentCurrencyCode" flag="fatal">[PUF-R102]-Price including allowance charge amount currency MUST not differ from document currency.</assert>
         </rule>
-        
+
         <rule context="cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal | cac:CreditNoteLine/cac:TaxTotal/cac:TaxSubtotal">
             <assert id="PUF-R103" test="cac:TaxCategory/cbc:Percent" flag="fatal">[PUF-R103]-If Tax Subtotal exist on line, tax category percent MUST exist.</assert>
             <assert id="PUF-R104" test="cac:TaxCategory[cac:TaxScheme/(normalize-space(upper-case(cbc:ID))='VAT')]/cbc:ID" flag="fatal">[PUF-R104]-If Tax Subtotal exist on line, VAT category ID MUST exist.</assert>
         </rule>
-        
+
     </pattern>
 
 </schema>
