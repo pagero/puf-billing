@@ -34,6 +34,6 @@ A minor release will always be backward compatible and will take place without p
 
 ==== Major release
 
-A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation to users who subscribe to Pagero UF mailing list or on https://github.com/pagero/puf[GitHub].
+A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation, to users who registered an account on Pagero validex or on https://github.com/pagero/puf[GitHub].
 
 To register for Pagero UF major release notification you can create an account on https://pagero.validex.net. But we urge all interested parties to follow the project on https://github.com/pagero/puf[GitHub] where all releases will be notified.
