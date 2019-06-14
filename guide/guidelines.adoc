@@ -30,7 +30,7 @@ will prevent validation error for customers who do not frequently keep the XSD s
 
 ==== Minor release
 
-A minor release will always be backward compatible and will take place without prior notice and will be implemented whenever needed. Minor releases may include bugfixes, new elements, schematron updates and other features.
+A minor release will always be backward compatible and will take place without prior notice and will be implemented whenever needed. Minor releases may include bugfixes, new elements, schematron updates and other features. These releases can be followed on https://github.com/pagero/puf[GitHub].
 
 ==== Major release
 
