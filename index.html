@@ -530,6 +530,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_registration_data_2">4.3.5. Registration data</a></li>
 </ul>
 </li>
+<li><a href="#_portugal">4.4. Portugal</a>
+<ul class="sectlevel3">
+<li><a href="#_billing_software_certification">4.4.1. Billing Software Certification</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_code_lists">5. Code lists</a>
@@ -3911,6 +3916,59 @@ to support the below values in order to fulfill the requirements of this validat
 <div class="paragraph">
 <p>To provide the registration data (Ufficio, NumeroREA, Capitale Sociale, Socio Unico and Stato Liquidazione) in the XML file please check
 the extension for AccountingSupplierParty structure <a href="#_registration_data">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_portugal"><a class="anchor" href="#_portugal"></a><a class="link" href="#_portugal">4.4. Portugal</a></h3>
+<div class="paragraph">
+<p>This section contains information about special requirements concerning invoicing in Portugal.</p>
+</div>
+<div class="sect3">
+<h4 id="_billing_software_certification"><a class="anchor" href="#_billing_software_certification"></a><a class="link" href="#_billing_software_certification">4.4.1. Billing Software Certification</a></h4>
+<div class="paragraph">
+<p>Invoices in Portugal must be issued via a certified software and in the extension <code>puf:BillingSoftware</code> it&#8217;s possible to provide the mandatory values.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Extension with the billing software details populated</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingSoftware<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+          <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+              <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                  <span class="tag">&lt;puf:BillingSoftware&gt;</span>
+                      <span class="tag">&lt;puf:Number&gt;</span>1111/AT<span class="tag">&lt;/puf:Number&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                      <span class="tag">&lt;puf:Hash&gt;</span>AAaa<span class="tag">&lt;/puf:Hash&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                      <span class="tag">&lt;cbc:Description&gt;</span>AAaa - Processado por programa certificado n. 1111/AT.<span class="tag">&lt;/cbc:Description&gt;</span> <i class="conum" data-value="3"></i><b>(3)</b>
+                  <span class="tag">&lt;/puf:BillingSoftware&gt;</span>
+              <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Software certification identification</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Hash code</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Description of the software certification</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

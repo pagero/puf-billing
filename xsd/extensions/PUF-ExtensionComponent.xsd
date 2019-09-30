@@ -26,6 +26,15 @@
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
+				<xsd:element name="BillingSoftware" minOccurs="0" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Number" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="Hash" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
+							<xsd:element ref="cbc:Description" minOccurs="0" maxOccurs="1"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
 				<xsd:element name="OrderReferenceExtension" minOccurs="0" maxOccurs="1">
 					<xsd:complexType>
 						<xsd:sequence>
@@ -201,6 +210,11 @@
 	<xsd:complexType name="PUFDateType">
 		<xsd:simpleContent>
 			<xsd:extension base="udt:DateType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="PUFTextType">
+		<xsd:simpleContent>
+			<xsd:extension base="udt:TextType"/>
 		</xsd:simpleContent>
 	</xsd:complexType>
 </xsd:schema>
