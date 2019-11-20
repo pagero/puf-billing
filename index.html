@@ -1582,10 +1582,10 @@ Please note that all e-invoice formats do not support both invoice recipient and
 <div class="sect3">
 <h4 id="_contract_document_reference"><a class="anchor" href="#_contract_document_reference"></a><a class="link" href="#_contract_document_reference">3.2.5. Contract Document Reference</a></h4>
 <div class="paragraph">
-<p>To be able to specify the issue date of a referenced contract document, the <code>(Invoice|CreditNote)/cac:ContractDocumentReference</code>-segment has been extended.</p>
+<p>To be able to specify more details regarding the referenced contract document, the <code>(Invoice|CreditNote)/cac:ContractDocumentReference</code>-segment has been extended both with additional elements from UBL 2.1 as well as an extension component.</p>
 </div>
 <div class="paragraph">
-<p>Below table shows the definition of the added element.</p>
+<p>Below tables shows the definition of the added elements existing in UBL 2.1.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 9. Elements added in cac:ContractDocumentReference</caption>
@@ -1607,12 +1607,83 @@ Please note that all e-invoice formats do not support both invoice recipient and
 </tbody>
 </table>
 <div class="paragraph">
+<p>The UBL extension to be used for below elements is (Invoice|CreditNote)/cac:ContractDocumentReference/ext:UBLExtensions and the structure used from PUF-ExtensionComponent.xsd is PageroExtension/ContractDocumentReferenceExtension.</p>
+</div>
+<div class="paragraph">
 <p><strong>Example</strong><br>
-<em>Contract document reference ID and date</em></p>
+<em>Example below how the URI is used for this extension.</em></p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:ContractDocumentReference&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                  <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                          <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:ContractDocumentReferenceExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                          <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                                  <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                          <span class="tag">&lt;puf:ContractDocumentReferenceExtension</span><span class="tag">/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                                  <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                          <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                  <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+<span class="tag">&lt;/cac:ContractDocumentReference&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>URI to be used if this extension is added.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Structure to be used if information from this extension will be used.</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 10. Elements added in puf:ContractDocumentReferenceExtension</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:BuyerContractID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ID for the buyer referenced contract document.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:BuyerContractIssueDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Issue date for the buyer referenced contract document, date should be formatted yyyy-mm-dd.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Contract document reference ID, date and extension</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:ContractDocumentReference&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                  <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                          <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:ContractDocumentReferenceExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                          <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                                  <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                          <span class="tag">&lt;puf:ContractDocumentReferenceExtension&gt;</span>
+                                                  <span class="tag">&lt;puf:BuyerContractID&gt;</span>BuyerContractID<span class="tag">&lt;/puf:BuyerContractID&gt;</span>
+                                                  <span class="tag">&lt;puf:BuyerContractIssueDate&gt;</span>2019-01-01<span class="tag">&lt;/puf:BuyerContractIssueDate&gt;</span>
+                                          <span class="tag">&lt;/puf:ContractDocumentReferenceExtension&gt;</span>
+                                  <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                          <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                  <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
     <span class="tag">&lt;cbc:ID&gt;</span>Contract Document ID<span class="tag">&lt;/cbc:ID&gt;</span>
     <span class="tag">&lt;cbc:IssueDate&gt;</span>2019-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
 <span class="tag">&lt;/cac:ContractDocumentReference&gt;</span></code></pre>
@@ -1699,7 +1770,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <p>Below table shows the definition of the added element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. Elements added in cac:OriginatorDocumentReference</caption>
+<caption class="title">Table 11. Elements added in cac:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1739,7 +1810,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <p>Below table shows the definition of the added element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. Elements added in cac:Delivery</caption>
+<caption class="title">Table 12. Elements added in cac:Delivery</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1814,7 +1885,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <p>Below table show the definition of the additional elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. Elements added in puf:DeliveryExtension</caption>
+<caption class="title">Table 13. Elements added in puf:DeliveryExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1872,7 +1943,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <p>Below table shows the definition of the added elements.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. Elements added in cac:DeliveryTerms</caption>
+<caption class="title">Table 14. Elements added in cac:DeliveryTerms</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1920,7 +1991,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <p>Below table shows the definition of the extended element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 14. Elements added in cac:PaymentTerms</caption>
+<caption class="title">Table 15. Elements added in cac:PaymentTerms</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1993,7 +2064,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <p>Below table shows the definition of the extended element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 15. Elements added in puf:PaymentTermsExtension</caption>
+<caption class="title">Table 16. Elements added in puf:PaymentTermsExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2043,7 +2114,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <p>Below table lists the extension-element added within the <code>(Invoice|CreditNote)/cac:AllowanceCharge</code>-segment.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 16. Elements added in cac:AllowanceCharge</caption>
+<caption class="title">Table 17. Elements added in cac:AllowanceCharge</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2076,7 +2147,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <p>To be able to provide more in-depth information if tax currency is different from document currency, a new structure has been added <code>(Invoice|CreditNote)/cac:TaxExchangeRate</code>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 17. Elements added in cac:TaxExchangeRate</caption>
+<caption class="title">Table 18. Elements added in cac:TaxExchangeRate</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2178,7 +2249,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <p>Below table lists all additional elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 18. Elements added in puf:TaxSubtotalExtension</caption>
+<caption class="title">Table 19. Elements added in puf:TaxSubtotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2354,7 +2425,7 @@ text depending on credit note or invoice in order for the attachment to be intep
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 19. Elements added in puf:LegalMonetaryTotalExtension</caption>
+<caption class="title">Table 20. Elements added in puf:LegalMonetaryTotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2615,7 +2686,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 20. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 21. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2684,7 +2755,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>If there are multiple orders that needs to be referenced, <code>cac:OrderLineReference</code> can be used. Below table shows the new elements added within the <code>Invoice/cac:InvoiceLine/cac:OrderLineReference</code>-segment.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 21. Elements added to cac:OrderLineReference</caption>
+<caption class="title">Table 22. Elements added to cac:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2762,7 +2833,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 22. Elements added in puf:OrderLineReference</caption>
+<caption class="title">Table 23. Elements added in puf:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2821,7 +2892,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>In order to specify the despatch advice reference on line level, the <code>Invoice/cac:InvoiceLine/cac:DespatchLineReference</code>-segment has been added.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 23. Elements added to cac:DespatchLineReference</caption>
+<caption class="title">Table 24. Elements added to cac:DespatchLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2916,7 +2987,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 24. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
+<caption class="title">Table 25. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3014,7 +3085,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 25. Elements added to puf:LineExtension/puf:ProjectReference</caption>
+<caption class="title">Table 26. Elements added to puf:LineExtension/puf:ProjectReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3107,7 +3178,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 26. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
+<caption class="title">Table 27. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3127,6 +3198,14 @@ See example below as well as the URI to be used for this extension.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:IssueDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Date of issue of the referenced contract, date should be formatted yyyy-mm-dd.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:BuyerContractID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ID for the buyer referenced contract document.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:BuyerContractIssueDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Issue date for the buyer referenced contract document, date should be formatted yyyy-mm-dd.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -3145,6 +3224,8 @@ See example below as well as the URI to be used for this extension.</p>
                         <span class="tag">&lt;puf:ContractDocumentReference&gt;</span>
                             <span class="tag">&lt;cbc:ID&gt;</span>123456<span class="tag">&lt;/cbc:ID&gt;</span>
                             <span class="tag">&lt;cbc:IssueDate&gt;</span>2018-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+                            <span class="tag">&lt;puf:BuyerContractID&gt;</span>BuyerContractID<span class="tag">&lt;/puf:BuyerContractID&gt;</span>
+                                                                <span class="tag">&lt;puf:BuyerContractIssueDate&gt;</span>2019-01-01<span class="tag">&lt;/puf:BuyerContractIssueDate&gt;</span>
                         <span class="tag">&lt;/puf:ContractDocumentReference&gt;</span>
                     <span class="tag">&lt;/puf:LineExtension&gt;</span>
                 <span class="tag">&lt;/puf:PageroExtension&gt;</span>
@@ -3165,7 +3246,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>See table below for definition of the new elements.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 27. Elements added to cac:InvoiceLine/cac:Delivery</caption>
+<caption class="title">Table 28. Elements added to cac:InvoiceLine/cac:Delivery</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3263,7 +3344,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>To provide more detailed tax information on line level, below table list new elements added within <code>Invoice/cac:InvoiceLine/cac:TaxTotal</code> segment.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 28. Elements added in cac:InvoiceLine/cac:TaxTotal</caption>
+<caption class="title">Table 29. Elements added in cac:InvoiceLine/cac:TaxTotal</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3342,7 +3423,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>Below table lists all additional elements added within <code>Invoice/cac:InvoiceLine/cac:Item</code>, these additional fields is used to assign more detailed information for the article.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 29. Elements added in cac:InvoiceLine/cac:Item</caption>
+<caption class="title">Table 30. Elements added in cac:InvoiceLine/cac:Item</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3451,7 +3532,7 @@ Note that the new element PriceInclAllowanceChargeAmount should include the allo
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 30. Elements added to puf:PriceExtension</caption>
+<caption class="title">Table 31. Elements added to puf:PriceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3983,7 +4064,7 @@ the extension for AccountingSupplierParty structure <a href="#_registration_data
 <div class="sect2">
 <h3 id="_code_lists_for_coded_elements"><a class="anchor" href="#_code_lists_for_coded_elements"></a><a class="link" href="#_code_lists_for_coded_elements">5.1. Code lists for coded elements</a></h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 31. Table of the code lists used</caption>
+<caption class="title">Table 32. Table of the code lists used</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -4165,7 +4246,7 @@ in the rule name, where the original name of the rule is stated followed by the 
 <p>To validate the files please create an account on <a href="https://pagero.validex.net" class="bare">https://pagero.validex.net</a>, the validation will take into into consideration both EN16931 rules, Peppol rules as well as added Pagero UF rules.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 32. Schematron rules added in Pagero UF</caption>
+<caption class="title">Table 33. Schematron rules added in Pagero UF</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
