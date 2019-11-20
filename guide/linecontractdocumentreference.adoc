@@ -36,6 +36,10 @@ Below table shows the definition of the new elements added to the extension.
 |Identification of the referenced contract.
 |`cbc:IssueDate`
 |Date of issue of the referenced contract, date should be formatted yyyy-mm-dd.
+|`puf:BuyerContractID`
+|ID for the buyer referenced contract document.
+|`puf:BuyerContractIssueDate`
+|Issue date for the buyer referenced contract document, date should be formatted yyyy-mm-dd.
 |===
 
 *Example* +
@@ -52,6 +56,8 @@ _Contract document ID and date_
                         <puf:ContractDocumentReference>
                             <cbc:ID>123456</cbc:ID>
                             <cbc:IssueDate>2018-01-01</cbc:IssueDate>
+                            <puf:BuyerContractID>BuyerContractID</puf:BuyerContractID>
+                						<puf:BuyerContractIssueDate>2019-01-01</puf:BuyerContractIssueDate>
                         </puf:ContractDocumentReference>
                     </puf:LineExtension>
                 </puf:PageroExtension>

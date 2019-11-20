@@ -43,6 +43,15 @@
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
+				<xsd:element name="ContractDocumentReferenceExtension" minOccurs="0" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="BuyerContractID" type="PUFIDType" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="BuyerContractIssueDate" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
+							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
 				<xsd:element name="PartyExtension" minOccurs="0" maxOccurs="1">
 					<xsd:complexType>
 						<xsd:sequence>
@@ -170,8 +179,10 @@
 							<xsd:element name="ContractDocumentReference" minOccurs="0" maxOccurs="1">
 								<xsd:complexType>
 									<xsd:sequence>
-										<xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
+										<xsd:element ref="cbc:ID" minOccurs="0" maxOccurs="1"/>
 										<xsd:element ref="cbc:IssueDate" minOccurs="0" maxOccurs="1"/>
+										<xsd:element name="BuyerContractID" type="PUFIDType" minOccurs="0" maxOccurs="1"/>
+										<xsd:element name="BuyerContractIssueDate" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
 									</xsd:sequence>
 								</xsd:complexType>
 							</xsd:element>
