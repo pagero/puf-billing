@@ -84,9 +84,9 @@
                     </ext:ExtensionContent>
                 </ext:UBLExtension>
             </ext:UBLExtensions>
-            <cbc:EndpointID schemeID="0088">1235467890123</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0088">7300010000001</cbc:EndpointID>
             <cac:PartyIdentification>
-                <cbc:ID schemeID="0088">1235467890123</cbc:ID>
+                <cbc:ID schemeID="0088">7300010000001</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyName>
                 <cbc:Name>Supplier Name</cbc:Name>
@@ -154,9 +154,9 @@
                     </ext:ExtensionContent>
                 </ext:UBLExtension>
             </ext:UBLExtensions>
-            <cbc:EndpointID schemeID="0088">1234561234560</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0088">7300010000001</cbc:EndpointID>
             <cac:PartyIdentification>
-                <cbc:ID schemeID="0088">1234561234560</cbc:ID>
+                <cbc:ID schemeID="0088">7300010000001</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyName>
                 <cbc:Name>Customer Name</cbc:Name>
@@ -199,7 +199,7 @@
         <cbc:SupplierAssignedAccountID>SupplierAssigned</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <cac:PartyIdentification>
-                <cbc:ID schemeID="0088">1111122222333</cbc:ID>
+                <cbc:ID schemeID="0088">7300010000001</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyName>
                 <cbc:Name>Buyer Name</cbc:Name>
@@ -256,7 +256,7 @@
         </ext:UBLExtensions>
         <cbc:ActualDeliveryDate>2019-01-01</cbc:ActualDeliveryDate>
         <cac:DeliveryLocation>
-            <cbc:ID schemeID="0088">0000000000000</cbc:ID>
+            <cbc:ID schemeID="0088">7300010000001</cbc:ID>
             <cbc:Description>Text describing the delivery location</cbc:Description>
             <cac:Address>
                 <cbc:Postbox>121212</cbc:Postbox>
@@ -477,7 +477,7 @@
             <cbc:Quantity unitCode="PCE">1</cbc:Quantity>
             <cbc:ActualDeliveryDate>2019-01-25</cbc:ActualDeliveryDate>
             <cac:DeliveryLocation>
-                <cbc:ID schemeID="0088">0000000000000</cbc:ID>
+                <cbc:ID schemeID="0088">7300010000001</cbc:ID>
                 <cac:Address>
                     <cbc:StreetName>Delivery Street</cbc:StreetName>
                     <cbc:CityName>Delivery City</cbc:CityName>
@@ -521,7 +521,7 @@
                 <cbc:ID>ManufacturersItemIdentification</cbc:ID>
             </cac:ManufacturersItemIdentification>
             <cac:StandardItemIdentification>
-                <cbc:ID schemeID="0088">0000000000000</cbc:ID>
+                <cbc:ID schemeID="0088">7300010000001</cbc:ID>
             </cac:StandardItemIdentification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID schemeID="UNCL5305">S</cbc:ID>
