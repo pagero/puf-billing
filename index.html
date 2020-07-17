@@ -3828,7 +3828,7 @@ to support the below values in order to fulfill the requirements of this validat
 <p>In order to send invoices in Italy a destination code must be provided called "Codice Destinatario".</p>
 </div>
 <div class="paragraph">
-<p>The destination code should be sent in <code>cac:AccountingCustomerParty/cac:Party/cbc:EndpointID</code> with schemeID "9921" (Indice delle Pubbliche Amministrazioni).</p>
+<p>The destination code should be sent in <code>cac:AccountingCustomerParty/cac:Party/cbc:EndpointID</code> with schemeID "0201" (Indice delle Pubbliche Amministrazioni).</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong></p>
@@ -3837,7 +3837,7 @@ to support the below values in order to fulfill the requirements of this validat
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
   <span class="tag">&lt;cac:Party&gt;</span>
-    <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">9921</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>123456<span class="tag">&lt;/cbc:EndpointID&gt;</span>
+    <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0201</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>123456<span class="tag">&lt;/cbc:EndpointID&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;/cac:Party&gt;</span>
 <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span></code></pre>

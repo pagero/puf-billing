@@ -4,7 +4,7 @@ This section contains information about requirements and other info concerning i
 
 In order to send invoices in Italy a destination code must be provided called "Codice Destinatario".
 
-The destination code should be sent in `cac:AccountingCustomerParty/cac:Party/cbc:EndpointID` with schemeID "9921" (Indice delle Pubbliche Amministrazioni).
+The destination code should be sent in `cac:AccountingCustomerParty/cac:Party/cbc:EndpointID` with schemeID "0201" (Indice delle Pubbliche Amministrazioni).
 
 *Example*
 
@@ -12,7 +12,7 @@ The destination code should be sent in `cac:AccountingCustomerParty/cac:Party/cb
 ----
 <cac:AccountingCustomerParty>
   <cac:Party>
-    <cbc:EndpointID schemeID="9921">123456</cbc:EndpointID>
+    <cbc:EndpointID schemeID="0201">123456</cbc:EndpointID>
     <!-- Code omitted for clarity -->
   </cac:Party>
 </cac:AccountingCustomerParty>
