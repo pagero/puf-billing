@@ -123,7 +123,7 @@ This is mostly used to public entities (e.g. government recipients). To identify
                           <cbc:ID>1234567890</cbc:ID>
                           <cbc:Name>Name of Unit</cbc:Name>
                           <puf:IDType listID="PUF-002-ADAID">FR:ServiceCode</puf:IDType>
-                      </puf:UnitCode>
+                      </puf:ADAID>
                   </puf:PartyExtension>
               </puf:PageroExtension>
           </ext:ExtensionContent>

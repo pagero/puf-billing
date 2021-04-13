@@ -504,10 +504,10 @@
         <!--ASSERT -->
         <xsl:choose>
             <xsl:when test="
-                    (some $code in tokenize('FR:ServiceCode ES:OficinaContable ES:OrganoGestor ES:UnidadTramitadora ES:OrganoProponente', '\s')
+                (some $code in tokenize('FR:ServiceCode ES:OficinaContable ES:OrganoGestor ES:UnidadTramitadora ES:OrganoProponente GEN:UnitCode', '\s')
                         satisfies normalize-space(text()) = $code)"/>
             <xsl:otherwise>
-                <svrl:failed-assert test="(some $code in tokenize('FR:ServiceCode ES:OficinaContable ES:OrganoGestor ES:UnidadTramitadora ES:OrganoProponente', '\s') satisfies normalize-space(text()) = $code)" xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
+                <svrl:failed-assert test="(some $code in tokenize('FR:ServiceCode ES:OficinaContable ES:OrganoGestor ES:UnidadTramitadora ES:OrganoProponente GEN:UnitCode', '\s') satisfies normalize-space(text()) = $code)" xmlns:svrl="http://purl.oclc.org/dsdl/svrl">
                     <xsl:attribute name="id">PUF-R017</xsl:attribute>
                     <xsl:attribute name="flag">fatal</xsl:attribute>
                     <xsl:attribute name="location">

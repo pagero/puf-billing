@@ -107,4 +107,7 @@ The value consist of "country code:type of value". Country code states which cou
 |`ES:OrganoProponente`
 |Code for the proposing agency (Órgano Proponente).
 
+|`GEN:UnitCode`
+|General code for defining the unit of a company.
+
 |===

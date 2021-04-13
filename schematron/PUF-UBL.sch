@@ -77,7 +77,7 @@
 
         <rule context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:ADAID/puf:IDType">
             <assert flag="fatal" id="PUF-R017" test="
-                    (some $code in tokenize('FR:ServiceCode ES:OficinaContable ES:OrganoGestor ES:UnidadTramitadora ES:OrganoProponente', '\s')
+                (some $code in tokenize('FR:ServiceCode ES:OficinaContable ES:OrganoGestor ES:UnidadTramitadora ES:OrganoProponente GEN:UnitCode', '\s')
                         satisfies normalize-space(text()) = $code)">[PUF-R017]-ID type MUST be a valid type according to list PUF-002-ADAID.</assert>
         </rule>
 
