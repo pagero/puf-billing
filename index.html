@@ -626,6 +626,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_portugal">4.4. Portugal</a>
 <ul class="sectlevel3">
 <li><a href="#_billing_software_certification">4.4.1. Billing Software Certification</a></li>
+<li><a href="#_qr_code_and_atcud">4.4.2. QR Code and ATCUD</a></li>
 </ul>
 </li>
 </ul>
@@ -4216,6 +4217,32 @@ the extension for AccountingSupplierParty structure <a href="#_registration_data
 <td>Description of the software certification</td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_qr_code_and_atcud"><a class="anchor" href="#_qr_code_and_atcud"></a><a class="link" href="#_qr_code_and_atcud">4.4.2. QR Code and ATCUD</a></h4>
+<div class="paragraph">
+<p>In Portugal it can be required to provide a QR code and ATCUD. The portugese government has specified that this can be provided in elements that exist in
+Peppol BIS 3 and therefore also exist in Pagero Universal Format. Below you will find a guide on how to provide it to comply with the portugese specification.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>QR code and ATCUD provided in cac:AdditionalDocumentReference</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AdditionalDocumentReference&gt;</span>
+        <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ANG</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>12345678-123456789123<span class="tag">&lt;/cbc:ID&gt;</span> <span class="comment">&lt;!--ATCUD, use the schemeID ANG--&gt;</span>
+        <span class="tag">&lt;cbc:DocumentDescription&gt;</span>QR_CODE<span class="tag">&lt;/cbc:DocumentDescription&gt;</span><span class="comment">&lt;!-- DocumentDescription must be QR_CODE --&gt;</span>
+        <span class="tag">&lt;cac:Attachment&gt;</span> <span class="comment">&lt;!--QR Code encoded in base64--&gt;</span>
+            <span class="tag">&lt;cbc:EmbeddedDocumentBinaryObject</span> <span class="attribute-name">mimeCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/plain</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">filename</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">the filename</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>QRstringInBase64<span class="tag">&lt;/cbc:EmbeddedDocumentBinaryObject&gt;</span><span class="comment">&lt;!-- mimeCode must be text/plain --&gt;</span>
+        <span class="tag">&lt;/cac:Attachment&gt;</span>
+    <span class="tag">&lt;/cac:AdditionalDocumentReference&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
 </div>
 </div>
 </div>
