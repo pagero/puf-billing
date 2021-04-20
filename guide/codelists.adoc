@@ -7,7 +7,7 @@ Certain elements require the use of Pagero UF specific Code list. Below you will
 |Business Term |XPath |listID
 
 |Registration Data Id Type
-|`puf:RegistrationData/puf:IdType`
+|`puf:RegistrationData/puf:IDType`
 |<<_puf_001_registrationdata>>
 
 |Additional Destination Address Identifier
