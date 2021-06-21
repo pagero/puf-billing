@@ -1,0 +1,30 @@
+Below table show available fields in `cac:PaymentTerms`, note that additional elements has also been added to the extension available in <<_paymentterms>>.
+
+.Elements added in cac:PaymentTerms
+|===
+|Path |Description
+
+|`ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:PaymentTerms` element, the information available can be found <<_paymentterms, here>>
+|`cbc:Note`
+|**Payment terms description** +
+Text describing payment terms.
+|`cbc:PenaltySurchargePercent`
+|**Penaly interest rate** +
+Penalty interest rate, numberic value only.
+|===
+
+*Example* +
+_cac:PaymentTerms example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:PaymentTerms>
+    <cbc:Note>3</cbc:Note>
+    <cbc:PenaltySurchargePercent>10</cbc:PenaltySurchargePercent>
+  </cac:PaymentTerms>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

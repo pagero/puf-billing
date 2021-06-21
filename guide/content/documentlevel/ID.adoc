@@ -1,0 +1,18 @@
+|===
+|Path |Description
+
+|`cbc:ID`
+|**Invoice number** +
+A unique identifier of the invoice.
+|===
+
+*Example* +
+_cbc:ID with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:ID>51234882</cbc:ID>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

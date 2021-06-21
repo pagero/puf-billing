@@ -1,23 +1,91 @@
-Certain elements require the use of Pagero UF specific Code list. Below you will find the lists and where the lists are applicable.
+Certain elements require the use of PUF specific Code list. Below you will find the lists and where the lists are applicable.
+In some of these code lists PUF only points towards an external code list to be used. Other times the code list to be used is a mix between
+values defined specifically for PUF and other external list(s). Other times all the values are defined solely for PUF.
 
 === Code lists for coded elements
 
 .Table of the code lists used
+[%autowidth.stretch]
 |===
-|Business Term |XPath |listID
+|Business Term |Path |listID
 
 |Registration Data Id Type
-|`puf:RegistrationData/puf:IDType`
+|`puf:PartyExtension/puf:RegistrationData/puf:IDType`
 |<<_puf_001_registrationdata>>
 
 |Additional Destination Address Identifier
-|`puf:ADAID/puf:IDType`
+|`puf:PartyExtension/puf:ADAID/puf:IDType`
 |<<_puf_002_adaid>>
 
+|Invoice Type Code
+|`cbc:InvoiceTypeCode` +
+`cbc:CreditNoteType`
+|<<_puf_003_invoicetypecode>>
+
+|Currency Code
+|`cbc:DocumentCurrencyCode` +
+`cbc:TaxCurrencyCode` +
+ `/*/@currencyID`
+|<<_puf_004_currencycode>>
+
+|Invoiced Object Identifier
+|`cac:AdditionalDocumentReference/cbc:ID/@schemeID`
+|<<_puf_005_invoicedobjectidentifier>>
+
+|Mime code
+|`cac:AdditionalDocumentReference/cac:Attachment/
+cbc:EmbeddedDocumentBinaryObject/@mimeCode`
+|<<_puf_006_mimecodes>>
+
+|Electronic address scheme
+|`cac:AccountingSupplierParty/cac:Party/cbc:EndpointID/@schemeID` +
+`cac:AccountingCustomerParty/cac:Party/cbc:EndpointID/@schemeID` +
+`cac:BuyerCustomerParty/cac:Party/cbc:EndpointID/@schemeID`
+|<<_puf_007_endpointscheme>>
+
+|Identification scheme
+|`cac:PartyIdentification/cbc:ID/@schemeID` +
+`cac:PartyLegalEntity/cbc:CompanyID/@schemeID` +
+`cac:Delivery/cac:DeliveryLocation/cbc:ID/@schemeID` +
+`cac:Item/cac:StandardItemIdentification/cbc:ID/@schemeID`
+|<<_puf_008_identificationscheme>>
+
+|Tax type scheme
+|`cac:TaxCategory/cac:TaxScheme/cbc:ID` +
+`cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:ID`
+|<<_puf_009_taxtypescheme>>
+
+|Payment means code
+|`cac:PaymentMeans/cbc:PaymentMeansCode`
+|<<_puf_010_paymentmeanscode>>
+
+|Allowance charge reason codes
+|`cac:AllowanceCharge/cbc:AllowanceChargeReasonCode`
+|<<_puf_011_allowancechargereasoncode>>
+
+|Tax category codes
+|`cac:TaxCategory/cbc:ID`
+|<<_puf_012_taxcategorycode>>
+
+|Tax exemption codes
+|`cac:TaxCategory/cbc:TaxExemptionReasonCode`
+|<<_puf_013_exemptcode>>
+
+|Unit of measure codes
+|`cbc:InvoicedQuantity/@unitCode` +
+`cbc:CreditedQuantity/@unitCode` +
+`cac:Price/cbc:BaseQuantity/@unitCode`
+|<<_puf_014_uomcode>>
+
+|Item type identification code
+|`cac:Item/cac:CommodityClassification/
+cbc:ItemClassificationCode/@listID`
+|<<_puf_015_itemtypeidentificationcode>>
 |===
 
 
 ==== PUF-001-REGISTRATIONDATA
+
 The value consist of "country code:type of value". Country code states which country the value is applicable for.
 
 |===
@@ -87,6 +155,7 @@ LN : Not in liquidation
 
 
 ==== PUF-002-ADAID
+
 The value consist of "country code:type of value". Country code states which country the value is applicable for.
 
 |===
@@ -111,3 +180,244 @@ The value consist of "country code:type of value". Country code states which cou
 |General code for defining the unit of a company.
 
 |===
+
+==== PUF-003-INVOICETYPECODE
+
+List of available invoice type codes.
+
+|===
+|Value |Description
+
+|`380`
+|Invoice, only applicable only with UBL message/document type Invoice.
+
+|`381`
+|Credit note, only applicable only with UBL message/document type CreditNote.
+
+|`383`
+|Debit note, only applicable only with UBL message/document type Invoice.
+
+|===
+
+==== PUF-004-CURRENCYCODE
+
+For available values see code list of three character currency codes see https://en.wikipedia.org/wiki/ISO_4217[Currency Codes]
+
+==== PUF-005-INVOICEDOBJECTIDENTIFIER
+
+For available values see code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL1153/[Invoice Object identifier schemes]
+
+==== PUF-006-MIMECODES
+
+List of available mime codes.
+
+|===
+|Value
+
+|`text/csv`
+
+|`application/pdf`
+
+|`image/jpeg`
+
+|`application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
+
+|`application/vnd.oasis.opendocument.spreadsheet`
+
+|===
+
+==== PUF-007-ENDPOINTSCHEME
+
+For available values see code list https://docs.peppol.eu/poacc/billing/3.0/codelist/eas/[Electronic address scheme]
+
+==== PUF-008-IDENTIFICATIONSCHEME
+
+Supported values can be found here https://docs.peppol.eu/poacc/billing/3.0/codelist/ICD/[ISO 6523 ICD list] +
+For `cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID/@schemeID` and
+`cac:PayeeParty/cac:PartyIdentification/cbc:ID/@schemeID` an additional code list is also applicable: https://docs.peppol.eu/poacc/billing/3.0/codelist/SEPA/[Sepa indicator]
+
+==== PUF-009-TAXTYPESCHEME
+
+List of available tax type scheme codes.
+
+|===
+|Value |Description
+
+|`VAT`
+|Value Added Tax
+
+|`GST`
+|Goods and Services Tax
+
+|`LOC`
+|Sales tax
+
+|`STT`
+|State/provincial sales tax
+
+|`AAG`
+|Harmonised sales tax, Canadian +
+__A harmonized sales tax consisting of a goods and service tax, a Canadian provincial sales tax and, as applicable, a Quebec sales tax which is recoverable.__
+
+|`AAH`
+|Quebec sales tax
+
+|`AAI`
+|Canadian provincial sales tax
+
+|===
+
+==== PUF-010-PAYMENTMEANSCODE
+
+|===
+|Value |Description
+
+|`30`
+|Credit transfer
+
+|`31`
+|Debit transfer
+
+|`42`
+|Payment to bank account
+
+|`56`
+|Bankgiro
+
+|`58`
+|SEPA credit transfer +
+__Credit transfer inside the Single Euro Payment Area (SEPA) system.__
+
+|`59`
+|Direct debit inside the Single Euro Payment Area (SEPA) system.
+
+|`93`
+|Reference giro +
+__Ordering customer tells the bank to use the payment system 'Reference giro'. Used in the Finnish national banking system.__
+
+|===
+
+For all available codes see list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL4461/[Payment means code]
+
+==== PUF-011-ALLOWANCECHARGEREASONCODE
+
+Values can differ depending on which legal domain you are in or if there are other types of business requirements.
+Below you will find links to recommended lists
+|===
+|Link
+
+|https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL5189/[Allowance reason codes]
+
+|https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL7161/[Charge reason codes]
+
+|===
+
+==== PUF-012-TAXCATEGORYCODE
+
+Standard european tax category codes can be found here https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL5305/[Duty or tax or fee category code] +
+
+For additional codes added in PUF see below code recommendations.
+
+===== Tax category codes Singapore
+
+|===
+|Value |Description
+
+|`SR`
+|Local supply of goods and services
+
+|`SRCA-S`
+|Customer accounting supply made by the supplier
+
+|`SRCA-C`
+|Customer accounting supply made by the customer on supplier’s behalf
+
+|`ZR`
+|Supplies involving goods for export/ provision of international services
+
+|`ES33`
+|Specific categories of exempt supplies listed under regulation 33 of the GST (General) Regulations
+
+|`ESN33`
+|Exempt supplies other than those listed under regulation 33 of the GST (General) Regulations
+
+|`DS`
+|Supplies required to be reported pursuant to the GST legislation
+
+|`OS`
+|Supplies outside the scope of the GST Act
+
+|`NG`
+|Supplies from a company which is not registered for GST
+
+|`SROVR`
+|Overseas vendor registration regime for Business-to-Consumer (“B2C”) supplies of imported digital services
+
+|`SRRC`
+|Reverse charge regime for Business-to-Business (“B2B”) supplies of imported services
+
+|===
+
+===== Tax category codes Portugal
+
+|===
+|Value |Description
+
+|`AA`
+|Lower rate
+
+|`S`
+|Standard rate
+
+|`E`
+|Exempt
+
+|`Z`
+|Zero rated goods
+
+|`AE`
+|Vat Reverse Charge
+
+|`G`
+|Free export item, VAT not charged
+
+|`O`
+|Services outside scope of tax
+
+|`RED`
+|Reduced rate
+
+|`INT`
+|Intermediate rate
+
+|`NOR`
+|Normal rate
+
+|`ISE`
+|Exempt
+
+|`OUT`
+|Others, applicable to special VAT schemes
+
+|`NA`
+|In case of non-subjection to VAT or IS. On receipts issued without itemized tax must be filled with "NA"
+
+|`IC`
+|intra-Community VAT
+
+|===
+
+==== PUF-013-EXEMPTCODE
+
+Values can differ depending on which legal domain you are in or if there are other types of business requirements.
+For Europe the code list https://docs.peppol.eu/poacc/billing/3.0/codelist/vatex/[Vatex code list] can be recommended.
+
+==== PUF-014-UOMCODE
+
+Values can differ depending on which legal domain you are in or if there are other types of business requirements.
+However, code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNECERec20/[UN/ECE Recommendation 20] and
+https://docs.peppol.eu/poacc/billing/3.0/codelist/UNECERec21/[UN/ECE Recommendation 21] can be recommended.
+
+==== PUF-015-ITEMTYPEIDENTIFICATIONCODE
+
+Values must be from code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL7143/[Item type identification code]

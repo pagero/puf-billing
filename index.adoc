@@ -1,9 +1,9 @@
-:doctitle: image:images/logo.png[float="center", width=100%] Pagero Universal Format Billing 1.0
+:doctitle: image:images/logo.png[float="center", width=100%] Pagero Universal Format Billing 2.0
 :name-op-en: Customer Integration, Pagero
 :minor: 1.0
 :revision: 1.0
 :toc: left
-:toclevels: 4
+:toclevels: 3
 :source-highlighter: coderay
 :icons: font
 :source-language: xml
@@ -21,9 +21,13 @@ include::guide/introduction.adoc[]
 
 include::guide/guidelines.adoc[]
 
-== Extended content
+== Content
 
-include::guide/extendedcontent.adoc[]
+include::guide/content.adoc[]
+:sectnums:
+== Extensions
+
+include::guide/extensions.adoc[]
 
 == Country Specific
 
@@ -35,11 +39,11 @@ include::guide/codelists.adoc[]
 
 == XML Schemas
 
-include::guide/schemas.adoc[]
+include::guide/xmlschemas.adoc[]
 
-== Validation rules
+== Validation
 
-include::guide/schematron.adoc[]
+include::guide/validation.adoc[]
 
 == Examples
 

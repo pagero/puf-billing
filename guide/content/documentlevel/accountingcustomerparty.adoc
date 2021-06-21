@@ -1,0 +1,159 @@
+Below table show available fields in `cac:AccountingCustomerParty`, note that additional elements has also been added to the extension available in <<_party>>.
+
+.Additional elements added within cac:AccountingCustomerParty
+|===
+|Path |Description
+
+|`cbc:SupplierAssignedAccountID`
+|**Customer Account ID** +
+Customer ID, assigned by the seller.
+|`cac:Party/ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:Party` element, the information available can be found <<_party, here>>
+|`cac:Party/cbc:EndpointID`
+|**Electronic Identifier** +
+Buyer's electronic address
+|`cac:Party/cbc:EndpointID/@schemeID`
+|**Electronic Identifier scheme ID** +
+Scheme identifier of electronic address +
+Value must be according to code list <<_puf_007_endpointscheme>>
+|`cac:Party/cac:PartyIdentification/cbc:ID`
+|**Buyer Identifier** +
+Identifier of the Buyer.
+|`cac:Party/cac:PartyIdentification/cbc:ID/@schemeID`
+|**Buyer Identifier** +
+Scheme identifier of Buyer identifier. +
+Value must be according to code list <<_puf_008_identificationscheme>>
+|`cac:Party/cac:PartyName/cbc:Name`
+|**Buyer name** +
+Buyer name
+|`cac:Party/cac:PostalAddress/cbc:Postbox`
+|**Postal box** +
+Buyer's postal address post box
+|`cac:Party/cac:PostalAddress/cbc:StreetName`
+|**Street name** +
+Buyer's postal address street name
+|`cac:Party/cac:PostalAddress/cbc:AdditionalStreetName`
+|**Additional Street name** +
+Buyer's postal address additional street name
+|`cac:Party/cac:PostalAddress/cbc:Department`
+|**Department** +
+Buyer's postal address department
+|`cac:Party/cac:PostalAddress/cbc:PlotIdentification`
+|**Plot Identification** +
+Buyer's postal address plot identification. Additional address number. An identifier for the piece of land associated with this address.
+|`cac:Party/cac:PostalAddress/cbc:CitySubdivisionName`
+|**City Subdvision Name** +
+Buyer's postal address city subdivision name. The name of the subdivision of the Buyer city, town, or village in which its address is located, such as the name of its district or borough.
+|`cac:Party/cac:PostalAddress/cbc:CityName`
+|**City name** +
+Buyer's postal address city name
+|`cac:Party/cac:PostalAddress/cbc:PostalZone`
+|**Postal zone** +
+Buyer's postal address post code
+|`cac:Party/cac:PostalAddress/cbc:CountrySubentity`
+|**Country subentity** +
+Buyer's postal address province or state
+|`cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line`
+|**Additional address line** +
+Note that cbc:StreetName and cbc:AdditionalStreetName should be populated prior of using this element.
+|`cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode`
+|**Country code** +
+Buyer's postal address country code
+|`cac:Party/cac:PostalAddress/cac:Country/cbc:Name`
+|**Country name** +
+Buyer's postal address country name
+|`cac:Party/cac:PartyTaxScheme/cbc:CompanyID`
+|**Company identifier** +
+Buyer's tax registration number
+|`cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID`
+|**Tax scheme identifier** +
+Buyer's tax registration number tax scheme Identifier.
+|`cac:Party/cac:PartyLegalEntity/cbc:RegistrationName`
+|**Registration name** +
+Buyer's formal name or company name
+|`cac:Party/cac:PartyLegalEntity/cbc:CompanyID`
+|**Legal company identifier** +
+Buyer's legal registration identifier
+|`cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID`
+|**Legal company scheme identifier** +
+Buyer's legal registration identifier scheme identifier. +
+Value must be according to code list <<_puf_008_identificationscheme>>
+|`cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalForm`
+|**Company legal form** +
+Relevant legal information regarding the Buyer.
+|`cac:Party/cac:Contact/cbc:Name`
+|**Contact name** +
+Name of contact person.
+|`cac:Party/cac:Contact/cbc:Telephone`
+|**Contact telephone** +
+Phone number of contact person.
+|`cac:Party/cac:Contact/cbc:ElectronicMail`
+|**Contact E-mail** +
+E-mail of contact person..
+|`cac:AccountingContact/cbc:Telephone`
+|**Accounting telephone** +
+The telephone number for the accounting contact of the organization.
+|`cac:AccountingContact/cbc:Telefax`
+|**Accounting fax number** +
+The telefax number for the accounting contact of the organization.
+|`cac:AccountingContact/cbc:ElectronicMail`
+|**Accounting E-mail** +
+The e-mail address for the accounting contact of the organization.
+|===
+
+*Example* +
+_cac:AccountingCustomerParty example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+      <cbc:SupplierAssignedAccountID>Customer Number</cbc:SupplierAssignedAccountID>
+      <cac:Party>
+          <cbc:EndpointID schemeID="0088">7300010000001</cbc:EndpointID>
+          <cac:PartyIdentification>
+              <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+          </cac:PartyIdentification>
+          <cac:PartyName>
+              <cbc:Name>Customer Name</cbc:Name>
+          </cac:PartyName>
+          <cac:PostalAddress>
+              <cbc:Postbox>54321</cbc:Postbox>
+              <cbc:StreetName>Customer Street</cbc:StreetName>
+              <cbc:Department>Customer Department</cbc:Department>
+              <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+              <cbc:CitySubdivisionName>Customer City Subdivision Name</cbc:CitySubdivisionName>
+              <cbc:CityName>Customer City</cbc:CityName>
+              <cbc:PostalZone>00000</cbc:PostalZone>
+              <cbc:CountrySubentity>Customer Province</cbc:CountrySubentity>
+              <cac:Country>
+                  <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                  <cbc:Name>Sweden</cbc:Name>
+              </cac:Country>
+          </cac:PostalAddress>
+          <cac:PartyTaxScheme>
+              <cbc:CompanyID>SE987654321001</cbc:CompanyID>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:PartyTaxScheme>
+          <cac:PartyLegalEntity>
+              <cbc:RegistrationName>Customer Registration Name</cbc:RegistrationName>
+              <cbc:CompanyID schemeID="0007">987654-4321</cbc:CompanyID>
+          </cac:PartyLegalEntity>
+          <cac:Contact>
+              <cbc:Name>Customer Contact Name</cbc:Name>
+              <cbc:Telephone>+465544466</cbc:Telephone>
+              <cbc:ElectronicMail>customer@contact.com</cbc:ElectronicMail>
+          </cac:Contact>
+      </cac:Party>
+      <cac:AccountingContact>
+          <cbc:Telephone>Customer tel</cbc:Telephone>
+          <cbc:Telefax>Customer Fax</cbc:Telefax>
+          <cbc:ElectronicMail>Customer@mainContact.com</cbc:ElectronicMail>
+      </cac:AccountingContact>
+  </cac:AccountingCustomerParty>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

@@ -1,2 +1,7 @@
-Invoice example can be downloaded link:examples/invoice_with_extension.xml[here]. +
-Credit note example can be downloaded link:examples/credit_note_with_extension.xml[here].
+Invoice example can be downloaded here: 
+
+- link:examples/invoice_with_extension.xml[]
+
+Credit note example can be downloaded here: 
+
+- link:examples/credit_note_with_extension.xml[]

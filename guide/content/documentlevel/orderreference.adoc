@@ -1,0 +1,35 @@
+Below table show available fields in `cac:OrderReference`, note that additional elements has also been added to the extension available in <<_orderreference>>
+
+.Elements added in cac:OrderReference
+|===
+|Path |Description
+
+|`ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:OrderReference` element, the information available can be found <<_orderreference, here>>
+|`cbc:ID`
+|**Purchase order reference** +
+Purchase order identifier, issued by the buyer.
+|`cbc:SalesOrderID`
+|**Sales order reference** +
+Sales order identifier, issued by the seller.
+|`cbc:IssueDate`
+|**Issue date** +
+Date of issue of the referenced purchase order +
+__Format "YYYY-MM-DD"__
+|===
+
+*Example* +
+_cbc:OrderReference example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:OrderReference>
+    <cbc:ID>PO123215</cbc:ID>
+    <cbc:SalesOrderID>SO1117782</cbc:SalesOrderID>
+    <cbc:IssueDate>2021-01-01</cbc:IssueDate>
+  </cac:OrderReference>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

@@ -1,0 +1,148 @@
+:sectnums!:
+
+Information in this section (3.1) describe the elements available on document level.
+
+==== ext:UBLExtensions
+
+include::documentlevel/UBLExtensions.adoc[]
+
+==== cbc:CustomizationID
+
+include::documentlevel/CustomizationID.adoc[]
+
+==== cbc:ProfileID
+
+include::documentlevel/ProfileID.adoc[]
+
+==== cbc:ID
+
+include::documentlevel/ID.adoc[]
+
+==== cbc:IssueDate
+
+include::documentlevel/IssueDate.adoc[]
+
+==== cbc:IssueTime
+
+include::documentlevel/IssueTime.adoc[]
+
+
+==== cbc:DueDate
+
+include::documentlevel/DueDate.adoc[]
+
+==== cbc:InvoiceTypeCode
+
+include::documentlevel/InvoiceTypeCode.adoc[]
+
+==== cbc:Note
+
+include::documentlevel/note.adoc[]
+
+==== cbc:TaxPointDate
+
+include::documentlevel/TaxPointDate.adoc[]
+
+==== cbc:DocumentCurrencyCode
+
+include::documentlevel/DocumentCurrencyCode.adoc[]
+
+==== cbc:TaxCurrencyCode
+
+include::documentlevel/TaxCurrencyCode.adoc[]
+
+==== cbc:AccountingCost
+
+include::documentlevel/AccountingCost.adoc[]
+
+==== cbc:BuyerReference
+
+include::documentlevel/BuyerReference.adoc[]
+
+==== cac:InvoicePeriod
+
+include::documentlevel/invoiceperiod.adoc[]
+
+==== cac:OrderReference
+
+include::documentlevel/orderreference.adoc[]
+
+==== cac:BillingReference
+
+include::documentlevel/BillingReference.adoc[]
+
+==== cac:DespatchDocumentReference
+
+include::documentlevel/despatchdocumentreference.adoc[]
+
+==== cac:ReceiptDocumentReference
+
+include::documentlevel/ReceiptDocumentReference.adoc[]
+
+==== cac:OriginatorDocumentReference
+
+include::documentlevel/originatordocumentreference.adoc[]
+
+==== cac:ContractDocumentReference
+
+include::documentlevel/contractdocumentreference.adoc[]
+
+==== cac:AdditionalDocumentReference
+
+include::documentlevel/additionalDocumentReference.adoc[]
+
+==== cac:ProjectReference
+
+include::documentlevel/ProjectReference.adoc[]
+
+==== 	cac:AccountingSupplierParty
+
+include::documentlevel/accountingsupplierparty.adoc[]
+
+==== cac:AccountingCustomerParty
+
+include::documentlevel/accountingcustomerparty.adoc[]
+
+==== cac:PayeeParty
+
+include::documentlevel/PayeeParty.adoc[]
+
+==== cac:BuyerCustomerParty
+
+include::documentlevel/buyercustomerparty.adoc[]
+
+==== cac:TaxRepresentativeParty
+
+include::documentlevel/TaxRepresentativeParty.adoc[]
+
+==== cac:Delivery
+
+include::documentlevel/delivery.adoc[]
+
+==== cac:DeliveryTerms
+
+include::documentlevel/deliveryterms.adoc[]
+
+==== cac:PaymentMeans
+
+include::documentlevel/PaymentMeans.adoc[]
+
+==== cac:PaymentTerms
+
+include::documentlevel/paymentterms.adoc[]
+
+==== cac:AllowanceCharge
+
+include::documentlevel/allowancecharge.adoc[]
+
+==== cac:TaxExchangeRate
+
+include::documentlevel/taxexchangerate.adoc[]
+
+==== cac:TaxTotal
+
+include::documentlevel/taxtotal.adoc[]
+
+==== cac:LegalMonetaryTotal
+
+include::documentlevel/legalmonetarytotal.adoc[]

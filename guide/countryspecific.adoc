@@ -1,17 +1,21 @@
-This section will provide information regarding on how to include common country specific data in Pagero UF.
+This section will provide information regarding on how to include common country specific data in PUF.
 
 === Spain
 
-include::spain.adoc[]
+include::countryspecific/spain.adoc[]
 
 === France
 
-include::france.adoc[]
+include::countryspecific/france.adoc[]
 
 === Italy
 
-include::italy.adoc[]
+include::countryspecific/italy.adoc[]
 
 === Portugal
 
-include::portugal.adoc[]
+include::countryspecific/portugal.adoc[]
+
+=== Singapore
+
+include::countryspecific/singapore.adoc[]

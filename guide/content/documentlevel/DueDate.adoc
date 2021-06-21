@@ -1,0 +1,18 @@
+|===
+|Path |Description
+
+|`cbc:DueDate`
+|**Due date of invoice** +
+__Format "YYYY-MM-DD"__
+|===
+
+*Example* +
+_cbc:DueDate with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:DueDate>2021-02-28</cbc:DueDate>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

@@ -1,0 +1,39 @@
+*Target name space - Invoice:* 
+
+- `urn:pagero:PageroUniversalFormat:Invoice:1:0` +
+
+*Example:* +
+_Invoice example for target namespace_
+[source,xml]
+----
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Target name space - CreditNote:* 
+
+- `urn:pagero:PageroUniversalFormat:CreditNote:1:0` +
+
+*Example:* +
+_Credit note example for target namespace_
+[source,xml]
+----
+<CreditNote xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0">
+  <!-- Code omitted for clarity -->
+</CreditNote>
+----
+
+*CommonAggregateComponents - Invoice/CreditNote:* 
+
+- `urn:pagero:CommonAggregateComponents:1.0`
+
+*Example:* +
+_Invoice example for CommonAggregateComponents namespace_
+[source,xml]
+----
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"> <!--1-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Note that the namespace is the same for CreditNote-root element.

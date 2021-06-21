@@ -1,0 +1,18 @@
+|===
+|Path |Description
+
+|`cbc:CustomizationID`
+|**Document specification identifier** +
+__Must be value 'urn:pagero.com:puf:billing:2.0'__
+|===
+
+*Example* +
+_cbc:CustomizationID populated with correct value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

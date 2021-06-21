@@ -1,0 +1,18 @@
+|===
+|Path |Description
+
+|`cbc:AccountingCost`
+|**Accounting cost** +
+Book keeping reference for buyers financial system
+|===
+
+*Example* +
+_cbc:AccountingCost populated with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:AccountingCost>1111.22.456</cbc:AccountingCost>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

@@ -1,0 +1,43 @@
+.Additional elements added within cac:PayeeParty
+|===
+|Path |Description
+
+|`cac:PartyIdentification/cbc:ID`
+|**Payee Identifier** +
+Identifier of the payee.
+|`cac:PartyIdentification/cbc:ID/@schemeID`
+|**Payee scheme Identifier** +
+Scheme identifier of payee identifier. +
+Value must be according to code list <<_puf_008_identificationscheme>>
+|`cac:PartyName/cbc:Name`
+|**Payee name** +
+Payee name.
+|`cac:PartyLegalEntity/cbc:CompanyID`
+|**Legal company identifier** +
+Payee's legal registration identifier.
+|`cac:PartyLegalEntity/cbc:CompanyID/@schemeID`
+|**Legal company identifier scheme identifier** +
+Payee's legal registration identifier scheme identifier. +
+Value must be according to code list <<_puf_008_identificationscheme>>
+|===
+
+*Example* +
+_cac:PayeeParty example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:PayeeParty>
+    <cac:PartyIdentification>
+        <cbc:ID schemeID="0088">7300000000001</cbc:ID>
+    </cac:PartyIdentification>
+    <cac:PartyName>
+        <cbc:Name>Payee Name</cbc:Name>
+    </cac:PartyName>
+    <cac:PartyLegalEntity>
+        <cbc:CompanyID schemeID="0007">2201611123</cbc:CompanyID>
+    </cac:PartyLegalEntity>
+  </cac:PayeeParty>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

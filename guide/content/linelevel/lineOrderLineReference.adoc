@@ -1,0 +1,49 @@
+Below table show available fields in `cac:OrderLineReference`, note that additional elements has also been added to the extension available in <<_orderlinereference>>.
+
+.Elements added to cac:OrderLineReference
+|===
+|Path |Description
+
+|`ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:OrderLineReference` element, the information available can be found <<_orderlinereference, here>>
+|`cbc:LineID`
+|**Order line reference** +
+Reference to the order line.
+|`cbc:SalesOrderLineID`
+|** Sales Order line reference** +
+Reference to the sales order line.
+|`cac:OrderReference/cbc:ID`
+|**Identifier of the order** +
+Identification of the referenced order.
+|`cac:OrderReference/cbc:SalesOrderID`
+|**Identifier of the sales order** +
+Identification of the referenced sales order.
+|`cac:OrderReference/cbc:IssueDate`
+|**Date of the referenced order** +
+Date of issue of the referenced order +
+__Format "YYYY-MM-DD"__
+|===
+
+*Example* +
+_cac:InvoiceLine/cac:OrderLineReference with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cac:OrderLineReference>
+      <cbc:LineID>1</cbc:LineID>
+      <cbc:SalesOrderLineID>5</cbc:SalesOrderLineID>
+      <cac:OrderReference>
+          <cbc:ID>Purchase Order ID</cbc:ID>
+          <cbc:SalesOrderID>Sales Order ID</cbc:SalesOrderID>
+          <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+      </cac:OrderReference>
+    </cac:OrderLineReference>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

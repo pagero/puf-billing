@@ -1,0 +1,91 @@
+In EN16931 based specifications, the `cac:AdditionalDocumentReference` aggregate is used to reference a supporting document. These can either be provided as a base64 encoded document embedded within the Invoice or CreditNote itself but can also reference an invoiced object by a document number or referencing an external document via a URL.
+
+PUF supports this handling but also has additional support in order to provide invoice or credit notes image/presentation.
+
+.Elements available in cac:AdditionalDocumentReference
+|===
+|Applicable XPath |Description
+
+|`cbc:ID`
+|Identifier for the referenced object/document.
+|`cbc:ID/@schemeID`
+|Scheme identifier of the referenced object/document. +
+When used it should be according to the list +
+<<_puf_005_invoicedobjectidentifier>>
+|`cbc:DocumentTypeCode`
+|Document type code. Should be 130 if referencing an invoiced object. Not used for other additional document references.
+|`cbc:DocumentDescription`
+|A description of the referenced or attached document.
+|`cac:Attachment/cbc:EmbeddedDocumentBinaryObject`
+|The attached document base64 encoded.
+|`cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@mimeCode`
+|The mimecode of the attached document. +
+Supported mime codes can be found in the code list +
+<<_puf_006_mimecodes>>
+|`cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename`
+|Filename of the attached document.
+|`cac:Attachment/cac:ExternalReference/cbc:URI`
+|A URL to where the referenced document can be found.
+|===
+
+===== Invoice image/presentation and  Credit Note image/presentation
+
+Providing an invoice presentation/image or credit note image/presentation is sometimes useful. This can be done in PUF as shown in the examples below.
+If `cbc:DocumentDescription` is "Commercial Invoice" or "Credit Note" the attachment will be interpreted as a an invoice presentation/image otherwise the attachment will be interpreted as a miscellaneous or "other" type of document. +
+
+*Example* +
+_Invoice with presentation (PDF-image)_
+[source,xml]
+----
+<Invoice>
+<!-- Code omitted for clarity -->
+  <cac:AdditionalDocumentReference>
+      <cbc:ID>123456</cbc:ID>
+      <cbc:DocumentDescription>Commercial Invoice</cbc:DocumentDescription> <!--1-->
+      <cac:Attachment>
+        <cbc:EmbeddedDocumentBinaryObject mimeCode="application/pdf" filename="presentation.pdf">MvYmlsbGluZy...8zLjAvYmlzLw==</cbc:EmbeddedDocumentBinaryObject>
+      </cac:Attachment>
+  </cac:AdditionalDocumentReference>
+<!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> If "Commercial Invoice" is stated in the cbc:DocumentDescription the attachment will be interpreted as a presentation.
+
+*Example* +
+_Credit Note with (PDF-image)_
+[source,xml]
+----
+<CreditNote>
+<!-- Code omitted for clarity -->
+  <cac:AdditionalDocumentReference>
+      <cbc:ID>123456</cbc:ID>
+      <cbc:DocumentDescription>Credit Note</cbc:DocumentDescription> <!--1-->
+      <cac:Attachment>
+        <cbc:EmbeddedDocumentBinaryObject mimeCode="application/pdf" filename="presentation.pdf">MvYmlsbGluZy...8zLjAvYmlzLw==</cbc:EmbeddedDocumentBinaryObject>
+      </cac:Attachment>
+  </cac:AdditionalDocumentReference>
+<!-- Code omitted for clarity -->
+</CreditNote>
+----
+<1> If "Credit Note" is stated in the Credit Note the attachment will be interpreted as a presentation.
+
+===== Invoiced object reference
+
+If there is a need to reference a document/object number without providing a link to the location and without embedding it in the Invoice/CreditNote this can be done
+in PUF within the `cac:AdditionalDocumentReference` as shown in below example. Note that it is possible to provide more than one invoiced object reference.
+
+*Example* +
+_Invoice with reference to an invoiced object with a document number_
+[source,xml]
+----
+<Invoice>
+<!-- Code omitted for clarity -->
+  <cac:AdditionalDocumentReference>
+      <cbc:ID schemeID="AIT">123456</cbc:ID> <!--1-->
+      <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode><!--2-->
+  </cac:AdditionalDocumentReference>
+<!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> The schemeID must be according to list <<_puf_005_invoicedobjectidentifier>>.
+<2> Document type code should be '130' to indicate invoiced object.

@@ -1,0 +1,19 @@
+|===
+|Path |Description
+
+|`cbc:TaxCurrencyCode`
+|**Tax currency code** +
+The accounting currency, this must be filled in if tax amount in accounting currency is populated in the document. Should only be filled in if the currency is different from the document currency. +
+__Value must be according to ISO 4217 Currency codes__ +
+For valid values see code list <<_puf_004_currencycode>>
+|===
+*Example* +
+_cbc:TaxCurrencyCode populated with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:TaxCurrencyCode>USD</cbc:TaxCurrencyCode>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

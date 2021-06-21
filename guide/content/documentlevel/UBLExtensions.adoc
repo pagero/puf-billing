@@ -1,0 +1,10 @@
+|===
+|Path |Description
+
+|`ext:UBLExtensions`
+|**Extension Content** +
+Added elements in regards to `ext:UBLExtensions` for `Invoice` can be found below: +
+
+<<_dutystamp>>
+
+|===

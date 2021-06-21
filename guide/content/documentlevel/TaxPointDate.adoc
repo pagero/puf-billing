@@ -1,0 +1,18 @@
+|===
+|Path |Description
+
+|`cbc:TaxPointDate`
+|**VAT point date** +
+This element should be filled in if the date when VAT become liable for seller and buyer is different from the invoice issue date. +
+__Format "YYYY-MM-DD"__
+|===
+*Example* +
+_cbc:TaxPointDate with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:TaxPointDate>2021-01-31</cbc:TaxPointDate>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

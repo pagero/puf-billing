@@ -1,0 +1,25 @@
+|===
+|Path |Description
+
+|`cbc:LineExtensionAmount`
+|**Net amount** +
+The net amount for the invoice line.
+|`cbc:LineExtensionAmount/@currencyID`
+|**Net amount currency** +
+Currency applied for cbc:LineExtensionAmount, must be the same as cbc:DocumentCurrencyCode. +
+For valid values see code list <<_puf_004_currencycode>>
+|===
+*Example* +
+_cac:InvoiceLine/cbc:LineExtensionAmount with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

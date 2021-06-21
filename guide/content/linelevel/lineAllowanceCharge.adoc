@@ -1,0 +1,55 @@
+.Elements added in cac:AllowanceCharge
+|===
+|Path |Description
+
+|`cbc:ChargeIndicator`
+|**Line allowance or Charge indicator** +
+Indicator to express either charge (true) or allowance (false) +
+__Value must be either true or false__
+|`cbc:AllowanceChargeReasonCode`
+|**Line allowance or charge reason code** +
+Reason code for allowance or charge. +
+See code list <<_puf_011_allowancechargereasoncode>> for recommendations
+|`cbc:AllowanceChargeReason`
+|**Line allowance or charge reason** +
+Test describing the reason for allowance or charge.
+|`cbc:MultiplierFactorNumeric`
+|**Line allowance or charge percentage** +
+Allowance or charge expressed in percent. +
+__E.g. 10% discount should be expressed as "10"__
+|`cbc:Amount`
+|**Line allowance or charge amount** +
+Amount of allowance or charge.
+|`cbc:Amount/@currencyID`
+|**Line allowance or charge amount currency** +
+Amount of allowance or charge currency. +
+For valid values see code list <<_puf_004_currencycode>>
+|`cbc:BaseAmount`
+|**Line allowance or charge base amount** +
+Base amount which the calcuation is based on.
+|`cbc:BaseAmount/@currencyID`
+|**Line allowance or charge base amount currency** +
+Base amount currency. +
+For valid values see code list <<_puf_004_currencycode>>
+|===
+
+*Example* +
+_cac:InvoiceLine/cac:AllowanceCharge populated with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cac:AllowanceCharge>
+      <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+      <cbc:AllowanceChargeReason>Reason for allowance</cbc:AllowanceChargeReason>
+      <cbc:MultiplierFactorNumeric>5</cbc:MultiplierFactorNumeric>
+      <cbc:Amount currencyID="EUR">5.00</cbc:Amount>
+      <cbc:BaseAmount currencyID="EUR">100.00</cbc:BaseAmount>
+    </cac:AllowanceCharge>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

@@ -1,32 +1,31 @@
-Pagero UF builds on and fully support the http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0]. Reference to guidelines and specification can be found link:http://docs.PEPPOL.eu/poacc/billing/3.0/bis/[here]. +
+PUF was originally built to support information and content as described in http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0] but also adding support for elements that where not present in Peppol BIS specification.
+While PUF aim to fully support Peppol BIS it will not necessarily be restricted to the rules as stated in the Peppol BIS specification nor in the EN16931. 
 
-In areas where support for certain information is available in the existing UBL 2.1 structure, Pagero UF implements these elements.
-In other areas where there are no suitable elements in the existing UBL 2.1 schema, Pagero UF implements `UBLExtensions`.
-Since `UBLExtensions` are only available on document level the UBL had to be altered, adding the `UBLExtension` in every aggregate thus replacing the `UBL-CommonAggregateComponents-2.1.xsd` with Pagero UF altered `PUF-CommonAggregateComponents-2.1.xsd`.
+In areas where support for certain information is available in the existing UBL 2.1 structure, PUF implements these elements.
+In other areas where there are no suitable elements in the existing UBL 2.1 schema, PUF implements `UBLExtensions`.
+Since `UBLExtensions` are only available on document level in UBL 2.1, it had to be altered, adding the `UBLExtension` in every aggregate thus replacing the `UBL-CommonAggregateComponents-2.1.xsd` with the PUF altered `PUF-CommonAggregateComponents-2.1.xsd`.
 The reason for this is that there would be too many semantic rules to tie each `UBLExtension` on document level to their corresponding existing element on other levels.
 
-In the following chapters, you will find descriptions of each element that's been added in Pagero UF that is not present in the http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0].
 
-=== How to get started with Pagero Universal Format
+=== How to get started with PUF
 
-include::howtogetstarted.adoc[]
+include::guidelines/howtogetstarted.adoc[]
 
 === Namespaces
 
-include::namespaces.adoc[]
+include::guidelines/namespaces.adoc[]
 
 === Customization and Profile ID
 
-include::customizationid.adoc[]
+include::guidelines/customizationidandProfile.adoc[]
 
 === Working with extensions
 
-include::workextensions.adoc[]
+include::guidelines/workextensions.adoc[]
 
 === Continuous development and release management
 
-Pagero UF will continuously be updated to meet new market demands. In order to support backward compatibility, the XSD schema is built with the use of "other" elements. The "other" elements in the XSD
-will prevent validation error for customers who do not frequently keep the XSD schema up-to-date.
+PUF will continuously be updated to meet new market demands. In order to support backward compatibility, the XSD schema is built with the use of "other" elements. The "other" elements in the XSD will prevent validation error for customers who do not frequently keep the XSD schema up-to-date.
 
 ==== Minor release
 
@@ -36,4 +35,4 @@ A minor release will always be backward compatible and will take place without p
 
 A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation, to users who registered an account on Pagero validex or on https://github.com/pagero/puf[GitHub].
 
-To register for Pagero UF major release notification you can create an account on https://pagero.validex.net. But we urge all interested parties to follow the project on https://github.com/pagero/puf[GitHub] where all releases will be notified.
+To register for PUF major release notification you can create an account on https://pagero.validex.net. But we urge all interested parties to follow the project on https://github.com/pagero/puf[GitHub] where all releases will be notified.

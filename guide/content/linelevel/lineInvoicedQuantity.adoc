@@ -1,0 +1,27 @@
+|===
+|Path |Description
+
+|`cbc:InvoicedQuantity`
+|**Quantity invoiced** +
+The item quantity for this invoice line. +
+__Note that corresponding element in UBL message/document type CreditNote is named cbc:CreditedQuantity__
+|`cbc:InvoicedQuantity/@unitCode`
+|**Quantity unit of measure** +
+Unit of measure for the quantity invoiced. +
+See code list <<_puf_014_uomcode>> for recommendations +
+__Note that corresponding element in UBL message/document type CreditNote is named cbc:CreditedQuantity/@unitCode__
+|===
+*Example* +
+_cac:InvoiceLine/cbc:InvoicedQuantity with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

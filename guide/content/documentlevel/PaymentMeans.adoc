@@ -1,0 +1,63 @@
+.Elements available in cac:PaymentMeans
+|===
+|Path |Description
+
+|`cbc:PaymentMeansCode`
+|**Payment means code** +
+Code for how the payment is to be settled. +
+__E.g. 30__ +
+Value must be according to code list <<_puf_010_paymentmeanscode>>
+|`cbc:PaymentMeansCode/@name`
+|**Payment means name** +
+Name describing the payment means.
+|`cbc:PaymentID`
+|**Payment Identifier** +
+Identifier for the payment. +
+__E.g. OCR__
+|`cac:CardAccount/cbc:PrimaryAccountNumberID`
+|**Primary account number identifier** +
+The Primary Account Number (PAN) of the card used for payment. In accordance with card payments security standards, an invoice should never include a full card primary account number.
+|`cac:CardAccount/cbc:NetworkID`
+|**Card network** +
+Name of card company.
+|`cac:CardAccount/cbc:HolderName`
+|**Card holder name** +
+Name of the card holder.
+|`cac:PayeeFinancialAccount/cbc:ID`
+|**Payment account number** +
+Account number e.g.IBAN och BBAN.
+|`cac:PayeeFinancialAccount/cbc:Name`
+|**Payment account name** +
+The name of the payment account, at a payment service provider, to which payment should be made.
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID`
+|**Payment account identifier ** +
+Payment account identifier e.g. a BIC or Swift.
+|`cac:PayeeFinancialAccount/cac:PaymentMandate/cbc:ID`
+|**Payment mandate reference identifier** +
+Payment mandate identifier used for referencing direct debit payments.
+|`cac:PayeeFinancialAccount/cac:PaymentMandate/
+cac:PayerFinancialAccount/cbc:ID`
+|**Payer account identifier** +
+Account to be debited in a direct debit payment.
+|===
+
+*Example* +
+_cbc:PaymentMeans example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:PaymentMeans>
+    <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+    <cbc:PaymentID>123456</cbc:PaymentID>
+    <cac:PayeeFinancialAccount>
+        <cbc:ID>12345678</cbc:ID>
+        <cbc:Name>AccountName</cbc:Name>
+        <cac:FinancialInstitutionBranch>
+            <cbc:ID>SE:BANKGIRO</cbc:ID>
+        </cac:FinancialInstitutionBranch>
+    </cac:PayeeFinancialAccount>
+  </cac:PaymentMeans>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

@@ -1,0 +1,21 @@
+.Elements added in cac:ProjectReference
+|===
+|Path |Description
+
+|`cbc:ID`
+|**Project reference** +
+An identifier of the project.
+|===
+
+*Example* +
+_cac:ProjectReference example values_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:ProjectReference>
+      <cbc:ID>557884</cbc:ID>
+  </cac:ProjectReference>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

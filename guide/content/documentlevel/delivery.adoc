@@ -1,0 +1,118 @@
+Below table show available fields in `cac:Delivery`, note that additional elements has also been added to the extension available in <<_delivery, cac:Delivery>> and <<_party, cac:Delivery/cac:DeliveryParty>>
+
+.Elements added in cac:Delivery
+|===
+|Path |Description
+
+|`ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:Delivery` element, the information available can be found <<_delivery, here>>
+|`cbc:ActualDeliveryDate`
+|**Delivery date** +
+Date when goods or service was made or completed +
+__Format YYYY-MM-DD__
+|`cac:DeliveryLocation/cbc:ID`
+|**Delivery location identifier** +
+Identifier of the delivery location +
+__E.g. GLN number__
+|`cac:DeliveryLocation/cbc:ID/@schemeID`
+|**Delivery location identifier scheme identifier** +
+Scheme identifier of the delivery location identifier +
+__E.g. 0088__ +
+Value must be according to code list <<_puf_008_identificationscheme>>
+|`cac:DeliveryLocation/cbc:Description`
+|**Delivery location description** +
+Description of the delivery location.
+|`cac:DeliveryLocation/cac:Address/cbc:PostBox`
+|**Postal box** +
+Delivery location address post box
+|`cac:DeliveryLocation/cac:Address/cbc:StreetName`
+|**Street name** +
+Delivery location address street name
+|`cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName`
+|**Additional Street name** +
+Delivery location address additional street name
+|`cac:DeliveryLocation/cac:Address/cbc:Department`
+|**Department** +
+Delivery address department
+|`cac:Party/cac:PostalAddress/cbc:PlotIdentification`
+|**Plot Identification** +
+Delivery postal address plot identification. Additional address number. An identifier for the piece of land associated with this address.
+|`cac:Party/cac:PostalAddress/cbc:CitySubdivisionName`
+|**City Subdvision Name** +
+Delivery postal address city subdivision name. The name of the subdivision of the delivery city, town, or village in which its address is located, such as the name of its district or borough.
+|`cac:DeliveryLocation/cac:Address/cbc:CityName`
+|**City name** +
+Delivery location address city name
+|`cac:DeliveryLocation/cac:Address/cbc:PostalZone`
+|**Postal zone** +
+Delivery location address post code
+|`cac:DeliveryLocation/cac:Address/cbc:CountrySubentity`
+|**Country subentity** +
+Delivery location address province or state
+|`cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line`
+|**Additional address line** +
+Note that cbc:StreetName and cbc:AdditionalStreetName should be populated prior of using this element.
+|`cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode`
+|**Country code** +
+Delivery location address country code
+|`cac:DeliveryLocation/cac:Address/cac:Country/cbc:Name`
+|**Country name** +
+Delivery location address country name
+|`cac:DeliveryParty/ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:Party` element, the information available can be found <<_party, here>>
+|`cac:DeliveryParty/cac:PartyName/cbc:Name`
+|**Delivery party name** +
+Name of the party that the goods/services is sent to.
+|`cac:DeliveryParty/cac:Contact/cbc:Name`
+|**Delivery party contact name** +
+Name of the contact to which the goods/services is sent to.
+|`cac:DeliveryParty/cac:Contact/cbc:Telephone`
+|**Delivery party contact telephone** +
+Telephone of the contact to which the goods/services is sent to.
+|`cac:DeliveryParty/cac:Contact/cbc:ElectronicMail`
+|**Delivery party contact email** +
+Email of the contact to which the goods/services is sent to.
+|===
+
+*Example* +
+_cac:Delivery populated with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:Delivery>
+      <cbc:ActualDeliveryDate>2019-01-01</cbc:ActualDeliveryDate>
+      <cac:DeliveryLocation>
+          <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+          <cbc:Description>Text describing the delivery location</cbc:Description>
+          <cac:Address>
+              <cbc:Postbox>121212</cbc:Postbox>
+              <cbc:StreetName>Delivery Street</cbc:StreetName>
+              <cbc:Department>Delivery Department</cbc:Department>
+              <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+              <cbc:CitySubdivisionName>Delivery City Subdivision Name</cbc:CitySubdivisionName>
+              <cbc:CityName>Delivery City</cbc:CityName>
+              <cbc:PostalZone>55555</cbc:PostalZone>
+              <cbc:CountrySubentity>Delivery Province</cbc:CountrySubentity>
+              <cac:Country>
+                  <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                  <cbc:Name>Sweden</cbc:Name>
+              </cac:Country>
+          </cac:Address>
+      </cac:DeliveryLocation>
+      <cac:DeliveryParty>
+          <cac:PartyName>
+              <cbc:Name>Delivery Name</cbc:Name>
+          </cac:PartyName>
+          <cac:Contact>
+              <cbc:Name>Anders Andersson</cbc:Name>
+              <cbc:Telephone>01113354</cbc:Telephone>
+              <cbc:ElectronicMail>DeliveryContact@mail.com</cbc:ElectronicMail>
+          </cac:Contact>
+      </cac:DeliveryParty>
+  </cac:Delivery>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

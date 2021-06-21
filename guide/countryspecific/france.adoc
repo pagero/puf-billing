@@ -1,0 +1,77 @@
+This section contains information about requirements and other information concerning invoicing in France.
+
+==== Service Code
+
+Service code is a routing code required by some customers to identify the correct recipient in French Government Portal.
+It's used as an addition to the SIRET number, which is the main identifier for all government recipients.
+
+The Service code should be provided in the extension block under <<_cacaccountingcustomerparty, cac:AccountingCustomerParty/cac:Party>>, in the structure `puf:PageroExtension/puf:PartyExtension/puf:ADAID` (More information how to use ADAID can be found <<_additional_destination_address_identifier_adaid, here>>).
+
+See example below, note that the Name is not mandatory to send, but opens up the possibility to provide the name of the receiving unit.
+
+*Example*
+[source,xml]
+----
+<cac:AccountingCustomerParty>
+  <cac:Party>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:PartyExtension>
+                        <puf:ADAID>
+                            <cbc:ID>1234567890</cbc:ID>
+                            <cbc:Name>Name of receiving unit</cbc:Name>
+                            <puf:IDType listID="PUF-002-ADAID">FR:ServiceCode</puf:IDType>
+                        </puf:ADAID>
+                    </puf:PartyExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+  </cac:Party>
+</cac:AccountingCustomerParty>
+
+----
+
+==== Legal Commitments
+
+Entities behind French Government portal can set up validation of certain elements called legal commitments. Therefore it's recommended to support the below values in order to fulfill the requirements of this validation.
+
+Customer contract defined as “Contrat”::
+* <<_caccontractdocumentreference, Contract reference identifier and Date>>
+
+*Example*
+[source,xml]
+----
+<cac:ContractDocumentReference>
+    <cbc:ID>Contract number</cbc:ID>
+    <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+</cac:ContractDocumentReference>
+----
+
+Tender reference defined as “Marché Public”::
+* <<_cacoriginatordocumentreference, Tender reference identifier and Date>>
+
+*Example*
+[source,xml]
+----
+<cac:OriginatorDocumentReference>
+    <cbc:ID>Tender number</cbc:ID>
+    <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+</cac:OriginatorDocumentReference>
+----
+
+Purchase order number defined as “Engagement”::
+* <<_cacorderreference, Order reference identifier and Date>>
+
+*Example*
+[source,xml]
+----
+<cac:OrderReference>
+    <cbc:ID>Order Number</cbc:ID>
+    <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+</cac:OrderReference>
+----

@@ -1,0 +1,20 @@
+|===
+|Path |Description
+
+|`cbc:ID`
+|**Line Identifier** +
+Unique line identifier
+|===
+*Example* +
+_cac:InvoiceLine/cbc:ID with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <cbc:ID>1</cbc:ID>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

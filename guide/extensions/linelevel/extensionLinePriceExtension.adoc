@@ -1,0 +1,83 @@
+In addition to Price a new element has been added to specify the unit price including allowances and charges.
+Note that the new element PriceInclAllowanceChargeAmount should include the `cac:AllowanceCharge` applied on line level (not to be confused with `cac:Price/cac:AllowanceCharge`), as shown in the example _Line with 100 EUR discount_. +
+
+The UBL extension to be used for below elements can be found <<_cacprice, here>>. +
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/PriceExtension`. +
+
+See example below as well as the URI to be used for this extension.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+      <!-- Code omitted for clarity -->
+      <cac:Price>
+          <ext:UBLExtensions>
+              <ext:UBLExtension>
+                  <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension</ext:ExtensionURI> <!--1-->
+                  <ext:ExtensionContent>
+                      <puf:PageroExtension>
+                          <puf:PriceExtension/> <!--2-->
+                      </puf:PageroExtension>
+                  </ext:ExtensionContent>
+              </ext:UBLExtension>
+          </ext:UBLExtensions>
+          <!-- Code omitted for clarity -->
+      </cac:Price>
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table show the definition of the new element added to the extension.
+
+.Elements added to puf:PriceExtension
+|===
+|Element |Description
+
+|`puf:PriceInclAllowanceChargeAmount`
+|Unit price including allowances or charges.
+|`puf:PriceInclAllowanceChargeAmount/@currencyID`
+|Currency of the unit price including allowances or charges. +
+For valid values see code list <<_puf_004_currencycode>>
+|===
+
+*Example* +
+_Line with 100 EUR discount_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+      <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+      <cbc:LineExtensionAmount currencyID="EUR">900</cbc:LineExtensionAmount>
+      <cac:AllowanceCharge>
+          <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+          <cbc:Amount currencyID="EUR">100</cbc:Amount>
+      </cac:AllowanceCharge>
+      <!-- Code omitted for clarity -->
+      <cac:Price>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:PriceExtension>
+                            <puf:PriceInclAllowanceChargeAmount currencyID="EUR">900</puf:PriceInclAllowanceChargeAmount> <!--2-->
+                        </puf:PriceExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:PriceAmount currencyID="EUR">1000</cbc:PriceAmount> <!--1-->
+      </cac:Price>
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> The unit price excluding the discount.
+<2> The unit price including the discount.
