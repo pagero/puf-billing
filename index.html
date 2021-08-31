@@ -667,6 +667,12 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_tax_category_codes_2">5.5.1. Tax Category codes</a></li>
 </ul>
 </li>
+<li><a href="#_saudi_arabia">5.6. Saudi Arabia</a>
+<ul class="sectlevel3">
+<li><a href="#_invoicetypecode_and_invoice_subtype">5.6.1. InvoiceTypeCode and Invoice subtype</a></li>
+<li><a href="#_partyidentification">5.6.2. PartyIdentification</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_code_lists">6. Code lists</a>
@@ -1331,7 +1337,7 @@ For valid values see code list <a href="#_puf_003_invoicetypecode">PUF-003-INVOI
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:InvoiceTypeCode/@name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Invoice type code name</strong><br>
-The textual equivalent of the InvoiceTypeCode.<br></p></td>
+The textual equivalent of the cbc:InvoiceTypeCode.<br></p></td>
 </tr>
 </tbody>
 </table>
@@ -7301,6 +7307,79 @@ Peppol BIS 3 and therefore also exist in PUF. Below you will find a guide on how
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_saudi_arabia"><a class="anchor" href="#_saudi_arabia"></a><a class="link" href="#_saudi_arabia">5.6. Saudi Arabia</a></h3>
+<div class="paragraph">
+<p>This section contains information about special requirements concerning invoicing in Saudi Arabia.</p>
+</div>
+<div class="sect3">
+<h4 id="_invoicetypecode_and_invoice_subtype"><a class="anchor" href="#_invoicetypecode_and_invoice_subtype"></a><a class="link" href="#_invoicetypecode_and_invoice_subtype">5.6.1. InvoiceTypeCode and Invoice subtype</a></h4>
+<div class="paragraph">
+<p>Available Invoice Type values to be used in Saudi Arabia can be found here <a href="#_invoice_type_codes_saudi_arabia">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>In addition to provide the InvoiceType it is required to also provide the subtypes. Supported codes can be found <a href="#_invoice_subtype_codes_saudi_arabia">here</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Example with InvoiceTypeCode and invoice subtypes provided for Saudi Arabia</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0100000</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>388<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>InvoiceTypeCode 388 for "Tax Invoice" provided. Attribute name in this KSA scenario is used to provide the invoice subtypes.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_partyidentification"><a class="anchor" href="#_partyidentification"></a><a class="link" href="#_partyidentification">5.6.2. PartyIdentification</a></h4>
+<div class="paragraph">
+<p>In Saudi Arabia there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.
+These additional identifiers for use in Saudi Arabia can be found <a href="#_identification_scheme_saudi_arabia">here</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Example with additional id provided in Saudi Arabia in Party structure</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:Party&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">SA:NAT</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>0123456789<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:Party&gt;</span>
+<span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The national id provided as cac:PartyIdentification/cbc:ID</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -7559,7 +7638,7 @@ LN : Not in liquidation</p></td>
 <div class="sect3">
 <h4 id="_puf_003_invoicetypecode"><a class="anchor" href="#_puf_003_invoicetypecode"></a><a class="link" href="#_puf_003_invoicetypecode">6.1.3. PUF-003-INVOICETYPECODE</a></h4>
 <div class="paragraph">
-<p>List of available invoice type codes.</p>
+<p>List of available general invoice type codes.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -7587,6 +7666,85 @@ LN : Not in liquidation</p></td>
 </tr>
 </tbody>
 </table>
+<div class="sect4">
+<h5 id="_invoice_type_codes_saudi_arabia"><a class="anchor" href="#_invoice_type_codes_saudi_arabia"></a><a class="link" href="#_invoice_type_codes_saudi_arabia">Invoice Type Codes Saudi Arabia</a></h5>
+<div class="paragraph">
+<p>The below listed InvoiceTypeCodes are available for use in Saudi Arabia</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>388</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tax Invoice, only applicable only with UBL message/document type Invoice.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>381</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Credit note, only applicable only with UBL message/document type CreditNote.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>383</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Debit note, only applicable only with UBL message/document type Invoice.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_invoice_subtype_codes_saudi_arabia"><a class="anchor" href="#_invoice_subtype_codes_saudi_arabia"></a><a class="link" href="#_invoice_subtype_codes_saudi_arabia">Invoice Subtype Codes Saudi Arabia</a></h5>
+<div class="paragraph">
+<p>In addition to the InvoiceTypeCode it is required to provide invoice subtypes. This should be placed in <code>cbc:InvoiceTypeCode/@name</code> and must follow a certain syntax.<br>
+Structure on the value must be <strong>NNPNESB</strong> (Example 0100000) where:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Supported values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NN (Position 1 and 2)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01 for tax invoice<br>
+02 for simplified tax invoice.<br>
+Note that only 01, Tax Invoice is currently supported</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>P (Position 3)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3rd Party invoice transaction, 0 for false, 1 for true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>N (Position 4)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nominal invoice transaction, 0 for false, 1 for true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>E (Position 5)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exports invoice transaction, 0 for false, 1 for true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>S (Position 6)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Summary invoice transaction, 0 for false, 1 for true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>B (Position 7)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Self-billed invoice transaction, 0 for false, 1 for true. Note that only 0 is currently supported</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_puf_004_currencycode"><a class="anchor" href="#_puf_004_currencycode"></a><a class="link" href="#_puf_004_currencycode">6.1.4. PUF-004-CURRENCYCODE</a></h4>
@@ -7645,6 +7803,70 @@ LN : Not in liquidation</p></td>
 <p>Supported values can be found here <a href="https://docs.peppol.eu/poacc/billing/3.0/codelist/ICD/">ISO 6523 ICD list</a><br>
 For <code>cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID/@schemeID</code> and
 <code>cac:PayeeParty/cac:PartyIdentification/cbc:ID/@schemeID</code> an additional code list is also applicable: <a href="https://docs.peppol.eu/poacc/billing/3.0/codelist/SEPA/">Sepa indicator</a></p>
+</div>
+<div class="paragraph">
+<p>For additional identification scheme identifier added in PUF see below recommendations.</p>
+</div>
+<div class="sect4">
+<h5 id="_identification_scheme_saudi_arabia"><a class="anchor" href="#_identification_scheme_saudi_arabia"></a><a class="link" href="#_identification_scheme_saudi_arabia">Identification scheme Saudi Arabia</a></h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:HQ</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Group VAT number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:NAT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">National ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:TIN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tax Identification Number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:IQA</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Iqama Number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:PAS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passport ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:CRN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Commercial registration number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:MOM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Momra license</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:MLS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MLSD license</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:SAG</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sagia license</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:GCC</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GCC ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SA:OTH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Other ID</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -8108,24 +8330,7 @@ The validations available on validex are:</p>
 <h2 id="_examples"><a class="anchor" href="#_examples"></a><a class="link" href="#_examples">9. Examples</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Invoice example can be downloaded here:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="examples/invoice_with_extension.xml" class="bare">examples/invoice_with_extension.xml</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Credit note example can be downloaded here:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="examples/credit_note_with_extension.xml" class="bare">examples/credit_note_with_extension.xml</a></p>
-</li>
-</ul>
+<p>Example files can be downloaded from <a href="https://github.com/pagero/puf/tree/master/examples">GitHub</a></p>
 </div>
 </div>
 </div>

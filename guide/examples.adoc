@@ -1,7 +1,1 @@
-Invoice example can be downloaded here: 
-
-- link:examples/invoice_with_extension.xml[]
-
-Credit note example can be downloaded here: 
-
-- link:examples/credit_note_with_extension.xml[]
+Example files can be downloaded from https://github.com/pagero/puf/tree/master/examples[GitHub] 

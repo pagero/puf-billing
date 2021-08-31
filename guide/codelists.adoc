@@ -183,7 +183,7 @@ The value consist of "country code:type of value". Country code states which cou
 
 ==== PUF-003-INVOICETYPECODE
 
-List of available invoice type codes.
+List of available general invoice type codes.
 
 |===
 |Value |Description
@@ -196,6 +196,52 @@ List of available invoice type codes.
 
 |`383`
 |Debit note, only applicable only with UBL message/document type Invoice.
+
+|===
+
+===== Invoice Type Codes Saudi Arabia
+The below listed InvoiceTypeCodes are available for use in Saudi Arabia
+|===
+|Value |Description
+
+
+|`388`
+|Tax Invoice, only applicable only with UBL message/document type Invoice.
+
+|`381`
+|Credit note, only applicable only with UBL message/document type CreditNote.
+
+|`383`
+|Debit note, only applicable only with UBL message/document type Invoice.
+|===
+
+===== Invoice Subtype Codes Saudi Arabia
+In addition to the InvoiceTypeCode it is required to provide invoice subtypes. This should be placed in `cbc:InvoiceTypeCode/@name` and must follow a certain syntax. +
+Structure on the value must be *NNPNESB* (Example 0100000) where:
+
+|===
+|Value |Supported values
+
+
+|`NN (Position 1 and 2)`
+|01 for tax invoice +
+02 for simplified tax invoice. +
+Note that only 01, Tax Invoice is currently supported
+
+|`P (Position 3)`
+|3rd Party invoice transaction, 0 for false, 1 for true
+
+|`N (Position 4)`
+|Nominal invoice transaction, 0 for false, 1 for true
+
+|`E (Position 5)`
+|Exports invoice transaction, 0 for false, 1 for true
+
+|`S (Position 6)`
+|Summary invoice transaction, 0 for false, 1 for true
+
+|`B (Position 7)`
+|Self-billed invoice transaction, 0 for false, 1 for true. Note that only 0 is currently supported
 
 |===
 
@@ -235,6 +281,47 @@ For available values see code list https://docs.peppol.eu/poacc/billing/3.0/code
 Supported values can be found here https://docs.peppol.eu/poacc/billing/3.0/codelist/ICD/[ISO 6523 ICD list] +
 For `cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID/@schemeID` and
 `cac:PayeeParty/cac:PartyIdentification/cbc:ID/@schemeID` an additional code list is also applicable: https://docs.peppol.eu/poacc/billing/3.0/codelist/SEPA/[Sepa indicator]
+
+For additional identification scheme identifier added in PUF see below recommendations.
+
+===== Identification scheme Saudi Arabia
+|===
+|Value |Description
+
+|`SA:HQ`
+|Group VAT number
+
+|`SA:NAT`
+|National ID
+
+|`SA:TIN`
+|Tax Identification Number
+
+|`SA:IQA`
+|Iqama Number
+
+|`SA:PAS`
+|Passport ID
+
+|`SA:CRN`
+|Commercial registration number
+
+|`SA:MOM`
+|Momra license
+
+|`SA:MLS`
+|MLSD license
+
+|`SA:SAG`
+|Sagia license
+
+|`SA:GCC`
+|GCC ID
+
+|`SA:OTH`
+|Other ID
+
+|===
 
 ==== PUF-009-TAXTYPESCHEME
 

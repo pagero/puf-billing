@@ -1,0 +1,44 @@
+This section contains information about special requirements concerning invoicing in Saudi Arabia.
+
+==== InvoiceTypeCode and Invoice subtype
+Available Invoice Type values to be used in Saudi Arabia can be found here <<_invoice_type_codes_saudi_arabia, here>>.
+
+In addition to provide the InvoiceType it is required to also provide the subtypes. Supported codes can be found <<_invoice_subtype_codes_saudi_arabia, here>>.
+
+*Example* +
+_Example with InvoiceTypeCode and invoice subtypes provided for Saudi Arabia_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="0100000">388</cbc:InvoiceTypeCode><!--1-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> InvoiceTypeCode 388 for "Tax Invoice" provided. Attribute name in this KSA scenario is used to provide the invoice subtypes.
+
+
+==== PartyIdentification
+In Saudi Arabia there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.
+These additional identifiers for use in Saudi Arabia can be found <<_identification_scheme_saudi_arabia, here>>.
+
+*Example* +
+_Example with additional id provided in Saudi Arabia in Party structure_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+    <cac:Party>
+        <!-- Code omitted for clarity -->
+        <cac:PartyIdentification>
+            <cbc:ID schemeID="SA:NAT">0123456789</cbc:ID><!--1-->
+        </cac:PartyIdentification>
+        <!-- Code omitted for clarity -->
+    </cac:Party>
+</cac:AccountingCustomerParty>
+
+</Invoice>
+----
+<1> The national id provided as cac:PartyIdentification/cbc:ID
