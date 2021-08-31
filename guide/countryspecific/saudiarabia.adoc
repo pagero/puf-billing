@@ -1,7 +1,7 @@
 This section contains information about special requirements concerning invoicing in Saudi Arabia.
 
 ==== InvoiceTypeCode and Invoice subtype
-Available Invoice Type values to be used in Saudi Arabia can be found here <<_invoice_type_codes_saudi_arabia, here>>.
+Available Invoice Type values to be used in Saudi Arabia can be found <<_invoice_type_codes_saudi_arabia, here>>.
 
 In addition to provide the InvoiceType it is required to also provide the subtypes. Supported codes can be found <<_invoice_subtype_codes_saudi_arabia, here>>.
 
