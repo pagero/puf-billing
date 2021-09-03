@@ -1,7 +1,12 @@
+Below table show available fields in `cac:BillingReference/cac:InvoiceDocumentReference`, note that additional elements has also been added to the extension available in <<_billingreference>>.
+
 .Elements added in cac:BillingReference/cac:InvoiceDocumentReference
 |===
 |Path |Description
 
+|`ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:BillingReference/cac:InvoiceDocumentReference` element, the information available can be found <<_billingreference, here>>
 |`cbc:ID`
 |**Preceding invoice number** +
 Identifier of a previous issued invoice.

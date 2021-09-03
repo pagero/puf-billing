@@ -43,6 +43,14 @@
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
+				<xsd:element name="BillingReferenceExtension" minOccurs="0" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
+							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
 				<xsd:element name="ContractDocumentReferenceExtension" minOccurs="0" maxOccurs="1">
 					<xsd:complexType>
 						<xsd:sequence>
@@ -153,6 +161,7 @@
 				<xsd:element name="LineExtension" minOccurs="0" maxOccurs="1">
 					<xsd:complexType>
 						<xsd:sequence>
+							<xsd:element name="TaxInclusiveLineExtensionAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
 							<xsd:element name="LineExclAllowanceChargeAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
 							<xsd:element name="OrderLineReference" minOccurs="0" maxOccurs="1">
 								<xsd:complexType>

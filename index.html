@@ -613,22 +613,24 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel3">
 <li><a href="#_dutystamp">4.1.1. DutyStamp</a></li>
 <li><a href="#_orderreference">4.1.2. OrderReference</a></li>
-<li><a href="#_contractdocumentreference">4.1.3. ContractDocumentReference</a></li>
-<li><a href="#_party">4.1.4. Party</a></li>
-<li><a href="#_delivery">4.1.5. Delivery</a></li>
-<li><a href="#_paymentterms">4.1.6. PaymentTerms</a></li>
-<li><a href="#_taxtotal">4.1.7. TaxTotal</a></li>
-<li><a href="#_legalmonetarytotal">4.1.8. LegalMonetaryTotal</a></li>
+<li><a href="#_billingreference">4.1.3. BillingReference</a></li>
+<li><a href="#_contractdocumentreference">4.1.4. ContractDocumentReference</a></li>
+<li><a href="#_party">4.1.5. Party</a></li>
+<li><a href="#_delivery">4.1.6. Delivery</a></li>
+<li><a href="#_paymentterms">4.1.7. PaymentTerms</a></li>
+<li><a href="#_taxtotal">4.1.8. TaxTotal</a></li>
+<li><a href="#_legalmonetarytotal">4.1.9. LegalMonetaryTotal</a></li>
 </ul>
 </li>
 <li><a href="#_line_level">4.2. Line Level</a>
 <ul class="sectlevel3">
-<li><a href="#_lineexclallowancechargeamount">4.2.1. LineExclAllowanceChargeAmount</a></li>
-<li><a href="#_originatordocumentreference">4.2.2. OriginatorDocumentReference</a></li>
-<li><a href="#_projectreference">4.2.3. ProjectReference</a></li>
-<li><a href="#_orderlinereference">4.2.4. OrderLineReference</a></li>
-<li><a href="#line-contract">4.2.5. ContractDocumentReference</a></li>
-<li><a href="#_price">4.2.6. Price</a></li>
+<li><a href="#_taxinclusivelineextensionamount">4.2.1. TaxInclusiveLineExtensionAmount</a></li>
+<li><a href="#_lineexclallowancechargeamount">4.2.2. LineExclAllowanceChargeAmount</a></li>
+<li><a href="#_originatordocumentreference">4.2.3. OriginatorDocumentReference</a></li>
+<li><a href="#_projectreference">4.2.4. ProjectReference</a></li>
+<li><a href="#_orderlinereference">4.2.5. OrderLineReference</a></li>
+<li><a href="#line-contract">4.2.6. ContractDocumentReference</a></li>
+<li><a href="#_price">4.2.7. Price</a></li>
 </ul>
 </li>
 </ul>
@@ -1682,6 +1684,9 @@ Date of issue of the referenced purchase order<br>
 </div>
 <div class="sect3">
 <h4 id="_cacbillingreference"><a class="anchor" href="#_cacbillingreference"></a><a class="link" href="#_cacbillingreference">cac:BillingReference</a></h4>
+<div class="paragraph">
+<p>Below table show available fields in <code>cac:BillingReference/cac:InvoiceDocumentReference</code>, note that additional elements has also been added to the extension available in <a href="#_billingreference">BillingReference</a>.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 4. Elements added in cac:BillingReference/cac:InvoiceDocumentReference</caption>
 <colgroup>
@@ -1695,6 +1700,11 @@ Date of issue of the referenced purchase order<br>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ext:UBLExtensions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
+Extension is added to provide additional information in the <code>cac:BillingReference/cac:InvoiceDocumentReference</code> element, the information available can be found <a href="#_billingreference">here</a></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:ID</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Preceding invoice number</strong><br>
@@ -3942,7 +3952,8 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ext:UBLExtensions</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
 Extension is added to provide additional information in the <code>cac:InvoiceLine</code> element, added elements in regards to <code>ext:UBLExtensions</code> for <code>cac:InvoiceLine</code> can be found below:<br></p>
-<p class="tableblock"><a href="#_lineexclallowancechargeamount">LineExclAllowanceChargeAmount</a><br>
+<p class="tableblock"><a href="#_taxinclusivelineextensionamount">TaxInclusiveLineExtensionAmount</a><br>
+<a href="#_lineexclallowancechargeamount">LineExclAllowanceChargeAmount</a><br>
 <a href="#_originatordocumentreference">OriginatorDocumentReference</a><br>
 <a href="#_projectreference">ProjectReference</a><br>
 <a href="#line-contract">ContractDocumentReference</a></p></td>
@@ -5219,7 +5230,101 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_contractdocumentreference"><a class="anchor" href="#_contractdocumentreference"></a><a class="link" href="#_contractdocumentreference">4.1.3. ContractDocumentReference</a></h4>
+<h4 id="_billingreference"><a class="anchor" href="#_billingreference"></a><a class="link" href="#_billingreference">4.1.3. BillingReference</a></h4>
+<div class="paragraph">
+<p>The UBL extension to be used for below elements can be found <a href="#_cacbillingreference">here</a>.<br>
+The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/BillingReferenceExtension</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Example below how the URI is used for this extension.</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:BillingReference&gt;</span>
+    <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
+      <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                            <span class="tag">&lt;puf:BillingReferenceExtension</span><span class="tag">/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
+  <span class="tag">&lt;/cac:BillingReference&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>URI to be used if this extension is added.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Structure to be used if information from this extension will be used.</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 35. Elements added in puf:BillingReferenceExtension</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:Note</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Textual note describing the reason for issuing a credit/debit note</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Contract document reference ID, date and extension</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:BillingReference&gt;</span>
+    <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
+      <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                            <span class="tag">&lt;puf:BillingReferenceExtension&gt;</span>
+                                                    <span class="tag">&lt;cbc:Note&gt;</span>Textual note describing the reason for issuing a credit/debit note<span class="tag">&lt;/cbc:Note&gt;</span>
+                                            <span class="tag">&lt;/puf:BillingReferenceExtension&gt;</span>
+                                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;cbc:ID&gt;</span>Invoice reference ID<span class="tag">&lt;/cbc:ID&gt;</span>
+      <span class="tag">&lt;cbc:IssueDate&gt;</span>2021-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
+  <span class="tag">&lt;/cac:BillingReference&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_contractdocumentreference"><a class="anchor" href="#_contractdocumentreference"></a><a class="link" href="#_contractdocumentreference">4.1.4. ContractDocumentReference</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_caccontractdocumentreference">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/ContractDocumentReferenceExtension</code>.</p>
@@ -5261,7 +5366,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 35. Elements added in puf:ContractDocumentReferenceExtension</caption>
+<caption class="title">Table 36. Elements added in puf:ContractDocumentReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5314,7 +5419,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party"><a class="anchor" href="#_party"></a><a class="link" href="#_party">4.1.4. Party</a></h4>
+<h4 id="_party"><a class="anchor" href="#_party"></a><a class="link" href="#_party">4.1.5. Party</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found in the below parties:<br>
 <a href="#_cacaccountingsupplierparty">cac:AccountingSupplierParty</a><br>
@@ -5368,7 +5473,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 36. Elements added in puf:PartyExtension</caption>
+<caption class="title">Table 37. Elements added in puf:PartyExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5489,7 +5594,7 @@ This is mostly used to public entities (e.g. government recipients). To identify
 </div>
 </div>
 <div class="sect3">
-<h4 id="_delivery"><a class="anchor" href="#_delivery"></a><a class="link" href="#_delivery">4.1.5. Delivery</a></h4>
+<h4 id="_delivery"><a class="anchor" href="#_delivery"></a><a class="link" href="#_delivery">4.1.6. Delivery</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacdelivery">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/DeliveryExtension</code>.<br></p>
@@ -5537,7 +5642,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table show the definition of the additional elements added to the delivery extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 37. Elements added in puf:DeliveryExtension</caption>
+<caption class="title">Table 38. Elements added in puf:DeliveryExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5591,7 +5696,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_paymentterms"><a class="anchor" href="#_paymentterms"></a><a class="link" href="#_paymentterms">4.1.6. PaymentTerms</a></h4>
+<h4 id="_paymentterms"><a class="anchor" href="#_paymentterms"></a><a class="link" href="#_paymentterms">4.1.7. PaymentTerms</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacpaymentterms">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>puf:PageroExtension/puf:PaymentTermsExtension</code>.<br></p>
@@ -5639,7 +5744,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>puf:Pag
 <p>Below table shows the definition of the extended element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 38. Elements added in puf:PaymentTermsExtension</caption>
+<caption class="title">Table 39. Elements added in puf:PaymentTermsExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5688,7 +5793,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>puf:Pag
 </div>
 </div>
 <div class="sect3">
-<h4 id="_taxtotal"><a class="anchor" href="#_taxtotal"></a><a class="link" href="#_taxtotal">4.1.7. TaxTotal</a></h4>
+<h4 id="_taxtotal"><a class="anchor" href="#_taxtotal"></a><a class="link" href="#_taxtotal">4.1.8. TaxTotal</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cactaxtotal">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/TaxSubtotalExtension</code>.<br></p>
@@ -5738,7 +5843,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table lists all additional elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 39. Elements added in puf:TaxSubtotalExtension</caption>
+<caption class="title">Table 40. Elements added in puf:TaxSubtotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5875,7 +5980,7 @@ Tax chargeability per tax (see Italy section <a href="#_tax_chargeability_esigib
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legalmonetarytotal"><a class="anchor" href="#_legalmonetarytotal"></a><a class="link" href="#_legalmonetarytotal">4.1.8. LegalMonetaryTotal</a></h4>
+<h4 id="_legalmonetarytotal"><a class="anchor" href="#_legalmonetarytotal"></a><a class="link" href="#_legalmonetarytotal">4.1.9. LegalMonetaryTotal</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_caclegalmonetarytotal">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/LegalMonetaryTotalExtension</code>.<br></p>
@@ -5923,7 +6028,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 40. Elements added in puf:LegalMonetaryTotalExtension</caption>
+<caption class="title">Table 41. Elements added in puf:LegalMonetaryTotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6133,7 +6238,124 @@ Please note that tax has been excluded in above example.
 <p>Below chapters describe the different extensions added on line level.</p>
 </div>
 <div class="sect3">
-<h4 id="_lineexclallowancechargeamount"><a class="anchor" href="#_lineexclallowancechargeamount"></a><a class="link" href="#_lineexclallowancechargeamount">4.2.1. LineExclAllowanceChargeAmount</a></h4>
+<h4 id="_taxinclusivelineextensionamount"><a class="anchor" href="#_taxinclusivelineextensionamount"></a><a class="link" href="#_taxinclusivelineextensionamount">4.2.1. TaxInclusiveLineExtensionAmount</a></h4>
+<div class="paragraph">
+<p>Element <code>TaxInclusiveLineExtensionAmount</code> has been added in order to specify the lines total amount including taxes.<br></p>
+</div>
+<div class="paragraph">
+<p>The UBL extension to be used for TaxInclusiveLineExtensionAmount on line level is <a href="#line-extension">ext:UBLExtensions</a>.<br>
+The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/LineExtension</code>.
+See example below as well as the URI to be used for this extension.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+      <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+          <span class="tag">&lt;ext:UBLExtension&gt;</span>
+              <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+              <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                  <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                      <span class="tag">&lt;puf:LineExtension</span><span class="tag">/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                  <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+              <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+          <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>URI to be used if this extension is added.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Structure to be used if information from this extension will be used.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Below table shows the definition of the new elements added to the extension.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 42. Elements added to puf:LineExtension</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:TaxInclusiveLineExtensionAmount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total line amount, including tax, discount and charges.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:TaxInclusiveLineExtensionAmount/@currencyID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Currency of the TaxInclusiveLineExtensionAmount.<br>
+For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCYCODE</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Line with 100 EUR discount</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+      <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+          <span class="tag">&lt;ext:UBLExtension&gt;</span>
+              <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+              <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                  <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                      <span class="tag">&lt;puf:LineExtension&gt;</span>
+                          <span class="tag">&lt;puf:TaxInclusiveLineExtensionAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1100<span class="tag">&lt;/puf:TaxInclusiveLineExtensionAmount&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                      <span class="tag">&lt;/puf:LineExtension&gt;</span>
+                  <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+              <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+          <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;cbc:LineExtensionAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1000<span class="tag">&lt;/cbc:LineExtensionAmount&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+      <span class="tag">&lt;cac:TaxTotal&gt;</span>
+        <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+      <span class="tag">&lt;/cac:TaxTotal&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The amount including tax</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The amount excluding tax</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_lineexclallowancechargeamount"><a class="anchor" href="#_lineexclallowancechargeamount"></a><a class="link" href="#_lineexclallowancechargeamount">4.2.2. LineExclAllowanceChargeAmount</a></h4>
 <div class="paragraph">
 <p>In addition to the LineExtensionAmount a new element has been added to specify the line amount excluding any allowances and charges on the line.<br></p>
 </div>
@@ -6182,7 +6404,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 41. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 43. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6251,7 +6473,7 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 </div>
 </div>
 <div class="sect3">
-<h4 id="_originatordocumentreference"><a class="anchor" href="#_originatordocumentreference"></a><a class="link" href="#_originatordocumentreference">4.2.2. OriginatorDocumentReference</a></h4>
+<h4 id="_originatordocumentreference"><a class="anchor" href="#_originatordocumentreference"></a><a class="link" href="#_originatordocumentreference">4.2.3. OriginatorDocumentReference</a></h4>
 <div class="paragraph">
 <p>In order to specify the tender reference on line level, Originator document reference has been added to line extension.<br></p>
 </div>
@@ -6304,7 +6526,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 42. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
+<caption class="title">Table 44. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6358,7 +6580,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_projectreference"><a class="anchor" href="#_projectreference"></a><a class="link" href="#_projectreference">4.2.3. ProjectReference</a></h4>
+<h4 id="_projectreference"><a class="anchor" href="#_projectreference"></a><a class="link" href="#_projectreference">4.2.4. ProjectReference</a></h4>
 <div class="paragraph">
 <p>In order to specify the project reference on line level, project reference has been added to line extension.<br></p>
 </div>
@@ -6411,7 +6633,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 43. Elements added to puf:LineExtension/puf:ProjectReference</caption>
+<caption class="title">Table 45. Elements added to puf:LineExtension/puf:ProjectReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6460,7 +6682,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_orderlinereference"><a class="anchor" href="#_orderlinereference"></a><a class="link" href="#_orderlinereference">4.2.4. OrderLineReference</a></h4>
+<h4 id="_orderlinereference"><a class="anchor" href="#_orderlinereference"></a><a class="link" href="#_orderlinereference">4.2.5. OrderLineReference</a></h4>
 <div class="paragraph">
 <p>In addition, an extension has been created for providing additional information not supported in UBL 2.1.<br></p>
 </div>
@@ -6519,7 +6741,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 44. Elements added in puf:OrderLineReference</caption>
+<caption class="title">Table 46. Elements added in puf:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6577,7 +6799,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="line-contract"><a class="anchor" href="#line-contract"></a><a class="link" href="#line-contract">4.2.5. ContractDocumentReference</a></h4>
+<h4 id="line-contract"><a class="anchor" href="#line-contract"></a><a class="link" href="#line-contract">4.2.6. ContractDocumentReference</a></h4>
 <div class="paragraph">
 <p>In order to specify the contract information on line level, ContractDocumentReference has been added to Line extension.<br></p>
 </div>
@@ -6630,7 +6852,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 45. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
+<caption class="title">Table 47. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6694,7 +6916,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_price"><a class="anchor" href="#_price"></a><a class="link" href="#_price">4.2.6. Price</a></h4>
+<h4 id="_price"><a class="anchor" href="#_price"></a><a class="link" href="#_price">4.2.7. Price</a></h4>
 <div class="paragraph">
 <p>In addition to Price a new element has been added to specify the unit price including allowances and charges.
 Note that the new element PriceInclAllowanceChargeAmount should include the <code>cac:AllowanceCharge</code> applied on line level (not to be confused with <code>cac:Price/cac:AllowanceCharge</code>), as shown in the example <em>Line with 100 EUR discount</em>.<br></p>
@@ -6749,7 +6971,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 46. Elements added to puf:PriceExtension</caption>
+<caption class="title">Table 48. Elements added to puf:PriceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7393,7 +7615,7 @@ values defined specifically for PUF and other external list(s). Other times all 
 <div class="sect2">
 <h3 id="_code_lists_for_coded_elements"><a class="anchor" href="#_code_lists_for_coded_elements"></a><a class="link" href="#_code_lists_for_coded_elements">6.1. Code lists for coded elements</a></h3>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 47. Table of the code lists used</caption>
+<caption class="title">Table 49. Table of the code lists used</caption>
 <colgroup>
 <col>
 <col>
@@ -8202,7 +8424,7 @@ The validations available on validex are:</p>
 <p>The validation artefacts are also available on <a href="https://github.com/pagero/puf">GitHub</a></p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 48. Schematron rules in PUF</caption>
+<caption class="title">Table 50. Schematron rules in PUF</caption>
 <colgroup>
 <col>
 <col>

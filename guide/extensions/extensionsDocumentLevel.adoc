@@ -8,6 +8,10 @@ include::documentlevel/DutyStamp.adoc[]
 
 include::documentlevel/orderreferenceextension.adoc[]
 
+==== BillingReference
+
+include::documentlevel/BillingReferenceExtension.adoc[]
+
 ==== ContractDocumentReference
 
 include::documentlevel/ContractDocumentReferenceExtension.adoc[]

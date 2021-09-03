@@ -5,6 +5,7 @@
 |**Extension Content** +
 Extension is added to provide additional information in the `cac:InvoiceLine` element, added elements in regards to `ext:UBLExtensions` for `cac:InvoiceLine` can be found below: +
 
+<<_taxinclusivelineextensionamount>> +
 <<_lineexclallowancechargeamount>> +
 <<_originatordocumentreference>> +
 <<_projectreference>> +

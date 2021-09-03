@@ -1,5 +1,9 @@
 Below chapters describe the different extensions added on line level.
 
+==== TaxInclusiveLineExtensionAmount
+
+include::linelevel/extensionLineTaxInclusiveLineExtensionAmount.adoc[]
+
 ==== LineExclAllowanceChargeAmount
 
 include::linelevel/extensionLineExclAllowanceChargeAmount.adoc[]
