@@ -1,0 +1,125 @@
+This section contains information about special requirements concerning invoicing in India.
+
+
+==== PartyIdentification
+In India there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.
+These additional identifiers for use in India can be found <<_identification_scheme_india, here>>.
+
+*Example* +
+_Example with additional id provided in India in Party structure_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+    <cac:Party>
+        <!-- Code omitted for clarity -->
+        <cac:PartyIdentification>
+            <cbc:ID schemeID="IN:GSTIN">11AAAAA3212A1AA</cbc:ID><!--1-->
+        </cac:PartyIdentification>
+        <!-- Code omitted for clarity -->
+    </cac:Party>
+</cac:AccountingCustomerParty>
+
+</Invoice>
+----
+<1> GSTIN number in India provided as cac:PartyIdentification/cbc:ID
+
+
+==== Party address information
+The mandatory clearance platform IRP validate the below address information according to code lists.
+
+*cbc:CountrySubentityCode* +
+Each party must contain the corresponding states code, the state code should be sent in element `cbc:CountrySubentityCode` and must be two digits.
+Valid state codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes. The parties state code must correspond with the first two digits of the parties GSTIN number.
+
+*cbc:PostalZone* +
+The post code or PIN code as referred to in India must exist on all parties and must be sent in `cbc:PostalZone`. Valid codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes.
+
+*Example* +
+_Example of a correct address for cac:AccountingCustomerParty_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+    <cac:Party>
+        <!-- Code omitted for clarity -->
+        <cac:PostalAddress>
+            <cbc:StreetName>Street 1</cbc:StreetName>
+            <cbc:CityName>Jammu</cbc:CityName>
+            <cbc:PostalZone>181131</cbc:PostalZone>
+            <cbc:CountrySubentityCode>01</cbc:CountrySubentityCode>
+            <cac:Country>
+              <cbc:IdentificationCode>IN</cbc:IdentificationCode>
+              <cbc:Name>India</cbc:Name>
+            </cac:Country>
+        </cac:PostalAddress>
+        <cac:PartyIdentification>
+            <cbc:ID schemeID="IN:GSTIN">01AAAAA3212A1AA</cbc:ID><!--1-->
+        </cac:PartyIdentification>
+        <!-- Code omitted for clarity -->
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+</Invoice>
+----
+
+==== Tax type scheme
+
+Tax type scheme codes for India can be found <<_puf_009_taxtypescheme, here>>.
+
+
+==== Harmonized System of Nomenclature code (HSN Code)
+
+Each invoice line must contain a HSN code, IRP will validate that the provided HSN code correspond with relevant taxes for that goods or service.
+
+All HSN codes applicable can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes.
+
+*Example* +
+_Example how to provide HSN code_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cac:Item>
+      <cac:CommodityClassification>
+        <cbc:ItemClassificationCode listID="HS">85176290</cbc:ItemClassificationCode>
+      </cac:CommodityClassification>
+    </cac:Item>
+  </cac:InvoiceLine>
+</Invoice>
+----
+
+==== Supply Type
+In India it's mandatory to define the type of supply relevant for the invoice, the available codes can be found below and mist be stated in the Supply type element found <<_supplytype, here>>
+
+|===
+|Value |Description
+
+|`B2B`
+|Business to Business
+
+|`SEZWP`
+|SEZ with payment
+
+|`SEZWOP`
+|SEZ without payment
+
+|`EXPWP`
+|Export with Payment
+
+|`EXPWOP`
+|Export without payment
+
+|`DEXP`
+|Direct Export
+
+|===
+
+
+==== IGST on Intra state transaction
+In some cases IGST is applicable on intra state supplies, in order to indicate this a true or false flag must be set in element `puf:IGSTOnIntra` which can be found <<_igstonintra, here>>

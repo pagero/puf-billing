@@ -2,6 +2,9 @@
 |===
 |Path |Description
 
+|`ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:Item` element, the information available can be found <<_item, here>>
 |`cbc:Description`
 |**Item description** +
 Description of the item

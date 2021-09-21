@@ -58,6 +58,9 @@ Buyer's postal address post code
 |`cac:Party/cac:PostalAddress/cbc:CountrySubentity`
 |**Country subentity** +
 Buyer's postal address province or state
+|`cac:Party/cac:PostalAddress/cbc:CountrySubentityCode`
+|**Country subentity code** +
+Buyer's postal address province or state code
 |`cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line`
 |**Additional address line** +
 Note that cbc:StreetName and cbc:AdditionalStreetName should be populated prior of using this element.

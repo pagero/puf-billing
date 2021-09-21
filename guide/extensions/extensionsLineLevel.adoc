@@ -25,6 +25,10 @@ include::linelevel/extensionLineOrderLineReference.adoc[]
 
 include::linelevel/extensionLineContractDocumentReference.adoc[]
 
+==== Item
+
+include::linelevel/extensionLineItemExtension.adoc[]
+
 ==== Price
 
 include::linelevel/extensionLinePriceExtension.adoc[]

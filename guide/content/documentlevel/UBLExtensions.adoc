@@ -5,6 +5,7 @@
 |**Extension Content** +
 Added elements in regards to `ext:UBLExtensions` for `Invoice` can be found below: +
 
-<<_dutystamp>>
-
+<<_supplytype>> +
+<<_dutystamp>> +
+<<_igstonintra>>
 |===

@@ -23,3 +23,7 @@ include::countryspecific/singapore.adoc[]
 === Saudi Arabia
 
 include::countryspecific/saudiarabia.adoc[]
+
+=== India
+
+include::countryspecific/india.adoc[]

@@ -50,6 +50,9 @@ Delivery location address post code
 |`cac:DeliveryLocation/cac:Address/cbc:CountrySubentity`
 |**Country subentity** +
 Delivery location address province or state
+|`cac:DeliveryLocation/cac:Address/cbc:CountrySubentityCode`
+|**Country subentity code** +
+Delivery location address province or state code
 |`cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line`
 |**Additional address line** +
 Note that cbc:StreetName and cbc:AdditionalStreetName should be populated prior of using this element.
@@ -62,6 +65,13 @@ Delivery location address country name
 |`cac:DeliveryParty/ext:UBLExtensions`
 |**Extension Content** +
 Extension is added to provide additional information in the `cac:Party` element, the information available can be found <<_party, here>>
+|`cac:DeliveryParty/cac:PartyIdentification/cbc:ID`
+|**Seller Identifier** +
+Identifier of the delivery party.
+|`cac:DeliveryParty/cac:PartyIdentification/cbc:ID/@schemeID`
+|**Seller Identifier** +
+Scheme identifier of delivery party identifier +
+Value must be according to code list <<_puf_008_identificationscheme>>
 |`cac:DeliveryParty/cac:PartyName/cbc:Name`
 |**Delivery party name** +
 Name of the party that the goods/services is sent to.
@@ -74,6 +84,27 @@ Telephone of the contact to which the goods/services is sent to.
 |`cac:DeliveryParty/cac:Contact/cbc:ElectronicMail`
 |**Delivery party contact email** +
 Email of the contact to which the goods/services is sent to.
+|`cac:Despatch/cac:DespatchParty/cac:PartyName/cbc:Name`
+|**Despatch party name** +
+Name of the party responsible for the despatch.
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:StreetName`
+|**Despatch party street** +
+Street address of the despatch party.
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CityName`
+|**Despatch party city** +
+City of the despatch party.
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:PostalZone`
+|**Despatch party postal zone** +
+Postal Zone of the despatch party.
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CountrySubentityCode`
+|**Despatch party state/province code** +
+State/province code of the despatch party.
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode`
+|**Despatch party country code** +
+Country code of the despatch party.
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:Country/cbc:Name`
+|**Despatch party country name** +
+Name of the country for the despatch party.
 |===
 
 *Example* +
@@ -112,6 +143,23 @@ _cac:Delivery populated with example value_
               <cbc:ElectronicMail>DeliveryContact@mail.com</cbc:ElectronicMail>
           </cac:Contact>
       </cac:DeliveryParty>
+      <cac:Despatch>
+          <cac:DespatchParty>
+              <cac:PartyName>
+                  <cbc:Name>Despatch party name</cbc:Name>
+              </cac:PartyName>
+              <cac:PostalAddress>
+                  <cbc:StreetName>Street 1</cbc:StreetName>
+                  <cbc:CityName>Jammu</cbc:CityName>
+                  <cbc:PostalZone>181131</cbc:PostalZone>
+                  <cbc:CountrySubentityCode>01</cbc:CountrySubentityCode>
+                  <cac:Country>
+                      <cbc:IdentificationCode>IN</cbc:IdentificationCode>
+                      <cbc:Name>India</cbc:Name>
+                  </cac:Country>
+              </cac:PostalAddress>
+          </cac:DespatchParty>
+      </cac:Despatch>
   </cac:Delivery>
   <!-- Code omitted for clarity -->
 </Invoice>

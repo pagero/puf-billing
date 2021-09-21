@@ -323,6 +323,18 @@ For additional identification scheme identifier added in PUF see below recommend
 
 |===
 
+===== Identification scheme India
+|===
+|Value |Description
+
+|`IN:PAN`
+|PAN is a 10-digit unique identification alphanumeric number
+
+|`IN:GSTIN`
+|GSTIN is a 15-digit PAN-based unique identification number assigned to every registered person under GST.
+
+|===
+
 ==== PUF-009-TAXTYPESCHEME
 
 List of available tax type scheme codes.
@@ -351,6 +363,30 @@ __A harmonized sales tax consisting of a goods and service tax, a Canadian provi
 
 |`AAI`
 |Canadian provincial sales tax
+
+|`IGST`
+|Integrated Goods and Services Tax, India
+
+|`CGST`
+|Central Goods and Services Tax, India
+
+|`SGST`
+|State Goods and Services Tax, India
+
+|`UTGST`
+|Union Territory Goods and Services Tax, India
+
+|`CESS`
+|CESS, India
+
+|`CESS Non advol`
+|CESS Non Ad Valorem, India
+
+|`STATECESS`
+|State CESS, India
+
+|`STATECESS Non Advol`
+|State CESS Non Ad Valorem, India
 
 |===
 
@@ -493,6 +529,7 @@ For additional codes added in PUF see below code recommendations.
 |intra-Community VAT
 
 |===
+
 
 ==== PUF-013-EXEMPTCODE
 

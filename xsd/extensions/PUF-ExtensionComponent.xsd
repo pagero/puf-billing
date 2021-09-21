@@ -19,6 +19,13 @@
 		</xsd:annotation>
 		<xsd:complexType>
 			<xsd:sequence>
+				<xsd:element name="SupplyType" minOccurs="0" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="Code" minOccurs="1" maxOccurs="1"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
 				<xsd:element name="DutyStamp" minOccurs="0" maxOccurs="1">
 					<xsd:complexType>
 						<xsd:sequence>
@@ -26,6 +33,7 @@
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
+				<xsd:element name="IGSTOnIntra" type="PUFIndicatorType" minOccurs="0" maxOccurs="1"/>
 				<xsd:element name="BillingSoftware" minOccurs="0" maxOccurs="1">
 					<xsd:complexType>
 						<xsd:sequence>
@@ -47,7 +55,6 @@
 					<xsd:complexType>
 						<xsd:sequence>
 							<xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
@@ -207,6 +214,14 @@
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
+				<xsd:element name="ItemExtension" minOccurs="0" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ItemType" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
+							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
 				<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
 			</xsd:sequence>
 		</xsd:complexType>
@@ -225,6 +240,11 @@
 	<xsd:complexType name="PUFAmountType">
 		<xsd:simpleContent>
 			<xsd:extension base="udt:AmountType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="PUFIndicatorType">
+		<xsd:simpleContent>
+			<xsd:extension base="udt:IndicatorType"/>
 		</xsd:simpleContent>
 	</xsd:complexType>
 	<xsd:complexType name="PUFDateType">

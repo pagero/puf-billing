@@ -131,7 +131,7 @@
             <cbc:TaxAmount currencyID="SAR">15.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <!-- BT-118 VAT category code.  Valid values in KSA: S, Z, E, O -->
-               <!-- <cbc:ID>S</cbc:ID>-->
+                <cbc:ID>S</cbc:ID>
                 <!-- BT-119 VAT category rate-->
                 <cbc:Percent>15.00</cbc:Percent>
                 <cac:TaxScheme>

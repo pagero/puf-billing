@@ -611,15 +611,17 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel2">
 <li><a href="#_document_level">4.1. Document Level</a>
 <ul class="sectlevel3">
-<li><a href="#_dutystamp">4.1.1. DutyStamp</a></li>
-<li><a href="#_orderreference">4.1.2. OrderReference</a></li>
-<li><a href="#_billingreference">4.1.3. BillingReference</a></li>
-<li><a href="#_contractdocumentreference">4.1.4. ContractDocumentReference</a></li>
-<li><a href="#_party">4.1.5. Party</a></li>
-<li><a href="#_delivery">4.1.6. Delivery</a></li>
-<li><a href="#_paymentterms">4.1.7. PaymentTerms</a></li>
-<li><a href="#_taxtotal">4.1.8. TaxTotal</a></li>
-<li><a href="#_legalmonetarytotal">4.1.9. LegalMonetaryTotal</a></li>
+<li><a href="#_supplytype">4.1.1. SupplyType</a></li>
+<li><a href="#_dutystamp">4.1.2. DutyStamp</a></li>
+<li><a href="#_igstonintra">4.1.3. IGSTOnIntra</a></li>
+<li><a href="#_orderreference">4.1.4. OrderReference</a></li>
+<li><a href="#_billingreference">4.1.5. BillingReference</a></li>
+<li><a href="#_contractdocumentreference">4.1.6. ContractDocumentReference</a></li>
+<li><a href="#_party">4.1.7. Party</a></li>
+<li><a href="#_delivery">4.1.8. Delivery</a></li>
+<li><a href="#_paymentterms">4.1.9. PaymentTerms</a></li>
+<li><a href="#_taxtotal">4.1.10. TaxTotal</a></li>
+<li><a href="#_legalmonetarytotal">4.1.11. LegalMonetaryTotal</a></li>
 </ul>
 </li>
 <li><a href="#_line_level">4.2. Line Level</a>
@@ -630,7 +632,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_projectreference">4.2.4. ProjectReference</a></li>
 <li><a href="#_orderlinereference">4.2.5. OrderLineReference</a></li>
 <li><a href="#line-contract">4.2.6. ContractDocumentReference</a></li>
-<li><a href="#_price">4.2.7. Price</a></li>
+<li><a href="#_item">4.2.7. Item</a></li>
+<li><a href="#_price">4.2.8. Price</a></li>
 </ul>
 </li>
 </ul>
@@ -673,6 +676,16 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel3">
 <li><a href="#_invoicetypecode_and_invoice_subtype">5.6.1. InvoiceTypeCode and Invoice subtype</a></li>
 <li><a href="#_partyidentification">5.6.2. PartyIdentification</a></li>
+</ul>
+</li>
+<li><a href="#_india">5.7. India</a>
+<ul class="sectlevel3">
+<li><a href="#_partyidentification_2">5.7.1. PartyIdentification</a></li>
+<li><a href="#_party_address_information">5.7.2. Party address information</a></li>
+<li><a href="#_tax_type_scheme">5.7.3. Tax type scheme</a></li>
+<li><a href="#_harmonized_system_of_nomenclature_code_hsn_code">5.7.4. Harmonized System of Nomenclature code (HSN Code)</a></li>
+<li><a href="#_supply_type">5.7.5. Supply Type</a></li>
+<li><a href="#_igst_on_intra_state_transaction">5.7.6. IGST on Intra state transaction</a></li>
 </ul>
 </li>
 </ul>
@@ -1097,7 +1110,9 @@ Note that most examples are only shown for document type Invoice.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ext:UBLExtensions</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
 Added elements in regards to <code>ext:UBLExtensions</code> for <code>Invoice</code> can be found below:<br></p>
-<p class="tableblock"><a href="#_dutystamp">DutyStamp</a></p></td>
+<p class="tableblock"><a href="#_supplytype">SupplyType</a><br>
+<a href="#_dutystamp">DutyStamp</a><br>
+<a href="#_igstonintra">IGSTOnIntra</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -2213,6 +2228,11 @@ Seller&#8217;s postal address post code</p></td>
 Seller&#8217;s postal address province or state</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
+Seller&#8217;s postal address province or state code</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
 Note that cbc:StreetName and cbc:AdditionalStreetName should be populated prior of using this element.</p></td>
@@ -2455,6 +2475,11 @@ Buyer&#8217;s postal address post code</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentity</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
 Buyer&#8217;s postal address province or state</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
+Buyer&#8217;s postal address province or state code</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
@@ -2766,6 +2791,11 @@ Buyer&#8217;s postal address post code</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentity</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
 Buyer&#8217;s postal address province or state</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
+Buyer&#8217;s postal address province or state code</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
@@ -3179,6 +3209,11 @@ Delivery location address post code</p></td>
 Delivery location address province or state</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
+Delivery location address province or state code</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
 Note that cbc:StreetName and cbc:AdditionalStreetName should be populated prior of using this element.</p></td>
@@ -3199,6 +3234,17 @@ Delivery location address country name</p></td>
 Extension is added to provide additional information in the <code>cac:Party</code> element, the information available can be found <a href="#_party">here</a></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryParty/cac:PartyIdentification/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Seller Identifier</strong><br>
+Identifier of the delivery party.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryParty/cac:PartyIdentification/cbc:ID/@schemeID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Seller Identifier</strong><br>
+Scheme identifier of delivery party identifier<br>
+Value must be according to code list <a href="#_puf_008_identificationscheme">PUF-008-IDENTIFICATIONSCHEME</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryParty/cac:PartyName/cbc:Name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery party name</strong><br>
 Name of the party that the goods/services is sent to.</p></td>
@@ -3217,6 +3263,41 @@ Telephone of the contact to which the goods/services is sent to.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryParty/cac:Contact/cbc:ElectronicMail</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery party contact email</strong><br>
 Email of the contact to which the goods/services is sent to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PartyName/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party name</strong><br>
+Name of the party responsible for the despatch.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:StreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party street</strong><br>
+Street address of the despatch party.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CityName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party city</strong><br>
+City of the despatch party.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:PostalZone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party postal zone</strong><br>
+Postal Zone of the despatch party.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party state/province code</strong><br>
+State/province code of the despatch party.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party country code</strong><br>
+Country code of the despatch party.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:Country/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party country name</strong><br>
+Name of the country for the despatch party.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3258,6 +3339,23 @@ Email of the contact to which the goods/services is sent to.</p></td>
               <span class="tag">&lt;cbc:ElectronicMail&gt;</span>DeliveryContact@mail.com<span class="tag">&lt;/cbc:ElectronicMail&gt;</span>
           <span class="tag">&lt;/cac:Contact&gt;</span>
       <span class="tag">&lt;/cac:DeliveryParty&gt;</span>
+      <span class="tag">&lt;cac:Despatch&gt;</span>
+          <span class="tag">&lt;cac:DespatchParty&gt;</span>
+              <span class="tag">&lt;cac:PartyName&gt;</span>
+                  <span class="tag">&lt;cbc:Name&gt;</span>Despatch party name<span class="tag">&lt;/cbc:Name&gt;</span>
+              <span class="tag">&lt;/cac:PartyName&gt;</span>
+              <span class="tag">&lt;cac:PostalAddress&gt;</span>
+                  <span class="tag">&lt;cbc:StreetName&gt;</span>Street 1<span class="tag">&lt;/cbc:StreetName&gt;</span>
+                  <span class="tag">&lt;cbc:CityName&gt;</span>Jammu<span class="tag">&lt;/cbc:CityName&gt;</span>
+                  <span class="tag">&lt;cbc:PostalZone&gt;</span>181131<span class="tag">&lt;/cbc:PostalZone&gt;</span>
+                  <span class="tag">&lt;cbc:CountrySubentityCode&gt;</span>01<span class="tag">&lt;/cbc:CountrySubentityCode&gt;</span>
+                  <span class="tag">&lt;cac:Country&gt;</span>
+                      <span class="tag">&lt;cbc:IdentificationCode&gt;</span>IN<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+                      <span class="tag">&lt;cbc:Name&gt;</span>India<span class="tag">&lt;/cbc:Name&gt;</span>
+                  <span class="tag">&lt;/cac:Country&gt;</span>
+              <span class="tag">&lt;/cac:PostalAddress&gt;</span>
+          <span class="tag">&lt;/cac:DespatchParty&gt;</span>
+      <span class="tag">&lt;/cac:Despatch&gt;</span>
   <span class="tag">&lt;/cac:Delivery&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
@@ -4762,6 +4860,11 @@ For valid values see code list <a href="#_puf_009_taxtypescheme">PUF-009-TAXTYPE
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ext:UBLExtensions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
+Extension is added to provide additional information in the <code>cac:Item</code> element, the information available can be found <a href="#_item">here</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:Description</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Item description</strong><br>
 Description of the item</p></td>
@@ -5036,7 +5139,98 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <p>Below chapters describe the different extensions added on document level.</p>
 </div>
 <div class="sect3">
-<h4 id="_dutystamp"><a class="anchor" href="#_dutystamp"></a><a class="link" href="#_dutystamp">4.1.1. DutyStamp</a></h4>
+<h4 id="_supplytype"><a class="anchor" href="#_supplytype"></a><a class="link" href="#_supplytype">4.1.1. SupplyType</a></h4>
+<div class="paragraph">
+<p>In order to specify a supply type for the invoice, following elements has been added in the below extension.<br></p>
+</div>
+<div class="paragraph">
+<p>The UBL extension to be used for below elements can be found <a href="#_extublextensions">here</a>.<br>
+The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/SupplyType</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>See example below as well as the URI to be used for this extension.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:SupplyType<span class="tag">&lt;/ext:ExtensionURI&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+          <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+              <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                <span class="tag">&lt;puf:SupplyType</span><span class="tag">/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+              <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>URI to be used if this extension is added.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Structure to be used if information from this extension will be used.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Below table shows the definition of the new elements added to the extension.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 33. Elements added to puf:PageroExtension/puf:SupplyType</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:Code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Code identifying the type of supply</strong><br>
+Code describing the type of supply.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Supply Type</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:SupplyType<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+          <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+              <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                  <span class="tag">&lt;puf:SupplyType&gt;</span>
+                      <span class="tag">&lt;puf:Code&gt;</span>B2B<span class="tag">&lt;/puf:Code&gt;</span>
+                  <span class="tag">&lt;/puf:SupplyType&gt;</span>
+              <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dutystamp"><a class="anchor" href="#_dutystamp"></a><a class="link" href="#_dutystamp">4.1.2. DutyStamp</a></h4>
 <div class="paragraph">
 <p>In order to specify a duty stamp for the invoice, following elements has been added in the below extension.<br></p>
 </div>
@@ -5083,7 +5277,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 33. Elements added to puf:PageroExtension/puf:DutyStamp</caption>
+<caption class="title">Table 34. Elements added to puf:PageroExtension/puf:DutyStamp</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5133,7 +5327,97 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 </div>
 </div>
 <div class="sect3">
-<h4 id="_orderreference"><a class="anchor" href="#_orderreference"></a><a class="link" href="#_orderreference">4.1.2. OrderReference</a></h4>
+<h4 id="_igstonintra"><a class="anchor" href="#_igstonintra"></a><a class="link" href="#_igstonintra">4.1.3. IGSTOnIntra</a></h4>
+<div class="paragraph">
+<p>In order to specify a supply type for the invoice, following elements has been added in the below extension.<br></p>
+</div>
+<div class="paragraph">
+<p>The UBL extension to be used for below elements can be found <a href="#_extublextensions">here</a>.<br>
+The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/IGSTOnIntra</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>See example below as well as the URI to be used for this extension.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:IGSTOnIntra<span class="tag">&lt;/ext:ExtensionURI&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+          <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+              <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                <span class="tag">&lt;puf:IGSTOnIntra</span><span class="tag">/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+              <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>URI to be used if this extension is added.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Structure to be used if information from this extension will be used.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Below table shows the definition of the new elements added to the extension.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 35. Elements added to puf:PageroExtension</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:IGSTOnIntra</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Indicator if IGST is applicable for intra state supplies</strong><br>
+To indicate if supply is chargeable to IGST despite the fact that the Supplier and Recipient are located within same State.<br>
+<strong>Possible values is true or false</strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+IGST on intra_</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:IGSTOnIntra<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+          <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+              <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                  <span class="tag">&lt;puf:IGSTOnIntra&gt;</span>true<span class="tag">&lt;/puf:IGSTOnIntra&gt;</span>
+              <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_orderreference"><a class="anchor" href="#_orderreference"></a><a class="link" href="#_orderreference">4.1.4. OrderReference</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacorderreference">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/OrderReferenceExtension</code>.<br></p>
@@ -5181,7 +5465,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 34. Elements added in puf:OrderReferenceExtension</caption>
+<caption class="title">Table 36. Elements added in puf:OrderReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5230,7 +5514,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_billingreference"><a class="anchor" href="#_billingreference"></a><a class="link" href="#_billingreference">4.1.3. BillingReference</a></h4>
+<h4 id="_billingreference"><a class="anchor" href="#_billingreference"></a><a class="link" href="#_billingreference">4.1.5. BillingReference</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacbillingreference">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/BillingReferenceExtension</code>.</p>
@@ -5274,7 +5558,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 35. Elements added in puf:BillingReferenceExtension</caption>
+<caption class="title">Table 37. Elements added in puf:BillingReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5324,7 +5608,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_contractdocumentreference"><a class="anchor" href="#_contractdocumentreference"></a><a class="link" href="#_contractdocumentreference">4.1.4. ContractDocumentReference</a></h4>
+<h4 id="_contractdocumentreference"><a class="anchor" href="#_contractdocumentreference"></a><a class="link" href="#_contractdocumentreference">4.1.6. ContractDocumentReference</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_caccontractdocumentreference">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/ContractDocumentReferenceExtension</code>.</p>
@@ -5366,7 +5650,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 36. Elements added in puf:ContractDocumentReferenceExtension</caption>
+<caption class="title">Table 38. Elements added in puf:ContractDocumentReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5419,7 +5703,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party"><a class="anchor" href="#_party"></a><a class="link" href="#_party">4.1.5. Party</a></h4>
+<h4 id="_party"><a class="anchor" href="#_party"></a><a class="link" href="#_party">4.1.7. Party</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found in the below parties:<br>
 <a href="#_cacaccountingsupplierparty">cac:AccountingSupplierParty</a><br>
@@ -5473,7 +5757,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 37. Elements added in puf:PartyExtension</caption>
+<caption class="title">Table 39. Elements added in puf:PartyExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5594,7 +5878,7 @@ This is mostly used to public entities (e.g. government recipients). To identify
 </div>
 </div>
 <div class="sect3">
-<h4 id="_delivery"><a class="anchor" href="#_delivery"></a><a class="link" href="#_delivery">4.1.6. Delivery</a></h4>
+<h4 id="_delivery"><a class="anchor" href="#_delivery"></a><a class="link" href="#_delivery">4.1.8. Delivery</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacdelivery">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/DeliveryExtension</code>.<br></p>
@@ -5642,7 +5926,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table show the definition of the additional elements added to the delivery extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 38. Elements added in puf:DeliveryExtension</caption>
+<caption class="title">Table 40. Elements added in puf:DeliveryExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5696,7 +5980,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_paymentterms"><a class="anchor" href="#_paymentterms"></a><a class="link" href="#_paymentterms">4.1.7. PaymentTerms</a></h4>
+<h4 id="_paymentterms"><a class="anchor" href="#_paymentterms"></a><a class="link" href="#_paymentterms">4.1.9. PaymentTerms</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacpaymentterms">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>puf:PageroExtension/puf:PaymentTermsExtension</code>.<br></p>
@@ -5744,7 +6028,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>puf:Pag
 <p>Below table shows the definition of the extended element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 39. Elements added in puf:PaymentTermsExtension</caption>
+<caption class="title">Table 41. Elements added in puf:PaymentTermsExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5793,7 +6077,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>puf:Pag
 </div>
 </div>
 <div class="sect3">
-<h4 id="_taxtotal"><a class="anchor" href="#_taxtotal"></a><a class="link" href="#_taxtotal">4.1.8. TaxTotal</a></h4>
+<h4 id="_taxtotal"><a class="anchor" href="#_taxtotal"></a><a class="link" href="#_taxtotal">4.1.10. TaxTotal</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cactaxtotal">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/TaxSubtotalExtension</code>.<br></p>
@@ -5843,7 +6127,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table lists all additional elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 40. Elements added in puf:TaxSubtotalExtension</caption>
+<caption class="title">Table 42. Elements added in puf:TaxSubtotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5980,7 +6264,7 @@ Tax chargeability per tax (see Italy section <a href="#_tax_chargeability_esigib
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legalmonetarytotal"><a class="anchor" href="#_legalmonetarytotal"></a><a class="link" href="#_legalmonetarytotal">4.1.9. LegalMonetaryTotal</a></h4>
+<h4 id="_legalmonetarytotal"><a class="anchor" href="#_legalmonetarytotal"></a><a class="link" href="#_legalmonetarytotal">4.1.11. LegalMonetaryTotal</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_caclegalmonetarytotal">here</a>.<br>
 The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/LegalMonetaryTotalExtension</code>.<br></p>
@@ -6028,7 +6312,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 41. Elements added in puf:LegalMonetaryTotalExtension</caption>
+<caption class="title">Table 43. Elements added in puf:LegalMonetaryTotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6287,7 +6571,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 42. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 44. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6404,7 +6688,7 @@ See example below as well as the URI to be used for this extension.</p>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 43. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 45. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6526,7 +6810,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 44. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
+<caption class="title">Table 46. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6633,7 +6917,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 45. Elements added to puf:LineExtension/puf:ProjectReference</caption>
+<caption class="title">Table 47. Elements added to puf:LineExtension/puf:ProjectReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6741,7 +7025,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 46. Elements added in puf:OrderLineReference</caption>
+<caption class="title">Table 48. Elements added in puf:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6852,7 +7136,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 47. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
+<caption class="title">Table 49. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6916,7 +7200,106 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 </div>
 </div>
 <div class="sect3">
-<h4 id="_price"><a class="anchor" href="#_price"></a><a class="link" href="#_price">4.2.7. Price</a></h4>
+<h4 id="_item"><a class="anchor" href="#_item"></a><a class="link" href="#_item">4.2.7. Item</a></h4>
+<div class="paragraph">
+<p>The UBL extension to be used for below elements can be found <a href="#_cacitem">here</a>.<br>
+The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/ItemExtension</code>.<br></p>
+</div>
+<div class="paragraph">
+<p>See example below as well as the URI to be used for this extension.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+      <span class="tag">&lt;cac:Price&gt;</span>
+          <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+              <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                  <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:ItemExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                  <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                      <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                          <span class="tag">&lt;puf:ItemExtension</span><span class="tag">/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                      <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                  <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+              <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+          <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+      <span class="tag">&lt;/cac:Price&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>URI to be used if this extension is added.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Structure to be used if information from this extension will be used.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Below table show the definition of the new element added to the extension.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 50. Elements added to puf:ItemExtension</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:ItemType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type of item, valid values are GOODS or SERVICE.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Line with 100 EUR discount</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+      <span class="tag">&lt;cac:Item&gt;</span>
+        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+            <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:ItemExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                        <span class="tag">&lt;puf:ItemExtension&gt;</span>
+                            <span class="tag">&lt;puf:ItemType&gt;</span>GOODS<span class="tag">&lt;/puf:ItemType&gt;</span>
+                        <span class="tag">&lt;/puf:ItemExtension&gt;</span>
+                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;/cac:Item&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_price"><a class="anchor" href="#_price"></a><a class="link" href="#_price">4.2.8. Price</a></h4>
 <div class="paragraph">
 <p>In addition to Price a new element has been added to specify the unit price including allowances and charges.
 Note that the new element PriceInclAllowanceChargeAmount should include the <code>cac:AllowanceCharge</code> applied on line level (not to be confused with <code>cac:Price/cac:AllowanceCharge</code>), as shown in the example <em>Line with 100 EUR discount</em>.<br></p>
@@ -6971,7 +7354,7 @@ The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroE
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 48. Elements added to puf:PriceExtension</caption>
+<caption class="title">Table 51. Elements added to puf:PriceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7602,6 +7985,179 @@ These additional identifiers for use in Saudi Arabia can be found <a href="#_ide
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_india"><a class="anchor" href="#_india"></a><a class="link" href="#_india">5.7. India</a></h3>
+<div class="paragraph">
+<p>This section contains information about special requirements concerning invoicing in India.</p>
+</div>
+<div class="sect3">
+<h4 id="_partyidentification_2"><a class="anchor" href="#_partyidentification_2"></a><a class="link" href="#_partyidentification_2">5.7.1. PartyIdentification</a></h4>
+<div class="paragraph">
+<p>In India there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.
+These additional identifiers for use in India can be found <a href="#_identification_scheme_india">here</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Example with additional id provided in India in Party structure</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:Party&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IN:GSTIN</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>11AAAAA3212A1AA<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:Party&gt;</span>
+<span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>GSTIN number in India provided as cac:PartyIdentification/cbc:ID</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_party_address_information"><a class="anchor" href="#_party_address_information"></a><a class="link" href="#_party_address_information">5.7.2. Party address information</a></h4>
+<div class="paragraph">
+<p>The mandatory clearance platform IRP validate the below address information according to code lists.</p>
+</div>
+<div class="paragraph">
+<p><strong>cbc:CountrySubentityCode</strong><br>
+Each party must contain the corresponding states code, the state code should be sent in element <code>cbc:CountrySubentityCode</code> and must be two digits.
+Valid state codes can be found on the government website <a href="https://einvoice1.gst.gov.in/Others/MasterCodes" class="bare">https://einvoice1.gst.gov.in/Others/MasterCodes</a>. The parties state code must correspond with the first two digits of the parties GSTIN number.</p>
+</div>
+<div class="paragraph">
+<p><strong>cbc:PostalZone</strong><br>
+The post code or PIN code as referred to in India must exist on all parties and must be sent in <code>cbc:PostalZone</code>. Valid codes can be found on the government website <a href="https://einvoice1.gst.gov.in/Others/MasterCodes" class="bare">https://einvoice1.gst.gov.in/Others/MasterCodes</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Example of a correct address for cac:AccountingCustomerParty</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:Party&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;cac:PostalAddress&gt;</span>
+            <span class="tag">&lt;cbc:StreetName&gt;</span>Street 1<span class="tag">&lt;/cbc:StreetName&gt;</span>
+            <span class="tag">&lt;cbc:CityName&gt;</span>Jammu<span class="tag">&lt;/cbc:CityName&gt;</span>
+            <span class="tag">&lt;cbc:PostalZone&gt;</span>181131<span class="tag">&lt;/cbc:PostalZone&gt;</span>
+            <span class="tag">&lt;cbc:CountrySubentityCode&gt;</span>01<span class="tag">&lt;/cbc:CountrySubentityCode&gt;</span>
+            <span class="tag">&lt;cac:Country&gt;</span>
+              <span class="tag">&lt;cbc:IdentificationCode&gt;</span>IN<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+              <span class="tag">&lt;cbc:Name&gt;</span>India<span class="tag">&lt;/cbc:Name&gt;</span>
+            <span class="tag">&lt;/cac:Country&gt;</span>
+        <span class="tag">&lt;/cac:PostalAddress&gt;</span>
+        <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IN:GSTIN</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>01AAAAA3212A1AA<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:Party&gt;</span>
+  <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tax_type_scheme"><a class="anchor" href="#_tax_type_scheme"></a><a class="link" href="#_tax_type_scheme">5.7.3. Tax type scheme</a></h4>
+<div class="paragraph">
+<p>Tax type scheme codes for India can be found <a href="#_puf_009_taxtypescheme">here</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_harmonized_system_of_nomenclature_code_hsn_code"><a class="anchor" href="#_harmonized_system_of_nomenclature_code_hsn_code"></a><a class="link" href="#_harmonized_system_of_nomenclature_code_hsn_code">5.7.4. Harmonized System of Nomenclature code (HSN Code)</a></h4>
+<div class="paragraph">
+<p>Each invoice line must contain a HSN code, IRP will validate that the provided HSN code correspond with relevant taxes for that goods or service.</p>
+</div>
+<div class="paragraph">
+<p>All HSN codes applicable can be found on the government website <a href="https://einvoice1.gst.gov.in/Others/MasterCodes" class="bare">https://einvoice1.gst.gov.in/Others/MasterCodes</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Example how to provide HSN code</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:Item&gt;</span>
+      <span class="tag">&lt;cac:CommodityClassification&gt;</span>
+        <span class="tag">&lt;cbc:ItemClassificationCode</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">HS</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>85176290<span class="tag">&lt;/cbc:ItemClassificationCode&gt;</span>
+      <span class="tag">&lt;/cac:CommodityClassification&gt;</span>
+    <span class="tag">&lt;/cac:Item&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_supply_type"><a class="anchor" href="#_supply_type"></a><a class="link" href="#_supply_type">5.7.5. Supply Type</a></h4>
+<div class="paragraph">
+<p>In India it&#8217;s mandatory to define the type of supply relevant for the invoice, the available codes can be found below and mist be stated in the Supply type element found <a href="#_supplytype">here</a></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>B2B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Business to Business</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SEZWP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SEZ with payment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SEZWOP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SEZ without payment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EXPWP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Export with Payment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EXPWOP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Export without payment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DEXP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Direct Export</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_igst_on_intra_state_transaction"><a class="anchor" href="#_igst_on_intra_state_transaction"></a><a class="link" href="#_igst_on_intra_state_transaction">5.7.6. IGST on Intra state transaction</a></h4>
+<div class="paragraph">
+<p>In some cases IGST is applicable on intra state supplies, in order to indicate this a true or false flag must be set in element <code>puf:IGSTOnIntra</code> which can be found <a href="#_igstonintra">here</a></p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -7615,7 +8171,7 @@ values defined specifically for PUF and other external list(s). Other times all 
 <div class="sect2">
 <h3 id="_code_lists_for_coded_elements"><a class="anchor" href="#_code_lists_for_coded_elements"></a><a class="link" href="#_code_lists_for_coded_elements">6.1. Code lists for coded elements</a></h3>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 49. Table of the code lists used</caption>
+<caption class="title">Table 52. Table of the code lists used</caption>
 <colgroup>
 <col>
 <col>
@@ -8090,6 +8646,31 @@ For <code>cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID/@
 </tbody>
 </table>
 </div>
+<div class="sect4">
+<h5 id="_identification_scheme_india"><a class="anchor" href="#_identification_scheme_india"></a><a class="link" href="#_identification_scheme_india">Identification scheme India</a></h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IN:PAN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PAN is a 10-digit unique identification alphanumeric number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IN:GSTIN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GSTIN is a 15-digit PAN-based unique identification number assigned to every registered person under GST.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_puf_009_taxtypescheme"><a class="anchor" href="#_puf_009_taxtypescheme"></a><a class="link" href="#_puf_009_taxtypescheme">6.1.9. PUF-009-TAXTYPESCHEME</a></h4>
@@ -8136,6 +8717,38 @@ For <code>cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID/@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>AAI</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Canadian provincial sales tax</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IGST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integrated Goods and Services Tax, India</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CGST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Central Goods and Services Tax, India</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SGST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">State Goods and Services Tax, India</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UTGST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Union Territory Goods and Services Tax, India</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CESS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CESS, India</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CESS Non advol</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CESS Non Ad Valorem, India</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STATECESS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">State CESS, India</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STATECESS Non Advol</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">State CESS Non Ad Valorem, India</p></td>
 </tr>
 </tbody>
 </table>
@@ -8424,7 +9037,7 @@ The validations available on validex are:</p>
 <p>The validation artefacts are also available on <a href="https://github.com/pagero/puf">GitHub</a></p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 50. Schematron rules in PUF</caption>
+<caption class="title">Table 53. Schematron rules in PUF</caption>
 <colgroup>
 <col>
 <col>
