@@ -15,7 +15,7 @@
     <!-- Credit Note Issue Time -->
     <cbc:IssueTime>21:32:52</cbc:IssueTime>
     <!-- BT-3 Credit Note Type Code and KSA-2 Invoice transaction code in attribute @name -->
-    <cbc:CreditNoteTypeCode name="010000">381</cbc:CreditNoteTypeCode>
+    <cbc:CreditNoteTypeCode name="0100000">381</cbc:CreditNoteTypeCode>
     <!-- BT-5 Credit Note Document Currency -->
     <cbc:DocumentCurrencyCode>SAR</cbc:DocumentCurrencyCode>
     <cac:BillingReference>

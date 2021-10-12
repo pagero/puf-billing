@@ -13,7 +13,7 @@
     <!-- Invoice Issue Time -->
     <cbc:IssueTime>21:32:52</cbc:IssueTime>
     <!-- BT-3 Invoice Type Code and KSA-2 Invoice transaction code in attribute @name -->
-    <cbc:InvoiceTypeCode name="010000">388</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode name="0100000">388</cbc:InvoiceTypeCode>
     <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>SAR</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>

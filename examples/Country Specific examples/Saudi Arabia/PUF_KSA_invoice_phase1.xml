@@ -15,7 +15,7 @@
     <!-- BT-9 Due Date -->
     <cbc:DueDate>2018-12-01</cbc:DueDate>
     <!-- BT-3 Invoice Type Code and KSA-2 Invoice transaction code in attribute @name -->
-    <cbc:InvoiceTypeCode name="010000">388</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode name="0100000">388</cbc:InvoiceTypeCode>
     <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>SAR</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
