@@ -36,6 +36,9 @@ Buyer's postal address street name
 |`cac:Party/cac:PostalAddress/cbc:AdditionalStreetName`
 |**Additional Street name** +
 Buyer's postal address additional street name
+|`cac:Party/cac:PostalAddress/cbc:BuildingNumber`
+|**Building number** +
+Buyer's postal address building number
 |`cac:Party/cac:PostalAddress/cbc:Department`
 |**Department** +
 Buyer's postal address department

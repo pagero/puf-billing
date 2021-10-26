@@ -14,6 +14,9 @@ Seller's tax representative's postal address street name
 |`cac:Party/cac:PostalAddress/cbc:AdditionalStreetName`
 |**Additional Street name** +
 Seller's tax representative's postal address additional street name
+|`cac:Party/cac:PostalAddress/cbc:BuildingNumber`
+|**Building number** +
+Seller's tax representative's postal address building number
 |`cac:Party/cac:PostalAddress/cbc:Department`
 |**Department** +
 Seller's tax representative's postal address department

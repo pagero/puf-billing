@@ -395,6 +395,15 @@ __A harmonized sales tax consisting of a goods and service tax, a Canadian provi
 |===
 |Value |Description
 
+|`1`
+|Instrument not defined
+
+|`10`
+|In cash
+
+|`20`
+|Cheque
+
 |`30`
 |Credit transfer
 
@@ -403,6 +412,9 @@ __A harmonized sales tax consisting of a goods and service tax, a Canadian provi
 
 |`42`
 |Payment to bank account
+
+|`48`
+|Bank card
 
 |`56`
 |Bankgiro

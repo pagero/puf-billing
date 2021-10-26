@@ -108,6 +108,7 @@
             <cac:PostalAddress>
                 <cbc:Postbox>12345</cbc:Postbox>
                 <cbc:StreetName>Test Street 1</cbc:StreetName>
+                <cbc:BuildingNumber>10</cbc:BuildingNumber>
                 <cbc:Department>Department</cbc:Department>
                 <cbc:PlotIdentification>0000</cbc:PlotIdentification>
                 <cbc:CitySubdivisionName>City Subdivision Name</cbc:CitySubdivisionName>
@@ -180,6 +181,7 @@
             <cac:PostalAddress>
                 <cbc:Postbox>54321</cbc:Postbox>
                 <cbc:StreetName>Customer Street</cbc:StreetName>
+                <cbc:BuildingNumber>11</cbc:BuildingNumber>
                 <cbc:Department>Customer Department</cbc:Department>
                 <cbc:PlotIdentification>0000</cbc:PlotIdentification>
                 <cbc:CitySubdivisionName>Customer City Subdivision Name</cbc:CitySubdivisionName>
@@ -225,6 +227,7 @@
             <cac:PostalAddress>
                 <cbc:Postbox>112233</cbc:Postbox>
                 <cbc:StreetName>Buyer Street</cbc:StreetName>
+                <cbc:BuildingNumber>12</cbc:BuildingNumber>
                 <cbc:Department>Buyer Department</cbc:Department>
                 <cbc:PlotIdentification>0000</cbc:PlotIdentification>
                 <cbc:CitySubdivisionName>Buyer City Subdivision Name</cbc:CitySubdivisionName>
