@@ -49,6 +49,10 @@ include::guide/validation.adoc[]
 
 include::guide/examples.adoc[]
 
+== Supported Countries
+
+include::guide/supportedcountries.adoc[]
+
 == Support
 
 include::guide/support.adoc[]

@@ -225,8 +225,7 @@ Structure on the value must be *NNPNESB* (Example 0100000) where:
 
 |`NN (Position 1 and 2)`
 |01 for tax invoice +
-02 for simplified tax invoice. +
-Note that only 01, Tax Invoice is currently supported
+02 for simplified tax invoice.
 
 |`P (Position 3)`
 |3rd Party invoice transaction, 0 for false, 1 for true
