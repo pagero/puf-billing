@@ -1,4 +1,4 @@
-In order to specify a supply type for the invoice, following elements has been added in the below extension. +
+In order to specify if IGST is applicable on intra state supplies the following elements has been added in the below extension. +
 
 The UBL extension to be used for below elements can be found <<_extublextensions, here>>. +
 The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/IGSTOnIntra`. +
