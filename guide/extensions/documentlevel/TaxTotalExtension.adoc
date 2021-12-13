@@ -48,7 +48,9 @@ Tax chargeability per tax (see Italy section <<_tax_chargeability_esigibilita_iv
 
 ===== Tax currency amounts
 
-In Peppol BIS 3.0 billing it's only possible to provide the tax currency amount summary of all sub totals. In order to extend the support, it's possible to use PUF extension to provide the taxable and tax amount in tax currency per each sub total. See example below.
+In Peppol BIS 3.0 billing it's only possible to provide the tax currency amount summary of all sub totals. 
+
+In order to extend the support, it's possible to use PUF extension to provide the taxable and tax amount in tax currency per each sub total. See example below.
 
 *Example*
 [source,xml]

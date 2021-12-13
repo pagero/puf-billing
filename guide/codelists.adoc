@@ -1,6 +1,10 @@
 Certain elements require the use of PUF specific Code list. Below you will find the lists and where the lists are applicable.
-In some of these code lists PUF only points towards an external code list to be used. Other times the code list to be used is a mix between
-values defined specifically for PUF and other external list(s). Other times all the values are defined solely for PUF.
+
+In some of these code lists PUF only points towards an external code list to be used. 
+
+Other times the code list to be used is a mix between values defined specifically for PUF and other external list(s). 
+
+Lastly, in some cases, *all* the values are defined solely for PUF.
 
 === Code lists for coded elements
 
@@ -200,7 +204,9 @@ List of available general invoice type codes.
 |===
 
 ===== Invoice Type Codes Saudi Arabia
-The below listed InvoiceTypeCodes are available for use in Saudi Arabia
+
+The below listed InvoiceTypeCodes are available for use in Saudi Arabia.
+
 |===
 |Value |Description
 
@@ -216,7 +222,9 @@ The below listed InvoiceTypeCodes are available for use in Saudi Arabia
 |===
 
 ===== Invoice Subtype Codes Saudi Arabia
-In addition to the InvoiceTypeCode it is required to provide invoice subtypes. This should be placed in `cbc:InvoiceTypeCode/@name` and must follow a certain syntax. +
+
+In addition to the InvoiceTypeCode it is required to provide invoice subtypes. This should be placed in `cbc:InvoiceTypeCode/@name` and must follow a certain syntax.
+
 Structure on the value must be *NNPNESB* (Example 0100000) where:
 
 |===
@@ -246,11 +254,11 @@ Structure on the value must be *NNPNESB* (Example 0100000) where:
 
 ==== PUF-004-CURRENCYCODE
 
-For available values see code list of three character currency codes see https://en.wikipedia.org/wiki/ISO_4217[Currency Codes]
+For available values see code list of three character currency codes see https://en.wikipedia.org/wiki/ISO_4217[Currency Codes].
 
 ==== PUF-005-INVOICEDOBJECTIDENTIFIER
 
-For available values see code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL1153/[Invoice Object identifier schemes]
+For available values see code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL1153/[Invoice Object identifier schemes].
 
 ==== PUF-006-MIMECODES
 
@@ -277,9 +285,10 @@ For available values see code list https://docs.peppol.eu/poacc/billing/3.0/code
 
 ==== PUF-008-IDENTIFICATIONSCHEME
 
-Supported values can be found here https://docs.peppol.eu/poacc/billing/3.0/codelist/ICD/[ISO 6523 ICD list] +
+Supported values can be found here https://docs.peppol.eu/poacc/billing/3.0/codelist/ICD/[ISO 6523 ICD list].
+
 For `cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID/@schemeID` and
-`cac:PayeeParty/cac:PartyIdentification/cbc:ID/@schemeID` an additional code list is also applicable: https://docs.peppol.eu/poacc/billing/3.0/codelist/SEPA/[Sepa indicator]
+`cac:PayeeParty/cac:PartyIdentification/cbc:ID/@schemeID` an additional code list is also applicable: https://docs.peppol.eu/poacc/billing/3.0/codelist/SEPA/[Sepa indicator].
 
 For additional identification scheme identifier added in PUF see below recommendations.
 
@@ -323,6 +332,7 @@ For additional identification scheme identifier added in PUF see below recommend
 |===
 
 ===== Identification scheme India
+
 |===
 |Value |Description
 
@@ -436,7 +446,9 @@ For all available codes see list https://docs.peppol.eu/poacc/billing/3.0/codeli
 ==== PUF-011-ALLOWANCECHARGEREASONCODE
 
 Values can differ depending on which legal domain you are in or if there are other types of business requirements.
-Below you will find links to recommended lists
+
+Below you will find links to recommended lists.
+
 |===
 |Link
 
@@ -448,7 +460,7 @@ Below you will find links to recommended lists
 
 ==== PUF-012-TAXCATEGORYCODE
 
-Standard european tax category codes can be found here https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL5305/[Duty or tax or fee category code] +
+Standard european tax category codes can be found here https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL5305/[Duty or tax or fee category code].
 
 For additional codes added in PUF see below code recommendations.
 
@@ -541,18 +553,19 @@ For additional codes added in PUF see below code recommendations.
 
 |===
 
-
 ==== PUF-013-EXEMPTCODE
 
 Values can differ depending on which legal domain you are in or if there are other types of business requirements.
+
 For Europe the code list https://docs.peppol.eu/poacc/billing/3.0/codelist/vatex/[Vatex code list] can be recommended.
 
 ==== PUF-014-UOMCODE
 
 Values can differ depending on which legal domain you are in or if there are other types of business requirements.
+
 However, code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNECERec20/[UN/ECE Recommendation 20] and
 https://docs.peppol.eu/poacc/billing/3.0/codelist/UNECERec21/[UN/ECE Recommendation 21] can be recommended.
 
 ==== PUF-015-ITEMTYPEIDENTIFICATIONCODE
 
-Values must be from code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL7143/[Item type identification code]
+Values must be from code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL7143/[Item type identification code].

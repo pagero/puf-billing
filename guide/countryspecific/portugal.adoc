@@ -1,6 +1,7 @@
 This section contains information about special requirements concerning invoicing in Portugal.
 
 ==== Billing Software Certification
+
 Invoices in Portugal must be issued via a certified software and in the extension `puf:BillingSoftware` it's possible to provide the mandatory values.
 
 *Example* +
@@ -30,8 +31,10 @@ _Extension with the billing software details populated_
 <3> Description of the software certification
 
 ==== QR Code and ATCUD
-In Portugal it can be required to provide a QR code and ATCUD. The portugese government has specified that this can be provided in elements that exist in
-Peppol BIS 3 and therefore also exist in PUF. Below you will find a guide on how to provide it to comply with the portugese specification.
+
+In Portugal it can be required to provide a QR code and ATCUD. The portugese government has specified that this can be provided in elements that exist in Peppol BIS 3 and therefore also exist in PUF. 
+
+Below you will find a guide on how to provide it to comply with the portugese specification.
 
 *Example* +
 _QR code and ATCUD provided in cac:AdditionalDocumentReference_

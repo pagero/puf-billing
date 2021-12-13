@@ -32,10 +32,15 @@ The mandatory clearance platform IRP validate the below address information acco
 
 *cbc:CountrySubentityCode* +
 Each party must contain the corresponding states code, the state code should be sent in element `cbc:CountrySubentityCode` and must be two digits.
-Valid state codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes. The parties state code must correspond with the first two digits of the parties GSTIN number.
+
+Valid state codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes. 
+
+The parties state code must correspond with the first two digits of the parties GSTIN number.
 
 *cbc:PostalZone* +
-The post code or PIN code as referred to in India must exist on all parties and must be sent in `cbc:PostalZone`. Valid codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes.
+The post code or PIN code as referred to in India must exist on all parties and must be sent in `cbc:PostalZone`. 
+
+Valid codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes.
 
 *Example* +
 _Example of a correct address for cac:AccountingCustomerParty_
@@ -70,7 +75,6 @@ _Example of a correct address for cac:AccountingCustomerParty_
 
 Tax type scheme codes for India can be found <<_puf_009_taxtypescheme, here>>.
 
-
 ==== Harmonized System of Nomenclature code (HSN Code)
 
 Each invoice line must contain a HSN code, IRP will validate that the provided HSN code correspond with relevant taxes for that goods or service.
@@ -95,7 +99,8 @@ _Example how to provide HSN code_
 ----
 
 ==== Supply Type
-In India it's mandatory to define the type of supply relevant for the invoice, the available codes can be found below and mist be stated in the Supply type element found <<_supplytype, here>>
+
+In India it's mandatory to define the type of supply relevant for the invoice, the available codes can be found below and must be stated in the Supply type element found <<_supplytype, here>>.
 
 |===
 |Value |Description
@@ -120,6 +125,6 @@ In India it's mandatory to define the type of supply relevant for the invoice, t
 
 |===
 
-
 ==== IGST on Intra state transaction
-In some cases IGST is applicable on intra state supplies, in order to indicate this a true or false flag must be set in element `puf:IGSTOnIntra` which can be found <<_igstonintra, here>>
+
+In some cases IGST is applicable on intra state supplies, in order to indicate this a true or false flag must be set in element `puf:IGSTOnIntra` which can be found <<_igstonintra, here>>.

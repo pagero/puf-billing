@@ -1,8 +1,9 @@
-The UBL extension to be used for below elements can be found in the below parties: +
-<<_cacaccountingsupplierparty, cac:AccountingSupplierParty>> +
-<<_cacaccountingcustomerparty, cac:AccountingCustomerParty>> +
-<<_cacbuyercustomerparty, cac:BuyerCustomerParty>> +
-<<_cacdelivery, cac:Delivery/cac:DeliveryParty>> +
+The UBL extension to be used for below elements can be found in the below parties:
+
+- <<_cacaccountingsupplierparty, cac:AccountingSupplierParty>>
+- <<_cacaccountingcustomerparty, cac:AccountingCustomerParty>>
+- <<_cacbuyercustomerparty, cac:BuyerCustomerParty>>
+- <<_cacdelivery, cac:Delivery/cac:DeliveryParty>>
 
 The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/PartyExtension`. +
 
@@ -57,7 +58,11 @@ Below table shows the definition of the new elements added to the extension.
 ===== Registration data
 
 When there is a need to provide additional registration data associated with the organization this can be done using the RegistrationData element.
-To identify the type of registration data. The `puf:IDType` must be coded using the PUF-001-REGISTRATIONDATA code list. See code list <<_puf_001_registrationdata>> for all supported types of registration data.
+To identify the type of registration data. 
+
+The `puf:IDType` must be coded using the PUF-001-REGISTRATIONDATA code list. 
+
+See code list <<_puf_001_registrationdata>> for all supported types of registration data.
 
 *Example*
 
@@ -94,8 +99,11 @@ To identify the type of registration data. The `puf:IDType` must be coded using 
 ===== Additional Destination Address Identifier (ADAID)
 
 Additional Destination Address Identifier (ADAID) is used when there is a need to provide additional routing codes in order for the invoice to be sent to the correct recipient.
-This is mostly used to public entities (e.g. government recipients). To identify the type of ADAID, the `puf:IDType` must be coded using the PUF-002-ADAID code list. See code list <<_puf_002_adaid>> for supported types of ADAID.
+This is mostly used to public entities (e.g. government recipients). 
 
+To identify the type of ADAID, the `puf:IDType` must be coded using the PUF-002-ADAID code list. 
+
+See code list <<_puf_002_adaid>> for supported types of ADAID.
 
 *Example*
 

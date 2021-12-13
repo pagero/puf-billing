@@ -31,6 +31,7 @@ Supported mime codes can be found in the code list +
 ===== Invoice image/presentation and  Credit Note image/presentation
 
 Providing an invoice presentation/image or credit note image/presentation is sometimes useful. This can be done in PUF as shown in the examples below.
+
 If `cbc:DocumentDescription` is "Commercial Invoice" or "Credit Note" the attachment will be interpreted as a an invoice presentation/image otherwise the attachment will be interpreted as a miscellaneous or "other" type of document. +
 
 *Example* +

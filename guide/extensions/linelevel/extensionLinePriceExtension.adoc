@@ -1,4 +1,5 @@
 In addition to Price a new element has been added to specify the unit price including allowances and charges.
+
 Note that the new element PriceInclAllowanceChargeAmount should include the `cac:AllowanceCharge` applied on line level (not to be confused with `cac:Price/cac:AllowanceCharge`), as shown in the example _Line with 100 EUR discount_. +
 
 The UBL extension to be used for below elements can be found <<_cacprice, here>>. +

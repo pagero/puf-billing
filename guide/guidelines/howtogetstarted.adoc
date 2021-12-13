@@ -1,7 +1,10 @@
-In the following chapters you can see which elements and what type of information that is supported in PUF. In some cases you will also get longer snippets
-of code and implementation guidelines in order how to properly provide the data. There is also a section with test files that can be useful when implementing PUF.
+In the following chapters you can see which elements and what type of information that is supported in PUF. 
 
-If your ERP already can create Invoices and CreditNotes in https://docs.oasis-open.org/ubl/UBL-2.1.html[Universal Business Language Version 2.1 (UBL 2.1)] or if your ERP can create a UBL based format or CIUS such as http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0] you can easily use this as stepping stone when moving towards PUF.
+In some cases you will also get longer snippets of code and implementation guidelines in order how to properly provide the data. 
+
+There is also a section with test files that can be useful when implementing PUF.
+
+If your ERP system already can create Invoices and CreditNotes in https://docs.oasis-open.org/ubl/UBL-2.1.html[Universal Business Language Version 2.1 (UBL 2.1)] or if your ERP system can create a UBL based format or CIUS such as http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0] you can easily use this as stepping stone when moving towards PUF.
 
 ==== Moving from other UBL formats to PUF
 

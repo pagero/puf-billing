@@ -1,100 +1,127 @@
 The aim for Pagero Universal is to cover invoicing and business requirements in legal domains and countries all over the world.
+
 The below list should be seen as an overview to visualize where PUF currently is considered applicable. If the country is marked as supported
 means that an analysis of country or regional requirements has been made. It does however not automatically mean that all conceivable
-content requirements are supported within PUF. +
+content requirements are supported within PUF.
 
 If a country is not in the list does not necessarily mean that Pagero Universal format cannot be used in the specific region but it means that
-no extensive analysis has been done of the requirements. The list of supported countries/regions are updated continuously as Pagero Universal Format
-is developed to follow new identified markets/requirements.
+no extensive analysis has been done of the requirements. 
+
+The list of supported countries/regions are updated continuously as Pagero Universal Format is developed to follow new identified markets/requirements.
 
 === Country list
+
+The following list gives an overview of country support in PUF.
+
+NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL extensions is required to be able to comply with the country requirements.
 
 .Table of supported countries
 [%autowidth.stretch]
 |===
-|Country |Require ext:UBLExtensions |Comment
+|Country |Supported by PUF |Require ext:UBLExtensions |Comment
 
 |Australia
+|*Yes*
 |*No*
 |
 
 |Austria
+|*Yes*
 |*No*
 |
 
 |Belgium
+|*Yes*
 |*No*
 |
 
 |Canada
+|*Yes*
 |*No*
 |
 
 |Denmark
+|*Yes*
 |*No*
 |
 
 |Croatia
+|*Yes*
 |*No*
 |
 
 |Finland
+|*Yes*
 |*No*
 |
 
 |France
 |*Yes*
+|*Yes*
 |
 
 |Germany
+|*Yes*
 |*No*
 |
 
 |India
 |*Yes*
+|*Yes*
 |
 
 |Ireland
+|*Yes*
 |*No*
 |
 
 |Italy
 |*Yes*
+|*Yes*
 |
 
 |Lithuania
+|*Yes*
 |*No*
 |
 
 |Netherlands
+|*Yes*
 |*No*
 |Only Invoice and Credit note support
 
 |Norway
+|*Yes*
 |*No*
 |
 
 |Portugal
 |*Yes*
+|*Yes*
 |
 
 |Saudi Arabia
 |*Yes*
+|*Yes*
 |
 
 |Singapore
+|*Yes*
 |*No*
 |
 
 |Spain
 |*Yes*
+|*Yes*
 |
 
 |Sweden
+|*Yes*
 |*No*
 |
 
 |United Kingdom
+|*Yes*
 |*No*
 |
 
