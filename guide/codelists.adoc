@@ -337,10 +337,13 @@ For additional identification scheme identifier added in PUF see below recommend
 |Value |Description
 
 |`IN:PAN`
-|PAN is a 10-digit unique identification alphanumeric number
+|PAN is a 10-digit unique identification alpha-numeric number
 
 |`IN:GSTIN`
 |GSTIN is a 15-digit PAN-based unique identification number assigned to every registered person under GST.
+
+|`IN:CIN`
+|Corporate Identification Number (CIN) is a 21 digits alpha-numeric unique identification number that is assigned by the Registrar of Companies (ROC).
 
 |===
 
