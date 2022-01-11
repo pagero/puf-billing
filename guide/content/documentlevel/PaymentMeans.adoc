@@ -32,6 +32,9 @@ The name of the payment account, at a payment service provider, to which payment
 |`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID`
 |**Payment account identifier ** +
 Payment account identifier e.g. a BIC or Swift.
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:Name`
+|**Payment bank name** +
+The name of the bank branch or division of the bank organization, to which payment should be made.
 |`cac:PayeeFinancialAccount/cac:PaymentMandate/cbc:ID`
 |**Payment mandate reference identifier** +
 Payment mandate identifier used for referencing direct debit payments.
@@ -55,6 +58,7 @@ _cbc:PaymentMeans example_
         <cbc:Name>AccountName</cbc:Name>
         <cac:FinancialInstitutionBranch>
             <cbc:ID>SE:BANKGIRO</cbc:ID>
+            <cbc:Name>BankName</cbc:Name>
         </cac:FinancialInstitutionBranch>
     </cac:PayeeFinancialAccount>
   </cac:PaymentMeans>
