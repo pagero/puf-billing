@@ -183,7 +183,7 @@
             <!-- ChargeIndicator must be false to indicate discount-->
             <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
             <!-- BT-136 Discount amount without tax. Currency in attribute currencyID (BT-5) -->
-            <cbc:Amount currencyID="">10</cbc:Amount>
+            <cbc:Amount currencyID="SAR">10</cbc:Amount>
         </cac:AllowanceCharge>
         <cac:TaxTotal>
             <!-- KSA-11 Line VAT Amount -->
