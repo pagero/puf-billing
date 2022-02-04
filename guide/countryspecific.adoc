@@ -27,3 +27,7 @@ include::countryspecific/saudiarabia.adoc[]
 === India
 
 include::countryspecific/india.adoc[]
+
+=== Hungary
+
+include::countryspecific/Hungary.adoc[]

@@ -1,4 +1,4 @@
-Element `TaxInclusiveLineExtensionAmount` has been added in order to specify the lines total amount including taxes. +
+Element `TaxCurrencyTaxInclusiveLineExtensionAmount` has been added in order to specify the lines total amount including taxes in tax currency. +
 
 The UBL extension to be used for TaxInclusiveLineExtensionAmount on line level is <<line-extension>>. +
 The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/LineExtension`.
@@ -34,15 +34,15 @@ Below table shows the definition of the new elements added to the extension.
 |===
 |Element |Description
 
-|`puf:TaxInclusiveLineExtensionAmount`
-|Total line amount, including tax, discount and charges.
-|`puf:TaxInclusiveLineExtensionAmount/@currencyID`
-|Currency of the TaxInclusiveLineExtensionAmount. +
+|`puf:TaxCurrencyTaxInclusiveLineExtensionAmount`
+|Total line amount, including tax, discount and charges in tax currency.
+|`puf:TaxCurrencyTaxInclusiveLineExtensionAmount/@currencyID`
+|Currency of the TaxCurrencyTaxInclusiveLineExtensionAmount. +
 For valid values see code list <<_puf_004_currencycode>>
 |===
 
 *Example* +
-_Line with tax inclusive amount_
+_Line with the total amount including tax both in document and tax currency_
 [source,xml]
 ----
 <Invoice>
@@ -54,20 +54,17 @@ _Line with tax inclusive amount_
               <ext:ExtensionContent>
                   <puf:PageroExtension>
                       <puf:LineExtension>
-                          <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">1100</puf:TaxInclusiveLineExtensionAmount> <!--1-->
+                          <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">100.00</puf:TaxInclusiveLineExtensionAmount> <!--1-->
+                          <puf:TaxCurrencyTaxInclusiveLineExtensionAmount currencyID="USD">120.00</puf:TaxCurrencyTaxInclusiveLineExtensionAmount> <!--2-->
                       </puf:LineExtension>
                   </puf:PageroExtension>
               </ext:ExtensionContent>
           </ext:UBLExtension>
       </ext:UBLExtensions>
-      <cbc:LineExtensionAmount currencyID="EUR">1000</cbc:LineExtensionAmount> <!--2-->
-      <cac:TaxTotal>
-        <cbc:TaxAmount currencyID="EUR">100</cbc:TaxAmount>
-      </cac:TaxTotal>
       <!-- Code omitted for clarity -->
   </cac:InvoiceLine>
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> The amount including tax
-<2> The amount excluding tax
+<1> The amount including tax in document currency
+<2> The amount including tax in tax currency

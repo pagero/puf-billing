@@ -1,8 +1,21 @@
 Below chapters describe the different extensions added on line level.
 
+[#line-restrictedinformation]
+==== RestrictedInformation
+
+include::linelevel/extensionLineRestrictedInformation.adoc[]
+
+==== TaxCurrencyLineExtensionAmount
+
+include::linelevel/extensionLineTaxCurrencyLineExtensionAmount.adoc[]
+
 ==== TaxInclusiveLineExtensionAmount
 
 include::linelevel/extensionLineTaxInclusiveLineExtensionAmount.adoc[]
+
+==== TaxCurrencyTaxInclusiveLineExtensionAmount
+
+include::linelevel/extensionLineTaxCurrencyTaxInclusiveLineExtensionAmount.adoc[]
 
 ==== LineExclAllowanceChargeAmount
 

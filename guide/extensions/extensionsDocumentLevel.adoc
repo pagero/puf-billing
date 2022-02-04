@@ -1,5 +1,9 @@
 Below chapters describe the different extensions added on document level.
 
+==== RestrictedInformation
+
+include::documentlevel/RestrictedInformation.adoc[]
+
 ==== SupplyType
 
 include::documentlevel/SupplyType.adoc[]

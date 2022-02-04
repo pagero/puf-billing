@@ -5,7 +5,7 @@ means that an analysis of country or regional requirements has been made. It doe
 content requirements are supported within PUF.
 
 If a country is not in the list does not necessarily mean that Pagero Universal format cannot be used in the specific region but it means that
-no extensive analysis has been done of the requirements. 
+no extensive analysis has been done of the requirements.
 
 The list of supported countries/regions are updated continuously as Pagero Universal Format is developed to follow new identified markets/requirements.
 
@@ -63,6 +63,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |Germany
 |*Yes*
 |*No*
+|
+
+|Hungary
+|*Yes*
+|*Yes*
 |
 
 |India

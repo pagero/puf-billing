@@ -86,3 +86,49 @@ _cac:InvoiceLine/cac:TaxTotal example_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
+
+===== Total tax currency amount
+
+If the need to provide the total tax amount on each line, this should be sent as a separate `cac:TaxTotal/cbc:TaxAmount`, see example below.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <cbc:TaxCurrencyCode>USD</cbc:TaxCurrencyCode>
+  <!-- Code omitted for clarity -->
+  <cac:TaxExchangeRate>
+    <cbc:SourceCurrencyCode>EUR</cbc:SourceCurrencyCode>
+    <cbc:TargetCurrencyCode>USD</cbc:TargetCurrencyCode>
+    <cbc:CalculationRate>1.17</cbc:CalculationRate>
+    <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
+    <cbc:Date>2019-01-01</cbc:Date>
+  </cac:TaxExchangeRate>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount> <!--1-->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="USD">29.25</cbc:TaxAmount> <!--2-->
+    </cac:TaxTotal>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+</Invoice>
+----
+<1> Total tax amount in document currency
+<2> Total tax amount in tax currency

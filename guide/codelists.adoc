@@ -1,8 +1,8 @@
 Certain elements require the use of PUF specific Code list. Below you will find the lists and where the lists are applicable.
 
-In some of these code lists PUF only points towards an external code list to be used. 
+In some of these code lists PUF only points towards an external code list to be used.
 
-Other times the code list to be used is a mix between values defined specifically for PUF and other external list(s). 
+Other times the code list to be used is a mix between values defined specifically for PUF and other external list(s).
 
 Lastly, in some cases, *all* the values are defined solely for PUF.
 
@@ -344,6 +344,21 @@ For additional identification scheme identifier added in PUF see below recommend
 
 |`IN:CIN`
 |Corporate Identification Number (CIN) is a 21 digits alpha-numeric unique identification number that is assigned by the Registrar of Companies (ROC).
+
+|===
+
+
+
+===== Identification scheme Hungary
+
+|===
+|Value |Description
+
+|`HU:TaxpayerId`
+|Tax number
+
+|`HU:GroupMemberTaxpayerId`
+|Group member tax number
 
 |===
 

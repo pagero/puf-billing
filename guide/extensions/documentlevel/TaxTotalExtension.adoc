@@ -47,6 +47,18 @@ Tax amount in tax currency per subtotal
 |`puf:TaxCurrencyTaxAmount/@currencyID`
 |**Tax currency tax amount currency** +
 Currency of tax amount in tax currency per subtotal
+|`puf:TaxInclusiveAmount`
+|**Total amount including tax** +
+Total amount including tax per subtotal
+|`puf:TaxInclusiveAmount/@currencyID`
+|**Currency of TaxInclusiveAmount** +
+For valid values see code list <<_puf_004_currencycode>>
+|`puf:TaxCurrencyTaxInclusiveAmount`
+|**Total amount including tax in tax currency** +
+Total amount including tax per subtotal in tax currency
+|`puf:TaxCurrencyTaxInclusiveAmount/@currencyID`
+|**Currency of TaxCurrencyTaxInclusiveAmount** +
+For valid values see code list <<_puf_004_currencycode>>
 |`puf:TaxChargeability/cbc:TaxTypeCode`
 |**Tax chargeability** +
 Tax chargeability per tax (see Italy section <<_tax_chargeability_esigibilita_iva, here>>)
@@ -85,6 +97,8 @@ In order to extend the support, it's possible to use PUF extension to provide th
                           <puf:TaxSubtotalExtension>
                               <puf:TaxCurrencyTaxableAmount currencyID="USD">117.00</puf:TaxCurrencyTaxableAmount> <!--1-->
                               <puf:TaxCurrencyTaxAmount currencyID="USD">29.25</puf:TaxCurrencyTaxAmount> <!--2-->
+                              <puf:TaxInclusiveAmount currencyID="EUR">125.00</puf:TaxInclusiveAmount>
+                              <puf:TaxCurrencyTaxInclusiveAmount currencyID="USD">146.25</puf:TaxCurrencyTaxInclusiveAmount>
                           </puf:TaxSubtotalExtension>
                       </puf:PageroExtension>
                   </ext:ExtensionContent>
@@ -109,6 +123,8 @@ In order to extend the support, it's possible to use PUF extension to provide th
                           <puf:TaxSubtotalExtension>
                               <puf:TaxCurrencyTaxableAmount currencyID="USD">117.00</puf:TaxCurrencyTaxableAmount> <!--3-->
                               <puf:TaxCurrencyTaxAmount currencyID="USD">14.04</puf:TaxCurrencyTaxAmount> <!--4-->
+                              <puf:TaxInclusiveAmount currencyID="EUR">112.00</puf:TaxInclusiveAmount>
+                              <puf:TaxCurrencyTaxInclusiveAmount currencyID="USD">131.04</puf:TaxCurrencyTaxInclusiveAmount>
                           </puf:TaxSubtotalExtension>
                       </puf:PageroExtension>
                   </ext:ExtensionContent>
@@ -135,4 +151,4 @@ In order to extend the support, it's possible to use PUF extension to provide th
 <2> Tax amount in tax currency for 25 % rate
 <3> Taxable amount in tax currency for 12 % rate
 <4> Tax amount in tax currency for 12 % rate
-<5> Summary of each sub totals tax currency amount
+<5> Summary of all sub totals `TaxCurrencyTaxAmount`

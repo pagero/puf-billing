@@ -13,12 +13,22 @@
 	<xsd:element name="Amount" type="PUFAmountType"/>
 	<xsd:element name="IDType" type="PUFIDType"/>
 	<xsd:element name="Code" type="PUFCodeType"/>
+	<xsd:element name="Key" type="PUFCodeType"/>
+	<xsd:element name="Value" type="PUFTextType"/>
 	<xsd:element name="PageroExtension">
 		<xsd:annotation>
 			<xsd:documentation>This element is to be considered as the root element in the pagero extension</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexType>
 			<xsd:sequence>
+				<xsd:element name="RestrictedInformation" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="Key" minOccurs="1" maxOccurs="1"/>
+							<xsd:element ref="Value" minOccurs="1" maxOccurs="1"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
 				<xsd:element name="SupplyType" minOccurs="0" maxOccurs="1">
 					<xsd:complexType>
 						<xsd:sequence>
@@ -127,6 +137,8 @@
 						<xsd:sequence>
 							<xsd:element name="TaxCurrencyTaxableAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
 							<xsd:element name="TaxCurrencyTaxAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="TaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="TaxCurrencyTaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
 							<xsd:element name="TaxChargeability" minOccurs="0" maxOccurs="1">
 								<xsd:complexType>
 									<xsd:sequence>
@@ -168,7 +180,17 @@
 				<xsd:element name="LineExtension" minOccurs="0" maxOccurs="1">
 					<xsd:complexType>
 						<xsd:sequence>
+							<xsd:element name="RestrictedInformation" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="Key" minOccurs="1" maxOccurs="1"/>
+										<xsd:element ref="Value" minOccurs="1" maxOccurs="1"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="TaxCurrencyLineExtensionAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
 							<xsd:element name="TaxInclusiveLineExtensionAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="TaxCurrencyTaxInclusiveLineExtensionAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
 							<xsd:element name="LineExclAllowanceChargeAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
 							<xsd:element name="OrderLineReference" minOccurs="0" maxOccurs="1">
 								<xsd:complexType>
@@ -210,6 +232,7 @@
 					<xsd:complexType>
 						<xsd:sequence>
 							<xsd:element name="PriceInclAllowanceChargeAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="TaxCurrencyPriceAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
 							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
 						</xsd:sequence>
 					</xsd:complexType>
