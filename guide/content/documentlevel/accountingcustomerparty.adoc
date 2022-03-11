@@ -105,7 +105,8 @@ The telephone number for the accounting contact of the organization.
 The telefax number for the accounting contact of the organization.
 |`cac:AccountingContact/cbc:ElectronicMail`
 |**Accounting E-mail** +
-The e-mail address for the accounting contact of the organization.
+The e-mail address for the accounting contact of the organization. +
+ _(Also used for distribution via email through Pagero Online)_
 |===
 
 *Example* +
