@@ -108,8 +108,8 @@
                 <ext:ExtensionContent>
                     <puf:PageroExtension>
                         <puf:LineExtension>
-                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">118.00</puf:TaxInclusiveLineExtensionAmount> 
-                            <puf:LineExclAllowanceChargeAmount currencyID="EUR">100.00</puf:LineExclAllowanceChargeAmount>
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="INR">118.00</puf:TaxInclusiveLineExtensionAmount> 
+                            <puf:LineExclAllowanceChargeAmount currencyID="INR">100.00</puf:LineExclAllowanceChargeAmount>
                         </puf:LineExtension>
                     </puf:PageroExtension>
                 </ext:ExtensionContent>
@@ -172,8 +172,8 @@
                 <ext:ExtensionContent>
                     <puf:PageroExtension>
                         <puf:LineExtension>
-                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">118.00</puf:TaxInclusiveLineExtensionAmount>
-                            <puf:LineExclAllowanceChargeAmount currencyID="EUR">100.00</puf:LineExclAllowanceChargeAmount>
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="INR">118.00</puf:TaxInclusiveLineExtensionAmount>
+                            <puf:LineExclAllowanceChargeAmount currencyID="INR">100.00</puf:LineExclAllowanceChargeAmount>
                         </puf:LineExtension>
                     </puf:PageroExtension>
                 </ext:ExtensionContent>

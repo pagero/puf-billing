@@ -91,9 +91,9 @@
 
         <rule context="cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal | cac:CreditNoteLine/cac:TaxTotal/cac:TaxSubtotal">
             <assert flag="fatal" id="PUF-R103" test="cac:TaxCategory/cbc:Percent">[PUF-R103]-If Tax Subtotal exist on line, tax category percent MUST exist.</assert>
-            <assert flag="fatal" id="PUF-R104" test="cac:TaxCategory[cac:TaxScheme/(normalize-space(upper-case(cbc:ID)) = 'VAT')]/cbc:ID">[PUF-R104]-If Tax Subtotal exist on line, VAT category ID MUST exist.</assert>
+            <assert flag="fatal" id="PUF-R104" test="cac:TaxCategory[string-length(cbc:ID)>0]/cbc:ID">[PUF-R104]-If Tax Subtotal exist on line, TAX category ID MUST exist.</assert>
+            <assert flag="fatal" id="PUF-R105" test="cac:TaxCategory/cac:TaxScheme[string-length(cbc:ID)>0]/cbc:ID">[PUF-R105]-If Tax Subtotal exist on line, TAX category TaxScheme ID MUST exist.</assert>
         </rule>
-
-    </pattern>
+   </pattern>
 
 </schema>

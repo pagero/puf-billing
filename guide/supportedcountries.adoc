@@ -1,4 +1,4 @@
-The aim for Pagero Universal is to cover invoicing and business requirements in legal domains and countries all over the world.
+The aim for Pagero Universal Format is to cover invoicing and business requirements in legal domains and countries all over the world.
 
 The below list should be seen as an overview to visualize where PUF currently is considered applicable. If the country is marked as supported
 means that an analysis of country or regional requirements has been made. It does however not automatically mean that all conceivable

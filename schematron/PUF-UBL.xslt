@@ -664,16 +664,32 @@
 
 		    <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="cac:TaxCategory[cac:TaxScheme/(normalize-space(upper-case(cbc:ID)) = 'VAT')]/cbc:ID"/>
+         <xsl:when test="cac:TaxCategory[string-length(cbc:ID)&gt;0]/cbc:ID"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="cac:TaxCategory[cac:TaxScheme/(normalize-space(upper-case(cbc:ID)) = 'VAT')]/cbc:ID">
+                                test="cac:TaxCategory[string-length(cbc:ID)&gt;0]/cbc:ID">
                <xsl:attribute name="id">PUF-R104</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[PUF-R104]-If Tax Subtotal exist on line, VAT category ID MUST exist.</svrl:text>
+               <svrl:text>[PUF-R104]-If Tax Subtotal exist on line, TAX category ID MUST exist.</svrl:text>
+            </svrl:failed-assert>
+         </xsl:otherwise>
+      </xsl:choose>
+
+		    <!--ASSERT -->
+      <xsl:choose>
+         <xsl:when test="cac:TaxCategory/cac:TaxScheme[string-length(cbc:ID)&gt;0]/cbc:ID"/>
+         <xsl:otherwise>
+            <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                                test="cac:TaxCategory/cac:TaxScheme[string-length(cbc:ID)&gt;0]/cbc:ID">
+               <xsl:attribute name="id">PUF-R105</xsl:attribute>
+               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="location">
+                  <xsl:apply-templates select="." mode="schematron-select-full-path"/>
+               </xsl:attribute>
+               <svrl:text>[PUF-R105]-If Tax Subtotal exist on line, TAX category TaxScheme ID MUST exist.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>

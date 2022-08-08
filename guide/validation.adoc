@@ -79,4 +79,7 @@ __Note that the old specification identifier 'urn:cen.eu:en16931:2017#compliant#
 |PUF-R104
 |[PUF-R104]-If Tax Subtotal exist on line, VAT category ID MUST exist.
 |Fatal
+|PUF-R105
+|[PUF-R105]-If Tax Subtotal exist on line, TAX category TaxScheme ID MUST exist.
+|Fatal
 |===
