@@ -306,11 +306,11 @@
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                                 test="not(normalize-space(cbc:SourceCurrencyCode/text()) = normalize-space(cbc:TargetCurrencyCode/text()))">
                <xsl:attribute name="id">PUF-R005</xsl:attribute>
-               <xsl:attribute name="flag">fatal</xsl:attribute>
+               <xsl:attribute name="flag">warning</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[PUF-R005]-Source currency code MUST be different from target currency code when tax exchange rate calculation is provided.</svrl:text>
+               <svrl:text>[PUF-R005]-Source currency code SHOULD be different from target currency code when tax exchange rate calculation is provided.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>

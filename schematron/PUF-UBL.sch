@@ -35,7 +35,7 @@
         </rule>
 
         <rule context="cac:TaxExchangeRate">
-            <assert flag="fatal" id="PUF-R005" test="not(normalize-space(cbc:SourceCurrencyCode/text()) = normalize-space(cbc:TargetCurrencyCode/text()))">[PUF-R005]-Source currency code MUST be different from target currency code when tax exchange rate calculation is provided.</assert>
+            <assert flag="warning" id="PUF-R005" test="not(normalize-space(cbc:SourceCurrencyCode/text()) = normalize-space(cbc:TargetCurrencyCode/text()))">[PUF-R005]-Source currency code SHOULD be different from target currency code when tax exchange rate calculation is provided.</assert>
             <assert flag="fatal" id="PUF-R006" test="string(cbc:MathematicOperatorCode) = 'Multiply'">[PUF-R006]-If tax exchange calculation is provided the mathematic operator code MUST equal "Multiply".</assert>
             <assert flag="fatal" id="PUF-R007" test="cbc:CalculationRate">[PUF-R007]-If tax exchange calculation is provided the calculation rate MUST exist.</assert>
             <assert flag="fatal" id="PUF-R008" test="cbc:SourceCurrencyCode and cbc:TargetCurrencyCode">[PUF-R008]-If tax exchange calculation is provided both source and target currency MUST be provided.</assert>
