@@ -15,6 +15,17 @@
                 </puf:PageroExtension>
             </ext:ExtensionContent>
         </ext:UBLExtension>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>POS</puf:Key>
+                        <puf:Value>01</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
     </ext:UBLExtensions>
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>

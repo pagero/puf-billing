@@ -6,7 +6,7 @@
     xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <ext:UBLExtensions>
         <ext:UBLExtension>
-            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
             <ext:ExtensionContent>
                 <puf:PageroExtension>
                     <puf:RestrictedInformation>
