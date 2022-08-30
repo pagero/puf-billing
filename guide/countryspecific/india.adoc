@@ -1,5 +1,31 @@
 This section contains information about special requirements concerning invoicing in India.
 
+==== Place of Supply
+Place of supply determines the place (the State) where the GST shall be received by the government treasury.
+
+The value should be provided in element <<_restrictedinformation>> with key `POS`
+
+*Example* +
+_Place of Supply example_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+        <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:RestrictedInformation>
+                  <puf:Key>POS</puf:Key>
+                  <puf:Value>01</puf:Value>
+              </puf:RestrictedInformation>
+            </puf:PageroExtension>
+        </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
 
 ==== PartyIdentification
 In India there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.
