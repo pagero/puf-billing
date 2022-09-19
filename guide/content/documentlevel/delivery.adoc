@@ -11,6 +11,10 @@ Extension is added to provide additional information in the `cac:Delivery` eleme
 |**Delivery date** +
 Date when goods or service was made or completed +
 __Format YYYY-MM-DD__
+|`cbc:LatestDeliveryDate`
+|**Latest delivery date** +
+The latest date of delivery allowed by the buyer +
+__Format YYYY-MM-DD__
 |`cac:DeliveryLocation/cbc:ID`
 |**Delivery location identifier** +
 Identifier of the delivery location +
@@ -115,6 +119,7 @@ _cac:Delivery populated with example value_
   <!-- Code omitted for clarity -->
   <cac:Delivery>
       <cbc:ActualDeliveryDate>2019-01-01</cbc:ActualDeliveryDate>
+      <cbc:LatestDeliveryDate>2019-01-03</cbc:LatestDeliveryDate>
       <cac:DeliveryLocation>
           <cbc:ID schemeID="0088">7300010000001</cbc:ID>
           <cbc:Description>Text describing the delivery location</cbc:Description>
