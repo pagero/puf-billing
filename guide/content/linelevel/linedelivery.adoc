@@ -12,9 +12,6 @@ See code list <<_puf_014_uomcode>> for recommendations
 |`cbc:ActualDeliveryDate`
 |**Delivery date** +
 Date of delivery.
-|`cbc:LatestDeliveryDate`
-|**Latest delivery date** +
-The latest date of delivery allowed by the buyer.
 |`cac:DeliveryLocation/cbc:ID`
 |**Delivery location idetifier** +
 Identifier of the delivery location. +
@@ -62,7 +59,6 @@ _cac:InvoiceLine/cac:Delivery example_
     <cac:Delivery>
       <cbc:Quantity unitCode="PCE">1</cbc:Quantity>
       <cbc:ActualDeliveryDate>2019-01-25</cbc:ActualDeliveryDate>
-      <cbc:LatestDeliveryDate>2019-01-27</cbc:LatestDeliveryDate>
       <cac:DeliveryLocation>
           <cbc:ID schemeID="0088">0000000000000</cbc:ID>
           <cac:Address>
