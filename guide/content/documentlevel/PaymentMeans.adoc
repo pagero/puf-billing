@@ -35,11 +35,10 @@ Payment account identifier e.g. a BIC or Swift.
 |`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:Name`
 |**Payment bank name** +
 The name of the bank branch or division of the bank organization, to which payment should be made.
-|`cac:PayeeFinancialAccount/cac:PaymentMandate/cbc:ID`
+|`cac:PaymentMandate/cbc:ID`
 |**Payment mandate reference identifier** +
 Payment mandate identifier used for referencing direct debit payments.
-|`cac:PayeeFinancialAccount/cac:PaymentMandate/
-cac:PayerFinancialAccount/cbc:ID`
+|`cac:PaymentMandate/cac:PayerFinancialAccount/cbc:ID`
 |**Payer account identifier** +
 Account to be debited in a direct debit payment.
 |===
