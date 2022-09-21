@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<ApplicationResponse xmlns="urn:oasis:names:specification:ubl:schema:xsd:ApplicationResponse-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+    
+    <!-- NOTE that this is a draft example. There will be changes/updates. Track the GITHUB page for PUF to see changes and updates. -->
+    
+    <!-- CustomizationID. Specification identification -->
+    <cbc:CustomizationID>urn:pagero.com:puf:techical_acknowledgement:1.0</cbc:CustomizationID>
+
+    <!-- ProfileID. Business process type identifier -->
+    <cbc:ProfileID>urn:pagero.com:puf:techical_acknowledgement:1.0</cbc:ProfileID>
+
+    <!-- Document identifier. -->
+    <cbc:ID>123456</cbc:ID>
+
+    <!-- cbc:IssueDate -->
+    <cbc:IssueDate>2022-09-07</cbc:IssueDate>
+    
+    <!-- cbc:IssueTime-->
+    <cbc:IssueTime>11:18:21</cbc:IssueTime>
+
+    <!-- cac:SenderParty. Sender information -->
+    <cac:SenderParty/>
+
+    <!-- cac:ReceiverParty. Receiver information -->
+    <cac:ReceiverParty/>
+        
+    <!-- cac:DocumentResponse. Document response -->
+    <cac:DocumentResponse>
+
+        <!-- Response information -->
+        <cac:Response>
+            
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ResponseExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:ResponseExtension>
+                                <!-- The interchange id of the referenced document. If sent by the issuer -->
+                                <puf:ReferencedDocumentInterchangeID>
+                                    <cbc:ID>123456789</cbc:ID>
+                                </puf:ReferencedDocumentInterchangeID>
+                            </puf:ResponseExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+
+            <!-- Response Code:
+                Possible codes
+                APPROVED 
+                REJECTED 
+            -->
+            <cbc:ResponseCode>APPROVED</cbc:ResponseCode>
+        </cac:Response>
+        
+        <cac:DocumentReference>
+            <!-- Reference to the invoice (invoice number) if applicable. Otherwise N/A -->
+            <cbc:ID>INV002</cbc:ID>
+        </cac:DocumentReference>
+    </cac:DocumentResponse>
+</ApplicationResponse>
