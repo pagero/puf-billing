@@ -95,6 +95,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*No*
 |Only Invoice and Credit note support
 
+|New Zealand
+|*Yes*
+|*No*
+|
+
 |Norway
 |*Yes*
 |*No*
