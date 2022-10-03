@@ -55,7 +55,7 @@
                 APPROVED 
                 REJECTED 
             -->
-            <cbc:ResponseCode>APPROVED</cbc:ResponseCode>
+            <cbc:ResponseCode>REJECTED</cbc:ResponseCode>
             
             <!-- Clarification if applicable. -->
             <cac:Status>
