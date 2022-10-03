@@ -320,6 +320,9 @@ For additional identification scheme identifier added in PUF see below recommend
 |`SA:MLS`
 |MLSD license
 
+|`SA:700`
+|700 number
+
 |`SA:SAG`
 |Sagia license
 
