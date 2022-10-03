@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0"
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    
+    <!-- Values in invoice are examples values only. -->
+    
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number (Invoice Reference Number (IRN)) -->
+    <cbc:ID>123456</cbc:ID>
+    <!-- BT-2 Invoice Issue Date  -->
+    <cbc:IssueDate>2018-01-01</cbc:IssueDate>
+    <!-- Invoice Issue Time -->
+    <cbc:IssueTime>21:32:52</cbc:IssueTime>
+    <!-- BT-9 Due Date -->
+    <cbc:DueDate>2018-12-01</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code and KSA-2 Invoice transaction code in attribute @name -->
+    <cbc:InvoiceTypeCode name="0100000">388</cbc:InvoiceTypeCode>
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>SAR</cbc:DocumentCurrencyCode>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <!-- BT-29 additional seller party id. Conditionally mandatory if applicable. See codelist: Identification scheme Saudi Arabia -->
+                <cbc:ID schemeID="SA:CRN">12222222</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <!--BT-35 Seller address street-->
+                <cbc:StreetName>Street Name</cbc:StreetName>
+                <!-- KSA-17 Seller address building number -->
+                <cbc:BuildingNumber>1234</cbc:BuildingNumber>
+                <!-- KSA-23 Seller Address additional Number -->
+                <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+                <!-- KSA-3 District -->
+                <cbc:CitySubdivisionName>District</cbc:CitySubdivisionName>
+                <!-- BT-37 Seller address City -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- BT-38 Seller address postal code -->
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <!-- BT-39 Seller address province/state-->
+                <cbc:CountrySubentity>Province</cbc:CountrySubentity>
+                <cac:Country>
+                    <!-- BT-40 Seller address country code -->
+                    <cbc:IdentificationCode>SA</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-31 Seller Vat Number -->
+                <cbc:CompanyID>31xxxxxxxx00003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Name -->
+                <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <!-- Customer number, not a requirement in KSA but can be useful to route document to correct recipient in pageroonline -->
+        <cbc:SupplierAssignedAccountID>Customer Number</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <!-- BT-46 additional buyer party id. Conditionally mandatory if applicable. See codelist: Identification scheme Saudi Arabia -->
+                <cbc:ID schemeID="SA:OTH">123456</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <!-- BT-50 Buyer address street-->
+                <cbc:StreetName>Street Name</cbc:StreetName>
+                <!-- KSA-18 Buyer address building number -->
+                <cbc:BuildingNumber>1234</cbc:BuildingNumber>
+                <!-- KSA-19 Buyer Address additional Number -->
+                <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+                <!-- KSA-4 Buyer District -->
+                <cbc:CitySubdivisionName>District</cbc:CitySubdivisionName>
+                <!-- BT-52 Buyer address City -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- BT-53 Buyer address postal code -->
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <!-- BT-54 Buyer address province/state -->
+                <cbc:CountrySubentity>Province</cbc:CountrySubentity>
+                <cac:Country>
+                    <!-- BT-55 Buyer address country code -->
+                    <cbc:IdentificationCode>SA</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer Vat Number if applicable-->
+                <cbc:CompanyID>32xxxxxxxx00003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Name -->
+                <cbc:RegistrationName>Buyer Name</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:Delivery>
+        <!-- KSA-5 Supply Date Conditionally mandatory if different from issue date -->
+        <cbc:ActualDeliveryDate>2019-01-01</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code. Valid values in KSA: 10, 30, 42, 48, 1 -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 A unique identifier of the financial payment account -->
+            <cbc:ID>SA1234567891234567891</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 An identifier for the payment service provider where a payment account is located. Such as a BIC or a national clearing code where required -->
+                <cbc:ID>SWIFTCODE</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BG-20 AllowanceCharge conditionally mandatory if applicable -->
+    <cac:AllowanceCharge>
+        <!-- ChargeIndicator must be false to indicate discount-->
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+        <!-- BT-92 Document level allowance amount without vat. Currency in attribute currencyID (BT-5) -->
+        <cbc:Amount currencyID="SAR">5.00</cbc:Amount>
+        <cac:TaxCategory>
+            <!-- BT-95 Document level allowanec VAT category code. Valid values in KSA: S, Z, E, O -->
+            <cbc:ID>E</cbc:ID>
+            <!-- BT-96 The VAT rate, represented as percentage that applies to the document level allowance. -->
+            <cbc:Percent>0</cbc:Percent>
+            <cac:TaxScheme>
+                <!-- KSA-21 Use "VAT" -->
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount. Currency in attribute currencyID (BT-5) -->
+        <cbc:TaxAmount currencyID="SAR">15.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- BT-116 Sum of all taxable amounts subject to a specific VAT category code and VAT category rate. Currency in attribute currencyID (BT-5) -->
+            <cbc:TaxableAmount currencyID="SAR">100.00</cbc:TaxableAmount>
+            <!--  BT-117. The total VAT amount for a given VAT category. Currency in attribute currencyID (BT-5) -->
+            <cbc:TaxAmount currencyID="SAR">15.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code.  Valid values in KSA: S, Z, E, O -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT category rate-->
+                <cbc:Percent>15.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <!-- KSA-21 Use "VAT" -->
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <!-- BT-116 Sum of all taxable amounts subject to a specific VAT category code and VAT category rate. Currency in attribute currencyID (BT-5) -->
+            <cbc:TaxableAmount currencyID="SAR">95.00</cbc:TaxableAmount>
+            <!--  BT-117. The total VAT amount for a given VAT category. Currency in attribute currencyID (BT-5) -->
+            <cbc:TaxAmount currencyID="SAR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code.  Valid values in KSA: S, Z, E, O -->
+                <cbc:ID>E</cbc:ID>
+                <!-- BT-119 VAT category rate-->
+                <cbc:Percent>0</cbc:Percent>
+                <!-- BT-121 VAT exemption reason code -->
+                <cbc:TaxExemptionReasonCode>VATEX-SA-29-7</cbc:TaxExemptionReasonCode>
+                <!-- BT-120 VAT exemption reason text. -->
+                <cbc:TaxExemptionReason>Life insurance services mentioned in Article 29 of the VAT Regulations</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <!-- KSA-21 Use "VAT" -->
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of all Invoice line net amounts in the Invoice  without VAT. Currency in attribute currencyID (BT-5)-->
+        <cbc:LineExtensionAmount currencyID="SAR">200.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT. Currency in attribute currencyID (BT-5)-->
+        <cbc:TaxExclusiveAmount currencyID="SAR">195.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT. Currency in attribute currencyID (BT-5) -->
+        <cbc:TaxInclusiveAmount currencyID="SAR">210.00</cbc:TaxInclusiveAmount>
+        <!-- BT-107 Sum of all allowances on document level. Currency in attribute currencyID (BT-5)-->
+        <cbc:AllowanceTotalAmount currencyID="SAR">5.00</cbc:AllowanceTotalAmount>
+        <!-- BT-115 Amount due for payment. Currency in attribute currencyID (BT-5) -->
+        <cbc:PayableAmount currencyID="SAR">210.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <!-- KSA-12 Line amount inclusive of VAT-->
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">115.00</puf:TaxInclusiveLineExtensionAmount> 
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- BT-126 Line ID -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-129 Invoiced Quantity. BT-130 unit of measure in attribute unitCode -->
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Line extension amount. Line net amount. Currency in attribute currencyID (BT-5) -->
+        <cbc:LineExtensionAmount currencyID="SAR">100.00</cbc:LineExtensionAmount>
+        <!-- Conditionally Mandatory if discount is used on line level -->
+        <cac:AllowanceCharge>
+            <!-- ChargeIndicator must be false to indicate discount-->
+            <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+            <!-- BT-136 Discount amount without tax. Currency in attribute currencyID (BT-5) -->
+            <cbc:Amount currencyID="SAR">10</cbc:Amount>
+        </cac:AllowanceCharge>
+        <cac:TaxTotal>
+            <!-- KSA-11 Line VAT Amount -->
+            <cbc:TaxAmount currencyID="SAR">15.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <!-- BT-153 Article/Item Description -->
+            <cbc:Name>Article 1</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code. Valid values in KSA: S, Z, E, O  -->
+                <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>15</cbc:Percent>
+                <!-- KSA-21 Use "VAT" -->
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
+            <cbc:PriceAmount currencyID="SAR">110.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <!-- KSA-12 Line amount inclusive of VAT-->
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">100.00</puf:TaxInclusiveLineExtensionAmount> 
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- BT-126 Line ID -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-129 Invoiced Quantity. BT-130 unit of measure in attribute unitCode -->
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Line extension amount. Line net amount. Currency in attribute currencyID (BT-5) -->
+        <cbc:LineExtensionAmount currencyID="SAR">100.00</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+            <!-- KSA-11 Line VAT Amount -->
+            <cbc:TaxAmount currencyID="SAR">0.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <!-- BT-153 Article/Item Description -->
+            <cbc:Name>Article 2</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code. Valid values in KSA: S, Z, E, O  -->
+                <cbc:ID schemeID="UNCL5305">E</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>0</cbc:Percent>
+                <!-- KSA-21 Use "VAT" -->
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
+            <cbc:PriceAmount currencyID="SAR">100.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
