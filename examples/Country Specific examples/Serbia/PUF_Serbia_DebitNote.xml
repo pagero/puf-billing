@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<CreditNote xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
-	xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-	xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ccts="urn:un:unece:uncefact:documentation:2"
-	xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2"
-	xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2"
-	xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-	xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0">
-	
-	<!-- Values in Credit Note are examples values only. -->
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0"
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    
+    <!-- Values in invoice are examples values only. -->
     
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
-	<!-- BT-1 Credit Note Number -->
+    <!-- BT-1 Invoice Number -->
     <cbc:ID>123456</cbc:ID>
-	<!-- BT-2 Credit Note Issue Date  -->
+    <!-- BT-2 Invoice Issue Date  -->
     <cbc:IssueDate>2022-01-01</cbc:IssueDate>
-    <!-- BT-3 Credit Note Type Code -->
-	<cbc:CreditNoteTypeCode>381</cbc:CreditNoteTypeCode>
-    <!-- BT-5 Document Currency -->
+    <!-- BT-9 Due Date -->
+    <cbc:DueDate>2022-02-01</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code -->
+    <cbc:InvoiceTypeCode>383</cbc:InvoiceTypeCode>
+    <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>RSD</cbc:DocumentCurrencyCode>
 	<cac:InvoicePeriod>
 		<!-- BT-8 Value Added tax point date code -->
-		<cbc:DescriptionCode>3</cbc:DescriptionCode>
+		<cbc:DescriptionCode>35</cbc:DescriptionCode>
 	</cac:InvoicePeriod>
 	<cac:BillingReference>
 		<cac:InvoiceDocumentReference>
@@ -101,6 +101,10 @@
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>
+    <cac:Delivery>
+        <!-- BT-72 Actual Delivery Date-->
+        <cbc:ActualDeliveryDate>2022-01-01</cbc:ActualDeliveryDate>
+    </cac:Delivery>
     <cac:PaymentMeans>
         <!-- BT-81 Payment means code. -->
         <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
@@ -182,11 +186,11 @@
         <!-- BT-115 Amount due for payment. Currency in attribute currencyID (BT-5) -->
     	<cbc:PayableAmount currencyID="RSD">210.00</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>
-	<cac:CreditNoteLine>
+    <cac:InvoiceLine>
         <!-- BT-126 Line ID -->
         <cbc:ID>1</cbc:ID>
         <!-- BT-129 Invoiced Quantity. BT-130 unit of measure in attribute unitCode -->
-        <cbc:CreditedQuantity unitCode="EA">1</cbc:CreditedQuantity>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
         <!-- BT-131 Line extension amount. Line net amount. Currency in attribute currencyID (BT-5) -->
     	<cbc:LineExtensionAmount currencyID="RSD">100.00</cbc:LineExtensionAmount>
         <!-- Conditionally Mandatory if discount is used on line level -->
@@ -213,12 +217,12 @@
             <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
         	<cbc:PriceAmount currencyID="RSD">110.00</cbc:PriceAmount>
         </cac:Price>
-    </cac:CreditNoteLine>
-	<cac:CreditNoteLine>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
         <!-- BT-126 Line ID -->
         <cbc:ID>2</cbc:ID>
         <!-- BT-129 Invoiced Quantity. BT-130 unit of measure in attribute unitCode -->
-		<cbc:CreditedQuantity unitCode="EA">1</cbc:CreditedQuantity>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
         <!-- BT-131 Line extension amount. Line net amount. Currency in attribute currencyID (BT-5) -->
     	<cbc:LineExtensionAmount currencyID="RSD">100.00</cbc:LineExtensionAmount>
         <cac:Item>
@@ -238,5 +242,5 @@
             <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
         	<cbc:PriceAmount currencyID="RSD">100.00</cbc:PriceAmount>
         </cac:Price>
-    </cac:CreditNoteLine>
-</CreditNote>
+    </cac:InvoiceLine>
+</Invoice>
