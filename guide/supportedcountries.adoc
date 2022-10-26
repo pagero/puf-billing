@@ -115,6 +115,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*Yes*
 |
 
+|Serbia
+|*Yes*
+|*No*
+|Only standard Invoice, Credit note and Debit note support 
+
 |Singapore
 |*Yes*
 |*No*
