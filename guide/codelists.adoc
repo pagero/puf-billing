@@ -485,6 +485,40 @@ Standard european tax category codes can be found here https://docs.peppol.eu/po
 
 For additional codes added in PUF see below code recommendations.
 
+===== Tax category codes Serbia
+
+|===
+|Value |Description
+
+|`S`
+|Standard rate
+
+|`AE`
+|Vat Reverse Charge
+
+|`Z`
+|Zero rated goods/Tax exemption with right to deduction
+
+|`E`
+|Exempt from VAT/Tax exemption without deduction rights
+
+|`R`
+|Exempt from VAT
+
+|`O`
+|Services outside scope of VAT
+
+|`OE`
+|Services outside scope of VAT 2
+
+|`SS`
+|Special procedures
+
+|`N`
+|Cancellation
+
+|===
+
 ===== Tax category codes Singapore
 
 |===
