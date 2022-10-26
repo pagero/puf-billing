@@ -16,6 +16,10 @@ include::countryspecific/italy.adoc[]
 
 include::countryspecific/portugal.adoc[]
 
+=== Serbia
+
+include::countryspecific/serbia.adoc[]
+
 === Singapore
 
 include::countryspecific/singapore.adoc[]

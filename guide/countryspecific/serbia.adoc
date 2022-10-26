@@ -1,0 +1,5 @@
+This section contains information about requirements and other information concerning invoicing in Serbia.
+
+==== Tax Category codes
+
+Tax category codes for Serbia can be found <<_tax_category_codes_serbia, here>>.
