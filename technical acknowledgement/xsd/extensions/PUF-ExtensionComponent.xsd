@@ -64,6 +64,14 @@
 									</xsd:sequence>
 								</xsd:complexType>
 							</xsd:element>
+							
+							<xsd:element name="ClearanceQR" minOccurs="0" maxOccurs="1">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="QRString" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
 
 							<xsd:element name="ReferencedDocumentSentToClearanceDate" minOccurs="0"
 								maxOccurs="1"/>
