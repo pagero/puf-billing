@@ -75,7 +75,7 @@
                                     -->
                                     <cbc:DocumentTypeCode>M</cbc:DocumentTypeCode>
                                     
-                                    <!-- Description of the document. LCD = Legal cleared document -->
+                                    <!-- Description of the document. -->
                                     <cbc:DocumentDescription>Document description</cbc:DocumentDescription>
                                     
                                     <cac:Attachment>
