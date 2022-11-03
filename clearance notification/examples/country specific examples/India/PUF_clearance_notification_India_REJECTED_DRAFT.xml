@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<ApplicationResponse xmlns="urn:oasis:names:specification:ubl:schema:xsd:ApplicationResponse-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+    
+    <!-- NOTE that this is a draft example. There will be changes/updates. Track the GITHUB page for PUF to see changes and updates. -->
+    
+    <!-- CustomizationID. Specification identification -->
+    <cbc:CustomizationID>urn:pagero.com:puf:clearance_notification:1.0</cbc:CustomizationID>
+
+    <!-- ProfileID. Business process type identifier -->
+    <cbc:ProfileID>urn:pagero.com:puf:clearance_notification:1.0</cbc:ProfileID>
+
+    <!-- Response identifier. A unique id to identify the response. -->
+    <cbc:ID>123456</cbc:ID>
+
+    <!-- cbc:IssueDate -->
+    <cbc:IssueDate>2022-06-16</cbc:IssueDate>
+    
+    <!-- cbc:IssueTime-->
+    <cbc:IssueTime>11:18:21</cbc:IssueTime>
+
+    <!-- cac:SenderParty. Sender information -->
+    <cac:SenderParty>
+        <cac:PartyName>
+        	<cbc:Name>IRP INDIA</cbc:Name>
+        </cac:PartyName>
+    </cac:SenderParty>
+
+    <!-- cac:ReceiverParty. Receiver information -->
+    <cac:ReceiverParty>
+        <cac:PartyLegalEntity>
+            <cbc:RegistrationName>Seller company name</cbc:RegistrationName>
+        </cac:PartyLegalEntity>
+    </cac:ReceiverParty>
+
+    <!-- cac:DocumentResponse. Document response -->
+    <cac:DocumentResponse>
+
+        <!-- Response information -->
+        <cac:Response>
+            
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ResponseExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:ResponseExtension>
+                                <!-- The interchange id of the referenced document. If sent by the issuer -->
+                                <puf:ReferencedDocumentInterchangeID>
+                                    <cbc:ID>123456789</cbc:ID>
+                                </puf:ReferencedDocumentInterchangeID>
+                            </puf:ResponseExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+
+            <!-- Response Code:
+                Possible clearance response codes
+                APPROVED = Approved by Clearance Authority
+                REJECTED = Rejected by Clearance Authority.
+            -->
+            <cbc:ResponseCode>REJECTED</cbc:ResponseCode>
+
+            <!-- Clarification if applicable. -->
+            <cac:Status>
+                <!-- StatusReasonCode. Returned by clearance authority.-->
+                <cbc:StatusReasonCode>RE</cbc:StatusReasonCode>
+                <!-- StatusReason. Reason for clarification -->
+            	<cbc:StatusReason>2271: SHIP TO - state code is not valid statecode for B2B, SEZ and Deemed Export transactions</cbc:StatusReason>
+            </cac:Status>
+        </cac:Response>
+        
+        <cac:DocumentReference>
+            <!-- Reference to the invoice (invoice number) -->
+            <cbc:ID>INV005</cbc:ID>
+            <!-- The date when the invoice was issued -->
+            <cbc:IssueDate>2022-09-07</cbc:IssueDate>
+            <!-- DocumentTypeCode. The invoice type in the referenced invoice -->
+            <cbc:DocumentTypeCode>380</cbc:DocumentTypeCode>
+        </cac:DocumentReference>
+    </cac:DocumentResponse>
+</ApplicationResponse>
