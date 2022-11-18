@@ -608,6 +608,27 @@ For additional codes added in PUF see below code recommendations.
 
 |===
 
+===== Tax category codes Basque Country
+
+|===
+|Value |Description
+
+|`S`
+|Without reverse charge (default).
+
+|`AE`
+|With reverse charge.
+
+|`E`
+|Exempt.
+
+|`OT`
+|Non-taxable under Art. 7, 14, Others
+
+|`RL`
+|Non-taxable under location rules.
+|===
+
 ==== PUF-013-EXEMPTCODE
 
 Values can differ depending on which legal domain you are in or if there are other types of business requirements.

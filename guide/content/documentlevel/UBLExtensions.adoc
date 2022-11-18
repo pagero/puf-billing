@@ -3,10 +3,5 @@
 
 |`ext:UBLExtensions`
 |**Extension Content** +
-Added elements in regards to `ext:UBLExtensions` for `Invoice` can be found below: +
-
-<<_restrictedinformation>> +
-<<_supplytype>> +
-<<_dutystamp>> +
-<<_igstonintra>>
+Added elements in regards to `ext:UBLExtensions` for `Invoice` can be found in chapter 4: <<_extensions>>.
 |===
