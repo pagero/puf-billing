@@ -1,4 +1,29 @@
-This section contains information about special requirements concerning invoicing in the Basque Country and Real-Time Invoice Reporting (RTIR)
+This section contains information about special requirements concerning invoicing in the Basque Country.
+
+==== PartyIdentification
+In the Basque Country there is a possible requirement to provide additional party identifiers that are not available in the ISO 6523 ICD list.
+These additional identifiers for use in the Basque Country can be found <<_identification_scheme_basque_country, here>>.
+
+*Example* +
+_Example with additional id provided in Basque Country in Party structure_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+    <cac:Party>
+        <!-- Code omitted for clarity -->
+        <cac:PartyIdentification>
+            <cbc:ID schemeID="TB:PASSPORT">0123456789</cbc:ID><!--1-->
+        </cac:PartyIdentification>
+        <!-- Code omitted for clarity -->
+    </cac:Party>
+</cac:AccountingCustomerParty>
+
+</Invoice>
+----
+<1> The passport id provided as cac:PartyIdentification/cbc:ID
 
 ==== Tax Category codes
 
