@@ -365,6 +365,25 @@ For additional identification scheme identifier added in PUF see below recommend
 
 |===
 
+===== Identification scheme Basque Country
+
+|===
+|Value |Description
+
+|`TB:PASSPORT`
+|Passport ID
+
+|`TB:OFFICIAL_ID`
+|Official ID document issued by country or territory of residence 
+
+|`TB:RC`
+|Residence certificate 
+
+|`TB:OTHER`
+|Other identifying document
+
+|===
+
 ==== PUF-009-TAXTYPESCHEME
 
 List of available tax type scheme codes.
