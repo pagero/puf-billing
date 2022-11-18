@@ -9476,6 +9476,33 @@ These additional identifiers for use in the Basque Country can be found <a href=
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>The value should be provided in element <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>SignificantTaxRegime</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Tax Regime example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+        <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+              <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                  <span class="tag">&lt;puf:Key&gt;</span>SignificantTaxRegime<span class="tag">&lt;/puf:Key&gt;</span>
+                  <span class="tag">&lt;puf:Value&gt;</span>01<span class="tag">&lt;/puf:Value&gt;</span>
+              <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+            <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+        <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>

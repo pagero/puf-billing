@@ -92,4 +92,27 @@ When reporting an invoice to the Basque tax authorities, it is required to speci
 |Transactions carried out by persons or entities that are not considered businessmen, businesswomen or professionals to VAT effects.
 |===
 
+The value should be provided in element <<_restrictedinformation>> with key `SignificantTaxRegime`
+
+*Example* +
+_Tax Regime example_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+        <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:RestrictedInformation>
+                  <puf:Key>SignificantTaxRegime</puf:Key>
+                  <puf:Value>01</puf:Value>
+              </puf:RestrictedInformation>
+            </puf:PageroExtension>
+        </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
 
