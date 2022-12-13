@@ -674,6 +674,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_serbia">5.5. Serbia</a>
 <ul class="sectlevel3">
 <li><a href="#_tax_category_codes_2">5.5.1. Tax Category codes</a></li>
+<li><a href="#_partyidentification">5.5.2. PartyIdentification</a></li>
 </ul>
 </li>
 <li><a href="#_singapore">5.6. Singapore</a>
@@ -684,13 +685,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_saudi_arabia">5.7. Saudi Arabia</a>
 <ul class="sectlevel3">
 <li><a href="#_invoicetypecode_and_invoice_subtype">5.7.1. InvoiceTypeCode and Invoice subtype</a></li>
-<li><a href="#_partyidentification">5.7.2. PartyIdentification</a></li>
+<li><a href="#_partyidentification_2">5.7.2. PartyIdentification</a></li>
 </ul>
 </li>
 <li><a href="#_india">5.8. India</a>
 <ul class="sectlevel3">
 <li><a href="#_place_of_supply">5.8.1. Place of Supply</a></li>
-<li><a href="#_partyidentification_2">5.8.2. PartyIdentification</a></li>
+<li><a href="#_partyidentification_3">5.8.2. PartyIdentification</a></li>
 <li><a href="#_party_address_information">5.8.3. Party address information</a></li>
 <li><a href="#_tax_type_scheme">5.8.4. Tax type scheme</a></li>
 <li><a href="#_harmonized_system_of_nomenclature_code_hsn_code">5.8.5. Harmonized System of Nomenclature code (HSN Code)</a></li>
@@ -709,7 +710,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#_basque_country">5.10. Basque Country</a>
 <ul class="sectlevel3">
-<li><a href="#_partyidentification_3">5.10.1. PartyIdentification</a></li>
+<li><a href="#_partyidentification_4">5.10.1. PartyIdentification</a></li>
 <li><a href="#_tax_category_codes_4">5.10.2. Tax Category codes</a></li>
 <li><a href="#_tax_regime">5.10.3. Tax Regime</a></li>
 </ul>
@@ -8587,6 +8588,43 @@ It&#8217;s used as an addition to the SIRET number, which is the main identifier
 <p>Tax category codes for Serbia can be found <a href="#_tax_category_codes_serbia">here</a>.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_partyidentification"><a class="anchor" href="#_partyidentification"></a><a class="link" href="#_partyidentification">5.5.2. PartyIdentification</a></h4>
+<div class="paragraph">
+<p>There is a possible requirement to provide additional party identifiers that are not available in the ISO 6523 ICD list.
+These additional identifiers for use in Serbia can be found <a href="#_identification_scheme_serbia">here</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Example with additional id provided in Serbia in Party structure</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:Party&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">RS:JBKJS</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>JBKJS:12345<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:Party&gt;</span>
+<span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The JBKJS id provided as cac:PartyIdentification/cbc:ID, note that the "JBKJS" prefix must be appended before the ID.</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_singapore"><a class="anchor" href="#_singapore"></a><a class="link" href="#_singapore">5.6. Singapore</a></h3>
@@ -8636,7 +8674,7 @@ It&#8217;s used as an addition to the SIRET number, which is the main identifier
 </div>
 </div>
 <div class="sect3">
-<h4 id="_partyidentification"><a class="anchor" href="#_partyidentification"></a><a class="link" href="#_partyidentification">5.7.2. PartyIdentification</a></h4>
+<h4 id="_partyidentification_2"><a class="anchor" href="#_partyidentification_2"></a><a class="link" href="#_partyidentification_2">5.7.2. PartyIdentification</a></h4>
 <div class="paragraph">
 <p>In Saudi Arabia there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.
 These additional identifiers for use in Saudi Arabia can be found <a href="#_identification_scheme_saudi_arabia">here</a>.</p>
@@ -8712,7 +8750,7 @@ These additional identifiers for use in Saudi Arabia can be found <a href="#_ide
 </div>
 </div>
 <div class="sect3">
-<h4 id="_partyidentification_2"><a class="anchor" href="#_partyidentification_2"></a><a class="link" href="#_partyidentification_2">5.8.2. PartyIdentification</a></h4>
+<h4 id="_partyidentification_3"><a class="anchor" href="#_partyidentification_3"></a><a class="link" href="#_partyidentification_3">5.8.2. PartyIdentification</a></h4>
 <div class="paragraph">
 <p>In India there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.
 These additional identifiers for use in India can be found <a href="#_identification_scheme_india">here</a>.</p>
@@ -9343,7 +9381,7 @@ It’s not possible to mix operation “CREATE” and “MODIFY” in the same d
 <p>This section contains information about special requirements concerning invoicing in the Basque Country.</p>
 </div>
 <div class="sect3">
-<h4 id="_partyidentification_3"><a class="anchor" href="#_partyidentification_3"></a><a class="link" href="#_partyidentification_3">5.10.1. PartyIdentification</a></h4>
+<h4 id="_partyidentification_4"><a class="anchor" href="#_partyidentification_4"></a><a class="link" href="#_partyidentification_4">5.10.1. PartyIdentification</a></h4>
 <div class="paragraph">
 <p>In the Basque Country there is a possible requirement to provide additional party identifiers that are not available in the ISO 6523 ICD list.
 These additional identifiers for use in the Basque Country can be found <a href="#_identification_scheme_basque_country">here</a>.</p>
@@ -10090,6 +10128,27 @@ LN : Not in liquidation</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>TB:OTHER</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Other identifying document</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_identification_scheme_serbia"><a class="anchor" href="#_identification_scheme_serbia"></a><a class="link" href="#_identification_scheme_serbia">Identification scheme Serbia</a></h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RS:JBKJS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unique ID number used for public entities</p></td>
 </tr>
 </tbody>
 </table>
