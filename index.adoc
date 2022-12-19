@@ -1,7 +1,9 @@
-:doctitle: image:images/logo.png[float="center", width=100%] Pagero Universal Format Billing 2.0
-:name-op-en: Customer Integration, Pagero
+:doctitle: image:images/puf-logo.png[float="center", width=100%] Pagero Universal Format Billing 2.0
+:author: Copyright &copy; 2022, Pagero Group
+:email: https://pagero.com
+:copyright: Pagero Group
 :minor: 1.0
-:revision: 1.0
+:revision: 2.0
 :toc: left
 :toclevels: 3
 :source-highlighter: coderay
@@ -10,8 +12,11 @@
 :doctype: book
 :sectanchors:
 :sectlinks:
-:sectnums:
 :nofooter:
+
+A specification based on https://docs.oasis-open.org/ubl/UBL-2.3.html[Universal Business Language (UBL)] that enables the exchange of compliant business documents worldwide via our e-business platform link:https://www.pageroonline.com[Pagero Online].
+
+:sectnums:
 
 == Introduction
 
@@ -24,7 +29,9 @@ include::guide/guidelines.adoc[]
 == Content
 
 include::guide/content.adoc[]
+
 :sectnums:
+
 == Extensions
 
 include::guide/extensions.adoc[]
