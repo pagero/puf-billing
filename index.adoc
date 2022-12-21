@@ -26,9 +26,9 @@ include::guide/introduction.adoc[]
 
 include::guide/guidelines.adoc[]
 
-== Content
+== Syntax
 
-include::guide/content.adoc[]
+include::guide/syntax.adoc[]
 
 :sectnums:
 
