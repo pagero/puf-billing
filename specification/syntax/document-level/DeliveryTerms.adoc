@@ -1,0 +1,32 @@
+.Elements added in cac:DeliveryTerms
+|===
+|Path |Description
+
+|`cbc:SpecialTerms`
+|**Delivery Terms** +
+Description of the delivery terms.
+
+|`cbc:LossRiskResponsibilityCode`
+|**Loss risk responsibility code** +
+Code to identify the responsibility for the loss risk.
+
+|`cbc:LossRisk`
+|**Loss risk description** +
+A description of the responsibility for the loss risk.
+
+|===
+
+*Example* +
+_cac:DeliveryTerms example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:DeliveryTerms>
+      <cbc:SpecialTerms>Description of the delivery terms</cbc:SpecialTerms>
+      <cbc:LossRiskResponsibilityCode>Code to identify the responsibility for the loss risk.</cbc:LossRiskResponsibilityCode>
+      <cbc:LossRisk>A description of the responsibility for the loss risk.</cbc:LossRisk>
+  </cac:DeliveryTerms>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

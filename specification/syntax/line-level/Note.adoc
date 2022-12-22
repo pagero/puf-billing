@@ -1,0 +1,24 @@
+|===
+|Path |Description
+
+|`cbc:Note`
+|**Line note** +
+Free text information.
+|===
+
+*Example* +
+_cac:InvoiceLine/cbc:Note with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cbc:Note>This</cbc:Note>
+    <cbc:Note>is an</cbc:Note>
+    <cbc:Note>Example</cbc:Note>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

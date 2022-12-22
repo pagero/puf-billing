@@ -1,0 +1,106 @@
+.Additional elements added within cac:TaxRepresentativeParty
+|===
+|Path |Description
+
+|`cac:Party/cac:PartyName/cbc:Name`
+|**Seller's tax representative name** +
+Seller's tax representative name.
+
+|`cac:Party/cac:PostalAddress/cbc:Postbox`
+|**Postal box** +
+Seller's tax representative's postal address post box.
+
+|`cac:Party/cac:PostalAddress/cbc:StreetName`
+|**Street name** +
+Seller's tax representative's postal address street name.
+
+|`cac:Party/cac:PostalAddress/cbc:AdditionalStreetName`
+|**Additional Street name** +
+Seller's tax representative's postal address additional street name.
+
+|`cac:Party/cac:PostalAddress/cbc:BuildingNumber`
+|**Building number** +
+Seller's tax representative's postal address building number.
+
+|`cac:Party/cac:PostalAddress/cbc:Department`
+|**Department** +
+Seller's tax representative's postal address department.
+
+|`cac:Party/cac:PostalAddress/cbc:PlotIdentification`
+|**Plot Identification** +
+Seller's tax representative's postal address plot identification. +
+Additional address number. An identifier for the piece of land associated with this address.
+
+|`cac:Party/cac:PostalAddress/cbc:CitySubdivisionName`
+|**City Subdvision Name** +
+Seller's tax representative's postal address city subdivision name. +
+The name of the subdivision of the seller's tax representative's city, town, or village in which its address is located, such as the name of its district or borough.
+
+|`cac:Party/cac:PostalAddress/cbc:CityName`
+|**City name** +
+Seller's tax representative's postal address city name.
+
+|`cac:Party/cac:PostalAddress/cbc:PostalZone`
+|**Postal zone** +
+Seller's tax representative's postal address post code.
+
+|`cac:Party/cac:PostalAddress/cbc:CountrySubentity`
+|**Country subentity** +
+Seller's tax representative's postal address province or state.
+
+|`cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line`
+|**Additional address line** +
+Note that `cbc:StreetName` and `cbc:AdditionalStreetName` should be populated prior of using this element.
+
+|`cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode`
+|**Country code** +
+Seller's tax representative's postal address country code.
+
+|`cac:Party/cac:PostalAddress/cac:Country/cbc:Name`
+|**Country name** +
+Seller's tax representative's postal address country name.
+
+|`cac:Party/cac:PartyTaxScheme/cbc:CompanyID`
+|**Company identifier** +
+Seller's tax representative's tax registration number.
+
+|`cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID`
+|**Tax scheme identifier** +
+Seller's tax representative's tax registration number tax scheme Identifier.
+
+|===
+
+*Example* +
+_cac:TaxRepresentativeParty example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:TaxRepresentativeParty>
+      <cac:PartyName>
+          <cbc:Name>Seller's Tax Representative Name</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+          <cbc:Postbox>54321</cbc:Postbox>
+          <cbc:StreetName>Street</cbc:StreetName>
+          <cbc:Department>Department</cbc:Department>
+          <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+          <cbc:CitySubdivisionName>City Subdivision Name</cbc:CitySubdivisionName>
+          <cbc:CityName>City</cbc:CityName>
+          <cbc:PostalZone>00000</cbc:PostalZone>
+          <cbc:CountrySubentity>Province</cbc:CountrySubentity>
+          <cac:Country>
+              <cbc:IdentificationCode>DE</cbc:IdentificationCode>
+              <cbc:Name>Germany</cbc:Name>
+          </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+          <cbc:CompanyID>DE221043210</cbc:CompanyID>
+          <cac:TaxScheme>
+              <cbc:ID>VAT</cbc:ID>
+          </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+  </cac:TaxRepresentativeParty>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

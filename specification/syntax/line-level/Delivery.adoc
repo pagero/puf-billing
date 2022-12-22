@@ -1,0 +1,98 @@
+.Elements added to cac:Delivery
+|===
+|Path |Description
+
+|`cbc:Quantity`
+|**Delivered quantity** +
+Delivered quantity.
+
+|`cbc:Quantity/@unitCode`
+|**Delivered quantity unit of measure** +
+Unit of the delivered quantity. +
+See code list <<_puf_014_uomcode>> for recommendations.
+
+|`cbc:ActualDeliveryDate`
+|**Delivery date** +
+Date of delivery.
+
+|`cac:DeliveryLocation/cbc:ID`
+|**Delivery location idetifier** +
+Identifier of the delivery location. +
+_E.g. a GLN number._
+
+|`cac:DeliveryLocation/cbc:ID/@schemeID`
+|**Delivery location scheme identifier** +
+Value must be according to code list <<_puf_008_identificationscheme>>.
+
+|`cac:DeliveryLocation/cac:Address/cbc:StreetName`
+|**Street name** +
+Street name of the delivery location.
+
+|`cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName`
+|**Additional street name** +
+Additional street name of the delivery location.
+
+|`cac:DeliveryLocation/cac:Address/cbc:PlotIdentification`
+|**Plot Identification** +
+Delivery postal address plot identification. +
+Additional address number. An identifier for the piece of land associated with this address.
+
+|`cac:DeliveryLocation/cac:Address/cbc:CitySubdivisionName`
+|**City Subdvision Name** +
+Delivery postal address city subdivision name. +
+The name of the subdivision of the delivery city, town, or village in which its address is located, such as the name of its district or borough.
+
+|`cac:DeliveryLocation/cac:Address/cbc:CityName`
+|**City name** +
+City of the delivery location.
+
+|`cac:DeliveryLocation/cac:Address/cbc:PostalZone`
+|**Post code** +
+Post code of the delivery location.
+
+|`cac:DeliveryLocation/cac:Address/cbc:CountrySubentity`
+|**Country sub entity** +
+Province or state of the delivery location.
+
+|`cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode`
+|**Country code** +
+Country code of the delivery location.
+
+|`cac:DeliveryLocation/cac:Address/cac:Country/cbc:Name`
+|**Country name** +
+The country name of the delivery location.
+
+|===
+
+*Example* +
+_cac:InvoiceLine/cac:Delivery example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+    <cac:Delivery>
+      <cbc:Quantity unitCode="PCE">1</cbc:Quantity>
+      <cbc:ActualDeliveryDate>2019-01-25</cbc:ActualDeliveryDate>
+      <cac:DeliveryLocation>
+          <cbc:ID schemeID="0088">0000000000000</cbc:ID>
+          <cac:Address>
+              <cbc:StreetName>Delivery Street</cbc:StreetName>
+              <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+              <cbc:CitySubdivisionName>Delivery City Subdivision Name</cbc:CitySubdivisionName>
+              <cbc:CityName>Delivery City</cbc:CityName>
+              <cbc:PostalZone>12345</cbc:PostalZone>
+              <cbc:CountrySubentity>Delivery Province</cbc:CountrySubentity>
+              <cac:Country>
+                  <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                  <cbc:Name>Sweden</cbc:Name>
+              </cac:Country>
+          </cac:Address>
+      </cac:DeliveryLocation>
+    </cac:Delivery>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

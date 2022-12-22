@@ -1,0 +1,346 @@
+This section contains information about special requirements concerning invoicing in Hungary and Real-Time Invoice Reporting (RTIR)
+
+==== Invoice appearance
+
+Each document must have a Invoice Apperance code, the value depends on how the documents is distributed between the issuer and receiver. 
+
+Note that invoices distributed via email shall be classified as `ELECTRONIC`.
+
+The table below lists valid codes.
+
+|===
+|Value |Description
+
+|`PAPER`
+|Invoice issued on paper.
+
+|`ELECTRONIC`
+|Electronic invoice (non-EDI).
+
+|`EDI`
+|EDI invoice.
+
+|`UNKNOWN`
+|The software cannot identify the form of appearance of the invoice or it is unknown at the time of issue.
+
+|===
+
+WARNING: The code should match the defined distribution method, if this is unknown at the time of issuance, `UNKNOWN` must be used.
+
+The value should be provided in element <<_restrictedinformation>> with key `invoiceAppearance`.
+
+*Example* +
+_Invoice Appearance ELECTRONIC example_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+        <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:RestrictedInformation>
+                  <puf:Key>invoiceAppearance</puf:Key>
+                  <puf:Value>ELECTRONIC</puf:Value>
+              </puf:RestrictedInformation>
+            </puf:PageroExtension>
+        </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Tax number
+
+The syntax of Hungarian tax IDs is 11 characters. 
+
+The first 8 digits is the tax payer ID. 
+
+The 9th digit is the VAT code. 
+
+The last two digits is the county code.
+
+The 9th digit means:
+
+- 1 - personal tax exemption, not VAT tax payer person +
+- 2 - general rules (scope in the Hunagrian VAT law) +
+- 3 - simplified entrepreneurial tax (it cannot be chosen anymore) +
+- 4 - group member tax ID +
+- 5 - group tax ID
+
+For the seller tax number the 9th digit should be a 2 (or 1, 3, 5).
+
+If the company have a group member tax ID the 9th digit must be a 5.
+
+Hungarian tax id should be sent in the element `cac:Party/cac:PartyLegalEntity/cbc:CompanyID`.
+
+The group member tax ID should be sent in `cbc:PartyIdentification` with a `@schemeID` attribute value defined in the list <<_identification_scheme_hungary>>.
+
+
+==== Customer VAT status
+
+It's mandatory to provide the customers VAT status, this determine allowed content and rules for the customer party.
+
+Allowed values can be found in below table.
+
+|===
+|Value |Description
+
+|`DOMESTIC`
+|Domestic VAT taxable person.
+
+|`OTHER`
+|Other (domestic non-VAT taxable person, non-natural person, foreign VAT taxable person and foreign non-VAT taxable person, non-natural person).
+
+|`PRIVATE_PERSON`
+|Non-VAT taxable natural person (domestic or foreign).
+
+|===
+
+The value should be provided in element <<_restrictedinformation>> with key `customerVatStatus`.
+
+*Example* +
+_Customer VAT Status populated in RestrictedInformation_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+        <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:RestrictedInformation>
+                  <puf:Key>customerVatStatus</puf:Key>
+                  <puf:Value>PRIVATE_PERSON</puf:Value>
+              </puf:RestrictedInformation>
+            </puf:PageroExtension>
+        </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Line expression indicator
+
+`lineExpressionIndicator` indicates whether the unit of the item can be expressed as a natural unit of measurement. The indicator must be provided on each line.
+
+If the value of the `lineExpressionIndicator` tag is `true`, the following values must be entered on the invoice line:
+
+- name of product or service 
+- quantity
+- quantity unit
+- unit price
+
+If the value of the `lineExpressionIndicator` tag is `false`, only the name of the product or service must be entered on the invoice line from above list.
+
+The value should be provided in element <<line-restrictedinformation>> with key `lineExpressionIndicator`.
+
+*Example* +
+_lineExpressionIndicator true_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:LineExtension>
+                        <puf:RestrictedInformation>
+                            <puf:Key>lineExpressionIndicator</puf:Key>
+                            <puf:Value>true</puf:Value>
+                        </puf:RestrictedInformation>
+                    </puf:LineExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+      <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
+      <cac:Item>
+        <cbc:Name>Article 1</cbc:Name>
+      </cac:Item>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="EUR">110.00</cbc:PriceAmount>
+      </cac:Price>
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Modification
+
+Hungary RTIR flow require a special handling regarding credit and modification of documents, below section will give brief information how this must be handled.
+
+===== Modify without master
+
+When creating a modification document e.g. a credit note, it's mandatory to indicate whether the original document has been reported or not.
+
+The value should be provided in element <<_restrictedinformation>> with key `modifyWithoutMaster`.
+
+*Example* +
+_CreditNote with modifyWithoutMaster_
+[source,xml]
+----
+<CreditNote>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+        <ext:ExtensionContent>
+            <puf:PageroExtension>
+                <puf:RestrictedInformation>
+                    <puf:Key>modificationIndex</puf:Key>
+                    <puf:Value>1</puf:Value>
+                </puf:RestrictedInformation>
+                <puf:RestrictedInformation>
+                    <puf:Key>modifyWithoutMaster</puf:Key>
+                    <puf:Value>false</puf:Value>
+                </puf:RestrictedInformation>
+            </puf:PageroExtension>
+        </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:ID>111234552</cbc:ID>
+  <cac:BillingReference>
+    <cac:InvoiceDocumentReference>
+        <cbc:ID>1234567</cbc:ID>
+    </cac:InvoiceDocumentReference>
+  </cac:BillingReference>
+  <!-- Code omitted for clarity -->
+</CreditNote>
+----
+
+===== Modification index
+
+In Hungary it’s possible to reference the original invoice multiple times. +
+It’s therefore mandatory to specify on each modification/credit document the index of the document starting with value 1. +
+If additional documents will be sent referencing the same original invoice this index is increased by 1.
+
+The value should be provided in element <<_restrictedinformation>> with key `modificationIndex`.
+
+*Example* +
+_CreditNote with modificationIndex_
+[source,xml]
+----
+<CreditNote>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+        <ext:ExtensionContent>
+            <puf:PageroExtension>
+                <puf:RestrictedInformation>
+                    <puf:Key>modificationIndex</puf:Key>
+                    <puf:Value>1</puf:Value>
+                </puf:RestrictedInformation>
+                <puf:RestrictedInformation>
+                    <puf:Key>modifyWithoutMaster</puf:Key>
+                    <puf:Value>false</puf:Value>
+                </puf:RestrictedInformation>
+            </puf:PageroExtension>
+        </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:ID>111234552</cbc:ID>
+  <cac:BillingReference>
+    <cac:InvoiceDocumentReference>
+        <cbc:ID>1234567</cbc:ID>
+    </cac:InvoiceDocumentReference>
+  </cac:BillingReference>
+  <!-- Code omitted for clarity -->
+</CreditNote>
+----
+
+===== lineOperation and modificationReferenceLineNumber
+
+Each line in a modification invoice or credit note must contain a `lineModificationReferenceLineOperation` and `lineModificationReferenceLineNumberReference`, below is a short explanation how to use the two different operations available `MODIFY` and `CREATE`.
+
+**Modify:** Used to modify text and data on an invoice, when using operation `MODIFY` it's not possible to change amounts on an invoice. If the value of the operation is `MODIFY`, the `lineModificationReferenceLineNumberReference` element will contain the line item number of the item in the original invoice, or the line item number of the new item created in a previous modifying document, which is the subject of the modification. +
+
+**Credit:** In Hungary RTIR flow credit note is structured a bit different than a regular credit note. In the file to the tax authority the operation `CREATE` must be sent on each line, which indicate that you Create a new line ontop of the referenced original invoice. In order to create a credit note, the operation `CREATE` must be sent on each line and then the subtract the original invoice line amount using minus sign and the original invoices line data. The `lineModificationReferenceLineNumberReference` element will be the continuation of the original numbering created from the original invoice and all previous documents thereof.
+
+WARNING: It's not possible to mix operation `CREATE` and `MODIFY` in the same document.
+
+Both the `lineModificationReferenceLineOperation` and `lineModificationReferenceLineNumberReference` should be provided on each line in element <<line-restrictedinformation>>.
+
+Valid values for `lineModificationReferenceLineOperation` is `CREATE` and `MODIFY` with the key `lineModificationReferenceLineOperation`.
+
+*Example* +
+_Original Invoice_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+          <ext:ExtensionContent>
+              <puf:PageroExtension>
+                  <puf:RestrictedInformation>
+                      <puf:Key>lineExpressionIndicator</puf:Key>
+                      <puf:Value>true</puf:Value>
+                  </puf:RestrictedInformation>
+              </puf:PageroExtension>
+          </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+      <cbc:ID>1</cbc:ID>
+      <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+      <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount> <!--2-->
+      <cac:Item>
+        <cbc:Name>Article 1</cbc:Name>
+      </cac:Item>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
+      </cac:Price>
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example* +
+_Credit Note with modification of Invoice_
+[source,xml]
+----
+<CreditNote>
+  <!-- Code omitted for clarity -->
+  <cac:CreditNoteLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+          <ext:ExtensionContent>
+              <puf:PageroExtension>
+                  <puf:RestrictedInformation>
+                      <puf:Key>lineModificationReferenceLineOperation</puf:Key>
+                      <puf:Value>CREATE</puf:Value>
+                  </puf:RestrictedInformation>
+                  <puf:RestrictedInformation>
+                      <puf:Key>lineModificationReferenceLineNumberReference</puf:Key>
+                      <puf:Value>2</puf:Value> <!--1-->
+                  </puf:RestrictedInformation>
+                  <puf:RestrictedInformation>
+                      <puf:Key>lineExpressionIndicator</puf:Key>
+                      <puf:Value>true</puf:Value>
+                  </puf:RestrictedInformation>
+              </puf:PageroExtension>
+          </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:ID>1</cbc:ID>
+    <cbc:CreditedQuantity unitCode="EA">-1</cbc:CreditedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">-100.00</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Name>Article 1</cbc:Name>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:CreditNoteLine>
+  <!-- Code omitted for clarity -->
+</CreditNote>
+----
+<1> `lineModificationReferenceLineNumberReference` is the continuation of the original numbering created from the original invoice, in this example the original invoice line number was 1, then the `lineModificationReferenceLineNumberReference` will be 2.

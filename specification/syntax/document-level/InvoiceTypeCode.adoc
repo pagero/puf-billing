@@ -1,0 +1,26 @@
+|===
+|Path |Description
+
+|`cbc:InvoiceTypeCode`
+|**Invoice type code** +
+Identifier of the invoice type. +
+__Example value to be set: '380' on Invoice__ +
+__Example value to be set: '381' on CreditNote__ +
+Note that corresponding element in UBL message/document type CreditNote is named `cbc:CreditNoteTypeCode`. +
+For valid values see code list <<_puf_003_invoicetypecode>>.
+
+|`cbc:InvoiceTypeCode/@name`
+|**Invoice type code name** +
+The textual equivalent of the `cbc:InvoiceTypeCode`. +
+
+|===
+*Example* +
+_cbc:InvoiceTypeCode populated with correct value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

@@ -1,0 +1,147 @@
+.Elements added in cac:Item
+|===
+|Path |Description
+
+|`ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:Item` element, the information available can be found <<_item, here>>.
+
+|`cbc:Description`
+|**Item description** +
+Description of the item.
+
+|`cbc:Name`
+|**Item name** +
+Name of the item.
+
+|`cac:BuyersItemIdentification/cbc:ID`
+|**Buyer's item identifier** +
+Identifier of the item, assigned by the buyer.
+
+|`cac:SellersItemIdentification/cbc:ID`
+|**Seller's item identifier** +
+Identifier of the item, assigned by the seller.
+
+|`cac:ManufacturersItemIdentification/cbc:ID`
+|**Manufacturer's item identifier** +
+Identifier of the item, assigned by the manufacturer.
+
+|`cac:StandardItemIdentification/cbc:ID`
+|**Standard item identifier** +
+Identifier of the item, based on an official register.
+
+|`cac:StandardItemIdentification/cbc:ID/@schemeID`
+|**Standard item identifier scheme identifier** +
+Identifier of the standard item register. +
+Value must be according to code list <<_puf_008_identificationscheme>>.
+
+|`cac:OriginCountry/cbc:IdentificationCode`
+|**Item country origin** +
+Country code from where the item origin.
+
+|`cac:CommodityClassification/cbc:ItemClassificationCode`
+|**Item classification code** +
+The items classification code.
+
+|`cac:CommodityClassification/cbc:ItemClassificationCode/@listID`
+|**Item classification list identifier** +
+Scheme identifier of the items classification code. +
+For valid values see code list <<_puf_015_itemtypeidentificationcode>>.
+
+|`cac:CommodityClassification/cbc:ItemClassificationCode/@listVersionID`
+|**Item classification list version identifier** +
+Scheme version identifier of the items classification code.
+
+|`cac:ClassifiedTaxCategory/cbc:ID`
+|**Tax category identifier** +
+Code for identifying the tax category. +
+_E.g. tax category "S"._ +
+For valid values see code list <<_puf_012_taxcategorycode>>.
+
+|`cac:ClassifiedTaxCategory/cbc:Percent`
+|**Tax category percent** +
+Percentage rate for the tax category.
+
+|`cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:ID`
+|**Tax scheme identfier** +
+Tax scheme for the tax category. +
+For valid values see code list <<_puf_009_taxtypescheme>>.
+
+|`cac:AdditionalItemProperty/cbc:Name`
+|**Additional item property name** +
+The name of the item property. +
+_E.g. Size._
+
+|`cac:AdditionalItemProperty/cbc:Value`
+|**Additional item information value** +
+The value of the item property. +
+_E.g. XXL._
+
+|`cac:ItemInstance/cbc:ManufactureDate`
+|**Manufactured date** +
+Date of when the item was manufactured. +
+_Format "YYYY-MM-DD"._
+
+|`cac:ItemInstance/cbc:BestBeforeDate`
+|**Best before date** +
+The items best before date. +
+_Format "YYYY-MM-DD"._
+
+|`cac:ItemInstance/cbc:SerialID`
+|**Serial number** +
+Serial number of the item.
+
+|`cac:ItemInstance/cac:LotIdentification/cbc:LotNumberID`
+|**Lot number identifier** +
+Lot number identifier of the item.
+
+|===
+
+*Example* +
+_cac:InvoiceLine/cac:Item example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cac:Item>
+      <cbc:Description>Item description</cbc:Description>
+      <cbc:Name>Item name</cbc:Name>
+      <cac:BuyersItemIdentification>
+          <cbc:ID>BuyersItemIdentification</cbc:ID>
+      </cac:BuyersItemIdentification>
+      <cac:SellersItemIdentification>
+          <cbc:ID>SellersItemIdentification</cbc:ID>
+      </cac:SellersItemIdentification>
+      <cac:ManufacturersItemIdentification>
+          <cbc:ID>ManufacturersItemIdentification</cbc:ID>
+      </cac:ManufacturersItemIdentification>
+      <cac:StandardItemIdentification>
+          <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+      </cac:StandardItemIdentification>
+      <cac:ClassifiedTaxCategory>
+          <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+          <cbc:Percent>25</cbc:Percent>
+          <cac:TaxScheme>
+              <cbc:ID>VAT</cbc:ID>
+          </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+      <cac:AdditionalItemProperty>
+        <cbc:Name>Size</cbc:Name>
+        <cbc:Value>XXL</cbc:Value>
+      </cac:AdditionalItemProperty>
+      <cac:ItemInstance>
+          <cbc:ManufactureDate>2018-01-01</cbc:ManufactureDate>
+          <cbc:BestBeforeDate>2018-01-01</cbc:BestBeforeDate>
+          <cbc:SerialID>123456789</cbc:SerialID>
+          <cac:LotIdentification>
+              <cbc:LotNumberID>1111111</cbc:LotNumberID>
+          </cac:LotIdentification>
+      </cac:ItemInstance>
+    </cac:Item>
+      <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

@@ -1,0 +1,166 @@
+The UBL extension to be used for below elements can be found <<_cactaxtotal, here>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/TaxSubtotalExtension`.
+
+See example below as well as the URI to be used for this extension.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:TaxTotal>
+      <cac:TaxSubtotal>
+          <ext:UBLExtensions>
+              <ext:UBLExtension>
+                  <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI> <!--1-->
+                  <ext:ExtensionContent>
+                      <puf:PageroExtension>
+                          <puf:TaxSubtotalExtension/> <!--2-->
+                      </puf:PageroExtension>
+                  </ext:ExtensionContent>
+              </ext:UBLExtension>
+          </ext:UBLExtensions>
+          <!-- Code omitted for clarity -->
+      </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table lists all additional elements added to the extension.
+
+.Elements added in puf:TaxSubtotalExtension
+|===
+|Element |Description
+
+|`puf:TaxCurrencyTaxableAmount`
+|**Tax currency taxable amount** +
+Taxable amount in tax currency per subtotal.
+
+|`puf:TaxCurrencyTaxableAmount/@currencyID`
+|**Tax currency taxable amount currency** +
+Currency of taxable amount in tax currency per subtotal.
+
+|`puf:TaxCurrencyTaxAmount`
+|**Tax currency tax amount** +
+Tax amount in tax currency per subtotal.
+
+|`puf:TaxCurrencyTaxAmount/@currencyID`
+|**Tax currency tax amount currency** +
+Currency of tax amount in tax currency per subtotal.
+
+|`puf:TaxInclusiveAmount`
+|**Total amount including tax** +
+Total amount including tax per subtotal.
+
+|`puf:TaxInclusiveAmount/@currencyID`
+|**Currency of TaxInclusiveAmount** +
+For valid values see code list <<_puf_004_currencycode>>.
+
+|`puf:TaxCurrencyTaxInclusiveAmount`
+|**Total amount including tax in tax currency** +
+Total amount including tax per subtotal in tax currency.
+
+|`puf:TaxCurrencyTaxInclusiveAmount/@currencyID`
+|**Currency of TaxCurrencyTaxInclusiveAmount** +
+For valid values see code list <<_puf_004_currencycode>>.
+
+|`puf:TaxChargeability/cbc:TaxTypeCode`
+|**Tax chargeability** +
+Tax chargeability per tax (see Italy section <<_tax_chargeability_esigibilita_iva, here>>).
+
+|===
+
+===== Tax currency amounts
+
+In Peppol BIS 3.0 billing it's only possible to provide the tax currency summary amount of all tax sub totals.
+
+In order to extend the support, it's possible to use the PUF `TaxSubtotalExtension` to provide the taxable and tax amount in tax currency per each sub total. 
+
+See example below.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <cbc:TaxCurrencyCode>USD</cbc:TaxCurrencyCode>
+  <!-- Code omitted for clarity -->
+  <cac:TaxExchangeRate>
+    <cbc:SourceCurrencyCode>EUR</cbc:SourceCurrencyCode>
+    <cbc:TargetCurrencyCode>USD</cbc:TargetCurrencyCode>
+    <cbc:CalculationRate>1.17</cbc:CalculationRate>
+    <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
+    <cbc:Date>2019-01-01</cbc:Date>
+  </cac:TaxExchangeRate>
+  <!-- Code omitted for clarity -->
+  <cac:TaxTotal>
+      <cbc:TaxAmount currencyID="EUR">37.00</cbc:TaxAmount>
+      <cac:TaxSubtotal>
+          <ext:UBLExtensions>
+              <ext:UBLExtension>
+                  <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                  <ext:ExtensionContent>
+                      <puf:PageroExtension>
+                          <puf:TaxSubtotalExtension>
+                              <puf:TaxCurrencyTaxableAmount currencyID="USD">117.00</puf:TaxCurrencyTaxableAmount> <!--1-->
+                              <puf:TaxCurrencyTaxAmount currencyID="USD">29.25</puf:TaxCurrencyTaxAmount> <!--2-->
+                              <puf:TaxInclusiveAmount currencyID="EUR">125.00</puf:TaxInclusiveAmount>
+                              <puf:TaxCurrencyTaxInclusiveAmount currencyID="USD">146.25</puf:TaxCurrencyTaxInclusiveAmount>
+                          </puf:TaxSubtotalExtension>
+                      </puf:PageroExtension>
+                  </ext:ExtensionContent>
+              </ext:UBLExtension>
+          </ext:UBLExtensions>
+          <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+          <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+          <cac:TaxCategory>
+              <cbc:ID>S</cbc:ID>
+              <cbc:Percent>25</cbc:Percent>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:TaxCategory>
+      </cac:TaxSubtotal>
+      <cac:TaxSubtotal>
+          <ext:UBLExtensions>
+              <ext:UBLExtension>
+                  <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                  <ext:ExtensionContent>
+                      <puf:PageroExtension>
+                          <puf:TaxSubtotalExtension>
+                              <puf:TaxCurrencyTaxableAmount currencyID="USD">117.00</puf:TaxCurrencyTaxableAmount> <!--3-->
+                              <puf:TaxCurrencyTaxAmount currencyID="USD">14.04</puf:TaxCurrencyTaxAmount> <!--4-->
+                              <puf:TaxInclusiveAmount currencyID="EUR">112.00</puf:TaxInclusiveAmount>
+                              <puf:TaxCurrencyTaxInclusiveAmount currencyID="USD">131.04</puf:TaxCurrencyTaxInclusiveAmount>
+                          </puf:TaxSubtotalExtension>
+                      </puf:PageroExtension>
+                  </ext:ExtensionContent>
+              </ext:UBLExtension>
+          </ext:UBLExtensions>
+          <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+          <cbc:TaxAmount currencyID="EUR">12.00</cbc:TaxAmount>
+          <cac:TaxCategory>
+              <cbc:ID>S</cbc:ID>
+              <cbc:Percent>12</cbc:Percent>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:TaxCategory>
+      </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <cac:TaxTotal>
+      <cbc:TaxAmount currencyID="USD">43.29</cbc:TaxAmount> <!--5-->
+  </cac:TaxTotal>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Taxable amount in tax currency for 25 % rate
+<2> Tax amount in tax currency for 25 % rate
+<3> Taxable amount in tax currency for 12 % rate
+<4> Tax amount in tax currency for 12 % rate
+<5> Summary of all sub totals `TaxCurrencyTaxAmount`

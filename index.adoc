@@ -20,46 +20,46 @@ A specification based on https://docs.oasis-open.org/ubl/UBL-2.3.html[Universal 
 
 == Introduction
 
-include::guide/introduction.adoc[]
+include::specification/introduction.adoc[]
 
 == Guidelines
 
-include::guide/guidelines.adoc[]
+include::specification/guidelines.adoc[]
 
 == Syntax
 
-include::guide/syntax.adoc[]
+include::specification/syntax.adoc[]
 
 :sectnums:
 
 == Extensions
 
-include::guide/extensions.adoc[]
+include::specification/extensions.adoc[]
 
-== Country Specific
+== Country specifics
 
-include::guide/countryspecific.adoc[]
+include::specification/country-specifics.adoc[]
 
 == Code lists
 
-include::guide/codelists.adoc[]
+include::specification/code-lists.adoc[]
 
-== XML Schemas
+== XML schemas
 
-include::guide/xmlschemas.adoc[]
+include::specification/xml-schemas.adoc[]
 
 == Validation
 
-include::guide/validation.adoc[]
+include::specification/validation.adoc[]
 
 == Examples
 
-include::guide/examples.adoc[]
+include::specification/examples.adoc[]
 
-== Supported Countries
+== Supported countries
 
-include::guide/supportedcountries.adoc[]
+include::specification/supported-countries.adoc[]
 
 == Support
 
-include::guide/support.adoc[]
+include::specification/support.adoc[]

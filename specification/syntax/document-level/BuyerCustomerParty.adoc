@@ -1,0 +1,236 @@
+In PUF, a new party has been added called Buyer Customer Party. This party should contain information regarding the buyer of the goods or service and should only be used if the buyer party differs from accounting customer party.
+
+If `cac:BuyerCustomerParty` is used, the `cac:AccountingCustomerParty` is to be considered the receiver of the document.
+
+Below table show available fields in `cac:BuyerCustomerParty`, note that additional elements has also been added to the extension available in <<_party>>
+
+.Elements added in cac:BuyerCustomerParty
+|===
+|Path |Description
+
+|`cbc:SupplierAssignedAccountID`
+|**Customer Account ID** +
+Customer ID, assigned by the seller.
+
+|`cac:Party/ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:Party` element, the information available can be found <<_party, here>>.
+
+|`cac:Party/cbc:EndpointID`
+|**Electronic Identifier** +
+Buyer's electronic address.
+
+|`cac:Party/cbc:EndpointID/@schemeID`
+|**Electronic Identifier scheme ID** +
+Scheme identifier of electronic address. +
+Value must be according to code list <<_puf_007_endpointscheme>>.
+
+|`cac:Party/cac:PartyIdentification/cbc:ID`
+|**Buyer Identifier** +
+Identifier of the Buyer.
+
+|`cac:Party/cac:PartyIdentification/cbc:ID/@schemeID`
+|**Buyer Identifier** +
+Scheme identifier of Buyer identifier. +
+Value must be according to code list <<_puf_008_identificationscheme>>.
+
+|`cac:Party/cac:PartyName/cbc:Name`
+|**Buyer name** +
+Buyer name.
+
+|`cac:Party/cac:PostalAddress/cbc:Postbox`
+|**Postal box** +
+Buyer's postal address post box.
+
+|`cac:Party/cac:PostalAddress/cbc:StreetName`
+|**Street name** +
+Buyer's postal address street name.
+
+|`cac:Party/cac:PostalAddress/cbc:AdditionalStreetName`
+|**Additional Street name** +
+Buyer's postal address additional street name.
+
+|`cac:Party/cac:PostalAddress/cbc:BuildingNumber`
+|**Building number** +
+Buyer's postal address building number.
+
+|`cac:Party/cac:PostalAddress/cbc:Department`
+|**Department** +
+Buyer's postal address department.
+
+|`cac:Party/cac:PostalAddress/cbc:PlotIdentification`
+|**Plot Identification** +
+Buyer's postal address plot identification. +
+dditional address number. An identifier for the piece of land associated with this address.
+
+|`cac:Party/cac:PostalAddress/cbc:CitySubdivisionName`
+|**City Subdvision Name** +
+Buyer's postal address city subdivision name. +
+The name of the subdivision of the Buyer city, town, or village in which its address is located, such as the name of its district or borough.
+
+|`cac:Party/cac:PostalAddress/cbc:CityName`
+|**City name** +
+Buyer's postal address city name.
+
+|`cac:Party/cac:PostalAddress/cbc:PostalZone`
+|**Postal zone** +
+Buyer's postal address post code.
+
+|`cac:Party/cac:PostalAddress/cbc:CountrySubentity`
+|**Country subentity** +
+Buyer's postal address province or state.
+
+|`cac:Party/cac:PostalAddress/cbc:CountrySubentityCode`
+|**Country subentity code** +
+Buyer's postal address province or state code.
+
+|`cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line`
+|**Additional address line** +
+Note that `cbc:StreetName` and `cbc:AdditionalStreetName` should be populated prior of using this element.
+
+|`cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode`
+|**Country code** +
+Buyer's postal address country code.
+
+|`cac:Party/cac:PostalAddress/cac:Country/cbc:Name`
+|**Country name** +
+Buyer's postal address country name.
+
+|`cac:Party/cac:PartyTaxScheme/cbc:CompanyID`
+|**Company identifier** +
+Buyer's tax registration number.
+
+|`cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID`
+|**Tax scheme identifier** +
+Buyer's tax registration number tax scheme Identifier.
+
+|`cac:Party/cac:PartyLegalEntity/cbc:RegistrationName`
+|**Registration name** +
+Buyer's formal name or company name.
+
+|`cac:Party/cac:PartyLegalEntity/cbc:CompanyID`
+|**Legal company identifier** +
+Buyer's legal registration identifier.
+
+|`cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID`
+|**Legal company scheme identifier** +
+Buyer's legal registration identifier scheme identifier. +
+Value must be according to code list <<_puf_008_identificationscheme>>.
+
+|`cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalForm`
+|**Company legal form** +
+Relevant legal information regarding the Buyer.
+
+|`cac:Party/cac:Contact/cbc:Name`
+|**Contact name** +
+Name of contact person.
+
+|`cac:Party/cac:Contact/cbc:Telephone`
+|**Contact telephone** +
+Phone number of contact person.
+
+|`cac:Party/cac:Contact/cbc:ElectronicMail`
+|**Contact E-mail** +
+E-mail of contact person.
+
+|`cac:AccountingContact/cbc:Telephone`
+|**Accounting telephone** +
+The telephone number for the accounting contact of the organization.
+
+|`cac:AccountingContact/cbc:Telefax`
+|**Accounting fax number** +
+The telefax number for the accounting contact of the organization.
+
+|`cac:AccountingContact/cbc:ElectronicMail`
+|**Accounting E-mail** +
+The e-mail address for the accounting contact of the organization.
+
+|===
+
+*Example* +
+_Party structure with both invoice recipient party and buyer party_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty> <!--1-->
+      <cac:Party>
+          <cbc:EndpointID schemeID="0088">1234567890123</cbc:EndpointID>
+          <cac:PartyIdentification>
+              <cbc:ID schemeID="0007">1234561234</cbc:ID>
+          </cac:PartyIdentification>
+          <cac:PartyName>
+              <cbc:Name>Receiver Trading Name AB</cbc:Name>
+          </cac:PartyName>
+          <cac:PostalAddress>
+              <cbc:StreetName>Street 32</cbc:StreetName>
+              <cbc:AdditionalStreetName>Po box 878</cbc:AdditionalStreetName>
+              <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+              <cbc:CitySubdivisionName>City Subdivision Name</cbc:CitySubdivisionName>
+              <cbc:CityName>Stockholm</cbc:CityName>
+              <cbc:PostalZone>123 12</cbc:PostalZone>
+              <cac:Country>
+                  <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+              </cac:Country>
+          </cac:PostalAddress>
+          <cac:PartyTaxScheme>
+              <cbc:CompanyID>SE123456789001</cbc:CompanyID>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:PartyTaxScheme>
+          <cac:PartyLegalEntity>
+              <cbc:RegistrationName>Receiver legal Name</cbc:RegistrationName>
+              <cbc:CompanyID schemeID="0007">1234561234</cbc:CompanyID>
+          </cac:PartyLegalEntity>
+          <cac:Contact>
+              <cbc:Name>Anders Andersson</cbc:Name>
+              <cbc:Telephone>555444666</cbc:Telephone>
+              <cbc:ElectronicMail>contact@receiver.com</cbc:ElectronicMail>
+          </cac:Contact>
+      </cac:Party>
+  </cac:AccountingCustomerParty>
+  <cac:BuyerCustomerParty> <!--2-->
+      <cac:Party>
+          <cbc:EndpointID schemeID="0088">7322010000001</cbc:EndpointID>
+          <cac:PartyIdentification>
+              <cbc:ID schemeID="0007">1111112222</cbc:ID>
+          </cac:PartyIdentification>
+          <cac:PartyName>
+              <cbc:Name>Buyer Trading Name AB</cbc:Name>
+          </cac:PartyName>
+          <cac:PostalAddress>
+              <cbc:StreetName>Street 32</cbc:StreetName>
+              <cbc:AdditionalStreetName>Po box 878</cbc:AdditionalStreetName>
+              <cbc:PlotIdentification>0000<cbc:PlotIdentification>
+              <cbc:CitySubdivisionName>City Subdivision Name</cbc:CitySubdivisionName>
+              <cbc:CityName>Stockholm</cbc:CityName>
+              <cbc:PostalZone>123 12</cbc:PostalZone>
+              <cac:Country>
+                  <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+              </cac:Country>
+          </cac:PostalAddress>
+          <cac:PartyTaxScheme>
+              <cbc:CompanyID>SE111111222201</cbc:CompanyID>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:PartyTaxScheme>
+          <cac:PartyLegalEntity>
+              <cbc:RegistrationName>Buyer legal Name</cbc:RegistrationName>
+              <cbc:CompanyID schemeID="0007">1111112222</cbc:CompanyID>
+          </cac:PartyLegalEntity>
+          <cac:Contact>
+              <cbc:Name>Daniel Danielsson</cbc:Name>
+              <cbc:Telephone>33322221111</cbc:Telephone>
+              <cbc:ElectronicMail>contact@buyer.com</cbc:ElectronicMail>
+          </cac:Contact>
+      </cac:Party>
+  </cac:BuyerCustomerParty>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Information in `cac:AccountingCustomerParty` will be used to identify the _receiver_ of the document.
+<2> Information in `cac:BuyerCustomerParty` will be sent to the receiver as _buyer_ information.
+
+WARNING: Please note that NOT all e-invoice formats support both invoice recipient and buyer party information, therefore only use both structures when needed.

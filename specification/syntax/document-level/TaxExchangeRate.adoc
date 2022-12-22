@@ -1,0 +1,48 @@
+.Elements added in cac:TaxExchangeRate
+|===
+|Path |Description
+
+|`cbc:SourceCurrencyCode`
+|**Source currency code** +
+Source currency code (i.e. document currency). +
+For valid values see code list <<_puf_004_currencycode>>.
+
+|`cbc:TargetCurrencyCode`
+|**Target currency code** +
+Target currency code (i. e. tax currency). +
+For valid values see code list <<_puf_004_currencycode>>.
+
+|`cbc:CalculationRate`
+|**Exchange calculation rate** +
+Exchange rate used for converting source currency to target currency.
+
+|`cbc:MathematicOperatorCode`
+|**Operation used to calculate the tax in target currency** +
+Method used for calculation the convertion, value must equal "Multiply".
+
+|`cbc:Date`
+|**Exchange rate date** +
+Date when the exchange rate was fetched. +
+_Format YYYY-MM-DD._
+
+|===
+
+*Example* +
+_cac:TaxExchangeRate with EUR as document currency and USD as tax currency_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <cbc:TaxCurrencyCode>USD</cbc:TaxCurrencyCode>
+  <!-- Code omitted for clarity -->
+  <cac:TaxExchangeRate>
+    <cbc:SourceCurrencyCode>EUR</cbc:SourceCurrencyCode>
+    <cbc:TargetCurrencyCode>USD</cbc:TargetCurrencyCode>
+    <cbc:CalculationRate>1.16</cbc:CalculationRate>
+    <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
+    <cbc:Date>2019-01-01</cbc:Date>
+  </cac:TaxExchangeRate>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

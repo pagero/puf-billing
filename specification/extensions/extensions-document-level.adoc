@@ -1,0 +1,49 @@
+Below chapters describe the different extensions added on document level.
+
+==== RestrictedInformation
+
+include::document-level/RestrictedInformation.adoc[]
+
+==== SupplyType
+
+include::document-level/SupplyType.adoc[]
+
+==== DutyStamp
+
+include::document-level/DutyStamp.adoc[]
+
+==== IGSTOnIntra
+
+include::document-level/IgstOnIntra.adoc[]
+
+==== OrderReference
+
+include::document-level/OrderReferenceExtension.adoc[]
+
+==== BillingReference
+
+include::document-level/BillingReferenceExtension.adoc[]
+
+==== ContractDocumentReference
+
+include::document-level/ContractDocumentReferenceExtension.adoc[]
+
+==== Party
+
+include::document-level/PartyExtension.adoc[]
+
+==== Delivery
+
+include::document-level/DeliveryExtension.adoc[]
+
+==== PaymentTerms
+
+include::document-level/PaymentTermsExtension.adoc[]
+
+==== TaxSubTotal
+
+include::document-level/TaxSubTotalExtension.adoc[]
+
+==== LegalMonetaryTotal
+
+include::document-level/LegalMonetaryTotalExtension.adoc[]

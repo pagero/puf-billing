@@ -1,0 +1,69 @@
+The UBL extension to be used for below elements can be found <<_cacitem, here>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/ItemExtension`. 
+
+See example below as well as the URI to be used for this extension.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+      <!-- Code omitted for clarity -->
+      <cac:Price>
+          <ext:UBLExtensions>
+              <ext:UBLExtension>
+                  <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ItemExtension</ext:ExtensionURI> <!--1-->
+                  <ext:ExtensionContent>
+                      <puf:PageroExtension>
+                          <puf:ItemExtension/> <!--2-->
+                      </puf:PageroExtension>
+                  </ext:ExtensionContent>
+              </ext:UBLExtension>
+          </ext:UBLExtensions>
+          <!-- Code omitted for clarity -->
+      </cac:Price>
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table show the definition of the new element added to the extension.
+
+.Elements added to puf:ItemExtension
+|===
+|Element |Description
+
+|`puf:ItemType`
+|**Item type** +
+Type of item, valid values are `GOODS` or `SERVICE`.
+|===
+
+*Example* +
+_Line with goods item_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+      <cac:Item>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ItemExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:ItemExtension>
+                            <puf:ItemType>GOODS</puf:ItemType>
+                        </puf:ItemExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+      </cac:Item>
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

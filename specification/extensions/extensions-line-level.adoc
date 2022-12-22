@@ -1,0 +1,49 @@
+Below chapters describe the different extensions added on line level.
+
+[#line-restrictedinformation]
+
+==== RestrictedInformation
+
+include::line-level/LineExtensionRestrictedInformation.adoc[]
+
+==== TaxCurrencyLineExtensionAmount
+
+include::line-level/LineExtensionTaxCurrencyLineExtensionAmount.adoc[]
+
+==== TaxInclusiveLineExtensionAmount
+
+include::line-level/LineExtensionTaxInclusiveLineExtensionAmount.adoc[]
+
+==== TaxCurrencyTaxInclusiveLineExtensionAmount
+
+include::line-level/LineExtensionTaxCurrencyTaxInclusiveLineExtensionAmount.adoc[]
+
+==== LineExclAllowanceChargeAmount
+
+include::line-level/LineExtensionExclAllowanceChargeAmount.adoc[]
+
+==== OriginatorDocumentReference
+
+include::line-level/LineExtensionOriginatorDocumentReference.adoc[]
+
+==== ProjectReference
+
+include::line-level/LineExtensionProjectReference.adoc[]
+
+==== OrderLineReference
+
+include::line-level/LineExtensionOrderLineReference.adoc[]
+
+[#line-contract]
+
+==== ContractDocumentReference
+
+include::line-level/LineExtensionContractDocumentReference.adoc[]
+
+==== Item
+
+include::line-level/LineExtensionItemExtension.adoc[]
+
+==== Price
+
+include::line-level/LineExtensionPriceExtension.adoc[]

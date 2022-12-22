@@ -1,0 +1,22 @@
+|===
+|Path |Description
+
+|`cbc:AccountingCost`
+|**Invoice line accounting reference** +
+Line book keeping reference for buyers financial system.
+|===
+
+*Example* +
+_cac:InvoiceLine/cbc:AccountingCost with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cbc:AccountingCost>Accounting cost reference</cbc:AccountingCost>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

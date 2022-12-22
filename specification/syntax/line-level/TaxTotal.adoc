@@ -1,0 +1,145 @@
+If multiple taxes is provided on one line, note that `cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal` must be provided for each tax.
+
+.Elements added in cac:InvoiceLine/cac:TaxTotal
+|===
+|Path |Description
+
+|`cbc:TaxAmount`
+|**Line total tax amount** +
+The total tax amount, the sum of the tax subtotals.. +
+_Summary of all TaxSubTotal/TaxAmount._
+
+|`cbc:TaxAmount/@currencyID`
+|**Line total tax amount currency** +
+Line total tax amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
+For valid values see code list <<_puf_004_currencycode>>.
+
+|`cac:TaxSubtotal/cbc:TaxableAmount`
+|**Total taxable amount for each tax category** +
+Line total taxable amount for each tax category or tax rate. +
+_E.g. Summary of all taxable amounts for invoice lines with a certain tax percent._
+
+|`cac:TaxSubtotal/cbc:TaxableAmount/@currencyID`
+|*Total taxable amount for each tax category currency** +
+Total taxable amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
+For valid values see code list <<_puf_004_currencycode>>.
+
+|`cac:TaxSubtotal/cbc:TaxAmount`
+|**Total tax amount for each tax category** +
+Total tax amount for a certain tax category or tax rate.
+
+|`cac:TaxSubtotal/cbc:TaxAmount/@currencyID`
+|**Total tax amount currency for each tax category** +
+Total tax amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
+For valid values see code list <<_puf_004_currencycode>>.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:ID`
+|**Line tax category code** +
+Code for identifying the tax category. +
+_E.g. tax category "S"_ +
+For valid values see code list <<_puf_012_taxcategorycode>>.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:Percent`
+|**Tax category percent** +
+Percentage rate for the tax category.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode`
+|**Tax exemption reason code** +
+Exemption reason code for the tax category, only applicable if the goods or service is exempt from tax. +
+See code list <<_puf_013_exemptcode>> for recommendations.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason`
+|**Tax exemption reason** +
+Exemption reason for the tax category, only applicable if the goods or service is exempt from tax.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID`
+|**Tax scheme identfier** +
+Tax scheme for the tax category. +
+For valid values see code list <<_puf_009_taxtypescheme>>.
+
+|===
+
+*Example* +
+_cac:InvoiceLine/cac:TaxTotal example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cac:TaxTotal>
+      <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+      <cac:TaxSubtotal>
+          <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+          <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+          <cac:TaxCategory>
+              <cbc:ID>S</cbc:ID>
+              <cbc:Percent>25</cbc:Percent>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:TaxCategory>
+      </cac:TaxSubtotal>
+      <cac:TaxSubtotal>
+          <cbc:TaxableAmount currencyID="EUR">-5.00</cbc:TaxableAmount>
+          <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+          <cac:TaxCategory>
+              <cbc:ID>Z</cbc:ID>
+              <cbc:Percent>0</cbc:Percent>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:TaxCategory>
+      </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+===== Total tax currency amount
+
+If the need to provide the total tax amount on each line, this should be sent as a separate `cac:TaxTotal/cbc:TaxAmount`, see example below.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <cbc:TaxCurrencyCode>USD</cbc:TaxCurrencyCode>
+  <!-- Code omitted for clarity -->
+  <cac:TaxExchangeRate>
+    <cbc:SourceCurrencyCode>EUR</cbc:SourceCurrencyCode>
+    <cbc:TargetCurrencyCode>USD</cbc:TargetCurrencyCode>
+    <cbc:CalculationRate>1.17</cbc:CalculationRate>
+    <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
+    <cbc:Date>2019-01-01</cbc:Date>
+  </cac:TaxExchangeRate>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount> <!--1-->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="USD">29.25</cbc:TaxAmount> <!--2-->
+    </cac:TaxTotal>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+</Invoice>
+----
+<1> Total tax amount in document currency
+<2> Total tax amount in tax currency

@@ -1,0 +1,65 @@
+:sectnums!:
+
+Examples shown below are based on Invoice, for the use of credit note the corresponding element replacing `Invoice/cac:InvoiceLine` is `CreditNote/cac:CreditNoteLine`.
+
+[#line-extension]
+
+==== ext:UBLExtensions
+
+include::line-level/UBLExtensions.adoc[]
+
+==== cbc:ID
+
+include::line-level/ID.adoc[]
+
+==== cbc:Note
+
+include::line-level/Note.adoc[]
+
+==== cbc:InvoicedQuantity
+
+include::line-level/InvoicedQuantity.adoc[]
+
+==== cbc:LineExtensionAmount
+
+include::line-level/LineExtensionAmount.adoc[]
+
+==== cbc:AccountingCost
+
+include::line-level/AccountingCost.adoc[]
+
+==== cac:InvoicePeriod
+
+include::line-level/InvoicePeriod.adoc[]
+
+==== cac:OrderLineReference
+
+include::line-level/OrderLineReference.adoc[]
+
+==== cac:DespatchLineReference
+
+include::line-level/DespatchLineReference.adoc[]
+
+==== cac:DocumentReference
+
+include::line-level/DocumentReference.adoc[]
+
+==== cac:Delivery
+
+include::line-level/Delivery.adoc[]
+
+==== cac:AllowanceCharge
+
+include::line-level/AllowanceCharge.adoc[]
+
+==== cac:TaxTotal
+
+include::line-level/TaxTotal.adoc[]
+
+==== cac:Item
+
+include::line-level/Item.adoc[]
+
+==== cac:Price
+
+include::line-level/Price.adoc[]

@@ -1,0 +1,120 @@
+This section contains information about special requirements concerning invoicing in the Basque Country.
+
+==== Party identification
+
+In the Basque Country there is a possible requirement to provide additional party identifiers that are not available in the ISO 6523 ICD list.
+
+These additional identifiers for use in the Basque Country can be found <<_identification_scheme_basque_country, here>>.
+
+*Example* +
+_Example with additional id provided in Basque Country in Party structure_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+    <cac:Party>
+        <!-- Code omitted for clarity -->
+        <cac:PartyIdentification>
+            <cbc:ID schemeID="TB:PASSPORT">0123456789</cbc:ID><!--1-->
+        </cac:PartyIdentification>
+        <!-- Code omitted for clarity -->
+    </cac:Party>
+</cac:AccountingCustomerParty>
+
+</Invoice>
+----
+<1> The passport id provided as `cac:PartyIdentification/cbc:ID`.
+
+==== Tax category codes
+
+Tax category codes for the Basque Country can be found <<_tax_category_codes_basque_country, here>>.
+
+
+==== Tax regime
+
+When reporting an invoice to the Basque tax authorities, it is required to specify the tax regime codes the invoice falls under. Up to three of these codes can be used in the same invoice.
+
+|===
+|Value |Description
+
+|`01`
+|Transaction in general regime.
+
+|`02`
+|Exports.
+
+|`03`
+|Transactions covered by the special tax regime for used goods, art objects, antiques and collectors' items.
+
+|`04`
+|Special tax regime for investment gold.
+
+|`05`
+|Special regime for travel agencies.
+
+|`06`
+|Special regime for consolidated groups in VAT (Advanced Level).
+
+|`07`
+|Special cash-basis regime.
+
+|`08`
+|Transactions subject to IPSI / IGIC (Tax on Production, Services and Imports / General Indirect Tax of the Canary Islands).
+
+|`09`
+|Sales from provision of services by travel agencies acting as mediators on behalf of third parties. (Additional Provision 3 of the Invoicing Regulations)
+
+|`10`
+|Amounts collected on behalf of third parties of professional fees or rights derived from industrial property, copyright or others on behalf of members or associates made by societies, associations, professional institutes or other entities performing these payment collection functions.
+
+|`11`
+|Transactions involving rental of business premises subject to withholding.
+
+|`12`
+|Transactions involving rental of business premises not subject to withholding.
+
+|`13`
+|Transactions involving rental of business premises subject or not to withholding.
+
+|`14`
+|Invoice with VAT pending accrual in site certifications whose recipient is a public administration (government authority).
+
+|`15`
+|Invoice with VAT pending accrual in chain of title transactions.
+
+|`51`
+|Transactions in special additional VAT regime.
+
+|`52`
+|Transactions in simplified regime.
+
+|`53`
+|Transactions carried out by persons or entities that are not considered businessmen, businesswomen or professionals to VAT effects.
+|===
+
+The value should be provided in element <<_restrictedinformation>> with key `SignificantTaxRegime`.
+
+*Example* +
+_Tax Regime example_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+        <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:RestrictedInformation>
+                  <puf:Key>SignificantTaxRegime</puf:Key>
+                  <puf:Value>01</puf:Value>
+              </puf:RestrictedInformation>
+            </puf:PageroExtension>
+        </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+

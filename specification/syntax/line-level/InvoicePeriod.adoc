@@ -1,0 +1,33 @@
+.Elements available in cac:InvoicePeriod
+|===
+|Path |Description
+
+|`cbc:StartDate`
+|**Invoice line period start date** +
+Start date of the line invoice period. +
+_Format "YYYY-MM-DD"._
+
+|`cbc:EndDate`
+|**Invoice line period end date** +
+End date of the line invoice period. +
+_Format "YYYY-MM-DD"._
+
+|===
+
+*Example* +
+_cac:InvoiceLine/cac:InvoicePeriod with example value_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+    <cac:InvoicePeriod>
+      <cbc:StartDate>2021-01-01</cbc:StartDate>
+      <cbc:EndDate>2021-01-31</cbc:EndDate>
+    </cac:InvoicePeriod>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

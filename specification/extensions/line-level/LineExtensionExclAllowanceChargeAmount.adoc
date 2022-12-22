@@ -1,0 +1,80 @@
+In addition to the LineExtensionAmount a new element has been added to specify the line amount excluding any allowances and charges on the line.
+
+The UBL extension to be used for LineExclAllowanceChargeAmount on line level is <<line-extension>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/LineExtension`.
+
+See example below as well as the URI to be used for this extension.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+      <ext:UBLExtensions>
+          <ext:UBLExtension>
+              <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI> <!--1-->
+              <ext:ExtensionContent>
+                  <puf:PageroExtension>
+                      <puf:LineExtension/> <!--2-->
+                  </puf:PageroExtension>
+              </ext:ExtensionContent>
+          </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table shows the definition of the new elements added to the extension.
+
+.Elements added to puf:LineExtension
+|===
+|Element |Description
+
+|`puf:LineExclAllowanceChargeAmount`
+|**Line total amount excluding tax, allowance and charges ** +
+Sum of the line amounts, the amount is excluded VAT, Tax, allowances and charges.
+
+|`puf:LineExclAllowanceChargeAmount/@currencyID`
+|**Line total amount excluding tax, allowance and charges currency code** +
+Currency of the Line Excl Allowance Charge Amount. +
+For valid values see code list <<_puf_004_currencycode>>.
+
+|===
+
+*Example* +
+_Line with 100 EUR discount_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+      <ext:UBLExtensions>
+          <ext:UBLExtension>
+              <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+              <ext:ExtensionContent>
+                  <puf:PageroExtension>
+                      <puf:LineExtension>
+                          <puf:LineExclAllowanceChargeAmount currencyID="EUR">1000</puf:LineExclAllowanceChargeAmount> <!--1-->
+                      </puf:LineExtension>
+                  </puf:PageroExtension>
+              </ext:ExtensionContent>
+          </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:LineExtensionAmount currencyID="EUR">900</cbc:LineExtensionAmount> <!--2-->
+      <cac:AllowanceCharge>
+          <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+          <cbc:Amount currencyID="EUR">100</cbc:Amount>
+      </cac:AllowanceCharge>
+      <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> The amount excluded the discount
+<2> The amount included the discount

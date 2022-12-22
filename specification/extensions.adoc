@@ -1,0 +1,7 @@
+=== Document level
+
+include::extensions/extensions-document-level.adoc[]
+
+=== Line level
+
+include::extensions/extensions-line-level.adoc[]
