@@ -1,4 +1,4 @@
-:doctitle: image:images/puf-logo.png[float="center", width=100%] Pagero Universal Format Billing 2.0
+:doctitle: image:images/puf-logo.png[float="center", width=100%] PUF Billing 2.0
 :author: Copyright &copy; 2022, Pagero Group
 :email: https://pagero.com
 :copyright: Pagero Group

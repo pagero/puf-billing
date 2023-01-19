@@ -3,7 +3,7 @@
 
 |`cbc:CustomizationID`
 |**Document specification identifier** +
-__Must be value 'urn:pagero.com:puf:billing:2.0'__
+_Must be value 'urn:pagero.com:puf:billing:2.0'._
 |===
 
 *Example* +

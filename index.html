@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.9">
 <meta name="copyright" content="Pagero Group">
-<title>Pagero Universal Format Billing 2.0</title>
+<title>PUF Billing 2.0</title>
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
@@ -429,7 +429,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1><span class="image center"><img src="images/puf-logo.png" alt="puf logo" width="100%"></span> Pagero Universal Format Billing 2.0</h1>
+<h1><span class="image center"><img src="images/puf-logo.png" alt="puf logo" width="100%"></span> PUF Billing 2.0</h1>
 <div class="details">
 <span id="author" class="author">Copyright &copy; 2022, Pagero Group</span><br>
 <span id="email" class="email"><a href="https://pagero.com" class="bare">https://pagero.com</a></span><br>
@@ -528,17 +528,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_document_level">4.1. Document level</a>
 <ul class="sectlevel3">
 <li><a href="#_restrictedinformation">4.1.1. RestrictedInformation</a></li>
-<li><a href="#_supplytype">4.1.2. SupplyType</a></li>
-<li><a href="#_dutystamp">4.1.3. DutyStamp</a></li>
-<li><a href="#_igstonintra">4.1.4. IGSTOnIntra</a></li>
-<li><a href="#_orderreference">4.1.5. OrderReference</a></li>
-<li><a href="#_billingreference">4.1.6. BillingReference</a></li>
-<li><a href="#_contractdocumentreference">4.1.7. ContractDocumentReference</a></li>
-<li><a href="#_party">4.1.8. Party</a></li>
-<li><a href="#_delivery">4.1.9. Delivery</a></li>
-<li><a href="#_paymentterms">4.1.10. PaymentTerms</a></li>
-<li><a href="#_taxsubtotal">4.1.11. TaxSubTotal</a></li>
-<li><a href="#_legalmonetarytotal">4.1.12. LegalMonetaryTotal</a></li>
+<li><a href="#_invoiceseries">4.1.2. InvoiceSeries</a></li>
+<li><a href="#_supplytype">4.1.3. SupplyType</a></li>
+<li><a href="#_dutystamp">4.1.4. DutyStamp</a></li>
+<li><a href="#_igstonintra">4.1.5. IGSTOnIntra</a></li>
+<li><a href="#_orderreference">4.1.6. OrderReference</a></li>
+<li><a href="#_billingreference">4.1.7. BillingReference</a></li>
+<li><a href="#_contractdocumentreference">4.1.8. ContractDocumentReference</a></li>
+<li><a href="#_party">4.1.9. Party</a></li>
+<li><a href="#_delivery">4.1.10. Delivery</a></li>
+<li><a href="#_paymentterms">4.1.11. PaymentTerms</a></li>
+<li><a href="#_taxsubtotal">4.1.12. TaxSubTotal</a></li>
+<li><a href="#_legalmonetarytotal">4.1.13. LegalMonetaryTotal</a></li>
 </ul>
 </li>
 <li><a href="#_line_level">4.2. Line level</a>
@@ -626,9 +627,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_basque_country">5.10. Basque Country</a>
 <ul class="sectlevel3">
-<li><a href="#_party_identification_4">5.10.1. Party identification</a></li>
-<li><a href="#_tax_category_codes_4">5.10.2. Tax category codes</a></li>
-<li><a href="#_tax_regime">5.10.3. Tax regime</a></li>
+<li><a href="#_invoice_description">5.10.1. Invoice Description</a></li>
+<li><a href="#_invoice_series">5.10.2. Invoice Series</a></li>
+<li><a href="#_partyidentification">5.10.3. PartyIdentification</a></li>
+<li><a href="#_tax_category_codes_4">5.10.4. Tax Category codes</a></li>
+<li><a href="#_tax_regime">5.10.5. Tax Regime</a></li>
+<li><a href="#_transaction_type">5.10.6. Transaction Type</a></li>
+<li><a href="#_correction_reason_code">5.10.7. Correction Reason code</a></li>
 </ul>
 </li>
 </ul>
@@ -1112,7 +1117,7 @@ Added elements in regards to <code>ext:UBLExtensions</code> for <code>Invoice</c
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:CustomizationID</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Document specification identifier</strong><br>
-<em>Must be value 'urn:pagero.com:puf:billing:2.0'</em></p></td>
+<em>Must be value 'urn:pagero.com:puf:billing:2.0'.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -1218,7 +1223,7 @@ A unique identifier of the invoice.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:IssueDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Issue date of invoice</strong><br>
-<em>Format "YYYY-MM-DD"</em></p></td>
+<em>Format "YYYY-MM-DD".</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -1253,7 +1258,7 @@ A unique identifier of the invoice.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:IssueTime</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>The time, assigned by the sender, at which this document was issued.</strong><br>
-<em>Format "HH:mm:ss", "HH:mm:ssZZZZ", "HH:mm:ss.SSS&#8217;Z'", or "HH:mm:ss.SSS"</em></p></td>
+<em>Format "HH:mm:ss", "HH:mm:ssZZZZ", "HH:mm:ss.SSS&#8217;Z'", or "HH:mm:ss.SSS".</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -1288,7 +1293,7 @@ A unique identifier of the invoice.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:DueDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Due date of invoice</strong><br>
-<em>Format "YYYY-MM-DD"</em></p></td>
+<em>Format "YYYY-MM-DD".</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -1585,12 +1590,12 @@ Reference assigned by the buyer for internal routing.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:StartDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Invoicing period start date</strong><br>
-<em>Format "YYYY-MM-DD"</em></p></td>
+<em>Format "YYYY-MM-DD".</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:EndDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Invoicing period end date</strong><br>
-<em>Format "YYYY-MM-DD"</em></p></td>
+<em>Format "YYYY-MM-DD".</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:Description</code></p></td>
@@ -1708,7 +1713,7 @@ Identifier of a previous issued invoice.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:IssueDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Issue date</strong><br>
 Issue date of previous issued invoice.<br>
-<em>Format "YYYY-MM-DD"</em></p></td>
+<em>Format "YYYY-MM-DD".</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -1891,7 +1896,7 @@ Contract reference identifier.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:IssueDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Issue date</strong><br>
 Issue date of the contract.<br>
-<em>Format "YYYY-MM-DD"</em></p></td>
+<em>Format "YYYY-MM-DD".</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -5357,7 +5362,97 @@ Value relevant to the assigned key.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_supplytype"><a class="anchor" href="#_supplytype"></a><a class="link" href="#_supplytype">4.1.2. SupplyType</a></h4>
+<h4 id="_invoiceseries"><a class="anchor" href="#_invoiceseries"></a><a class="link" href="#_invoiceseries">4.1.2. InvoiceSeries</a></h4>
+<div class="paragraph">
+<p>The UBL extension to be used for below elements can be found <a href="#_extublextensions">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/InvoiceSeries</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Example below how the URI is used for this extension.</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:BillingReference&gt;</span>
+    <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
+      <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries<span class="tag">&lt;/ext:ExtensionURI&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                            <span class="tag">&lt;puf:InvoiceSeries</span><span class="tag">/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
+  <span class="tag">&lt;/cac:BillingReference&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>URI to be used if this extension is added.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Structure to be used if information from this extension will be used.</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 34. Elements added in puf:BillingReferenceExtension</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identifier used for the series the document is part of.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Invoice Series example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+          <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                        <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                        <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                        <span class="tag">&lt;puf:InvoiceSeries&gt;</span>
+                                                <span class="tag">&lt;cbc:ID&gt;</span>InvSeries<span class="tag">&lt;/cbc:Note&gt;</span>
+                                        <span class="tag">&lt;/puf:InvoiceSeries&gt;</span>
+                                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                        <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_supplytype"><a class="anchor" href="#_supplytype"></a><a class="link" href="#_supplytype">4.1.3. SupplyType</a></h4>
 <div class="paragraph">
 <p>In order to specify a supply type for the invoice, following elements has been added in the below extension.</p>
 </div>
@@ -5406,7 +5501,7 @@ Value relevant to the assigned key.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 34. Elements added to puf:PageroExtension/puf:SupplyType</caption>
+<caption class="title">Table 35. Elements added to puf:PageroExtension/puf:SupplyType</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5450,7 +5545,7 @@ Code describing the type of supply.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_dutystamp"><a class="anchor" href="#_dutystamp"></a><a class="link" href="#_dutystamp">4.1.3. DutyStamp</a></h4>
+<h4 id="_dutystamp"><a class="anchor" href="#_dutystamp"></a><a class="link" href="#_dutystamp">4.1.4. DutyStamp</a></h4>
 <div class="paragraph">
 <p>In order to specify a duty stamp for the invoice, following elements has been added in the below extension.</p>
 </div>
@@ -5499,7 +5594,7 @@ Code describing the type of supply.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 35. Elements added to puf:PageroExtension/puf:DutyStamp</caption>
+<caption class="title">Table 36. Elements added to puf:PageroExtension/puf:DutyStamp</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5549,7 +5644,7 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 </div>
 </div>
 <div class="sect3">
-<h4 id="_igstonintra"><a class="anchor" href="#_igstonintra"></a><a class="link" href="#_igstonintra">4.1.4. IGSTOnIntra</a></h4>
+<h4 id="_igstonintra"><a class="anchor" href="#_igstonintra"></a><a class="link" href="#_igstonintra">4.1.5. IGSTOnIntra</a></h4>
 <div class="paragraph">
 <p>In order to specify if IGST (Integrated Goods and Services Tax) is applicable on intra state supplies the following elements has been added in the below extension.</p>
 </div>
@@ -5598,7 +5693,7 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 36. Elements added to puf:PageroExtension</caption>
+<caption class="title">Table 37. Elements added to puf:PageroExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5641,7 +5736,7 @@ To indicate if supply is chargeable to IGST despite the fact that the Supplier a
 </div>
 </div>
 <div class="sect3">
-<h4 id="_orderreference"><a class="anchor" href="#_orderreference"></a><a class="link" href="#_orderreference">4.1.5. OrderReference</a></h4>
+<h4 id="_orderreference"><a class="anchor" href="#_orderreference"></a><a class="link" href="#_orderreference">4.1.6. OrderReference</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacorderreference">here</a>.</p>
 </div>
@@ -5691,7 +5786,7 @@ To indicate if supply is chargeable to IGST despite the fact that the Supplier a
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 37. Elements added in puf:OrderReferenceExtension</caption>
+<caption class="title">Table 38. Elements added in puf:OrderReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5741,7 +5836,7 @@ Date of the sales order, date should be formatted yyyy-mm-dd.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_billingreference"><a class="anchor" href="#_billingreference"></a><a class="link" href="#_billingreference">4.1.6. BillingReference</a></h4>
+<h4 id="_billingreference"><a class="anchor" href="#_billingreference"></a><a class="link" href="#_billingreference">4.1.7. BillingReference</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacbillingreference">here</a>.</p>
 </div>
@@ -5787,7 +5882,7 @@ Date of the sales order, date should be formatted yyyy-mm-dd.</p></td>
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 38. Elements added in puf:BillingReferenceExtension</caption>
+<caption class="title">Table 39. Elements added in puf:BillingReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5800,15 +5895,22 @@ Date of the sales order, date should be formatted yyyy-mm-dd.</p></td>
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:InvoiceSeries/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identifier used for the series the referenced document is part of.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:Note</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Bill reference note</strong><br>
-Textual note describing the reason for issuing a credit/debit note.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Textual note describing the reason for issuing a credit/debit note.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:Code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code signifying the reason for credit.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
 <p><strong>Example</strong><br>
-<em>Contract document reference ID, date and extension</em></p>
+<em>Invoice document reference ID, date and extension</em></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5822,7 +5924,13 @@ Textual note describing the reason for issuing a credit/debit note.</p></td>
                             <span class="tag">&lt;ext:ExtensionContent&gt;</span>
                                     <span class="tag">&lt;puf:PageroExtension&gt;</span>
                                             <span class="tag">&lt;puf:BillingReferenceExtension&gt;</span>
+                                                        <span class="comment">&lt;!-- Referenced invoice's serie, if applicable --&gt;</span>
+                                                    <span class="tag">&lt;puf:InvoiceSeries&gt;</span>
+                                                            <span class="tag">&lt;cbc:ID&gt;</span>InvSeries1<span class="tag">&lt;/cbc:ID&gt;</span>
+                                                    <span class="tag">&lt;/puf:InvoiceSeries&gt;</span>
                                                     <span class="tag">&lt;cbc:Note&gt;</span>Textual note describing the reason for issuing a credit/debit note<span class="tag">&lt;/cbc:Note&gt;</span>
+                                                        <span class="comment">&lt;!-- Reason for credit in code form, if applicable --&gt;</span>
+                                                    <span class="tag">&lt;puf:Code&gt;</span>codeValue<span class="tag">&lt;/puf:Code&gt;</span>
                                             <span class="tag">&lt;/puf:BillingReferenceExtension&gt;</span>
                                     <span class="tag">&lt;/puf:PageroExtension&gt;</span>
                             <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
@@ -5838,7 +5946,7 @@ Textual note describing the reason for issuing a credit/debit note.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_contractdocumentreference"><a class="anchor" href="#_contractdocumentreference"></a><a class="link" href="#_contractdocumentreference">4.1.7. ContractDocumentReference</a></h4>
+<h4 id="_contractdocumentreference"><a class="anchor" href="#_contractdocumentreference"></a><a class="link" href="#_contractdocumentreference">4.1.8. ContractDocumentReference</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_caccontractdocumentreference">here</a>.</p>
 </div>
@@ -5882,7 +5990,7 @@ Textual note describing the reason for issuing a credit/debit note.</p></td>
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 39. Elements added in puf:ContractDocumentReferenceExtension</caption>
+<caption class="title">Table 40. Elements added in puf:ContractDocumentReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5937,7 +6045,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party"><a class="anchor" href="#_party"></a><a class="link" href="#_party">4.1.8. Party</a></h4>
+<h4 id="_party"><a class="anchor" href="#_party"></a><a class="link" href="#_party">4.1.9. Party</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found in the below parties:</p>
 </div>
@@ -6003,7 +6111,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 40. Elements added in puf:PartyExtension</caption>
+<caption class="title">Table 41. Elements added in puf:PartyExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6143,7 +6251,7 @@ The <code>puf:IDType</code> must be coded using the <a href="#_puf_002_adaid">PU
 </div>
 </div>
 <div class="sect3">
-<h4 id="_delivery"><a class="anchor" href="#_delivery"></a><a class="link" href="#_delivery">4.1.9. Delivery</a></h4>
+<h4 id="_delivery"><a class="anchor" href="#_delivery"></a><a class="link" href="#_delivery">4.1.10. Delivery</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacdelivery">here</a>.</p>
 </div>
@@ -6193,7 +6301,7 @@ The <code>puf:IDType</code> must be coded using the <a href="#_puf_002_adaid">PU
 <p>Below table show the definition of the additional elements added to the delivery extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 41. Elements added in puf:DeliveryExtension</caption>
+<caption class="title">Table 42. Elements added in puf:DeliveryExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6249,7 +6357,7 @@ A code for the delivery method.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_paymentterms"><a class="anchor" href="#_paymentterms"></a><a class="link" href="#_paymentterms">4.1.10. PaymentTerms</a></h4>
+<h4 id="_paymentterms"><a class="anchor" href="#_paymentterms"></a><a class="link" href="#_paymentterms">4.1.11. PaymentTerms</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacpaymentterms">here</a>.</p>
 </div>
@@ -6299,7 +6407,7 @@ A code for the delivery method.</p></td>
 <p>Below table shows the definition of the extended element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 42. Elements added in puf:PaymentTermsExtension</caption>
+<caption class="title">Table 43. Elements added in puf:PaymentTermsExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6349,7 +6457,7 @@ Penalty text due to late payment, if the need of explicitly stating a penalty te
 </div>
 </div>
 <div class="sect3">
-<h4 id="_taxsubtotal"><a class="anchor" href="#_taxsubtotal"></a><a class="link" href="#_taxsubtotal">4.1.11. TaxSubTotal</a></h4>
+<h4 id="_taxsubtotal"><a class="anchor" href="#_taxsubtotal"></a><a class="link" href="#_taxsubtotal">4.1.12. TaxSubTotal</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cactaxtotal">here</a>.</p>
 </div>
@@ -6401,7 +6509,7 @@ Penalty text due to late payment, if the need of explicitly stating a penalty te
 <p>Below table lists all additional elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 43. Elements added in puf:TaxSubtotalExtension</caption>
+<caption class="title">Table 44. Elements added in puf:TaxSubtotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6578,7 +6686,7 @@ Tax chargeability per tax (see Italy section <a href="#_tax_chargeability_esigib
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legalmonetarytotal"><a class="anchor" href="#_legalmonetarytotal"></a><a class="link" href="#_legalmonetarytotal">4.1.12. LegalMonetaryTotal</a></h4>
+<h4 id="_legalmonetarytotal"><a class="anchor" href="#_legalmonetarytotal"></a><a class="link" href="#_legalmonetarytotal">4.1.13. LegalMonetaryTotal</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_caclegalmonetarytotal">here</a>.</p>
 </div>
@@ -6628,7 +6736,7 @@ Tax chargeability per tax (see Italy section <a href="#_tax_chargeability_esigib
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 44. Elements added in puf:LegalMonetaryTotalExtension</caption>
+<caption class="title">Table 45. Elements added in puf:LegalMonetaryTotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6915,7 +7023,7 @@ If country specific information is available as restricted information value, th
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 45. Elements added in puf:RestrictedInformation</caption>
+<caption class="title">Table 46. Elements added in puf:RestrictedInformation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7024,7 +7132,7 @@ Value relevant to the assigned key.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 46. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 47. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7144,7 +7252,7 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 47. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 48. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7267,7 +7375,7 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 48. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 49. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7387,7 +7495,7 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 49. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 50. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7513,7 +7621,7 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 50. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
+<caption class="title">Table 51. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7624,7 +7732,7 @@ Date of issue of the referenced tender, date should be formatted yyyy-mm-dd.</p>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 51. Elements added to puf:LineExtension/puf:ProjectReference</caption>
+<caption class="title">Table 52. Elements added to puf:LineExtension/puf:ProjectReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7735,7 +7843,7 @@ Identification of the project reference.</p></td>
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 52. Elements added in puf:OrderLineReference</caption>
+<caption class="title">Table 53. Elements added in puf:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7849,7 +7957,7 @@ Date of the sales order, date should be formatted yyyy-mm-dd.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 53. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
+<caption class="title">Table 54. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7970,7 +8078,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 54. Elements added to puf:ItemExtension</caption>
+<caption class="title">Table 55. Elements added to puf:ItemExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8075,7 +8183,7 @@ Type of item, valid values are <code>GOODS</code> or <code>SERVICE</code>.</p></
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 55. Elements added to puf:PriceExtension</caption>
+<caption class="title">Table 56. Elements added to puf:PriceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9491,9 +9599,64 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 <p>This section contains information about special requirements concerning invoicing in the Basque Country.</p>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_4"><a class="anchor" href="#_party_identification_4"></a><a class="link" href="#_party_identification_4">5.10.1. Party identification</a></h4>
+<h4 id="_invoice_description"><a class="anchor" href="#_invoice_description"></a><a class="link" href="#_invoice_description">5.10.1. Invoice Description</a></h4>
 <div class="paragraph">
-<p>In the Basque Country there is a possible requirement to provide additional party identifiers that are not available in the ISO 6523 ICD list.</p>
+<p>When reporting an invoice to the Basque tax authorities, it is a requirement to provide an invoice description. This is a description of why the invoice exists and what its purpose is.</p>
+</div>
+<div class="paragraph">
+<p>This description is mandatory, and can be sent in the regular Note field. Do note that this information is also shown to any recipients of the invoice.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Invoice Description example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cbc:Note&gt;</span>Reason for document.<span class="tag">&lt;/cbc:Note&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_invoice_series"><a class="anchor" href="#_invoice_series"></a><a class="link" href="#_invoice_series">5.10.2. Invoice Series</a></h4>
+<div class="paragraph">
+<p>If the invoice follows an invoice series, this should be reported to the Basque tax authorities.</p>
+</div>
+<div class="paragraph">
+<p>Do note that when issuing a credit note it is mandatory to have a series. Furthermore, when issuing a credit note and referencing an earlier invoice&#8217;s series the structure shown in <a href="#_billingreference">here</a> should be used.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Invoice Series example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="comment">&lt;!-- Invoice Series if applicable --&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+      <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+          <span class="tag">&lt;puf:PageroExtension&gt;</span>
+              <span class="tag">&lt;puf:InvoiceSeries&gt;</span>
+                  <span class="tag">&lt;cbc:ID&gt;</span>InvSeries1<span class="tag">&lt;/cbc:ID&gt;</span>
+              <span class="tag">&lt;/puf:InvoiceSeries&gt;</span>
+          <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+      <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_partyidentification"><a class="anchor" href="#_partyidentification"></a><a class="link" href="#_partyidentification">5.10.3. PartyIdentification</a></h4>
+<div class="paragraph">
+<p>In the Basque Country there is a potential need to provide additional party identifiers that are not available in the ISO 6523 ICD list.</p>
 </div>
 <div class="paragraph">
 <p>These additional identifiers for use in the Basque Country can be found <a href="#_identification_scheme_basque_country">here</a>.</p>
@@ -9530,13 +9693,13 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_4"><a class="anchor" href="#_tax_category_codes_4"></a><a class="link" href="#_tax_category_codes_4">5.10.2. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_4"><a class="anchor" href="#_tax_category_codes_4"></a><a class="link" href="#_tax_category_codes_4">5.10.4. Tax Category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for the Basque Country can be found <a href="#_tax_category_codes_basque_country">here</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_regime"><a class="anchor" href="#_tax_regime"></a><a class="link" href="#_tax_regime">5.10.3. Tax regime</a></h4>
+<h4 id="_tax_regime"><a class="anchor" href="#_tax_regime"></a><a class="link" href="#_tax_regime">5.10.5. Tax Regime</a></h4>
 <div class="paragraph">
 <p>When reporting an invoice to the Basque tax authorities, it is required to specify the tax regime codes the invoice falls under. Up to three of these codes can be used in the same invoice.</p>
 </div>
@@ -9627,7 +9790,7 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 </tbody>
 </table>
 <div class="paragraph">
-<p>The value should be provided in element <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>SignificantTaxRegime</code>.</p>
+<p>The value should be provided in element <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>SignificantTaxRegime</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
@@ -9654,6 +9817,141 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_transaction_type"><a class="anchor" href="#_transaction_type"></a><a class="link" href="#_transaction_type">5.10.6. Transaction Type</a></h4>
+<div class="paragraph">
+<p>When reporting a cross-border invoice (i.e. not within Spain) to the Basque tax authorities, it is required to specify the transaction type the invoice falls under. This will be either Goods or Service. It is currently only supported to send one type per invoice. If you invoice for both goods and services, it is necessary to split these into two or more invoices.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GOODS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The invoice is for the sale of goods.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SERVICE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The invoice is for the sale of services.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The value should be provided in element <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>TransactionType</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Transaction Type example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+        <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+              <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                  <span class="tag">&lt;puf:Key&gt;</span>TransactionType<span class="tag">&lt;/puf:Key&gt;</span>
+                  <span class="tag">&lt;puf:Value&gt;</span>SERVICE<span class="tag">&lt;/puf:Value&gt;</span>
+              <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+            <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+        <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_correction_reason_code"><a class="anchor" href="#_correction_reason_code"></a><a class="link" href="#_correction_reason_code">5.10.7. Correction Reason code</a></h4>
+<div class="paragraph">
+<p>When reporting a correction (Credit Note) to the Basque tax authorities, it is required to specify why the correction is being made. Below is a list of allowed values.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>R1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Error based on law and Art. 80 One, Two and Six of the VAT Regulation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>R2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Article 80 Three of the VAT Regulation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>R3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Article 80 Four of the VAT Regulation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>R4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Others</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>R5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Corrective invoice for simplified invoice.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The value should be provided in the element <code>puf:Code</code> within the <a href="#_billingreference">BillingReference</a> structure.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Credit reason code example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;CreditNote&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                            <span class="tag">&lt;puf:BillingReferenceExtension&gt;</span>
+                                                          <span class="comment">&lt;!-- Referenced invoice's serie, if applicable --&gt;</span>
+                                                    <span class="tag">&lt;puf:InvoiceSeries&gt;</span>
+                                                            <span class="tag">&lt;cbc:ID&gt;</span>InvSeries1<span class="tag">&lt;/cbc:ID&gt;</span>
+                                                    <span class="tag">&lt;/puf:InvoiceSeries&gt;</span>
+                                                    <span class="tag">&lt;cbc:Note&gt;</span>Textual note describing the reason for issuing a credit/debit note<span class="tag">&lt;/cbc:Note&gt;</span>
+                                                          <span class="comment">&lt;!-- Reason for credit in code form, if applicable --&gt;</span>
+                                                    <span class="tag">&lt;puf:Code&gt;</span>R1<span class="tag">&lt;/puf:Code&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+                                            <span class="tag">&lt;/puf:BillingReferenceExtension&gt;</span>
+                                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/CreditNote&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The reason code provided.</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -9675,7 +9973,7 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 <div class="sect2">
 <h3 id="_code_lists_for_coded_elements"><a class="anchor" href="#_code_lists_for_coded_elements"></a><a class="link" href="#_code_lists_for_coded_elements">6.1. Code lists for coded elements</a></h3>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 56. Table of the code lists used</caption>
+<caption class="title">Table 57. Table of the code lists used</caption>
 <colgroup>
 <col>
 <col>
@@ -10745,7 +11043,7 @@ LN : Not in liquidation</p></td>
 <p>The validation artefacts are also available on <a href="https://github.com/pagero/puf">GitHub</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 57. Schematron rules in PUF</caption>
+<caption class="title">Table 58. Schematron rules in PUF</caption>
 <colgroup>
 <col>
 <col>
@@ -10918,7 +11216,7 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 </table>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 58. Table of supported countries</caption>
+<caption class="title">Table 59. Table of supported countries</caption>
 <colgroup>
 <col>
 <col>
@@ -10929,7 +11227,7 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 <tr>
 <th class="tableblock halign-left valign-top">Country</th>
 <th class="tableblock halign-left valign-top">Supported by PUF</th>
-<th class="tableblock halign-left valign-top">Require ext:UBLExtensions</th>
+<th class="tableblock halign-left valign-top">Require ext:UBLExtensions?</th>
 <th class="tableblock halign-left valign-top">Comment</th>
 </tr>
 </thead>
@@ -11022,7 +11320,7 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 <td class="tableblock halign-left valign-top"><p class="tableblock">Netherlands</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>No</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Only Invoice and Credit note support</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only invoice and credit note support.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">New Zealand</p></td>
@@ -11052,7 +11350,7 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 <td class="tableblock halign-left valign-top"><p class="tableblock">Serbia</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>No</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Only standard Invoice, Credit note and Debit note support</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only standard invoice, credit note and debit note support.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Singapore</p></td>
@@ -11065,6 +11363,12 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spain (Basque Country)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Support for TicketBAI system in the Basque region. Only support for invoice and corrections.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sweden</p></td>

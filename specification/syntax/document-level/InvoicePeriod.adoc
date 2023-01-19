@@ -4,11 +4,11 @@
 
 |`cbc:StartDate`
 |**Invoicing period start date** +
-__Format "YYYY-MM-DD"__
+_Format "YYYY-MM-DD"._
 
 |`cbc:EndDate`
 |**Invoicing period end date** +
-__Format "YYYY-MM-DD"__
+_Format "YYYY-MM-DD"._
 
 |`cbc:Description`
 |**Invoicing period description** + 

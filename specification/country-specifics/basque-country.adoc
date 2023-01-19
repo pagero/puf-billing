@@ -1,8 +1,53 @@
 This section contains information about special requirements concerning invoicing in the Basque Country.
 
-==== Party identification
+==== Invoice Description
 
-In the Basque Country there is a possible requirement to provide additional party identifiers that are not available in the ISO 6523 ICD list.
+When reporting an invoice to the Basque tax authorities, it is a requirement to provide an invoice description. This is a description of why the invoice exists and what its purpose is. 
+
+This description is mandatory, and can be sent in the regular Note field. Do note that this information is also shown to any recipients of the invoice. 
+
+*Example* +
+_Invoice Description example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:Note>Reason for document.</cbc:Note>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Invoice Series
+
+If the invoice follows an invoice series, this should be reported to the Basque tax authorities.
+
+Do note that when issuing a credit note it is mandatory to have a series. Furthermore, when issuing a credit note and referencing an earlier invoice's series the structure shown in <<_billingreference, here>> should be used.
+
+*Example* +
+_Invoice Series example_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <!-- Invoice Series if applicable -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI>
+      <ext:ExtensionContent>
+          <puf:PageroExtension>
+              <puf:InvoiceSeries>
+                  <cbc:ID>InvSeries1</cbc:ID>
+              </puf:InvoiceSeries>  
+          </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== PartyIdentification
+
+In the Basque Country there is a potential need to provide additional party identifiers that are not available in the ISO 6523 ICD list.
 
 These additional identifiers for use in the Basque Country can be found <<_identification_scheme_basque_country, here>>.
 
@@ -27,12 +72,12 @@ _Example with additional id provided in Basque Country in Party structure_
 ----
 <1> The passport id provided as `cac:PartyIdentification/cbc:ID`.
 
-==== Tax category codes
+==== Tax Category codes
 
 Tax category codes for the Basque Country can be found <<_tax_category_codes_basque_country, here>>.
 
 
-==== Tax regime
+==== Tax Regime
 
 When reporting an invoice to the Basque tax authorities, it is required to specify the tax regime codes the invoice falls under. Up to three of these codes can be used in the same invoice.
 
@@ -94,7 +139,7 @@ When reporting an invoice to the Basque tax authorities, it is required to speci
 |Transactions carried out by persons or entities that are not considered businessmen, businesswomen or professionals to VAT effects.
 |===
 
-The value should be provided in element <<_restrictedinformation>> with key `SignificantTaxRegime`.
+The value should be provided in element <<_restrictedinformation>> with key `SignificantTaxRegime`
 
 *Example* +
 _Tax Regime example_
@@ -118,3 +163,93 @@ _Tax Regime example_
 </Invoice>
 ----
 
+==== Transaction Type
+
+When reporting a cross-border invoice (i.e. not within Spain) to the Basque tax authorities, it is required to specify the transaction type the invoice falls under. This will be either Goods or Service. It is currently only supported to send one type per invoice. If you invoice for both goods and services, it is necessary to split these into two or more invoices. 
+
+|===
+|Value |Description
+
+|`GOODS`
+|The invoice is for the sale of goods.
+
+|`SERVICE`
+|The invoice is for the sale of services.
+|===
+
+The value should be provided in element <<_restrictedinformation>> with key `TransactionType`
+
+*Example* +
+_Transaction Type example_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+        <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:RestrictedInformation>
+                  <puf:Key>TransactionType</puf:Key>
+                  <puf:Value>SERVICE</puf:Value>
+              </puf:RestrictedInformation>
+            </puf:PageroExtension>
+        </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Correction Reason code
+
+When reporting a correction (Credit Note) to the Basque tax authorities, it is required to specify why the correction is being made. Below is a list of allowed values. 
+
+|===
+|Value |Description
+
+|`R1`
+|Error based on law and Art. 80 One, Two and Six of the VAT Regulation.
+
+|`R2`
+|Article 80 Three of the VAT Regulation.
+
+|`R3`
+|Article 80 Four of the VAT Regulation.
+
+|`R4`
+|Others
+
+|`R5`
+|Corrective invoice for simplified invoice.
+|===
+
+The value should be provided in the element `puf:Code` within the <<_billingreference>> structure. 
+
+*Example* +
+_Credit reason code example_
+[source,xml]
+----
+<CreditNote>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+    			<ext:ExtensionContent>
+    				<puf:PageroExtension>
+    					<puf:BillingReferenceExtension>
+							  <!-- Referenced invoice's serie, if applicable -->
+    						<puf:InvoiceSeries>
+    							<cbc:ID>InvSeries1</cbc:ID>
+    						</puf:InvoiceSeries>
+    						<cbc:Note>Textual note describing the reason for issuing a credit/debit note</cbc:Note>
+							  <!-- Reason for credit in code form, if applicable -->
+    						<puf:Code>R1</puf:Code><!--1-->
+    					</puf:BillingReferenceExtension>
+    				</puf:PageroExtension>
+    			</ext:ExtensionContent>
+    		</ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</CreditNote>
+----
+<1> The reason code provided.

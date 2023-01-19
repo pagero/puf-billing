@@ -15,7 +15,7 @@ Identifier of a previous issued invoice.
 |`cbc:IssueDate`
 |**Issue date** +
 Issue date of previous issued invoice. +
-__Format "YYYY-MM-DD"__
+_Format "YYYY-MM-DD"._
 
 |===
 

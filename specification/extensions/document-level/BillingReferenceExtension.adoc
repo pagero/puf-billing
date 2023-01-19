@@ -32,14 +32,18 @@ _Example below how the URI is used for this extension._
 |===
 |Element |Description
 
-|`cbc:Note`
-|**Bill reference note** +
-Textual note describing the reason for issuing a credit/debit note.
+|`puf:InvoiceSeries/cbc:ID`
+|Identifier used for the series the referenced document is part of. 
 
+|`cbc:Note`
+|Textual note describing the reason for issuing a credit/debit note.
+
+|`puf:Code`
+|Code signifying the reason for credit.
 |===
 
 *Example* +
-_Contract document reference ID, date and extension_
+_Invoice document reference ID, date and extension_
 [source,xml]
 ----
 <Invoice>
@@ -52,7 +56,13 @@ _Contract document reference ID, date and extension_
     			<ext:ExtensionContent>
     				<puf:PageroExtension>
     					<puf:BillingReferenceExtension>
+							<!-- Referenced invoice's serie, if applicable -->
+    						<puf:InvoiceSeries>
+    							<cbc:ID>InvSeries1</cbc:ID>
+    						</puf:InvoiceSeries>
     						<cbc:Note>Textual note describing the reason for issuing a credit/debit note</cbc:Note>
+							<!-- Reason for credit in code form, if applicable -->
+    						<puf:Code>codeValue</puf:Code>
     					</puf:BillingReferenceExtension>
     				</puf:PageroExtension>
     			</ext:ExtensionContent>

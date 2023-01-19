@@ -18,7 +18,7 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 .Table of supported countries
 [%autowidth.stretch]
 |===
-|Country |Supported by PUF |Require ext:UBLExtensions |Comment
+|Country |Supported by PUF |Require ext:UBLExtensions? |Comment
 
 |Australia
 |*Yes*
@@ -93,7 +93,7 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |Netherlands
 |*Yes*
 |*No*
-|Only Invoice and Credit note support
+|Only invoice and credit note support.
 
 |New Zealand
 |*Yes*
@@ -118,7 +118,7 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |Serbia
 |*Yes*
 |*No*
-|Only standard Invoice, Credit note and Debit note support 
+|Only standard invoice, credit note and debit note support.
 
 |Singapore
 |*Yes*
@@ -129,6 +129,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*Yes*
 |*Yes*
 |
+
+|Spain (Basque Country)
+|*Yes*
+|*Yes*
+|Support for TicketBAI system in the Basque region. Only support for invoice and corrections.
 
 |Sweden
 |*Yes*

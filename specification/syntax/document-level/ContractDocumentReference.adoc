@@ -15,7 +15,7 @@ Contract reference identifier.
 |`cbc:IssueDate`
 |**Issue date** +
 Issue date of the contract. +
-__Format "YYYY-MM-DD"__
+_Format "YYYY-MM-DD"._
 
 |===
 
