@@ -72,5 +72,5 @@ _Line with both net amount in document currency and tax currency_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> The net amount in tax currency
-<2> The net amount in document currency
+<1> The net amount in tax currency.
+<2> The net amount in document currency.

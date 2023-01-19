@@ -76,5 +76,5 @@ _Line with 100 EUR discount_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> The amount excluded the discount
-<2> The amount included the discount
+<1> The amount excluded the discount.
+<2> The amount included the discount.

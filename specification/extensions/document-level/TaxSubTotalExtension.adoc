@@ -159,8 +159,8 @@ See example below.
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> Taxable amount in tax currency for 25 % rate
-<2> Tax amount in tax currency for 25 % rate
-<3> Taxable amount in tax currency for 12 % rate
-<4> Tax amount in tax currency for 12 % rate
-<5> Summary of all sub totals `TaxCurrencyTaxAmount`
+<1> Taxable amount in tax currency for 25% rate.
+<2> Tax amount in tax currency for 25% rate.
+<3> Taxable amount in tax currency for 12% rate.
+<4> Tax amount in tax currency for 12% rate.
+<5> Summary of all sub totals `TaxCurrencyTaxAmount`.

@@ -11,22 +11,22 @@ Extension is added to provide additional information in the `cac:Delivery` eleme
 |`cbc:ActualDeliveryDate`
 |**Delivery date** +
 Date when goods or service was made or completed. +
-__Format YYYY-MM-DD__
+_Format YYYY-MM-DD._
 
 |`cbc:LatestDeliveryDate`
 |**Latest delivery date** +
 The latest date of delivery allowed by the buyer. +
-__Format YYYY-MM-DD__
+_Format YYYY-MM-DD._
 
 |`cac:DeliveryLocation/cbc:ID`
 |**Delivery location identifier** +
 Identifier of the delivery location. +
-__E.g. GLN number__
+_E.g. GLN number._
 
 |`cac:DeliveryLocation/cbc:ID/@schemeID`
 |**Delivery location identifier scheme identifier** +
 Scheme identifier of the delivery location identifier. +
-__E.g. 0088__ +
+_E.g. 0088._ +
 Value must be according to code list <<_puf_008_identificationscheme>>.
 
 |`cac:DeliveryLocation/cbc:Description`

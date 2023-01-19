@@ -33,7 +33,8 @@ _Example below how the URI is used for this extension._
 |Element |Description
 
 |`cbc:ID`
-|Identifier used for the series the document is part of. 
+|**Invoice series identifier** +
+Identifier used for the series the document is part of. 
 |===
 
 *Example* +

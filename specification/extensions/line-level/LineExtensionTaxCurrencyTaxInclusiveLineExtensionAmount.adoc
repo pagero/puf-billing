@@ -72,5 +72,5 @@ _Line with the total amount including tax both in document and tax currency_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> The amount including tax in document currency
-<2> The amount including tax in tax currency
+<1> The amount including tax in document currency.
+<2> The amount including tax in tax currency.

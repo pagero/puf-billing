@@ -26,9 +26,9 @@ _Extension with the billing software details populated_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> Software certification identification
-<2> Hash code
-<3> Description of the software certification
+<1> Software certification identification.
+<2> Hash code.
+<3> Description of the software certification.
 
 ==== QR code and ATCUD
 

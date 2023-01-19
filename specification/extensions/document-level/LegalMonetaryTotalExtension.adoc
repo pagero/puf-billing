@@ -177,4 +177,4 @@ _Payment In Kind is 100 EUR_
 </Invoice>
 ----
 <1> The amount 100 EUR is the payment in kind.
-<2> 100 EUR is subtracted on the TaxInclusiveAmount, calculation 1250 - 100 = 1150, resulting in new Payable amount.
+<2> 100 EUR is subtracted on the `TaxInclusiveAmount`, calculation 1250 - 100 = 1150, resulting in new Payable amount.

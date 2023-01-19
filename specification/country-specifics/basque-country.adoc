@@ -4,7 +4,9 @@ This section contains information about special requirements concerning invoicin
 
 When reporting an invoice to the Basque tax authorities, it is a requirement to provide an invoice description. This is a description of why the invoice exists and what its purpose is. 
 
-This description is mandatory, and can be sent in the regular Note field. Do note that this information is also shown to any recipients of the invoice. 
+This description is mandatory, and can be sent in the regular Note field. 
+
+NOTE: This information is also shown to any recipients of the invoice. 
 
 *Example* +
 _Invoice Description example_
@@ -79,7 +81,9 @@ Tax category codes for the Basque Country can be found <<_tax_category_codes_bas
 
 ==== Tax Regime
 
-When reporting an invoice to the Basque tax authorities, it is required to specify the tax regime codes the invoice falls under. Up to three of these codes can be used in the same invoice.
+When reporting an invoice to the Basque tax authorities, it is required to specify the tax regime codes the invoice falls under. 
+
+Up to three of these codes can be used in the same invoice.
 
 |===
 |Value |Description
@@ -137,15 +141,17 @@ When reporting an invoice to the Basque tax authorities, it is required to speci
 
 |`53`
 |Transactions carried out by persons or entities that are not considered businessmen, businesswomen or professionals to VAT effects.
+
 |===
 
-The value should be provided in element <<_restrictedinformation>> with key `SignificantTaxRegime`
+The value should be provided in element <<_restrictedinformation>> with key `SignificantTaxRegime`.
 
 *Example* +
 _Tax Regime example_
 [source,xml]
 ----
 <Invoice>
+  <!-- Code omitted for clarity -->
   <ext:UBLExtensions>
     <ext:UBLExtension>
         <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
@@ -165,7 +171,13 @@ _Tax Regime example_
 
 ==== Transaction Type
 
-When reporting a cross-border invoice (i.e. not within Spain) to the Basque tax authorities, it is required to specify the transaction type the invoice falls under. This will be either Goods or Service. It is currently only supported to send one type per invoice. If you invoice for both goods and services, it is necessary to split these into two or more invoices. 
+When reporting a cross-border invoice (i.e. not within Spain) to the Basque tax authorities, it is required to specify the transaction type the invoice falls under. 
+
+This will be either Goods or Service. 
+
+It is currently only supported to send one type per invoice. 
+
+If you invoice for both goods and services, it is necessary to split these into two or more invoices. 
 
 |===
 |Value |Description
@@ -175,15 +187,17 @@ When reporting a cross-border invoice (i.e. not within Spain) to the Basque tax 
 
 |`SERVICE`
 |The invoice is for the sale of services.
+
 |===
 
-The value should be provided in element <<_restrictedinformation>> with key `TransactionType`
+The value should be provided in element <<_restrictedinformation>> with key `TransactionType`.
 
 *Example* +
 _Transaction Type example_
 [source,xml]
 ----
 <Invoice>
+  <!-- Code omitted for clarity -->
   <ext:UBLExtensions>
     <ext:UBLExtension>
         <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
@@ -203,7 +217,9 @@ _Transaction Type example_
 
 ==== Correction Reason code
 
-When reporting a correction (Credit Note) to the Basque tax authorities, it is required to specify why the correction is being made. Below is a list of allowed values. 
+When reporting a correction (Credit Note) to the Basque tax authorities, it is required to specify why the correction is being made. 
+
+Below is a list of allowed values. 
 
 |===
 |Value |Description
@@ -222,6 +238,7 @@ When reporting a correction (Credit Note) to the Basque tax authorities, it is r
 
 |`R5`
 |Corrective invoice for simplified invoice.
+
 |===
 
 The value should be provided in the element `puf:Code` within the <<_billingreference>> structure. 

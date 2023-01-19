@@ -3172,25 +3172,25 @@ Extension is added to provide additional information in the <code>cac:Delivery</
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:ActualDeliveryDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery date</strong><br>
 Date when goods or service was made or completed.<br>
-<em>Format YYYY-MM-DD</em></p></td>
+<em>Format YYYY-MM-DD.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:LatestDeliveryDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Latest delivery date</strong><br>
 The latest date of delivery allowed by the buyer.<br>
-<em>Format YYYY-MM-DD</em></p></td>
+<em>Format YYYY-MM-DD.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cbc:ID</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery location identifier</strong><br>
 Identifier of the delivery location.<br>
-<em>E.g. GLN number</em></p></td>
+<em>E.g. GLN number.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cbc:ID/@schemeID</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery location identifier scheme identifier</strong><br>
 Scheme identifier of the delivery location identifier.<br>
-<em>E.g. 0088</em><br>
+<em>E.g. 0088.</em><br>
 Value must be according to code list <a href="#_puf_008_identificationscheme">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
 </tr>
 <tr>
@@ -3471,7 +3471,7 @@ A description of the responsibility for the loss risk.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:PaymentMeansCode</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Payment means code</strong><br>
 Code for how the payment is to be settled.<br>
-<em>E.g. 30</em><br>
+<em>E.g. 30.</em><br>
 Value must be according to code list <a href="#_puf_010_paymentmeanscode">PUF-010-PAYMENTMEANSCODE</a>.</p></td>
 </tr>
 <tr>
@@ -5422,7 +5422,8 @@ Value relevant to the assigned key.</p></td>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Identifier used for the series the document is part of.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Invoice series identifier</strong><br>
+Identifier used for the series the document is part of.</p></td>
 </tr>
 </tbody>
 </table>
@@ -5896,15 +5897,18 @@ Date of the sales order, date should be formatted yyyy-mm-dd.</p></td>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:InvoiceSeries/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Identifier used for the series the referenced document is part of.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Billing reference document series identifier</strong><br>
+Identifier used for the series the referenced document is part of.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:Note</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Textual note describing the reason for issuing a credit/debit note.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Billing reference note</strong><br>
+Textual note describing the reason for issuing a credit/debit note.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:Code</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code signifying the reason for credit.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Billing reference code</strong><br>
+Code signifying the reason for credit.</p></td>
 </tr>
 </tbody>
 </table>
@@ -6663,23 +6667,23 @@ Tax chargeability per tax (see Italy section <a href="#_tax_chargeability_esigib
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Taxable amount in tax currency for 25 % rate</td>
+<td>Taxable amount in tax currency for 25% rate.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Tax amount in tax currency for 25 % rate</td>
+<td>Tax amount in tax currency for 25% rate.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Taxable amount in tax currency for 12 % rate</td>
+<td>Taxable amount in tax currency for 12% rate.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Tax amount in tax currency for 12 % rate</td>
+<td>Tax amount in tax currency for 12% rate.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Summary of all sub totals <code>TaxCurrencyTaxAmount</code></td>
+<td>Summary of all sub totals <code>TaxCurrencyTaxAmount</code>.</td>
 </tr>
 </table>
 </div>
@@ -6942,7 +6946,7 @@ Please note that tax has been excluded in above example.
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>100 EUR is subtracted on the TaxInclusiveAmount, calculation 1250 - 100 = 1150, resulting in new Payable amount.</td>
+<td>100 EUR is subtracted on the <code>TaxInclusiveAmount</code>, calculation 1250 - 100 = 1150, resulting in new Payable amount.</td>
 </tr>
 </table>
 </div>
@@ -7189,11 +7193,11 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The net amount in tax currency</td>
+<td>The net amount in tax currency.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The net amount in document currency</td>
+<td>The net amount in document currency.</td>
 </tr>
 </table>
 </div>
@@ -7312,11 +7316,11 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The amount including tax</td>
+<td>The amount including tax.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The amount excluding tax</td>
+<td>The amount excluding tax.</td>
 </tr>
 </table>
 </div>
@@ -7432,11 +7436,11 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The amount including tax in document currency</td>
+<td>The amount including tax in document currency.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The amount including tax in tax currency</td>
+<td>The amount including tax in tax currency.</td>
 </tr>
 </table>
 </div>
@@ -7556,11 +7560,11 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The amount excluded the discount</td>
+<td>The amount excluded the discount.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The amount included the discount</td>
+<td>The amount included the discount.</td>
 </tr>
 </table>
 </div>
@@ -8713,15 +8717,15 @@ It&#8217;s used as an addition to the <a href="https://en.m.wikipedia.org/wiki/S
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Software certification identification</td>
+<td>Software certification identification.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Hash code</td>
+<td>Hash code.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Description of the software certification</td>
+<td>Description of the software certification.</td>
 </tr>
 </table>
 </div>
@@ -9431,9 +9435,13 @@ The code should match the defined distribution method, if this is unknown at the
 <div class="sect4">
 <h5 id="_modification_index"><a class="anchor" href="#_modification_index"></a><a class="link" href="#_modification_index">Modification index</a></h5>
 <div class="paragraph">
-<p>In Hungary it’s possible to reference the original invoice multiple times.<br>
-It’s therefore mandatory to specify on each modification/credit document the index of the document starting with value 1.<br>
-If additional documents will be sent referencing the same original invoice this index is increased by 1.</p>
+<p>In Hungary it’s possible to reference the original invoice multiple times.</p>
+</div>
+<div class="paragraph">
+<p>It’s therefore mandatory to specify on each modification/credit document the index of the document starting with value 1.</p>
+</div>
+<div class="paragraph">
+<p>If additional documents will be sent referencing the same original invoice this index is increased by 1.</p>
 </div>
 <div class="paragraph">
 <p>The value should be provided in element <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>modificationIndex</code>.</p>
@@ -9479,10 +9487,19 @@ If additional documents will be sent referencing the same original invoice this 
 <p>Each line in a modification invoice or credit note must contain a <code>lineModificationReferenceLineOperation</code> and <code>lineModificationReferenceLineNumberReference</code>, below is a short explanation how to use the two different operations available <code>MODIFY</code> and <code>CREATE</code>.</p>
 </div>
 <div class="paragraph">
-<p><strong>Modify:</strong> Used to modify text and data on an invoice, when using operation <code>MODIFY</code> it&#8217;s not possible to change amounts on an invoice. If the value of the operation is <code>MODIFY</code>, the <code>lineModificationReferenceLineNumberReference</code> element will contain the line item number of the item in the original invoice, or the line item number of the new item created in a previous modifying document, which is the subject of the modification.<br></p>
+<p><strong>Modify:</strong> Used to modify text and data on an invoice, when using operation <code>MODIFY</code> it&#8217;s not possible to change amounts on an invoice.</p>
 </div>
 <div class="paragraph">
-<p><strong>Credit:</strong> In Hungary RTIR flow credit note is structured a bit different than a regular credit note. In the file to the tax authority the operation <code>CREATE</code> must be sent on each line, which indicate that you Create a new line ontop of the referenced original invoice. In order to create a credit note, the operation <code>CREATE</code> must be sent on each line and then the subtract the original invoice line amount using minus sign and the original invoices line data. The <code>lineModificationReferenceLineNumberReference</code> element will be the continuation of the original numbering created from the original invoice and all previous documents thereof.</p>
+<p>If the value of the operation is <code>MODIFY</code>, the <code>lineModificationReferenceLineNumberReference</code> element will contain the line item number of the item in the original invoice, or the line item number of the new item created in a previous modifying document, which is the subject of the modification.</p>
+</div>
+<div class="paragraph">
+<p><strong>Credit:</strong> In Hungary RTIR flow credit note is structured a bit different than a regular credit note.</p>
+</div>
+<div class="paragraph">
+<p>In the file to the tax authority the operation <code>CREATE</code> must be sent on each line, which indicate that you Create a new line ontop of the referenced original invoice. In order to create a credit note, the operation <code>CREATE</code> must be sent on each line and then the subtract the original invoice line amount using minus sign and the original invoices line data.</p>
+</div>
+<div class="paragraph">
+<p>The <code>lineModificationReferenceLineNumberReference</code> element will be the continuation of the original numbering created from the original invoice and all previous documents thereof.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -9604,7 +9621,19 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 <p>When reporting an invoice to the Basque tax authorities, it is a requirement to provide an invoice description. This is a description of why the invoice exists and what its purpose is.</p>
 </div>
 <div class="paragraph">
-<p>This description is mandatory, and can be sent in the regular Note field. Do note that this information is also shown to any recipients of the invoice.</p>
+<p>This description is mandatory, and can be sent in the regular Note field.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This information is also shown to any recipients of the invoice.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
@@ -9701,7 +9730,10 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 <div class="sect3">
 <h4 id="_tax_regime"><a class="anchor" href="#_tax_regime"></a><a class="link" href="#_tax_regime">5.10.5. Tax Regime</a></h4>
 <div class="paragraph">
-<p>When reporting an invoice to the Basque tax authorities, it is required to specify the tax regime codes the invoice falls under. Up to three of these codes can be used in the same invoice.</p>
+<p>When reporting an invoice to the Basque tax authorities, it is required to specify the tax regime codes the invoice falls under.</p>
+</div>
+<div class="paragraph">
+<p>Up to three of these codes can be used in the same invoice.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -9790,7 +9822,7 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 </tbody>
 </table>
 <div class="paragraph">
-<p>The value should be provided in element <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>SignificantTaxRegime</code></p>
+<p>The value should be provided in element <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>SignificantTaxRegime</code>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
@@ -9799,6 +9831,7 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;ext:UBLExtensions&gt;</span>
     <span class="tag">&lt;ext:UBLExtension&gt;</span>
         <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
@@ -9820,7 +9853,16 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 <div class="sect3">
 <h4 id="_transaction_type"><a class="anchor" href="#_transaction_type"></a><a class="link" href="#_transaction_type">5.10.6. Transaction Type</a></h4>
 <div class="paragraph">
-<p>When reporting a cross-border invoice (i.e. not within Spain) to the Basque tax authorities, it is required to specify the transaction type the invoice falls under. This will be either Goods or Service. It is currently only supported to send one type per invoice. If you invoice for both goods and services, it is necessary to split these into two or more invoices.</p>
+<p>When reporting a cross-border invoice (i.e. not within Spain) to the Basque tax authorities, it is required to specify the transaction type the invoice falls under.</p>
+</div>
+<div class="paragraph">
+<p>This will be either Goods or Service.</p>
+</div>
+<div class="paragraph">
+<p>It is currently only supported to send one type per invoice.</p>
+</div>
+<div class="paragraph">
+<p>If you invoice for both goods and services, it is necessary to split these into two or more invoices.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -9845,7 +9887,7 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 </tbody>
 </table>
 <div class="paragraph">
-<p>The value should be provided in element <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>TransactionType</code></p>
+<p>The value should be provided in element <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>TransactionType</code>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
@@ -9854,6 +9896,7 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;ext:UBLExtensions&gt;</span>
     <span class="tag">&lt;ext:UBLExtension&gt;</span>
         <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
@@ -9875,7 +9918,10 @@ It&#8217;s not possible to mix operation <code>CREATE</code> and <code>MODIFY</c
 <div class="sect3">
 <h4 id="_correction_reason_code"><a class="anchor" href="#_correction_reason_code"></a><a class="link" href="#_correction_reason_code">5.10.7. Correction Reason code</a></h4>
 <div class="paragraph">
-<p>When reporting a correction (Credit Note) to the Basque tax authorities, it is required to specify why the correction is being made. Below is a list of allowed values.</p>
+<p>When reporting a correction (Credit Note) to the Basque tax authorities, it is required to specify why the correction is being made.</p>
+</div>
+<div class="paragraph">
+<p>Below is a list of allowed values.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -11368,7 +11414,8 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spain (Basque Country)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Support for TicketBAI system in the Basque region. Only support for invoice and corrections.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Support for TicketBAI system in the Basque region.<br>
+Only support for invoice and corrections.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sweden</p></td>

@@ -75,5 +75,5 @@ _Line with tax inclusive amount_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> The amount including tax
-<2> The amount excluding tax
+<1> The amount including tax.
+<2> The amount excluding tax.

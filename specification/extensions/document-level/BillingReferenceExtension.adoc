@@ -33,13 +33,16 @@ _Example below how the URI is used for this extension._
 |Element |Description
 
 |`puf:InvoiceSeries/cbc:ID`
-|Identifier used for the series the referenced document is part of. 
+|**Billing reference document series identifier** +
+Identifier used for the series the referenced document is part of. 
 
 |`cbc:Note`
-|Textual note describing the reason for issuing a credit/debit note.
+|**Billing reference note** +
+Textual note describing the reason for issuing a credit/debit note.
 
 |`puf:Code`
-|Code signifying the reason for credit.
+|**Billing reference code** +
+Code signifying the reason for credit.
 |===
 
 *Example* +

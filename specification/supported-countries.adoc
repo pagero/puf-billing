@@ -133,7 +133,8 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |Spain (Basque Country)
 |*Yes*
 |*Yes*
-|Support for TicketBAI system in the Basque region. Only support for invoice and corrections.
+|Support for TicketBAI system in the Basque region. +
+Only support for invoice and corrections.
 
 |Sweden
 |*Yes*
