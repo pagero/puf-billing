@@ -57,7 +57,7 @@ _Invoice with presentation (PDF-image)_
 [source,xml]
 ----
 <Invoice>
-<!-- Code omitted for clarity -->
+  <!-- Code omitted for clarity -->
   <cac:AdditionalDocumentReference>
       <cbc:ID>123456</cbc:ID>
       <cbc:DocumentDescription>Commercial Invoice</cbc:DocumentDescription> <!--1-->
@@ -65,7 +65,7 @@ _Invoice with presentation (PDF-image)_
         <cbc:EmbeddedDocumentBinaryObject mimeCode="application/pdf" filename="presentation.pdf">MvYmlsbGluZy...8zLjAvYmlzLw==</cbc:EmbeddedDocumentBinaryObject>
       </cac:Attachment>
   </cac:AdditionalDocumentReference>
-<!-- Code omitted for clarity -->
+  <!-- Code omitted for clarity -->
 </Invoice>
 ----
 <1> If "Commercial Invoice" is stated in the `cbc:DocumentDescription` the attachment will be interpreted as a presentation.
@@ -75,7 +75,7 @@ _Credit note with presentation (PDF-image)_
 [source,xml]
 ----
 <CreditNote>
-<!-- Code omitted for clarity -->
+  <!-- Code omitted for clarity -->
   <cac:AdditionalDocumentReference>
       <cbc:ID>123456</cbc:ID>
       <cbc:DocumentDescription>Credit Note</cbc:DocumentDescription> <!--1-->
@@ -83,7 +83,7 @@ _Credit note with presentation (PDF-image)_
         <cbc:EmbeddedDocumentBinaryObject mimeCode="application/pdf" filename="presentation.pdf">MvYmlsbGluZy...8zLjAvYmlzLw==</cbc:EmbeddedDocumentBinaryObject>
       </cac:Attachment>
   </cac:AdditionalDocumentReference>
-<!-- Code omitted for clarity -->
+  <!-- Code omitted for clarity -->
 </CreditNote>
 ----
 <1> If "Credit Note" is stated in the Credit Note the attachment will be interpreted as a presentation.
@@ -100,12 +100,12 @@ _Invoice with reference to an invoiced object with a document number_
 [source,xml]
 ----
 <Invoice>
-<!-- Code omitted for clarity -->
+  <!-- Code omitted for clarity -->
   <cac:AdditionalDocumentReference>
       <cbc:ID schemeID="AIT">123456</cbc:ID> <!--1-->
       <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode><!--2-->
   </cac:AdditionalDocumentReference>
-<!-- Code omitted for clarity -->
+  <!-- Code omitted for clarity -->
 </Invoice>
 ----
 <1> The schemeID must be according to list <<_puf_005_invoicedobjectidentifier>>.

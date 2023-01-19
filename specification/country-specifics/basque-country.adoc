@@ -60,16 +60,15 @@ _Example with additional id provided in Basque Country in Party structure_
 <Invoice>
   <!-- Code omitted for clarity -->
   <cac:AccountingCustomerParty>
+      <cac:Party>
+          <!-- Code omitted for clarity -->
+          <cac:PartyIdentification>
+              <cbc:ID schemeID="TB:PASSPORT">0123456789</cbc:ID><!--1-->
+          </cac:PartyIdentification>
+          <!-- Code omitted for clarity -->
+      </cac:Party>
+    </cac:AccountingCustomerParty>
     <!-- Code omitted for clarity -->
-    <cac:Party>
-        <!-- Code omitted for clarity -->
-        <cac:PartyIdentification>
-            <cbc:ID schemeID="TB:PASSPORT">0123456789</cbc:ID><!--1-->
-        </cac:PartyIdentification>
-        <!-- Code omitted for clarity -->
-    </cac:Party>
-</cac:AccountingCustomerParty>
-
 </Invoice>
 ----
 <1> The passport id provided as `cac:PartyIdentification/cbc:ID`.
@@ -251,20 +250,20 @@ _Credit reason code example_
   <ext:UBLExtensions>
     <ext:UBLExtension>
         <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
-    			<ext:ExtensionContent>
-    				<puf:PageroExtension>
-    					<puf:BillingReferenceExtension>
-							  <!-- Referenced invoice's serie, if applicable -->
-    						<puf:InvoiceSeries>
-    							<cbc:ID>InvSeries1</cbc:ID>
-    						</puf:InvoiceSeries>
-    						<cbc:Note>Textual note describing the reason for issuing a credit/debit note</cbc:Note>
-							  <!-- Reason for credit in code form, if applicable -->
-    						<puf:Code>R1</puf:Code><!--1-->
-    					</puf:BillingReferenceExtension>
-    				</puf:PageroExtension>
-    			</ext:ExtensionContent>
-    		</ext:UBLExtension>
+          <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:BillingReferenceExtension>
+                <!-- Referenced invoice's serie, if applicable -->
+                <puf:InvoiceSeries>
+                  <cbc:ID>InvSeries1</cbc:ID>
+                </puf:InvoiceSeries>
+                <cbc:Note>Textual note describing the reason for issuing a credit/debit note</cbc:Note>
+                <!-- Reason for credit in code form, if applicable -->
+                <puf:Code>R1</puf:Code><!--1-->
+              </puf:BillingReferenceExtension>
+            </puf:PageroExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
   </ext:UBLExtensions>
   <!-- Code omitted for clarity -->
 </CreditNote>

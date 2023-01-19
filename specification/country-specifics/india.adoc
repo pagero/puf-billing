@@ -97,6 +97,7 @@ _Example of a correct address for cac:AccountingCustomerParty_
         <!-- Code omitted for clarity -->
     </cac:Party>
   </cac:AccountingCustomerParty>
+  <!-- Code omitted for clarity -->
 </Invoice>
 ----
 

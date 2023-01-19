@@ -14,28 +14,32 @@ See example below, note that `cbc:Name` is not mandatory to send, but opens up t
 *Example*
 [source,xml]
 ----
-<cac:AccountingCustomerParty>
-  <cac:Party>
-    <ext:UBLExtensions>
-        <ext:UBLExtension>
-            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
-            <ext:ExtensionContent>
-                <puf:PageroExtension>
-                    <puf:PartyExtension>
-                        <puf:ADAID>
-                            <cbc:ID>1234567890</cbc:ID>
-                            <cbc:Name>Name of receiving unit</cbc:Name>
-                            <puf:IDType listID="PUF-002-ADAID">FR:ServiceCode</puf:IDType>
-                        </puf:ADAID>
-                    </puf:PartyExtension>
-                </puf:PageroExtension>
-            </ext:ExtensionContent>
-        </ext:UBLExtension>
-    </ext:UBLExtensions>
+<Invoice>
     <!-- Code omitted for clarity -->
-  </cac:Party>
-</cac:AccountingCustomerParty>
-
+    <cac:AccountingCustomerParty>
+        <!-- Code omitted for clarity -->
+        <cac:Party>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <puf:ADAID>
+                                    <cbc:ID>1234567890</cbc:ID>
+                                    <cbc:Name>Name of receiving unit</cbc:Name>
+                                    <puf:IDType listID="PUF-002-ADAID">FR:ServiceCode</puf:IDType>
+                                </puf:ADAID>
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
 ----
 
 ==== Legal commitments
@@ -49,10 +53,14 @@ Customer contract defined as "Contrat"::
 *Example*
 [source,xml]
 ----
-<cac:ContractDocumentReference>
-    <cbc:ID>Contract number</cbc:ID>
-    <cbc:IssueDate>2019-01-01</cbc:IssueDate>
-</cac:ContractDocumentReference>
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:ContractDocumentReference>
+        <cbc:ID>Contract number</cbc:ID>
+        <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+    </cac:ContractDocumentReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
 ----
 
 Tender reference defined as "Marché Public"::
@@ -62,10 +70,14 @@ Tender reference defined as "Marché Public"::
 *Example*
 [source,xml]
 ----
-<cac:OriginatorDocumentReference>
-    <cbc:ID>Tender number</cbc:ID>
-    <cbc:IssueDate>2019-01-01</cbc:IssueDate>
-</cac:OriginatorDocumentReference>
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:OriginatorDocumentReference>
+        <cbc:ID>Tender number</cbc:ID>
+        <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+    </cac:OriginatorDocumentReference>
+</Invoice>
+    <!-- Code omitted for clarity -->
 ----
 
 Purchase order number defined as "Engagement"::
@@ -75,8 +87,12 @@ Purchase order number defined as "Engagement"::
 *Example*
 [source,xml]
 ----
-<cac:OrderReference>
-    <cbc:ID>Order Number</cbc:ID>
-    <cbc:IssueDate>2019-01-01</cbc:IssueDate>
-</cac:OrderReference>
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:OrderReference>
+        <cbc:ID>Order Number</cbc:ID>
+        <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+    </cac:OrderReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
 ----

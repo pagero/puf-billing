@@ -77,7 +77,6 @@ Hungarian tax id should be sent in the element `cac:Party/cac:PartyLegalEntity/c
 
 The group member tax ID should be sent in `cbc:PartyIdentification` with a `@schemeID` attribute value defined in the list <<_identification_scheme_hungary>>.
 
-
 ==== Customer VAT status
 
 It's mandatory to provide the customers VAT status, this determine allowed content and rules for the customer party.

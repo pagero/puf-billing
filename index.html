@@ -941,8 +941,12 @@ When using <code>CreditNote</code> please take note to use the separate XML sche
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cbc:CustomizationID&gt;</span>urn:pagero.com:puf:billing:2.0<span class="tag">&lt;/cbc:CustomizationID&gt;</span>
-<span class="tag">&lt;cbc:ProfileID&gt;</span>urn:pagero.com:puf:billing:1.0<span class="tag">&lt;/cbc:ProfileID&gt;</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cbc:CustomizationID&gt;</span>urn:pagero.com:puf:billing:2.0<span class="tag">&lt;/cbc:CustomizationID&gt;</span>
+  <span class="tag">&lt;cbc:ProfileID&gt;</span>urn:pagero.com:puf:billing:1.0<span class="tag">&lt;/cbc:ProfileID&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -1002,14 +1006,18 @@ To identify which context the <code>UBLExtensions</code> is in the element <code
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
     <span class="tag">&lt;cac:Party&gt;</span>
-        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
-            <span class="tag">&lt;ext:UBLExtension&gt;</span>
-                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
-        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+      <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+          <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
     <span class="tag">&lt;/cac:Party&gt;</span>
-<span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span></code></pre>
+  <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;Invoice&gt;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2002,7 +2010,7 @@ A URL to where the referenced document can be found.</p></td>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
-<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;cac:AdditionalDocumentReference&gt;</span>
       <span class="tag">&lt;cbc:ID&gt;</span>123456<span class="tag">&lt;/cbc:ID&gt;</span>
       <span class="tag">&lt;cbc:DocumentDescription&gt;</span>Commercial Invoice<span class="tag">&lt;/cbc:DocumentDescription&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2010,7 +2018,7 @@ A URL to where the referenced document can be found.</p></td>
         <span class="tag">&lt;cbc:EmbeddedDocumentBinaryObject</span> <span class="attribute-name">mimeCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">application/pdf</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">filename</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">presentation.pdf</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>MvYmlsbGluZy...8zLjAvYmlzLw==<span class="tag">&lt;/cbc:EmbeddedDocumentBinaryObject&gt;</span>
       <span class="tag">&lt;/cac:Attachment&gt;</span>
   <span class="tag">&lt;/cac:AdditionalDocumentReference&gt;</span>
-<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
@@ -2029,7 +2037,7 @@ A URL to where the referenced document can be found.</p></td>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;CreditNote&gt;</span>
-<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;cac:AdditionalDocumentReference&gt;</span>
       <span class="tag">&lt;cbc:ID&gt;</span>123456<span class="tag">&lt;/cbc:ID&gt;</span>
       <span class="tag">&lt;cbc:DocumentDescription&gt;</span>Credit Note<span class="tag">&lt;/cbc:DocumentDescription&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2037,7 +2045,7 @@ A URL to where the referenced document can be found.</p></td>
         <span class="tag">&lt;cbc:EmbeddedDocumentBinaryObject</span> <span class="attribute-name">mimeCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">application/pdf</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">filename</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">presentation.pdf</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>MvYmlsbGluZy...8zLjAvYmlzLw==<span class="tag">&lt;/cbc:EmbeddedDocumentBinaryObject&gt;</span>
       <span class="tag">&lt;/cac:Attachment&gt;</span>
   <span class="tag">&lt;/cac:AdditionalDocumentReference&gt;</span>
-<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/CreditNote&gt;</span></code></pre>
 </div>
 </div>
@@ -2066,12 +2074,12 @@ in PUF within the <code>cac:AdditionalDocumentReference</code> as shown in below
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
-<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;cac:AdditionalDocumentReference&gt;</span>
       <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">AIT</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>123456<span class="tag">&lt;/cbc:ID&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
       <span class="tag">&lt;cbc:DocumentTypeCode&gt;</span>130<span class="tag">&lt;/cbc:DocumentTypeCode&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
   <span class="tag">&lt;/cac:AdditionalDocumentReference&gt;</span>
-<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
@@ -8324,38 +8332,42 @@ For valid values see code list <a href="#_puf_004_currencycode">PUF-004-CURRENCY
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
-  <span class="tag">&lt;cac:Party&gt;</span>
-    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
-        <span class="tag">&lt;ext:UBLExtension&gt;</span>
-            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
-            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
-                <span class="tag">&lt;puf:PageroExtension&gt;</span>
-                    <span class="tag">&lt;puf:PartyExtension&gt;</span>
-                        <span class="tag">&lt;puf:ADAID&gt;</span>
-                            <span class="tag">&lt;cbc:ID&gt;</span>1234567890<span class="tag">&lt;/cbc:ID&gt;</span>
-                            <span class="tag">&lt;puf:IDType</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PUF-002-ADAID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>ES:OficinaContable<span class="tag">&lt;/puf:IDType&gt;</span>
-                        <span class="tag">&lt;/puf:ADAID&gt;</span>
-                        <span class="tag">&lt;puf:ADAID&gt;</span>
-                            <span class="tag">&lt;cbc:ID&gt;</span>1234567890<span class="tag">&lt;/cbc:ID&gt;</span>
-                            <span class="tag">&lt;puf:IDType</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PUF-002-ADAID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>ES:OrganoGestor<span class="tag">&lt;/puf:IDType&gt;</span>
-                        <span class="tag">&lt;/puf:ADAID&gt;</span>
-                        <span class="tag">&lt;puf:ADAID&gt;</span>
-                            <span class="tag">&lt;cbc:ID&gt;</span>1234567890<span class="tag">&lt;/cbc:ID&gt;</span>
-                            <span class="tag">&lt;puf:IDType</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PUF-002-ADAID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>ES:UnidadTramitadora<span class="tag">&lt;/puf:IDType&gt;</span>
-                        <span class="tag">&lt;/puf:ADAID&gt;</span>
-                        <span class="tag">&lt;puf:ADAID&gt;</span>
-                            <span class="tag">&lt;cbc:ID&gt;</span>1234567890<span class="tag">&lt;/cbc:ID&gt;</span>
-                            <span class="tag">&lt;puf:IDType</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PUF-002-ADAID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>ES:OrganoProponente<span class="tag">&lt;/puf:IDType&gt;</span>
-                        <span class="tag">&lt;/puf:ADAID&gt;</span>
-                    <span class="tag">&lt;/puf:PartyExtension&gt;</span>
-                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
-            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
-        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
-    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-  <span class="tag">&lt;/cac:Party&gt;</span>
-<span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span></code></pre>
+    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                        <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                            <span class="tag">&lt;puf:PartyExtension&gt;</span>
+                                <span class="tag">&lt;puf:ADAID&gt;</span>
+                                    <span class="tag">&lt;cbc:ID&gt;</span>1234567890<span class="tag">&lt;/cbc:ID&gt;</span>
+                                    <span class="tag">&lt;puf:IDType</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PUF-002-ADAID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>ES:OficinaContable<span class="tag">&lt;/puf:IDType&gt;</span>
+                                <span class="tag">&lt;/puf:ADAID&gt;</span>
+                                <span class="tag">&lt;puf:ADAID&gt;</span>
+                                    <span class="tag">&lt;cbc:ID&gt;</span>1234567890<span class="tag">&lt;/cbc:ID&gt;</span>
+                                    <span class="tag">&lt;puf:IDType</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PUF-002-ADAID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>ES:OrganoGestor<span class="tag">&lt;/puf:IDType&gt;</span>
+                                <span class="tag">&lt;/puf:ADAID&gt;</span>
+                                <span class="tag">&lt;puf:ADAID&gt;</span>
+                                    <span class="tag">&lt;cbc:ID&gt;</span>1234567890<span class="tag">&lt;/cbc:ID&gt;</span>
+                                    <span class="tag">&lt;puf:IDType</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PUF-002-ADAID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>ES:UnidadTramitadora<span class="tag">&lt;/puf:IDType&gt;</span>
+                                <span class="tag">&lt;/puf:ADAID&gt;</span>
+                                <span class="tag">&lt;puf:ADAID&gt;</span>
+                                    <span class="tag">&lt;cbc:ID&gt;</span>1234567890<span class="tag">&lt;/cbc:ID&gt;</span>
+                                    <span class="tag">&lt;puf:IDType</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PUF-002-ADAID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>ES:OrganoProponente<span class="tag">&lt;/puf:IDType&gt;</span>
+                                <span class="tag">&lt;/puf:ADAID&gt;</span>
+                            <span class="tag">&lt;/puf:PartyExtension&gt;</span>
+                        <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -8385,27 +8397,32 @@ It&#8217;s used as an addition to the <a href="https://en.m.wikipedia.org/wiki/S
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
-  <span class="tag">&lt;cac:Party&gt;</span>
-    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
-        <span class="tag">&lt;ext:UBLExtension&gt;</span>
-            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
-            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
-                <span class="tag">&lt;puf:PageroExtension&gt;</span>
-                    <span class="tag">&lt;puf:PartyExtension&gt;</span>
-                        <span class="tag">&lt;puf:ADAID&gt;</span>
-                            <span class="tag">&lt;cbc:ID&gt;</span>1234567890<span class="tag">&lt;/cbc:ID&gt;</span>
-                            <span class="tag">&lt;cbc:Name&gt;</span>Name of receiving unit<span class="tag">&lt;/cbc:Name&gt;</span>
-                            <span class="tag">&lt;puf:IDType</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PUF-002-ADAID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>FR:ServiceCode<span class="tag">&lt;/puf:IDType&gt;</span>
-                        <span class="tag">&lt;/puf:ADAID&gt;</span>
-                    <span class="tag">&lt;/puf:PartyExtension&gt;</span>
-                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
-            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
-        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
-    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-  <span class="tag">&lt;/cac:Party&gt;</span>
-<span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span></code></pre>
+    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                        <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                            <span class="tag">&lt;puf:PartyExtension&gt;</span>
+                                <span class="tag">&lt;puf:ADAID&gt;</span>
+                                    <span class="tag">&lt;cbc:ID&gt;</span>1234567890<span class="tag">&lt;/cbc:ID&gt;</span>
+                                    <span class="tag">&lt;cbc:Name&gt;</span>Name of receiving unit<span class="tag">&lt;/cbc:Name&gt;</span>
+                                    <span class="tag">&lt;puf:IDType</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PUF-002-ADAID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>FR:ServiceCode<span class="tag">&lt;/puf:IDType&gt;</span>
+                                <span class="tag">&lt;/puf:ADAID&gt;</span>
+                            <span class="tag">&lt;/puf:PartyExtension&gt;</span>
+                        <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -8433,10 +8450,14 @@ It&#8217;s used as an addition to the <a href="https://en.m.wikipedia.org/wiki/S
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:ContractDocumentReference&gt;</span>
-    <span class="tag">&lt;cbc:ID&gt;</span>Contract number<span class="tag">&lt;/cbc:ID&gt;</span>
-    <span class="tag">&lt;cbc:IssueDate&gt;</span>2019-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
-<span class="tag">&lt;/cac:ContractDocumentReference&gt;</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:ContractDocumentReference&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>Contract number<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="tag">&lt;cbc:IssueDate&gt;</span>2019-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+    <span class="tag">&lt;/cac:ContractDocumentReference&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
 <div class="dlist">
@@ -8458,10 +8479,14 @@ It&#8217;s used as an addition to the <a href="https://en.m.wikipedia.org/wiki/S
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:OriginatorDocumentReference&gt;</span>
-    <span class="tag">&lt;cbc:ID&gt;</span>Tender number<span class="tag">&lt;/cbc:ID&gt;</span>
-    <span class="tag">&lt;cbc:IssueDate&gt;</span>2019-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
-<span class="tag">&lt;/cac:OriginatorDocumentReference&gt;</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:OriginatorDocumentReference&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>Tender number<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="tag">&lt;cbc:IssueDate&gt;</span>2019-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+    <span class="tag">&lt;/cac:OriginatorDocumentReference&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span></code></pre>
 </div>
 </div>
 <div class="dlist">
@@ -8483,10 +8508,14 @@ It&#8217;s used as an addition to the <a href="https://en.m.wikipedia.org/wiki/S
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:OrderReference&gt;</span>
-    <span class="tag">&lt;cbc:ID&gt;</span>Order Number<span class="tag">&lt;/cbc:ID&gt;</span>
-    <span class="tag">&lt;cbc:IssueDate&gt;</span>2019-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
-<span class="tag">&lt;/cac:OrderReference&gt;</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:OrderReference&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>Order Number<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="tag">&lt;cbc:IssueDate&gt;</span>2019-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+    <span class="tag">&lt;/cac:OrderReference&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -8509,12 +8538,16 @@ It&#8217;s used as an addition to the <a href="https://en.m.wikipedia.org/wiki/S
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
-  <span class="tag">&lt;cac:Party&gt;</span>
-    <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0201</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>123456<span class="tag">&lt;/cbc:EndpointID&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-  <span class="tag">&lt;/cac:Party&gt;</span>
-<span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span></code></pre>
+    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+    <span class="tag">&lt;cac:Party&gt;</span>
+        <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0201</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>123456<span class="tag">&lt;/cbc:EndpointID&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -8579,25 +8612,29 @@ It&#8217;s used as an addition to the <a href="https://en.m.wikipedia.org/wiki/S
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:TaxTotal&gt;</span>
-    <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
-        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
-            <span class="tag">&lt;ext:UBLExtension&gt;</span>
-                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
-                <span class="tag">&lt;ext:ExtensionContent&gt;</span>
-                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
-                        <span class="tag">&lt;puf:TaxSubtotalExtension&gt;</span>
-                          <span class="tag">&lt;puf:TaxChargeability&gt;</span>
-                            <span class="tag">&lt;cbc:TaxTypeCode&gt;</span>S<span class="tag">&lt;/cbc:TaxTypeCode&gt;</span>
-                          <span class="tag">&lt;/puf:TaxChargeability&gt;</span>
-                        <span class="tag">&lt;/puf:TaxSubtotalExtension&gt;</span>
-                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
-                <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
-            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
-        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
-        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
-<span class="tag">&lt;/cac:TaxTotal&gt;</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:TaxTotal&gt;</span>
+        <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+            <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                        <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                            <span class="tag">&lt;puf:TaxSubtotalExtension&gt;</span>
+                            <span class="tag">&lt;puf:TaxChargeability&gt;</span>
+                                <span class="tag">&lt;cbc:TaxTypeCode&gt;</span>S<span class="tag">&lt;/cbc:TaxTypeCode&gt;</span>
+                            <span class="tag">&lt;/puf:TaxChargeability&gt;</span>
+                            <span class="tag">&lt;/puf:TaxSubtotalExtension&gt;</span>
+                        <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+    <span class="tag">&lt;/cac:TaxTotal&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -8642,24 +8679,28 @@ It&#8217;s used as an addition to the <a href="https://en.m.wikipedia.org/wiki/S
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:AccountingCustomerParty&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="tag">&lt;cac:Party&gt;</span>
-        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-        <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
-            <span class="tag">&lt;cbc:CompanyID&gt;</span>IT123456789<span class="tag">&lt;/cbc:CompanyID&gt;</span>
-            <span class="tag">&lt;cac:TaxScheme&gt;</span>
-                <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
-            <span class="tag">&lt;/cac:TaxScheme&gt;</span>
-        <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
-        <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
-            <span class="tag">&lt;cbc:CompanyID&gt;</span>12345678901<span class="tag">&lt;/cbc:CompanyID&gt;</span>
-            <span class="tag">&lt;cac:TaxScheme&gt;</span>
-                <span class="tag">&lt;cbc:ID&gt;</span>TAX<span class="tag">&lt;/cbc:ID&gt;</span>
-            <span class="tag">&lt;/cac:TaxScheme&gt;</span>
-        <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
-        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="tag">&lt;/cac:Party&gt;</span>
-<span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+            <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+                <span class="tag">&lt;cbc:CompanyID&gt;</span>IT123456789<span class="tag">&lt;/cbc:CompanyID&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+            <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+                <span class="tag">&lt;cbc:CompanyID&gt;</span>12345678901<span class="tag">&lt;/cbc:CompanyID&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>TAX<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -9030,6 +9071,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
         <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
     <span class="tag">&lt;/cac:Party&gt;</span>
   <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
@@ -9699,16 +9741,15 @@ This information is also shown to any recipients of the invoice.
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+      <span class="tag">&lt;cac:Party&gt;</span>
+          <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+          <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+              <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">TB:PASSPORT</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>0123456789<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+          <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+          <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+      <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="tag">&lt;cac:Party&gt;</span>
-        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-        <span class="tag">&lt;cac:PartyIdentification&gt;</span>
-            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">TB:PASSPORT</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>0123456789<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
-        <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
-        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="tag">&lt;/cac:Party&gt;</span>
-<span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
-
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
@@ -9970,20 +10011,20 @@ This information is also shown to any recipients of the invoice.
   <span class="tag">&lt;ext:UBLExtensions&gt;</span>
     <span class="tag">&lt;ext:UBLExtension&gt;</span>
         <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
-                            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
-                                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
-                                            <span class="tag">&lt;puf:BillingReferenceExtension&gt;</span>
-                                                          <span class="comment">&lt;!-- Referenced invoice's serie, if applicable --&gt;</span>
-                                                    <span class="tag">&lt;puf:InvoiceSeries&gt;</span>
-                                                            <span class="tag">&lt;cbc:ID&gt;</span>InvSeries1<span class="tag">&lt;/cbc:ID&gt;</span>
-                                                    <span class="tag">&lt;/puf:InvoiceSeries&gt;</span>
-                                                    <span class="tag">&lt;cbc:Note&gt;</span>Textual note describing the reason for issuing a credit/debit note<span class="tag">&lt;/cbc:Note&gt;</span>
-                                                          <span class="comment">&lt;!-- Reason for credit in code form, if applicable --&gt;</span>
-                                                    <span class="tag">&lt;puf:Code&gt;</span>R1<span class="tag">&lt;/puf:Code&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
-                                            <span class="tag">&lt;/puf:BillingReferenceExtension&gt;</span>
-                                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
-                            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
-                    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+              <span class="tag">&lt;puf:BillingReferenceExtension&gt;</span>
+                <span class="comment">&lt;!-- Referenced invoice's serie, if applicable --&gt;</span>
+                <span class="tag">&lt;puf:InvoiceSeries&gt;</span>
+                  <span class="tag">&lt;cbc:ID&gt;</span>InvSeries1<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/puf:InvoiceSeries&gt;</span>
+                <span class="tag">&lt;cbc:Note&gt;</span>Textual note describing the reason for issuing a credit/debit note<span class="tag">&lt;/cbc:Note&gt;</span>
+                <span class="comment">&lt;!-- Reason for credit in code form, if applicable --&gt;</span>
+                <span class="tag">&lt;puf:Code&gt;</span>R1<span class="tag">&lt;/puf:Code&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+              <span class="tag">&lt;/puf:BillingReferenceExtension&gt;</span>
+            <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
   <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/CreditNote&gt;</span></code></pre>

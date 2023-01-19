@@ -29,14 +29,18 @@ After the URI, the specific resource name is added.
 _UBLExtension used in the Party structure._
 [source,xml]
 ----
-<cac:AccountingSupplierParty>
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingSupplierParty>
     <cac:Party>
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
-        <!-- Code omitted for clarity -->
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+          <!-- Code omitted for clarity -->
     </cac:Party>
-</cac:AccountingSupplierParty>
+  </cac:AccountingSupplierParty>
+  <!-- Code omitted for clarity -->
+<Invoice>
 ----
 
 For detailed examples and how to use possible values in each extension please check the chapters where the PUF-specific elements are described.

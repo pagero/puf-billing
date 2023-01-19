@@ -7,11 +7,16 @@ To indicate the correct PUF specification identifer and the profile identifier, 
 |*Invoice and credit note*
 |urn:pagero.com:puf:billing:2.0
 |urn:pagero.com:puf:billing:1.0
+
 |===
 
 *Example of CustomizationID and ProfileID:*
 [source,xml]
 ----
-<cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
-<cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+  <!-- Code omitted for clarity -->
+</Invoice>
 ----
