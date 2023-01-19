@@ -19,67 +19,89 @@ The validation artefacts are also available on https://github.com/pagero/puf[Git
 |[PUF-R001]-Specification identifier MUST have the value 'urn:pagero.com:puf:billing:2.0' or 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant' +
 __Note that the old specification identifier 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant' will also be accepted during the migration phase to ensure backwards compability __
 |Fatal
+
 |PUF-R002
 |[PUF-R002]-Profile identifier MUST have the value 'urn:pagero.com:puf:billing:1.0'.
 |Fatal
+
 |PUF-R003
 |[PUF-R003]-Attribute listID MUST be 'PUF-001-REGISTRATIONDATA'
 |Fatal
+
 |PUF-R004
 |[PUF-R004]-Attribute listID MUST be 'PUF-002-ADAID'
 |Fatal
+
 |PUF-R005
 |[PUF-R005]-Source currency code SHOULD be different from target currency code when tax exchange rate calculation is provided.
 |Warning
+
 |PUF-R006
 |[PUF-R006]-If tax exchange calculation is provided the mathematic operator code MUST equal "Multiply".
 |Fatal
+
 |PUF-R007
 |[PUF-R007]-If tax exchange calculation is provided the calculation rate MUST exist
 |Fatal
+
 |PUF-R008
 |[PUF-R008]-If tax exchange calculation is provided both source and target currency MUST be provided.
 |Fatal
+
 |PUF-R009
 |[PUF-R009]-Value in tax chargeability MUST be one of the valid codes "S","D" or "I".
 |Fatal
+
 |PUF-R010
 |[PUF-R010]-Tax currency taxable amounts currency MUST not differ from documents tax currency.
 |Fatal
+
 |PUF-R011
 |[PUF-R011]-Tax currency tax amounts currency MUST not differ from documents tax currency.
 |Fatal
+
 |PUF-R012
 |[PUF-R012]-Tax currency tax exclusive amounts currency MUST not differ from documents tax currency.
 |Fatal
+
 |PUF-R013
 |[PUF-R013]-Tax currency tax inclusive amounts currency MUST not differ from documents tax currency.
 |Fatal
+
 |PUF-R014
 |[PUF-R014]-Tax currency payable amounts currency SHOULD not differ from documents tax currency.
 |Fatal
+
 |PUF-R015
 |[PUF-R015]-Payment in kind amount currency MUST not differ from document currency.
 |Fatal
+
 |PUF-R016
 |[PUF-R016]-ID type MUST be a valid type according to list PUF-001-REGISTRATIONDATA.
 |Fatal
+
 |PUF-R017
 |[PUF-R017]-ID type MUST be a valid type according to list PUF-002-ADAID.
 |Fatal
+
 |PUF-R101
 |[PUF-R101]-Line exclusive allowance and charge amount currency MUST not differ from document currency.
 |Fatal
+
 |PUF-R102
 |[PUF-R102]-Price including allowance charge amount currency MUST not differ from document currency.
 |Fatal
+
 |PUF-R103
 |[PUF-R103]-If Tax Subtotal exist on line, tax category percent MUST exist.
 |Fatal
+
 |PUF-R104
 |[PUF-R104]-If Tax Subtotal exist on line, TAX category ID MUST exist.
 |Fatal
+
 |PUF-R105
 |[PUF-R105]-If Tax Subtotal exist on line, TAX category TaxScheme ID MUST exist.
 |Fatal
+
 |===
