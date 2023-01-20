@@ -13,17 +13,17 @@ See example below as well as the URI to be used for this extension.
 [source,xml]
 ----
 <Invoice>
-  <ext:UBLExtensions>
-      <ext:UBLExtension>
-          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI> <!--1-->
-          <ext:ExtensionContent>
-              <puf:PageroExtension>
-                <puf:RestrictedInformation/> <!--2-->
-              </puf:PageroExtension>
-          </ext:ExtensionContent>
-      </ext:UBLExtension>
-  </ext:UBLExtensions>
-  <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI> <!--1-->
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation/> <!--2-->
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
 </Invoice>
 ----
 <1> URI to be used if this extension is added.
@@ -50,19 +50,19 @@ _RestrictedInformation example from Hungary specific section_
 [source,xml]
 ----
 <Invoice>
-  <ext:UBLExtensions>
-    <ext:UBLExtension>
-        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
-        <ext:ExtensionContent>
-            <puf:PageroExtension>
-              <puf:RestrictedInformation>
-                  <puf:Key>modifyWithoutMaster</puf:Key>
-                  <puf:Value>false</puf:Value>
-              </puf:RestrictedInformation>
-            </puf:PageroExtension>
-        </ext:ExtensionContent>
-    </ext:UBLExtension>
-  </ext:UBLExtensions>
-  <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>modifyWithoutMaster</puf:Key>
+                        <puf:Value>false</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
 </Invoice>
 ----

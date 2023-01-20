@@ -7,23 +7,24 @@ _Example below how the URI is used for this extension._
 [source,xml]
 ----
 <Invoice>
-  <!-- Code omitted for clarity -->
-  <cac:BillingReference>
-    <cac:InvoiceDocumentReference>
-      <ext:UBLExtensions>
-    		<ext:UBLExtension>
-    			<ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI> <!--1-->
-    			<ext:ExtensionContent>
-    				<puf:PageroExtension>
-    					<puf:BillingReferenceExtension/> <!--2-->
-    				</puf:PageroExtension>
-    			</ext:ExtensionContent>
-    		</ext:UBLExtension>
-    	</ext:UBLExtensions>
-    </cac:InvoiceDocumentReference>
-  </cac:BillingReference>
-  <!-- Code omitted for clarity -->
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI> <!--1-->
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:BillingReferenceExtension/> <!--2-->
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
 </Invoice>
+
 ----
 <1> URI to be used if this extension is added.
 <2> Structure to be used if information from this extension will be used.
@@ -50,31 +51,31 @@ _Invoice document reference ID, date and extension_
 [source,xml]
 ----
 <Invoice>
-  <!-- Code omitted for clarity -->
-  <cac:BillingReference>
-    <cac:InvoiceDocumentReference>
-      <ext:UBLExtensions>
-    		<ext:UBLExtension>
-    			<ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
-    			<ext:ExtensionContent>
-    				<puf:PageroExtension>
-    					<puf:BillingReferenceExtension>
-							<!-- Referenced invoice's serie, if applicable -->
-    						<puf:InvoiceSeries>
-    							<cbc:ID>InvSeries1</cbc:ID>
-    						</puf:InvoiceSeries>
-    						<cbc:Note>Textual note describing the reason for issuing a credit/debit note</cbc:Note>
-							<!-- Reason for credit in code form, if applicable -->
-    						<puf:Code>codeValue</puf:Code>
-    					</puf:BillingReferenceExtension>
-    				</puf:PageroExtension>
-    			</ext:ExtensionContent>
-    		</ext:UBLExtension>
-    	</ext:UBLExtensions>
-      <cbc:ID>Invoice reference ID</cbc:ID>
-      <cbc:IssueDate>2021-01-01</cbc:IssueDate>
-    </cac:InvoiceDocumentReference>
-  </cac:BillingReference>
-  <!-- Code omitted for clarity -->
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:BillingReferenceExtension>
+                                <!-- Referenced invoice's serie, if applicable -->
+                                <puf:InvoiceSeries>
+                                    <cbc:ID>InvSeries1</cbc:ID>
+                                </puf:InvoiceSeries>
+                                <cbc:Note>Textual note describing the reason for issuing a credit/debit note</cbc:Note>
+                                <!-- Reason for credit in code form, if applicable -->
+                                <puf:Code>codeValue</puf:Code>
+                            </puf:BillingReferenceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:ID>Invoice reference ID</cbc:ID>
+            <cbc:IssueDate>2021-01-01</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
 </Invoice>
 ----

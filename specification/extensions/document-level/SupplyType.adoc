@@ -43,18 +43,19 @@ _Supply Type_
 [source,xml]
 ----
 <Invoice>
-  <ext:UBLExtensions>
-      <ext:UBLExtension>
-          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SupplyType</ext:ExtensionURI>
-          <ext:ExtensionContent>
-              <puf:PageroExtension>
-                  <puf:SupplyType>
-                      <puf:Code>B2B</puf:Code>
-                  </puf:SupplyType>
-              </puf:PageroExtension>
-          </ext:ExtensionContent>
-      </ext:UBLExtension>
-  </ext:UBLExtensions>
-  <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SupplyType</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:SupplyType>
+                        <puf:Code>B2B</puf:Code>
+                    </puf:SupplyType>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
 </Invoice>
+
 ----

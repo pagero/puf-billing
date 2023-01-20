@@ -7,22 +7,22 @@ _Example below how the URI is used for this extension._
 [source,xml]
 ----
 <Invoice>
-  <!-- Code omitted for clarity -->
-  <cac:BillingReference>
-    <cac:InvoiceDocumentReference>
-      <ext:UBLExtensions>
-    		<ext:UBLExtension>
-    			<ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI> <!--1-->
-    			<ext:ExtensionContent>
-    				<puf:PageroExtension>
-    					<puf:InvoiceSeries/> <!--2-->
-    				</puf:PageroExtension>
-    			</ext:ExtensionContent>
-    		</ext:UBLExtension>
-    	</ext:UBLExtensions>
-    </cac:InvoiceDocumentReference>
-  </cac:BillingReference>
-  <!-- Code omitted for clarity -->
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI> <!--1-->
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:InvoiceSeries/> <!--2-->
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
 </Invoice>
 ----
 <1> URI to be used if this extension is added.
@@ -42,19 +42,19 @@ _Invoice Series example_
 [source,xml]
 ----
 <Invoice>
-  	<!-- Code omitted for clarity -->
-	<ext:UBLExtensions>
-		<ext:UBLExtension>
-			<ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI>
-			<ext:ExtensionContent>
-				<puf:PageroExtension>
-					<puf:InvoiceSeries>
-						<cbc:ID>InvSeries</cbc:Note>
-					</puf:InvoiceSeries>
-				</puf:PageroExtension>
-			</ext:ExtensionContent>
-		</ext:UBLExtension>
-	</ext:UBLExtensions>
-  <!-- Code omitted for clarity -->
+    <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:InvoiceSeries>
+                        <cbc:ID>InvSeries</cbc:ID>
+                    </puf:InvoiceSeries>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
 </Invoice>
 ----
