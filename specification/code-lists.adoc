@@ -1,4 +1,6 @@
-Certain elements require the use of PUF specific Code list. Below you will find the lists and where the lists are applicable.
+Certain elements require the use of https://pagero.github.io/puf-code-lists/[PUF specific code lists^]. 
+
+Below you will find links to the lists and where the lists are applicable.
 
 In some of these code lists PUF only points towards an external code list to be used.
 
@@ -11,666 +13,79 @@ Lastly, in some cases, *all* the values are defined solely for PUF.
 .Table of the code lists used
 [%autowidth.stretch]
 |===
-|Business Term |Path |listID
+|Business Term |Path |listID & URL to list
 
-|Registration Data Id Type
+|Registration data identifier type
 |`puf:PartyExtension/puf:RegistrationData/puf:IDType`
-|<<_puf_001_registrationdata>>
+|https://pagero.github.io/puf-code-lists/#_puf_001_registrationdata[PUF-001-REGISTRATIONDATA^]
 
-|Additional Destination Address Identifier
+|Additional destination address identifier
 |`puf:PartyExtension/puf:ADAID/puf:IDType`
-|<<_puf_002_adaid>>
+|https://pagero.github.io/puf-code-lists/#_puf_002_adaid[PUF-002-ADAID^]
 
-|Invoice Type Code
+|Invoice type code
 |`cbc:InvoiceTypeCode` +
 `cbc:CreditNoteType`
-|<<_puf_003_invoicetypecode>>
+|https://pagero.github.io/puf-code-lists/#_puf_003_invoicetypecode[PUF-003-INVOICETYPECODE^]
 
-|Currency Code
+|Currency code
 |`cbc:DocumentCurrencyCode` +
 `cbc:TaxCurrencyCode` +
  `/*/@currencyID`
-|<<_puf_004_currencycode>>
+|https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^]
 
-|Invoiced Object Identifier
+|Invoiced object identifier
 |`cac:AdditionalDocumentReference/cbc:ID/@schemeID`
-|<<_puf_005_invoicedobjectidentifier>>
+|https://pagero.github.io/puf-code-lists/#_puf_005_invoicedobjectidentifier[PUF-005-INVOICEDOBJECTIDENTIFIER^]
 
-|Mime code
+|MIME code
 |`cac:AdditionalDocumentReference/cac:Attachment/
 cbc:EmbeddedDocumentBinaryObject/@mimeCode`
-|<<_puf_006_mimecodes>>
+|https://pagero.github.io/puf-code-lists/#_puf_006_mimecodes[PUF-006-MIMECODES^]
 
 |Electronic address scheme
 |`cac:AccountingSupplierParty/cac:Party/cbc:EndpointID/@schemeID` +
 `cac:AccountingCustomerParty/cac:Party/cbc:EndpointID/@schemeID` +
 `cac:BuyerCustomerParty/cac:Party/cbc:EndpointID/@schemeID`
-|<<_puf_007_endpointscheme>>
+|https://pagero.github.io/puf-code-lists/#_puf_007_endpointscheme[PUF-007-ENDPOINTSCHEME^]
 
 |Identification scheme
 |`cac:PartyIdentification/cbc:ID/@schemeID` +
 `cac:PartyLegalEntity/cbc:CompanyID/@schemeID` +
 `cac:Delivery/cac:DeliveryLocation/cbc:ID/@schemeID` +
 `cac:Item/cac:StandardItemIdentification/cbc:ID/@schemeID`
-|<<_puf_008_identificationscheme>>
+|https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^]
 
 |Tax type scheme
 |`cac:TaxCategory/cac:TaxScheme/cbc:ID` +
 `cac:Item/cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:ID`
-|<<_puf_009_taxtypescheme>>
+|https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[PUF-009-TAXTYPESCHEME^]
 
 |Payment means code
 |`cac:PaymentMeans/cbc:PaymentMeansCode`
-|<<_puf_010_paymentmeanscode>>
+|https://pagero.github.io/puf-code-lists/#_puf_010_paymentmeanscode[PUF-010-PAYMENTMEANSCODE^]
 
 |Allowance charge reason codes
 |`cac:AllowanceCharge/cbc:AllowanceChargeReasonCode`
-|<<_puf_011_allowancechargereasoncode>>
+|https://pagero.github.io/puf-code-lists/#_puf_011_allowancechargereasoncode[PUF-011-ALLOWANCECHARGEREASONCODE^]
 
 |Tax category codes
 |`cac:TaxCategory/cbc:ID`
-|<<_puf_012_taxcategorycode>>
+|https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^]
 
 |Tax exemption codes
 |`cac:TaxCategory/cbc:TaxExemptionReasonCode`
-|<<_puf_013_exemptcode>>
+|https://pagero.github.io/puf-code-lists/#_puf_013_taxexemptioncode[PUF-013-TAXEXEMPTIONCODE^]
 
 |Unit of measure codes
 |`cbc:InvoicedQuantity/@unitCode` +
 `cbc:CreditedQuantity/@unitCode` +
 `cac:Price/cbc:BaseQuantity/@unitCode`
-|<<_puf_014_uomcode>>
+|https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-UOMCODE^]
 
 |Item type identification code
 |`cac:Item/cac:CommodityClassification/
 cbc:ItemClassificationCode/@listID`
-|<<_puf_015_itemtypeidentificationcode>>
-|===
-
-
-==== PUF-001-REGISTRATIONDATA
-
-The value consist of "country code:type of value". Country code states which country the value is applicable for.
+|https://pagero.github.io/puf-code-lists/#_puf_015_itemtypeidentificationcode[PUF-015-ITEMTYPEIDENTIFICATIONCODE^]
 
 |===
-|Value |Description
-
-|`IT:Ufficio`
-|Initials of the province where the Company is registered.
-
-|`IT:NumeroREA`
-|The registration number in the "companies register".
-
-|`IT:CapitaleSociale`
-|Only in the case of a company (SpA, SApA, SRL), the element must be filled in with the share capital
-
-|`IT:SocioUnico`
-|Only in the case of a joint-stock company or limited liability company, the element must be filled in to indicate if there is a single shareholder or several shareholders. +
-
-Allowed values: SU or SM +
-
-SU : Sole shareholder +
-SM : Several shareholders
-
-|`IT:StatoLiquidazione`
-|Indication of whether the Company is in liquidation or not. +
-Allowed values: LS or LN +
-
-LS : In liquidation +
-LN : Not in liquidation
-
-|`ES:Book`
-|Book in the register of the company.
-
-|`ES:RegisterOfCompaniesLocation`
-|In which register the company is located.
-
-|`ES:Sheet`
-|Sheet in the register of the company.
-
-|`ES:Folio`
-|Folio in the register of the company.
-
-|`ES:Section`
-|Section in the register of the company.
-
-|`ES:Volume`
-|Volume in the register of the company.
-
-|`ES:AdditionalRegistrationData`
-|Other registration data.
-
-|`FR:DenomSociete`
-|Legal name.
-
-|`FR:TypeSociete`
-|Type of company (for example SAS).
-
-|`FR:CapitalSocial`
-|Share capital, capital contributed to a company at the time of its creation.
-
-|`FR:RCSNumber`
-|Trade and Companies Register number.
-
-|`FR:APE`
-|Business activity classification code.
-
-|===
-
-
-==== PUF-002-ADAID
-
-The value consist of "country code:type of value". Country code states which country the value is applicable for.
-
-|===
-|Value |Description
-
-|`FR:ServiceCode`
-|Code of the receiving unit behind French Government portal.
-
-|`ES:OficinaContable`
-|Code for the accounting office (Oficina Contable).
-
-|`ES:OrganoGestor`
-|Code for the management agency (Órgano Gestor).
-
-|`ES:UnidadTramitadora`
-|Code for the processing authority unit (Unidad Tramitadora).
-
-|`ES:OrganoProponente`
-|Code for the proposing agency (Órgano Proponente).
-
-|`GEN:UnitCode`
-|General code for defining the unit of a company.
-
-|===
-
-==== PUF-003-INVOICETYPECODE
-
-List of available general invoice type codes.
-
-|===
-|Value |Description
-
-|`380`
-|Invoice, only applicable only with UBL message/document type Invoice.
-
-|`381`
-|Credit note, only applicable only with UBL message/document type CreditNote.
-
-|`383`
-|Debit note, only applicable only with UBL message/document type Invoice.
-
-|===
-
-===== Invoice Type Codes Saudi Arabia
-
-The below listed InvoiceTypeCodes are available for use in Saudi Arabia.
-
-|===
-|Value |Description
-
-
-|`388`
-|Tax Invoice, only applicable only with UBL message/document type Invoice.
-
-|`381`
-|Credit note, only applicable only with UBL message/document type CreditNote.
-
-|`383`
-|Debit note, only applicable only with UBL message/document type Invoice.
-|===
-
-===== Invoice Subtype Codes Saudi Arabia
-
-In addition to the InvoiceTypeCode it is required to provide invoice subtypes. This should be placed in `cbc:InvoiceTypeCode/@name` and must follow a certain syntax.
-
-Structure on the value must be *NNPNESB* (Example 0100000) where:
-
-|===
-|Value |Supported values
-
-
-|`NN (Position 1 and 2)`
-|01 for tax invoice +
-02 for simplified tax invoice.
-
-|`P (Position 3)`
-|3rd Party invoice transaction, 0 for false, 1 for true
-
-|`N (Position 4)`
-|Nominal invoice transaction, 0 for false, 1 for true
-
-|`E (Position 5)`
-|Exports invoice transaction, 0 for false, 1 for true
-
-|`S (Position 6)`
-|Summary invoice transaction, 0 for false, 1 for true
-
-|`B (Position 7)`
-|Self-billed invoice transaction, 0 for false, 1 for true. Note that only 0 is currently supported
-
-|===
-
-==== PUF-004-CURRENCYCODE
-
-For available values see code list of three character currency codes see https://en.wikipedia.org/wiki/ISO_4217[Currency Codes].
-
-==== PUF-005-INVOICEDOBJECTIDENTIFIER
-
-For available values see code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL1153/[Invoice Object identifier schemes].
-
-==== PUF-006-MIMECODES
-
-List of available mime codes.
-
-|===
-|Value
-
-|`text/csv`
-
-|`application/pdf`
-
-|`image/jpeg`
-
-|`application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
-
-|`application/vnd.oasis.opendocument.spreadsheet`
-
-|===
-
-==== PUF-007-ENDPOINTSCHEME
-
-For available values see code list https://docs.peppol.eu/poacc/billing/3.0/codelist/eas/[Electronic address scheme]
-
-==== PUF-008-IDENTIFICATIONSCHEME
-
-Supported values can be found here https://docs.peppol.eu/poacc/billing/3.0/codelist/ICD/[ISO 6523 ICD list].
-
-For `cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID/@schemeID` and
-`cac:PayeeParty/cac:PartyIdentification/cbc:ID/@schemeID` an additional code list is also applicable: https://docs.peppol.eu/poacc/billing/3.0/codelist/SEPA/[Sepa indicator].
-
-For additional identification scheme identifier added in PUF see below recommendations.
-
-===== Identification scheme Saudi Arabia
-|===
-|Value |Description
-
-|`SA:HQ`
-|Group VAT number
-
-|`SA:NAT`
-|National ID
-
-|`SA:TIN`
-|Tax Identification Number
-
-|`SA:IQA`
-|Iqama Number
-
-|`SA:PAS`
-|Passport ID
-
-|`SA:CRN`
-|Commercial registration number
-
-|`SA:MOM`
-|Momra license
-
-|`SA:MLS`
-|MLSD license
-
-|`SA:700`
-|700 number
-
-|`SA:SAG`
-|Sagia license
-
-|`SA:GCC`
-|GCC ID
-
-|`SA:OTH`
-|Other ID
-
-|===
-
-===== Identification scheme India
-
-|===
-|Value |Description
-
-|`IN:PAN`
-|PAN is a 10-digit unique identification alpha-numeric number
-
-|`IN:GSTIN`
-|GSTIN is a 15-digit PAN-based unique identification number assigned to every registered person under GST.
-
-|`IN:CIN`
-|Corporate Identification Number (CIN) is a 21 digits alpha-numeric unique identification number that is assigned by the Registrar of Companies (ROC).
-
-|===
-
-
-
-===== Identification scheme Hungary
-
-|===
-|Value |Description
-
-|`HU:TaxpayerId`
-|Tax number
-
-|`HU:GroupMemberTaxpayerId`
-|Group member tax number
-
-|===
-
-===== Identification scheme Basque Country
-
-|===
-|Value |Description
-
-|`TB:PASSPORT`
-|Passport ID
-
-|`TB:OFFICIAL_ID`
-|Official ID document issued by country or territory of residence
-
-|`TB:RC`
-|Residence certificate
-
-|`TB:OTHER`
-|Other identifying document
-
-|===
-
-===== Identification scheme Serbia
-
-|===
-|Value |Description
-
-|`RS:JBKJS`
-|Unique ID number used for public entities
-
-|===
-
-==== PUF-009-TAXTYPESCHEME
-
-List of available tax type scheme codes.
-
-|===
-|Value |Description
-
-|`VAT`
-|Value Added Tax
-
-|`GST`
-|Goods and Services Tax
-
-|`LOC`
-|Sales tax
-
-|`STT`
-|State/provincial sales tax
-
-|`AAG`
-|Harmonised sales tax, Canadian +
-__A harmonized sales tax consisting of a goods and service tax, a Canadian provincial sales tax and, as applicable, a Quebec sales tax which is recoverable.__
-
-|`AAH`
-|Quebec sales tax
-
-|`AAI`
-|Canadian provincial sales tax
-
-|`IGST`
-|Integrated Goods and Services Tax, India
-
-|`CGST`
-|Central Goods and Services Tax, India
-
-|`SGST`
-|State Goods and Services Tax, India
-
-|`UTGST`
-|Union Territory Goods and Services Tax, India
-
-|`CESS`
-|CESS, India
-
-|`CESS Non advol`
-|CESS Non Ad Valorem, India
-
-|`STATECESS`
-|State CESS, India
-
-|`STATECESS Non Advol`
-|State CESS Non Ad Valorem, India
-
-|===
-
-==== PUF-010-PAYMENTMEANSCODE
-
-|===
-|Value |Description
-
-|`1`
-|Instrument not defined
-
-|`10`
-|In cash
-
-|`20`
-|Cheque
-
-|`30`
-|Credit transfer
-
-|`31`
-|Debit transfer
-
-|`42`
-|Payment to bank account
-
-|`48`
-|Bank card
-
-|`56`
-|Bankgiro
-
-|`58`
-|SEPA credit transfer +
-__Credit transfer inside the Single Euro Payment Area (SEPA) system.__
-
-|`59`
-|Direct debit inside the Single Euro Payment Area (SEPA) system.
-
-|`93`
-|Reference giro +
-__Ordering customer tells the bank to use the payment system 'Reference giro'. Used in the Finnish national banking system.__
-
-|===
-
-For all available codes see list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL4461/[Payment means code]
-
-==== PUF-011-ALLOWANCECHARGEREASONCODE
-
-Values can differ depending on which legal domain you are in or if there are other types of business requirements.
-
-Below you will find links to recommended lists.
-
-|===
-|Link
-
-|https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL5189/[Allowance reason codes]
-
-|https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL7161/[Charge reason codes]
-
-|===
-
-==== PUF-012-TAXCATEGORYCODE
-
-Standard european tax category codes can be found here https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL5305/[Duty or tax or fee category code].
-
-For additional codes added in PUF see below code recommendations.
-
-===== Tax category codes Serbia
-
-|===
-|Value |Description
-
-|`S`
-|Standard rate
-
-|`AE`
-|Vat Reverse Charge
-
-|`Z`
-|Zero rated goods/Tax exemption with right to deduction
-
-|`E`
-|Exempt from VAT/Tax exemption without deduction rights
-
-|`R`
-|Exempt from VAT
-
-|`O`
-|Services outside scope of VAT
-
-|`OE`
-|Services outside scope of VAT 2
-
-|`SS`
-|Special procedures
-
-|`N`
-|Cancellation
-
-|===
-
-===== Tax category codes Singapore
-
-|===
-|Value |Description
-
-|`SR`
-|Local supply of goods and services
-
-|`SRCA-S`
-|Customer accounting supply made by the supplier
-
-|`SRCA-C`
-|Customer accounting supply made by the customer on supplier’s behalf
-
-|`ZR`
-|Supplies involving goods for export/ provision of international services
-
-|`ES33`
-|Specific categories of exempt supplies listed under regulation 33 of the GST (General) Regulations
-
-|`ESN33`
-|Exempt supplies other than those listed under regulation 33 of the GST (General) Regulations
-
-|`DS`
-|Supplies required to be reported pursuant to the GST legislation
-
-|`OS`
-|Supplies outside the scope of the GST Act
-
-|`NG`
-|Supplies from a company which is not registered for GST
-
-|`SROVR`
-|Overseas vendor registration regime for Business-to-Consumer (“B2C”) supplies of imported digital services
-
-|`SRRC`
-|Reverse charge regime for Business-to-Business (“B2B”) supplies of imported services
-
-|===
-
-===== Tax category codes Portugal
-
-|===
-|Value |Description
-
-|`AA`
-|Lower rate
-
-|`S`
-|Standard rate
-
-|`E`
-|Exempt
-
-|`Z`
-|Zero rated goods
-
-|`AE`
-|Vat Reverse Charge
-
-|`G`
-|Free export item, VAT not charged
-
-|`O`
-|Services outside scope of tax
-
-|`RED`
-|Reduced rate
-
-|`INT`
-|Intermediate rate
-
-|`NOR`
-|Normal rate
-
-|`ISE`
-|Exempt
-
-|`OUT`
-|Others, applicable to special VAT schemes
-
-|`NA`
-|In case of non-subjection to VAT or IS. On receipts issued without itemized tax must be filled with "NA"
-
-|`IC`
-|intra-Community VAT
-
-|===
-
-===== Tax category codes Basque Country
-
-|===
-|Value |Description
-
-|`S`
-|Without reverse charge (default).
-
-|`AE`
-|With reverse charge.
-
-|`E`
-|Exempt.
-
-|`OT`
-|Non-taxable under Art. 7, 14, Others
-
-|`RL`
-|Non-taxable under location rules.
-|===
-
-==== PUF-013-EXEMPTCODE
-
-Values can differ depending on which legal domain you are in or if there are other types of business requirements.
-
-For Europe the code list https://docs.peppol.eu/poacc/billing/3.0/codelist/vatex/[Vatex code list] can be recommended.
-
-==== PUF-014-UOMCODE
-
-Values can differ depending on which legal domain you are in or if there are other types of business requirements.
-
-However, code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNECERec20/[UN/ECE Recommendation 20] and
-https://docs.peppol.eu/poacc/billing/3.0/codelist/UNECERec21/[UN/ECE Recommendation 21] can be recommended.
-
-==== PUF-015-ITEMTYPEIDENTIFICATIONCODE
-
-Values must be from code list https://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL7143/[Item type identification code].

@@ -1,1 +1,1 @@
-If you have any questions related to PUF, please https://support.pagero.com/hc/en-us/requests/new[create a support ticket via Pagero Support].
+If you have any questions related to PUF, please https://support.pagero.com/hc/en-us/requests/new[create a support ticket via Pagero Support^].

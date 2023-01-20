@@ -62,14 +62,14 @@ The mandatory clearance platform IRP validate the below address information acco
 *cbc:CountrySubentityCode* +
 Each party must contain the corresponding states code, the state code should be sent in element `cbc:CountrySubentityCode` and must be two digits.
 
-Valid state codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes. 
+Valid state codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes[https://einvoice1.gst.gov.in/Others/MasterCodes^]. 
 
 The parties state code must correspond with the first two digits of the parties GSTIN number.
 
 *cbc:PostalZone* +
 The post code or PIN code as referred to in India must exist on all parties and must be sent in `cbc:PostalZone`. 
 
-Valid codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes.
+Valid codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes[https://einvoice1.gst.gov.in/Others/MasterCodes^].
 
 *Example* +
 _Example of a correct address for cac:AccountingCustomerParty_
@@ -109,7 +109,7 @@ Tax type scheme codes for India can be found <<_puf_009_taxtypescheme, here>>.
 
 Each invoice line must contain a HSN code, IRP will validate that the provided HSN code correspond with relevant taxes for that goods or service.
 
-All HSN codes applicable can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes.
+All HSN codes applicable can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes[https://einvoice1.gst.gov.in/Others/MasterCodes^].
 
 *Example* +
 _Example how to provide HSN code_

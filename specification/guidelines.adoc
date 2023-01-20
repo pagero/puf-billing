@@ -1,4 +1,4 @@
-PUF was originally built to support information and content as described in http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0] but also adding support for elements that where not present in Peppol BIS specification.
+PUF was originally built to support information and content as described in http://docs.peppol.eu/poacc/billing/3.0/[PEPPOL BIS Billing 3.0^] but also adding support for elements that where not present in Peppol BIS specification.
 
 While PUF aim to fully support Peppol BIS it will not necessarily be restricted to the rules as stated in the Peppol BIS specification nor in the EN16931. 
 
@@ -35,10 +35,10 @@ The "other" elements in the XSD will prevent validation error for customers who 
 
 A minor release will always be backward compatible and will take place without prior notice and will be implemented whenever needed. 
 
-Minor releases may include bugfixes, new elements, schematron updates and other features. These releases can be followed on https://github.com/pagero/puf[GitHub].
+Minor releases may include bugfixes, new elements, schematron updates and other features. These releases can be followed on https://github.com/pagero/puf-billing[GitHub^].
 
 ==== Major release
 
-A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation, to users who registered an account on Pagero validex or on https://github.com/pagero/puf[GitHub].
+A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation, to users who registered an account on Pagero validex or on https://github.com/pagero/puf-billing[GitHub^].
 
-To register for PUF major release notification you can create an account on https://pagero.validex.net. But we urge all interested parties to follow the project on https://github.com/pagero/puf[GitHub] where all releases will be notified.
+To register for PUF major release notification you can create an account on https://pagero.validex.net[https://pagero.validex.net^]. But we urge all interested parties to follow the project on https://github.com/pagero/puf-billing[GitHub^] where all releases will be notified.

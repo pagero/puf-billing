@@ -3,7 +3,8 @@ This section contains information about requirements and other information conce
 ==== Service code
 
 Service code is a routing code required by some customers to identify the correct recipient in French Government Portal.
-It's used as an addition to the https://en.m.wikipedia.org/wiki/SIRET_code[SIRET number], which is the main identifier for all government recipients.
+
+It's used as an addition to the https://en.m.wikipedia.org/wiki/SIRET_code[SIRET number^], which is the main identifier for all government recipients.
 
 The Service code should be provided in the extension block under <<_cacaccountingcustomerparty, cac:AccountingCustomerParty/cac:Party>>, in the structure `puf:PageroExtension/puf:PartyExtension/puf:ADAID`.
 

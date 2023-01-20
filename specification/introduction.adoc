@@ -1,18 +1,18 @@
-Pagero Universal Format, hereafter referred to as "PUF", is developed and maintained by Pagero Group. PUF is based upon https://docs.oasis-open.org/ubl/UBL-2.1.html[Universal Business Language Version 2.1 (UBL 2.1)].
+Pagero Universal Format, hereafter referred to as "PUF", is developed and maintained by Pagero Group. PUF is based upon https://docs.oasis-open.org/ubl/UBL-2.1.html[Universal Business Language Version 2.1 (UBL 2.1)^].
 
 To align with new regulations and the business needs that comes with the growing use of electronic invoices throughout the world, the core idea of PUF is to enable its users to provide enough data to meet the requirements in these markets. +
 
 To be able to provide the broadest support possible, PUF has been designed with the following core basis in mind:
 
-* https://standards.cen.eu/dyn/www/f?p=204:110:0::::FSP_PROJECT:60602&cs=1B61B766636F9FB34B7DBD72CE9026C72[European standard EN 16931-1:2017]
+* https://standards.cen.eu/dyn/www/f?p=204:110:0::::FSP_PROJECT:60602&cs=1B61B766636F9FB34B7DBD72CE9026C72[European standard EN 16931-1:2017^]
 
 ** EN 16931-1:2017 complies with the European Directive on electronic invoicing for public authorities (EN 2014/55 / ​​EU). It has been prepared by the Technical Committee TC434 at CEN by the European Commission.
 
-*	http://docs.peppol.eu/poacc/billing/3.0/[Peppol BIS Billing 3.0] (OpenPeppol's CIUS (Core Invoice Usage Specification) with EN16931 as the underlying specification)
+*	http://docs.peppol.eu/poacc/billing/3.0/[Peppol BIS Billing 3.0^] (OpenPeppol's CIUS (Core Invoice Usage Specification) with EN16931 as the underlying specification)
 
-*	Other https://ec.europa.eu/cefdigital/wiki/display/EINVCOMMUNITY/Community-driven+Registry+of+CIUS+(Core+Invoice+Usage+Specifications)+and+Extensions[CIUS's] based on the regulations of https://standards.cen.eu/dyn/www/f?p=204:110:0::::FSP_PROJECT:60602&cs=1B61B766636F9FB34B7DBD72CE9026C72[EN 16931-1:2017]
+*	Other https://ec.europa.eu/cefdigital/wiki/display/EINVCOMMUNITY/Community-driven+Registry+of+CIUS+(Core+Invoice+Usage+Specifications)+and+Extensions[CIUS's^] based on the regulations of https://standards.cen.eu/dyn/www/f?p=204:110:0::::FSP_PROJECT:60602&cs=1B61B766636F9FB34B7DBD72CE9026C72[EN 16931-1:2017^]
 
-* https://ec.europa.eu/cefdigital/wiki/display/EINVCOMMUNITY/Community-driven+Registry+of+CIUS+(Core+Invoice+Usage+Specifications)+and+Extensions[Extensions] based on the regulations of https://standards.cen.eu/dyn/www/f?p=204:110:0::::FSP_PROJECT:60602&cs=1B61B766636F9FB34B7DBD72CE9026C72[EN 16931-1:2017]
+* https://ec.europa.eu/cefdigital/wiki/display/EINVCOMMUNITY/Community-driven+Registry+of+CIUS+(Core+Invoice+Usage+Specifications)+and+Extensions[Extensions^] based on the regulations of https://standards.cen.eu/dyn/www/f?p=204:110:0::::FSP_PROJECT:60602&cs=1B61B766636F9FB34B7DBD72CE9026C72[EN 16931-1:2017^]
 
 *	Country specific information found in domestic formats in various legal domains.
 

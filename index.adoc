@@ -14,7 +14,7 @@
 :sectlinks:
 :nofooter:
 
-A specification based on https://docs.oasis-open.org/ubl/UBL-2.3.html[Universal Business Language (UBL)] that enables the exchange of compliant business documents worldwide via our e-business platform link:https://www.pageroonline.com[Pagero Online].
+A specification based on https://docs.oasis-open.org/ubl/UBL-2.3.html[Universal Business Language (UBL)^] that enables the exchange of compliant business documents worldwide via our e-business platform link:https://www.pageroonline.com[Pagero Online^].
 
 :sectnums:
 
