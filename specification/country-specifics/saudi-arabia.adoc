@@ -2,9 +2,11 @@ This section contains information about special requirements concerning invoicin
 
 ==== Invoice type code and invoice subtype
 
-Available Invoice Type values to be used in Saudi Arabia can be found <<_invoice_type_codes_saudi_arabia, here>>.
+Available invoice type code values to be used in Saudi Arabia can be found here: https://pagero.github.io/puf-code-lists/#_invoice_type_codes_saudi_arabia[Invoice type codes Saudi Arabia^].
 
-In addition to provide the InvoiceType it is required to also provide the subtypes. Supported codes can be found <<_invoice_subtype_codes_saudi_arabia, here>>.
+In addition to providing the invoice type it is also required to provide the subtype/s. 
+
+Supported subtype codes can be found here: https://pagero.github.io/puf-code-lists/#_invoice_subtype_codes_saudi_arabia[Invoice subtype codes Saudi Arabia^].
 
 *Example* +
 _Example with InvoiceTypeCode and invoice subtypes provided for Saudi Arabia_
@@ -22,7 +24,8 @@ _Example with InvoiceTypeCode and invoice subtypes provided for Saudi Arabia_
 ==== Party identification
 
 In Saudi Arabia there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.
-These additional identifiers for use in Saudi Arabia can be found <<_identification_scheme_saudi_arabia, here>>.
+
+These additional identifiers for use in Saudi Arabia can be found here: https://pagero.github.io/puf-code-lists/#_identification_scheme_saudi_arabia[Identification scheme Saudi Arabia^].
 
 *Example* +
 _Example with additional id provided in Saudi Arabia in Party structure_

@@ -75,7 +75,7 @@ If the company have a group member tax ID the 9th digit must be a 5.
 
 Hungarian tax id should be sent in the element `cac:Party/cac:PartyLegalEntity/cbc:CompanyID`.
 
-The group member tax ID should be sent in `cbc:PartyIdentification` with a `@schemeID` attribute value defined in the list <<_identification_scheme_hungary>>.
+The group member tax ID should be sent in `cbc:PartyIdentification` with a `@schemeID` attribute value defined in the list https://pagero.github.io/puf-code-lists/#_identification_scheme_hungary[Identification scheme Hungary^].
 
 ==== Customer VAT status
 

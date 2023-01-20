@@ -57,6 +57,6 @@ _QR code and ATCUD provided in cac:AdditionalDocumentReference_
 
 ==== Tax category codes
 
-Tax category codes for Portugal can be found <<_tax_category_codes_portugal, here>>. 
+Tax category codes for Portugal can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_portugal[Tax category codes Portugal^]. 
 
 Note that multiple tax category codes overlap due to previous Portugese standards. The recommendation is to use the official UNCL5305 codes in the list, if possible.

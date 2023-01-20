@@ -2,4 +2,4 @@ This section contains information about requirements and other information conce
 
 ==== Tax category codes
 
-Tax category codes for Singapore can be found <<_tax_category_codes_singapore, here>>.
+Tax category codes for Singapore can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_singapore[Tax category codes Singapore^].

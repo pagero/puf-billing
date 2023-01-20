@@ -31,7 +31,8 @@ _Place of Supply example_
 ==== Party identification
 
 In India there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.
-These additional identifiers for use in India can be found <<_identification_scheme_india, here>>.
+
+These additional identifiers for use in India can be found here: https://pagero.github.io/puf-code-lists/#_identification_scheme_india[Identification scheme India^].
 
 *Example* +
 _Example with additional id provided in India in Party structure_
@@ -103,7 +104,7 @@ _Example of a correct address for cac:AccountingCustomerParty_
 
 ==== Tax type scheme
 
-Tax type scheme codes for India can be found <<_puf_009_taxtypescheme, here>>.
+Tax type scheme codes for India can be found in https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[PUF-009-TAXTYPESCHEME^].
 
 ==== Harmonized System of Nomenclature code (HSN Code)
 

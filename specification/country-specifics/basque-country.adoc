@@ -51,7 +51,7 @@ _Invoice Series example_
 
 In the Basque Country there is a potential need to provide additional party identifiers that are not available in the ISO 6523 ICD list.
 
-These additional identifiers for use in the Basque Country can be found <<_identification_scheme_basque_country, here>>.
+These additional identifiers for use in the Basque Country can be found here: https://pagero.github.io/puf-code-lists/#_identification_scheme_basque_country[Identification scheme Basque Country^].
 
 *Example* +
 _Example with additional id provided in Basque Country in Party structure_
@@ -75,7 +75,7 @@ _Example with additional id provided in Basque Country in Party structure_
 
 ==== Tax Category codes
 
-Tax category codes for the Basque Country can be found <<_tax_category_codes_basque_country, here>>.
+Tax category codes for the Basque Country can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_basque_country[Tax category codes Basque Country^].
 
 
 ==== Tax Regime
@@ -233,7 +233,7 @@ Below is a list of allowed values.
 |Article 80 Four of the VAT Regulation.
 
 |`R4`
-|Others
+|Others.
 
 |`R5`
 |Corrective invoice for simplified invoice.

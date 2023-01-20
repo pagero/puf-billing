@@ -2,12 +2,13 @@ This section contains information about requirements and other information conce
 
 ==== Tax category codes
 
-Tax category codes for Serbia can be found <<_tax_category_codes_serbia, here>>.
+Tax category codes for Serbia can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_serbia[Tax category codes Serbia^].
 
 ==== Party identification
 
 There is a possible requirement to provide additional party identifiers that are not available in the ISO 6523 ICD list.
-These additional identifiers for use in Serbia can be found <<_identification_scheme_serbia, here>>.
+
+These additional identifiers for use in Serbia can be found here https://pagero.github.io/puf-code-lists/#_identification_scheme_serbia[Identification scheme Serbia^].
 
 *Example* +
 _Example with additional id provided in Serbia in Party structure_
