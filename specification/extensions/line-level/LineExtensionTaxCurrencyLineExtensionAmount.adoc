@@ -43,7 +43,7 @@ Net amount in tax currency.
 |`puf:TaxCurrencyLineExtensionAmount/@currencyID`
 |**Tax currency line net amount currency code** +
 Currency of the `puf:TaxCurrencyLineExtensionAmount`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 

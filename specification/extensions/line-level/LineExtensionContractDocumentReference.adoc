@@ -44,7 +44,7 @@ Identification of the referenced contract.
 
 |`cbc:IssueDate`
 |**Referenced contract issue date** +
-Date of issue of the referenced contract, date should be formatted yyyy-mm-dd.
+Date of issue of the referenced contract, date should be formatted "yyyy-mm-dd".
 
 |`puf:BuyerContractID`
 |**Referenced buyer contract identifier** +
@@ -52,7 +52,7 @@ ID for the buyer referenced contract document.
 
 |`puf:BuyerContractIssueDate`
 |**Referenced buyer contract issue date** +
-Issue date for the buyer referenced contract document, date should be formatted yyyy-mm-dd.
+Issue date for the buyer referenced contract document, date should be formatted "yyyy-mm-dd".
 
 |===
 

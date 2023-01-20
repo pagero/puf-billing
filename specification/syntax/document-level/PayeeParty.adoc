@@ -9,7 +9,7 @@ Identifier of the payee.
 |`cac:PartyIdentification/cbc:ID/@schemeID`
 |**Payee scheme Identifier** +
 Scheme identifier of payee identifier. +
-Value must be according to code list <<_puf_008_identificationscheme>>.
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
 
 |`cac:PartyName/cbc:Name`
 |**Payee name** +
@@ -22,7 +22,7 @@ Payee's legal registration identifier.
 |`cac:PartyLegalEntity/cbc:CompanyID/@schemeID`
 |**Legal company identifier scheme identifier** +
 Payee's legal registration identifier scheme identifier. +
-Value must be according to code list <<_puf_008_identificationscheme>>.
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
 
 |===
 

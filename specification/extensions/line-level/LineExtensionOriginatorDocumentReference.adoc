@@ -44,7 +44,7 @@ Identification of the tender reference.
 
 |`cbc:IssueDate`
 |**Referenced tender issue date** +
-Date of issue of the referenced tender, date should be formatted yyyy-mm-dd.
+Date of issue of the referenced tender, date should be formatted "yyyy-mm-dd".
 
 |===
 

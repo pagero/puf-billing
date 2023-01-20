@@ -43,7 +43,7 @@ Total line amount, including tax, discount and charges.
 |`puf:TaxInclusiveLineExtensionAmount/@currencyID`
 |**Tax inclusive line total amount currency code** +
 Currency of the `puf:TaxInclusiveLineExtensionAmount`. +
-For valid values see code list <<_puf_004_currencycode>>
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 

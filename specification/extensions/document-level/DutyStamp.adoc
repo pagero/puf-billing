@@ -39,7 +39,7 @@ Duty stamp amount.
 |`puf:Amount/@currencyID`
 |**Duty stamp currency** +
 Duty stamp amount currency. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 

@@ -46,7 +46,7 @@ Additional registration data identifier associated with the party.
 |`puf:RegistrationData/puf:IDType`
 |**Additional registration data identifier type** +
 To identify the type of registration data. +
-The `puf:IDType` must be coded using the <<_puf_001_registrationdata>> code list.
+The `puf:IDType` must be coded using the https://pagero.github.io/puf-code-lists/#_puf_001_registrationdata[PUF-001-REGISTRATIONDATA^] code list.
 
 |`puf:RegistrationData/puf:IDType/@listID`
 |**Additional registration data identifier list identifier** +
@@ -63,7 +63,7 @@ Name of the additional destination unit.
 |`puf:ADAID/puf:IDType`
 |**Additional destination address identifier type** +
 To identify the type of additional destination address identifier. +
-The `puf:IDType` must be coded using the <<_puf_002_adaid>> code list.
+The `puf:IDType` must be coded using the https://pagero.github.io/puf-code-lists/#_puf_002_adaid[PUF-002-ADAID^] code list.
 
 |`puf:ADAID/puf:IDType/@listID`
 |**Additional destination address list identifier** +
@@ -75,9 +75,9 @@ The `puf:IDType` must be coded using the <<_puf_002_adaid>> code list.
 
 When there is a need to provide additional registration data associated with the organization this can be done using the `RegistrationData` element.
 
-To identify the type of registration data, the `puf:IDType` must be coded using the <<_puf_001_registrationdata>> code list. 
+To identify the type of registration data, the `puf:IDType` must be coded using the https://pagero.github.io/puf-code-lists/#_puf_001_registrationdata[PUF-001-REGISTRATIONDATA^] code list. 
 
-See code list <<_puf_001_registrationdata>> for all supported types of registration data.
+See code list https://pagero.github.io/puf-code-lists/#_puf_001_registrationdata[PUF-001-REGISTRATIONDATA^] for all supported types of registration data.
 
 *Example*
 
@@ -115,9 +115,9 @@ See code list <<_puf_001_registrationdata>> for all supported types of registrat
 
 Additional Destination Address Identifier (ADAID) is used when there is a need to provide additional routing codes in order for the invoice to be sent to the correct recipient. This is mostly used to public entities (e.g. government recipients). 
 
-To identify the type of ADAID, the `puf:IDType` must be coded using the <<_puf_002_adaid>> code list. 
+To identify the type of ADAID, the `puf:IDType` must be coded using the https://pagero.github.io/puf-code-lists/#_puf_002_adaid[PUF-002-ADAID^] code list. 
 
-See code list <<_puf_002_adaid>> for all supported types of ADAID.
+See code list https://pagero.github.io/puf-code-lists/#_puf_002_adaid[PUF-002-ADAID^] for all supported types of ADAID.
 
 *Example*
 

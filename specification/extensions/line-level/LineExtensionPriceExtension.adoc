@@ -47,7 +47,7 @@ Note that the value should include the `cac:AllowanceCharge` applied on line lev
 |`puf:PriceInclAllowanceChargeAmount/@currencyID`
 |**Currency code for price including allowances and charges** +
 Currency of the unit price including allowances or charges. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`puf:TaxCurrencyPriceAmount`
 |**Price in tax currency** +
@@ -56,7 +56,7 @@ Unit price excluding allowances or charges in tax currency.
 |`puf:TaxCurrencyPriceAmount/@currencyID`
 |**Currency code for price in tax currency** +
 Currency of `puf:TaxCurrencyPriceAmount`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 

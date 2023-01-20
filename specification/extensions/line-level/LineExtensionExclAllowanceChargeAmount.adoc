@@ -43,7 +43,7 @@ Sum of the line amounts, the amount is excluded VAT, Tax, allowances and charges
 |`puf:LineExclAllowanceChargeAmount/@currencyID`
 |**Line total amount excluding tax, allowance and charges currency code** +
 Currency of the Line Excl Allowance Charge Amount. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 

@@ -19,7 +19,7 @@ Buyer's electronic address.
 |`cac:Party/cbc:EndpointID/@schemeID`
 |**Electronic Identifier scheme ID** +
 Scheme identifier of electronic address. +
-Value must be according to code list <<_puf_007_endpointscheme>>.
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_007_endpointscheme[PUF-007-ENDPOINTSCHEME^].
 
 |`cac:Party/cac:PartyIdentification/cbc:ID`
 |**Buyer Identifier** +
@@ -28,7 +28,7 @@ Identifier of the Buyer.
 |`cac:Party/cac:PartyIdentification/cbc:ID/@schemeID`
 |**Buyer Identifier** +
 Scheme identifier of Buyer identifier. +
-Value must be according to code list <<_puf_008_identificationscheme>>.
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
 
 |`cac:Party/cac:PartyName/cbc:Name`
 |**Buyer name** +
@@ -111,7 +111,7 @@ Buyer's legal registration identifier.
 |`cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID`
 |**Legal company scheme identifier** +
 Buyer's legal registration identifier scheme identifier. +
-Value must be according to code list <<_puf_008_identificationscheme>>.
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
 
 |`cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalForm`
 |**Company legal form** +

@@ -58,7 +58,7 @@ Total amount including tax per subtotal.
 
 |`puf:TaxInclusiveAmount/@currencyID`
 |**Currency of TaxInclusiveAmount** +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`puf:TaxCurrencyTaxInclusiveAmount`
 |**Total amount including tax in tax currency** +
@@ -66,7 +66,7 @@ Total amount including tax per subtotal in tax currency.
 
 |`puf:TaxCurrencyTaxInclusiveAmount/@currencyID`
 |**Currency of TaxCurrencyTaxInclusiveAmount** +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`puf:TaxChargeability/cbc:TaxTypeCode`
 |**Tax chargeability** +

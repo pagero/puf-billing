@@ -47,7 +47,7 @@ Below table show the definition of the new element added to the extension.
 
 |`puf:SalesOrderIssueDate`
 |**Sales order issue date** +
-Date of the sales order, date should be formatted yyyy-mm-dd.
+Date of the sales order, date should be formatted "yyyy-mm-dd".
 
 |===
 

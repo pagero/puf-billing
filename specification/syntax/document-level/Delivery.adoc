@@ -27,7 +27,7 @@ _E.g. GLN number._
 |**Delivery location identifier scheme identifier** +
 Scheme identifier of the delivery location identifier. +
 _E.g. 0088._ +
-Value must be according to code list <<_puf_008_identificationscheme>>.
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
 
 |`cac:DeliveryLocation/cbc:Description`
 |**Delivery location description** +
@@ -98,7 +98,7 @@ Identifier of the delivery party.
 |`cac:DeliveryParty/cac:PartyIdentification/cbc:ID/@schemeID`
 |**Seller Identifier** +
 Scheme identifier of delivery party identifier +
-Value must be according to code list <<_puf_008_identificationscheme>>.
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
 
 |`cac:DeliveryParty/cac:PartyName/cbc:Name`
 |**Delivery party name** +

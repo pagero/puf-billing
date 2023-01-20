@@ -16,7 +16,7 @@ Identifier for the referenced object/document.
 |**Referenced document identifier scheme** +
 Scheme identifier of the referenced object/document. +
 When used it should be according to the list +
-<<_puf_005_invoicedobjectidentifier>>.
+https://pagero.github.io/puf-code-lists/#_puf_005_invoicedobjectidentifier[PUF-005-INVOICEDOBJECTIDENTIFIER^].
 
 |`cbc:DocumentTypeCode`
 |**Referenced document type code** + 
@@ -34,7 +34,7 @@ The attached document base64 encoded.
 |**Referenced document MIME code** +
 The mimecode of the attached document. +
 Supported mime codes can be found in the code list +
-<<_puf_006_mimecodes>>.
+https://pagero.github.io/puf-code-lists/#_puf_006_mimecodes[PUF-006-MIMECODES^].
 
 |`cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename`
 |**Referenced document filename** +
@@ -108,5 +108,5 @@ _Invoice with reference to an invoiced object with a document number_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> The schemeID must be according to list <<_puf_005_invoicedobjectidentifier>>.
+<1> The schemeID must be according to list https://pagero.github.io/puf-code-lists/#_puf_005_invoicedobjectidentifier[PUF-005-INVOICEDOBJECTIDENTIFIER^].
 <2> Document type code should be '130' to indicate invoiced object.

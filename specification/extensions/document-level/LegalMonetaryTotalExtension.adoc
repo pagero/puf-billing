@@ -41,7 +41,7 @@ If the document currency and tax currency differs, tax exclusive Amount in tax c
 |`puf:TaxCurrencyTaxExclusiveAmount/@currencyID`
 |**Tax currency tax exclusive amount currency code** +
 Currency of the tax currency tax exclusive amount. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`puf:TaxCurrencyTaxInclusiveAmount`
 |**Tax currency tax inclusive amount** +
@@ -50,7 +50,7 @@ If the document currency and tax currency differs, tax inclusive amount in tax c
 |`puf:TaxCurrencyTaxInclusiveAmount/@currencyID`
 |**Tax currency tax inclusive amount currency code** +
 Currency of the tax currency tax inclusive Amount. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`puf:TaxCurrencyPayableAmount`
 |**Tax currency payable amount** +
@@ -59,7 +59,7 @@ If the document currency and tax currency differs, payable amount in tax currenc
 |`puf:TaxCurrencyPayableAmount/@currencyID`
 |**Tax currency payable amount currency code** +
 Currency of the tax currency payable amount. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`puf:PaymentInKind/puf:Amount`
 |**Payment in kind amount** +
@@ -68,7 +68,7 @@ Payment in kind amount on invoice.
 |`puf:PaymentInKind/puf:Amount/@currencyID`
 |**Payment in kind currency code** +
 Currency of the payment in kind amount. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`puf:PaymentInKind/cbc:Note`
 |**Payment in kind note** +

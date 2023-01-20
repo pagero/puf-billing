@@ -1,3 +1,3 @@
-Invoice and Credit Note XSD schemas including Pagero/PUF Extension can be downloaded here:
+Invoice and CreditNote XML schemas including Pagero/PUF Extension can be found here:
 
-- link:xml-schemas/puf-xsd-schemas.zip[]
+- https://github.com/pagero/puf-billing/tree/master/xml-schemas[^]

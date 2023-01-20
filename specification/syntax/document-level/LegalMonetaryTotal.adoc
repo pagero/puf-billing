@@ -16,7 +16,7 @@ _Summary of all TaxSubTotal/TaxAmount._
 |`cbc:LineExtensionAmount/@currencyID`
 |**Summary of all lines net amount currency** +
 Currency applied for `cbc:LineExtensionAmount`, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:TaxExclusiveAmount`
 |**Total invoice amount excluding tax** +
@@ -25,7 +25,7 @@ Documents total invoice amount, excluding taxes. +
 |`cbc:TaxExclusiveAmount/@currencyID`
 |**Total invoice amount currency excluding tax** +
 Currency applied for `cbc:TaxExclusiveAmount`, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:TaxInclusiveAmount`
 |**Total invoice amount including tax** +
@@ -34,7 +34,7 @@ Documents total invoice amount, including taxes.
 |`cbc:TaxInclusiveAmount/@currencyID`
 |**Total invoice amount currency including tax** +
 Currency applied for `cbc:TaxInclusiveAmount`, including taxes, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:AllowanceTotalAmount`
 |**Summary of all allowances on document level** +
@@ -43,7 +43,7 @@ Total amount of all allowances on document level (`Invoice/cac:AllowanceCharge/c
 |`cbc:AllowanceTotalAmount/@currencyID`
 |**Summary of all allowances on document level currency** +
 Currency applied for `cbc:AllowanceTotalAmount`, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:ChargeTotalAmount`
 |**Summary of all charges on document level** +
@@ -52,7 +52,7 @@ Total amount of all charges on document level (`Invoice/cac:AllowanceCharge/cbc:
 |`cbc:ChargeTotalAmount/@currencyID`
 |**Summary of all charges on document level currency** +
 Currency applied for cbc:ChargeTotalAmount, must be the same as cbc:DocumentCurrencyCode. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:PrepaidAmount`
 |**Amount already prepaid** +
@@ -61,7 +61,7 @@ Amount that has already been paid and should be subtracted from the payable amou
 |`cbc:PrepaidAmount/@currencyID`
 |**Prepaid amount currency** +
 Currency applied for `cbc:PrepaidAmount`, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:PayableRoundingAmount`
 |**Rounding amount** +
@@ -70,7 +70,7 @@ Rounding amount, should be applied to the calculation of payable amount.
 |`cbc:PayableRoundingAmount/@currencyID`
 |**Rounding amount currency** +
 Currency applied for `cbc:PayableRoundingAmount`, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:PayableAmount`
 |**Payable amount** +
@@ -79,7 +79,7 @@ Document total amount that should be paid, amount equals the subtraction of prep
 |`cbc:PayableAmount/@currencyID`
 |**Payable amount currency** +
 Currency applied for `cbc:PayableAmount`, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 

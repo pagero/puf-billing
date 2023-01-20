@@ -15,7 +15,7 @@ Net price of the item, this value must not be negative.
 |`cbc:PriceAmount/@currencyID`
 |**Item net price currency** +
 Currency applied for cbc:PriceAmount, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:BaseQuantity`
 |**Base quantity** +
@@ -24,7 +24,7 @@ The number of items to which the price applies.
 |`cbc:BaseQuantity/@unitCode`
 |**Base quantity unit of measure** +
 The unit of measure of the base quantity. +
-See code list <<_puf_014_uomcode>> for recommendations.
+See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-UOMCODE^] for recommendations.
 
 |`cac:AllowanceCharge/cbc:ChargeIndicator`
 |**Charge indicator** +
@@ -37,7 +37,7 @@ The allowance applied to the price, note that this value is just informative and
 |`cac:AllowanceCharge/cbc:Amount/@currencyID`
 |**Allowance Amount currency** +
 Currency applied for `cbc:Amount`, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cac:AllowanceCharge/cbc:BaseAmount`
 |**Base amount** +
@@ -46,7 +46,7 @@ The items base price, before any allowance was applied, this value must not be n
 |`cac:AllowanceCharge/cbc:BaseAmount/@currencyID`
 |**Base amount currency** +
 Currency applied for cbc:BaseAmount, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 

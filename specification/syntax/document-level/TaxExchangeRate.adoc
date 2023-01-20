@@ -5,12 +5,12 @@
 |`cbc:SourceCurrencyCode`
 |**Source currency code** +
 Source currency code (i.e. document currency). +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:TargetCurrencyCode`
 |**Target currency code** +
 Target currency code (i. e. tax currency). +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:CalculationRate`
 |**Exchange calculation rate** +

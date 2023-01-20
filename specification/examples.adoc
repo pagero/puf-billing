@@ -1,1 +1,3 @@
-Example files can be downloaded from https://github.com/pagero/puf-billing/tree/master/examples[GitHub^] 
+Example files can be found here:
+
+- https://github.com/pagero/puf-billing/tree/master/examples[^]

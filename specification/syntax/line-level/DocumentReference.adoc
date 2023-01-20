@@ -9,7 +9,7 @@ Identifier for the line referenced object.
 |`cbc:ID/@schemeID`
 |**Scheme Identifier for line referenced object** +
 Scheme identifier of the referenced object/document. +
-The schemeID must be according to list <<_puf_005_invoicedobjectidentifier>>.
+The schemeID must be according to list https://pagero.github.io/puf-code-lists/#_puf_005_invoicedobjectidentifier[PUF-005-INVOICEDOBJECTIDENTIFIER^].
 
 |`cbc:DocumentTypeCode`
 |**Document type code** +

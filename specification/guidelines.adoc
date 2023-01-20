@@ -8,7 +8,6 @@ In other areas where there are no suitable elements in the existing UBL 2.1 sche
 
 Since `UBLExtensions` are only available on document level in UBL 2.1, it had to be altered, adding the `UBLExtension` in every aggregate thus replacing the `UBL-CommonAggregateComponents-2.1.xsd` with the PUF altered `PUF-CommonAggregateComponents-2.1.xsd`. The reason for this is that there would be too many semantic rules to tie each `UBLExtension` on document level to their corresponding existing element on other levels.
 
-
 === How to get started with PUF
 
 include::guidelines/get-started.adoc[]
@@ -35,10 +34,10 @@ The "other" elements in the XSD will prevent validation error for customers who 
 
 A minor release will always be backward compatible and will take place without prior notice and will be implemented whenever needed. 
 
-Minor releases may include bugfixes, new elements, schematron updates and other features. These releases can be followed on https://github.com/pagero/puf-billing[GitHub^].
+Minor releases may include bugfixes, new elements, schematron updates and other features. These releases can be followed on https://github.com/pagero/puf-billing[^].
 
 ==== Major release
 
-A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation, to users who registered an account on Pagero validex or on https://github.com/pagero/puf-billing[GitHub^].
+A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation, to users who registered an account on https://pagero.validex.net[^] or on https://github.com/pagero/puf-billing[^].
 
-To register for PUF major release notification you can create an account on https://pagero.validex.net[https://pagero.validex.net^]. But we urge all interested parties to follow the project on https://github.com/pagero/puf-billing[GitHub^] where all releases will be notified.
+To register for PUF major release notification you can create an account on https://pagero.validex.net[^]. But we urge all interested parties to follow the project on https://github.com/pagero/puf-billing[^] where all releases will be notified.

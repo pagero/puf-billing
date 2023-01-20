@@ -10,7 +10,7 @@ _Value must be either true or false._
 |`cbc:AllowanceChargeReasonCode`
 |**Allowance or charge reason code** +
 Reason code for allowance or charge. +
-See code list <<_puf_011_allowancechargereasoncode>> for recommendations.
+See code list https://pagero.github.io/puf-code-lists/#_puf_011_allowancechargereasoncode[PUF-011-ALLOWANCECHARGEREASONCODE^] for recommendations.
 
 |`cbc:AllowanceChargeReason`
 |**Allowance or charge reason** +
@@ -28,7 +28,7 @@ Amount of allowance or charge.
 |`cbc:Amount/@currencyID`
 |**Allowance or charge amount currency** +
 Allowance or charge amount currency. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:BaseAmount`
 |**Allowance or charge base amount** +
@@ -37,13 +37,13 @@ Base amount which the calculation is based on.
 |`cbc:BaseAmount/@currencyID`
 |**Allowance or charge base amount currency** +
 Base amount currency. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cac:TaxCategory/cbc:ID`
 |**Allowance or charge tax category code** +
 Code to indicate the tax category. +
 _E.g. "S"._ +
-For valid values see code list <<_puf_012_taxcategorycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
 
 |`cac:TaxCategory/cbc:Percent`
 |**Allowance or Charge tax percent** +
@@ -52,7 +52,7 @@ Allowance or charge tax percent.
 |`cac:TaxCategory/cbc:TaxExemptionReasonCode`
 |**Tax exemption reason code** +
 Reason code if the allowance or charge is exempt from tax. +
-See code list <<_puf_013_exemptcode>> for recommendations.
+See code list https://pagero.github.io/puf-code-lists/#_puf_013_taxexemptioncode[PUF-013-TAXEXEMPTIONCODE^] for recommendations.
 
 |`cac:TaxCategory/cbc:TaxExemptionReason`
 |**Tax exemption reason** +
@@ -60,7 +60,7 @@ Reason if the allowance or charge is exempt from tax.
 
 |`cac:TaxCategory/cac:TaxScheme/cbc:ID`
 |**Allowance or Charge tax scheme identifier** +
-For valid values see code list <<_puf_009_taxtypescheme>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[PUF-009-TAXTYPESCHEME^].
 
 |`cac:TaxTotal/cbc:TaxAmount`
 |**Allowance or Charge tax Amount** +
@@ -69,7 +69,7 @@ Total tax amount for the allowance or charge.
 |`cac:TaxTotal/cbc:TaxAmount/@currencyID`
 |**Allowance or Charge tax Amount currency** +
 Total tax amount currency for the allowance or charge. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 

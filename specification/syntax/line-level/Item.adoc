@@ -33,7 +33,7 @@ Identifier of the item, based on an official register.
 |`cac:StandardItemIdentification/cbc:ID/@schemeID`
 |**Standard item identifier scheme identifier** +
 Identifier of the standard item register. +
-Value must be according to code list <<_puf_008_identificationscheme>>.
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
 
 |`cac:OriginCountry/cbc:IdentificationCode`
 |**Item country origin** +
@@ -46,7 +46,7 @@ The items classification code.
 |`cac:CommodityClassification/cbc:ItemClassificationCode/@listID`
 |**Item classification list identifier** +
 Scheme identifier of the items classification code. +
-For valid values see code list <<_puf_015_itemtypeidentificationcode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_015_itemtypeidentificationcode[PUF-015-ITEMTYPEIDENTIFICATIONCODE^].
 
 |`cac:CommodityClassification/cbc:ItemClassificationCode/@listVersionID`
 |**Item classification list version identifier** +
@@ -56,7 +56,7 @@ Scheme version identifier of the items classification code.
 |**Tax category identifier** +
 Code for identifying the tax category. +
 _E.g. tax category "S"._ +
-For valid values see code list <<_puf_012_taxcategorycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
 
 |`cac:ClassifiedTaxCategory/cbc:Percent`
 |**Tax category percent** +
@@ -65,7 +65,7 @@ Percentage rate for the tax category.
 |`cac:ClassifiedTaxCategory/cac:TaxScheme/cbc:ID`
 |**Tax scheme identfier** +
 Tax scheme for the tax category. +
-For valid values see code list <<_puf_009_taxtypescheme>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[PUF-009-TAXTYPESCHEME^].
 
 |`cac:AdditionalItemProperty/cbc:Name`
 |**Additional item property name** +

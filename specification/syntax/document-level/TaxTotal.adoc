@@ -12,7 +12,7 @@ _Summary of all cac:TaxSubTotal/cbc:TaxAmount._
 |`cbc:TaxAmount/@currencyID`
 |**Document total tax amount currency** +
 Documents total tax amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cac:TaxSubtotal/ext:UBLExtensions`
 |**Extension Content** +
@@ -26,7 +26,7 @@ _E.g. Summary of all taxable amounts for invoice lines with a certain tax percen
 |`cac:TaxSubtotal/cbc:TaxableAmount/@currencyID`
 |**Total taxable amount for each tax category currency** +
 Total taxable amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cac:TaxSubtotal/cbc:TaxAmount`
 |**Total tax amount for each tax category** +
@@ -35,13 +35,13 @@ Total tax amount for a certain tax category or tax rate.
 |`cac:TaxSubtotal/cbc:TaxAmount/@currencyID`
 |**Total tax amount currency for each tax category** +
 Total tax amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cac:TaxSubtotal/cac:TaxCategory/cbc:ID`
 |**Tax category code** +
 Code for identifying the tax category. +
 _E.g. tax category "S"._ +
-For valid values see code list <<_puf_012_taxcategorycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
 
 |`cac:TaxSubtotal/cac:TaxCategory/cbc:Percent`
 |**Tax category percent** +
@@ -50,7 +50,7 @@ Percentage rate for the tax category.
 |`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode`
 |**Tax exemption reason code** +
 Exemption reason code for the tax category, only applicable if the goods or service is exempt from tax. +
-See code list <<_puf_013_exemptcode>> for recommendations.
+See code list https://pagero.github.io/puf-code-lists/#_puf_013_taxexemptioncode[PUF-013-TAXEXEMPTIONCODE^] for recommendations.
 
 |`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason`
 |**Tax exemption reason** +
@@ -59,7 +59,7 @@ Exemption reason for the tax category, only applicable if the goods or service i
 |`cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID`
 |**Tax scheme identfier** +
 Tax scheme for the tax category. +
-For valid values see code list <<_puf_009_taxtypescheme>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[PUF-009-TAXTYPESCHEME^].
 
 |===
 

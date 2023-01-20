@@ -10,7 +10,7 @@ _Value must be either true or false._
 |`cbc:AllowanceChargeReasonCode`
 |**Line allowance or charge reason code** +
 Reason code for allowance or charge. +
-See code list <<_puf_011_allowancechargereasoncode>> for recommendations.
+See code list https://pagero.github.io/puf-code-lists/#_puf_011_allowancechargereasoncode[PUF-011-ALLOWANCECHARGEREASONCODE^] for recommendations.
 
 |`cbc:AllowanceChargeReason`
 |**Line allowance or charge reason** +
@@ -28,7 +28,7 @@ Amount of allowance or charge.
 |`cbc:Amount/@currencyID`
 |**Line allowance or charge amount currency** +
 Amount of allowance or charge currency. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cbc:BaseAmount`
 |**Line allowance or charge base amount** +
@@ -37,7 +37,7 @@ Base amount which the calcuation is based on.
 |`cbc:BaseAmount/@currencyID`
 |**Line allowance or charge base amount currency** +
 Base amount currency. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 

@@ -8,7 +8,7 @@ The net amount for the invoice line.
 |`cbc:LineExtensionAmount/@currencyID`
 |**Net amount currency** +
 Currency applied for cbc:LineExtensionAmount, must be the same as cbc:DocumentCurrencyCode. +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 

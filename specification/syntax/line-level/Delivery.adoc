@@ -9,7 +9,7 @@ Delivered quantity.
 |`cbc:Quantity/@unitCode`
 |**Delivered quantity unit of measure** +
 Unit of the delivered quantity. +
-See code list <<_puf_014_uomcode>> for recommendations.
+See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-UOMCODE^] for recommendations.
 
 |`cbc:ActualDeliveryDate`
 |**Delivery date** +
@@ -22,7 +22,7 @@ _E.g. a GLN number._
 
 |`cac:DeliveryLocation/cbc:ID/@schemeID`
 |**Delivery location scheme identifier** +
-Value must be according to code list <<_puf_008_identificationscheme>>.
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
 
 |`cac:DeliveryLocation/cac:Address/cbc:StreetName`
 |**Street name** +

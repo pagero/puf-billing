@@ -5,7 +5,7 @@
 |**Document currency code** +
 The currency code in which the amounts is specified through out the invoice. +
 _Value must be according to ISO 4217 Currency codes._ +
-For valid values see code list <<_puf_004_currencycode>>.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 
