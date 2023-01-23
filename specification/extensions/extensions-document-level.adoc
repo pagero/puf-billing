@@ -20,6 +20,10 @@ include::document-level/DutyStamp.adoc[]
 
 include::document-level/IgstOnIntra.adoc[]
 
+==== SupplierGeneratedQRString
+
+include::document-level/SupplierGeneratedQRString.adoc[]
+
 ==== OrderReference
 
 include::document-level/OrderReferenceExtension.adoc[]

@@ -5,279 +5,296 @@
   Copyright (c) Pagero Group. All Rights Reserved.
 -->
 <xsd:schema xmlns="urn:pagero:ExtensionComponent:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ccts="urn:un:unece:uncefact:documentation:2" targetNamespace="urn:pagero:ExtensionComponent:1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
-	<!-- ===== Imports ===== -->
-	<xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" schemaLocation="../common/UBL-CommonBasicComponents-2.1.xsd"/>
-	<xsd:import namespace="urn:pagero:CommonAggregateComponents:1.0" schemaLocation="../common/PUF-CommonAggregateComponents-2.1.xsd"/>
-	<xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" schemaLocation="../common/UBL-UnqualifiedDataTypes-2.1.xsd"/>
-	<!-- ===== Element Declarations ===== -->
-	<xsd:element name="Amount" type="PUFAmountType"/>
-	<xsd:element name="IDType" type="PUFIDType"/>
-	<xsd:element name="Code" type="PUFCodeType"/>
-	<xsd:element name="Key" type="PUFCodeType"/>
-	<xsd:element name="Value" type="PUFTextType"/>
-	<xsd:element name="PageroExtension">
-		<xsd:annotation>
-			<xsd:documentation>This element is to be considered as the root element in the pagero extension</xsd:documentation>
-		</xsd:annotation>
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="RestrictedInformation" minOccurs="0" maxOccurs="unbounded">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element ref="Key" minOccurs="1" maxOccurs="1"/>
-							<xsd:element ref="Value" minOccurs="1" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="SupplyType" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element ref="Code" minOccurs="1" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="DutyStamp" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element ref="Amount" minOccurs="1" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="IGSTOnIntra" type="PUFIndicatorType" minOccurs="0" maxOccurs="1"/>
-				<xsd:element name="BillingSoftware" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="Number" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="Hash" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element ref="cbc:Description" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="OrderReferenceExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="SalesOrderIssueDate" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="BillingReferenceExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="ContractDocumentReferenceExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="BuyerContractID" type="PUFIDType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="BuyerContractIssueDate" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="PartyExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="RegistrationData" minOccurs="0" maxOccurs="unbounded">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
-										<xsd:element ref="IDType" minOccurs="1" maxOccurs="1"/>
-										<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:element name="ADAID" minOccurs="0" maxOccurs="unbounded">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
-										<xsd:element ref="cbc:Name" minOccurs="0" maxOccurs="1"/>
-										<xsd:element ref="IDType" minOccurs="1" maxOccurs="1"/>
-										<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="DeliveryExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="DeliveryMethod" minOccurs="0" maxOccurs="1">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
-										<xsd:element ref="Code" minOccurs="0" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="PaymentTermsExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="Penalty" minOccurs="0" maxOccurs="1">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="TaxSubtotalExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="TaxCurrencyTaxableAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="TaxCurrencyTaxAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="TaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="TaxCurrencyTaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="TaxChargeability" minOccurs="0" maxOccurs="1">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="cbc:TaxTypeCode" minOccurs="1" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:element name="EquivalenceSurcharge" minOccurs="0" maxOccurs="1">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="cbc:Percent" minOccurs="1" maxOccurs="1"/>
-										<xsd:element ref="Amount" minOccurs="1" maxOccurs="1"/>
-										<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="LegalMonetaryTotalExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="TaxCurrencyTaxExclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="TaxCurrencyTaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="TaxCurrencyPayableAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="PaymentInKind" minOccurs="0" maxOccurs="1">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="Amount" minOccurs="1" maxOccurs="1"/>
-										<xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="LineExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="RestrictedInformation" minOccurs="0" maxOccurs="unbounded">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="Key" minOccurs="1" maxOccurs="1"/>
-										<xsd:element ref="Value" minOccurs="1" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:element name="TaxCurrencyLineExtensionAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="TaxInclusiveLineExtensionAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="TaxCurrencyTaxInclusiveLineExtensionAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="LineExclAllowanceChargeAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="OrderLineReference" minOccurs="0" maxOccurs="1">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element name="SalesOrderIssueDate" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:element name="OriginatorDocumentReference" minOccurs="0" maxOccurs="1">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
-										<xsd:element ref="cbc:IssueDate" minOccurs="0" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:element name="ProjectReference" minOccurs="0" maxOccurs="1">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:element name="ContractDocumentReference" minOccurs="0" maxOccurs="1">
-								<xsd:complexType>
-									<xsd:sequence>
-										<xsd:element ref="cbc:ID" minOccurs="0" maxOccurs="1"/>
-										<xsd:element ref="cbc:IssueDate" minOccurs="0" maxOccurs="1"/>
-										<xsd:element name="BuyerContractID" type="PUFIDType" minOccurs="0" maxOccurs="1"/>
-										<xsd:element name="BuyerContractIssueDate" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
-									</xsd:sequence>
-								</xsd:complexType>
-							</xsd:element>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="PriceExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="PriceInclAllowanceChargeAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:element name="TaxCurrencyPriceAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:element name="ItemExtension" minOccurs="0" maxOccurs="1">
-					<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="ItemType" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
-							<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-				<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-	<!--Types-->
-	<xsd:complexType name="PUFCodeType">
-		<xsd:simpleContent>
-			<xsd:extension base="udt:CodeType"/>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="PUFIDType">
-		<xsd:simpleContent>
-			<xsd:extension base="udt:CodeType"/>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="PUFAmountType">
-		<xsd:simpleContent>
-			<xsd:extension base="udt:AmountType"/>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="PUFIndicatorType">
-		<xsd:simpleContent>
-			<xsd:extension base="udt:IndicatorType"/>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="PUFDateType">
-		<xsd:simpleContent>
-			<xsd:extension base="udt:DateType"/>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="PUFTextType">
-		<xsd:simpleContent>
-			<xsd:extension base="udt:TextType"/>
-		</xsd:simpleContent>
-	</xsd:complexType>
+    <!-- ===== Imports ===== -->
+    <xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" schemaLocation="../common/UBL-CommonBasicComponents-2.1.xsd"/>
+    <xsd:import namespace="urn:pagero:CommonAggregateComponents:1.0" schemaLocation="../common/PUF-CommonAggregateComponents-2.1.xsd"/>
+    <xsd:import namespace="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" schemaLocation="../common/UBL-UnqualifiedDataTypes-2.1.xsd"/>
+    <!-- ===== Element Declarations ===== -->
+    <xsd:element name="Amount" type="PUFAmountType"/>
+    <xsd:element name="IDType" type="PUFIDType"/>
+    <xsd:element name="Code" type="PUFCodeType"/>
+    <xsd:element name="Key" type="PUFCodeType"/>
+    <xsd:element name="Value" type="PUFTextType"/>
+    <xsd:element name="InvoiceSeries" type="InvoiceSeriesType"/>
+    <xsd:element name="PageroExtension">
+        <xsd:annotation>
+            <xsd:documentation>This element is to be considered as the root element in the pagero extension</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="RestrictedInformation" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="Key" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element ref="Value" minOccurs="1" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="SupplierGeneratedQRString" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="QRString" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="QREncodingType" type="PUFIDType" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="SupplyType" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="Code" minOccurs="1" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="DutyStamp" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="Amount" minOccurs="1" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="IGSTOnIntra" type="PUFIndicatorType" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="BillingSoftware" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Number" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="Hash" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element ref="cbc:Description" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element ref="InvoiceSeries" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="OrderReferenceExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="SalesOrderIssueDate" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="BillingReferenceExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="InvoiceSeries" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element ref="Code" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="ContractDocumentReferenceExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="BuyerContractID" type="PUFIDType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="BuyerContractIssueDate" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="PartyExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="RegistrationData" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
+                                        <xsd:element ref="IDType" minOccurs="1" maxOccurs="1"/>
+                                        <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="ADAID" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
+                                        <xsd:element ref="cbc:Name" minOccurs="0" maxOccurs="1"/>
+                                        <xsd:element ref="IDType" minOccurs="1" maxOccurs="1"/>
+                                        <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="DeliveryExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="DeliveryMethod" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
+                                        <xsd:element ref="Code" minOccurs="0" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="PaymentTermsExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Penalty" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="TaxSubtotalExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="TaxCurrencyTaxableAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="TaxCurrencyTaxAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="TaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="TaxCurrencyTaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="TaxChargeability" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="cbc:TaxTypeCode" minOccurs="1" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="EquivalenceSurcharge" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="cbc:Percent" minOccurs="1" maxOccurs="1"/>
+                                        <xsd:element ref="Amount" minOccurs="1" maxOccurs="1"/>
+                                        <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="LegalMonetaryTotalExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="TaxCurrencyTaxExclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="TaxCurrencyTaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="TaxCurrencyPayableAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="PaymentInKind" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="Amount" minOccurs="1" maxOccurs="1"/>
+                                        <xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="LineExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="RestrictedInformation" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="Key" minOccurs="1" maxOccurs="1"/>
+                                        <xsd:element ref="Value" minOccurs="1" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="TaxCurrencyLineExtensionAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="TaxInclusiveLineExtensionAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="TaxCurrencyTaxInclusiveLineExtensionAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="LineExclAllowanceChargeAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="OrderLineReference" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="SalesOrderIssueDate" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="OriginatorDocumentReference" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
+                                        <xsd:element ref="cbc:IssueDate" minOccurs="0" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="ProjectReference" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="ContractDocumentReference" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="cbc:ID" minOccurs="0" maxOccurs="1"/>
+                                        <xsd:element ref="cbc:IssueDate" minOccurs="0" maxOccurs="1"/>
+                                        <xsd:element name="BuyerContractID" type="PUFIDType" minOccurs="0" maxOccurs="1"/>
+                                        <xsd:element name="BuyerContractIssueDate" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="PriceExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="PriceInclAllowanceChargeAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="TaxCurrencyPriceAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="ItemExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ItemType" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <!--Types-->
+    <xsd:complexType name="PUFCodeType">
+        <xsd:simpleContent>
+            <xsd:extension base="udt:CodeType"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="PUFIDType">
+        <xsd:simpleContent>
+            <xsd:extension base="udt:CodeType"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="PUFAmountType">
+        <xsd:simpleContent>
+            <xsd:extension base="udt:AmountType"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="PUFIndicatorType">
+        <xsd:simpleContent>
+            <xsd:extension base="udt:IndicatorType"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="PUFDateType">
+        <xsd:simpleContent>
+            <xsd:extension base="udt:DateType"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="PUFTextType">
+        <xsd:simpleContent>
+            <xsd:extension base="udt:TextType"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="InvoiceSeriesType">
+        <xsd:sequence>
+            <xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
 </xsd:schema>

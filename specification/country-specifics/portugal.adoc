@@ -35,12 +35,14 @@ _Extension with the billing software details populated_
 
 In Portugal it can be required to provide a QR code and ATCUD. 
 
-The portugese government has specified that this can be provided in elements that exist in Peppol BIS 3.0 and therefore also exist in PUF. 
+There are two ways of providing a QR string in PUF. Note that you should only use **one** of the alternatives.
 
-Below you will find a guide on how to provide it to comply with the portugese specification.
 
-*Example* +
-_QR code and ATCUD provided in cac:AdditionalDocumentReference_
+
+
+*Example 1. As mentioned in the national CIUS-PT.* +
+_In this example the QR code and ATCUD is provided in cac:AdditionalDocumentReference provided as recommended in the portuguese national cius (CIUS-PT). This way of sending the QR can be used if
+the issuer is sending an Invoice Image that contains a qr image that corresponds to the the embedded qr string in below example._
 [source,xml]
 ----
 <Invoice>
@@ -51,6 +53,34 @@ _QR code and ATCUD provided in cac:AdditionalDocumentReference_
         <cac:Attachment> <!--QR Code encoded in base64-->
             <cbc:EmbeddedDocumentBinaryObject mimeCode="text/plain" filename="the filename">QRstringInBase64</cbc:EmbeddedDocumentBinaryObject><!-- mimeCode must be text/plain -->
         </cac:Attachment>
+    </cac:AdditionalDocumentReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example 2. Alternate way of sending QR string and ATCUD* +
+If there is a need for providing a QR code that is to be used by Pagero in order to display it on an invoice presentation/image. If this is the case the below example is to visualize how QR and ATCUD
+can be provided. Note that in this scenario the QR string must be sent as plain TEXT and not as base64._
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:QRExtension</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:SupplierGeneratedQRString>
+            <puf:QRString>TheQRCode</puf:QRString>
+            <puf:QREncodingType>TEXT</puf:QREncodingType>
+          </puf:SupplierGeneratedQRString>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity --> 
+  <cac:AdditionalDocumentReference>
+        <cbc:ID schemeID="ANG">12345678-123456789123</cbc:ID> <!--ATCUD, use the schemeID ANG-->
     </cac:AdditionalDocumentReference>
     <!-- Code omitted for clarity -->
 </Invoice>
