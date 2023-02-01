@@ -8,7 +8,7 @@ In other areas where there are no suitable elements in the existing UBL 2.1 sche
 
 Since `UBLExtensions` are only available on document level in UBL 2.1, it had to be altered, adding the `UBLExtension` in every aggregate thus replacing the `UBL-CommonAggregateComponents-2.1.xsd` with the PUF altered `PUF-CommonAggregateComponents-2.1.xsd`. The reason for this is that there would be too many semantic rules to tie each `UBLExtension` on document level to their corresponding existing element on other levels.
 
-=== How to get started with PUF
+=== How to get started
 
 include::guidelines/get-started.adoc[]
 
@@ -24,7 +24,7 @@ include::guidelines/customizationid-and-profileid.adoc[]
 
 include::guidelines/working-with-extensions.adoc[]
 
-=== Continuous development and release management
+=== Release management
 
 PUF will continuously be updated to meet new market demands. In order to support backward compatibility, the XSD schema is built with the use of "other" elements. 
 

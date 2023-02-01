@@ -1,6 +1,6 @@
 This section contains information about special requirements concerning invoicing in the Basque Country.
 
-==== Invoice Description
+==== Invoice description
 
 When reporting an invoice to the Basque tax authorities, it is a requirement to provide an invoice description. This is a description of why the invoice exists and what its purpose is. 
 
@@ -19,7 +19,7 @@ _Invoice Description example_
 </Invoice>
 ----
 
-==== Invoice Series
+==== Invoice series
 
 If the invoice follows an invoice series, this should be reported to the Basque tax authorities.
 
@@ -73,12 +73,12 @@ _Example with additional id provided in Basque Country in Party structure_
 ----
 <1> The passport id provided as `cac:PartyIdentification/cbc:ID`.
 
-==== Tax Category codes
+==== Tax category codes
 
 Tax category codes for the Basque Country can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_basque_country[Tax category codes Basque Country^].
 
 
-==== Tax Regime
+==== Tax regime
 
 When reporting an invoice to the Basque tax authorities, it is required to specify the tax regime codes the invoice falls under. 
 
@@ -168,7 +168,7 @@ _Tax Regime example_
 </Invoice>
 ----
 
-==== Transaction Type
+==== Transaction type
 
 When reporting a cross-border invoice (i.e. not within Spain) to the Basque tax authorities, it is required to specify the transaction type the invoice falls under. 
 
@@ -214,7 +214,7 @@ _Transaction Type example_
 </Invoice>
 ----
 
-==== Correction Reason code
+==== Correction reason code
 
 When reporting a correction (Credit Note) to the Basque tax authorities, it is required to specify why the correction is being made. 
 

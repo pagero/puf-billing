@@ -1,6 +1,6 @@
 This section contains information about requirements and other information concerning invoicing in Italy.
 
-==== Routing code (Codice Destinatario)
+==== Routing code (codice destinatario)
 
 In order to send invoices in Italy a destination code must be provided called "Codice Destinatario".
 
@@ -22,7 +22,7 @@ The destination code should be sent in `cac:AccountingCustomerParty/cac:Party/cb
 </Invoice>
 ----
 
-==== Duty stamp (Dati Bollo)
+==== Duty stamp (dati bollo)
 
 In order to provide Dati Bollo (Duty Stamp) required on some invoices in Italy the value can be provided in the following element <<_dutystamp, Duty Stamp>>.
 
@@ -47,7 +47,7 @@ _Example for Dati Bollo in Italy_
 </Invoice>
 ----
 
-==== Tax chargeability (Esigibilita IVA)
+==== Tax chargeability (esigibilita IVA)
 
 To provide tax chargeability, the extension element `(Invoice|CreditNote)/cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions` can be used. 
 
@@ -89,7 +89,7 @@ Possible values to provide:
 </Invoice>
 ----
 
-==== VAT number and fiscal Code
+==== VAT number and fiscal code
 
 It is possible to send a VAT number and/or a fiscal code (Codice Fiscale) in PUF, below is a description and example how to provide this.
 

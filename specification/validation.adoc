@@ -1,6 +1,6 @@
 Available validation rules for PUF.
 
-To validate PUF documents please create an account on https://pagero.validex.net[^].
+To validate PUF documents please create an account on https://pagero.validex.net[Pagero Validex^].
 
 The validations available on validex are:
 
@@ -8,7 +8,7 @@ The validations available on validex are:
 2. **XSD schema**
 3. **PUF schematron rules** (see below)
 
-The validation artefacts are also available on https://github.com/pagero/puf-billing/tree/master/validation-artefacts[^].
+The validation artefacts are also available on https://github.com/pagero/puf-billing/tree/master/validation-artefacts[GitHub^].
 
 .Schematron rules in PUF
 [%autowidth.stretch]

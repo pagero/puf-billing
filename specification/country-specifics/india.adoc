@@ -106,7 +106,7 @@ _Example of a correct address for cac:AccountingCustomerParty_
 
 Tax type scheme codes for India can be found in https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[PUF-009-TAXTYPESCHEME^].
 
-==== Harmonized System of Nomenclature code (HSN Code)
+==== HSN code
 
 Each invoice line must contain a HSN code, IRP will validate that the provided HSN code correspond with relevant taxes for that goods or service.
 
