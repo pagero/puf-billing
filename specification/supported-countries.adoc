@@ -40,12 +40,12 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*No*
 |
 
-|Denmark
+|Croatia
 |*Yes*
 |*No*
 |
 
-|Croatia
+|Denmark
 |*Yes*
 |*No*
 |
