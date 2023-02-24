@@ -171,6 +171,11 @@ Only support for invoice and corrections.
 |*No*
 |
 
+|Switzerland
+|*Yes*
+|*No*
+|
+
 |United Kingdom
 |*Yes*
 |*No*
