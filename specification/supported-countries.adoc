@@ -95,6 +95,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*Yes*
 |
 
+|Latvia
+|*Yes*
+|*No*
+|
+
 |Lithuania
 |*Yes*
 |*No*
