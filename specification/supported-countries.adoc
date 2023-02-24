@@ -150,6 +150,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*Yes*
 |
 
+|Romania
+|*Yes*
+|*No*
+|
+
 |Saudi Arabia
 |*Yes*
 |*Yes*
@@ -174,7 +179,7 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*Yes*
 |*Yes*
 |Support for TicketBAI system in the Basque region. +
-Only support for invoice and corrections.
+Only support for invoice and credit.
 
 |Sweden
 |*Yes*
