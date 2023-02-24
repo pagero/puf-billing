@@ -100,6 +100,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*No*
 |
 
+|Malta
+|*Yes*
+|*No*
+|
+
 |Netherlands
 |*Yes*
 |*No*
