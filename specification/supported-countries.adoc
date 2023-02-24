@@ -35,6 +35,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*No*
 |
 
+|Bulgaria
+|*Yes*
+|*No*
+|
+
 |Canada
 |*Yes*
 |*No*
