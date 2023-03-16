@@ -4612,6 +4612,16 @@ Scheme identifier of the referenced object/document.<br>
 The schemeID must be according to list <a href="https://pagero.github.io/puf-code-lists/#_puf_005_invoicedobjectidentifier" target="_blank" rel="noopener">PUF-005-INVOICEDOBJECTIDENTIFIER</a>.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:IssueDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Issue date of the referenced document</strong><br>
+<em>Format "YYYY-MM-DD".</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:IssueTime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Issue time of the referenced document</strong><br>
+<em>Format "HH:mm:ss", "HH:mm:ssZZZZ", "HH:mm:ss.SSS&#8217;Z'", or "HH:mm:ss.SSS".</em></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:DocumentTypeCode</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Document type code</strong><br>
 Document type code should be '130' if referencing an invoiced object.</p></td>
@@ -4620,7 +4630,7 @@ Document type code should be '130' if referencing an invoiced object.</p></td>
 </table>
 <div class="paragraph">
 <p><strong>Example</strong><br>
-<em>cac:InvoiceLine/cac:DocumentReference with example value</em></p>
+<em>cac:InvoiceLine/cac:DocumentReference for referencing an invoiced object</em></p>
 </div>
 <div class="listingblock">
 <div class="content">

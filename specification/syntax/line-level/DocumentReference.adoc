@@ -11,6 +11,14 @@ Identifier for the line referenced object.
 Scheme identifier of the referenced object/document. +
 The schemeID must be according to list https://pagero.github.io/puf-code-lists/#_puf_005_invoicedobjectidentifier[PUF-005-INVOICEDOBJECTIDENTIFIER^].
 
+|`cbc:IssueDate`
+|**Issue date of the referenced document** +
+_Format "YYYY-MM-DD"._
+
+|`cbc:IssueTime`
+|**Issue time of the referenced document** +
+_Format "HH:mm:ss", "HH:mm:ssZZZZ", "HH:mm:ss.SSS'Z'", or "HH:mm:ss.SSS"._
+
 |`cbc:DocumentTypeCode`
 |**Document type code** +
 Document type code should be '130' if referencing an invoiced object.
@@ -18,7 +26,7 @@ Document type code should be '130' if referencing an invoiced object.
 |===
 
 *Example* +
-_cac:InvoiceLine/cac:DocumentReference with example value_
+_cac:InvoiceLine/cac:DocumentReference for referencing an invoiced object_
 [source,xml]
 ----
 <Invoice>
