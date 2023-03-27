@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0"
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>123456</cbc:ID>
+    <cbc:IssueDate>2018-01-01</cbc:IssueDate>
+    <cbc:IssueTime>21:32:52</cbc:IssueTime>
+    <cbc:DueDate>2018-12-01</cbc:DueDate>
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <cbc:Note>Header Text 1</cbc:Note>
+    <cbc:Note>Header Text 2</cbc:Note>
+    <cbc:Note>Header Text 3</cbc:Note>
+    <cbc:TaxPointDate>2017-01-01</cbc:TaxPointDate>
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <cbc:TaxCurrencyCode>USD</cbc:TaxCurrencyCode>
+    <cbc:AccountingCost>Accounting Cost</cbc:AccountingCost>
+    <cbc:BuyerReference>Buyer Reference</cbc:BuyerReference>
+    <cac:InvoicePeriod>
+        <cbc:StartDate>2018-01-01</cbc:StartDate>
+        <cbc:EndDate>2018-12-31</cbc:EndDate>
+        <cbc:Description>Period description</cbc:Description>
+    </cac:InvoicePeriod>
+    <cac:OrderReference>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:OrderReferenceExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:OrderReferenceExtension>
+                            <puf:SalesOrderIssueDate>2019-01-01</puf:SalesOrderIssueDate>
+                        </puf:OrderReferenceExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>PO Number</cbc:ID>
+        <cbc:SalesOrderID>Sales Order number</cbc:SalesOrderID>
+        <cbc:IssueDate>2018-12-01</cbc:IssueDate>
+    </cac:OrderReference>
+    <cac:DespatchDocumentReference>
+        <cbc:ID>Despatch Document ID</cbc:ID>
+        <cbc:IssueDate>2018-12-01</cbc:IssueDate>
+    </cac:DespatchDocumentReference>
+    <cac:ReceiptDocumentReference>
+        <cbc:ID>Receipt ID</cbc:ID>
+    </cac:ReceiptDocumentReference>
+    <cac:OriginatorDocumentReference>
+        <cbc:ID>Tender Reference ID</cbc:ID>
+        <cbc:IssueDate>2018-01-01</cbc:IssueDate>
+    </cac:OriginatorDocumentReference>
+    <cac:ContractDocumentReference>
+        <cbc:ID>Contract Reference ID</cbc:ID>
+        <cbc:IssueDate>2018-12-01</cbc:IssueDate>
+    </cac:ContractDocumentReference>
+    <cac:ProjectReference>
+        <cbc:ID>Project Reference ID</cbc:ID>
+    </cac:ProjectReference>
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>123456</cbc:ID>
+        <cbc:DocumentDescription>Timesheet</cbc:DocumentDescription>
+        <cac:Attachment>
+            <cbc:EmbeddedDocumentBinaryObject mimeCode="application/pdf" filename="timesheet.pdf">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tVu6geijNy5LaUsY8rJW+ROkTnrUV0wos/hBMifTzex5zJ+qKhUlJ8kNmXhTLkHaUqseG1t+Szfc0Zc256PW5+ftmWlORJZLWtzJzOgBfj+5dYBXpax0MSCSqsxpoO3OcbLCyBo3ZdEa6u8atnVz/5fZn9cNZU3NvoOPp//9gfHoB5n5pGANCmVuZHN0cmVhbQ0KZW5kb2JqDQoxOCAwIG9iag0KWyAyNzggMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgNjExIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgNTU2IDAgMCA1NTYgMjIyIDAgMCAwIDgzMyAwIDAgMCAwIDAgNTAwIDI3OF0gDQplbmRvYmoNCjE5IDAgb2JqDQo8PC9UeXBlL01ldGFkYXRhL1N1YnR5cGUvWE1ML0xlbmd0aCAzMDk0Pj4NCnN0cmVhbQ0KPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz48eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSIzLjEtNzAxIj4KPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgIHhtbG5zOnBkZj0iaHR0cDovL25zLmFkb2JlLmNvbS9wZGYvMS4zLyI+CjxwZGY6UHJvZHVjZXI+TWljcm9zb2Z0wq4gV29yZCBmw7ZyIE1pY3Jvc29mdCAzNjU8L3BkZjpQcm9kdWNlcj48L3JkZjpEZXNjcmlwdGlvbj4KPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyI+CjxkYzpjcmVhdG9yPjxyZGY6U2VxPjxyZGY6bGk+QW5kcmVhcyBDYXJsc3NvbjwvcmRmOmxpPjwvcmRmOlNlcT48L2RjOmNyZWF0b3I+PC9yZGY6RGVzY3JpcHRpb24+CjxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iPgo8eG1wOkNyZWF0b3JUb29sPk1pY3Jvc29mdMKuIFdvcmQgZsO2ciBNaWNyb3NvZnQgMzY1PC94bXA6Q3JlYXRvclRvb2w+PHhtcDpDcmVhdGVEYXRlPjIwMjMtMDMtMjdUMTU6MzM6MTYrMDI6MDA8L3htcDpDcmVhdGVEYXRlPjx4bXA6TW9kaWZ5RGF0ZT4yMDIzLTAzLTI3VDE1OjMzOjE2KzAyOjAwPC94bXA6TW9kaWZ5RGF0ZT48L3JkZjpEZXNjcmlwdGlvbj4KPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIj4KPHhtcE1NOkRvY3VtZW50SUQ+dXVpZDo5MUUyRjhGNC1GQTgwLTRBMjItOTkxNS1CNEQ0NkE1NkJGMjc8L3htcE1NOkRvY3VtZW50SUQ+PHhtcE1NOkluc3RhbmNlSUQ+dXVpZDo5MUUyRjhGNC1GQTgwLTRBMjItOTkxNS1CNEQ0NkE1NkJGMjc8L3htcE1NOkluc3RhbmNlSUQ+PC9yZGY6RGVzY3JpcHRpb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo8L3JkZjpSREY+PC94OnhtcG1ldGE+PD94cGFja2V0IGVuZD0idyI/Pg0KZW5kc3RyZWFtDQplbmRvYmoNCjIwIDAgb2JqDQo8PC9EaXNwbGF5RG9jVGl0bGUgdHJ1ZT4+DQplbmRvYmoNCjIxIDAgb2JqDQo8PC9UeXBlL1hSZWYvU2l6ZSAyMS9XWyAxIDQgMl0gL1Jvb3QgMSAwIFIvSW5mbyA5IDAgUi9JRFs8RjRGOEUyOTE4MEZBMjI0QTk5MTVCNEQ0NkE1NkJGMjc+PEY0RjhFMjkxODBGQTIyNEE5OTE1QjRENDZBNTZCRjI3Pl0gL0ZpbHRlci9GbGF0ZURlY29kZS9MZW5ndGggODI+Pg0Kc3RyZWFtDQp4nGNgAIL//xmBpCADA4haBqHugSnGN2CKmQtC2UOoR2CK5RiE+s3AwATWzgShmCEUC4RihVCMEAqqkg2oj00ErJ19MZjiKAFTIncZGACMnwpWDQplbmRzdHJlYW0NCmVuZG9iag0KeHJlZg0KMCAyMg0KMDAwMDAwMDAxMCA2NTUzNSBmDQowMDAwMDAwMDE3IDAwMDAwIG4NCjAwMDAwMDAxNjYgMDAwMDAgbg0KMDAwMDAwMDIyMiAwMDAwMCBuDQowMDAwMDAwNDkyIDAwMDAwIG4NCjAwMDAwMDA3NzggMDAwMDAgbg0KMDAwMDAwMDgzMSAwMDAwMCBuDQowMDAwMDAwOTk0IDAwMDAwIG4NCjAwMDAwMDEyMjIgMDAwMDAgbg0KMDAwMDAwMTI3NSAwMDAwMCBuDQowMDAwMDAwMDExIDY1NTM1IGYNCjAwMDAwMDAwMTIgNjU1MzUgZg0KMDAwMDAwMDAxMyA2NTUzNSBmDQowMDAwMDAwMDE0IDY1NTM1IGYNCjAwMDAwMDAwMTUgNjU1MzUgZg0KMDAwMDAwMDAxNiA2NTUzNSBmDQowMDAwMDAwMDE3IDY1NTM1IGYNCjAwMDAwMDAwMDAgNjU1MzUgZg0KMDAwMDAwMTk1NSAwMDAwMCBuDQowMDAwMDAyMTY0IDAwMDAwIG4NCjAwMDAwMDUzNDEgMDAwMDAgbg0KMDAwMDAwNTM4NiAwMDAwMCBuDQp0cmFpbGVyDQo8PC9TaXplIDIyL1Jvb3QgMSAwIFIvSW5mbyA5IDAgUi9JRFs8RjRGOEUyOTE4MEZBMjI0QTk5MTVCNEQ0NkE1NkJGMjc+PEY0RjhFMjkxODBGQTIyNEE5OTE1QjRENDZBNTZCRjI3Pl0gPj4NCnN0YXJ0eHJlZg0KNTY2Nw0KJSVFT0YNCnhyZWYNCjAgMA0KdHJhaWxlcg0KPDwvU2l6ZSAyMi9Sb290IDEgMCBSL0luZm8gOSAwIFIvSURbPEY0RjhFMjkxODBGQTIyNEE5OTE1QjRENDZBNTZCRjI3PjxGNEY4RTI5MTgwRkEyMjRBOTkxNUI0RDQ2QTU2QkYyNz5dIC9QcmV2IDU2NjcvWFJlZlN0bSA1Mzg2Pj4NCnN0YXJ0eHJlZg0KNjI2Mg0KJSVFT0Y=</cbc:EmbeddedDocumentBinaryObject>
+        </cac:Attachment>
+    </cac:AdditionalDocumentReference>
+    <cac:AccountingSupplierParty>
+        <cbc:CustomerAssignedAccountID>SupplierId</cbc:CustomerAssignedAccountID>
+        <cac:Party>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <puf:RegistrationData>
+                                    <cbc:ID>NumeroREA</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA"
+                                        >IT:NumeroREA</puf:IDType>
+                                </puf:RegistrationData>
+                                <puf:RegistrationData>
+                                    <cbc:ID>Book</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA"
+                                        >ES:Book</puf:IDType>
+                                </puf:RegistrationData>
+                                <puf:RegistrationData>
+                                    <cbc:ID>Volume</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA"
+                                        >ES:Volume</puf:IDType>
+                                </puf:RegistrationData>
+                                <puf:RegistrationData>
+                                    <cbc:ID>CapitalSocial</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA"
+                                        >FR:CapitalSocial</puf:IDType>
+                                </puf:RegistrationData>
+                                <puf:RegistrationData>
+                                    <cbc:ID>Ape</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA"
+                                        >FR:APE</puf:IDType>
+                                </puf:RegistrationData>
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:EndpointID schemeID="0088">7300010000001</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Supplier Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:Postbox>12345</cbc:Postbox>
+                <cbc:StreetName>Test Street 1</cbc:StreetName>
+                <cbc:BuildingNumber>10</cbc:BuildingNumber>
+                <cbc:Department>Department</cbc:Department>
+                <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+                <cbc:CitySubdivisionName>City Subdivision Name</cbc:CitySubdivisionName>
+                <cbc:CityName>Town</cbc:CityName>
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <cbc:CountrySubentity>Province</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                    <cbc:Name>Sweden</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>SE123456123401</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0007">1234561234</cbc:CompanyID>
+                <cac:RegistrationAddress>
+                    <cbc:CityName>Supplier Hometown</cbc:CityName>
+                    <cac:Country>
+                        <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                    </cac:Country>
+                </cac:RegistrationAddress>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Supplier Contact Name</cbc:Name>
+                <cbc:Telephone>11111111</cbc:Telephone>
+                <cbc:ElectronicMail>supplier@contact.com</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:Telephone>Supplier tel</cbc:Telephone>
+            <cbc:Telefax>Supplier Fax</cbc:Telefax>
+            <cbc:ElectronicMail>Supplier@mainContact.com</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>Customer Number</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <puf:ADAID>
+                                    <cbc:ID>1234567890</cbc:ID>
+                                    <cbc:Name>Name of Unit</cbc:Name>
+                                    <puf:IDType listID="PUF-002-ADAID"
+                                        >ES:OficinaContable</puf:IDType>
+                                </puf:ADAID>
+                                <puf:ADAID>
+                                    <cbc:ID>1234567891</cbc:ID>
+                                    <puf:IDType listID="PUF-002-ADAID">ES:OrganoGestor</puf:IDType>
+                                </puf:ADAID>
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:EndpointID schemeID="0088">7300010000001</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Customer Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:Postbox>54321</cbc:Postbox>
+                <cbc:StreetName>Customer Street</cbc:StreetName>
+                <cbc:BuildingNumber>11</cbc:BuildingNumber>
+                <cbc:Department>Customer Department</cbc:Department>
+                <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+                <cbc:CitySubdivisionName>Customer City Subdivision Name</cbc:CitySubdivisionName>
+                <cbc:CityName>Customer City</cbc:CityName>
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <cbc:CountrySubentity>Customer Province</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                    <cbc:Name>Sweden</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>SE987654321001</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Customer Registration Name</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0007">987654-4321</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Customer Contact Name</cbc:Name>
+                <cbc:Telephone>+465544466</cbc:Telephone>
+                <cbc:ElectronicMail>customer@contact.com</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:Telephone>Customer tel</cbc:Telephone>
+            <cbc:Telefax>Customer Fax</cbc:Telefax>
+            <cbc:ElectronicMail>Customer@mainContact.com</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingCustomerParty>
+    <cac:BuyerCustomerParty>
+        <cbc:SupplierAssignedAccountID>SupplierAssigned</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Buyer Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:Postbox>112233</cbc:Postbox>
+                <cbc:StreetName>Buyer Street</cbc:StreetName>
+                <cbc:BuildingNumber>12</cbc:BuildingNumber>
+                <cbc:Department>Buyer Department</cbc:Department>
+                <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+                <cbc:CitySubdivisionName>Buyer City Subdivision Name</cbc:CitySubdivisionName>
+                <cbc:CityName>Buyer City</cbc:CityName>
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <cbc:CountrySubentity>Buyer Province</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                    <cbc:Name>Sweden</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>SE111111222201</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Buyer Registration Name</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0007">111111-2222</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Buyer Contact Person</cbc:Name>
+                <cbc:Telephone>+46113334456</cbc:Telephone>
+                <cbc:ElectronicMail>buyer@contact.com</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:Telephone>Buyer tel</cbc:Telephone>
+            <cbc:Telefax>Buyer Fax</cbc:Telefax>
+            <cbc:ElectronicMail>buyer@mainContact.com</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:BuyerCustomerParty>
+    <cac:Delivery>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:DeliveryExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:DeliveryExtension>
+                            <puf:DeliveryMethod>
+                                <cbc:Note>Text describing the delivery method</cbc:Note>
+                                <puf:Code>Deliver Method Code</puf:Code>
+                            </puf:DeliveryMethod>
+                        </puf:DeliveryExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ActualDeliveryDate>2019-01-01</cbc:ActualDeliveryDate>
+        <cac:DeliveryLocation>
+            <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+            <cbc:Description>Text describing the delivery location</cbc:Description>
+            <cac:Address>
+                <cbc:Postbox>121212</cbc:Postbox>
+                <cbc:StreetName>Delivery Street</cbc:StreetName>
+                <cbc:Department>Delivery Department</cbc:Department>
+                <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+                <cbc:CitySubdivisionName>Delivery City Subdivision Name</cbc:CitySubdivisionName>
+                <cbc:CityName>Delivery City</cbc:CityName>
+                <cbc:PostalZone>55555</cbc:PostalZone>
+                <cbc:CountrySubentity>Delivery Province</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                    <cbc:Name>Sweden</cbc:Name>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+        <cac:DeliveryParty>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <puf:ADAID>
+                                    <cbc:ID>1234567890</cbc:ID>
+                                    <puf:IDType listID="PUF-002-ADAID">GEN:UnitCode</puf:IDType>
+                                </puf:ADAID>
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cac:PartyName>
+                <cbc:Name>Delivery Name</cbc:Name>
+            </cac:PartyName>
+        </cac:DeliveryParty>
+    </cac:Delivery>
+    <cac:DeliveryTerms>
+        <cbc:SpecialTerms>Description of the delivery terms</cbc:SpecialTerms>
+        <cbc:LossRiskResponsibilityCode>Code to identify the responsibility for the loss
+            risk.</cbc:LossRiskResponsibilityCode>
+        <cbc:LossRisk>A description of the responsibility for the loss risk.</cbc:LossRisk>
+    </cac:DeliveryTerms>
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cbc:PaymentID>123456</cbc:PaymentID>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>12345678</cbc:ID>
+            <cbc:Name>AccountName</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>SE:BANKGIRO</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <cac:PaymentTerms>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PaymentTermsExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:PaymentTermsExtension>
+                            <puf:Penalty>
+                                <cbc:Note>Penalty text due to late payment</cbc:Note>
+                            </puf:Penalty>
+                        </puf:PaymentTermsExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:Note>30 days</cbc:Note>
+        <cbc:PenaltySurchargePercent>10</cbc:PenaltySurchargePercent>
+    </cac:PaymentTerms>
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+        <cbc:AllowanceChargeReason>Reason for allowance</cbc:AllowanceChargeReason>
+        <cbc:Amount currencyID="EUR">5.00</cbc:Amount>
+        <cac:TaxCategory>
+            <cbc:ID>Z</cbc:ID>
+            <cbc:Percent>0</cbc:Percent>
+            <cbc:TaxExemptionReasonCode>vatex-eu-132-1b</cbc:TaxExemptionReasonCode>
+            <cbc:TaxExemptionReason>Tax exemption reason description</cbc:TaxExemptionReason>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+    </cac:AllowanceCharge>
+    <cac:TaxExchangeRate>
+        <cbc:SourceCurrencyCode listID="ISO4217">EUR</cbc:SourceCurrencyCode>
+        <cbc:TargetCurrencyCode listID="ISO4217">USD</cbc:TargetCurrencyCode>
+        <cbc:CalculationRate>1.17</cbc:CalculationRate>
+        <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
+        <cbc:Date>2018-01-01</cbc:Date>
+    </cac:TaxExchangeRate>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <puf:TaxChargeability>
+                                    <cbc:TaxTypeCode>I</cbc:TaxTypeCode>
+                                </puf:TaxChargeability>
+                                <puf:TaxCurrencyTaxableAmount currencyID="USD"
+                                    >117.00</puf:TaxCurrencyTaxableAmount>
+                                <puf:TaxCurrencyTaxAmount currencyID="USD"
+                                    >29.25</puf:TaxCurrencyTaxAmount>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <puf:TaxChargeability>
+                                    <cbc:TaxTypeCode>I</cbc:TaxTypeCode>
+                                </puf:TaxChargeability>
+                                <puf:TaxCurrencyTaxableAmount currencyID="USD"
+                                    >-5.85</puf:TaxCurrencyTaxableAmount>
+                                <puf:TaxCurrencyTaxAmount currencyID="USD"
+                                    >0.00</puf:TaxCurrencyTaxAmount>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:TaxableAmount currencyID="EUR">-5.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>Z</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="USD">29.25</cbc:TaxAmount>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LegalMonetaryTotalExtension>
+                            <puf:TaxCurrencyTaxExclusiveAmount currencyID="USD"
+                                >117.00</puf:TaxCurrencyTaxExclusiveAmount>
+                            <puf:TaxCurrencyTaxInclusiveAmount currencyID="USD"
+                                >146.25</puf:TaxCurrencyTaxInclusiveAmount>
+                            <puf:TaxCurrencyPayableAmount currencyID="USD"
+                                >134.55</puf:TaxCurrencyPayableAmount>
+                            <puf:PaymentInKind>
+                                <puf:Amount currencyID="EUR">10.00</puf:Amount>
+                                <cbc:Note>Text describing the payment in kind</cbc:Note>
+                            </puf:PaymentInKind>
+                        </puf:LegalMonetaryTotalExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">95.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">120.00</cbc:TaxInclusiveAmount>
+        <cbc:AllowanceTotalAmount currencyID="EUR">5.00</cbc:AllowanceTotalAmount>
+        <cbc:PayableAmount currencyID="EUR">110.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:LineExclAllowanceChargeAmount currencyID="EUR"
+                                >110.00</puf:LineExclAllowanceChargeAmount>
+                            <puf:OriginatorDocumentReference>
+                                <cbc:ID>Tender Reference ID</cbc:ID>
+                                <cbc:IssueDate>2018-01-01</cbc:IssueDate>
+                            </puf:OriginatorDocumentReference>
+                            <puf:ProjectReference>
+                                <cbc:ID>Project Reference ID</cbc:ID>
+                            </puf:ProjectReference>
+                            <puf:ContractDocumentReference>
+                                <cbc:ID>Contract Reference ID</cbc:ID>
+                                <cbc:IssueDate>2018-01-01</cbc:IssueDate>
+                                <puf:BuyerContractID>Buyer Contract ID</puf:BuyerContractID>
+                                <puf:BuyerContractIssueDate>2018-01-01</puf:BuyerContractIssueDate>
+                            </puf:ContractDocumentReference>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>10000</cbc:ID>
+        <cbc:Note>Line text 1</cbc:Note>
+        <cbc:Note>Line text 2</cbc:Note>
+        <cbc:Note>Line text 3</cbc:Note>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>1</cbc:LineID>
+            <cbc:SalesOrderLineID>10</cbc:SalesOrderLineID>
+            <cac:OrderReference>
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                        <ext:ExtensionContent>
+                            <puf:PageroExtension>
+                                <puf:LineExtension>
+                                    <puf:OrderLineReference>
+                                        <puf:SalesOrderIssueDate>2019-01-01</puf:SalesOrderIssueDate>
+                                    </puf:OrderLineReference>
+                                </puf:LineExtension>
+                            </puf:PageroExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
+                <cbc:ID>Purchase Order ID</cbc:ID>
+                <cbc:SalesOrderID>Sales Order ID</cbc:SalesOrderID>
+                <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+            </cac:OrderReference>
+        </cac:OrderLineReference>
+        <cac:DespatchLineReference>
+            <cbc:LineID>1</cbc:LineID>
+            <cac:DocumentReference>
+                <cbc:ID>Despatch Document ID</cbc:ID>
+                <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+            </cac:DocumentReference>
+        </cac:DespatchLineReference>
+        <cac:Delivery>
+            <cbc:Quantity unitCode="PCE">1</cbc:Quantity>
+            <cbc:ActualDeliveryDate>2019-01-25</cbc:ActualDeliveryDate>
+            <cac:DeliveryLocation>
+                <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+                <cac:Address>
+                    <cbc:StreetName>Delivery Street</cbc:StreetName>
+                    <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+                    <cbc:CitySubdivisionName>Delivery City Subdivision
+                        Name</cbc:CitySubdivisionName>
+                    <cbc:CityName>Delivery City</cbc:CityName>
+                    <cbc:PostalZone>12345</cbc:PostalZone>
+                    <cbc:CountrySubentity>Delivery Province</cbc:CountrySubentity>
+                    <cac:Country>
+                        <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                        <cbc:Name>Sweden</cbc:Name>
+                    </cac:Country>
+                </cac:Address>
+            </cac:DeliveryLocation>
+        </cac:Delivery>
+        <cac:AllowanceCharge>
+            <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+            <cbc:AllowanceChargeReason>discount</cbc:AllowanceChargeReason>
+            <cbc:Amount currencyID="EUR">10</cbc:Amount>
+        </cac:AllowanceCharge>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+                <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+                    <cbc:Percent>25</cbc:Percent>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Name>Article 1</cbc:Name>
+            <cac:BuyersItemIdentification>
+                <cbc:ID>BuyersItemIdentification</cbc:ID>
+            </cac:BuyersItemIdentification>
+            <cac:SellersItemIdentification>
+                <cbc:ID>SellersItemIdentification</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:ManufacturersItemIdentification>
+                <cbc:ID>ManufacturersItemIdentification</cbc:ID>
+            </cac:ManufacturersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <cac:ItemInstance>
+                <cbc:ManufactureDate>2018-01-01</cbc:ManufactureDate>
+                <cbc:BestBeforeDate>2018-01-01</cbc:BestBeforeDate>
+                <cbc:SerialID>123456789</cbc:SerialID>
+                <cac:LotIdentification>
+                    <cbc:LotNumberID>1111111</cbc:LotNumberID>
+                </cac:LotIdentification>
+            </cac:ItemInstance>
+        </cac:Item>
+        <cac:Price>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PriceExtension>
+                                <puf:PriceInclAllowanceChargeAmount currencyID="EUR"
+                                    >100.00</puf:PriceInclAllowanceChargeAmount>
+                            </puf:PriceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:PriceAmount currencyID="EUR">110.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
