@@ -135,6 +135,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*No*
 |
 
+|Monaco
+|*Yes*
+|*No*
+|
+
 |Netherlands
 |*Yes*
 |*No*
@@ -171,6 +176,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |Only standard invoice, credit note and debit note support.
 
 |Singapore
+|*Yes*
+|*No*
+|
+
+|Slovakia
 |*Yes*
 |*No*
 |
