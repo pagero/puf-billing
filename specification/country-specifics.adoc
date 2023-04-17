@@ -1,12 +1,24 @@
 This section will provide information regarding on how to include common country specific data in PUF.
 
-=== Spain
+=== Basque Country
 
-include::country-specifics/spain.adoc[]
+include::country-specifics/basque-country.adoc[]
+
+=== Canada
+
+include::country-specifics/canada.adoc[]
 
 === France
 
 include::country-specifics/france.adoc[]
+
+=== Hungary
+
+include::country-specifics/hungary.adoc[]
+
+=== India
+
+include::country-specifics/india.adoc[]
 
 === Italy
 
@@ -16,6 +28,10 @@ include::country-specifics/italy.adoc[]
 
 include::country-specifics/portugal.adoc[]
 
+=== Saudi Arabia
+
+include::country-specifics/saudi-arabia.adoc[]
+
 === Serbia
 
 include::country-specifics/serbia.adoc[]
@@ -24,18 +40,6 @@ include::country-specifics/serbia.adoc[]
 
 include::country-specifics/singapore.adoc[]
 
-=== Saudi Arabia
+=== Spain
 
-include::country-specifics/saudi-arabia.adoc[]
-
-=== India
-
-include::country-specifics/india.adoc[]
-
-=== Hungary
-
-include::country-specifics/hungary.adoc[]
-
-=== Basque Country
-
-include::country-specifics/basque-country.adoc[]
+include::country-specifics/spain.adoc[]

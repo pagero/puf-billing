@@ -1,0 +1,36 @@
+This section contains information about requirements and other information concerning invoicing in Canada.
+
+==== Tax type scheme
+
+Tax type scheme codes for Canada can be found in https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[PUF-009-TAXTYPESCHEME^].
+
+==== Party identification
+
+There is a possible requirement to provide additional party identifiers that are not available in the ISO 6523 ICD list.
+
+These additional identifiers for use in Canada can be found here https://pagero.github.io/puf-code-lists/#_identification_scheme_canada[Identification scheme Canada^].
+
+*Example* +
+_Example with additional id's provided in Canada in Party structure_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingSupplierParty>
+    <!-- Code omitted for clarity -->
+    <cac:Party>
+        <!-- Code omitted for clarity -->
+        <cac:PartyIdentification>
+            <cbc:ID schemeID="CA:GST">123456789RT0002</cbc:ID><!--1-->
+        </cac:PartyIdentification>
+        <cac:PartyIdentification>
+            <cbc:ID schemeID="CA:QST">123456789TQ0002</cbc:ID><!--2-->
+        </cac:PartyIdentification>
+        <!-- Code omitted for clarity -->
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+
+</Invoice>
+----
+<1> GST number provided as `cac:PartyIdentification/cbc:ID`.
+<2> QST number provided as `cac:PartyIdentification/cbc:ID`.
