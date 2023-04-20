@@ -11,6 +11,10 @@ To send documents to the Spanish government you are required to provide DIR3 cod
 
 The DIR3 codes should be provided in the extension element in <<_cacaccountingcustomerparty, cac:AccountingCustomerParty/cac:Party>>, in the structure `PageroExtension/PartyExtension/ADAID`.
 
+If <<_cacbuyercustomerparty, cac:BuyerCustomerParty/cac:Party>> is used, then the DIR3 codes should be sent in this party with the same structure as in <<_cacaccountingcustomerparty, cac:AccountingCustomerParty/cac:Party>>. 
+
+<<_cacbuyercustomerparty, cac:BuyerCustomerParty/cac:Party>> should contain information regarding the buyer of the goods or service and should *ONLY* be used if the buyer party differs from accounting customer party.
+
 More information how to use ADAID can be found <<_additional_destination_address_identifier_adaid, here>>.
 
 *Example*

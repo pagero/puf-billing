@@ -1,4 +1,4 @@
-In PUF, a new party has been added called Buyer Customer Party. This party should contain information regarding the buyer of the goods or service and should only be used if the buyer party differs from accounting customer party.
+In PUF, a new party has been added called Buyer Customer Party. This party should contain information regarding the buyer of the goods or service and should *ONLY* be used if the buyer party differs from accounting customer party.
 
 If `cac:BuyerCustomerParty` is used, the `cac:AccountingCustomerParty` is to be considered the receiver of the document.
 
