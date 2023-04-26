@@ -187,6 +187,18 @@
         <cac:Item>
             <!-- BT-153 Article/Item Description -->
             <cbc:Name>Article 1</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code. -->
+                <cbc:ID>E</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReasonCode>VATEX-EU-132</cbc:TaxExemptionReasonCode>
+                <!-- BT-120 VAT exemption reason text. -->
+                <cbc:TaxExemptionReason>Exemptions for certain activities in public interest.</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
         </cac:Item>
         <cac:Price>
             <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
@@ -203,6 +215,15 @@
         <cac:Item>
             <!-- BT-153 Article/Item Description -->
             <cbc:Name>Article 2</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code. -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>15</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
         </cac:Item>
         <cac:Price>
             <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
