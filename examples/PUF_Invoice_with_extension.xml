@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
-    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-    xmlns:puf="urn:pagero:ExtensionComponent:1.0"
-    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-    xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
     <cbc:ID>123456</cbc:ID>
@@ -70,28 +66,23 @@
                             <puf:PartyExtension>
                                 <puf:RegistrationData>
                                     <cbc:ID>NumeroREA</cbc:ID>
-                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA"
-                                        >IT:NumeroREA</puf:IDType>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">IT:NumeroREA</puf:IDType>
                                 </puf:RegistrationData>
                                 <puf:RegistrationData>
                                     <cbc:ID>Book</cbc:ID>
-                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA"
-                                        >ES:Book</puf:IDType>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">ES:Book</puf:IDType>
                                 </puf:RegistrationData>
                                 <puf:RegistrationData>
                                     <cbc:ID>Volume</cbc:ID>
-                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA"
-                                        >ES:Volume</puf:IDType>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">ES:Volume</puf:IDType>
                                 </puf:RegistrationData>
                                 <puf:RegistrationData>
                                     <cbc:ID>CapitalSocial</cbc:ID>
-                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA"
-                                        >FR:CapitalSocial</puf:IDType>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">FR:CapitalSocial</puf:IDType>
                                 </puf:RegistrationData>
                                 <puf:RegistrationData>
                                     <cbc:ID>Ape</cbc:ID>
-                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA"
-                                        >FR:APE</puf:IDType>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">FR:APE</puf:IDType>
                                 </puf:RegistrationData>
                             </puf:PartyExtension>
                         </puf:PageroExtension>
@@ -357,7 +348,7 @@
         <cbc:AllowanceChargeReason>Reason for allowance</cbc:AllowanceChargeReason>
         <cbc:Amount currencyID="EUR">5.00</cbc:Amount>
         <cac:TaxCategory>
-            <cbc:ID>Z</cbc:ID>
+            <cbc:ID>E</cbc:ID>
             <cbc:Percent>0</cbc:Percent>
             <cbc:TaxExemptionReasonCode>vatex-eu-132-1b</cbc:TaxExemptionReasonCode>
             <cbc:TaxExemptionReason>Tax exemption reason description</cbc:TaxExemptionReason>
@@ -388,10 +379,8 @@
                                 <puf:TaxChargeability>
                                     <cbc:TaxTypeCode>I</cbc:TaxTypeCode>
                                 </puf:TaxChargeability>
-                                <puf:TaxCurrencyTaxableAmount currencyID="USD"
-                                    >117.00</puf:TaxCurrencyTaxableAmount>
-                                <puf:TaxCurrencyTaxAmount currencyID="USD"
-                                    >29.25</puf:TaxCurrencyTaxAmount>
+                                <puf:TaxCurrencyTaxableAmount currencyID="USD">117.00</puf:TaxCurrencyTaxableAmount>
+                                <puf:TaxCurrencyTaxAmount currencyID="USD">29.25</puf:TaxCurrencyTaxAmount>
                             </puf:TaxSubtotalExtension>
                         </puf:PageroExtension>
                     </ext:ExtensionContent>
@@ -417,10 +406,8 @@
                                 <puf:TaxChargeability>
                                     <cbc:TaxTypeCode>I</cbc:TaxTypeCode>
                                 </puf:TaxChargeability>
-                                <puf:TaxCurrencyTaxableAmount currencyID="USD"
-                                    >-5.85</puf:TaxCurrencyTaxableAmount>
-                                <puf:TaxCurrencyTaxAmount currencyID="USD"
-                                    >0.00</puf:TaxCurrencyTaxAmount>
+                                <puf:TaxCurrencyTaxableAmount currencyID="USD">-5.85</puf:TaxCurrencyTaxableAmount>
+                                <puf:TaxCurrencyTaxAmount currencyID="USD">0.00</puf:TaxCurrencyTaxAmount>
                             </puf:TaxSubtotalExtension>
                         </puf:PageroExtension>
                     </ext:ExtensionContent>
@@ -429,8 +416,10 @@
             <cbc:TaxableAmount currencyID="EUR">-5.00</cbc:TaxableAmount>
             <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
             <cac:TaxCategory>
-                <cbc:ID>Z</cbc:ID>
+                <cbc:ID>E</cbc:ID>
                 <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReasonCode>vatex-eu-132-1b</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>Tax exemption reason description</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -447,12 +436,9 @@
                 <ext:ExtensionContent>
                     <puf:PageroExtension>
                         <puf:LegalMonetaryTotalExtension>
-                            <puf:TaxCurrencyTaxExclusiveAmount currencyID="USD"
-                                >117.00</puf:TaxCurrencyTaxExclusiveAmount>
-                            <puf:TaxCurrencyTaxInclusiveAmount currencyID="USD"
-                                >146.25</puf:TaxCurrencyTaxInclusiveAmount>
-                            <puf:TaxCurrencyPayableAmount currencyID="USD"
-                                >134.55</puf:TaxCurrencyPayableAmount>
+                            <puf:TaxCurrencyTaxExclusiveAmount currencyID="USD">117.00</puf:TaxCurrencyTaxExclusiveAmount>
+                            <puf:TaxCurrencyTaxInclusiveAmount currencyID="USD">146.25</puf:TaxCurrencyTaxInclusiveAmount>
+                            <puf:TaxCurrencyPayableAmount currencyID="USD">134.55</puf:TaxCurrencyPayableAmount>
                             <puf:PaymentInKind>
                                 <puf:Amount currencyID="EUR">10.00</puf:Amount>
                                 <cbc:Note>Text describing the payment in kind</cbc:Note>
@@ -475,8 +461,7 @@
                 <ext:ExtensionContent>
                     <puf:PageroExtension>
                         <puf:LineExtension>
-                            <puf:LineExclAllowanceChargeAmount currencyID="EUR"
-                                >110.00</puf:LineExclAllowanceChargeAmount>
+                            <puf:LineExclAllowanceChargeAmount currencyID="EUR">110.00</puf:LineExclAllowanceChargeAmount>
                             <puf:OriginatorDocumentReference>
                                 <cbc:ID>Tender Reference ID</cbc:ID>
                                 <cbc:IssueDate>2018-01-01</cbc:IssueDate>
@@ -606,8 +591,7 @@
                     <ext:ExtensionContent>
                         <puf:PageroExtension>
                             <puf:PriceExtension>
-                                <puf:PriceInclAllowanceChargeAmount currencyID="EUR"
-                                    >100.00</puf:PriceInclAllowanceChargeAmount>
+                                <puf:PriceInclAllowanceChargeAmount currencyID="EUR">100.00</puf:PriceInclAllowanceChargeAmount>
                             </puf:PriceExtension>
                         </puf:PageroExtension>
                     </ext:ExtensionContent>
