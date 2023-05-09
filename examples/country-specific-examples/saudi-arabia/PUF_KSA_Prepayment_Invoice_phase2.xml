@@ -5,7 +5,7 @@
     xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
     xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     
-    <!-- Values in invoice are examples values only. -->
+    <!-- Values in invoice are examples values only. Example of prepayment invoice -->
     
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
@@ -18,7 +18,7 @@
     <!-- BT-9 Due Date -->
     <cbc:DueDate>2018-12-01</cbc:DueDate>
     <!-- BT-3 Invoice Type Code and KSA-2 Invoice transaction code in attribute @name -->
-    <cbc:InvoiceTypeCode name="0100000">388</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode name="0100000">386</cbc:InvoiceTypeCode>
     <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>SAR</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
@@ -194,7 +194,7 @@
                     <puf:PageroExtension>
                         <puf:LineExtension>
                             <!-- KSA-12 Line amount inclusive of VAT-->
-                            <puf:TaxInclusiveLineExtensionAmount currencyID="SAR">115.00</puf:TaxInclusiveLineExtensionAmount> 
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">115.00</puf:TaxInclusiveLineExtensionAmount> 
                         </puf:LineExtension>
                     </puf:PageroExtension>
                 </ext:ExtensionContent>
@@ -244,7 +244,7 @@
                     <puf:PageroExtension>
                         <puf:LineExtension>
                             <!-- KSA-12 Line amount inclusive of VAT-->
-                            <puf:TaxInclusiveLineExtensionAmount currencyID="SAR">100.00</puf:TaxInclusiveLineExtensionAmount> 
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">100.00</puf:TaxInclusiveLineExtensionAmount> 
                         </puf:LineExtension>
                     </puf:PageroExtension>
                 </ext:ExtensionContent>
