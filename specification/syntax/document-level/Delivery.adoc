@@ -33,9 +33,24 @@ Value must be according to code list https://pagero.github.io/puf-code-lists/#_p
 |**Delivery location description** +
 Description of the delivery location.
 
-|`cac:DeliveryLocation/cac:Address/cbc:PostBox`
+|`cac:DeliveryLocation/cac:Address/cbc:ID`
+|**Address ID** +
+Delivery location address id. +
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.
+
+|`cac:DeliveryLocation/cac:Address/cbc:Postbox`
 |**Postal box** +
 Delivery location address post box.
+
+|`cac:DeliveryLocation/cac:Address/cbc:Floor`
+|**Floor** +
+Delivery location address floor. +
+An addressable floor of a building.
+
+|`cac:DeliveryLocation/cac:Address/cbc:Room`
+|**Room** +
+Delivery location address room. +
+A room, suite, or apartment of a building.
 
 |`cac:DeliveryLocation/cac:Address/cbc:StreetName`
 |**Street name** +
@@ -45,18 +60,26 @@ Delivery location address street name.
 |**Additional Street name** +
 Delivery location address additional street name.
 
+|`cac:DeliveryLocation/cac:Address/cbc:BuildingName`
+|**Building name** +
+Delivery location address building name.
+
+|`cac:DeliveryLocation/cac:Address/cbc:BuildingNumber`
+|**Building number** +
+Delivery location address building number.
+
 |`cac:DeliveryLocation/cac:Address/cbc:Department`
 |**Department** +
-Delivery address department.
+Delivery location address department.
 
 |`cac:DeliveryLocation/cac:Address/cbc:PlotIdentification`
 |**Plot Identification** +
-Delivery postal address plot identification. +
+Delivery location address plot identification. +
 Additional address number. An identifier for the piece of land associated with this address.
 
 |`cac:DeliveryLocation/cac:Address/cbc:CitySubdivisionName`
 |**City Subdvision Name** +
-Delivery postal address city subdivision name. +
+Delivery location address city subdivision name. +
 The name of the subdivision of the delivery city, town, or village in which its address is located, such as the name of its district or borough.
 
 |`cac:DeliveryLocation/cac:Address/cbc:CityName`
@@ -74,6 +97,16 @@ Delivery location address province or state.
 |`cac:DeliveryLocation/cac:Address/cbc:CountrySubentityCode`
 |**Country subentity code** +
 Delivery location address province or state code.
+
+|`cac:DeliveryLocation/cac:Address/cbc:Region`
+|**Region** +
+Delivery location address region. +
+Delivery location addressable region or group of countries.
+
+|`cac:DeliveryLocation/cac:Address/cbc:District`
+|**District** +
+Delivery location address district. +
+A district or borough, may be a subdivision of a city for this address.
 
 |`cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line`
 |**Additional address line** +

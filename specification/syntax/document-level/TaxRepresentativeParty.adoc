@@ -6,9 +6,24 @@
 |**Seller's tax representative name** +
 Seller's tax representative name.
 
+|`cac:Party/cac:PostalAddress/cbc:ID`
+|**Address ID** +
+Seller's tax representative's postal address id. +
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.
+
 |`cac:Party/cac:PostalAddress/cbc:Postbox`
 |**Postal box** +
 Seller's tax representative's postal address post box.
+
+|`cac:Party/cac:PostalAddress/cbc:Floor`
+|**Floor** +
+Seller's tax representative's postal address floor. +
+An addressable floor of a building.
+
+|`cac:Party/cac:PostalAddress/cbc:Room`
+|**Room** +
+Seller's tax representative's postal address room. +
+A room, suite, or apartment of a building.
 
 |`cac:Party/cac:PostalAddress/cbc:StreetName`
 |**Street name** +
@@ -17,6 +32,10 @@ Seller's tax representative's postal address street name.
 |`cac:Party/cac:PostalAddress/cbc:AdditionalStreetName`
 |**Additional Street name** +
 Seller's tax representative's postal address additional street name.
+
+|`cac:Party/cac:PostalAddress/cbc:BuildingName`
+|**Building name** +
+Seller's tax representative's postal address building name.
 
 |`cac:Party/cac:PostalAddress/cbc:BuildingNumber`
 |**Building number** +
@@ -47,6 +66,20 @@ Seller's tax representative's postal address post code.
 |`cac:Party/cac:PostalAddress/cbc:CountrySubentity`
 |**Country subentity** +
 Seller's tax representative's postal address province or state.
+
+|`cac:Party/cac:PostalAddress/cbc:CountrySubentityCode`
+|**Country subentity code** +
+Seller's tax representative's postal address province or state code.
+
+|`cac:Party/cac:PostalAddress/cbc:Region`
+|**Region** +
+Seller's tax representative's postal address region. +
+Seller's tax representative's addressable region or group of countries.
+
+|`cac:Party/cac:PostalAddress/cbc:District`
+|**District** +
+Seller's tax representative's postal address district. +
+A district or borough, may be a subdivision of a city for this address.
 
 |`cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line`
 |**Additional address line** +
