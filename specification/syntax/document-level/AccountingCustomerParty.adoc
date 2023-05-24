@@ -34,9 +34,24 @@ Value must be according to code list https://pagero.github.io/puf-code-lists/#_p
 |**Buyer name** +
 Buyer name.
 
+|`cac:Party/cac:PostalAddress/cbc:ID`
+|**Address ID** +
+Buyer's postal address id. +
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.
+
 |`cac:Party/cac:PostalAddress/cbc:Postbox`
 |**Postal box** +
 Buyer's postal address post box.
+
+|`cac:Party/cac:PostalAddress/cbc:Floor`
+|**Floor** +
+Buyer's postal address floor. +
+An addressable floor of a building.
+
+|`cac:Party/cac:PostalAddress/cbc:Room`
+|**Room** +
+Buyer's postal address room. +
+A room, suite, or apartment of a building.
 
 |`cac:Party/cac:PostalAddress/cbc:StreetName`
 |**Street name** +
@@ -45,6 +60,10 @@ Buyer's postal address street name.
 |`cac:Party/cac:PostalAddress/cbc:AdditionalStreetName`
 |**Additional Street name** +
 Buyer's postal address additional street name.
+
+|`cac:Party/cac:PostalAddress/cbc:BuildingName`
+|**Building name** +
+Buyer's postal address building name.
 
 |`cac:Party/cac:PostalAddress/cbc:BuildingNumber`
 |**Building number** +
@@ -57,7 +76,7 @@ Buyer's postal address department.
 |`cac:Party/cac:PostalAddress/cbc:PlotIdentification`
 |**Plot Identification** +
 Buyer's postal address plot identification. +
- Additional address number. An identifier for the piece of land associated with this address.
+Additional address number. An identifier for the piece of land associated with this address.
 
 |`cac:Party/cac:PostalAddress/cbc:CitySubdivisionName`
 |**City Subdvision Name** +
@@ -79,6 +98,16 @@ Buyer's postal address province or state.
 |`cac:Party/cac:PostalAddress/cbc:CountrySubentityCode`
 |**Country subentity code** +
 Buyer's postal address province or state code.
+
+|`cac:Party/cac:PostalAddress/cbc:Region`
+|**Region** +
+Buyer's postal address region. +
+Buyer's addressable region or group of countries.
+
+|`cac:Party/cac:PostalAddress/cbc:District`
+|**District** +
+Buyer's postal address district. +
+A district or borough, may be a subdivision of a city for this address.
 
 |`cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line`
 |**Additional address line** +

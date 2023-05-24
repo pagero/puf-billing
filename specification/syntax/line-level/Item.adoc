@@ -95,6 +95,11 @@ Serial number of the item.
 |**Lot number identifier** +
 Lot number identifier of the item.
 
+|`cac:ItemInstance/cac:LotIdentification/cbc:ExpiryDate`
+|**Lot expiry date** +
+Lot expiry date. +
+_Format "YYYY-MM-DD"._
+
 |===
 
 *Example* +
