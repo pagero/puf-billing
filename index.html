@@ -3547,12 +3547,12 @@ Extension is added to provide additional information in the <code>cac:Party</cod
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryParty/cac:PartyIdentification/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Seller Identifier</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party Identifier</strong><br>
 Identifier of the delivery party.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryParty/cac:PartyIdentification/cbc:ID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Seller Identifier</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party Identifier</strong><br>
 Scheme identifier of delivery party identifier<br>
 Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
 </tr>
@@ -3582,36 +3582,111 @@ Email of the contact to which the goods/services is sent to.</p></td>
 Name of the party responsible for the despatch.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address ID</strong><br>
+Despatch party postal address id.<br>
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:Postbox</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
+Despatch party postal address post box.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:Floor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
+Despatch party postal address floor.<br>
+An addressable floor of a building.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:Room</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
+Despatch party postal address room.<br>
+A room, suite, or apartment of a building.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:StreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party street</strong><br>
-Street address of the despatch party.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
+Despatch party postal address street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:AdditionalStreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
+Despatch party postal address additional street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:BuildingName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
+Despatch party postal address building name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:BuildingNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
+Despatch party postal address building number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:Department</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
+Despatch party postal address department.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:PlotIdentification</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
+Despatch party postal address plot identification.<br>
+Additional address number. An identifier for the piece of land associated with this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CitySubdivisionName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
+Despatch party postal address city subdivision name.<br>
+The name of the subdivision of the city, town, or village in which the address is located, such as the name of its district or borough.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party city</strong><br>
-City of the despatch party.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
+Despatch party postal address city name.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:PostalZone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party postal zone</strong><br>
-Postal Zone of the despatch party.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
+Despatch party postal address post code.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/<br>
-cbc:CountrySubentityCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party state/province code</strong><br>
-State/province code of the despatch party.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CountrySubentity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
+Despatch party postal address province or state.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/<br>
-cac:Country/cbc:IdentificationCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party country code</strong><br>
-Country code of the despatch party.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
+Despatch party postal address province or state code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:Region</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
+Despatch party postal address region.<br>
+Despatch party addressable region or group of countries.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:District</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
+Despatch party postal address district.<br>
+A district or borough, may be a subdivision of a city for this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
+Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
+Despatch party postal address country code.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:Country/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch party country name</strong><br>
-Name of the country for the despatch party.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
+Despatch party postal address country name.</p></td>
 </tr>
 </tbody>
 </table>
@@ -4884,51 +4959,111 @@ Identifier of the delivery location.<br>
 Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address ID</strong><br>
+Delivery location address id.<br>
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:Postbox</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
+Delivery location address post box.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:Floor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
+Delivery location address floor.<br>
+An addressable floor of a building.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:Room</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
+Delivery location address room.<br>
+A room, suite, or apartment of a building.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:StreetName</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
-Street name of the delivery location.</p></td>
+Delivery location address street name.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional street name</strong><br>
-Additional street name of the delivery location.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
+Delivery location address additional street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:BuildingName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
+Delivery location address building name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:BuildingNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
+Delivery location address building number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:Department</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
+Delivery location address department.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:PlotIdentification</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
-Delivery postal address plot identification.<br>
+Delivery location address plot identification.<br>
 Additional address number. An identifier for the piece of land associated with this address.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:CitySubdivisionName</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
-Delivery postal address city subdivision name.<br>
+Delivery location address city subdivision name.<br>
 The name of the subdivision of the delivery city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:CityName</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
-City of the delivery location.</p></td>
+Delivery location address city name.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:PostalZone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Post code</strong><br>
-Post code of the delivery location.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
+Delivery location address post code.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:CountrySubentity</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country sub entity</strong><br>
-Province or state of the delivery location.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
+Delivery location address province or state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
+Delivery location address province or state code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:Region</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
+Delivery location address region.<br>
+Delivery location addressable region or group of countries.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:District</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
+Delivery location address district.<br>
+A district or borough, may be a subdivision of a city for this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
+Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
-Country code of the delivery location.</p></td>
+Delivery location address country code.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cac:Country/cbc:Name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
-The country name of the delivery location.</p></td>
+Delivery location address country name.</p></td>
 </tr>
 </tbody>
 </table>

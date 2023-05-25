@@ -125,11 +125,11 @@ Delivery location address country name.
 Extension is added to provide additional information in the `cac:Party` element, the information available can be found <<_party, here>>.
 
 |`cac:DeliveryParty/cac:PartyIdentification/cbc:ID`
-|**Seller Identifier** +
+|**Party Identifier** +
 Identifier of the delivery party.
 
 |`cac:DeliveryParty/cac:PartyIdentification/cbc:ID/@schemeID`
-|**Seller Identifier** +
+|**Party Identifier** +
 Scheme identifier of delivery party identifier +
 Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
 
@@ -153,31 +153,92 @@ Email of the contact to which the goods/services is sent to.
 |**Despatch party name** +
 Name of the party responsible for the despatch.
 
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:ID`
+|**Address ID** +
+Despatch party postal address id. +
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:Postbox`
+|**Postal box** +
+Despatch party postal address post box.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:Floor`
+|**Floor** +
+Despatch party postal address floor. +
+An addressable floor of a building.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:Room`
+|**Room** +
+Despatch party postal address room. +
+A room, suite, or apartment of a building.
+
 |`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:StreetName`
-|**Despatch party street** +
-Street address of the despatch party.
+|**Street name** +
+Despatch party postal address street name.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:AdditionalStreetName`
+|**Additional Street name** +
+Despatch party postal address additional street name.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:BuildingName`
+|**Building name** +
+Despatch party postal address building name.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:BuildingNumber`
+|**Building number** +
+Despatch party postal address building number.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:Department`
+|**Department** +
+Despatch party postal address department.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:PlotIdentification`
+|**Plot Identification** +
+Despatch party postal address plot identification. +
+Additional address number. An identifier for the piece of land associated with this address.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CitySubdivisionName`
+|**City Subdvision Name** +
+Despatch party postal address city subdivision name. +
+The name of the subdivision of the city, town, or village in which the address is located, such as the name of its district or borough.
 
 |`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CityName`
-|**Despatch party city** +
-City of the despatch party.
+|**City name** +
+Despatch party postal address city name.
 
 |`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:PostalZone`
-|**Despatch party postal zone** +
-Postal Zone of the despatch party.
+|**Postal zone** +
+Despatch party postal address post code.
 
-|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/ +
-cbc:CountrySubentityCode`
-|**Despatch party state/province code** +
-State/province code of the despatch party.
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CountrySubentity`
+|**Country subentity** +
+Despatch party postal address province or state.
 
-|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/ +
-cac:Country/cbc:IdentificationCode`
-|**Despatch party country code** +
-Country code of the despatch party.
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:CountrySubentityCode`
+|**Country subentity code** +
+Despatch party postal address province or state code.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:Region`
+|**Region** +
+Despatch party postal address region. +
+Despatch party addressable region or group of countries.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cbc:District`
+|**District** +
+Despatch party postal address district. +
+A district or borough, may be a subdivision of a city for this address.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:AddressLine/cbc:Line`
+|**Additional address line** +
+Note that `cbc:StreetName` and `cbc:AdditionalStreetName` should be populated prior of using this element.
+
+|`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode`
+|**Country code** +
+Despatch party postal address country code.
 
 |`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:Country/cbc:Name`
-|**Despatch party country name** +
-Name of the country for the despatch party.
+|**Country name** +
+Despatch party postal address country name.
 
 |===
 
