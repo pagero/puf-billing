@@ -110,6 +110,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*Yes*
 |
 
+|Japan
+|*Yes*
+|*No*
+|
+
 |Latvia
 |*Yes*
 |*No*
