@@ -48,6 +48,10 @@ include::document-level/DeliveryExtension.adoc[]
 
 include::document-level/PaymentTermsExtension.adoc[]
 
+==== PrepaidPayment
+
+include::document-level/PrepaidPaymentExtension.adoc[]
+
 ==== TaxSubTotal
 
 include::document-level/TaxSubTotalExtension.adoc[]

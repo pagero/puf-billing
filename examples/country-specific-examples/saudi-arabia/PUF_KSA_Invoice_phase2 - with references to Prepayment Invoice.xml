@@ -117,6 +117,52 @@
             </cac:FinancialInstitutionBranch>
         </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>
+    <cac:PrepaidPayment>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PrepaidPaymentExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PrepaidPaymentExtension>
+                                <cac:DocumentReference>
+                                    <!-- KSA-26 Prepayment ID. The sequential number (Invoice number BT-1) of the associated Prepayment invoice(s). -->
+                                    <cbc:ID>46531</cbc:ID>
+                                    <!-- KSA-28 Prepayment Issue Date. Issue Date (BT-2) of the associated Prepayment invoice(s). -->
+                                    <cbc:IssueDate>2021-07-31</cbc:IssueDate>
+                                    <!-- KSA-29 Prepayment Issue Time. Issue Time (KSA-25) of the associated Prepayment invoice(s). -->
+                                    <cbc:IssueTime>12:28:17</cbc:IssueTime>
+                                    <!-- KSA-30 Prepayment Document Type Code. Invoice type code (BT-3) of the associated Prepayment invoice(s). The only acceptable value is '386'. -->
+                                    <cbc:DocumentTypeCode>386</cbc:DocumentTypeCode>
+                                </cac:DocumentReference>
+                                <!-- Name/description of the prepayment -->
+                                <cbc:Description>Prepayment adjustment</cbc:Description>
+                                <cac:TaxTotal>
+                                    <!-- Total VAT Amount -->
+                                    <cbc:TaxAmount currencyID="SAR">1.50</cbc:TaxAmount>
+                                    <cac:TaxSubtotal> 
+                                        <!-- KSA-31 The sum total of VAT category taxable amount (BT-116) subject to specific VAT Category code of the associated Prepayment invoice(s).-->
+                                        <cbc:TaxableAmount currencyID="SAR">10.00</cbc:TaxableAmount>
+                                        <!-- KSA-32 Prepayment VAT Category Tax Amount -->
+                                        <cbc:TaxAmount currencyID="SAR">1.50</cbc:TaxAmount>
+                                        <cac:TaxCategory>
+                                            <!-- KSA-33 Prepayment VAT Category Code -->
+                                            <cbc:ID>S</cbc:ID>
+                                            <!-- KSA-34 The VAT category code (BT-118) of the associated Prepayment invoice(s). -->
+                                            <cbc:Percent>15.00</cbc:Percent>
+                                            <cac:TaxScheme>
+                                                <cbc:ID>VAT</cbc:ID>
+                                            </cac:TaxScheme>
+                                        </cac:TaxCategory>
+                                    </cac:TaxSubtotal>
+                                </cac:TaxTotal>
+                            </puf:PrepaidPaymentExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- The paid amount -->
+        <cbc:PaidAmount currencyID="SAR">11.50</cbc:PaidAmount>
+    </cac:PrepaidPayment>
     <cac:TaxTotal>
         <!-- BT-110 Invoice total VAT amount. Currency in attribute currencyID (BT-5) -->
         <cbc:TaxAmount currencyID="SAR">15.00</cbc:TaxAmount>
@@ -196,74 +242,6 @@
         <cac:Price>
             <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
             <cbc:PriceAmount currencyID="SAR">110.00</cbc:PriceAmount>
-        </cac:Price>
-    </cac:InvoiceLine>
-    <!-- Adjustment of the prepayment amount from the final invoice amount. -->
-    <cac:InvoiceLine>
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
-                <ext:ExtensionContent>
-                    <puf:PageroExtension>
-                        <puf:LineExtension>
-                            <!-- KSA-12 Line amount inclusive of VAT-->
-                            <puf:TaxInclusiveLineExtensionAmount currencyID="SAR">0.00</puf:TaxInclusiveLineExtensionAmount> 
-                        </puf:LineExtension>
-                    </puf:PageroExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
-        <!-- BT-126 Line ID -->
-        <cbc:ID>2</cbc:ID>
-        <!-- BT-129 Invoiced Quantity. BT-130 unit of measure in attribute unitCode -->
-        <cbc:InvoicedQuantity unitCode="EA">0.00</cbc:InvoicedQuantity>
-        <!-- BT-131 Line extension amount. Line net amount. Currency in attribute currencyID (BT-5) -->
-        <cbc:LineExtensionAmount currencyID="SAR">0.00</cbc:LineExtensionAmount>
-        <!-- Reference to the prepayment invoice -->
-        <cac:DocumentReference>
-            <!-- KSA-26 The sequential number (Invoice number BT-1) of the associated Prepayment invoice(s) -->
-            <cbc:ID>46531</cbc:ID>
-            <!-- KSA-28 Issue Date (BT-2) of the associated Prepayment invoice(s) -->
-            <cbc:IssueDate>2021-07-31</cbc:IssueDate>
-            <!-- KSA-29 Issue Time (KSA-25) of the associated Prepayment invoice(s) -->
-            <cbc:IssueTime>12:28:17</cbc:IssueTime>
-            <!-- KSA-30 Invoice type code (BT-3) of the associated Prepayment invoice(s). The only acceptable value is '386'. -->
-            <cbc:DocumentTypeCode>386</cbc:DocumentTypeCode>
-        </cac:DocumentReference>
-        <cac:TaxTotal>
-            <!-- KSA-11 Line VAT Amount -->
-            <cbc:TaxAmount currencyID="SAR">0.00</cbc:TaxAmount>
-            <cac:TaxSubtotal> 
-                <!-- KSA-31 Prepayment VAT Category Taxable Amount -->
-                <cbc:TaxableAmount currencyID="SAR">10.00</cbc:TaxableAmount>
-                <!-- KSA-32 Prepayment VAT Category Tax Amount -->
-                <cbc:TaxAmount currencyID="SAR">1.50</cbc:TaxAmount>
-                <cac:TaxCategory>
-                    <cbc:ID>S</cbc:ID>
-                    <cbc:Percent>15.00</cbc:Percent>
-                    <cac:TaxScheme>
-                        <cbc:ID>VAT</cbc:ID>
-                    </cac:TaxScheme>
-                </cac:TaxCategory>
-            </cac:TaxSubtotal>
-        </cac:TaxTotal>
-        <cac:Item>
-            <!-- BT-153 Article/Item Description -->
-            <cbc:Name>Prepayment adjustment</cbc:Name>
-            <cac:ClassifiedTaxCategory>
-                <!-- BT-151 Invoiced item VAT category code. Valid values in KSA: S, Z, E, O  -->
-                <cbc:ID>S</cbc:ID>
-                <!-- BT-152 Invoiced item VAT rate -->
-                <cbc:Percent>15.00</cbc:Percent>
-                <!-- KSA-21 Use "VAT" -->
-                <cac:TaxScheme>
-                    <cbc:ID>VAT</cbc:ID>
-                </cac:TaxScheme>
-            </cac:ClassifiedTaxCategory>
-        </cac:Item>
-        <cac:Price>
-            <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
-            <cbc:PriceAmount currencyID="SAR">0.00</cbc:PriceAmount>
         </cac:Price>
     </cac:InvoiceLine>
 </Invoice>

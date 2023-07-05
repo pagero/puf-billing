@@ -1,0 +1,155 @@
+The UBL extension to be used for below elements can be found <<_cacprepaidpayment, here>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `puf:PageroExtension/puf:PrepaidPaymentExtension`.
+
+See example below as well as the URI to be used for this extension.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+<!-- Code omitted for clarity -->
+    <cac:PrepaidPayment>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PrepaidPaymentExtension</ext:ExtensionURI> <!--1-->
+                        <ext:ExtensionContent>
+                            <puf:PageroExtension>
+                                <puf:PrepaidPaymentExtension/> <!--2-->
+                        </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+    </cac:PrepaidPayment>
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table shows the definition of the extended element.
+
+.Elements added in puf:PrepaidPaymentExtension
+|===
+|Element |Description
+
+|`cac:DocumentReference/cbc:ID`
+|**Prepayment invoice number ID** +
+The invoice number of the associated prepayment invoice.
+
+|`cac:DocumentReference/cbc:IssueDate`
+|**Prepayment invoice issue date** +
+Issue date of associated prepayment invoice. + 
+_Format "YYYY-MM-DD". of the associated prepayment invoice._
+
+|`cac:DocumentReference/cbc:IssueTime`
+|**Prepayment invoice issue time** +
+Issue time of associated prepayment invoice. +  
+_Format "HH:mm:ss", "HH:mm:ssZZZZ", "HH:mm:ss.SSS’Z'", or "HH:mm:ss.SSS"._
+
+|`cac:DocumentReference/cbc:DocumentTypeCode`
+|**Document type code** +
+Document type code should be '386' when referencing a prepayment invoice.
+
+|`cbc:Description`
+|**Name/Description of the prepayment** +
+Description of the prepayment (free text).
+
+|`cac:TaxTotal/cbc:TaxAmount`
+|**Total tax amount** +
+Prepayment invoice total tax amount in document currency. +
+_Summary of all cac:TaxSubTotal/cbc:TaxAmount of the prepayment._
+
+|`cac:TaxTotal/cbc:TaxAmount/@currencyID`
+|**Total tax amount currency** +
+Prepayment invoice total tax amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
+
+|`cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount`
+|**Total taxable amount for each tax category** +
+Total taxable amount for each tax category or tax rate. +
+_E.g. Summary of all taxable amounts for invoice lines with a certain tax percent._
+
+|`cac:TaxSubtotal/cbc:TaxableAmount/@currencyID`
+|**Total taxable amount for each tax category currency** +
+Total taxable amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
+
+|`cac:TaxSubtotal/cbc:TaxAmount`
+|**Total tax amount for each tax category** +
+Total tax amount for a certain tax category or tax rate.
+
+|`cac:TaxSubtotal/cbc:TaxAmount/@currencyID`
+|**Total tax amount currency for each tax category** +
+Total tax amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:ID`
+|**Tax category code** +
+Code for identifying the tax category. +
+_E.g. tax category "S"._ +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:Percent`
+|**Tax category percent** +
+Percentage rate for the tax category.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode`
+|**Tax exemption reason code** +
+Exemption reason code for the tax category, only applicable if the goods or service is exempt from tax. +
+See code list https://pagero.github.io/puf-code-lists/#_puf_013_taxexemptioncode[PUF-013-TAXEXEMPTIONCODE^] for recommendations.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason`
+|**Tax exemption reason** +
+Exemption reason for the tax category, only applicable if the goods or service is exempt from tax.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID`
+|**Tax scheme identfier** +
+Tax scheme for the tax category. +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[PUF-009-TAXTYPESCHEME^].
+
+
+|===
+
+*Example* +
+_cac:PrepaidPayment example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:PrepaidPayment>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PrepaidPaymentExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PrepaidPaymentExtension>
+                                <cac:DocumentReference>
+                                    <cbc:ID>46531</cbc:ID>
+                                    <cbc:IssueDate>2021-07-31</cbc:IssueDate>
+                                    <cbc:IssueTime>12:28:17</cbc:IssueTime>
+                                    <cbc:DocumentTypeCode>386</cbc:DocumentTypeCode>
+                                </cac:DocumentReference>
+                                <cbc:Description>Prepayment adjustment</cbc:Description>
+                                <cac:TaxTotal>
+                                    <cbc:TaxAmount currencyID="SAR">1.50</cbc:TaxAmount>
+                                    <cac:TaxSubtotal> 
+                                        <cbc:TaxableAmount currencyID="SAR">10.00</cbc:TaxableAmount>
+                                        <cbc:TaxAmount currencyID="SAR">1.50</cbc:TaxAmount>
+                                        <cac:TaxCategory>
+                                            <cbc:ID>S</cbc:ID>
+                                            <cbc:Percent>15.00</cbc:Percent>
+                                            <cac:TaxScheme>
+                                                <cbc:ID>VAT</cbc:ID>
+                                            </cac:TaxScheme>
+                                        </cac:TaxCategory>
+                                    </cac:TaxSubtotal>
+                                </cac:TaxTotal>
+                            </puf:PrepaidPaymentExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:PaidAmount currencyID="SAR">11.50</cbc:PaidAmount>
+    </cac:PrepaidPayment>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

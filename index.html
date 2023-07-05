@@ -585,6 +585,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_cacdeliveryterms">cac:DeliveryTerms</a></li>
 <li><a href="#_cacpaymentmeans">cac:PaymentMeans</a></li>
 <li><a href="#_cacpaymentterms">cac:PaymentTerms</a></li>
+<li><a href="#_cacprepaidpayment">cac:PrepaidPayment</a></li>
 <li><a href="#_cacallowancecharge">cac:AllowanceCharge</a></li>
 <li><a href="#_cactaxexchangerate">cac:TaxExchangeRate</a></li>
 <li><a href="#_cactaxtotal">cac:TaxTotal</a></li>
@@ -628,8 +629,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_party">4.1.10. Party</a></li>
 <li><a href="#_delivery">4.1.11. Delivery</a></li>
 <li><a href="#_paymentterms">4.1.12. PaymentTerms</a></li>
-<li><a href="#_taxsubtotal">4.1.13. TaxSubTotal</a></li>
-<li><a href="#_legalmonetarytotal">4.1.14. LegalMonetaryTotal</a></li>
+<li><a href="#_prepaidpayment">4.1.13. PrepaidPayment</a></li>
+<li><a href="#_taxsubtotal">4.1.14. TaxSubTotal</a></li>
+<li><a href="#_legalmonetarytotal">4.1.15. LegalMonetaryTotal</a></li>
 </ul>
 </li>
 <li><a href="#_line_level">4.2. Line level</a>
@@ -3960,9 +3962,61 @@ Penalty interest rate, numberic value only.</p></td>
 </div>
 </div>
 <div class="sect3">
+<h4 id="_cacprepaidpayment"><a class="anchor" href="#_cacprepaidpayment"></a><a class="link" href="#_cacprepaidpayment">cac:PrepaidPayment</a></h4>
+<div class="paragraph">
+<p>Below table show available fields in <code>cac:PrepaidPayment</code>, note that additional elements has also been added to the extension available in <a href="#_prepaidpayment">PrepaidPayment</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 20. Elements added in cac:PrepaidPayment</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ext:UBLExtensions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
+Extension is added to provide additional information in the <code>cac:PrepaidPayment</code> element, the information available can be found <a href="#_prepaidpayment">here</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:PaidAmount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Paid amount</strong><br>
+The amount of the payment in the invoice currency.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:PaidAmount/@currencyID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Paid amount currency</strong><br>
+Currency applied for <code>cbc:Paid amount</code>, must be the same as <code>cbc:DocumentCurrencyCode</code>.<br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_004_currencycode" target="_blank" rel="noopener">PUF-004-CURRENCYCODE</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>cac:PrepaidPayment example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:PrepaidPayment&gt;</span>
+    <span class="tag">&lt;cbc:PaidAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>10.00<span class="tag">&lt;/cbc:PaidAmount&gt;</span>
+  <span class="tag">&lt;/cac:PrepaidPayment&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_cacallowancecharge"><a class="anchor" href="#_cacallowancecharge"></a><a class="link" href="#_cacallowancecharge">cac:AllowanceCharge</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 20. Elements added in cac:AllowanceCharge</caption>
+<caption class="title">Table 21. Elements added in cac:AllowanceCharge</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4094,7 +4148,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <div class="sect3">
 <h4 id="_cactaxexchangerate"><a class="anchor" href="#_cactaxexchangerate"></a><a class="link" href="#_cactaxexchangerate">cac:TaxExchangeRate</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 21. Elements added in cac:TaxExchangeRate</caption>
+<caption class="title">Table 22. Elements added in cac:TaxExchangeRate</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4165,7 +4219,7 @@ Date when the exchange rate was fetched.<br>
 <p>Below table show available fields in <code>cac:TaxTotal/cac:TaxSubtotal</code>, note that additional elements has also been added to the extension available in <a href="#_taxtotal">cac:TaxTotal/cac:TaxSubtotal</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 22. Elements added in cac:TaxTotal</caption>
+<caption class="title">Table 23. Elements added in cac:TaxTotal</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4292,7 +4346,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table show available fields in cac:LegalMonetaryTotal, note that additional elements has also been added to the extension available in <a href="#_legalmonetarytotal">cac:LegalMonetaryTotal</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 23. Elements added in cac:LegalMonetaryTotal</caption>
+<caption class="title">Table 24. Elements added in cac:LegalMonetaryTotal</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4670,7 +4724,7 @@ Line book keeping reference for buyers financial system.</p></td>
 <div class="sect3">
 <h4 id="_cacinvoiceperiod_2"><a class="anchor" href="#_cacinvoiceperiod_2"></a><a class="link" href="#_cacinvoiceperiod_2">cac:InvoicePeriod</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 24. Elements available in cac:InvoicePeriod</caption>
+<caption class="title">Table 25. Elements available in cac:InvoicePeriod</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4723,7 +4777,7 @@ End date of the line invoice period.<br>
 <p>Below table show available fields in <code>cac:OrderLineReference</code>, note that additional elements has also been added to the extension available in <a href="#_orderlinereference">OrderLineReference</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 25. Elements added to cac:OrderLineReference</caption>
+<caption class="title">Table 26. Elements added to cac:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4797,7 +4851,7 @@ Date of issue of the referenced order.<br>
 <div class="sect3">
 <h4 id="_cacdespatchlinereference"><a class="anchor" href="#_cacdespatchlinereference"></a><a class="link" href="#_cacdespatchlinereference">cac:DespatchLineReference</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 26. Elements added to cac:DespatchLineReference</caption>
+<caption class="title">Table 27. Elements added to cac:DespatchLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4854,7 +4908,7 @@ Date of issue of the referenced despatch advice.<br>
 <div class="sect3">
 <h4 id="_cacdocumentreference"><a class="anchor" href="#_cacdocumentreference"></a><a class="link" href="#_cacdocumentreference">cac:DocumentReference</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 27. Elements available in cac:DocumentReference</caption>
+<caption class="title">Table 28. Elements available in cac:DocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4918,7 +4972,7 @@ Document type code should be '130' if referencing an invoiced object.</p></td>
 <div class="sect3">
 <h4 id="_cacdelivery_2"><a class="anchor" href="#_cacdelivery_2"></a><a class="link" href="#_cacdelivery_2">cac:Delivery</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 28. Elements added to cac:Delivery</caption>
+<caption class="title">Table 29. Elements added to cac:Delivery</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5105,7 +5159,7 @@ Delivery location address country name.</p></td>
 <div class="sect3">
 <h4 id="_cacallowancecharge_2"><a class="anchor" href="#_cacallowancecharge_2"></a><a class="link" href="#_cacallowancecharge_2">cac:AllowanceCharge</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 29. Elements added in cac:AllowanceCharge</caption>
+<caption class="title">Table 30. Elements added in cac:AllowanceCharge</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5194,7 +5248,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>If multiple taxes is provided on one line, note that <code>cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal</code> must be provided for each tax.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 30. Elements added in cac:InvoiceLine/cac:TaxTotal</caption>
+<caption class="title">Table 31. Elements added in cac:InvoiceLine/cac:TaxTotal</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5377,7 +5431,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <div class="sect3">
 <h4 id="_cacitem"><a class="anchor" href="#_cacitem"></a><a class="link" href="#_cacitem">cac:Item</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 31. Elements added in cac:Item</caption>
+<caption class="title">Table 32. Elements added in cac:Item</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5569,7 +5623,7 @@ Lot expiry date.<br>
 <p>Below table show available fields in <code>cac:Price</code>, note that additional elements has also been added to the extension available in <a href="#_price">Price</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 32. Elements added in cac:InvoiceLine/cac:Price</caption>
+<caption class="title">Table 33. Elements added in cac:InvoiceLine/cac:Price</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5737,7 +5791,7 @@ If country specific information is available as restricted information value, th
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 33. Elements added in puf:RestrictedInformation</caption>
+<caption class="title">Table 34. Elements added in puf:RestrictedInformation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5833,7 +5887,7 @@ Value relevant to the assigned key.</p></td>
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 34. Elements added in puf:BillingReferenceExtension</caption>
+<caption class="title">Table 35. Elements added in puf:BillingReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5927,7 +5981,7 @@ Identifier used for the series the document is part of.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 35. Elements added to puf:PageroExtension/puf:SupplyType</caption>
+<caption class="title">Table 36. Elements added to puf:PageroExtension/puf:SupplyType</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6020,7 +6074,7 @@ Code describing the type of supply.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 36. Elements added to puf:PageroExtension/puf:DutyStamp</caption>
+<caption class="title">Table 37. Elements added to puf:PageroExtension/puf:DutyStamp</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6119,7 +6173,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 37. Elements added to puf:PageroExtension</caption>
+<caption class="title">Table 38. Elements added to puf:PageroExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6214,7 +6268,7 @@ To indicate if supply is chargeable to IGST despite the fact that the Supplier a
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 38. Elements added to puf:PageroExtension</caption>
+<caption class="title">Table 39. Elements added to puf:PageroExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6312,7 +6366,7 @@ To indicate if supply is chargeable to IGST despite the fact that the Supplier a
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 39. Elements added in puf:OrderReferenceExtension</caption>
+<caption class="title">Table 40. Elements added in puf:OrderReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6408,7 +6462,7 @@ Date of the sales order, date should be formatted yyyy-mm-dd.</p></td>
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 40. Elements added in puf:BillingReferenceExtension</caption>
+<caption class="title">Table 41. Elements added in puf:BillingReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6519,7 +6573,7 @@ Code signifying the reason for credit.</p></td>
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 41. Elements added in puf:ContractDocumentReferenceExtension</caption>
+<caption class="title">Table 42. Elements added in puf:ContractDocumentReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6640,7 +6694,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 42. Elements added in puf:PartyExtension</caption>
+<caption class="title">Table 43. Elements added in puf:PartyExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6830,7 +6884,7 @@ The <code>puf:IDType</code> must be coded using the <a href="https://pagero.gith
 <p>Below table show the definition of the additional elements added to the delivery extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 43. Elements added in puf:DeliveryExtension</caption>
+<caption class="title">Table 44. Elements added in puf:DeliveryExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6936,7 +6990,7 @@ A code for the delivery method.</p></td>
 <p>Below table shows the definition of the extended element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 44. Elements added in puf:PaymentTermsExtension</caption>
+<caption class="title">Table 45. Elements added in puf:PaymentTermsExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6986,7 +7040,208 @@ Penalty text due to late payment, if the need of explicitly stating a penalty te
 </div>
 </div>
 <div class="sect3">
-<h4 id="_taxsubtotal"><a class="anchor" href="#_taxsubtotal"></a><a class="link" href="#_taxsubtotal">4.1.13. TaxSubTotal</a></h4>
+<h4 id="_prepaidpayment"><a class="anchor" href="#_prepaidpayment"></a><a class="link" href="#_prepaidpayment">4.1.13. PrepaidPayment</a></h4>
+<div class="paragraph">
+<p>The UBL extension to be used for below elements can be found <a href="#_cacprepaidpayment">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>puf:PageroExtension/puf:PrepaidPaymentExtension</code>.</p>
+</div>
+<div class="paragraph">
+<p>See example below as well as the URI to be used for this extension.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:PrepaidPayment&gt;</span>
+            <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PrepaidPaymentExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                        <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                <span class="tag">&lt;puf:PrepaidPaymentExtension</span><span class="tag">/&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                        <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;/cac:PrepaidPayment&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>URI to be used if this extension is added.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Structure to be used if information from this extension will be used.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Below table shows the definition of the extended element.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 46. Elements added in puf:PrepaidPaymentExtension</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DocumentReference/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Prepayment invoice number ID</strong><br>
+The invoice number of the associated prepayment invoice.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DocumentReference/cbc:IssueDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Prepayment invoice issue date</strong><br>
+Issue date of associated prepayment invoice.<br>
+<em>Format "YYYY-MM-DD". of the associated prepayment invoice.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DocumentReference/cbc:IssueTime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Prepayment invoice issue time</strong><br>
+Issue time of associated prepayment invoice.<br>
+<em>Format "HH:mm:ss", "HH:mm:ssZZZZ", "HH:mm:ss.SSS’Z'", or "HH:mm:ss.SSS".</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DocumentReference/cbc:DocumentTypeCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Document type code</strong><br>
+Document type code should be '386' when referencing a prepayment invoice.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:Description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Name/Description of the prepayment</strong><br>
+Description of the prepayment (free text).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxTotal/cbc:TaxAmount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total tax amount</strong><br>
+Prepayment invoice total tax amount in document currency.<br>
+<em>Summary of all cac:TaxSubTotal/cbc:TaxAmount of the prepayment.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxTotal/cbc:TaxAmount/@currencyID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total tax amount currency</strong><br>
+Prepayment invoice total tax amount currency, must be the same as <code>cbc:DocumentCurrencyCode</code>.<br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_004_currencycode" target="_blank" rel="noopener">PUF-004-CURRENCYCODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total taxable amount for each tax category</strong><br>
+Total taxable amount for each tax category or tax rate.<br>
+<em>E.g. Summary of all taxable amounts for invoice lines with a certain tax percent.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cbc:TaxableAmount/@currencyID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total taxable amount for each tax category currency</strong><br>
+Total taxable amount currency, must be the same as <code>cbc:DocumentCurrencyCode</code>.<br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_004_currencycode" target="_blank" rel="noopener">PUF-004-CURRENCYCODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cbc:TaxAmount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total tax amount for each tax category</strong><br>
+Total tax amount for a certain tax category or tax rate.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cbc:TaxAmount/@currencyID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Total tax amount currency for each tax category</strong><br>
+Total tax amount currency, must be the same as <code>cbc:DocumentCurrencyCode</code>.<br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_004_currencycode" target="_blank" rel="noopener">PUF-004-CURRENCYCODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category code</strong><br>
+Code for identifying the tax category.<br>
+<em>E.g. tax category "S".</em><br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:Percent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category percent</strong><br>
+Percentage rate for the tax category.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax exemption reason code</strong><br>
+Exemption reason code for the tax category, only applicable if the goods or service is exempt from tax.<br>
+See code list <a href="https://pagero.github.io/puf-code-lists/#_puf_013_taxexemptioncode" target="_blank" rel="noopener">PUF-013-TAXEXEMPTIONCODE</a> for recommendations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax exemption reason</strong><br>
+Exemption reason for the tax category, only applicable if the goods or service is exempt from tax.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme identfier</strong><br>
+Tax scheme for the tax category.<br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme" target="_blank" rel="noopener">PUF-009-TAXTYPESCHEME</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>cac:PrepaidPayment example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:PrepaidPayment&gt;</span>
+        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+            <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PrepaidPaymentExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                        <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                            <span class="tag">&lt;puf:PrepaidPaymentExtension&gt;</span>
+                                <span class="tag">&lt;cac:DocumentReference&gt;</span>
+                                    <span class="tag">&lt;cbc:ID&gt;</span>46531<span class="tag">&lt;/cbc:ID&gt;</span>
+                                    <span class="tag">&lt;cbc:IssueDate&gt;</span>2021-07-31<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+                                    <span class="tag">&lt;cbc:IssueTime&gt;</span>12:28:17<span class="tag">&lt;/cbc:IssueTime&gt;</span>
+                                    <span class="tag">&lt;cbc:DocumentTypeCode&gt;</span>386<span class="tag">&lt;/cbc:DocumentTypeCode&gt;</span>
+                                <span class="tag">&lt;/cac:DocumentReference&gt;</span>
+                                <span class="tag">&lt;cbc:Description&gt;</span>Prepayment adjustment<span class="tag">&lt;/cbc:Description&gt;</span>
+                                <span class="tag">&lt;cac:TaxTotal&gt;</span>
+                                    <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">SAR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1.50<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+                                    <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+                                        <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">SAR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>10.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+                                        <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">SAR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1.50<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+                                        <span class="tag">&lt;cac:TaxCategory&gt;</span>
+                                            <span class="tag">&lt;cbc:ID&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+                                            <span class="tag">&lt;cbc:Percent&gt;</span>15.00<span class="tag">&lt;/cbc:Percent&gt;</span>
+                                            <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                                                <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                                            <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+                                        <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+                                    <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+                                <span class="tag">&lt;/cac:TaxTotal&gt;</span>
+                            <span class="tag">&lt;/puf:PrepaidPaymentExtension&gt;</span>
+                        <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;cbc:PaidAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">SAR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>11.50<span class="tag">&lt;/cbc:PaidAmount&gt;</span>
+    <span class="tag">&lt;/cac:PrepaidPayment&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_taxsubtotal"><a class="anchor" href="#_taxsubtotal"></a><a class="link" href="#_taxsubtotal">4.1.14. TaxSubTotal</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cactaxtotal">here</a>.</p>
 </div>
@@ -7038,7 +7293,7 @@ Penalty text due to late payment, if the need of explicitly stating a penalty te
 <p>Below table lists all additional elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 45. Elements added in puf:TaxSubtotalExtension</caption>
+<caption class="title">Table 47. Elements added in puf:TaxSubtotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7215,7 +7470,7 @@ Tax chargeability per tax (see Italy section <a href="#_tax_chargeability_esigib
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legalmonetarytotal"><a class="anchor" href="#_legalmonetarytotal"></a><a class="link" href="#_legalmonetarytotal">4.1.14. LegalMonetaryTotal</a></h4>
+<h4 id="_legalmonetarytotal"><a class="anchor" href="#_legalmonetarytotal"></a><a class="link" href="#_legalmonetarytotal">4.1.15. LegalMonetaryTotal</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_caclegalmonetarytotal">here</a>.</p>
 </div>
@@ -7265,7 +7520,7 @@ Tax chargeability per tax (see Italy section <a href="#_tax_chargeability_esigib
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 46. Elements added in puf:LegalMonetaryTotalExtension</caption>
+<caption class="title">Table 48. Elements added in puf:LegalMonetaryTotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7552,7 +7807,7 @@ If country specific information is available as restricted information value, th
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 47. Elements added in puf:RestrictedInformation</caption>
+<caption class="title">Table 49. Elements added in puf:RestrictedInformation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7661,7 +7916,7 @@ Value relevant to the assigned key.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 48. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 50. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7781,7 +8036,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 49. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 51. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7904,7 +8159,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 50. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 52. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8024,7 +8279,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 51. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 53. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8150,7 +8405,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 52. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
+<caption class="title">Table 54. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8261,7 +8516,7 @@ Date of issue of the referenced tender, date should be formatted "yyyy-mm-dd".</
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 53. Elements added to puf:LineExtension/puf:ProjectReference</caption>
+<caption class="title">Table 55. Elements added to puf:LineExtension/puf:ProjectReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8372,7 +8627,7 @@ Identification of the project reference.</p></td>
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 54. Elements added in puf:OrderLineReference</caption>
+<caption class="title">Table 56. Elements added in puf:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8486,7 +8741,7 @@ Date of the sales order, date should be formatted "yyyy-mm-dd".</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 55. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
+<caption class="title">Table 57. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8607,7 +8862,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 56. Elements added to puf:ItemExtension</caption>
+<caption class="title">Table 58. Elements added to puf:ItemExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8712,7 +8967,7 @@ Type of item, valid values are <code>GOODS</code> or <code>SERVICE</code>.</p></
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 57. Elements added to puf:PriceExtension</caption>
+<caption class="title">Table 59. Elements added to puf:PriceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10683,7 +10938,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 <div class="sect2">
 <h3 id="_code_lists_for_coded_elements"><a class="anchor" href="#_code_lists_for_coded_elements"></a><a class="link" href="#_code_lists_for_coded_elements">6.1. Code lists for coded elements</a></h3>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 58. Table of the code lists used</caption>
+<caption class="title">Table 60. Table of the code lists used</caption>
 <colgroup>
 <col>
 <col>
@@ -10834,7 +11089,7 @@ cbc:ItemClassificationCode/@listID</code></p></td>
 <p>The validation artefacts are also available on <a href="https://github.com/pagero/puf-billing/tree/master/validation-artefacts" target="_blank" rel="noopener">GitHub</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 59. Schematron rules in PUF</caption>
+<caption class="title">Table 61. Schematron rules in PUF</caption>
 <colgroup>
 <col>
 <col>
@@ -11014,7 +11269,7 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 </table>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 60. Table of supported countries</caption>
+<caption class="title">Table 62. Table of supported countries</caption>
 <colgroup>
 <col>
 <col>
