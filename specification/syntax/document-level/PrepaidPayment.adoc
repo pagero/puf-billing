@@ -1,0 +1,33 @@
+Below table show available fields in `cac:PrepaidPayment`, note that additional elements has also been added to the extension available in <<_prepaidpayment>>.
+
+.Elements added in cac:PrepaidPayment
+|===
+|Path |Description
+
+|`ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:PrepaidPayment` element, the information available can be found <<_prepaidpayment, here>>.
+
+|`cbc:PaidAmount`
+|**Paid amount** +
+The amount of the payment in the invoice currency.
+
+|`cbc:PaidAmount/@currencyID`
+|**Paid amount currency** +
+Currency applied for `cbc:Paid amount`, must be the same as `cbc:DocumentCurrencyCode`. +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
+
+|===
+
+*Example* +
+_cac:PrepaidPayment example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:PrepaidPayment>
+    <cbc:PaidAmount currencyID="EUR">10.00</cbc:PaidAmount>
+  </cac:PrepaidPayment>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

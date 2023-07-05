@@ -130,6 +130,10 @@ include::document-level/PaymentMeans.adoc[]
 
 include::document-level/PaymentTerms.adoc[]
 
+==== cac:PrepaidPayment
+
+include::document-level/PrepaidPayment.adoc[]
+
 ==== cac:AllowanceCharge
 
 include::document-level/AllowanceCharge.adoc[]
