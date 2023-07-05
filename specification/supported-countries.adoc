@@ -216,6 +216,11 @@ Only support for invoice and credit.
 |*No*
 |
 
+|Türkiye
+|*Yes*
+|*Yes*
+|
+
 |United Kingdom
 |*Yes*
 |*No*

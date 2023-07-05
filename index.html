@@ -734,6 +734,17 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_routing_codes_dir3">5.11.1. Routing codes (DIR3)</a></li>
 </ul>
 </li>
+<li><a href="#_türkiye">5.12. Türkiye</a>
+<ul class="sectlevel3">
+<li><a href="#_invoice_profile_id">5.12.1. Invoice profile id</a></li>
+<li><a href="#_invoice_type_code">5.12.2. Invoice type code</a></li>
+<li><a href="#_invoice_delivery_method">5.12.3. Invoice delivery method</a></li>
+<li><a href="#_first_name_and_surname">5.12.4. First name and surname</a></li>
+<li><a href="#_tax_category_codes_5">5.12.5. Tax category codes</a></li>
+<li><a href="#_tax_scheme">5.12.6. Tax scheme</a></li>
+<li><a href="#_internet_sales">5.12.7. Internet Sales</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_code_lists">6. Code lists</a>
@@ -10915,6 +10926,430 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_türkiye"><a class="anchor" href="#_türkiye"></a><a class="link" href="#_türkiye">5.12. Türkiye</a></h3>
+<div class="paragraph">
+<p>This section contains information about special requirements concerning invoicing in Türkiye.</p>
+</div>
+<div class="sect3">
+<h4 id="_invoice_profile_id"><a class="anchor" href="#_invoice_profile_id"></a><a class="link" href="#_invoice_profile_id">5.12.1. Invoice profile id</a></h4>
+<div class="paragraph">
+<p>For the UBL-TR format in Türkiye, it is mandatory to specify the invoice profile that&#8217;s used.</p>
+</div>
+<div class="paragraph">
+<p>Valid values are listed in the table below:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TICARIFATURA</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Commercial invoice.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TEMELFATURA</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basic invoice.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EARSIVFATURA</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">e-Archive invoice.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IHRACAT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Goods export invoice.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Invoice profile example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                        <span class="tag">&lt;puf:Key&gt;</span>UBLTRProfile<span class="tag">&lt;/puf:Key&gt;</span>
+                        <span class="tag">&lt;puf:Value&gt;</span>TICARIFATURA<span class="tag">&lt;/puf:Value&gt;</span>
+                    <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_invoice_type_code"><a class="anchor" href="#_invoice_type_code"></a><a class="link" href="#_invoice_type_code">5.12.2. Invoice type code</a></h4>
+<div class="paragraph">
+<p>In addition to the invoice profile, it is also required to indicate the invoice type. This should be indicated in the attribute <code>name`</code> belonging to the element <code>cbc:InvoiceTypeCode</code>.</p>
+</div>
+<div class="paragraph">
+<p>Valid values are listed in the table below:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SATIS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sales invoice (seller-buyer).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IADE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Return invoice (buyer-seller).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TEVKIFAT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invoice with withholding tax.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ISTISNA</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invoice with VAT Exemption.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OZELMATRAH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Private bills.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IHRACKAYITLI</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Export sales.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Invoice type code example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">SATIS</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Note that in Türkiye, credit notes do not exist and instead a return invoice (<code>IADE</code>), from buyer to seller, should be used. This means that the actual value of <code>cbc:InvoiceTypeCode</code> should be <code>380</code>, even for <code>IADE</code> invoices.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_invoice_delivery_method"><a class="anchor" href="#_invoice_delivery_method"></a><a class="link" href="#_invoice_delivery_method">5.12.3. Invoice delivery method</a></h4>
+<div class="paragraph">
+<p>If the invoice profile id is set as "EARSIVFATURA" it is mandatory to include how the invoice is being distributed.
+There are only two allowed values. If Pagero is to do the invoice distribution, you should always enter "ELEKTRONIK".
+If an e-mail address for the buyer exists (see <code>cac:AccountingContact/cbc:ElectronicMail</code> in <a href="#_cacaccountingcustomerparty">cac:AccountingCustomerParty</a>) in the invoice and no delivery method value is sent, Pagero will default to "ELEKTRONIK".</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KAGIT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Paper.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ELEKTRONIK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Electronically.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Invoice Delivery Method example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+        <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                    <span class="tag">&lt;puf:Key&gt;</span>InvoiceDeliveryMethod<span class="tag">&lt;/puf:Key&gt;</span>
+                    <span class="tag">&lt;puf:Value&gt;</span>ELEKTRONIK<span class="tag">&lt;/puf:Value&gt;</span>
+                <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+            <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+        <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_first_name_and_surname"><a class="anchor" href="#_first_name_and_surname"></a><a class="link" href="#_first_name_and_surname">5.12.4. First name and surname</a></h4>
+<div class="paragraph">
+<p>If the buyer is a private person (uses TCKN), the first name and surname of the buyer should be included in specific elements.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Invoice type code example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cac:PostalAddress&gt;</span>
+                <span class="comment">&lt;!-- BT-50 Buyer address street--&gt;</span>
+                <span class="tag">&lt;cbc:StreetName&gt;</span>Street Name<span class="tag">&lt;/cbc:StreetName&gt;</span>
+                <span class="comment">&lt;!-- BT-52 Buyer address City --&gt;</span>
+                <span class="tag">&lt;cbc:CityName&gt;</span>City<span class="tag">&lt;/cbc:CityName&gt;</span>
+                <span class="comment">&lt;!-- BT-53 Buyer address postal code --&gt;</span>
+                <span class="tag">&lt;cbc:PostalZone&gt;</span>00000<span class="tag">&lt;/cbc:PostalZone&gt;</span>
+                <span class="tag">&lt;cac:Country&gt;</span>
+                    <span class="comment">&lt;!-- BT-55 Buyer address country code --&gt;</span>
+                    <span class="tag">&lt;cbc:IdentificationCode&gt;</span>RS<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+                <span class="tag">&lt;/cac:Country&gt;</span>
+            <span class="tag">&lt;/cac:PostalAddress&gt;</span>
+            <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+                <span class="comment">&lt;!-- BT-48 Buyer Vat Number if applicable --&gt;</span>
+                    <span class="tag">&lt;cbc:CompanyID&gt;</span>98765432101<span class="tag">&lt;/cbc:CompanyID&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+            <span class="tag">&lt;cac:Person&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                <span class="tag">&lt;cbc:FirstName&gt;</span>Buyer First Name<span class="tag">&lt;/cbc:FirstName&gt;</span>
+                <span class="tag">&lt;cbc:FamilyName&gt;</span>Buyer Surname<span class="tag">&lt;/cbc:FamilyName&gt;</span>
+            <span class="tag">&lt;/cac:Person&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Note that the buyer&#8217;s name is split into first name and surname separately.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tax_category_codes_5"><a class="anchor" href="#_tax_category_codes_5"></a><a class="link" href="#_tax_category_codes_5">5.12.5. Tax category codes</a></h4>
+<div class="paragraph">
+<p>Tax category codes for Türkiye are numerous and can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_turkiye" target="_blank" rel="noopener">Tax category codes Türkiye</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tax_scheme"><a class="anchor" href="#_tax_scheme"></a><a class="link" href="#_tax_scheme">5.12.6. Tax scheme</a></h4>
+<div class="paragraph">
+<p>In Türkiye there are various types of taxes in addition to the regular VAT (known as "KDV" in Türkiye).
+Another relatively common tax is what&#8217;s known as "ÖTV", or Special Consumption Tax. This applies to sales of products such as alcohol, mobile phones, cars, and tobacco. In the event an invoice is applicable for this Special Consumption Tax, it needs to be indicated in the <code>cac:TaxScheme/cbc:ID</code> element on both line and header level.</p>
+</div>
+<div class="paragraph">
+<p>Tax types other than VAT and SCT can also be supported in the Pagero Universal Format, but it is recommended you contact Pagero for further details.</p>
+</div>
+<div class="paragraph">
+<p>Note that the <code>cac:TaxScheme/cbc:ID</code> value should only be changed from 'VAT' if the tax being applied is <strong>not</strong> 'VAT'.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Special Consumption Tax example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:TaxTotal&gt;</span>
+    <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">TRY</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>45.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+    <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+      <span class="comment">&lt;!-- BT-116 Sum of all taxable amounts subject to a specific tax category code and tax category rate. Currency in attribute currencyID (BT-5) --&gt;</span>
+      <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">TRY</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+      <span class="comment">&lt;!--  BT-117. The total VAT amount for a given tax category. Currency in attribute currencyID (BT-5) --&gt;</span>
+      <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">TRY</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>45.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+      <span class="tag">&lt;cac:TaxCategory&gt;</span>
+          <span class="comment">&lt;!-- BT-118 Tax category code. --&gt;</span>
+          <span class="tag">&lt;cbc:ID&gt;</span>9077<span class="tag">&lt;/cbc:ID&gt;</span>
+          <span class="comment">&lt;!-- BT-119 Tax category rate--&gt;</span>
+          <span class="tag">&lt;cbc:Percent&gt;</span>45.00<span class="tag">&lt;/cbc:Percent&gt;</span>
+          <span class="tag">&lt;cac:TaxScheme&gt;</span>
+              <span class="tag">&lt;cbc:ID&gt;</span>SCT<span class="tag">&lt;/cbc:ID&gt;</span>
+          <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+      <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+    <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+  <span class="tag">&lt;cac:TaxTotal&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_internet_sales"><a class="anchor" href="#_internet_sales"></a><a class="link" href="#_internet_sales">5.12.7. Internet Sales</a></h4>
+<div class="paragraph">
+<p>If the invoice is the result of an online sale, extra information needs to be included in the invoice if it is applicable.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Website URL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Website URL that online sale is processed from.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Payment date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The date the payment was or will be made.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Payment means</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Supported codes are:<br>
+48 (Credit/debit card)<br>
+30, 31, 42, 58, 59 ("EFT/HAVALE", meaning money transfers)<br>
+10 ("KAPIDAODEME", meaning payment at the door)<br>
+68 ("ODEMEARACISI", meaning payment platform/forwarder like PayPal)<br>
+ZZZ ("DIGER", meaning other type of payment. If other, it must be accompanied by explanation in <code>name</code> attribute.).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Payment platform</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This is payment platform/forwarder name, used if payment is processed through a payment platform or forwarder like paypal. Mandatory if payment means code is 68 ("ODEMEARACISI")..</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Shipment carrier tax id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tax id (vkn) if shipment handled by company, individual id (tckn) if shipment handled by individual.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Shipment carrier name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Company name if shipment handled by company, first name and family name if shipment handled by individual.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Shipment date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The date of the shipment.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Internet Sales example</strong><br>
+<em>Internet Sales example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+        <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                <span class="comment">&lt;!--If the invoice is the result of an online sale, the website URL is mandatory.--&gt;</span>
+                <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                    <span class="tag">&lt;puf:Key&gt;</span>UBLTRWebsiteURL<span class="tag">&lt;/puf:Key&gt;</span>
+                    <span class="tag">&lt;puf:Value&gt;</span>www.exampleurl.com<span class="tag">&lt;/puf:Value&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+            <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+        <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cbc:DueDate&gt;</span>2023-07-03<span class="tag">&lt;/cbc:DueDate&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:PaymentMeans&gt;</span>
+    <span class="comment">&lt;!-- BT-81 Payment means code. --&gt;</span>
+    <span class="tag">&lt;cbc:PaymentMeansCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Payment platform name</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>68<span class="tag">&lt;/cbc:PaymentMeansCode&gt;</span> <i class="conum" data-value="3"></i><b>(3)</b>
+  <span class="tag">&lt;/cac:PaymentMeans&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:Delivery&gt;</span>
+    <span class="tag">&lt;cac:CarrierParty&gt;</span>
+        <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;cbc:ID&gt;</span>1234543210<span class="tag">&lt;/cbc:ID&gt;</span>  <i class="conum" data-value="4"></i><b>(4)</b>
+        <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+        <span class="tag">&lt;cac:PartyName&gt;</span>
+            <span class="tag">&lt;cbc:Name&gt;</span>Carrier Party Name<span class="tag">&lt;/cbc:Name&gt;</span>  <i class="conum" data-value="5"></i><b>(5)</b>
+        <span class="tag">&lt;/cac:PartyName&gt;</span>
+    <span class="tag">&lt;/cac:CarrierParty&gt;</span>
+    <span class="tag">&lt;cac:Despatch&gt;</span>
+        <span class="tag">&lt;cbc:ActualDespatchDate&gt;</span>2023-07-03<span class="tag">&lt;/cbc:ActualDespatchDate&gt;</span>  <i class="conum" data-value="6"></i><b>(6)</b>
+    <span class="tag">&lt;/cac:Despatch&gt;</span>
+  <span class="tag">&lt;/cac:Delivery&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Website URL that online sale is processed from.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Payment date.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Note the use of the attribute <code>name</code> to specify the payment platform. This is mandatory if the payment goes through a payment platform such as PayPal and others (code 68).
+Otherwise it is OK to omit the attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>This is the tax id of the shipment carrier.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>This is the name of the shipment carrier.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>This is the shipment date.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -11518,6 +11953,12 @@ Only support for invoice and credit.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Switzerland</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>No</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Türkiye</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
