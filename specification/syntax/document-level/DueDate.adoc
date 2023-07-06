@@ -3,7 +3,8 @@
 
 |`cbc:DueDate`
 |**Due date of invoice** +
-_Format "YYYY-MM-DD"._
+_Format "YYYY-MM-DD"._ +
+_Note that corresponding element in UBL message/document type CreditNote is CreditNote/cac:PaymentMeans/cbc:PaymentDueDate._
 |===
 
 *Example* +

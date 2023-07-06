@@ -16,7 +16,7 @@ See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-
 Date of delivery.
 
 |`cac:DeliveryLocation/cbc:ID`
-|**Delivery location idetifier** +
+|**Delivery location identifier** +
 Identifier of the delivery location. +
 _E.g. a GLN number._
 
