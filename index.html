@@ -1384,7 +1384,8 @@ A unique identifier of the invoice.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:DueDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Due date of invoice</strong><br>
-<em>Format "YYYY-MM-DD".</em></p></td>
+<em>Format "YYYY-MM-DD".</em><br>
+<em>Note that corresponding element in UBL message/document type CreditNote is CreditNote/cac:PaymentMeans/cbc:PaymentDueDate.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -4614,8 +4615,8 @@ The item quantity for this invoice line.<br>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:InvoicedQuantity/@unitCode</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Quantity unit of measure</strong><br>
 Unit of measure for the quantity invoiced.<br>
-See code list <a href="#_puf_014_uomcode">[_puf_014_uomcode]</a> for recommendations.<br>
-<em>Note that corresponding element in UBL message/document type CreditNote is named cbc:CreditedQuantity/@unitCode.</em></p></td>
+<em>Note that corresponding element in UBL message/document type CreditNote is named cbc:CreditedQuantity/@unitCode.</em><br>
+See code list <a href="https://pagero.github.io/puf-code-lists/#_puf_014_uomcode" target="_blank" rel="noopener">PUF-014-UOMCODE</a> for recommendations.</p></td>
 </tr>
 </tbody>
 </table>
@@ -5002,7 +5003,7 @@ Date of delivery.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery location idetifier</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery location identifier</strong><br>
 Identifier of the delivery location.<br>
 <em>E.g. a GLN number.</em></p></td>
 </tr>

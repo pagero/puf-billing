@@ -9,8 +9,9 @@ _Note that corresponding element in UBL message/document type CreditNote is name
 |`cbc:InvoicedQuantity/@unitCode`
 |**Quantity unit of measure** +
 Unit of measure for the quantity invoiced. +
-See code list <<_puf_014_uomcode>> for recommendations. +
-_Note that corresponding element in UBL message/document type CreditNote is named cbc:CreditedQuantity/@unitCode._
+_Note that corresponding element in UBL message/document type CreditNote is named cbc:CreditedQuantity/@unitCode._ +
+See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-UOMCODE^] for recommendations.
+
 
 |===
 *Example* +
