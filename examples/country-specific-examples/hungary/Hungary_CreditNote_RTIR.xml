@@ -35,7 +35,7 @@
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
     <cbc:ID>CRN11323134</cbc:ID>
     <cbc:IssueDate>2022-01-13</cbc:IssueDate>
-    <cbc:CreditNoteTypeCode>381</cbc:CreditNoteTypeCode>
+    <cbc:CreditNoteTypeCode name="NORMAL">381</cbc:CreditNoteTypeCode>
     <cbc:DocumentCurrencyCode>HUF</cbc:DocumentCurrencyCode>
     <cac:BillingReference>
         <cac:InvoiceDocumentReference>
