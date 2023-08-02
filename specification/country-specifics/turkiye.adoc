@@ -213,7 +213,7 @@ _Special Consumption Tax example_
 
 ==== Internet Sales
 
-If the invoice is the result of an online sale, extra information needs to be included in the invoice if it is applicable. 
+If the invoice is the result of an online sale, extra information needs to be included in the invoice, if applicable. 
 
 |===
 |Value |Description
@@ -230,10 +230,10 @@ If the invoice is the result of an online sale, extra information needs to be in
 30, 31, 42, 58, 59 ("EFT/HAVALE", meaning money transfers) +
 10 ("KAPIDAODEME", meaning payment at the door) +
 68 ("ODEMEARACISI", meaning payment platform/forwarder like PayPal) +
-ZZZ ("DIGER", meaning other type of payment. If other, it must be accompanied by explanation in `name` attribute.).
+ZZZ ("DIGER", meaning other type of payment. If other, it must be accompanied by explanation in `name` attribute.)
 
 |`Payment platform`
-|This is payment platform/forwarder name, used if payment is processed through a payment platform or forwarder like paypal. Mandatory if payment means code is 68 ("ODEMEARACISI")..
+|This is payment platform/forwarder name, used if payment is processed through a payment platform or forwarder like paypal. Mandatory if payment means code is 68 ("ODEMEARACISI").
 
 |`Shipment carrier tax id`
 |Tax id (vkn) if shipment handled by company, individual id (tckn) if shipment handled by individual.

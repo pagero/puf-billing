@@ -2193,6 +2193,9 @@ in PUF within the <code>cac:AdditionalDocumentReference</code> as shown in below
 </div>
 <div class="sect3">
 <h4 id="_cacprojectreference"><a class="anchor" href="#_cacprojectreference"></a><a class="link" href="#_cacprojectreference">cac:ProjectReference</a></h4>
+<div class="paragraph">
+<p>The project reference is sent in an invoice in the element <code>cac:ProjectReference/cbc:ID</code>. In a credit note, this element does not exist, and project reference is sent by using the element <code>cac:AdditionalDocumentReference[cbc:DocumentTypeCode='50']/cbc:ID</code>.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 10. Elements added in cac:ProjectReference</caption>
 <colgroup>
@@ -2215,7 +2218,7 @@ An identifier of the project.</p></td>
 </table>
 <div class="paragraph">
 <p><strong>Example</strong><br>
-<em>cac:ProjectReference example values</em></p>
+<em>Project Reference for invoice example</em></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2227,6 +2230,30 @@ An identifier of the project.</p></td>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Project Reference for credit note example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;CreditNote&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AdditionalDocumentReference&gt;</span>
+    <span class="tag">&lt;cbc:ID&gt;</span>557884<span class="tag">&lt;/cbc:ID&gt;</span>
+    <span class="tag">&lt;cbc:DocumentTypeCode&gt;</span>50<span class="tag">&lt;/cbc:DocumentTypeCode&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="tag">&lt;/cac:AdditionalDocumentReference&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/CreditNote&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Code 50 indicating this is a project reference</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -4227,7 +4254,7 @@ Date when the exchange rate was fetched.<br>
 <div class="sect3">
 <h4 id="_cactaxtotal"><a class="anchor" href="#_cactaxtotal"></a><a class="link" href="#_cactaxtotal">cac:TaxTotal</a></h4>
 <div class="paragraph">
-<p>Below table show available fields in <code>cac:TaxTotal/cac:TaxSubtotal</code>, note that additional elements has also been added to the extension available in <a href="#_taxtotal">cac:TaxTotal/cac:TaxSubtotal</a>.</p>
+<p>Below table show available fields in <code>cac:TaxTotal/cac:TaxSubtotal</code>, note that additional elements has also been added to the extension available in <a href="#_taxsubtotal">cac:TaxTotal/cac:TaxSubtotal</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 23. Elements added in cac:TaxTotal</caption>
@@ -4257,7 +4284,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/ext:UBLExtensions</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
-Extension is added to provide additional information in the <code>cac:TaxTotal/cac:TaxSubtotal</code> element, the information available can be found <a href="#_taxtotal">here</a>.</p></td>
+Extension is added to provide additional information in the <code>cac:TaxTotal/cac:TaxSubtotal</code> element, the information available can be found <a href="#_taxsubtotal">here</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cbc:TaxableAmount</code></p></td>
@@ -11223,7 +11250,7 @@ Another relatively common tax is what&#8217;s known as "ÖTV", or Special Consum
 <div class="sect3">
 <h4 id="_internet_sales"><a class="anchor" href="#_internet_sales"></a><a class="link" href="#_internet_sales">5.12.7. Internet Sales</a></h4>
 <div class="paragraph">
-<p>If the invoice is the result of an online sale, extra information needs to be included in the invoice if it is applicable.</p>
+<p>If the invoice is the result of an online sale, extra information needs to be included in the invoice, if applicable.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -11252,11 +11279,11 @@ Another relatively common tax is what&#8217;s known as "ÖTV", or Special Consum
 30, 31, 42, 58, 59 ("EFT/HAVALE", meaning money transfers)<br>
 10 ("KAPIDAODEME", meaning payment at the door)<br>
 68 ("ODEMEARACISI", meaning payment platform/forwarder like PayPal)<br>
-ZZZ ("DIGER", meaning other type of payment. If other, it must be accompanied by explanation in <code>name</code> attribute.).</p></td>
+ZZZ ("DIGER", meaning other type of payment. If other, it must be accompanied by explanation in <code>name</code> attribute.)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Payment platform</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This is payment platform/forwarder name, used if payment is processed through a payment platform or forwarder like paypal. Mandatory if payment means code is 68 ("ODEMEARACISI")..</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This is payment platform/forwarder name, used if payment is processed through a payment platform or forwarder like paypal. Mandatory if payment means code is 68 ("ODEMEARACISI").</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Shipment carrier tax id</code></p></td>
