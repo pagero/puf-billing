@@ -25,7 +25,7 @@
     <!-- BT-9 Due Date -->
     <cbc:DueDate>2023-02-01</cbc:DueDate>
     <!-- BT-3 Invoice Type Code -->
-    <cbc:InvoiceTypeCode name="SADIS">380</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode name="SATIS">380</cbc:InvoiceTypeCode>
     <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>TRY</cbc:DocumentCurrencyCode>
     <!-- BG-4 Seller -->
