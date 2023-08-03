@@ -171,7 +171,7 @@ _Invoice type code example_
 
 ==== Tax category codes
 
-Tax category codes for Türkiye are numerous and can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_turkiye[Tax category codes Türkiye^].
+Tax category codes for Türkiye are numerous and can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_türkiye[Tax category codes Türkiye^].
 
 
 ==== Tax scheme
