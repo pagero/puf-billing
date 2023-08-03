@@ -43,3 +43,7 @@ include::country-specifics/singapore.adoc[]
 === Spain
 
 include::country-specifics/spain.adoc[]
+
+=== Türkiye
+
+include::country-specifics/turkiye.adoc[]

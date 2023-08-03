@@ -1,4 +1,4 @@
-Below table show available fields in `cac:TaxTotal/cac:TaxSubtotal`, note that additional elements has also been added to the extension available in <<_taxtotal, cac:TaxTotal/cac:TaxSubtotal>>.
+Below table show available fields in `cac:TaxTotal/cac:TaxSubtotal`, note that additional elements has also been added to the extension available in <<_taxsubtotal, cac:TaxTotal/cac:TaxSubtotal>>.
 
 .Elements added in cac:TaxTotal
 |===
@@ -16,7 +16,7 @@ For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004
 
 |`cac:TaxSubtotal/ext:UBLExtensions`
 |**Extension Content** +
-Extension is added to provide additional information in the `cac:TaxTotal/cac:TaxSubtotal` element, the information available can be found <<_taxtotal, here>>.
+Extension is added to provide additional information in the `cac:TaxTotal/cac:TaxSubtotal` element, the information available can be found <<_taxsubtotal, here>>.
 
 |`cac:TaxSubtotal/cbc:TaxableAmount`
 |**Total taxable amount for each tax category** +
