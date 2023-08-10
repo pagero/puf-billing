@@ -17,7 +17,8 @@
     <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
     <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>SGD</cbc:DocumentCurrencyCode>
-    <!-- BT-10 Buyer reference (maximum 5 characters) -->
+
+    <!-- BT-10 Buyer reference (Note: maximum 5 characters) -->
     <cbc:BuyerReference>REFER</cbc:BuyerReference>
     <cac:OrderReference>
         <!-- BT-13 Purchase order reference -->
