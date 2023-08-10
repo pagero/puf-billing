@@ -1,3 +1,6 @@
+The project reference is sent in an invoice in the element `cac:ProjectReference/cbc:ID`. In a credit note, this element does not exist, and project reference is sent by using the element `cac:AdditionalDocumentReference[cbc:DocumentTypeCode='50']/cbc:ID`.
+
+
 .Elements added in cac:ProjectReference
 |===
 |Path |Description
@@ -8,7 +11,7 @@ An identifier of the project.
 |===
 
 *Example* +
-_cac:ProjectReference example values_
+_Project Reference for invoice example_
 [source,xml]
 ----
 <Invoice>
@@ -19,3 +22,19 @@ _cac:ProjectReference example values_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
+
+*Example* +
+_Project Reference for credit note example_
+[source,xml]
+----
+<CreditNote>
+  <!-- Code omitted for clarity -->
+  <cac:AdditionalDocumentReference>
+    <cbc:ID>557884</cbc:ID>
+    <cbc:DocumentTypeCode>50</cbc:DocumentTypeCode> <!--1--> 
+  </cac:AdditionalDocumentReference>
+  <!-- Code omitted for clarity -->
+</CreditNote>
+----
+
+<1> Code 50 indicating this is a project reference
