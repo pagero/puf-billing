@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+
+    <!-- Values in invoice are examples values only. -->
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>123456</cbc:ID>
+    <!-- BT-2 Invoice Issue Date  -->
+    <cbc:IssueDate>2018-01-01</cbc:IssueDate>
+    <!-- BT-9 Due Date -->
+    <cbc:DueDate>2018-12-01</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code -->
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>SGD</cbc:DocumentCurrencyCode>
+    <!-- BT-10 Buyer reference (Note: maximum 5 characters) -->
+    <cbc:BuyerReference>REFER</cbc:BuyerReference>
+    <cac:OrderReference>
+        <!-- BT-13 Purchase order reference -->
+        <cbc:ID>98776</cbc:ID>
+        <!-- BT-14 Sales order reference -->
+        <cbc:SalesOrderID>112233</cbc:SalesOrderID>
+    </cac:OrderReference>
+    <!-- BG-4 Seller -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- The VAT number in this sample is a dummy value and is not valid -->
+            <cbc:EndpointID schemeID="0195">SG1234567891</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BT-29 additional seller party id. Dummy GLN -->
+                <cbc:ID schemeID="0088">8808808000121</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Supplier</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!--BT-35 Seller address street-->
+                <cbc:StreetName>Street Name</cbc:StreetName>
+                <!-- BT-37 Seller address City -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- BT-38 Seller address postal code -->
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <!-- BT-39 Seller address province/state -->
+                <cbc:CountrySubentity>Province</cbc:CountrySubentity>
+                <cac:Country>
+                    <!-- BT-40 Seller address country code -->
+                    <cbc:IdentificationCode>SG</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-31 Seller VAT Number -->
+                <cbc:CompanyID>SG1234567891</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Name -->
+                <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
+                <!-- BT-30 Seller legal registration identifier -->
+                <cbc:CompanyID schemeID="0195">SG1234567891</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 SELLER CONTACT -->
+            <cac:Contact>
+                <!-- BT-41 Seller contact point -->
+                <cbc:Name>John Doe</cbc:Name>
+                <!-- BT-42 Seller contact telephone number -->
+                <cbc:Telephone>222 121212</cbc:Telephone>
+                <!-- BT-43 Seller contact email address -->
+                <cbc:ElectronicMail>test1@test.supplier.com</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- BG-7 Buyer -->
+    <cac:AccountingCustomerParty>
+        <!-- Customer number, not a requirement but can be useful to route document to correct recipient in Pagero Online -->
+        <cbc:SupplierAssignedAccountID>1234567</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0195">SG4321567891</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BT-46 additional buyer party id. Dummy GLN -->
+                <cbc:ID schemeID="0088">8808808000121</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Buyer Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- BT-50 Buyer address street-->
+                <cbc:StreetName>Street Name</cbc:StreetName>
+                <!-- BT-52 Buyer address City -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- BT-53 Buyer address postal code -->
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <!-- BT-54 Buyer address province/state -->
+                <cbc:CountrySubentity>Province</cbc:CountrySubentity>
+                <cac:Country>
+                    <!-- BT-55 Buyer address country code -->
+                    <cbc:IdentificationCode>SG</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer VAT Number if applicable-->
+                <cbc:CompanyID>SG4321567891</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Name -->
+                <cbc:RegistrationName>Buyer Registration Name</cbc:RegistrationName>
+                <!-- BT-47 Buyer legal registration identifier. The VAT number in this sample is a dummy value and is not valid -->
+                <cbc:CompanyID schemeID="0195">SG4321567891</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-9 BUYER CONTACT -->
+            <cac:Contact>
+                <!-- BT-56 Buyer contact point -->
+                <cbc:Name>Jane Doe</cbc:Name>
+                <!-- BT-57 Buyer contact telephone number -->
+                <cbc:Telephone>123 121212</cbc:Telephone>
+                <!-- BT-58 Buyer contact email address. NOTE receiver e-mail is mandatory when sending via Hermes platform in Belgium -->
+                <cbc:ElectronicMail>test@test.buyer.com</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+        <cac:AccountingContact>
+            <!-- NOTE receiver e-mail is mandatory when sending via Hermes platform in Belgium -->
+            <cbc:ElectronicMail>test@test.buyer.com</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingCustomerParty>
+    <!-- BG-13 DELIVERY INFORMATION -->
+    <cac:Delivery>
+        <!-- BT-72 Actual delivery date -->
+        <cbc:ActualDeliveryDate>2017-12-01</cbc:ActualDeliveryDate>
+        <cbc:LatestDeliveryDate>2017-12-28</cbc:LatestDeliveryDate>
+        <cac:DeliveryLocation>
+            <!-- BT-71 Deliver to location identifier -->
+            <cbc:ID schemeID="0088">83745498753497</cbc:ID>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 A unique identifier of the financial payment account -->
+            <cbc:ID>SG12345678912345</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 An identifier for the payment service provider where a payment account is located. Such as a BIC or a national clearing code where required -->
+                <cbc:ID>CDDEEFFG</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount. Currency in attribute currencyID (BT-5) -->
+        <cbc:TaxAmount currencyID="SGD">24.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- BT-116 Sum of all taxable amounts subject to a specific VAT category code and VAT category rate. Currency in attribute currencyID (BT-5) -->
+            <cbc:TaxableAmount currencyID="SGD">300.00</cbc:TaxableAmount>
+            <!--  BT-117. The total VAT amount for a given VAT category. Currency in attribute currencyID (BT-5) -->
+            <cbc:TaxAmount currencyID="SGD">24.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code. -->
+                <cbc:ID>SR</cbc:ID>
+                <!-- BT-119 VAT category rate-->
+                <cbc:Percent>8.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <!-- Use: "VAT" -->
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of all Invoice line net amounts in the Invoice  without VAT. Currency in attribute currencyID (BT-5)-->
+        <cbc:LineExtensionAmount currencyID="SGD">300.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT. Currency in attribute currencyID (BT-5)-->
+        <cbc:TaxExclusiveAmount currencyID="SGD">300.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT. Currency in attribute currencyID (BT-5) -->
+        <cbc:TaxInclusiveAmount currencyID="SGD">324.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableRoundingAmount currencyID="SGD">0.00</cbc:PayableRoundingAmount>
+        <!-- BT-115 Amount due for payment. Currency in attribute currencyID (BT-5) -->
+        <cbc:PayableAmount currencyID="SGD">324.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <!-- BT-126 Line ID -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-129 Invoiced Quantity. BT-130 unit of measure in attribute unitCode -->
+        <cbc:InvoicedQuantity unitCode="C62">3</cbc:InvoicedQuantity>
+        <!-- BT-131 Line extension amount. Line net amount. Currency in attribute currencyID (BT-5) -->
+        <cbc:LineExtensionAmount currencyID="SGD">300.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Article Description 1</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Article Name 1</cbc:Name>
+            <!-- BG-30 LINE VAT INFORMATION -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code -->
+                <cbc:ID>SR</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>8.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- BG-29 PRICE DETAILS -->
+        <cac:Price>
+            <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
+            <cbc:PriceAmount currencyID="SGD">100</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
