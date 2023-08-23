@@ -2,7 +2,7 @@ This document refers to an Excel file that serves as an additional mapping guide
 
 The Excel file can be accessed through the following link:
 
-- https://github.com/pagero/puf-billing/master/specification/excel/Pagero%20Universal%20Format.xlsx[PUF Billing Excel Specification^]
+- https://github.com/pagero/puf-billing/blob/master/specification/excel/Pagero%20Universal%20Format.xlsx[PUF Billing Excel Specification^]
 
 If you are looking for information related to UBL extensions, those are not included in the Excel file. The extensions to the standard mapping are detailed separately in the Extensions segment of the PUF documentation.
 
