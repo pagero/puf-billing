@@ -1,0 +1,12 @@
+This document refers to an Excel file that serves as an additional mapping guide for the Pagero Universal Format (PUF) in complement to the online documentation. This file details only the base mapping without any extensions. It's designed to provide an essential understanding of the structure and core components of the PUF.
+
+The Excel file can be accessed through the following link:
+
+- https://github.com/pagero/puf-billing/master/specification/excel/Pagero%20Universal%20Format.xlsx[PUF Billing Excel Specification^]
+
+If you are looking for information related to UBL extensions, those are not included in the Excel file. The extensions to the standard mapping are detailed separately in the Extensions segment of the PUF documentation.
+
+You can find the complete explanation and specifications of the UBL extensions at the following link: <<_extensions>>
+
+Please consult this section for a comprehensive understanding of how the extensions work in conjunction with the Pagero Universal Format.
+

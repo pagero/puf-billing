@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.12">
+<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="author" content="Copyright &copy; 2023, Pagero Group">
 <meta name="copyright" content="Pagero Group">
 <title>PUF Billing 2.0</title>
 <style>
@@ -427,18 +428,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+/*! Stylesheet for CodeRay to loosely match GitHub themes | MIT License */
 pre.CodeRay{background:#f7f7f8}
-.CodeRay .line-numbers{border-right:1px solid currentColor;opacity:.35;padding:0 .5em 0 0}
+.CodeRay .line-numbers{border-right:1px solid;opacity:.35;padding:0 .5em 0 0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
 .CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
 .CodeRay .line-numbers strong{color:#000}
 table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
 table.CodeRay td{vertical-align:top;line-height:inherit}
 table.CodeRay td.line-numbers{text-align:right}
 table.CodeRay td.code{padding:0 0 0 .75em}
-.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .debug{color:#fff!important;background:navy!important}
 .CodeRay .annotation{color:#007}
-.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-name{color:navy}
 .CodeRay .attribute-value{color:#700}
 .CodeRay .binary{color:#509}
 .CodeRay .comment{color:#998;font-style:italic}
@@ -447,7 +448,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .char .delimiter{color:#039}
 .CodeRay .class{color:#458;font-weight:bold}
 .CodeRay .complex{color:#a08}
-.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .constant,.CodeRay .predefined-constant{color:teal}
 .CodeRay .color{color:#099}
 .CodeRay .class-variable{color:#369}
 .CodeRay .decorator{color:#b0b}
@@ -462,7 +463,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .exception{color:inherit}
 .CodeRay .filename{color:#099}
 .CodeRay .function{color:#900;font-weight:bold}
-.CodeRay .global-variable{color:#008080}
+.CodeRay .global-variable{color:teal}
 .CodeRay .hex{color:#058}
 .CodeRay .integer,.CodeRay .float{color:#099}
 .CodeRay .include{color:#555}
@@ -473,7 +474,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .inline-delimiter{color:#d14}
 .CodeRay .important{color:#555;font-weight:bold}
 .CodeRay .interpreted{color:#b2b}
-.CodeRay .instance-variable{color:#008080}
+.CodeRay .instance-variable{color:teal}
 .CodeRay .label{color:#970}
 .CodeRay .local-variable{color:#963}
 .CodeRay .octal{color:#40e}
@@ -483,7 +484,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .directive{font-weight:bold}
 .CodeRay .type{font-weight:bold}
 .CodeRay .predefined-type{color:inherit}
-.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .reserved,.CodeRay .keyword{color:#000;font-weight:bold}
 .CodeRay .key{color:#808}
 .CodeRay .key .delimiter{color:#606}
 .CodeRay .key .char{color:#80f}
@@ -503,7 +504,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .symbol{color:#990073}
 .CodeRay .symbol .content{color:#a60}
 .CodeRay .symbol .delimiter{color:#630}
-.CodeRay .tag{color:#008080}
+.CodeRay .tag{color:teal}
 .CodeRay .tag-special{color:#d70}
 .CodeRay .variable{color:#036}
 .CodeRay .insert{background:#afa}
@@ -753,14 +754,15 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </ul>
 </li>
 <li><a href="#_xml_schemas">7. XML schemas</a></li>
-<li><a href="#_validation">8. Validation</a></li>
-<li><a href="#_examples">9. Examples</a></li>
-<li><a href="#_supported_countries">10. Supported countries</a>
+<li><a href="#_excel_specification">8. Excel specification</a></li>
+<li><a href="#_validation">9. Validation</a></li>
+<li><a href="#_examples">10. Examples</a></li>
+<li><a href="#_supported_countries">11. Supported countries</a>
 <ul class="sectlevel2">
-<li><a href="#_country_list">10.1. Country list</a></li>
+<li><a href="#_country_list">11.1. Country list</a></li>
 </ul>
 </li>
-<li><a href="#_support">11. Support</a></li>
+<li><a href="#_support">12. Support</a></li>
 </ul>
 </div>
 </div>
@@ -2467,6 +2469,16 @@ Phone number of contact person.</p></td>
 E-mail of contact person.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FirstName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person first name</strong><br>
+First name of person. Should only be used if seller is a private individual.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FamilyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person surname</strong><br>
+Surname of person. Should only be used if seller is a private individual.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:AccountingContact/cbc:Telephone</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Accounting telephone</strong><br>
 The telephone number for the accounting contact of the organization.</p></td>
@@ -2755,6 +2767,16 @@ Phone number of contact person.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:ElectronicMail</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact E-mail</strong><br>
 E-mail of contact person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FirstName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person first name</strong><br>
+First name of person. Should only be used if buyer is a private individual.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FamilyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person surname</strong><br>
+Surname of person. Should only be used if buyer is a private individual.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:AccountingContact/cbc:Telephone</code></p></td>
@@ -3114,6 +3136,16 @@ Phone number of contact person.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:ElectronicMail</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact E-mail</strong><br>
 E-mail of contact person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FirstName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person first name</strong><br>
+First name of person. Should only be used if buyer is a private individual.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FamilyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person surname</strong><br>
+Surname of person. Should only be used if buyer is a private individual.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:AccountingContact/cbc:Telephone</code></p></td>
@@ -3581,6 +3613,11 @@ Delivery location address country code.</p></td>
 Delivery location address country name.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:CarrierParty/cac:PartyName/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Carrier party name</strong><br>
+Name of the party that transport the goods/services.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryParty/ext:UBLExtensions</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
 Extension is added to provide additional information in the <code>cac:Party</code> element, the information available can be found <a href="#_party">here</a>.</p></td>
@@ -3615,6 +3652,11 @@ Telephone of the contact to which the goods/services is sent to.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryParty/cac:Contact/cbc:ElectronicMail</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery party contact email</strong><br>
 Email of the contact to which the goods/services is sent to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cbc:ActualDespatchDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch date</strong><br>
+The actual or expected date when the shipment was dispatched from the dispatching party.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:PartyName/cbc:Name</code></p></td>
@@ -3728,6 +3770,21 @@ Despatch party postal address country code.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
 Despatch party postal address country name.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:Contact/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact name</strong><br>
+Name of contact person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:Contact/cbc:Telephone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact telephone</strong><br>
+Phone number of contact person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Despatch/cac:DespatchParty/cac:Contact/cbc:ElectronicMail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact E-mail</strong><br>
+E-mail of contact person.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -3808,6 +3865,11 @@ Despatch party postal address country name.</p></td>
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery Terms Code</strong><br>
+Delivery terms coded.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:SpecialTerms</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery Terms</strong><br>
 Description of the delivery terms.</p></td>
@@ -3833,6 +3895,7 @@ A description of the responsibility for the loss risk.</p></td>
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;cac:DeliveryTerms&gt;</span>
+      <span class="tag">&lt;cbc:ID&gt;</span>DAP<span class="tag">&lt;/cbc:ID&gt;</span>
       <span class="tag">&lt;cbc:SpecialTerms&gt;</span>Description of the delivery terms<span class="tag">&lt;/cbc:SpecialTerms&gt;</span>
       <span class="tag">&lt;cbc:LossRiskResponsibilityCode&gt;</span>Code to identify the responsibility for the loss risk.<span class="tag">&lt;/cbc:LossRiskResponsibilityCode&gt;</span>
       <span class="tag">&lt;cbc:LossRisk&gt;</span>A description of the responsibility for the loss risk.<span class="tag">&lt;/cbc:LossRisk&gt;</span>
@@ -11524,7 +11587,34 @@ cbc:ItemClassificationCode/@listID</code></p></td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_validation"><a class="anchor" href="#_validation"></a><a class="link" href="#_validation">8. Validation</a></h2>
+<h2 id="_excel_specification"><a class="anchor" href="#_excel_specification"></a><a class="link" href="#_excel_specification">8. Excel specification</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document refers to an Excel file that serves as an additional mapping guide for the Pagero Universal Format (PUF) in complement to the online documentation. This file details only the base mapping without any extensions. It&#8217;s designed to provide an essential understanding of the structure and core components of the PUF.</p>
+</div>
+<div class="paragraph">
+<p>The Excel file can be accessed through the following link:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/pagero/puf-billing/master/specification/excel/Pagero%20Universal%20Format.xlsx" target="_blank" rel="noopener">PUF Billing Excel Specification</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you are looking for information related to UBL extensions, those are not included in the Excel file. The extensions to the standard mapping are detailed separately in the Extensions segment of the PUF documentation.</p>
+</div>
+<div class="paragraph">
+<p>You can find the complete explanation and specifications of the UBL extensions at the following link: <a href="#_extensions">Extensions</a></p>
+</div>
+<div class="paragraph">
+<p>Please consult this section for a comprehensive understanding of how the extensions work in conjunction with the Pagero Universal Format.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_validation"><a class="anchor" href="#_validation"></a><a class="link" href="#_validation">9. Validation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Available validation rules for PUF.</p>
@@ -11682,7 +11772,7 @@ cbc:ItemClassificationCode/@listID</code></p></td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_examples"><a class="anchor" href="#_examples"></a><a class="link" href="#_examples">9. Examples</a></h2>
+<h2 id="_examples"><a class="anchor" href="#_examples"></a><a class="link" href="#_examples">10. Examples</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Example files can be found here:</p>
@@ -11697,7 +11787,7 @@ cbc:ItemClassificationCode/@listID</code></p></td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_supported_countries"><a class="anchor" href="#_supported_countries"></a><a class="link" href="#_supported_countries">10. Supported countries</a></h2>
+<h2 id="_supported_countries"><a class="anchor" href="#_supported_countries"></a><a class="link" href="#_supported_countries">11. Supported countries</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The aim for PUF is to cover invoicing and business requirements in legal domains and countries all over the world.</p>
@@ -11715,7 +11805,7 @@ no extensive analysis has been done of the requirements.</p>
 <p>The list of supported countries/regions are updated continuously as PUF is developed to follow new identified markets/requirements.</p>
 </div>
 <div class="sect2">
-<h3 id="_country_list"><a class="anchor" href="#_country_list"></a><a class="link" href="#_country_list">10.1. Country list</a></h3>
+<h3 id="_country_list"><a class="anchor" href="#_country_list"></a><a class="link" href="#_country_list">11.1. Country list</a></h3>
 <div class="paragraph">
 <p>The following list gives an overview of country support in PUF.</p>
 </div>
@@ -12001,7 +12091,7 @@ Only support for invoice and credit.</p></td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_support"><a class="anchor" href="#_support"></a><a class="link" href="#_support">11. Support</a></h2>
+<h2 id="_support"><a class="anchor" href="#_support"></a><a class="link" href="#_support">12. Support</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>If you have any questions related to PUF, please <a href="https://support.pagero.com/hc/en-us/requests/new" target="_blank" rel="noopener">create a support ticket via Pagero Support</a>.</p>

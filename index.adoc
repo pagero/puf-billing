@@ -48,6 +48,10 @@ include::specification/code-lists.adoc[]
 
 include::specification/xml-schemas.adoc[]
 
+== Excel specification
+
+include::specification/excel-specification.adoc[]
+
 == Validation
 
 include::specification/validation.adoc[]
