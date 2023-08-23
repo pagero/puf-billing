@@ -120,6 +120,10 @@ Delivery location address country code.
 |**Country name** +
 Delivery location address country name.
 
+|`cac:CarrierParty/cac:PartyName/cbc:Name`
+|**Carrier party name** +
+Name of the party that transport the goods/services.
+
 |`cac:DeliveryParty/ext:UBLExtensions`
 |**Extension Content** +
 Extension is added to provide additional information in the `cac:Party` element, the information available can be found <<_party, here>>.
@@ -148,6 +152,10 @@ Telephone of the contact to which the goods/services is sent to.
 |`cac:DeliveryParty/cac:Contact/cbc:ElectronicMail`
 |**Delivery party contact email** +
 Email of the contact to which the goods/services is sent to.
+
+|`cac:Despatch/cbc:ActualDespatchDate`
+|**Despatch date** +
+The actual or expected date when the shipment was dispatched from the dispatching party.
 
 |`cac:Despatch/cac:DespatchParty/cac:PartyName/cbc:Name`
 |**Despatch party name** +
@@ -239,6 +247,18 @@ Despatch party postal address country code.
 |`cac:Despatch/cac:DespatchParty/cac:PostalAddress/cac:Country/cbc:Name`
 |**Country name** +
 Despatch party postal address country name.
+
+|`cac:Despatch/cac:DespatchParty/cac:Contact/cbc:Name`
+|**Contact name** +
+Name of contact person.
+
+|`cac:Despatch/cac:DespatchParty/cac:Contact/cbc:Telephone`
+|**Contact telephone** +
+Phone number of contact person.
+
+|`cac:Despatch/cac:DespatchParty/cac:Contact/cbc:ElectronicMail`
+|**Contact E-mail** +
+E-mail of contact person.
 
 |===
 

@@ -2,6 +2,10 @@
 |===
 |Path |Description
 
+|`cbc:ID`
+|**Delivery Terms Code** +
+Delivery terms coded.
+
 |`cbc:SpecialTerms`
 |**Delivery Terms** +
 Description of the delivery terms.
@@ -23,6 +27,7 @@ _cac:DeliveryTerms example_
 <Invoice>
   <!-- Code omitted for clarity -->
   <cac:DeliveryTerms>
+      <cbc:ID>DAP</cbc:ID>
       <cbc:SpecialTerms>Description of the delivery terms</cbc:SpecialTerms>
       <cbc:LossRiskResponsibilityCode>Code to identify the responsibility for the loss risk.</cbc:LossRiskResponsibilityCode>
       <cbc:LossRisk>A description of the responsibility for the loss risk.</cbc:LossRisk>

@@ -159,6 +159,14 @@ Phone number of contact person.
 |**Contact E-mail** +
 E-mail of contact person.
 
+|`cac:Party/cac:Person/cbc:FirstName`
+|**Person first name** +
+First name of person. Should only be used if seller is a private individual.
+
+|`cac:Party/cac:Person/cbc:FamilyName`
+|**Person surname** +
+Surname of person. Should only be used if seller is a private individual.
+
 |`cac:AccountingContact/cbc:Telephone`
 |**Accounting telephone** +
 The telephone number for the accounting contact of the organization.
