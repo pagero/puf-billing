@@ -38,6 +38,12 @@ Account number e.g.IBAN och BBAN.
 |**Payment account name** +
 The name of the payment account, at a payment service provider, to which payment should be made.
 
+|`cac:PayeeFinancialAccount/cbc:CurrencyCode`
+|**Payment account currency code** +
+The currency in which the Financial Account is held expressed as a code. +
+ _Value must be according to ISO 4217 Currency codes._ +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
+
 |`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:ID`
 |**Payment account identifier ** +
 Payment account identifier e.g. a BIC or Swift.
