@@ -77,6 +77,14 @@
                             <xsd:element ref="InvoiceSeries" minOccurs="0" maxOccurs="1"/>
                             <xsd:element ref="cbc:Note" minOccurs="0" maxOccurs="1"/>
                             <xsd:element ref="Code" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="RestrictedInformation" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="Key" minOccurs="1" maxOccurs="1"/>
+                                        <xsd:element ref="Value" minOccurs="1" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
