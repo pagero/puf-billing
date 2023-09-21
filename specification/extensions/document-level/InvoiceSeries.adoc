@@ -1,4 +1,4 @@
-The UBL extension to be used for below elements can be found <<_extublextensions, here>>.
+The UBL extension to be used for below elements can be found <<_cacbillingreference, here>>.
 
 The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/InvoiceSeries`.
 
