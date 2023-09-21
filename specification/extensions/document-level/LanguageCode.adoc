@@ -1,0 +1,62 @@
+In order to specify language code for the system generated PDF presentation in Pagero Online, a segment for this is added as Extension.
+
+WARNING: Note that not all languages are supported in Pagero Online. +
+Please contact us to learn which languages are available.
+
+The UBL extension to be used for below elements can be found <<_extublextensions, here>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/LanguageCode`. 
+
+See example below as well as the URI to be used for this extension.
+
+*Example* +
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+      <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LanguageCode</ext:ExtensionURI> <!--1-->
+          <ext:ExtensionContent>
+              <puf:PageroExtension>
+                <puf:LanguageCode/> <!--2-->
+              </puf:PageroExtension>
+          </ext:ExtensionContent>
+      </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table shows the definition of the new elements added to the extension.
+
+.Elements added to puf:PageroExtension/puf:LanguageCode
+|===
+|Element |Description
+
+|`puf:LanguageCode`
+|**Language Code** +
+Must be in lower case alpha, ISO 639-1, format.
+
+|===
+
+*Example* +
+_Language Code_
+[source,xml]
+----
+<Invoice>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LanguageCode</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:LanguageCode>en</puf:LanguageCode>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+
+----

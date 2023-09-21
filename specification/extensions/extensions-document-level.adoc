@@ -8,6 +8,10 @@ include::document-level/RestrictedInformation.adoc[]
 
 include::document-level/InvoiceSeries.adoc[]
 
+==== LanguageCode
+
+include::document-level/LanguageCode.adoc[]
+
 ==== SupplyType
 
 include::document-level/SupplyType.adoc[]
