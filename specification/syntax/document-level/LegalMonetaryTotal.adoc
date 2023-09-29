@@ -10,8 +10,7 @@ Extension is added to provide additional information in the `cac:LegalMonetaryTo
 
 |`cbc:LineExtensionAmount`
 |**Summary of all lines net amount** +
-Summary of all lines net amount. +
-_Summary of all TaxSubTotal/TaxAmount._
+Summary of all lines net amount.
 
 |`cbc:LineExtensionAmount/@currencyID`
 |**Summary of all lines net amount currency** +
