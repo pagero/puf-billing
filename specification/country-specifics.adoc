@@ -47,3 +47,7 @@ include::country-specifics/spain.adoc[]
 === Türkiye
 
 include::country-specifics/turkiye.adoc[]
+
+=== United States
+
+include::country-specifics/usa.adoc[]

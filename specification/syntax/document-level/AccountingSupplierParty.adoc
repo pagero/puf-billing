@@ -128,7 +128,7 @@ Seller's tax registration number.
 |`cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID`
 |**Tax scheme identifier** +
 Seller's tax registration number tax scheme Identifier. +
-_If `cac:PartyTaxScheme/cbc:CompanyID` is to be intepreted as a VAT registration text e.g. "Godkänd för F-Skatt" or "Foretaksregisteret", `cac:TaxScheme/cbc:ID` must be "TAX"._
+_If `cac:PartyTaxScheme/cbc:CompanyID` is to be intepreted as a VAT registration text for Sweden and Norway e.g. "Godkänd för F-Skatt" or "Foretaksregisteret", `cac:TaxScheme/cbc:ID` must be "TAX"._
 
 |`cac:Party/cac:PartyLegalEntity/cbc:RegistrationName`
 |**Registration name** +

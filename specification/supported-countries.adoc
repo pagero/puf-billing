@@ -226,4 +226,9 @@ Only support for invoice and credit.
 |*No*
 |
 
+|United States
+|*Yes*
+|*No*
+|
+
 |===

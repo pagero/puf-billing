@@ -61,6 +61,11 @@ Exemption reason for the tax category, only applicable if the goods or service i
 Tax scheme for the tax category. +
 For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[PUF-009-TAXTYPESCHEME^].
 
+|`cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name`
+|**Tax category name** +
+The name of this taxation scheme. +
+Can be used to specify type of local tax.
+
 |===
 
 *Example* +
