@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>123456</cbc:ID>
+    <cbc:IssueDate>2023-01-01</cbc:IssueDate>
+    <cbc:IssueTime>21:32:52</cbc:IssueTime>
+    <cbc:DueDate>2023-12-01</cbc:DueDate>
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <cbc:Note>Header Text 1</cbc:Note>
+    <cbc:TaxPointDate>2017-01-01</cbc:TaxPointDate>
+    <cbc:DocumentCurrencyCode>USD</cbc:DocumentCurrencyCode>
+    <cbc:AccountingCost>Accounting Cost</cbc:AccountingCost>
+    <cbc:BuyerReference>Buyer Reference</cbc:BuyerReference>
+    <cac:InvoicePeriod>
+        <cbc:StartDate>2023-01-01</cbc:StartDate>
+        <cbc:EndDate>2023-12-31</cbc:EndDate>
+        <cbc:Description>Period description</cbc:Description>
+    </cac:InvoicePeriod>
+    <cac:OrderReference>
+        <cbc:ID>PO Number</cbc:ID>
+        <cbc:IssueDate>2023-12-01</cbc:IssueDate>
+    </cac:OrderReference>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyName>
+                <cbc:Name>Supplier Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Brassiewood Drive</cbc:StreetName>
+                <cbc:CityName>Austin</cbc:CityName>
+                <cbc:PostalZone>78744</cbc:PostalZone>
+                <cbc:CountrySubentity>TX</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>US</cbc:IdentificationCode>
+                    <cbc:Name>USA</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>xx-xxxxxxx</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>TAX</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
+                <cac:RegistrationAddress>
+                    <cbc:CityName>Supplier Hometown</cbc:CityName>
+                    <cac:Country>
+                        <cbc:IdentificationCode>US</cbc:IdentificationCode>
+                    </cac:Country>
+                </cac:RegistrationAddress>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Supplier Contact Name</cbc:Name>
+                <cbc:Telephone>11111111</cbc:Telephone>
+                <cbc:ElectronicMail>supplier@contact.com</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:Telephone>Supplier tel</cbc:Telephone>
+            <cbc:Telefax>Supplier Fax</cbc:Telefax>
+            <cbc:ElectronicMail>Supplier@mainContact.com</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>Customer Number</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <cac:PartyName>
+                <cbc:Name>Customer Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Walnut Lane</cbc:StreetName>
+                <cbc:CityName>Goodrich</cbc:CityName>
+                <cbc:PostalZone>77335</cbc:PostalZone>
+                <cbc:CountrySubentity>TX</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>US</cbc:IdentificationCode>
+                    <cbc:Name>USA</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>xx-xxxxxxx</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:Contact>
+                <cbc:Name>Customer Contact Name</cbc:Name>
+                <cbc:Telephone>65544466</cbc:Telephone>
+                <cbc:ElectronicMail>customer@contact.com</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:Telephone>Customer tel</cbc:Telephone>
+            <cbc:Telefax>Customer Fax</cbc:Telefax>
+            <cbc:ElectronicMail>Customer@mainContact.com</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingCustomerParty>
+    <cac:Delivery>
+        <cbc:ActualDeliveryDate>2019-01-01</cbc:ActualDeliveryDate>
+        <cac:DeliveryLocation>
+            <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+            <cbc:Description>Text describing the delivery location</cbc:Description>
+            <cac:Address>
+                <cbc:StreetName>Wahoo Trail</cbc:StreetName>
+                <cbc:CityName>Goodrich</cbc:CityName>
+                <cbc:PostalZone>77335</cbc:PostalZone>
+                <cbc:CountrySubentity>TX</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>US</cbc:IdentificationCode>
+                    <cbc:Name>USA</cbc:Name>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+        <cac:DeliveryParty>
+            <cac:PartyName>
+                <cbc:Name>Delivery Name</cbc:Name>
+            </cac:PartyName>
+        </cac:DeliveryParty>
+    </cac:Delivery>
+    <cac:DeliveryTerms>
+        <cbc:SpecialTerms>Description of the delivery terms</cbc:SpecialTerms>
+        <cbc:LossRiskResponsibilityCode>Code to identify the responsibility for the loss risk.</cbc:LossRiskResponsibilityCode>
+        <cbc:LossRisk>A description of the responsibility for the loss risk.</cbc:LossRisk>
+    </cac:DeliveryTerms>
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cbc:PaymentID>123456</cbc:PaymentID>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>US0000012345678</cbc:ID>
+            <cbc:Name>AccountName</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>TESTSESS</cbc:ID>
+                <cbc:Name>Bank Name</cbc:Name>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <cac:PaymentTerms>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PaymentTermsExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:PaymentTermsExtension>
+                            <puf:Penalty>
+                                <cbc:Note>Penalty text due to late payment</cbc:Note>
+                            </puf:Penalty>
+                        </puf:PaymentTermsExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:Note>30 days</cbc:Note>
+        <cbc:PenaltySurchargePercent>10</cbc:PenaltySurchargePercent>
+    </cac:PaymentTerms>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="USD">16.40</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="USD">200.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="USD">12.50</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+                <cbc:Percent>6.25</cbc:Percent>
+                <cac:TaxScheme>
+                    <!-- STT = State Tax -->
+                    <cbc:ID>STT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="USD">200.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="USD">3.90</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+                <cbc:Percent>1.95</cbc:Percent>
+                <cac:TaxScheme>
+                    <!-- LOC = Local Tax -->
+                    <cbc:ID>LOC</cbc:ID>
+                    <!--Type of local tax described in text-->
+                    <cbc:Name>City Sales Tax</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="USD">200.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="USD">200.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="USD">216.40</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="USD">216.40</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <cbc:ID>10000</cbc:ID>
+        <cbc:Note>Line text 1</cbc:Note>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="USD">200.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>1</cbc:LineID>
+            <cac:OrderReference>
+                <cbc:ID>Purchase Order ID</cbc:ID>
+                <cbc:IssueDate>2019-01-01</cbc:IssueDate>
+            </cac:OrderReference>
+        </cac:OrderLineReference>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="USD">16.40</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <cbc:TaxableAmount currencyID="USD">200.00</cbc:TaxableAmount>
+                <cbc:TaxAmount currencyID="USD">12.50</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+                    <cbc:Percent>6.25</cbc:Percent>
+                    <cac:TaxScheme>
+                        <!-- STT = State Tax -->
+                        <cbc:ID>STT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+            <cac:TaxSubtotal>
+                <cbc:TaxableAmount currencyID="USD">200.00</cbc:TaxableAmount>
+                <cbc:TaxAmount currencyID="USD">3.90</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+                    <cbc:Name>City Tax</cbc:Name>
+                    <cbc:Percent>1.95</cbc:Percent>
+                    <cac:TaxScheme>
+                        <!-- LOC = Local Tax -->
+                        <cbc:ID>LOC</cbc:ID>
+                        <!--Type of local tax described in text-->
+                        <cbc:Name>City Sales Tax</cbc:Name>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Name>Article 1</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>123456</cbc:ID>
+            </cac:SellersItemIdentification>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="USD">200.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

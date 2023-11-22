@@ -24,6 +24,10 @@ include::guidelines/customizationid-and-profileid.adoc[]
 
 include::guidelines/working-with-extensions.adoc[]
 
+=== Pagero Online
+
+include::guidelines/pageroonline.adoc[]
+
 === Release management
 
 PUF will continuously be updated to meet new market demands. In order to support backward compatibility, the XSD schema is built with the use of "other" elements. 

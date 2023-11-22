@@ -1,0 +1,17 @@
+This section outlines various scenarios and instances that illustrate how the logic used in Pagero Online is determined by the Pagero Universal Format.
+
+==== Recipient matching
+Pagero Online will route the documents using the recipients party identifiers in the following order, provided that there is a matching identifier in the Pagero Network.
+
+. `cac:AccountingCustomerParty/cbc:SupplierAssignedAccountID`
+. `cac:AccountingCustomerParty/cac:Party/cbc:EndpointID`
+. `cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID`
+. `cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID`
+. `cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID`
+. `cac:AccountingCustomerParty/cac:AccountingContact/cbc:ElectronicMail` (requires e-mail distribution service)
+
+If no recipient is found the document will either be distributed on paper via mail (requires print distribution service) or stopped with an error message in Pagero Online.
+
+==== Language and appearance
+It's possible to specify language code for the system generated PDF presentation in Pagero Online, a segment for this is added as an Extension.
+Please see <<_languagecode,this section>> for more information.

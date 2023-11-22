@@ -542,10 +542,16 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_namespaces">2.2. Namespaces</a></li>
 <li><a href="#_customization_and_profile_id">2.3. Customization and Profile ID</a></li>
 <li><a href="#_working_with_extensions">2.4. Working with extensions</a></li>
-<li><a href="#_release_management">2.5. Release management</a>
+<li><a href="#_pagero_online">2.5. Pagero Online</a>
 <ul class="sectlevel3">
-<li><a href="#_minor_release">2.5.1. Minor release</a></li>
-<li><a href="#_major_release">2.5.2. Major release</a></li>
+<li><a href="#_recipient_matching">2.5.1. Recipient matching</a></li>
+<li><a href="#_language_and_appearance">2.5.2. Language and appearance</a></li>
+</ul>
+</li>
+<li><a href="#_release_management">2.6. Release management</a>
+<ul class="sectlevel3">
+<li><a href="#_minor_release">2.6.1. Minor release</a></li>
+<li><a href="#_major_release">2.6.2. Major release</a></li>
 </ul>
 </li>
 </ul>
@@ -745,6 +751,12 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_tax_category_codes_5">5.12.5. Tax category codes</a></li>
 <li><a href="#_tax_scheme">5.12.6. Tax scheme</a></li>
 <li><a href="#_internet_sales">5.12.7. Internet Sales</a></li>
+</ul>
+</li>
+<li><a href="#_united_states">5.13. United States</a>
+<ul class="sectlevel3">
+<li><a href="#_tax_scheme_2">5.13.1. Tax scheme</a></li>
+<li><a href="#_party_identification_5">5.13.2. Party identification</a></li>
 </ul>
 </li>
 </ul>
@@ -1122,7 +1134,51 @@ To identify which context the <code>UBLExtensions</code> is in the element <code
 </div>
 </div>
 <div class="sect2">
-<h3 id="_release_management"><a class="anchor" href="#_release_management"></a><a class="link" href="#_release_management">2.5. Release management</a></h3>
+<h3 id="_pagero_online"><a class="anchor" href="#_pagero_online"></a><a class="link" href="#_pagero_online">2.5. Pagero Online</a></h3>
+<div class="paragraph">
+<p>This section outlines various scenarios and instances that illustrate how the logic used in Pagero Online is determined by the Pagero Universal Format.</p>
+</div>
+<div class="sect3">
+<h4 id="_recipient_matching"><a class="anchor" href="#_recipient_matching"></a><a class="link" href="#_recipient_matching">2.5.1. Recipient matching</a></h4>
+<div class="paragraph">
+<p>Pagero Online will route the documents using the recipients party identifiers in the following order, provided that there is a matching identifier in the Pagero Network.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>cac:AccountingCustomerParty/cbc:SupplierAssignedAccountID</code></p>
+</li>
+<li>
+<p><code>cac:AccountingCustomerParty/cac:Party/cbc:EndpointID</code></p>
+</li>
+<li>
+<p><code>cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID</code></p>
+</li>
+<li>
+<p><code>cac:AccountingCustomerParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID</code></p>
+</li>
+<li>
+<p><code>cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:CompanyID</code></p>
+</li>
+<li>
+<p><code>cac:AccountingCustomerParty/cac:AccountingContact/cbc:ElectronicMail</code> (requires e-mail distribution service)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If no recipient is found the document will either be distributed on paper via mail (requires print distribution service) or stopped with an error message in Pagero Online.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_language_and_appearance"><a class="anchor" href="#_language_and_appearance"></a><a class="link" href="#_language_and_appearance">2.5.2. Language and appearance</a></h4>
+<div class="paragraph">
+<p>It&#8217;s possible to specify language code for the system generated PDF presentation in Pagero Online, a segment for this is added as an Extension.
+Please see <a href="#_languagecode">this section</a> for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_release_management"><a class="anchor" href="#_release_management"></a><a class="link" href="#_release_management">2.6. Release management</a></h3>
 <div class="paragraph">
 <p>PUF will continuously be updated to meet new market demands. In order to support backward compatibility, the XSD schema is built with the use of "other" elements.</p>
 </div>
@@ -1130,7 +1186,7 @@ To identify which context the <code>UBLExtensions</code> is in the element <code
 <p>The "other" elements in the XSD will prevent validation error for customers who do not frequently keep the XSD schema up-to-date.</p>
 </div>
 <div class="sect3">
-<h4 id="_minor_release"><a class="anchor" href="#_minor_release"></a><a class="link" href="#_minor_release">2.5.1. Minor release</a></h4>
+<h4 id="_minor_release"><a class="anchor" href="#_minor_release"></a><a class="link" href="#_minor_release">2.6.1. Minor release</a></h4>
 <div class="paragraph">
 <p>A minor release will always be backward compatible and will take place without prior notice and will be implemented whenever needed.</p>
 </div>
@@ -1139,7 +1195,7 @@ To identify which context the <code>UBLExtensions</code> is in the element <code
 </div>
 </div>
 <div class="sect3">
-<h4 id="_major_release"><a class="anchor" href="#_major_release"></a><a class="link" href="#_major_release">2.5.2. Major release</a></h4>
+<h4 id="_major_release"><a class="anchor" href="#_major_release"></a><a class="link" href="#_major_release">2.6.2. Major release</a></h4>
 <div class="paragraph">
 <p>A major release may include changes that are not backward compatible. Such a release will be notified at least three months prior to date of implementation, to users who registered an account on <a href="https://pagero.validex.net" class="bare" target="_blank" rel="noopener">https://pagero.validex.net</a> or on <a href="https://github.com/pagero/puf-billing" class="bare" target="_blank" rel="noopener">https://github.com/pagero/puf-billing</a>.</p>
 </div>
@@ -2431,7 +2487,7 @@ Seller&#8217;s tax registration number.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme identifier</strong><br>
 Seller&#8217;s tax registration number tax scheme Identifier.<br>
-<em>If <code>cac:PartyTaxScheme/cbc:CompanyID</code> is to be intepreted as a VAT registration text e.g. "Godkänd för F-Skatt" or "Foretaksregisteret", <code>cac:TaxScheme/cbc:ID</code> must be "TAX".</em></p></td>
+<em>If <code>cac:PartyTaxScheme/cbc:CompanyID</code> is to be intepreted as a VAT registration text for Sweden and Norway e.g. "Godkänd för F-Skatt" or "Foretaksregisteret", <code>cac:TaxScheme/cbc:ID</code> must be "TAX".</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:RegistrationName</code></p></td>
@@ -4409,6 +4465,12 @@ Exemption reason for the tax category, only applicable if the goods or service i
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme identfier</strong><br>
 Tax scheme for the tax category.<br>
 For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme" target="_blank" rel="noopener">PUF-009-TAXTYPESCHEME</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category name</strong><br>
+The name of this taxation scheme.<br>
+Can be used to specify type of local tax.</p></td>
 </tr>
 </tbody>
 </table>
@@ -11552,6 +11614,105 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_united_states"><a class="anchor" href="#_united_states"></a><a class="link" href="#_united_states">5.13. United States</a></h3>
+<div class="paragraph">
+<p>This section contains information about requirements and other information concerning invoicing in United States of America.</p>
+</div>
+<div class="sect3">
+<h4 id="_tax_scheme_2"><a class="anchor" href="#_tax_scheme_2"></a><a class="link" href="#_tax_scheme_2">5.13.1. Tax scheme</a></h4>
+<div class="paragraph">
+<p>Since taxes vary in different states and there are a number of local taxes as well, Pagero recommends to specify State and Local Tax in the following way:<br>
+- For State Tax use <code>cac:TaxScheme/cbc:ID</code> with value <code>STT</code>.<br>
+- For Local Tax use <code>cac:TaxScheme/cbc:ID</code> with value <code>LOC</code> and use <code>cac:TaxScheme/cbc:Name</code> to specify the type of local tax, ie. 'City', 'District', 'County'.<br></p>
+</div>
+<div class="paragraph">
+<p>Please see <a href="https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme" target="_blank" rel="noopener">code list</a> for all available tax type scheme codes.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>
+<em>State and Local Tax</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:TaxTotal&gt;</span>
+    <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">USD</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>16.40<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+    <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+        <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">USD</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>200.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+        <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">USD</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>12.50<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+        <span class="tag">&lt;cac:TaxCategory&gt;</span>
+            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">UNCL5305</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;cbc:Percent&gt;</span>6.25<span class="tag">&lt;/cbc:Percent&gt;</span>
+            <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>STT<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+            <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+        <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+    <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+    <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+        <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">USD</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>200.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+        <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">USD</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>3.90<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+        <span class="tag">&lt;cac:TaxCategory&gt;</span>
+            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">UNCL5305</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;cbc:Percent&gt;</span>1.95<span class="tag">&lt;/cbc:Percent&gt;</span>
+            <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>LOC<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+                <span class="tag">&lt;cbc:Name&gt;</span>City Sales Tax<span class="tag">&lt;/cbc:Name&gt;</span><i class="conum" data-value="3"></i><b>(3)</b>
+            <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+        <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+    <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+<span class="tag">&lt;/cac:TaxTotal&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>STT use for State Tax of 6.25%</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>LOC use for Local Tax of 1.95%</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Local Tax specified as City Sales Tax</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_party_identification_5"><a class="anchor" href="#_party_identification_5"></a><a class="link" href="#_party_identification_5">5.13.2. Party identification</a></h4>
+<div class="paragraph">
+<p>There is no party identifiers available in the ISO 6523 ICD list for USA at the moment.
+To specify Tax Identification Number please use 'cac:PartyTaxScheme/cbc:CompanyID'</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Example with Tax ID</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:Party&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+                <span class="tag">&lt;cbc:CompanyID&gt;</span>xx-xxxxxxx<span class="tag">&lt;/cbc:CompanyID&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>TAX<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:Party&gt;</span>
+<span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -12192,6 +12353,12 @@ Only support for invoice and credit.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">United Kingdom</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>No</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">United States</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>No</strong></p></td>
 <td class="tableblock halign-left valign-top"></td>

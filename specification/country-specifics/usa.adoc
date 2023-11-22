@@ -1,0 +1,72 @@
+This section contains information about requirements and other information concerning invoicing in United States of America.
+
+==== Tax scheme
+
+Since taxes vary in different states and there are a number of local taxes as well, Pagero recommends to specify State and Local Tax in the following way: +
+- For State Tax use `cac:TaxScheme/cbc:ID` with value `STT`. +
+- For Local Tax use `cac:TaxScheme/cbc:ID` with value `LOC` and use `cac:TaxScheme/cbc:Name` to specify the type of local tax, ie. 'City', 'District', 'County'. +
+
+Please see https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[code list^] for all available tax type scheme codes.
+
+*Example*
+_State and Local Tax_
+[source,xml]
+----
+<cac:TaxTotal>
+    <cbc:TaxAmount currencyID="USD">16.40</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+        <cbc:TaxableAmount currencyID="USD">200.00</cbc:TaxableAmount>
+        <cbc:TaxAmount currencyID="USD">12.50</cbc:TaxAmount>
+        <cac:TaxCategory>
+            <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+            <cbc:Percent>6.25</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>STT</cbc:ID><!--1-->
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:TaxSubtotal>
+    <cac:TaxSubtotal>
+        <cbc:TaxableAmount currencyID="USD">200.00</cbc:TaxableAmount>
+        <cbc:TaxAmount currencyID="USD">3.90</cbc:TaxAmount>
+        <cac:TaxCategory>
+            <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+            <cbc:Percent>1.95</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>LOC</cbc:ID><!--2-->
+                <cbc:Name>City Sales Tax</cbc:Name><!--3-->
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:TaxSubtotal>
+</cac:TaxTotal>
+----
+<1> STT use for State Tax of 6.25%
+<2> LOC use for Local Tax of 1.95%
+<3> Local Tax specified as City Sales Tax
+
+==== Party identification
+
+There is no party identifiers available in the ISO 6523 ICD list for USA at the moment.
+To specify Tax Identification Number please use 'cac:PartyTaxScheme/cbc:CompanyID'
+
+*Example* +
+_Example with Tax ID_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+    <cac:Party>
+        <!-- Code omitted for clarity -->
+        <cac:PartyTaxScheme>
+                <cbc:CompanyID>xx-xxxxxxx</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>TAX</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+        <!-- Code omitted for clarity -->
+    </cac:Party>
+</cac:AccountingCustomerParty>
+
+</Invoice>
+----
