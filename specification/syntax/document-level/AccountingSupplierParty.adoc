@@ -167,6 +167,10 @@ First name of person. Should only be used if seller is a private individual.
 |**Person surname** +
 Surname of person. Should only be used if seller is a private individual.
 
+|`cac:AccountingContact/cbc:Name`
+|**Accounting name** +
+The name of the individual who serves as the accounting contact for the organization.
+
 |`cac:AccountingContact/cbc:Telephone`
 |**Accounting telephone** +
 The telephone number for the accounting contact of the organization.
@@ -234,7 +238,8 @@ _cac:AccountingSupplierParty example_
           </cac:Contact>
       </cac:Party>
       <cac:AccountingContact>
-          <cbc:Telephone>Supplier tel</cbc:Telephone>
+          <cbc:Name>Supplier Accounting Name</cbc:Name>
+          <cbc:Telephone>Supplier Tel</cbc:Telephone>
           <cbc:Telefax>Supplier Fax</cbc:Telefax>
           <cbc:ElectronicMail>Supplier@mainContact.com</cbc:ElectronicMail>
       </cac:AccountingContact>
