@@ -52,6 +52,88 @@ Payment account identifier e.g. a BIC or Swift.
 |**Payment bank name** +
 The name of the bank branch or division of the bank organization, to which payment should be made.
 
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:Postbox`
+|**Postal box** +
+Bank address post box.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:Floor`
+|**Floor** +
+Bank address floor. +
+An addressable floor of a building.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:Room`
+|**Room** +
+Bank address room. +
+A room, suite, or apartment of a building.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:StreetName`
+|**Street name** +
+Bank address street name.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:AdditionalStreetName`
+|**Additional Street name** +
+Bank address additional street name.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:BuildingName`
+|**Building name** +
+Bank address building name.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:BuildingNumber`
+|**Building number** +
+Bank address building number.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:Department`
+|**Department** +
+Bank address department.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:PlotIdentification`
+|**Plot Identification** +
+Bank address plot identification. +
+Additional address number. An identifier for the piece of land associated with this address.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:CitySubdivisionName`
+|**City Subdvision Name** +
+Bank address city subdivision name. +
+The name of the subdivision of the delivery city, town, or village in which its address is located, such as the name of its district or borough.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:CityName`
+|**City name** +
+Bank address city name.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:PostalZone`
+|**Postal zone** +
+Bank address post code.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:CountrySubentity`
+|**Country subentity** +
+Bank address province or state.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:CountrySubentityCode`
+|**Country subentity code** +
+Bank address province or state code.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:Region`
+|**Region** +
+Bank address region. +
+Bank addressable region or group of countries.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cbc:District`
+|**District** +
+Bank address district. +
+A district or borough, may be a subdivision of a city for this address.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cac:AddressLine/cbc:Line`
+|**Additional address line** +
+Note that `cbc:StreetName` and `cbc:AdditionalStreetName` should be populated prior of using this element.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cac:Country/cbc:IdentificationCode`
+|**Country code** +
+Bank address country code.
+
+|`cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:Address/cac:Country/cbc:Name`
+|**Country name** +
+Bank address country name.
+
 |`cac:PaymentMandate/cbc:ID`
 |**Payment mandate reference identifier** +
 Payment mandate identifier used for referencing direct debit payments.
@@ -77,6 +159,21 @@ _cbc:PaymentMeans example_
         <cac:FinancialInstitutionBranch>
             <cbc:ID>SE:BANKGIRO</cbc:ID>
             <cbc:Name>BankName</cbc:Name>
+            <cac:Address>
+                    <cbc:Postbox>111</cbc:Postbox>
+                    <cbc:StreetName>Bank Street</cbc:StreetName>
+                    <cbc:BuildingNumber>11</cbc:BuildingNumber>
+                    <cbc:Department>Bank Department</cbc:Department>
+                    <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+                    <cbc:CitySubdivisionName>Bank City Subdivision Name</cbc:CitySubdivisionName>
+                    <cbc:CityName>Bank City</cbc:CityName>
+                    <cbc:PostalZone>22233</cbc:PostalZone>
+                    <cbc:CountrySubentity>Bank Province</cbc:CountrySubentity>
+                    <cac:Country>
+                        <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                        <cbc:Name>Sweden</cbc:Name>
+                    </cac:Country>
+                </cac:Address>
         </cac:FinancialInstitutionBranch>
     </cac:PayeeFinancialAccount>
   </cac:PaymentMeans>

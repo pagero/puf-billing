@@ -134,7 +134,8 @@
             </cac:Contact>
         </cac:Party>
         <cac:AccountingContact>
-            <cbc:Telephone>Supplier tel</cbc:Telephone>
+            <cbc:Name>Supplier Accounting Name</cbc:Name>
+            <cbc:Telephone>Supplier Tel</cbc:Telephone>
             <cbc:Telefax>Supplier Fax</cbc:Telefax>
             <cbc:ElectronicMail>Supplier@mainContact.com</cbc:ElectronicMail>
         </cac:AccountingContact>
@@ -201,7 +202,8 @@
             </cac:Contact>
         </cac:Party>
         <cac:AccountingContact>
-            <cbc:Telephone>Customer tel</cbc:Telephone>
+            <cbc:Name>Customer Accounting Name</cbc:Name>
+            <cbc:Telephone>Customer Tel</cbc:Telephone>
             <cbc:Telefax>Customer Fax</cbc:Telefax>
             <cbc:ElectronicMail>Customer@mainContact.com</cbc:ElectronicMail>
         </cac:AccountingContact>
@@ -247,7 +249,8 @@
             </cac:Contact>
         </cac:Party>
         <cac:AccountingContact>
-            <cbc:Telephone>Buyer tel</cbc:Telephone>
+            <cbc:Name>Buyer Accounting Name</cbc:Name>
+            <cbc:Telephone>Buyer Tel</cbc:Telephone>
             <cbc:Telefax>Buyer Fax</cbc:Telefax>
             <cbc:ElectronicMail>buyer@mainContact.com</cbc:ElectronicMail>
         </cac:AccountingContact>
@@ -322,6 +325,22 @@
             <cbc:Name>AccountName</cbc:Name>
             <cac:FinancialInstitutionBranch>
                 <cbc:ID>SE:BANKGIRO</cbc:ID>
+                <cbc:Name>AccountName</cbc:Name>
+                <cac:Address>
+                    <cbc:Postbox>111</cbc:Postbox>
+                    <cbc:StreetName>Bank Street</cbc:StreetName>
+                    <cbc:BuildingNumber>11</cbc:BuildingNumber>
+                    <cbc:Department>Bank Department</cbc:Department>
+                    <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+                    <cbc:CitySubdivisionName>Bank City Subdivision Name</cbc:CitySubdivisionName>
+                    <cbc:CityName>Bank City</cbc:CityName>
+                    <cbc:PostalZone>22233</cbc:PostalZone>
+                    <cbc:CountrySubentity>Bank Province</cbc:CountrySubentity>
+                    <cac:Country>
+                        <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                        <cbc:Name>Sweden</cbc:Name>
+                    </cac:Country>
+                </cac:Address>
             </cac:FinancialInstitutionBranch>
         </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>

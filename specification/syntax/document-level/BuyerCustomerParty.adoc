@@ -170,6 +170,10 @@ First name of person. Should only be used if buyer is a private individual.
 |**Person surname** +
 Surname of person. Should only be used if buyer is a private individual.
 
+|`cac:AccountingContact/cbc:Name`
+|**Accounting name** +
+The name of the individual who serves as the accounting contact for the organization.
+
 |`cac:AccountingContact/cbc:Telephone`
 |**Accounting telephone** +
 The telephone number for the accounting contact of the organization.
