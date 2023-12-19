@@ -16,6 +16,7 @@
     <xsd:element name="Key" type="PUFCodeType"/>
     <xsd:element name="Value" type="PUFTextType"/>
     <xsd:element name="InvoiceSeries" type="InvoiceSeriesType"/>
+    <xsd:element name="Classification" type="ClassificationType"/>
     <xsd:element name="PageroExtension">
         <xsd:annotation>
             <xsd:documentation>This element is to be considered as the root element in the pagero extension</xsd:documentation>
@@ -30,6 +31,18 @@
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
+                <xsd:element name="RestrictedInformationLine" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Key" type="PUFCodeType" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element ref="cbc:ID" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element ref="cbc:LineExtensionAmount" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element ref="cac:TaxTotal" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element ref="Classification" minOccurs="0" maxOccurs="unbounded"/>                                                                       
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element ref="Classification" minOccurs="0" maxOccurs="unbounded"/>
                 <xsd:element name="SupplierGeneratedQRString" minOccurs="0" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:sequence>
@@ -313,6 +326,14 @@
     <xsd:complexType name="InvoiceSeriesType">
         <xsd:sequence>
             <xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ClassificationType">
+        <xsd:sequence>
+            <xsd:element name="Type" type="PUFTextType" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="ClassificationType" type="PUFTextType" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="ClassificationCategory" type="PUFTextType" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="Amount" type="PUFAmountType" minOccurs="1" maxOccurs="1"/>
         </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>
