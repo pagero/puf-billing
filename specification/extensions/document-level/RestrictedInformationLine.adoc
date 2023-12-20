@@ -1,0 +1,99 @@
+RestrictedInformationLine has been added on document level in order to cater the need for additional country specific invoice lines +
+
+WARNING: Note that no Restricted Information Lines can be added without prior consulting with Pagero. +
+If country specific invoice lines is available as Restricted Information Line, this can be found in the Country specifics section.
+
+The UBL extension to be used for below elements can be found <<_extublextensions, here>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/RestrictedInformationLine`.
+
+See example below as well as the URI to be used for this extension.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationLine</ext:ExtensionURI> <!--1-->
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformationLine/> <!--2-->
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table show the definition of the new element added to the extension.
+
+.Elements added in puf:RestrictedInformationLine
+|===
+|Element |Description
+
+|`puf:Key`
+|**Key** +
+Key for identifying the line type.
+
+|`cbc:ID`
+|**Line Identifier** +
+Definition of this element can be found <<line-ID, here>>.
+
+|`cbc:LineExtensionAmount`
+|**Line Net amount** +
+Definition of this element can be found <<line-LineExtensionAmount, here>>.
+
+|`cac:TaxTotal`
+|**Line Tax Total** +
+Definition of this element can be found <<line-TaxTotal, here>>.
+
+|`puf:Classification`
+|**Line Classification** +
+Definition of this element can be found <<line-extension-Classification, here>>.
+
+|===
+
+*Example* +
+_RestrictedInformationLine example_
+[source,xml]
+----
+<Invoice>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationLine</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformationLine>
+                        <puf:Key>KEY_VALUE</puf:Key>
+                        <cbc:ID>1</cbc:ID>
+                        <cbc:LineExtensionAmount currencyID="EUR">100</cbc:LineExtensionAmount>
+                        <cac:TaxTotal>
+                            <cbc:TaxAmount currencyID="EUR">25</cbc:TaxAmount>
+                            <cac:TaxSubtotal>
+                                <cbc:TaxAmount currencyID="EUR">25</cbc:TaxAmount>
+                                <cac:TaxCategory>
+                                <cbc:ID>S</cbc:ID>
+                                <cbc:TaxExemptionReasonCode/>
+                                <cac:TaxScheme>
+                                    <cbc:ID>VAT</cbc:ID>
+                                </cac:TaxScheme>
+                                </cac:TaxCategory>
+                            </cac:TaxSubtotal>
+                        </cac:TaxTotal>
+                        <puf:Classification>
+                            <puf:Type>INCOME</puf:Type>
+                            <puf:ClassificationType>Type value</puf:ClassificationType>
+                            <puf:ClassificationCategory>Category value</puf:ClassificationCategory>
+                            <puf:Amount currencyID="EUR">100</puf:Amount>
+                        </puf:Classification>
+                    </puf:RestrictedInformationLine>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
