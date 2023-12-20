@@ -8,6 +8,8 @@ Examples shown below are based on Invoice, for the use of credit note the corres
 
 include::line-level/UBLExtensions.adoc[]
 
+[#line-ID]
+
 ==== cbc:ID
 
 include::line-level/ID.adoc[]
@@ -19,6 +21,8 @@ include::line-level/Note.adoc[]
 ==== cbc:InvoicedQuantity
 
 include::line-level/InvoicedQuantity.adoc[]
+
+[#line-LineExtensionAmount]
 
 ==== cbc:LineExtensionAmount
 
@@ -51,6 +55,8 @@ include::line-level/Delivery.adoc[]
 ==== cac:AllowanceCharge
 
 include::line-level/AllowanceCharge.adoc[]
+
+[#line-TaxTotal]
 
 ==== cac:TaxTotal
 

@@ -1,0 +1,79 @@
+Classification can be used on document level to set different kind of classifications e.g. Income or Expense classification +
+
+The UBL extension to be used for below elements can be found <<_extublextensions, here>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/Classification`.
+
+See example below as well as the URI to be used for this extension.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Classification</ext:ExtensionURI> <!--1-->
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:Classification/> <!--2-->
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table show the definition of the new element added to the extension.
+
+.Elements added in puf:Classification
+|===
+|Element |Description
+
+|`puf:Type`
+|**Type** +
+Key defining the type of value possible values INCOME or EXPENSE.
+
+|`puf:ClassificationType`
+|**Classification Type** +
+Type of classification.
+
+|`puf:ClassificationCategory`
+|**Classification Category** +
+Category of the classification.
+
+|`puf:Amount`
+|**Amount** +
+Amount related to the classification.
+
+|`puf:Amount/@currencyID`
+|**Amount currency** +
+Currency of the amount related to the classification.
+
+|===
+
+*Example* +
+_Classification example_
+[source,xml]
+----
+<Invoice>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Classification</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:Classification>
+                        <puf:Type>INCOME</puf:Type>
+                        <puf:ClassificationType>Type value</puf:ClassificationType>
+                        <puf:ClassificationCategory>Category value</puf:ClassificationCategory>
+                        <puf:Amount currencyID="EUR">100</puf:Amount>
+                    </puf:Classification>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----

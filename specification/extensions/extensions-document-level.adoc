@@ -4,6 +4,17 @@ Below chapters describe the different extensions added on document level.
 
 include::document-level/RestrictedInformation.adoc[]
 
+==== RestrictedInformationLine
+
+include::document-level/RestrictedInformationLine.adoc[]
+
+
+[#line-extension-Classification]
+
+==== Classification
+
+include::document-level/Classification.adoc[]
+
 ==== InvoiceSeries
 
 include::document-level/InvoiceSeries.adoc[]
