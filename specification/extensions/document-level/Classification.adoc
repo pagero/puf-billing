@@ -46,11 +46,11 @@ Category of the classification.
 
 |`puf:Amount`
 |**Amount** +
-Amount related to the classification.
+Net amount related to the classification.
 
 |`puf:Amount/@currencyID`
 |**Amount currency** +
-Currency of the amount related to the classification.
+Currency of the net amount related to the classification.
 
 |===
 
