@@ -20,11 +20,7 @@
     <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>RON</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
-        <cac:Party>
-            <cac:PartyIdentification>
-                <!-- BT-29 additional seller party id. -->
-                <cbc:ID schemeID="9947">RO1234567</cbc:ID>
-            </cac:PartyIdentification>
+        <cac:Party>            
             <cac:PostalAddress>
                 <!--BT-35 Seller address street-->
                 <cbc:StreetName>Street Name</cbc:StreetName>
@@ -56,11 +52,7 @@
     <cac:AccountingCustomerParty>
         <!-- Customer number, not a requirement in Romania but can be useful to route document to correct recipient in Pagero Online -->
         <cbc:SupplierAssignedAccountID>Customer Number</cbc:SupplierAssignedAccountID>
-        <cac:Party>
-            <cac:PartyIdentification>
-                <!-- BT-46 additional buyer party id.  -->
-                <cbc:ID schemeID="9947">RO7654321</cbc:ID>
-            </cac:PartyIdentification>
+        <cac:Party>            
             <cac:PostalAddress>
                 <!-- BT-50 Buyer address street-->
                 <cbc:StreetName>Street Name</cbc:StreetName>
