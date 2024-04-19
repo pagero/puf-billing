@@ -257,11 +257,7 @@ _CreditNote with modificationIndex_
 
 ===== lineOperation and modificationReferenceLineNumber
 
-Each line in a modification invoice or credit note must contain a `lineModificationReferenceLineOperation` and `lineModificationReferenceLineNumberReference`, below is a short explanation how to use the two different operations available `MODIFY` and `CREATE`.
-
-**Modify:** Used to modify text and data on an invoice, when using operation `MODIFY` it's not possible to change amounts on an invoice. 
-
-If the value of the operation is `MODIFY`, the `lineModificationReferenceLineNumberReference` element will contain the line item number of the item in the original invoice, or the line item number of the new item created in a previous modifying document, which is the subject of the modification.
+Each line in a modification invoice or credit note must contain a `lineModificationReferenceLineOperation` and `lineModificationReferenceLineNumberReference`, below is a short explanation how to use the available operation `CREATE`.
 
 **Credit:** In Hungary RTIR flow credit note is structured a bit different than a regular credit note. 
 
@@ -269,11 +265,9 @@ In the file to the tax authority the operation `CREATE` must be sent on each lin
 
 The `lineModificationReferenceLineNumberReference` element will be the continuation of the original numbering created from the original invoice and all previous documents thereof.
 
-WARNING: It's not possible to mix operation `CREATE` and `MODIFY` in the same document.
-
 Both the `lineModificationReferenceLineOperation` and `lineModificationReferenceLineNumberReference` should be provided on each line in element <<line-restrictedinformation>>.
 
-Valid values for `lineModificationReferenceLineOperation` is `CREATE` and `MODIFY` with the key `lineModificationReferenceLineOperation`.
+Valid values for `lineModificationReferenceLineOperation` is `CREATE` with the key `lineModificationReferenceLineOperation`.
 
 *Example* +
 _Original Invoice_
