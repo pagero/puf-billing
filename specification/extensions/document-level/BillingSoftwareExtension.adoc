@@ -1,0 +1,69 @@
+In order to specify information about a billing software, following elements has been added in the below extension.
+
+The UBL extension to be used for below elements can be found <<_extublextensions, here>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/BillingSoftware`.
+
+See example below as well as the URI to be used for this extension.
+
+*Example* +
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+      <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingSoftware</ext:ExtensionURI> <!--1-->
+          <ext:ExtensionContent>
+              <puf:PageroExtension>
+                <puf:BillingSoftware/> <!--2-->
+              </puf:PageroExtension>
+          </ext:ExtensionContent>
+      </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table shows the definition of the new elements added to the extension.
+
+.Elements added to puf:PageroExtension/puf:BillingSoftware
+|===
+|Element |Description
+
+|`puf:Number`
+|**Software number** +
+Software certification identification or Software number.
+
+|`puf:Hash`
+|**Hash code** +
+Hash code. 
+
+|`cbc:Description`
+|**Billing software description** +
+Description of the software identification (free text). +
+|===
+
+*Example* +
+_Billing Software_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+      <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingSoftware</ext:ExtensionURI>
+          <ext:ExtensionContent>
+              <puf:PageroExtension>
+                  <puf:BillingSoftware>
+                        <puf:Number>123456</puf:Number>
+                        <puf:Hash>AAaa</puf:Hash>
+                        <cbc:Description>Software description</cbc:Description>
+                    </puf:BillingSoftware>
+              </puf:PageroExtension>
+          </ext:ExtensionContent>
+      </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

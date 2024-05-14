@@ -35,6 +35,10 @@ include::document-level/DutyStamp.adoc[]
 
 include::document-level/IgstOnIntra.adoc[]
 
+==== Billing Software
+
+include::document-level/BillingSoftwareExtension.adoc[]
+
 ==== SupplierGeneratedQRString
 
 include::document-level/SupplierGeneratedQRString.adoc[]

@@ -105,6 +105,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*No*
 |
 
+|Israel
+|*Yes*
+|*Yes*
+|Extension needed if BillingSoftware is to be provided (optional)
+
 |Italy
 |*Yes*
 |*Yes*

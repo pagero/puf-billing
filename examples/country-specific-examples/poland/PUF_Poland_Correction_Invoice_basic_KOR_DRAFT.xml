@@ -84,7 +84,7 @@
                                     <puf:Value>2023-08-29</puf:Value>
                                 </puf:RestrictedInformation>
                                 <!-- Reason for correction (PrzyczynaKorekty) -->
-                                <cbc:Note>Textual note describing the reason for issuing a credit/debit note</cbc:Note>
+                                <cbc:Note>Textual note describing the reason for issuing a correction</cbc:Note>
                             </puf:BillingReferenceExtension>
                         </puf:PageroExtension>
                     </ext:ExtensionContent>
