@@ -24,6 +24,10 @@ include::country-specifics/india.adoc[]
 
 include::country-specifics/italy.adoc[]
 
+=== Malaysia
+
+include::country-specifics/malaysia.adoc[]
+
 === Portugal
 
 include::country-specifics/portugal.adoc[]

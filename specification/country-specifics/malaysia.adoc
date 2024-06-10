@@ -1,0 +1,86 @@
+This section contains information about special requirements concerning invoicing in Malaysia.
+
+
+==== Party identification
+
+In Malayia there is a requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.
+
+These additional identifiers for use in Malaysia can be found here: https://pagero.github.io/puf-code-lists/#_identification_scheme_malaysia[Identification scheme malaysia^].
+
+*Example* +
+_Example with additional id provided in Malaysia in Party structure_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+    <cac:Party>
+        <!-- Code omitted for clarity -->
+        <cac:PartyIdentification>
+            <cbc:ID schemeID="MY:BRN">201901234000</cbc:ID><!--1-->
+        </cac:PartyIdentification>
+        <!-- Code omitted for clarity -->
+    </cac:Party>
+</cac:AccountingCustomerParty>
+
+</Invoice>
+----
+<1> Business registration number in Malaysia provided as `cac:PartyIdentification/cbc:ID`.
+
+==== Tax Details
+
+In order to provide the correct tax details in Malaysia the LHDN valid values must be provided in `cac:TaxScheme/cbc:Name` element.
+
+Valid values for `cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name` are listed in the table below: 
+
+|===
+|Value |Description
+
+|`01`
+|Sales Tax.
+
+|`02`
+|Service Tax.
+
+|`03`
+|Tourism Tax.
+
+|`04`
+|High-Value Goods Tax.
+
+|`05`
+|Sales Tax on Low Value Goods.
+
+|`06`
+|Not Applicable.
+
+|`E`
+|Tax exemption (where applicable).
+
+|===
+
+*Example* +
+_Tax example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="MYR">6.00</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="MYR">100.00</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="MYR">6.00</cbc:TaxAmount>
+      <cac:TaxCategory>
+          <cbc:ID>S</cbc:ID>
+          <cbc:Percent>45.00</cbc:Percent>
+          <cac:TaxScheme>
+              <cbc:ID>SST</cbc:ID>
+              <cbc:Name>01</cbc:Name>
+          </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  <cac:TaxTotal>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
