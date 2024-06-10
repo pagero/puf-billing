@@ -44,6 +44,10 @@ Textual note describing the reason for issuing a credit/debit note.
 |`puf:Code`
 |**Billing reference code** +
 Code signifying the reason for credit.
+
+|`puf:ClearanceID`
+|**Clearance ID of the referenced document** +
+ID, usually assigned by the Tax Authority, of the referenced document e.g. UUID in Malaysia.
 |===
 
 *Example* +
@@ -67,6 +71,7 @@ _Invoice document reference ID, date and extension_
                                 <cbc:Note>Textual note describing the reason for issuing a credit/debit note</cbc:Note>
                                 <!-- Reason for credit in code form, if applicable -->
                                 <puf:Code>codeValue</puf:Code>
+                                <puf:ClearanceID>Clearance ID</puf:ClearanceID>
                             </puf:BillingReferenceExtension>
                         </puf:PageroExtension>
                     </ext:ExtensionContent>

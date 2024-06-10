@@ -21,6 +21,14 @@ Seller's electronic address. +
 Scheme identifier of electronic address. +
 Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_007_endpointscheme[PUF-007-ENDPOINTSCHEME^].
 
+|`cac:Party/cbc:IndustryClassificationCode`
+|**Industry Classification Code** +
+Seller Industry classification code.
+
+|`cac:Party/cbc:IndustryClassificationCode/@name`
+|**Industry Classification Name** +
+Corresponding name of the classification code.
+
 |`cac:Party/cac:PartyIdentification/cbc:ID`
 |**Seller Identifier** +
 Identifier of the seller.
