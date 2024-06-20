@@ -18,6 +18,10 @@ Scheme identifier of the referenced object/document. +
 When used it should be according to the list +
 https://pagero.github.io/puf-code-lists/#_puf_005_invoicedobjectidentifier[PUF-005-INVOICEDOBJECTIDENTIFIER^].
 
+|`cbc:IssueDate`
+|**Referenced document issue date** +
+Issue Date for the referenced object/document.
+
 |`cbc:DocumentTypeCode`
 |**Referenced document type code** + 
 Should be 130 if referencing an invoiced object. Not used for other additional document references.

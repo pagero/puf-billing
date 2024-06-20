@@ -62,6 +62,10 @@ include::line-level/AllowanceCharge.adoc[]
 
 include::line-level/TaxTotal.adoc[]
 
+==== cac:WithholdingTaxTotal
+
+include::line-level/WithholdingTaxTotal.adoc[]
+
 ==== cac:Item
 
 include::line-level/Item.adoc[]
