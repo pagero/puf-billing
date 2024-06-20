@@ -146,6 +146,10 @@ include::document-level/TaxExchangeRate.adoc[]
 
 include::document-level/TaxTotal.adoc[]
 
+==== cac:WithholdingTaxTotal
+
+include::document-level/WithholdingTaxTotal.adoc[]
+
 ==== cac:LegalMonetaryTotal
 
 include::document-level/LegalMonetaryTotal.adoc[]

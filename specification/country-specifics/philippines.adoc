@@ -1,0 +1,212 @@
+This section contains information about special requirements concerning invoicing in Philippines.
+For more information on how to send compliant invoices in Philippines see https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/philippines[example files^].
+
+==== Corrective Invoice
+When sending a corrective invoice it is required to specify the unique id of the invoice being corrected as well as the reason code. +
+
+The unique id is returned in the https://pagero.github.io/puf-clearance-notification/#_pufresponseextension[PUF Clearance Notification^] as `puf:ClearanceReferenceID/cbc:ID`. +
+
+Below is a list of reason codes. 
+
+|===
+|Code |Description
+
+|`01`
+|**Error** - In any mandatory field.
+
+|`02`
+|**Duplication** - Sales data transmitted more than once regardless of transaction period.
+
+|`03`
+|**Addition/reduction** - Addition/reduction of contracted volume or amount.
+
+|`04`
+|**Cancellation** - For sales data previously transmitted but transaction was subsequently cancelled or rescinded by buyer/seller for failure to consumate. Full return of goods without replacement is considered cancellation.
+
+|`05`
+|**Return** - For original goods supplied and returned for replacement.  Ex: Damaged, defective, wrong specifications, change item, or for any other reason.
+
+|`09`
+|**Others** - In one of the following cases: +
+
+- If not covered by the aforementioned errors. +
+- If multiple documents are issued a single adjustment document and correction code cannot be specified. +
+- If the code of the adjustment document is not distinguished in the CAS.
+
+|===
+
+The clearance id and the reason code should be provided within the <<_billingreference>> structure.
+
+*Example* +
+_Correction example. +
+Sales Invoice being corrected for 'other' reason_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <!-- Invoice Type Code 384 and Sales Invoice (SI) code in attribute @name -->
+    <cbc:InvoiceTypeCode name="01">384</cbc:InvoiceTypeCode><!--1-->
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:BillingReferenceExtension>
+                                <cbc:Note>Textual note describing the reason for issuing a corrective invoice</cbc:Note>
+                                <!-- Reason for correction in code form -->
+                                <puf:Code>09</puf:Code><!--2-->
+                                <!-- The unique id of the invoice being corrected -->
+                                <puf:ClearanceID>2024062178083614FMWDD2O0</puf:ClearanceID><!--3-->
+                            </puf:BillingReferenceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:ID>Invoice reference ID</cbc:ID>
+            <cbc:IssueDate>2024-05-01</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Invoice type code (384, Corrective) and type code attribute (01, Sales Invoice)
+<2> The reason code provided.
+<3> Previous Unique ID (Clearance ID)
+
+==== Withholding VAT
+Witholding Tax amount can be provided on <<_cacwithholdingtaxtotal,header level>> if one of the following `cac:TaxScheme/cbc:ID` is used.
+
+* `VAT` (Withholding Tax-Business VAT)
+* `INC` (Withholding Tax-Income Tax)
+* `PER` (Withholding Tax-Business Percentage)
+
+==== Permit To Use (PTU)
+The PTU is the number issued by the Bureau of Internal Revenue allowing taxpayer's use of  Computerized Accounting System (CAS) and must be provided in the <<_restrictedinformation>> with key `Ph_PTU`.
+
+*Example* +
+_PTU example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+        <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:RestrictedInformation>
+                  <puf:Key>Ph_PTU</puf:Key>
+                  <puf:Value>123456</puf:Value>
+              </puf:RestrictedInformation>
+            </puf:PageroExtension>
+        </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Seller Tax Status
+Seller Tax Status or Seller Type can be either VAT registered or Non-VAT registered. +
+Allowed values: 0 or 1. +
+
+0 = VAT Registered. +
+1 = Non VAT registered. +
+
+Use the <<_registration_data>> extension to provide this information. Example is provided in <<_party_branch_code>>
+
+==== Party Branch Code
+The Party extension should be used to provide the code that identifies a headquarters or branch office.
+
+*Example*
+_Party Extension_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <!-- Code omitted for clarity -->
+        <cac:Party>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <puf:RegistrationData>
+                                    <cbc:ID>0</cbc:ID><!--1-->
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">PH:SellerType</puf:IDType>
+                                </puf:RegistrationData>
+                                <puf:ADAID>
+                                    <cbc:ID>00123</cbc:ID><!--2-->
+                                    <puf:IDType listID="PUF-002-ADAID">GEN:UnitCode</puf:IDType>
+                                </puf:ADAID>
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Seller Tax Status is specified in `puf:RegistrationData`.
+<2> Party Branch Code is specified in `puf:ADAID`
+
+==== Invoice Type
+Available invoice type code values to be used in Philippines can be found here: https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_philippines[Invoice type codes Philippines^].
+
+In addition to providing the invoice type, it is also required to provide an additional code in the `name` attribute. The main reason for this is to enable Corrective Invoice for mulitple invoice types.
+
+*Example* +
+_Sales Invoice_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="01">380</cbc:InvoiceTypeCode><!--1-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> InvoiceTypeCode 380 for "Invoice" provided. Additional type code 01 for "Sales Invoice" in attribute name.
+
+*Example* +
+_Credit Note_
+[source,xml]
+----
+<CreditNote>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="03">381</cbc:InvoiceTypeCode><!--1-->
+  <!-- Code omitted for clarity -->
+</CreditNote>
+----
+<1> InvoiceTypeCode 381 for "Credit Note" provided. Additional type code 03 for "Credit Note" in attribute name.
+
+*Example* +
+_Correction of Sales Invoice_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="01">384</cbc:InvoiceTypeCode><!--1-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> InvoiceTypeCode 384 for "Corrective Invoice" provided. Additional type code 01 for "Sales Invoice" in attribute name.
+
+==== Allowance reason codes
+The following codes are supported for discounts in Philippines.
+
+|===
+|Value |Description
+
+|104 | Standard/Regular Discount.
+|100 | Special Discount.
+|SC | Senior Citizen Discount.
+|PWD | Person With Disability Discount
+|===

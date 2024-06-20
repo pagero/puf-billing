@@ -1,0 +1,93 @@
+Below table show available fields in `cac:WithholdingTaxTotal/cac:TaxSubtotal`, note that additional elements has also been added to the extension available in <<_taxsubtotal, cac:WithholdingTaxTotal/cac:TaxSubtotal>>.
+
+.Elements added in cac:WithholdingTaxTotal
+|===
+|Path |Description
+
+|`cbc:TaxAmount`
+|**Document total tax amount** +
+Documents total tax amount in document currency. +
+_Summary of all cac:TaxSubTotal/cbc:TaxAmount._
+
+|`cbc:TaxAmount/@currencyID`
+|**Document total tax amount currency** +
+Documents total tax amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
+
+|`cac:TaxSubtotal/ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:WithholdingTaxTotal/cac:TaxSubtotal` element, the information available can be found <<_taxsubtotal, here>>.
+
+|`cac:TaxSubtotal/cbc:TaxableAmount`
+|**Total taxable amount for each tax category** +
+Total taxable amount for each tax category or tax rate. +
+_E.g. Summary of all taxable amounts for invoice lines with a certain tax percent._
+
+|`cac:TaxSubtotal/cbc:TaxableAmount/@currencyID`
+|**Total taxable amount for each tax category currency** +
+Total taxable amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
+
+|`cac:TaxSubtotal/cbc:TaxAmount`
+|**Total tax amount for each tax category** +
+Total tax amount for a certain tax category or tax rate.
+
+|`cac:TaxSubtotal/cbc:TaxAmount/@currencyID`
+|**Total tax amount currency for each tax category** +
+Total tax amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:ID`
+|**Tax category code** +
+Code for identifying the tax category. +
+_E.g. tax category "S"._ +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:Percent`
+|**Tax category percent** +
+Percentage rate for the tax category.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode`
+|**Tax exemption reason code** +
+Exemption reason code for the tax category, only applicable if the goods or service is exempt from tax. +
+See code list https://pagero.github.io/puf-code-lists/#_puf_013_taxexemptioncode[PUF-013-TAXEXEMPTIONCODE^] for recommendations.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason`
+|**Tax exemption reason** +
+Exemption reason for the tax category, only applicable if the goods or service is exempt from tax.
+
+|`cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:ID`
+|**Tax scheme identfier** +
+Tax scheme for the tax category. +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme[PUF-009-TAXTYPESCHEME^].
+
+|`cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name`
+|**Tax category name** +
+The name of this taxation scheme. +
+Can be used to specify type of local tax.
+
+|===
+
+*Example* +
+_cac:WithholdingTaxTotal example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:WithholdingTaxTotal>
+    <cbc:TaxAmount currencyID="EUR">6.00</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+        <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+        <cbc:TaxAmount currencyID="EUR">6.00</cbc:TaxAmount>
+        <cac:TaxCategory>
+            <cbc:ID>S</cbc:ID>
+            <cbc:Percent>6</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>INC</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:WithholdingTaxTotal>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

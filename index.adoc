@@ -1,5 +1,5 @@
 :doctitle: image:images/puf-logo.png[float="center", width=100%] PUF Billing 2.0
-:author: Copyright &copy; 2023, Pagero Group
+:author: Copyright &copy; 2024, Pagero Group
 :email: https://pagero.com
 :copyright: Pagero Group
 :minor: 1.0

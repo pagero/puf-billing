@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+
+    <!-- Values in invoice are examples values only. -->
+
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <!-- Permit To Use number (PTU) is issued by the Bureau of Internal Revenue (BIR) -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>Ph_PTU</puf:Key>
+                        <puf:Value>20146IT4-4</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- Document number  -->
+    <cbc:ID>123456</cbc:ID>
+    <!-- Issue Date  -->
+    <cbc:IssueDate>2024-05-01</cbc:IssueDate>
+    <!-- Due Date -->
+    <cbc:DueDate>2024-06-01</cbc:DueDate>
+    <!-- Invoice Type Code and country specific code in attribute @name -->
+    <cbc:InvoiceTypeCode name="01">380</cbc:InvoiceTypeCode>
+    <!-- Document Currency -->
+    <cbc:DocumentCurrencyCode>PHP</cbc:DocumentCurrencyCode>
+    <!--Additional Document References-->
+    <!-- Air Waybill -->
+    <cac:AdditionalDocumentReference>
+        <!-- Air Waybill ID -->
+        <cbc:ID schemeID="AWB">998877</cbc:ID>
+        <!--Air Waybill Date-->
+        <cbc:IssueDate>2024-05-01</cbc:IssueDate>
+        <!-- Document Type Code (always 130) -->
+        <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode>
+    </cac:AdditionalDocumentReference>
+    <!-- Bill of Lading -->
+    <cac:AdditionalDocumentReference>
+        <!-- Bill of Lading Number -->
+        <cbc:ID schemeID="BM">665544</cbc:ID>
+        <!--Bill of Lading Date-->
+        <cbc:IssueDate>2024-05-02</cbc:IssueDate>
+        <!-- Document Type Code (always 130) -->
+        <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode>
+    </cac:AdditionalDocumentReference>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <!--  Supplier VAT Registration (Seller Type)  -->
+                                <!-- 0 = VAT Registered -->
+                                <!-- 1 = Non VAT registered -->
+                                <puf:RegistrationData>
+                                    <cbc:ID>0</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">PH:SellerType</puf:IDType>
+                                </puf:RegistrationData>
+                                <!-- Supplier Branch Code -->
+                                <puf:ADAID>
+                                    <cbc:ID>00123</cbc:ID>
+                                    <puf:IDType listID="PUF-002-ADAID">GEN:UnitCode</puf:IDType>
+                                </puf:ADAID>
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- Supplier Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Supplier Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- Supplier address street-->
+                <cbc:StreetName>Street Name</cbc:StreetName>
+                <!-- Supplier address City -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- Supplier address postal code -->
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- Supplier address country code -->
+                    <cbc:IdentificationCode>PH</cbc:IdentificationCode>
+                    <!-- Supplier address country name -->
+                    <cbc:Name>Philippines</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- Supplier TIN Number -->
+                <cbc:CompanyID>123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>TAX</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- Supplier Registration Name -->
+                <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <cac:AccountingContact>
+            <!-- Supplier main Email address -->
+            <cbc:ElectronicMail>supplier@company.com</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <!-- Customer number, not a requirement but can be useful to route document to correct recipient in Pagero Online -->
+        <cbc:SupplierAssignedAccountID>Customer Number</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <!-- Buyer Branch Code -->
+                                <puf:ADAID>
+                                    <cbc:ID>00000</cbc:ID>
+                                    <puf:IDType listID="PUF-002-ADAID">GEN:UnitCode</puf:IDType>
+                                </puf:ADAID>
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Buyer Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- Buyer address street-->
+                <cbc:StreetName>Street Name</cbc:StreetName>
+                <!-- Buyer address City -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- Buyer address postal code -->
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- Buyer address country code -->
+                    <cbc:IdentificationCode>US</cbc:IdentificationCode>
+                    <!-- Buyer address country name -->
+                    <cbc:Name>USA</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- Buyer TIN number -->
+                <cbc:CompanyID>123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>TAX</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- Buyer Registration Name -->
+                <cbc:RegistrationName>Buyer Registration Name</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:Delivery>
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <!-- Deliver to address street -->
+                <cbc:StreetName>Street Name</cbc:StreetName>
+                <!-- Deliver to address City -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- Deliver to address postal code -->
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- Deliver to address country code -->
+                    <cbc:IdentificationCode>US</cbc:IdentificationCode>
+                    <!-- Deliver to address country name -->
+                    <cbc:Name>USA</cbc:Name>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+        <cac:DeliveryParty>
+            <!-- Deliver to name -->
+            <cac:PartyName>
+                <cbc:Name>Deliver to Name</cbc:Name>
+            </cac:PartyName>
+        </cac:DeliveryParty>
+    </cac:Delivery>
+    <cac:PaymentMeans>
+        <!-- Payment means code -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- A unique identifier of the financial payment account -->
+            <cbc:ID>XX1234567891234567891</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- An identifier for the payment service provider where a payment account is located. Such as a BIC or a national clearing code where required -->
+                <cbc:ID>SWIFTCODE</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- AllowanceCharge -->
+    <cac:AllowanceCharge>
+        <!-- ChargeIndicator must be false to indicate discount-->
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+        <!--Reason code.
+        One of the following codes must be used:
+        104 = Standard/Regular
+        100 = Special Discount
+        SC = Senior Citizen Discount
+        PWD = Person With Disability Discount-->
+        <cbc:AllowanceChargeReasonCode>104</cbc:AllowanceChargeReasonCode>
+        <!--The reason for the document level allowance, expressed as text-->
+        <cbc:AllowanceChargeReason>Reason for discount</cbc:AllowanceChargeReason>
+        <!-- Document level allowance amount without vat. Currency in attribute currencyID -->
+        <cbc:Amount currencyID="PHP">5.00</cbc:Amount>
+        <cac:TaxCategory>
+            <!-- Document level allowanec VAT category code. Valid values in PH: S, Z, E -->
+            <cbc:ID>S</cbc:ID>
+            <!-- The VAT rate, represented as percentage that applies to the document level allowance. -->
+            <cbc:Percent>12</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <cac:TaxTotal>
+        <!-- Invoice total VAT amount. Currency in attribute currencyID -->
+        <cbc:TaxAmount currencyID="PHP">14.25</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- Sum of all taxable amounts subject to a specific VAT category code and VAT category rate. Currency in attribute currencyID -->
+            <cbc:TaxableAmount currencyID="PHP">95.00</cbc:TaxableAmount>
+            <!--  The total VAT amount for a given VAT category. Currency in attribute currencyID -->
+            <cbc:TaxAmount currencyID="PHP">14.25</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- VAT category code.  Valid values are: S, Z, E -->
+                <cbc:ID>S</cbc:ID>
+                <!-- VAT category rate-->
+                <cbc:Percent>15.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <!-- Use "VAT" -->
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <!-- Sum of all Invoice line net amounts in the Invoice  without VAT. Currency in attribute currencyID -->
+        <cbc:LineExtensionAmount currencyID="PHP">100.00</cbc:LineExtensionAmount>
+        <!-- Invoice total amount without VAT. Currency in attribute currencyID -->
+        <cbc:TaxExclusiveAmount currencyID="PHP">95.00</cbc:TaxExclusiveAmount>
+        <!-- Invoice total amount with VAT. Currency in attribute currencyID -->
+        <cbc:TaxInclusiveAmount currencyID="PHP">109.25</cbc:TaxInclusiveAmount>
+        <!-- Sum of all allowances on document level. Currency in attribute currencyID -->
+        <cbc:AllowanceTotalAmount currencyID="PHP">-5.00</cbc:AllowanceTotalAmount>
+        <!-- Amount due for payment. Currency in attribute currencyID -->
+        <cbc:PayableAmount currencyID="PHP">109.25</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <!-- Sales amount excluding any taxes, charges or discounts -->
+                            <puf:LineExclAllowanceChargeAmount currencyID="PHP">110.00</puf:LineExclAllowanceChargeAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!--Line ID -->
+        <cbc:ID>1</cbc:ID>
+        <!-- Invoiced Quantity. Unit of measure in attribute unitCode -->
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <!-- Line extension amount. Line net amount. Currency in attribute currencyID -->
+        <cbc:LineExtensionAmount currencyID="PHP">100.00</cbc:LineExtensionAmount>
+        <!-- Conditionally Mandatory if discount is used on line level -->
+        <cac:AllowanceCharge>
+            <!-- ChargeIndicator must be false to indicate discount-->
+            <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+            <!-- Reason code.
+                One of the following codes must be used:
+                104 = Standard/Regular
+                100 = Special Discount -->
+            <cbc:AllowanceChargeReasonCode>104</cbc:AllowanceChargeReasonCode>
+            <!-- Discount amount without tax. Currency in attribute currencyID -->
+            <cbc:Amount currencyID="PHP">10.00</cbc:Amount>
+        </cac:AllowanceCharge>
+        <cac:TaxTotal>
+            <!-- Line VAT Amount -->
+            <cbc:TaxAmount currencyID="PHP">15.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <!-- Article/Item Description -->
+            <cbc:Description>Description</cbc:Description>
+            <!-- Article/Item Name -->
+            <cbc:Name>Article Name</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <!-- Invoiced item VAT category code. Valid values are: S, Z, E -->
+                <cbc:ID schemeID="UNCL5305">S</cbc:ID>
+                <!-- Invoiced item VAT rate -->
+                <cbc:Percent>15</cbc:Percent>
+                <!-- Use "VAT" -->
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- Item net price. Currency in attribute currencyID -->
+            <cbc:PriceAmount currencyID="PHP">110.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
