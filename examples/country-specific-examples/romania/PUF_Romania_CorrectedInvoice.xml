@@ -53,7 +53,10 @@
             <cac:PartyLegalEntity>
                 <!-- BT-27 Seller Name -->
                 <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
+                <!-- BT-32 Seller legal registration identifier -->
                 <cbc:CompanyID>J12/1234/1234</cbc:CompanyID>
+                <!-- BT-33 Seller additional legal information -->
+                <cbc:CompanyLegalForm>Legal data, e.g. share capital, registered office, etc.</cbc:CompanyLegalForm>
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingSupplierParty>
