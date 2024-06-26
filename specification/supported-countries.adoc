@@ -140,6 +140,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*No*
 |
 
+|Malaysia
+|*Yes*
+|*Yes*
+|
+
 |Malta
 |*Yes*
 |*No*

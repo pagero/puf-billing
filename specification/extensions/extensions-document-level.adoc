@@ -43,6 +43,10 @@ include::document-level/BillingSoftwareExtension.adoc[]
 
 include::document-level/SupplierGeneratedQRString.adoc[]
 
+==== Self Billing Indicator
+
+include::document-level/SelfBilled.adoc[]
+
 ==== OrderReference
 
 include::document-level/OrderReferenceExtension.adoc[]
