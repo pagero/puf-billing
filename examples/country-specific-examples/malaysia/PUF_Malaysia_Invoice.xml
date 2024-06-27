@@ -237,61 +237,6 @@
         </ext:UBLExtensions>
         <cbc:PaidAmount currencyID="MYR">5.00</cbc:PaidAmount>
     </cac:PrepaidPayment>
-    <!-- IBG-20 Document Level Allowances -->
-    <cac:AllowanceCharge>
-        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
-
-        <!-- IBT-098 Document level allowance reason code -->
-        <cbc:AllowanceChargeReasonCode>Reason for allowance code</cbc:AllowanceChargeReasonCode>
-        <!-- IBT-097 Document level allowance reason -->
-        <cbc:AllowanceChargeReason>Reason for allowance</cbc:AllowanceChargeReason>
-        <!-- IBT-094 Document level allowance percentage-->
-        <cbc:MultiplierFactorNumeric>5</cbc:MultiplierFactorNumeric>
-        <!-- IBT-092 Document level allowance amount-->
-        <cbc:Amount currencyID="MYR">5.00</cbc:Amount>
-        <!-- IBT-093 Document level allowance base amount-->
-        <cbc:BaseAmount currencyID="MYR">100.00</cbc:BaseAmount>
-        <cac:TaxCategory>
-            <!-- IBT-095 Document level allowance tax category code-->
-            <cbc:ID>E</cbc:ID>
-            <!-- IBT-096 Document level allowance tax rate-->
-            <cbc:Percent>0</cbc:Percent>
-            <!-- IBT-197 Document level allowance tax exemption reason text-->
-            <cbc:TaxExemptionReason>Tax exemption reason description</cbc:TaxExemptionReason>
-            <cac:TaxScheme>
-                <!-- IBT-095 Document level allowance tax category code-->
-                <cbc:ID>SST</cbc:ID>
-                <cbc:Name>E</cbc:Name>
-            </cac:TaxScheme>
-        </cac:TaxCategory>
-    </cac:AllowanceCharge>
-    <!-- IBG-21 Document Level Charges -->
-    <cac:AllowanceCharge>
-        <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
-        <!-- IBT-105 Document level charge reason code -->
-        <cbc:AllowanceChargeReasonCode>Reason for charge code</cbc:AllowanceChargeReasonCode>
-        <!-- IBT-104 Document level charge reason -->
-        <cbc:AllowanceChargeReason>Reason for charge</cbc:AllowanceChargeReason>
-        <!-- IBT-101 Document level charge percentage-->
-        <cbc:MultiplierFactorNumeric>5</cbc:MultiplierFactorNumeric>
-        <!-- IBT-099 Document level charge amount-->
-        <cbc:Amount currencyID="MYR">5.00</cbc:Amount>
-        <!-- IBT-100 Document level charge base amount-->
-        <cbc:BaseAmount currencyID="MYR">100.00</cbc:BaseAmount>
-        <cac:TaxCategory>
-            <!-- IBT-102 Document level charge tax category code-->
-            <cbc:ID>E</cbc:ID>
-            <!-- IBT-103 Document level charge tax rate-->
-            <cbc:Percent>0</cbc:Percent>
-            <!-- IBT-199 Document level charge tax exemption reason text-->
-            <cbc:TaxExemptionReason>Tax exemption reason description</cbc:TaxExemptionReason>
-            <cac:TaxScheme>
-                <!-- IBT-095 Document level charge tax category code-->
-                <cbc:ID>SST</cbc:ID>
-                <cbc:Name>E</cbc:Name>
-            </cac:TaxScheme>
-        </cac:TaxCategory>
-    </cac:AllowanceCharge>
     <cac:TaxTotal>
         <!-- BT-110 Invoice total tax amount. Currency in attribute currencyID (IBT-005) -->
         <cbc:TaxAmount currencyID="MYR">26.20</cbc:TaxAmount>
@@ -313,14 +258,14 @@
         </cac:TaxSubtotal>
         <cac:TaxSubtotal>
             <!-- IBT-116 Sum of all taxable amounts subject to a specific tax category code and tax category rate. Currency in attribute currencyID (IBT-005) -->
-            <cbc:TaxableAmount currencyID="MYR">0.00</cbc:TaxableAmount>
+            <cbc:TaxableAmount currencyID="MYR">300.00</cbc:TaxableAmount>
             <!--  IBT-117. The total VAT amount for a given VAT category. Currency in attribute currencyID (IBT-005) -->
             <cbc:TaxAmount currencyID="MYR">0.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <!-- IBT-118 tax category code. -->
                 <cbc:ID>E</cbc:ID>
                 <!-- IBT-119 tax category rate-->
-                <cbc:Percent>0</cbc:Percent>                
+                <cbc:Percent>0</cbc:Percent>
                 <!-- IBT-120 Tax exemption reason text-->
                 <cbc:TaxExemptionReason>Tax exemption reason description</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
@@ -336,15 +281,15 @@
     </cac:TaxTotal>
     <cac:LegalMonetaryTotal>
         <!-- IBT-106 Sum of Invoice line net amount, attribute currencyID (IBT-005)-->
-        <cbc:LineExtensionAmount currencyID="MYR">262.00</cbc:LineExtensionAmount>
+        <cbc:LineExtensionAmount currencyID="MYR">562.00</cbc:LineExtensionAmount>
         <!-- IBT-109 Invoice total amount without tax. Currency in attribute currencyID (IBT-005)-->
-        <cbc:TaxExclusiveAmount currencyID="MYR">262.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxExclusiveAmount currencyID="MYR">562.00</cbc:TaxExclusiveAmount>
         <!-- IBT-112 Invoice total amount with VAT. Currency in attribute currencyID (IBT-005) -->
-        <cbc:TaxInclusiveAmount currencyID="MYR">288.20</cbc:TaxInclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="MYR">588.20</cbc:TaxInclusiveAmount>
         <!-- IBT-107 Sum of allowances on document level-->
-        <cbc:AllowanceTotalAmount currencyID="MYR">5.00</cbc:AllowanceTotalAmount>
+        <cbc:AllowanceTotalAmount currencyID="MYR">0.00</cbc:AllowanceTotalAmount>
         <!-- IBT-108 Sum of charges on document level-->
-        <cbc:ChargeTotalAmount currencyID="MYR">5.00</cbc:ChargeTotalAmount>
+        <cbc:ChargeTotalAmount currencyID="MYR">0.00</cbc:ChargeTotalAmount>
         <!-- IBT-113 Prepaid amount. Currency in attribute currencyID (IBT-005) -->
         <cbc:PrepaidAmount currencyID="MYR">5.00</cbc:PrepaidAmount>
         <!-- IBT-114 Rounding amount. Currency in attribute currencyID (IBT-005) -->
@@ -418,7 +363,7 @@
                     <!-- IBT-118 VAT category code. -->
                     <cbc:ID>S</cbc:ID>
                     <!-- IBT-119 VAT category rate-->
-                    <cbc:Percent>10</cbc:Percent>                   
+                    <cbc:Percent>10</cbc:Percent>
                     <cac:TaxScheme>
                         <cbc:ID>SST</cbc:ID>
                         <cbc:Name>01</cbc:Name>
@@ -442,11 +387,109 @@
             <!-- IBT-158 - Classification -->
             <cac:CommodityClassification>
                 <cbc:ItemClassificationCode listID="CLASS">022</cbc:ItemClassificationCode>
-            </cac:CommodityClassification>            
+            </cac:CommodityClassification>
         </cac:Item>
         <cac:Price>
             <!-- IBT-146 Item net price. Currency in attribute currencyID (IBT-005) -->
             <cbc:PriceAmount currencyID="MYR">262.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <!-- N/A Subtotal -Amount of each individual item / service within the invoice, excluding any taxes, charges or discounts -->
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:LineExclAllowanceChargeAmount currencyID="MYR">262.00</puf:LineExclAllowanceChargeAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- IBT-126 Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+        <!-- IBT-129 Invoiced Quantity. IBT-130 unit of measure in attribute unitCode -->
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <!-- IBT-131 Invoice line net amount. Currency in attribute currencyID (IBT-005) -->
+        <cbc:LineExtensionAmount currencyID="MYR">300.00</cbc:LineExtensionAmount>
+        <cac:InvoicePeriod>
+            <!-- IBT-134 Invoice line period start date -->
+            <cbc:StartDate>2024-01-01</cbc:StartDate>
+            <!-- IBT-135 Invoice line period end date -->
+            <cbc:EndDate>2024-01-31</cbc:EndDate>
+        </cac:InvoicePeriod>
+        <!-- IBG-27 Invoice line allowances-->
+        <cac:AllowanceCharge>
+            <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+            <!-- IBT-140 Invoice line allowance reason code -->
+            <cbc:AllowanceChargeReasonCode>Reason for allowance code</cbc:AllowanceChargeReasonCode>
+            <!-- IBT-139 Invoice line allowance reason-->
+            <cbc:AllowanceChargeReason>Reason for allowance</cbc:AllowanceChargeReason>
+            <!-- IBT-138 Invoice line allowance percentage-->
+            <cbc:MultiplierFactorNumeric>5</cbc:MultiplierFactorNumeric>
+            <!-- IBT-136 Invoice line allowance amount-->
+            <cbc:Amount currencyID="MYR">5.00</cbc:Amount>
+            <!-- IBT-137 Invoice line allowance base amount-->
+            <cbc:BaseAmount currencyID="MYR">100.00</cbc:BaseAmount>
+        </cac:AllowanceCharge>
+        <!-- IBG-28 Invoice line charges -->
+        <cac:AllowanceCharge>
+            <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+            <!-- IBT-145 Invoice line charge reason code  -->
+            <cbc:AllowanceChargeReasonCode>Reason for allowance code</cbc:AllowanceChargeReasonCode>
+            <!-- IBT-144 Invoice line charge reason-->
+            <cbc:AllowanceChargeReason>Reason for allowance</cbc:AllowanceChargeReason>
+            <!-- IBT-143 Invoice line charge percentage-->
+            <cbc:MultiplierFactorNumeric>5</cbc:MultiplierFactorNumeric>
+            <!-- IBT-141 Invoice line charge amount-->
+            <cbc:Amount currencyID="MYR">5.00</cbc:Amount>
+            <!-- IBT-142 Invoice line charge base amount -->
+            <cbc:BaseAmount currencyID="MYR">100.00</cbc:BaseAmount>
+        </cac:AllowanceCharge>
+        <cac:TaxTotal>
+            <!-- N/A Invoiced item tax amount. Currency in attribute currencyID (IBT-005) -->
+            <cbc:TaxAmount currencyID="MYR">0.00</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <!-- N/A Invoiced item tax exemption amount. Currency in attribute currencyID (IBT-005) -->
+                <cbc:TaxableAmount currencyID="MYR">300.00</cbc:TaxableAmount>
+                <!-- N/A Invoiced item tax amount. Currency in attribute currencyID (IBT-005) -->
+                <cbc:TaxAmount currencyID="MYR">0.00</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <!-- IBT-118 VAT category code. -->
+                    <cbc:ID>E</cbc:ID>
+                    <!-- IBT-119 VAT category rate-->
+                    <cbc:Percent>0</cbc:Percent>
+                    <cbc:TaxExemptionReason>Tax exemption reason description</cbc:TaxExemptionReason>
+                    <cac:TaxScheme>
+                        <cbc:ID>SST</cbc:ID>
+                        <cbc:Name>E</cbc:Name>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
+        <cac:Item>
+            <!-- IBT-154 Item Description -->
+            <cbc:Description>Item description</cbc:Description>
+            <!-- IBT-153 Item Name-->
+            <cbc:Name>Item name</cbc:Name>
+            <!-- IBT-159 Country of Origin -->
+            <cac:OriginCountry>
+                <cbc:IdentificationCode>MY</cbc:IdentificationCode>
+            </cac:OriginCountry>
+            <!-- BTMY-010 - Product Tariff Code -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="PTC">10059000</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <!-- IBT-158 - Classification -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CLASS">022</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+        </cac:Item>
+        <cac:Price>
+            <!-- IBT-146 Item net price. Currency in attribute currencyID (IBT-005) -->
+            <cbc:PriceAmount currencyID="MYR">300.00</cbc:PriceAmount>
         </cac:Price>
     </cac:InvoiceLine>
 </Invoice>
