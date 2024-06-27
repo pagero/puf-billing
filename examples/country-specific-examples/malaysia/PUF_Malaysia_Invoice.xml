@@ -51,6 +51,22 @@
     <!-- IBG-04 Seller Information  -->
     <cac:AccountingSupplierParty>
         <cac:Party>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <!-- N/A Authorisation Number for Certified Exporter (e.g., ATIGA number) -->
+                                <puf:RegistrationData>
+                                    <cbc:ID>CPT-CCN-W-211111-KL-000002</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">MY:CertEx</puf:IDType>
+                                </puf:RegistrationData>                                
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
             <!-- BTMY-006 Malaysia Standard Industrial Classification (MSIC) Codes-->
             <!-- name = Business Activity Description-->
             <cbc:IndustryClassificationCode name="Growing of maize">01111</cbc:IndustryClassificationCode>
