@@ -155,6 +155,10 @@ Value must be according to code list https://pagero.github.io/puf-code-lists/#_p
 |**Company legal form** +
 Relevant legal information regarding the seller.
 
+|`cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName`
+|**Registered tax office** +
+Seller's registered tax office.
+
 |`cac:Party/cac:Contact/cbc:Name`
 |**Contact name** +
 Name of contact person.
