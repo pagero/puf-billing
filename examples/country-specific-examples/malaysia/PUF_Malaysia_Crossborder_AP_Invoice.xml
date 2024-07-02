@@ -194,7 +194,7 @@
         </cac:TaxTotal>
         <cac:Item>
             <!-- IBT-153 Item Name-->
-            <cbc:Name>1451315</cbc:Name>
+            <cbc:Name>Itme name</cbc:Name>
             <!-- IBT-159 Country of Origin -->
             <cac:OriginCountry>
                 <cbc:IdentificationCode>MY</cbc:IdentificationCode>
@@ -256,7 +256,7 @@
         </cac:TaxTotal>
         <cac:Item>
             <!-- IBT-153 Item Name-->
-            <cbc:Name>654894</cbc:Name>
+            <cbc:Name>Itme name</cbc:Name>
             <!-- IBT-159 Country of Origin -->
             <cac:OriginCountry>
                 <cbc:IdentificationCode>MY</cbc:IdentificationCode>
@@ -318,7 +318,7 @@
         </cac:TaxTotal>
         <cac:Item>
             <!-- IBT-153 Item Name-->
-            <cbc:Name>484946</cbc:Name>
+            <cbc:Name>Itme name</cbc:Name>
             <!-- IBT-159 Country of Origin -->
             <cac:OriginCountry>
                 <cbc:IdentificationCode>MY</cbc:IdentificationCode>
