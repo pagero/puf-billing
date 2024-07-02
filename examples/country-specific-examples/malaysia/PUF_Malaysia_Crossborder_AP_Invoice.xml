@@ -5,7 +5,7 @@
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled</ext:ExtensionURI>
             <ext:ExtensionContent>
                 <puf:PageroExtension>
-                    <!-- N/A Self billing indicator -->
+                    <!-- Self billing indicator -->
                     <puf:SelfBilled>true</puf:SelfBilled>                                
                 </puf:PageroExtension>
             </ext:ExtensionContent>
