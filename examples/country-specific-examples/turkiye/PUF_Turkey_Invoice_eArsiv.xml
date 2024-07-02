@@ -64,7 +64,12 @@
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
-            </cac:PartyTaxScheme>           
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cac:RegistrationAddress>
+                    <cbc:CityName>Registered tax office</cbc:CityName>
+                </cac:RegistrationAddress>
+            </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingSupplierParty>
 	<!-- BG-7 Buyer -->
@@ -95,7 +100,12 @@
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
-            </cac:PartyTaxScheme>  
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cac:RegistrationAddress>
+                    <cbc:CityName>Registered tax office</cbc:CityName>
+                </cac:RegistrationAddress>
+            </cac:PartyLegalEntity> 
             <cac:Person>
                 <cbc:FirstName>Buyer First Name</cbc:FirstName>
                 <cbc:FamilyName>Buyer Surname</cbc:FamilyName>

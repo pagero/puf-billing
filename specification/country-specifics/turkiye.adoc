@@ -132,7 +132,7 @@ _Invoice Delivery Method example_
 If the buyer is a private person (uses TCKN), the first name and surname of the buyer should be included in specific elements.
 
 *Example* +
-_Invoice type code example_
+_First name and surname example_
 [source,xml]
 ----
 <Invoice>
@@ -168,6 +168,44 @@ _Invoice type code example_
 </Invoice>
 ----
 <1> Note that the buyer's name is split into first name and surname separately. 
+
+==== Registered tax office
+
+The specific tax office where the buyer or seller is registered for tax purposes.
+
+*Example* +
+_Registered tax office example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+        <cac:Party>        	
+            <cac:PostalAddress>
+                <cbc:StreetName>Street Name</cbc:StreetName>
+                <cbc:CityName>City</cbc:CityName>
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>TR</cbc:IdentificationCode>
+                    <cbc:Name>Türkiye</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+            	<cbc:CompanyID>98765432101</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>  
+            <cac:PartyLegalEntity>
+                <cac:RegistrationAddress>
+                    <cbc:CityName>Registered tax office</cbc:CityName>
+                </cac:RegistrationAddress>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>  
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
 
 ==== Tax category codes
 
