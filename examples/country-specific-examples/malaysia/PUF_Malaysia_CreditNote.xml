@@ -126,7 +126,7 @@
             </cac:PartyTaxScheme>
             <cac:PartyLegalEntity>
                 <!-- IBT-027 Seller Registration Name -->
-                <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
+                <cbc:RegistrationName>Seller Registration Name</cbc:RegistrationName>
             </cac:PartyLegalEntity>
             <cac:Contact>
                 <!-- IBT-042 Seller contact telephone -->
@@ -352,9 +352,9 @@
         <cac:AllowanceCharge>
             <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
             <!-- IBT-145 Invoice line charge reason code  -->
-            <cbc:AllowanceChargeReasonCode>Reason for allowance code</cbc:AllowanceChargeReasonCode>
+            <cbc:AllowanceChargeReasonCode>Reason for charge code</cbc:AllowanceChargeReasonCode>
             <!-- IBT-144 Invoice line charge reason-->
-            <cbc:AllowanceChargeReason>Reason for allowance</cbc:AllowanceChargeReason>
+            <cbc:AllowanceChargeReason>Reason for charge</cbc:AllowanceChargeReason>
             <!-- IBT-143 Invoice line charge percentage-->
             <cbc:MultiplierFactorNumeric>5</cbc:MultiplierFactorNumeric>
             <!-- IBT-141 Invoice line charge amount-->
@@ -450,9 +450,9 @@
         <cac:AllowanceCharge>
             <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
             <!-- IBT-145 Invoice line charge reason code  -->
-            <cbc:AllowanceChargeReasonCode>Reason for allowance code</cbc:AllowanceChargeReasonCode>
+            <cbc:AllowanceChargeReasonCode>Reason for charge code</cbc:AllowanceChargeReasonCode>
             <!-- IBT-144 Invoice line charge reason-->
-            <cbc:AllowanceChargeReason>Reason for allowance</cbc:AllowanceChargeReason>
+            <cbc:AllowanceChargeReason>Reason for charge</cbc:AllowanceChargeReason>
             <!-- IBT-143 Invoice line charge percentage-->
             <cbc:MultiplierFactorNumeric>5</cbc:MultiplierFactorNumeric>
             <!-- IBT-141 Invoice line charge amount-->
