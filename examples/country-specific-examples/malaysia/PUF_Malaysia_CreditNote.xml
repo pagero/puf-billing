@@ -266,10 +266,6 @@
             </cac:TaxCategory>
         </cac:TaxSubtotal>
     </cac:TaxTotal>
-    <cac:TaxTotal>
-        <!-- BT-111 Invoice total tax amount in accounting currency. Currency in attribute currencyID (IBT-005) -->
-        <cbc:TaxAmount currencyID="MYR">26.20</cbc:TaxAmount>
-    </cac:TaxTotal>
     <cac:LegalMonetaryTotal>
         <!-- IBT-106 Sum of Invoice line net amount, attribute currencyID (IBT-005)-->
         <cbc:LineExtensionAmount currencyID="MYR">562.00</cbc:LineExtensionAmount>
