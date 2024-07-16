@@ -108,7 +108,7 @@
                 <!-- IBT-053 Postal code -->
                 <cbc:PostalZone>NA</cbc:PostalZone>
                 <!-- IBT-054 Country subentity code -->
-                <cbc:CountrySubentityCode>NA</cbc:CountrySubentityCode>
+                <cbc:CountrySubentityCode>17</cbc:CountrySubentityCode>
                 <cac:Country>
                     <!-- IBT-055 Country code -->
                     <cbc:IdentificationCode>MY</cbc:IdentificationCode>
