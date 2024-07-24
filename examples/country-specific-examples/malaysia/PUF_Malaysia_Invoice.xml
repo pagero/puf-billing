@@ -311,7 +311,7 @@
         <!-- IBT-114 Rounding amount. Currency in attribute currencyID (IBT-005) -->
         <cbc:PayableRoundingAmount currencyID="MYR">0.20</cbc:PayableRoundingAmount>
         <!-- IBT-115 Amount due for payment. Currency in attribute currencyID (IBT-005) -->
-        <cbc:PayableAmount currencyID="MYR">283.00</cbc:PayableAmount>
+        <cbc:PayableAmount currencyID="MYR">583.00</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>
     <cac:InvoiceLine>
         <!-- N/A Subtotal -Amount of each individual item / service within the invoice, excluding any taxes, charges or discounts -->
