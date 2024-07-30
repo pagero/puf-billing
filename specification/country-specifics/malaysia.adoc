@@ -84,3 +84,7 @@ _Tax example_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
+
+==== Unit of Measure
+
+LHDN is following the UN/ECE Recommendation 20, Revision 17 (2021). The Unit of Measure code sent in the invoice must be one of the accepted codes listed on the LHDN's official webpage https://sdk.myinvois.hasil.gov.my/codes/unit-types/[here^].
