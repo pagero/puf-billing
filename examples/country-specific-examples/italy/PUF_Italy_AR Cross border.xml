@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" 
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+    <!-- Values in this document are example values only -->
+    <ext:UBLExtensions>
+        <!-- Duty stamp (Dati Bollo) -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:DutyStamp</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:DutyStamp>
+                        <puf:Amount currencyID="EUR">2.00</puf:Amount>
+                    </puf:DutyStamp>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>123123</cbc:ID>
+    <!-- BT-2 Invoice Issue Date  -->
+    <cbc:IssueDate>2022-01-01</cbc:IssueDate>
+    <!-- BT-9 Due Date -->
+    <cbc:DueDate>2023-01-01</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code -->
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <cac:InvoicePeriod>
+        <!-- BT-73 The date when the Invoice period starts -->
+        <cbc:StartDate>2022-10-31</cbc:StartDate>
+        <!-- BT-74 The date when the Invoice period ends -->
+        <cbc:EndDate>2022-10-31</cbc:EndDate>
+    </cac:InvoicePeriod>
+    <cac:OrderReference>
+        <!-- BT-13 Referenced Purchase Order identifier, issued by buyer -->
+        <cbc:ID>123456789</cbc:ID>
+        <!-- BT-14 Referenced Purchase Order identifier, issued by seller  -->
+        <cbc:SalesOrderID>12345678</cbc:SalesOrderID>
+    </cac:OrderReference>
+    <!-- BG-4 Seller -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <!--  IT:Ufficio
+                                    Initials of the province where the Company is registered.  -->
+                                <puf:RegistrationData>
+                                    <cbc:ID>MI</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">IT:Ufficio</puf:IDType>
+                                </puf:RegistrationData>
+                                <!--  IT:NumeroREA
+                                    The registration number in the "companies register".  -->
+                                <puf:RegistrationData>
+                                    <cbc:ID>NumeroREA</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">IT:NumeroREA</puf:IDType>
+                                </puf:RegistrationData>
+                                <!--  IT:CapitaleSociale
+                                    Only in the case of a company (SpA, SApA, SRL), the element must be filled in with the share capital  -->
+                                <puf:RegistrationData>
+                                    <cbc:ID>100000.00</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">IT:CapitaleSociale</puf:IDType>
+                                </puf:RegistrationData>
+                                <!-- IT:SocioUnico
+                                    Only in the case of a joint-stock company or limited liability company, the element must be filled in to indicate if there is a single shareholder or several shareholders.
+                                    Allowed values: SU or SM.
+                                    SU = Sole shareholder.
+                                    SM = Several shareholders.
+                                -->
+                                <puf:RegistrationData>
+                                    <cbc:ID>SM</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">IT:SocioUnico</puf:IDType>
+                                </puf:RegistrationData>
+                                <!--  IT:StatoLiquidazione
+                                    Indication of whether the Company is in liquidation or not.
+                                    Allowed values: LS or LN.
+                                    LS = In liquidation.
+                                    LN = Not in liquidation.  
+                                -->
+                                <puf:RegistrationData>
+                                    <cbc:ID>LN</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">IT:StatoLiquidazione</puf:IDType>
+                                </puf:RegistrationData>
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cac:PartyName>
+                <!-- BT-28 Seller Trading Name -->
+                <cbc:Name>Seller Trading Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!--BT-35 Seller address street-->
+                <cbc:StreetName>Street name</cbc:StreetName>
+                <cbc:AdditionalStreetName>Additional street name</cbc:AdditionalStreetName>
+                <!-- BT-37 Seller address City -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- BT-38 Seller address postal code -->
+                <cbc:PostalZone>11111</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Seller address country code -->
+                    <cbc:IdentificationCode>IT</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- VAT number in Italy
+            CompanyID - Must start with a country code (two characters) followed by 1 to 28 characters
+            TaxScheme/ID - Must be VAT
+            -->
+            <cac:PartyTaxScheme>
+                <!-- BT-31 Seller Vat Number -->
+                <cbc:CompanyID>IT12121212</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- Fiscal code in Italy
+                CompanyID - Can contain 11 to 16 characters
+                TaxScheme/ID - Must be TAX
+            -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>12345678901</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>TAX</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Registration Name -->
+                <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
+                <!-- BT-30 Seller Legal Registration Identifier-->
+                <cbc:CompanyID>12345678</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <!-- BT-41 Seller contact name -->
+                <cbc:Name>Contact nae</cbc:Name>
+                <!-- BT-42 Seller contact telephone -->
+                <cbc:Telephone>123123123</cbc:Telephone>
+                <!-- BT-43 Seller contact email -->
+                <cbc:ElectronicMail>test@test.es</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- BG-7 Buyer -->
+    <cac:AccountingCustomerParty>
+        <!-- Customer number -->
+        <cbc:SupplierAssignedAccountID>18894</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- Routing code (Codice Destinatario) - Must be set to XXXXXXX -->
+            <cbc:EndpointID schemeID="0201">XXXXXXX</cbc:EndpointID>
+            <cac:PartyName>
+                <!-- BT-45 Buyer Trading Name -->
+                <cbc:Name>Buyer trading name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- BT-50 Buyer address street-->
+                <cbc:StreetName>Street</cbc:StreetName>
+                <!-- BT-52 Buyer address City -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- BT-53 Buyer address postal code -->
+                <cbc:PostalZone>11111</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Buyer address country code -->
+                    <cbc:IdentificationCode>DE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer VAT Number if applicable -->
+                <cbc:CompanyID>DE12121212</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>12345678901</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>TAX</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Name -->
+                <cbc:RegistrationName>Buyer name</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:TaxTotal>
+        <!-- Tax chargeability (Esigibilita IVA) 
+            Possible values to provide:
+            I = VAT with immediate chargeability
+            D = VAT unrealized
+            S = Splitting of payments
+        -->
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:TaxSubtotalExtension>
+                            <puf:TaxChargeability>
+                                <cbc:TaxTypeCode>I</cbc:TaxTypeCode>
+                            </puf:TaxChargeability>
+                        </puf:TaxSubtotalExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- BT-110 Invoice total VAT amount. Currency in attribute currencyID (BT-5) -->
+        <cbc:TaxAmount currencyID="EUR">56.07</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- BT-116 Sum of all taxable amounts subject to a specific VAT category code and VAT category rate. Currency in attribute currencyID (BT-5) -->
+            <cbc:TaxableAmount currencyID="EUR">267</cbc:TaxableAmount>
+            <!--  BT-117. The total VAT amount for a given VAT category. Currency in attribute currencyID (BT-5) -->
+            <cbc:TaxAmount currencyID="EUR">56.07</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code. -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT category rate-->
+                <cbc:Percent>21</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of all Invoice line net amounts in the Invoice  without VAT. Currency in attribute currencyID (BT-5)-->
+        <cbc:LineExtensionAmount currencyID="EUR">267</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT. Currency in attribute currencyID (BT-5)-->
+        <cbc:TaxExclusiveAmount currencyID="EUR">267</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT. Currency in attribute currencyID (BT-5) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">323.07</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment. Currency in attribute currencyID (BT-5) -->
+        <cbc:PayableAmount currencyID="EUR">323.07</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-129 Invoiced Quantity. BT-130 unit of measure in attribute unitCode -->
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Line extension amount. Line net amount. Currency in attribute currencyID (BT-5) -->
+        <cbc:LineExtensionAmount currencyID="EUR">267</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-153 Article/Item Description -->
+            <cbc:Name>Item name</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code. -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>21</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
+            <cbc:PriceAmount currencyID="EUR">267</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
