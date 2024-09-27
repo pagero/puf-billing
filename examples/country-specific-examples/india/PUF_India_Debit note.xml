@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
-    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-    xmlns:puf="urn:pagero:ExtensionComponent:1.0"
-    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" 
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" 
     xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <!-- Values in this document are example values only -->
     <ext:UBLExtensions>
         <ext:UBLExtension>
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SupplyType</ext:ExtensionURI>
@@ -32,8 +31,16 @@
     <cbc:ID>123456</cbc:ID>
     <cbc:IssueDate>2018-01-01</cbc:IssueDate>
     <cbc:DueDate>2018-12-01</cbc:DueDate>
-    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode>383</cbc:InvoiceTypeCode>
     <cbc:DocumentCurrencyCode>INR</cbc:DocumentCurrencyCode>
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <!-- Preceding Invoice reference -->
+            <cbc:ID>Preceding document number</cbc:ID>
+            <!-- Preceding Invoice date -->
+            <cbc:IssueDate>2024-01-01</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyIdentification>
@@ -119,7 +126,7 @@
                 <ext:ExtensionContent>
                     <puf:PageroExtension>
                         <puf:LineExtension>
-                            <puf:TaxInclusiveLineExtensionAmount currencyID="INR">118.00</puf:TaxInclusiveLineExtensionAmount> 
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="INR">118.00</puf:TaxInclusiveLineExtensionAmount>
                             <puf:LineExclAllowanceChargeAmount currencyID="INR">100.00</puf:LineExclAllowanceChargeAmount>
                         </puf:LineExtension>
                     </puf:PageroExtension>

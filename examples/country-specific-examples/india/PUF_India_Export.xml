@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
-    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-    xmlns:puf="urn:pagero:ExtensionComponent:1.0"
-    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" 
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" 
     xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <!-- Values in this document are example values only -->
     <ext:UBLExtensions>
         <ext:UBLExtension>
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SupplyType</ext:ExtensionURI>
             <ext:ExtensionContent>
                 <puf:PageroExtension>
                     <puf:SupplyType>
-                        <puf:Code>B2B</puf:Code>
+                        <puf:Code>EXPWP</puf:Code>
                     </puf:SupplyType>
-                </puf:PageroExtension>
-            </ext:ExtensionContent>
-        </ext:UBLExtension>
-        <ext:UBLExtension>
-            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
-            <ext:ExtensionContent>
-                <puf:PageroExtension>
-                    <puf:RestrictedInformation>
-                        <puf:Key>POS</puf:Key>
-                        <puf:Value>01</puf:Value>
-                    </puf:RestrictedInformation>
                 </puf:PageroExtension>
             </ext:ExtensionContent>
         </ext:UBLExtension>
@@ -32,7 +20,7 @@
     <cbc:ID>123456</cbc:ID>
     <cbc:IssueDate>2018-01-01</cbc:IssueDate>
     <cbc:DueDate>2018-12-01</cbc:DueDate>
-    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode>383</cbc:InvoiceTypeCode>
     <cbc:DocumentCurrencyCode>INR</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
         <cac:Party>
@@ -59,22 +47,19 @@
         <!-- Customer number, not a requirement but can be useful to route document to correct recipient in pageroonline -->
         <cbc:SupplierAssignedAccountID>Customer Number</cbc:SupplierAssignedAccountID>
         <cac:Party>
-            <cac:PartyIdentification>
-                <cbc:ID schemeID="IN:GSTIN">01AAAAA3212A1AA</cbc:ID>
-            </cac:PartyIdentification>
+            <!--
+            Only the address and name details should be included in an export invoice. All the below fields must be provided for the cross-border receiver.
+            Pagero will set the other necessary data for the AccountingCustomerParty during the document processing.
+            -->
             <cac:PostalAddress>
                 <cbc:StreetName>Street 52</cbc:StreetName>
-                <cbc:CityName>Jammu</cbc:CityName>
-                <cbc:PostalZone>190002</cbc:PostalZone>
-                <cbc:CountrySubentityCode>01</cbc:CountrySubentityCode>
+                <cbc:CityName>City Name</cbc:CityName>
                 <cac:Country>
-                    <cbc:IdentificationCode>IN</cbc:IdentificationCode>
-                    <cbc:Name>India</cbc:Name>
+                    <cbc:IdentificationCode>DE</cbc:IdentificationCode>
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyLegalEntity>
                 <cbc:RegistrationName>Buyer Name</cbc:RegistrationName>
-                <cbc:CompanyID schemeID="IN:PAN">AAAAA3212A</cbc:CompanyID>
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>
@@ -82,26 +67,15 @@
         <cbc:ActualDeliveryDate>2019-01-01</cbc:ActualDeliveryDate>
     </cac:Delivery>
     <cac:TaxTotal>
-        <cbc:TaxAmount currencyID="INR">36.00</cbc:TaxAmount>
+        <cbc:TaxAmount currencyID="INR">236.00</cbc:TaxAmount>
         <cac:TaxSubtotal>
             <cbc:TaxableAmount currencyID="INR">200.00</cbc:TaxableAmount>
-            <cbc:TaxAmount currencyID="INR">18.00</cbc:TaxAmount>
+            <cbc:TaxAmount currencyID="INR">36.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
-                <cbc:Percent>9</cbc:Percent>
+                <cbc:Percent>18</cbc:Percent>
                 <cac:TaxScheme>
-                    <cbc:ID>CGST</cbc:ID>
-                </cac:TaxScheme>
-            </cac:TaxCategory>
-        </cac:TaxSubtotal>
-        <cac:TaxSubtotal>
-            <cbc:TaxableAmount currencyID="INR">200.00</cbc:TaxableAmount>
-            <cbc:TaxAmount currencyID="INR">18.00</cbc:TaxAmount>
-            <cac:TaxCategory>
-                <cbc:ID>S</cbc:ID>
-                <cbc:Percent>9</cbc:Percent>
-                <cac:TaxScheme>
-                    <cbc:ID>SGST</cbc:ID>
+                    <cbc:ID>IGST</cbc:ID>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -119,7 +93,7 @@
                 <ext:ExtensionContent>
                     <puf:PageroExtension>
                         <puf:LineExtension>
-                            <puf:TaxInclusiveLineExtensionAmount currencyID="INR">118.00</puf:TaxInclusiveLineExtensionAmount> 
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="INR">118.00</puf:TaxInclusiveLineExtensionAmount>
                             <puf:LineExclAllowanceChargeAmount currencyID="INR">100.00</puf:LineExclAllowanceChargeAmount>
                         </puf:LineExtension>
                     </puf:PageroExtension>
@@ -133,23 +107,12 @@
             <cbc:TaxAmount currencyID="INR">18.00</cbc:TaxAmount>
             <cac:TaxSubtotal>
                 <cbc:TaxableAmount currencyID="INR">100.00</cbc:TaxableAmount>
-                <cbc:TaxAmount currencyID="INR">9.00</cbc:TaxAmount>
+                <cbc:TaxAmount currencyID="INR">18.00</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cbc:ID>S</cbc:ID>
-                    <cbc:Percent>9</cbc:Percent>
+                    <cbc:Percent>18</cbc:Percent>
                     <cac:TaxScheme>
-                        <cbc:ID>CGST</cbc:ID>
-                    </cac:TaxScheme>
-                </cac:TaxCategory>
-            </cac:TaxSubtotal>
-            <cac:TaxSubtotal>
-                <cbc:TaxableAmount currencyID="INR">100.00</cbc:TaxableAmount>
-                <cbc:TaxAmount currencyID="INR">9.00</cbc:TaxAmount>
-                <cac:TaxCategory>
-                    <cbc:ID>S</cbc:ID>
-                    <cbc:Percent>9</cbc:Percent>
-                    <cac:TaxScheme>
-                        <cbc:ID>SGST</cbc:ID>
+                        <cbc:ID>IGST</cbc:ID>
                     </cac:TaxScheme>
                 </cac:TaxCategory>
             </cac:TaxSubtotal>
@@ -197,23 +160,12 @@
             <cbc:TaxAmount currencyID="INR">18.00</cbc:TaxAmount>
             <cac:TaxSubtotal>
                 <cbc:TaxableAmount currencyID="INR">100.00</cbc:TaxableAmount>
-                <cbc:TaxAmount currencyID="INR">9.00</cbc:TaxAmount>
+                <cbc:TaxAmount currencyID="INR">18.00</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cbc:ID>S</cbc:ID>
-                    <cbc:Percent>9</cbc:Percent>
+                    <cbc:Percent>18</cbc:Percent>
                     <cac:TaxScheme>
-                        <cbc:ID>CGST</cbc:ID>
-                    </cac:TaxScheme>
-                </cac:TaxCategory>
-            </cac:TaxSubtotal>
-            <cac:TaxSubtotal>
-                <cbc:TaxableAmount currencyID="INR">100.00</cbc:TaxableAmount>
-                <cbc:TaxAmount currencyID="INR">9.00</cbc:TaxAmount>
-                <cac:TaxCategory>
-                    <cbc:ID>S</cbc:ID>
-                    <cbc:Percent>9</cbc:Percent>
-                    <cac:TaxScheme>
-                        <cbc:ID>SGST</cbc:ID>
+                        <cbc:ID>IGST</cbc:ID>
                     </cac:TaxScheme>
                 </cac:TaxCategory>
             </cac:TaxSubtotal>
