@@ -1,0 +1,102 @@
+.Elements added to cac:Shipment
+|===
+|Path |Description
+
+|`cbc:GrossWeightMeasure`
+|**Weight** +
+The gross weight of the despatch as a whole.
+
+|`cbc:GrossWeightMeasure/@unitCode`
+|**Weight unit of measure** +
+The unit of measure that applies to the shipment weight. +
+See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-UOMCODE^] for recommendations.
+
+|`cbc:GrossVolumeMeasure`
+|**Volume** +
+The gross volume of the despatch as a whole.
+
+|`cbc:GrossVolumeMeasure/@unitCode`
+|**Volume unit of measure** +
+The unit of measure that applies to the shipment volume. +
+See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-UOMCODE^] for recommendations.
+
+|`cac:GoodsItem/cbc:ChargeableWeightMeasure`
+|**Chargeable weight** +
+Chargeable weight of the shipment.
+
+|`cac:GoodsItem/cbc:ChargeableWeightMeasure/@unitCode`
+|**Chargeable weight unit of measure** +
+The unit of measure that applies to the shipment chargeable weight. +
+See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-UOMCODE^] for recommendations.
+
+|`cac:Consignment/cac:OriginalDespatchTransportationService/cac:TransportEquipment/cac:MeasurementDimension[cbc:AttributeID = 'DRIVINGDISTANCE']/cbc:Measure`
+|**Distance** +
+Driving distance of the shipment. 
+
+|`cac:Consignment/cac:OriginalDespatchTransportationService/cac:TransportEquipment/cac:MeasurementDimension[cbc:AttributeID = 'DRIVINGDISTANCE']/cbc:Measure/@unitCode`
+|**Distance unit of measure** +
+The unit of measure that applies to the shipment driving distance. +
+See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-UOMCODE^] for recommendations.
+
+|`cac:Consignment/cac:OriginalDespatchTransportationService/cac:TransportEquipment/cac:MeasurementDimension/cbc:AttributeID`
+|**Type of measurement** +
+Specifies the type being measured. Currently 'DRIVINGDISTANCE' is the only value used by Pagero.
+
+|`cac:Consignment/cbc:LoadingLengthMeasure`
+|**Loading length** +
+The total length in a means of transport or a piece of transport equipment which, given the width and height of the transport means, will accommodate all of the consignments in a single consolidation.
+
+|`cac:Consignment/cbc:LoadingLengthMeasure/@unitCode`
+|**Loading length unit of measure** +
+The unit of measure that applies to the Loading length. +
+See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-UOMCODE^] for recommendations.
+
+|`cac:Consignment/cbc:TotalPackagesQuantity`
+|**Quantity** +
+The total number of packages associated with a Consignment.
+
+|`cac:Consignment/cbc:TotalPackagesQuantity/@unitCode`
+|**Quantity unit of measure** +
+The unit of measure that applies to the consignment total packages. +
+See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-UOMCODE^] for recommendations.
+
+|===
+
+*Example* +
+_cac:InvoiceLine/cac:Delivery/cac:Shipment example_
+[source,xml]
+----
+<Invoice>
+<!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+    <cac:Delivery>
+    <!-- Code omitted for clarity -->
+      <cac:Shipment>
+          <cbc:GrossWeightMeasure unitCode="KGM">100</cbc:GrossWeightMeasure>
+          <cbc:GrossVolumeMeasure unitCode="CMQ">100</cbc:GrossVolumeMeasure>
+          <cac:GoodsItem>
+              <cbc:ChargeableWeightMeasure unitCode="KGM">100</cbc:ChargeableWeightMeasure>
+          </cac:GoodsItem>
+          <cac:Consignment>
+              <cac:OriginalDespatchTransportationService>
+                <cac:TransportEquipment>
+                  <cac:MeasurementDimension>
+                    <cbc:AttributeID>DRIVINGDISTANCE</cbc:AttributeID> <!--1-->
+                    <cbc:Measure unitCode="KMT">100</cbc:Measure>
+                  </cac:MeasurementDimension>
+                </cac:TransportEquipment>
+              </cac:OriginalDespatchTransportationService>
+              <cbc:LoadingLengthMeasure unitCode="LMT">100</cbc:LoadingLengthMeasure>
+              <cbc:TotalPackagesQuantity unitCode="EA">100</cbc:TotalPackagesQuantity>
+          </cac:Consignment>
+      </cac:Shipment>
+      <!-- Code omitted for clarity -->
+    </cac:Delivery>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+<1> 'DRIVINGDISTANCE' indicates that distance is being measured. Currently 'DRIVINGDISTANCE' is the only value used by Pagero.

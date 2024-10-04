@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
-<meta name="author" content="Copyright &copy; 2024, Pagero Group">
+<meta name="generator" content="Asciidoctor 2.0.12">
 <meta name="copyright" content="Pagero Group">
 <title>PUF Billing 2.0</title>
 <style>
@@ -428,18 +427,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-/*! Stylesheet for CodeRay to loosely match GitHub themes | MIT License */
+/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
 pre.CodeRay{background:#f7f7f8}
-.CodeRay .line-numbers{border-right:1px solid;opacity:.35;padding:0 .5em 0 0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.CodeRay .line-numbers{border-right:1px solid currentColor;opacity:.35;padding:0 .5em 0 0}
 .CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
 .CodeRay .line-numbers strong{color:#000}
 table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
 table.CodeRay td{vertical-align:top;line-height:inherit}
 table.CodeRay td.line-numbers{text-align:right}
 table.CodeRay td.code{padding:0 0 0 .75em}
-.CodeRay .debug{color:#fff!important;background:navy!important}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
 .CodeRay .annotation{color:#007}
-.CodeRay .attribute-name{color:navy}
+.CodeRay .attribute-name{color:#000080}
 .CodeRay .attribute-value{color:#700}
 .CodeRay .binary{color:#509}
 .CodeRay .comment{color:#998;font-style:italic}
@@ -448,7 +447,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .char .delimiter{color:#039}
 .CodeRay .class{color:#458;font-weight:bold}
 .CodeRay .complex{color:#a08}
-.CodeRay .constant,.CodeRay .predefined-constant{color:teal}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
 .CodeRay .color{color:#099}
 .CodeRay .class-variable{color:#369}
 .CodeRay .decorator{color:#b0b}
@@ -463,7 +462,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .exception{color:inherit}
 .CodeRay .filename{color:#099}
 .CodeRay .function{color:#900;font-weight:bold}
-.CodeRay .global-variable{color:teal}
+.CodeRay .global-variable{color:#008080}
 .CodeRay .hex{color:#058}
 .CodeRay .integer,.CodeRay .float{color:#099}
 .CodeRay .include{color:#555}
@@ -474,7 +473,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .inline-delimiter{color:#d14}
 .CodeRay .important{color:#555;font-weight:bold}
 .CodeRay .interpreted{color:#b2b}
-.CodeRay .instance-variable{color:teal}
+.CodeRay .instance-variable{color:#008080}
 .CodeRay .label{color:#970}
 .CodeRay .local-variable{color:#963}
 .CodeRay .octal{color:#40e}
@@ -484,7 +483,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .directive{font-weight:bold}
 .CodeRay .type{font-weight:bold}
 .CodeRay .predefined-type{color:inherit}
-.CodeRay .reserved,.CodeRay .keyword{color:#000;font-weight:bold}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
 .CodeRay .key{color:#808}
 .CodeRay .key .delimiter{color:#606}
 .CodeRay .key .char{color:#80f}
@@ -504,7 +503,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .symbol{color:#990073}
 .CodeRay .symbol .content{color:#a60}
 .CodeRay .symbol .delimiter{color:#630}
-.CodeRay .tag{color:teal}
+.CodeRay .tag{color:#008080}
 .CodeRay .tag-special{color:#d70}
 .CodeRay .variable{color:#036}
 .CodeRay .insert{background:#afa}
@@ -5481,124 +5480,6 @@ See code list <a href="https://pagero.github.io/puf-code-lists/#_puf_014_uomcode
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery date</strong><br>
 Date of delivery.</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery location identifier</strong><br>
-Identifier of the delivery location.<br>
-<em>E.g. a GLN number.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cbc:ID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery location scheme identifier</strong><br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address ID</strong><br>
-Delivery location address id.<br>
-Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:Postbox</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
-Delivery location address post box.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:Floor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
-Delivery location address floor.<br>
-An addressable floor of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:Room</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
-Delivery location address room.<br>
-A room, suite, or apartment of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:StreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
-Delivery location address street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
-Delivery location address additional street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:BuildingName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
-Delivery location address building name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:BuildingNumber</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
-Delivery location address building number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:Department</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
-Delivery location address department.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:PlotIdentification</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
-Delivery location address plot identification.<br>
-Additional address number. An identifier for the piece of land associated with this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:CitySubdivisionName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
-Delivery location address city subdivision name.<br>
-The name of the subdivision of the delivery city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
-Delivery location address city name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:PostalZone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
-Delivery location address post code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:CountrySubentity</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
-Delivery location address province or state.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:CountrySubentityCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
-Delivery location address province or state code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:Region</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
-Delivery location address region.<br>
-Delivery location addressable region or group of countries.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cbc:District</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
-Delivery location address district.<br>
-A district or borough, may be a subdivision of a city for this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
-Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
-Delivery location address country code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:DeliveryLocation/cac:Address/cac:Country/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
-Delivery location address country name.</p></td>
-</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -5608,14 +5489,310 @@ Delivery location address country name.</p></td>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
-  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;cac:InvoiceLine&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
     <span class="tag">&lt;cac:Delivery&gt;</span>
       <span class="tag">&lt;cbc:Quantity</span> <span class="attribute-name">unitCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PCE</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1<span class="tag">&lt;/cbc:Quantity&gt;</span>
       <span class="tag">&lt;cbc:ActualDeliveryDate&gt;</span>2019-01-25<span class="tag">&lt;/cbc:ActualDeliveryDate&gt;</span>
+    <span class="tag">&lt;/cac:Delivery&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_cacshipment"><a class="anchor" href="#_cacshipment"></a><a class="link" href="#_cacshipment">cac:Shipment</a></h5>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 31. Elements added to cac:Shipment</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:GrossWeightMeasure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Weight</strong><br>
+The gross weight of the despatch as a whole.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:GrossWeightMeasure/@unitCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Weight unit of measure</strong><br>
+The unit of measure that applies to the shipment weight.<br>
+See code list <a href="https://pagero.github.io/puf-code-lists/#_puf_014_uomcode" target="_blank" rel="noopener">PUF-014-UOMCODE</a> for recommendations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:GrossVolumeMeasure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Volume</strong><br>
+The gross volume of the despatch as a whole.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:GrossVolumeMeasure/@unitCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Volume unit of measure</strong><br>
+The unit of measure that applies to the shipment volume.<br>
+See code list <a href="https://pagero.github.io/puf-code-lists/#_puf_014_uomcode" target="_blank" rel="noopener">PUF-014-UOMCODE</a> for recommendations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:GoodsItem/cbc:ChargeableWeightMeasure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Chargeable weight</strong><br>
+Chargeable weight of the shipment.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:GoodsItem/cbc:ChargeableWeightMeasure/@unitCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Chargeable weight unit of measure</strong><br>
+The unit of measure that applies to the shipment chargeable weight.<br>
+See code list <a href="https://pagero.github.io/puf-code-lists/#_puf_014_uomcode" target="_blank" rel="noopener">PUF-014-UOMCODE</a> for recommendations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Consignment/cac:OriginalDespatchTransportationService/cac:TransportEquipment/cac:MeasurementDimension[cbc:AttributeID = 'DRIVINGDISTANCE']/cbc:Measure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Distance</strong><br>
+Driving distance of the shipment.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Consignment/cac:OriginalDespatchTransportationService/cac:TransportEquipment/cac:MeasurementDimension[cbc:AttributeID = 'DRIVINGDISTANCE']/cbc:Measure/@unitCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Distance unit of measure</strong><br>
+The unit of measure that applies to the shipment driving distance.<br>
+See code list <a href="https://pagero.github.io/puf-code-lists/#_puf_014_uomcode" target="_blank" rel="noopener">PUF-014-UOMCODE</a> for recommendations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Consignment/cac:OriginalDespatchTransportationService/cac:TransportEquipment/cac:MeasurementDimension/cbc:AttributeID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Type of measurement</strong><br>
+Specifies the type being measured. Currently 'DRIVINGDISTANCE' is the only value used by Pagero.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Consignment/cbc:LoadingLengthMeasure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Loading length</strong><br>
+The total length in a means of transport or a piece of transport equipment which, given the width and height of the transport means, will accommodate all of the consignments in a single consolidation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Consignment/cbc:LoadingLengthMeasure/@unitCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Loading length unit of measure</strong><br>
+The unit of measure that applies to the Loading length.<br>
+See code list <a href="https://pagero.github.io/puf-code-lists/#_puf_014_uomcode" target="_blank" rel="noopener">PUF-014-UOMCODE</a> for recommendations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Consignment/cbc:TotalPackagesQuantity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Quantity</strong><br>
+The total number of packages associated with a Consignment.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Consignment/cbc:TotalPackagesQuantity/@unitCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Quantity unit of measure</strong><br>
+The unit of measure that applies to the consignment total packages.<br>
+See code list <a href="https://pagero.github.io/puf-code-lists/#_puf_014_uomcode" target="_blank" rel="noopener">PUF-014-UOMCODE</a> for recommendations.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>cac:InvoiceLine/cac:Delivery/cac:Shipment example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:Delivery&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+      <span class="tag">&lt;cac:Shipment&gt;</span>
+          <span class="tag">&lt;cbc:GrossWeightMeasure</span> <span class="attribute-name">unitCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">KGM</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100<span class="tag">&lt;/cbc:GrossWeightMeasure&gt;</span>
+          <span class="tag">&lt;cbc:GrossVolumeMeasure</span> <span class="attribute-name">unitCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">CMQ</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100<span class="tag">&lt;/cbc:GrossVolumeMeasure&gt;</span>
+          <span class="tag">&lt;cac:GoodsItem&gt;</span>
+              <span class="tag">&lt;cbc:ChargeableWeightMeasure</span> <span class="attribute-name">unitCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">KGM</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100<span class="tag">&lt;/cbc:ChargeableWeightMeasure&gt;</span>
+          <span class="tag">&lt;/cac:GoodsItem&gt;</span>
+          <span class="tag">&lt;cac:Consignment&gt;</span>
+              <span class="tag">&lt;cac:OriginalDespatchTransportationService&gt;</span>
+                <span class="tag">&lt;cac:TransportEquipment&gt;</span>
+                  <span class="tag">&lt;cac:MeasurementDimension&gt;</span>
+                    <span class="tag">&lt;cbc:AttributeID&gt;</span>DRIVINGDISTANCE<span class="tag">&lt;/cbc:AttributeID&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                    <span class="tag">&lt;cbc:Measure</span> <span class="attribute-name">unitCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">KMT</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100<span class="tag">&lt;/cbc:Measure&gt;</span>
+                  <span class="tag">&lt;/cac:MeasurementDimension&gt;</span>
+                <span class="tag">&lt;/cac:TransportEquipment&gt;</span>
+              <span class="tag">&lt;/cac:OriginalDespatchTransportationService&gt;</span>
+              <span class="tag">&lt;cbc:LoadingLengthMeasure</span> <span class="attribute-name">unitCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">LMT</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100<span class="tag">&lt;/cbc:LoadingLengthMeasure&gt;</span>
+              <span class="tag">&lt;cbc:TotalPackagesQuantity</span> <span class="attribute-name">unitCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EA</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100<span class="tag">&lt;/cbc:TotalPackagesQuantity&gt;</span>
+          <span class="tag">&lt;/cac:Consignment&gt;</span>
+      <span class="tag">&lt;/cac:Shipment&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:Delivery&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>'DRIVINGDISTANCE' indicates that distance is being measured. Currently 'DRIVINGDISTANCE' is the only value used by Pagero.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_cacdeliverylocation"><a class="anchor" href="#_cacdeliverylocation"></a><a class="link" href="#_cacdeliverylocation">cac:DeliveryLocation</a></h5>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 32. Elements added to cac:DeliveryLocation</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery location identifier</strong><br>
+Identifier of the delivery location.<br>
+<em>E.g. a GLN number.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:ID/@schemeID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery location scheme identifier</strong><br>
+Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery location name</strong><br>
+Delivery location name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address ID</strong><br>
+Delivery location address id.<br>
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:Postbox</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
+Delivery location address post box.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:Floor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
+Delivery location address floor.<br>
+An addressable floor of a building.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:Room</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
+Delivery location address room.<br>
+A room, suite, or apartment of a building.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:StreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
+Delivery location address street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:AdditionalStreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
+Delivery location address additional street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:BuildingName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
+Delivery location address building name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:BuildingNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
+Delivery location address building number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:Department</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
+Delivery location address department.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:PlotIdentification</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
+Delivery location address plot identification.<br>
+Additional address number. An identifier for the piece of land associated with this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:CitySubdivisionName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
+Delivery location address city subdivision name.<br>
+The name of the subdivision of the delivery city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:CityName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
+Delivery location address city name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:PostalZone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
+Delivery location address post code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:CountrySubentity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
+Delivery location address province or state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
+Delivery location address province or state code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:Region</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
+Delivery location address region.<br>
+Delivery location addressable region or group of countries.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:District</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
+Delivery location address district.<br>
+A district or borough, may be a subdivision of a city for this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cac:AddressLine/cbc:Line</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
+Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cac:Country/cbc:IdentificationCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
+Delivery location address country code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cac:Country/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
+Delivery location address country name.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>cac:InvoiceLine/cac:Delivery/cac:DeliveryLocation example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:Delivery&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
       <span class="tag">&lt;cac:DeliveryLocation&gt;</span>
           <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0088</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>0000000000000<span class="tag">&lt;/cbc:ID&gt;</span>
+          <span class="tag">&lt;cbc:Name&gt;</span>Name of the delivery location<span class="tag">&lt;/cbc:Name&gt;</span>
           <span class="tag">&lt;cac:Address&gt;</span>
               <span class="tag">&lt;cbc:StreetName&gt;</span>Delivery Street<span class="tag">&lt;/cbc:StreetName&gt;</span>
               <span class="tag">&lt;cbc:PlotIdentification&gt;</span>0000<span class="tag">&lt;/cbc:PlotIdentification&gt;</span>
@@ -5629,6 +5806,7 @@ Delivery location address country name.</p></td>
               <span class="tag">&lt;/cac:Country&gt;</span>
           <span class="tag">&lt;/cac:Address&gt;</span>
       <span class="tag">&lt;/cac:DeliveryLocation&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
     <span class="tag">&lt;/cac:Delivery&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
@@ -5637,10 +5815,188 @@ Delivery location address country name.</p></td>
 </div>
 </div>
 </div>
+<div class="sect4">
+<h5 id="_cacdespatchlocation"><a class="anchor" href="#_cacdespatchlocation"></a><a class="link" href="#_cacdespatchlocation">cac:DespatchLocation</a></h5>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 33. Elements added to cac:Despatch/cac:DespatchLocation</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch location identifier</strong><br>
+Identifier of the Despatch location.<br>
+<em>E.g. a GLN number.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:ID/@schemeID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch location scheme identifier</strong><br>
+Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Despatch location name</strong><br>
+Despatch location name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address ID</strong><br>
+Despatch location address id.<br>
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:Postbox</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
+Despatch location address post box.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:Floor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
+Despatch location address floor.<br>
+An addressable floor of a building.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:Room</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
+Despatch location address room.<br>
+A room, suite, or apartment of a building.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:StreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
+Despatch location address street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:AdditionalStreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
+Despatch location address additional street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:BuildingName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
+Despatch location address building name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:BuildingNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
+Despatch location address building number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:Department</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
+Despatch location address department.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:PlotIdentification</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
+Despatch location address plot identification.<br>
+Additional address number. An identifier for the piece of land associated with this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:CitySubdivisionName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
+Despatch location address city subdivision name.<br>
+The name of the subdivision of the Despatch city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:CityName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
+Despatch location address city name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:PostalZone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
+Despatch location address post code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:CountrySubentity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
+Despatch location address province or state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
+Despatch location address province or state code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:Region</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
+Despatch location address region.<br>
+Despatch location addressable region or group of countries.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cbc:District</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
+Despatch location address district.<br>
+A district or borough, may be a subdivision of a city for this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cac:AddressLine/cbc:Line</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
+Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cac:Country/cbc:IdentificationCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
+Despatch location address country code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Address/cac:Country/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
+Despatch location address country name.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>cac:InvoiceLine/cac:Delivery/cac:Despatch/cac:DespatchLocation example</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:Delivery&gt;</span>
+      <span class="tag">&lt;cac:Despatch&gt;</span>
+        <span class="tag">&lt;cac:DespatchLocation&gt;</span>
+            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0088</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>0000000000000<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;cbc:Name&gt;</span>Name of the despatch location<span class="tag">&lt;/cbc:Name&gt;</span>
+            <span class="tag">&lt;cac:Address&gt;</span>
+                <span class="tag">&lt;cbc:StreetName&gt;</span>Despatch Street<span class="tag">&lt;/cbc:StreetName&gt;</span>
+                <span class="tag">&lt;cbc:PlotIdentification&gt;</span>0000<span class="tag">&lt;/cbc:PlotIdentification&gt;</span>
+                <span class="tag">&lt;cbc:CitySubdivisionName&gt;</span>Despatch City Subdivision Name<span class="tag">&lt;/cbc:CitySubdivisionName&gt;</span>
+                <span class="tag">&lt;cbc:CityName&gt;</span>Despatch City<span class="tag">&lt;/cbc:CityName&gt;</span>
+                <span class="tag">&lt;cbc:PostalZone&gt;</span>12345<span class="tag">&lt;/cbc:PostalZone&gt;</span>
+                <span class="tag">&lt;cbc:CountrySubentity&gt;</span>Despatch Province<span class="tag">&lt;/cbc:CountrySubentity&gt;</span>
+                <span class="tag">&lt;cac:Country&gt;</span>
+                    <span class="tag">&lt;cbc:IdentificationCode&gt;</span>SE<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+                    <span class="tag">&lt;cbc:Name&gt;</span>Sweden<span class="tag">&lt;/cbc:Name&gt;</span>
+                <span class="tag">&lt;/cac:Country&gt;</span>
+            <span class="tag">&lt;/cac:Address&gt;</span>
+        <span class="tag">&lt;/cac:DespatchLocation&gt;</span>
+      <span class="tag">&lt;/cac:Despatch&gt;</span>
+    <span class="tag">&lt;/cac:Delivery&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
 <div class="sect3">
 <h4 id="_cacallowancecharge_2"><a class="anchor" href="#_cacallowancecharge_2"></a><a class="link" href="#_cacallowancecharge_2">cac:AllowanceCharge</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 31. Elements added in cac:AllowanceCharge</caption>
+<caption class="title">Table 34. Elements added in cac:AllowanceCharge</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5729,7 +6085,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>If multiple taxes is provided on one line, note that <code>cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal</code> must be provided for each tax.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 32. Elements added in cac:InvoiceLine/cac:TaxTotal</caption>
+<caption class="title">Table 35. Elements added in cac:InvoiceLine/cac:TaxTotal</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5912,7 +6268,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <div class="sect3">
 <h4 id="_cacwithholdingtaxtotal_2"><a class="anchor" href="#_cacwithholdingtaxtotal_2"></a><a class="link" href="#_cacwithholdingtaxtotal_2">cac:WithholdingTaxTotal</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 33. Elements added in cac:InvoiceLine/cac:WithholdingTaxTotal</caption>
+<caption class="title">Table 36. Elements added in cac:InvoiceLine/cac:WithholdingTaxTotal</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6024,7 +6380,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <div class="sect3">
 <h4 id="_cacitem"><a class="anchor" href="#_cacitem"></a><a class="link" href="#_cacitem">cac:Item</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 34. Elements added in cac:Item</caption>
+<caption class="title">Table 37. Elements added in cac:Item</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6216,7 +6572,7 @@ Lot expiry date.<br>
 <p>Below table show available fields in <code>cac:Price</code>, note that additional elements has also been added to the extension available in <a href="#_price">Price</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 35. Elements added in cac:InvoiceLine/cac:Price</caption>
+<caption class="title">Table 38. Elements added in cac:InvoiceLine/cac:Price</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6384,7 +6740,7 @@ If country specific information is available as restricted information value, th
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 36. Elements added in puf:RestrictedInformation</caption>
+<caption class="title">Table 39. Elements added in puf:RestrictedInformation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6496,7 +6852,7 @@ If country specific invoice lines is available as Restricted Information Line, t
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 37. Elements added in puf:RestrictedInformationLine</caption>
+<caption class="title">Table 40. Elements added in puf:RestrictedInformationLine</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6629,7 +6985,7 @@ Definition of this element can be found <a href="#line-extension-Classification"
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 38. Elements added in puf:Classification</caption>
+<caption class="title">Table 41. Elements added in puf:Classification</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6742,7 +7098,7 @@ Currency of the net amount related to the classification.</p></td>
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 39. Elements added in puf:BillingReferenceExtension</caption>
+<caption class="title">Table 42. Elements added in puf:BillingReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6849,7 +7205,7 @@ Please contact us to learn which languages are available.
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 40. Elements added to puf:PageroExtension/puf:LanguageCode</caption>
+<caption class="title">Table 43. Elements added to puf:PageroExtension/puf:LanguageCode</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6940,7 +7296,7 @@ Must be in lower case alpha, ISO 639-1, format.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 41. Elements added to puf:PageroExtension/puf:SupplyType</caption>
+<caption class="title">Table 44. Elements added to puf:PageroExtension/puf:SupplyType</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7033,7 +7389,7 @@ Code describing the type of supply.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 42. Elements added to puf:PageroExtension/puf:DutyStamp</caption>
+<caption class="title">Table 45. Elements added to puf:PageroExtension/puf:DutyStamp</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7132,7 +7488,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 43. Elements added to puf:PageroExtension</caption>
+<caption class="title">Table 46. Elements added to puf:PageroExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7224,7 +7580,7 @@ To indicate if supply is chargeable to IGST despite the fact that the Supplier a
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 44. Elements added to puf:PageroExtension/puf:BillingSoftware</caption>
+<caption class="title">Table 47. Elements added to puf:PageroExtension/puf:BillingSoftware</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7332,7 +7688,7 @@ Description of the software identification (free text).<br></p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 45. Elements added to puf:PageroExtension</caption>
+<caption class="title">Table 48. Elements added to puf:PageroExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7442,7 +7798,7 @@ Please contact Pagero to learn in which markets we support self-billing.
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 46. Elements added to puf:PageroExtension/puf:SelfBilled</caption>
+<caption class="title">Table 49. Elements added to puf:PageroExtension/puf:SelfBilled</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7535,7 +7891,7 @@ Can either be <strong>true</strong> or <strong>false</strong>.<br>
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 47. Elements added in puf:OrderReferenceExtension</caption>
+<caption class="title">Table 50. Elements added in puf:OrderReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7631,7 +7987,7 @@ Date of the sales order, date should be formatted yyyy-mm-dd.</p></td>
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 48. Elements added in puf:BillingReferenceExtension</caption>
+<caption class="title">Table 51. Elements added in puf:BillingReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7748,7 +8104,7 @@ ID, usually assigned by the Tax Authority, of the referenced document e.g. UUID 
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 49. Elements added in puf:ContractDocumentReferenceExtension</caption>
+<caption class="title">Table 52. Elements added in puf:ContractDocumentReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -7869,7 +8225,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 50. Elements added in puf:PartyExtension</caption>
+<caption class="title">Table 53. Elements added in puf:PartyExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8059,7 +8415,7 @@ The <code>puf:IDType</code> must be coded using the <a href="https://pagero.gith
 <p>Below table show the definition of the additional elements added to the delivery extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 51. Elements added in puf:DeliveryExtension</caption>
+<caption class="title">Table 54. Elements added in puf:DeliveryExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8165,7 +8521,7 @@ A code for the delivery method.</p></td>
 <p>Below table shows the definition of the extended element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 52. Elements added in puf:PaymentTermsExtension</caption>
+<caption class="title">Table 55. Elements added in puf:PaymentTermsExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8262,7 +8618,7 @@ Penalty text due to late payment, if the need of explicitly stating a penalty te
 <p>Below table shows the definition of the extended element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 53. Elements added in puf:PrepaidPaymentExtension</caption>
+<caption class="title">Table 56. Elements added in puf:PrepaidPaymentExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8468,7 +8824,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table lists all additional elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 54. Elements added in puf:TaxSubtotalExtension</caption>
+<caption class="title">Table 57. Elements added in puf:TaxSubtotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8695,7 +9051,7 @@ Tax chargeability per tax (see Italy section <a href="#_tax_chargeability_esigib
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 55. Elements added in puf:LegalMonetaryTotalExtension</caption>
+<caption class="title">Table 58. Elements added in puf:LegalMonetaryTotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8982,7 +9338,7 @@ If country specific information is available as restricted information value, th
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 56. Elements added in puf:RestrictedInformation</caption>
+<caption class="title">Table 59. Elements added in puf:RestrictedInformation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9091,7 +9447,7 @@ Value relevant to the assigned key.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 57. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 60. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9211,7 +9567,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 58. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 61. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9334,7 +9690,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 59. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 62. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9454,7 +9810,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 60. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 63. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9580,7 +9936,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 61. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
+<caption class="title">Table 64. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9691,7 +10047,7 @@ Date of issue of the referenced tender, date should be formatted "yyyy-mm-dd".</
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 62. Elements added to puf:LineExtension/puf:ProjectReference</caption>
+<caption class="title">Table 65. Elements added to puf:LineExtension/puf:ProjectReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9802,7 +10158,7 @@ Identification of the project reference.</p></td>
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 63. Elements added in puf:OrderLineReference</caption>
+<caption class="title">Table 66. Elements added in puf:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9916,7 +10272,7 @@ Date of the sales order, date should be formatted "yyyy-mm-dd".</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 64. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
+<caption class="title">Table 67. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10037,7 +10393,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 65. Elements added to puf:ItemExtension</caption>
+<caption class="title">Table 68. Elements added to puf:ItemExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10142,7 +10498,7 @@ Type of item, valid values are <code>GOODS</code> or <code>SERVICE</code>.</p></
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 66. Elements added to puf:PriceExtension</caption>
+<caption class="title">Table 69. Elements added to puf:PriceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -13133,7 +13489,7 @@ To specify Tax Identification Number please use 'cac:PartyTaxScheme/cbc:CompanyI
 <div class="sect2">
 <h3 id="_code_lists_for_coded_elements"><a class="anchor" href="#_code_lists_for_coded_elements"></a><a class="link" href="#_code_lists_for_coded_elements">6.1. Code lists for coded elements</a></h3>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 67. Table of the code lists used</caption>
+<caption class="title">Table 70. Table of the code lists used</caption>
 <colgroup>
 <col>
 <col>
@@ -13311,7 +13667,7 @@ cbc:ItemClassificationCode/@listID</code></p></td>
 <p>The validation artefacts are also available on <a href="https://github.com/pagero/puf-billing/tree/master/validation-artefacts" target="_blank" rel="noopener">GitHub</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 68. Schematron rules in PUF</caption>
+<caption class="title">Table 71. Schematron rules in PUF</caption>
 <colgroup>
 <col>
 <col>
@@ -13491,7 +13847,7 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 </table>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 69. Table of supported countries</caption>
+<caption class="title">Table 72. Table of supported countries</caption>
 <colgroup>
 <col>
 <col>
