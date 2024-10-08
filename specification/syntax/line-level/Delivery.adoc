@@ -15,102 +15,6 @@ See code list https://pagero.github.io/puf-code-lists/#_puf_014_uomcode[PUF-014-
 |**Delivery date** +
 Date of delivery.
 
-|`cac:DeliveryLocation/cbc:ID`
-|**Delivery location identifier** +
-Identifier of the delivery location. +
-_E.g. a GLN number._
-
-|`cac:DeliveryLocation/cbc:ID/@schemeID`
-|**Delivery location scheme identifier** +
-Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
-
-|`cac:DeliveryLocation/cac:Address/cbc:ID`
-|**Address ID** +
-Delivery location address id. +
-Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.
-
-|`cac:DeliveryLocation/cac:Address/cbc:Postbox`
-|**Postal box** +
-Delivery location address post box.
-
-|`cac:DeliveryLocation/cac:Address/cbc:Floor`
-|**Floor** +
-Delivery location address floor. +
-An addressable floor of a building.
-
-|`cac:DeliveryLocation/cac:Address/cbc:Room`
-|**Room** +
-Delivery location address room. +
-A room, suite, or apartment of a building.
-
-|`cac:DeliveryLocation/cac:Address/cbc:StreetName`
-|**Street name** +
-Delivery location address street name.
-
-|`cac:DeliveryLocation/cac:Address/cbc:AdditionalStreetName`
-|**Additional Street name** +
-Delivery location address additional street name.
-
-|`cac:DeliveryLocation/cac:Address/cbc:BuildingName`
-|**Building name** +
-Delivery location address building name.
-
-|`cac:DeliveryLocation/cac:Address/cbc:BuildingNumber`
-|**Building number** +
-Delivery location address building number.
-
-|`cac:DeliveryLocation/cac:Address/cbc:Department`
-|**Department** +
-Delivery location address department.
-
-|`cac:DeliveryLocation/cac:Address/cbc:PlotIdentification`
-|**Plot Identification** +
-Delivery location address plot identification. +
-Additional address number. An identifier for the piece of land associated with this address.
-
-|`cac:DeliveryLocation/cac:Address/cbc:CitySubdivisionName`
-|**City Subdvision Name** +
-Delivery location address city subdivision name. +
-The name of the subdivision of the delivery city, town, or village in which its address is located, such as the name of its district or borough.
-
-|`cac:DeliveryLocation/cac:Address/cbc:CityName`
-|**City name** +
-Delivery location address city name.
-
-|`cac:DeliveryLocation/cac:Address/cbc:PostalZone`
-|**Postal zone** +
-Delivery location address post code.
-
-|`cac:DeliveryLocation/cac:Address/cbc:CountrySubentity`
-|**Country subentity** +
-Delivery location address province or state.
-
-|`cac:DeliveryLocation/cac:Address/cbc:CountrySubentityCode`
-|**Country subentity code** +
-Delivery location address province or state code.
-
-|`cac:DeliveryLocation/cac:Address/cbc:Region`
-|**Region** +
-Delivery location address region. +
-Delivery location addressable region or group of countries.
-
-|`cac:DeliveryLocation/cac:Address/cbc:District`
-|**District** +
-Delivery location address district. +
-A district or borough, may be a subdivision of a city for this address.
-
-|`cac:DeliveryLocation/cac:Address/cac:AddressLine/cbc:Line`
-|**Additional address line** +
-Note that `cbc:StreetName` and `cbc:AdditionalStreetName` should be populated prior of using this element.
-
-|`cac:DeliveryLocation/cac:Address/cac:Country/cbc:IdentificationCode`
-|**Country code** +
-Delivery location address country code.
-
-|`cac:DeliveryLocation/cac:Address/cac:Country/cbc:Name`
-|**Country name** +
-Delivery location address country name.
-
 |===
 
 *Example* +
@@ -118,30 +22,24 @@ _cac:InvoiceLine/cac:Delivery example_
 [source,xml]
 ----
 <Invoice>
-  <!-- Code omitted for clarity -->
+<!-- Code omitted for clarity -->
   <cac:InvoiceLine>
   <!-- Code omitted for clarity -->
     <cac:Delivery>
       <cbc:Quantity unitCode="PCE">1</cbc:Quantity>
       <cbc:ActualDeliveryDate>2019-01-25</cbc:ActualDeliveryDate>
-      <cac:DeliveryLocation>
-          <cbc:ID schemeID="0088">0000000000000</cbc:ID>
-          <cac:Address>
-              <cbc:StreetName>Delivery Street</cbc:StreetName>
-              <cbc:PlotIdentification>0000</cbc:PlotIdentification>
-              <cbc:CitySubdivisionName>Delivery City Subdivision Name</cbc:CitySubdivisionName>
-              <cbc:CityName>Delivery City</cbc:CityName>
-              <cbc:PostalZone>12345</cbc:PostalZone>
-              <cbc:CountrySubentity>Delivery Province</cbc:CountrySubentity>
-              <cac:Country>
-                  <cbc:IdentificationCode>SE</cbc:IdentificationCode>
-                  <cbc:Name>Sweden</cbc:Name>
-              </cac:Country>
-          </cac:Address>
-      </cac:DeliveryLocation>
     </cac:Delivery>
     <!-- Code omitted for clarity -->
   </cac:InvoiceLine>
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
+
+===== cac:Shipment
+include::Delivery/Shipment.adoc[]
+
+===== cac:DeliveryLocation
+include::Delivery/DeliveryLocation.adoc[]
+
+===== cac:DespatchLocation
+include::Delivery/DespatchLocation.adoc[]

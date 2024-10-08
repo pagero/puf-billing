@@ -1,0 +1,139 @@
+.Elements added to cac:Despatch/cac:DespatchLocation
+|===
+|Path |Description
+
+|`cbc:ID`
+|**Despatch location identifier** +
+Identifier of the Despatch location. +
+_E.g. a GLN number._
+
+|`cbc:ID/@schemeID`
+|**Despatch location scheme identifier** +
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
+
+|`cbc:Name`
+|**Despatch location name** +
+Despatch location name.
+
+|`cac:Address/cbc:ID`
+|**Address ID** +
+Despatch location address id. +
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.
+
+|`cac:Address/cbc:Postbox`
+|**Postal box** +
+Despatch location address post box.
+
+|`cac:Address/cbc:Floor`
+|**Floor** +
+Despatch location address floor. +
+An addressable floor of a building.
+
+|`cac:Address/cbc:Room`
+|**Room** +
+Despatch location address room. +
+A room, suite, or apartment of a building.
+
+|`cac:Address/cbc:StreetName`
+|**Street name** +
+Despatch location address street name.
+
+|`cac:Address/cbc:AdditionalStreetName`
+|**Additional Street name** +
+Despatch location address additional street name.
+
+|`cac:Address/cbc:BuildingName`
+|**Building name** +
+Despatch location address building name.
+
+|`cac:Address/cbc:BuildingNumber`
+|**Building number** +
+Despatch location address building number.
+
+|`cac:Address/cbc:Department`
+|**Department** +
+Despatch location address department.
+
+|`cac:Address/cbc:PlotIdentification`
+|**Plot Identification** +
+Despatch location address plot identification. +
+Additional address number. An identifier for the piece of land associated with this address.
+
+|`cac:Address/cbc:CitySubdivisionName`
+|**City Subdvision Name** +
+Despatch location address city subdivision name. +
+The name of the subdivision of the Despatch city, town, or village in which its address is located, such as the name of its district or borough.
+
+|`cac:Address/cbc:CityName`
+|**City name** +
+Despatch location address city name.
+
+|`cac:Address/cbc:PostalZone`
+|**Postal zone** +
+Despatch location address post code.
+
+|`cac:Address/cbc:CountrySubentity`
+|**Country subentity** +
+Despatch location address province or state.
+
+|`cac:Address/cbc:CountrySubentityCode`
+|**Country subentity code** +
+Despatch location address province or state code.
+
+|`cac:Address/cbc:Region`
+|**Region** +
+Despatch location address region. +
+Despatch location addressable region or group of countries.
+
+|`cac:Address/cbc:District`
+|**District** +
+Despatch location address district. +
+A district or borough, may be a subdivision of a city for this address.
+
+|`cac:Address/cac:AddressLine/cbc:Line`
+|**Additional address line** +
+Note that `cbc:StreetName` and `cbc:AdditionalStreetName` should be populated prior of using this element.
+
+|`cac:Address/cac:Country/cbc:IdentificationCode`
+|**Country code** +
+Despatch location address country code.
+
+|`cac:Address/cac:Country/cbc:Name`
+|**Country name** +
+Despatch location address country name.
+
+|===
+
+*Example* +
+_cac:InvoiceLine/cac:Delivery/cac:Despatch/cac:DespatchLocation example_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+    <cac:Delivery>
+      <cac:Despatch>
+        <cac:DespatchLocation>
+            <cbc:ID schemeID="0088">0000000000000</cbc:ID>
+            <cbc:Name>Name of the despatch location</cbc:Name>
+            <cac:Address>
+                <cbc:StreetName>Despatch Street</cbc:StreetName>
+                <cbc:PlotIdentification>0000</cbc:PlotIdentification>
+                <cbc:CitySubdivisionName>Despatch City Subdivision Name</cbc:CitySubdivisionName>
+                <cbc:CityName>Despatch City</cbc:CityName>
+                <cbc:PostalZone>12345</cbc:PostalZone>
+                <cbc:CountrySubentity>Despatch Province</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                    <cbc:Name>Sweden</cbc:Name>
+                </cac:Country>
+            </cac:Address>
+        </cac:DespatchLocation>
+      </cac:Despatch>
+    </cac:Delivery>
+    <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
