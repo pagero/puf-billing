@@ -29,28 +29,28 @@
     <cbc:InvoiceTypeCode name="IADE">380</cbc:InvoiceTypeCode>
     <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>TRY</cbc:DocumentCurrencyCode>
-    <!-- BG-4 Seller -->
+    <!-- BG-4 Sender -->
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <!-- BT-28 Seller Trading Name -->
+            <!-- BT-28 Sender Trading Name -->
             <cac:PartyName>
-                <cbc:Name>Seller Trading Name</cbc:Name>
+                <cbc:Name>Sender Trading Name</cbc:Name>
             </cac:PartyName>
             <cac:PostalAddress>
-                <!--BT-35 Seller address street-->
+                <!--BT-35 Sender address street-->
                 <cbc:StreetName>Street Name</cbc:StreetName>
-                <!-- BT-37 Seller address City -->
+                <!-- BT-37 Sender address City -->
                 <cbc:CityName>City</cbc:CityName>
-                <!-- BT-38 Seller address postal code -->
+                <!-- BT-38 Sender address postal code -->
                 <cbc:PostalZone>00000</cbc:PostalZone>
                 <cac:Country>
-                    <!-- BT-40 Seller address country code -->
+                    <!-- BT-40 Sender address country code -->
                     <cbc:IdentificationCode>TR</cbc:IdentificationCode>
                     <cbc:Name>Türkiye</cbc:Name>
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
-                <!-- BT-31 Seller Vat Number -->
+                <!-- BT-31 Sender Vat Number -->
                 <cbc:CompanyID>1234567890</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
@@ -58,30 +58,30 @@
             </cac:PartyTaxScheme>
         </cac:Party>
     </cac:AccountingSupplierParty>
-    <!-- BG-7 Buyer -->
+    <!-- BG-7 Receiver -->
     <cac:AccountingCustomerParty>
         <!-- Customer number, not a requirement in Turkey but can be useful to route document to correct recipient in pageroonline -->
         <cbc:SupplierAssignedAccountID>Customer Number</cbc:SupplierAssignedAccountID>
         <cac:Party>
-            <!-- BT-45 Buyer Trading Name -->
+            <!-- BT-45 Receiver Trading Name -->
             <cac:PartyName>
-                <cbc:Name>Buyer Trading Name</cbc:Name>
+                <cbc:Name>Receiver Trading Name</cbc:Name>
             </cac:PartyName>
             <cac:PostalAddress>
-                <!-- BT-50 Buyer address street-->
+                <!-- BT-50 Receiver address street-->
                 <cbc:StreetName>Street Name</cbc:StreetName>
-                <!-- BT-52 Buyer address City -->
+                <!-- BT-52 Receiver address City -->
                 <cbc:CityName>City</cbc:CityName>
-                <!-- BT-53 Buyer address postal code -->
+                <!-- BT-53 Receiver address postal code -->
                 <cbc:PostalZone>00000</cbc:PostalZone>
                 <cac:Country>
-                    <!-- BT-55 Buyer address country code -->
+                    <!-- BT-55 Receiver address country code -->
                     <cbc:IdentificationCode>TR</cbc:IdentificationCode>
                     <cbc:Name>Türkiye</cbc:Name>
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
-                <!-- BT-48 Buyer Vat Number if applicable -->
+                <!-- BT-48 Receiver Vat Number if applicable -->
                 <cbc:CompanyID>9876543210</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
