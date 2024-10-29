@@ -63,7 +63,7 @@
                                 <puf:RegistrationData>
                                     <cbc:ID>CPT-CCN-W-211111-KL-000002</cbc:ID>
                                     <puf:IDType listID="PUF-001-REGISTRATIONDATA">MY:CertEx</puf:IDType>
-                                </puf:RegistrationData>                                
+                                </puf:RegistrationData>
                             </puf:PartyExtension>
                         </puf:PageroExtension>
                     </ext:ExtensionContent>
@@ -259,6 +259,7 @@
         <cbc:SourceCurrencyCode>USD</cbc:SourceCurrencyCode>
         <cbc:TargetCurrencyCode>MYR</cbc:TargetCurrencyCode>
         <cbc:CalculationRate>5.00</cbc:CalculationRate>
+        <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
     </cac:TaxExchangeRate>
     <cac:TaxTotal>
         <!-- BT-110 Invoice total tax amount. Currency in attribute currencyID (IBT-005) -->
