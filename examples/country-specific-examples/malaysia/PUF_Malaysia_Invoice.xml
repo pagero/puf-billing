@@ -61,7 +61,7 @@
                                 <puf:RegistrationData>
                                     <cbc:ID>CPT-CCN-W-211111-KL-000002</cbc:ID>
                                     <puf:IDType listID="PUF-001-REGISTRATIONDATA">MY:CertEx</puf:IDType>
-                                </puf:RegistrationData>                                
+                                </puf:RegistrationData>
                             </puf:PartyExtension>
                         </puf:PageroExtension>
                     </ext:ExtensionContent>
@@ -241,9 +241,9 @@
                             <cac:DocumentReference>
                                 <!-- IBT-179 Prepayment Reference Number-->
                                 <cbc:ID>46531</cbc:ID>
-                                <!-- IBT-181 Prepayment Date -->
+                                <!-- Prepayment invoice issue date -->
                                 <cbc:IssueDate>2024-01-01</cbc:IssueDate>
-                                <!-- N/A Prepayment Time -->
+                                <!-- Prepayment invoice issue time -->
                                 <cbc:IssueTime>12:28:17</cbc:IssueTime>
                             </cac:DocumentReference>
                         </puf:PrepaidPaymentExtension>
@@ -252,6 +252,8 @@
             </ext:UBLExtension>
         </ext:UBLExtensions>
         <cbc:PaidAmount currencyID="MYR">5.00</cbc:PaidAmount>
+        <!-- IBT-181 Prepayment Date -->
+        <cbc:PaidDate>2024-01-10</cbc:PaidDate>
     </cac:PrepaidPayment>
     <cac:TaxTotal>
         <!-- BT-110 Invoice total tax amount. Currency in attribute currencyID (IBT-005) -->

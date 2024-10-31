@@ -243,9 +243,9 @@
                             <cac:DocumentReference>
                                 <!-- IBT-179 Prepayment Reference Number-->
                                 <cbc:ID>46531</cbc:ID>
-                                <!-- IBT-181 Prepayment Date -->
+                                <!-- Prepayment invoice issue date -->
                                 <cbc:IssueDate>2024-01-01</cbc:IssueDate>
-                                <!-- N/A Prepayment Time -->
+                                <!-- Prepayment invoice issue time -->
                                 <cbc:IssueTime>12:28:17</cbc:IssueTime>
                             </cac:DocumentReference>
                         </puf:PrepaidPaymentExtension>
@@ -254,6 +254,8 @@
             </ext:UBLExtension>
         </ext:UBLExtensions>
         <cbc:PaidAmount currencyID="USD">5.00</cbc:PaidAmount>
+        <!-- IBT-181 Prepayment Date -->
+        <cbc:PaidDate>2024-01-10</cbc:PaidDate>
     </cac:PrepaidPayment>
     <cac:TaxExchangeRate>
         <cbc:SourceCurrencyCode>USD</cbc:SourceCurrencyCode>
