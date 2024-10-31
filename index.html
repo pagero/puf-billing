@@ -4349,6 +4349,16 @@ The amount of the payment in the invoice currency.</p></td>
 Currency applied for <code>cbc:Paid amount</code>, must be the same as <code>cbc:DocumentCurrencyCode</code>.<br>
 For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_004_currencycode" target="_blank" rel="noopener">PUF-004-CURRENCYCODE</a>.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:ReceivedDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Received date</strong><br>
+The date when the prepaid amount was received.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:PaidDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Paid date</strong><br>
+The date on which this payment was made.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -4361,6 +4371,8 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;cac:PrepaidPayment&gt;</span>
     <span class="tag">&lt;cbc:PaidAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>10.00<span class="tag">&lt;/cbc:PaidAmount&gt;</span>
+    <span class="tag">&lt;cbc:ReceivedDate&gt;</span>2024-01-14<span class="tag">&lt;/cbc:ReceivedDate&gt;</span>
+    <span class="tag">&lt;cbc:PaidDate&gt;</span>2024-01-10<span class="tag">&lt;/cbc:PaidDate&gt;</span>
   <span class="tag">&lt;/cac:PrepaidPayment&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
