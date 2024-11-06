@@ -18,6 +18,10 @@ include::document-level/ProfileID.adoc[]
 
 include::document-level/ID.adoc[]
 
+==== cbc:UUID
+
+include::document-level/UUID.adoc[]
+
 ==== cbc:IssueDate
 
 include::document-level/IssueDate.adoc[]
