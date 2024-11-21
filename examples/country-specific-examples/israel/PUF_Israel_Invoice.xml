@@ -87,7 +87,7 @@
             </cac:PartyLegalEntity>
             <!-- SELLER CONTACT -->
             <cac:Contact>
-                <!-- Seller contact point -->
+                <!-- Seller contact point. Also referred to as invoice issuer/sender name -->
                 <cbc:Name>John Doe</cbc:Name>
                 <!-- Seller contact telephone number -->
                 <cbc:Telephone>222 121212</cbc:Telephone>
