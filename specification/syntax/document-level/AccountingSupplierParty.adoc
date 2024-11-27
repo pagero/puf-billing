@@ -12,6 +12,10 @@ Supplier ID, assigned by the buyer.
 |**Extension Content** +
 Extension is added to provide additional information in the `cac:Party` element, the information available can be found <<_party, here>>.
 
+|`cac:Party/cbc:WebsiteURI`
+|**Seller website** +
+The Uniform Resource Identifier (URI) that identifies this party's web site; i.e., the web site's Uniform Resource Locator (URL).
+
 |`cac:Party/cbc:EndpointID`
 |**Electronic Identifier** +
 Seller's electronic address. +
@@ -206,6 +210,7 @@ _cac:AccountingSupplierParty example_
   <cac:AccountingSupplierParty>
       <cbc:CustomerAssignedAccountID>SupplierId</cbc:CustomerAssignedAccountID>
       <cac:Party>
+          <cbc:WebsiteURI>www.pagero.com</cbc:WebsiteURI>
           <cbc:EndpointID schemeID="0088">7300010000001</cbc:EndpointID>
           <cac:PartyIdentification>
               <cbc:ID schemeID="0088">7300010000001</cbc:ID>
