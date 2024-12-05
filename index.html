@@ -148,6 +148,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
 #header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+details>summary:first-of-type{cursor:pointer;display:list-item;outline:none;margin-bottom:.75em}
 #header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -2933,6 +2934,216 @@ First name of person. Should only be used if buyer is a private individual.</p><
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person surname</strong><br>
 Surname of person. Should only be used if buyer is a private individual.</p></td>
 </tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>AgentParty </strong><br>
+A party who acts as an agent for this party.</p></td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary class="title"><strong>Click here for a complete list of fields for the agent party.</strong></summary>
+<div class="content">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/ext:UBLExtensions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
+Extension is added to set the type of the AgentParty,
+Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_021_rolecode" target="_blank" rel="noopener">PUF-021-ROLECODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:Postbox</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
+Agent&#8217;s postal address post box.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:Floor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
+Agent&#8217;s postal address floor.<br>
+An addressable floor of a building.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:Room</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
+Agent&#8217;s postal address room.<br>
+A room, suite, or apartment of a building.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:StreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
+Agent&#8217;s postal address street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:AdditionalStreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
+Agent&#8217;s postal address additional street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:BuildingName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
+Agent&#8217;s postal address building name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:BuildingNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
+Agent&#8217;s postal address building number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:Department</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
+Agent&#8217;s postal address department.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:PlotIdentification</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
+Agent&#8217;s postal address plot identification.<br>
+Additional address number. An identifier for the piece of land associated with this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:CitySubdivisionName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
+Agent&#8217;s postal address city subdivision name.<br>
+The name of the subdivision of the Buyer city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:CityName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
+Agent&#8217;s postal address city name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:PostalZone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
+Agent&#8217;s postal address post code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:CountrySubentity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
+Agent&#8217;s postal address province or state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
+Agent&#8217;s postal address province or state code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:Region</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
+Agent&#8217;s postal address region.<br>
+Agent&#8217;s addressable region or group of countries.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:District</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
+Agent&#8217;s postal address district.<br>
+A district or borough, may be a subdivision of a city for this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
+Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
+Agent&#8217;s postal address country code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cac:Country/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
+Agent&#8217;s postal address country name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyTaxScheme/cbc:CompanyID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company identifier</strong><br>
+Agent&#8217;s tax registration number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme identifier</strong><br>
+Agent&#8217;s tax registration number tax scheme Identifier.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyLegalEntity/cbc:RegistrationName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registration name</strong><br>
+Agent&#8217;s formal name or company name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyLegalEntity/cbc:CompanyID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company identifier</strong><br>
+Agent&#8217;s legal registration identifier.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyLegalEntity/cbc:CompanyID/@schemeID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company scheme identifier</strong><br>
+Agent&#8217;s legal registration identifier scheme identifier.<br>
+Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyLegalEntity/cbc:CompanyLegalForm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company legal form</strong><br>
+Relevant legal information regarding the Agent.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registered tax office</strong><br>
+Agent&#8217;s registered tax office.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:Contact/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact name</strong><br>
+Name of contact person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:Contact/cbc:Telephone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact telephone</strong><br>
+Phone number of contact person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:Contact/cbc:ElectronicMail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact E-mail</strong><br>
+E-mail of contact person.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:AccountingContact/cbc:Name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Accounting name</strong><br>
