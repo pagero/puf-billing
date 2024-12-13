@@ -1,0 +1,24 @@
+This section contains information about requirements and other information concerning invoicing in Greece.
+
+==== myDATA xml file as attachment
+
+In PUF you can attach the myDATA-xml reporting file as a separate attachment to the business document.
+
+*Example* +
+_Example where myDATA-xml reporting file is provided within the business document_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>12345678</cbc:ID>
+        <cbc:DocumentDescription>##InvoicesDoc##</cbc:DocumentDescription><1>
+        <cac:Attachment>
+            <cbc:EmbeddedDocumentBinaryObject mimeCode="text/xml" filename="the filename">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPFRFU1Q+CiAgICA8U09NRVZBTFVFPlRFU1Q8L1NPTUVWQUxVRT4KPC9URVNUPgo=</cbc:EmbeddedDocumentBinaryObject><2>
+        </cac:Attachment>
+    </cac:AdditionalDocumentReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> DocumentDescription must be +##InvoicesDoc+## to indicate that attached file is the myDATA file.
+<2> myDATA reporting file encoded in base64.
