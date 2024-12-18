@@ -223,13 +223,13 @@
                     <cbc:RegistrationName>Agent party name</cbc:RegistrationName>
                 </cac:PartyLegalEntity>
                 <!-- Agent party Contact -->
-                <cac:Contact> 
+                <cac:Contact>
                     <!-- Concat  Nome Persona Fisica - FPA 1.4.4.3 'Nome' and 
                          Cognome Persona Fisica - FPA 1.4.4.4 'Cognome'
                          The name will be placed in Nome
                     -->
                     <cbc:Name>FirstName, FamilyName</cbc:Name>
-                </cac:Contact>               
+                </cac:Contact>
             </cac:AgentParty>
         </cac:Party>
     </cac:AccountingCustomerParty>
@@ -282,23 +282,23 @@
             D = VAT unrealized
             S = Splitting of payments
         -->
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
-                <ext:ExtensionContent>
-                    <puf:PageroExtension>
-                        <puf:TaxSubtotalExtension>
-                            <puf:TaxChargeability>
-                                <cbc:TaxTypeCode>I</cbc:TaxTypeCode>
-                            </puf:TaxChargeability>
-                        </puf:TaxSubtotalExtension>
-                    </puf:PageroExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
         <!-- BT-110 Invoice total VAT amount. Currency in attribute currencyID (BT-5) -->
         <cbc:TaxAmount currencyID="EUR">56.07</cbc:TaxAmount>
         <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <puf:TaxChargeability>
+                                    <cbc:TaxTypeCode>I</cbc:TaxTypeCode>
+                                </puf:TaxChargeability>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
             <!-- BT-116 Sum of all taxable amounts subject to a specific VAT category code and VAT category rate. Currency in attribute currencyID (BT-5) -->
             <cbc:TaxableAmount currencyID="EUR">267</cbc:TaxableAmount>
             <!--  BT-117. The total VAT amount for a given VAT category. Currency in attribute currencyID (BT-5) -->
