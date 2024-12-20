@@ -246,4 +246,9 @@ Only support for invoice and credit.
 |*No*
 |
 
+|Vietnam
+|*Yes*
+|*Yes*
+|Only support for 'new' Invoice. See <<_limitations,limitations>> for more information.
+
 |===

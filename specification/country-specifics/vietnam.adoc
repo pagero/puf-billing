@@ -1,0 +1,64 @@
+This section contains information about requirements and other information concerning invoicing in Vietnam.
+
+==== Invoice, Serial and Sequence Number
+In Vietnam, each e-invoice is assigned a unique serial number, which serves as its identifier. Additionally, a sequence number is used, which increments with each new invoice issued. +
+An internally generated invoice number from an ERP system can be included in the 'cac:BillingReference' segment. +
+For enhanced search functionality in Pagero Online, it is recommended to use a combination of the Invoice Type, Serial Number, and Sequence Number in the https://pagero.github.io/puf-billing/#_cbcid[cac:ID] field.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:InvoiceSeries>
+                        <cbc:ID>X24ABC</cbc:ID><!--1-->
+                    </puf:InvoiceSeries>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>SequenceNo</puf:Key>
+                        <puf:Value>12345678</puf:Value><!--2-->
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:ID>01GTKT-X24ABC-12345678</cbc:ID><!--3-->
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>11223344</cbc:ID><!--4-->
+        </cac:InvoiceDocumentReference>
+    </<cac:BillingReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Serial Number
+<2> Sequence Number
+<3> Combined Invoice Number
+<4> ERP generated Invoice Number
+
+==== Invoice Type Code
+In addition to Invoice Type Code the 'name' attribute is used to provide the Vietnameese invoice type.
+
+*Example*
+_Invoice Type Code_
+[source,xml]
+----
+<cbc:InvoiceTypeCode name="01GTKT">380</cbc:InvoiceTypeCode>
+----
+
+==== Limitations
+ - There is no support for charges in the Vietnam e-invoice format.
+ - Credit Note is not supported in Pagero solution.
+ - Cancellation is not supported in Pagero solution.
+ - Adjustments is not supported in Pagero solution.

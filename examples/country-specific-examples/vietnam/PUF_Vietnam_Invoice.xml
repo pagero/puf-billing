@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+    <!-- Values in invoice are examples values only. -->    
+    
+    <ext:UBLExtensions>
+        <!-- Invoice Serial Number -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:InvoiceSeries>
+                        <cbc:ID>X24ABC</cbc:ID>
+                    </puf:InvoiceSeries>  
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- Restricted Information is used for additional information -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <!-- 
+                         Sequence number of the invoice. Not an ERP document number.
+                         Sequence number must be 8 characters if the supplier is sending for Circular 78.
+                    -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>SequenceNo</puf:Key>
+                        <puf:Value>12345678</puf:Value>
+                    </puf:RestrictedInformation>
+                    <!-- 
+                         FPT auto number. Indicates if FPT should auto generate the invoice number.
+                         1 = No, 2 = Yes
+                         Please note that SequenceNo should not be provided if FPT_autoNumber is set to 2.
+                    -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>FPT_autoNumber</puf:Key>
+                        <puf:Value>1</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>        
+    </ext:UBLExtensions>    
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- Invoice Number -->
+    <!-- Please note that invoice number is only informative and correct values should be sent in Serial and SequenceNo -->
+    <cbc:ID>VAT01-X24ABC-12345678</cbc:ID>
+    <!-- Invoice Issue Date  -->
+    <cbc:IssueDate>2024-02-01</cbc:IssueDate>
+    <!-- Invoice Issue Time  -->
+    <cbc:IssueTime>21:32:52</cbc:IssueTime>
+    <!-- Payment Due Date -->
+    <cbc:DueDate>2024-03-01</cbc:DueDate>
+    <!-- Invoice type  -->
+    <cbc:InvoiceTypeCode name="01GTKT">380</cbc:InvoiceTypeCode>
+    <!-- Document level freetext/Note  -->
+    <cbc:Note>Header Text 1</cbc:Note>
+    <!-- Document currency code -->
+    <cbc:DocumentCurrencyCode>VND</cbc:DocumentCurrencyCode>
+    <!-- Buyer accounting reference -->
+    <cbc:AccountingCost>Accounting Cost</cbc:AccountingCost>
+    <!-- Buyer reference -->
+    <cbc:BuyerReference>Buyer Reference</cbc:BuyerReference>
+    <!-- Purchase order reference-->
+    <cac:OrderReference>
+        <cbc:ID>PO Number</cbc:ID>
+    </cac:OrderReference>
+    <!-- Delivery Note Number -->
+    <cac:AdditionalDocumentReference>
+        <cbc:ID schemeID = "DQ">Delivery Note Number</cbc:ID>
+    </cac:AdditionalDocumentReference>
+    <!-- Seller Information  -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- Seller  Name -->
+            <cac:PartyName>
+                <cbc:Name>Seller Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- Street name-->
+                <cbc:StreetName>Street name</cbc:StreetName>
+                <!-- City Name -->
+                <cbc:CityName>Hanoi</cbc:CityName>
+                <!-- Postal code -->
+                <cbc:PostalZone>50480</cbc:PostalZone>
+                <cac:Country>
+                    <!-- Country code -->
+                    <cbc:IdentificationCode>VN</cbc:IdentificationCode>
+                    <!-- Country name-->
+                    <cbc:Name>Viet nam</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- Tax Identification Number -->
+                <cbc:CompanyID>1234567890</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>TAX</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- Seller Registration Name -->
+                <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <!-- Seller contact telephone -->
+                <cbc:Telephone>123123123</cbc:Telephone>
+                <!-- Seller contact email -->
+                <cbc:ElectronicMail>test@test.vn</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- Buyer -->
+    <cac:AccountingCustomerParty>
+        <!-- Unique identifier of the recipient (customer number)-->
+        <cbc:SupplierAssignedAccountID>18894</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Buyer trading name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- Street name-->
+                <cbc:StreetName>Street name</cbc:StreetName>
+                <!-- City Name -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- Postal code -->
+                <cbc:PostalZone>00000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- Country code -->
+                    <cbc:IdentificationCode>VN</cbc:IdentificationCode>
+                    <!-- Country name-->
+                    <cbc:Name>Viet Nam</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- Tax Identification Number -->
+                <cbc:CompanyID>1234567890</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>TAX</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- Buyer Name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Buyer name</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <!-- buyer contact telephone -->
+                <cbc:Telephone>123123123</cbc:Telephone>
+                <!-- buyer contact email -->
+                <cbc:ElectronicMail>test@test.vn</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    
+    <!-- Delivery Information -->
+    <cac:Delivery>
+        <!-- Actual Delivery Date-->
+        <cbc:ActualDeliveryDate>2024-01-01</cbc:ActualDeliveryDate>
+        <cac:DeliveryLocation>
+            <!-- Deliver to location identifier -->
+            <cbc:ID schemeID="0088">7300010000001</cbc:ID>
+            <cac:Address>
+                <!-- Deliver to street name -->
+                <cbc:StreetName>Delivery Street</cbc:StreetName>
+                <!-- Deliver to city -->
+                <cbc:CityName>Delivery City</cbc:CityName>
+                <!-- Deliver to post code -->
+                <cbc:PostalZone>55555</cbc:PostalZone>
+                <cac:Country>
+                    <!-- Deliver to country code -->
+                    <cbc:IdentificationCode>VN</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+        <cac:DeliveryParty>
+            <!-- Delivery party Name -->
+            <cac:PartyName>
+                <cbc:Name>Delivery party name</cbc:Name>
+            </cac:PartyName>
+        </cac:DeliveryParty>
+    </cac:Delivery>
+    <cac:PaymentMeans>
+        <!-- Payment means code. See online specification for available codes -->
+        <cbc:PaymentMeansCode>CK</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- A unique identifier of the financial payment account -->
+            <cbc:ID>1234567890123</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- A unique identifier of the financial payment account -->
+                <cbc:ID>SWIFTCODE</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <cac:PaymentTerms>
+        <!-- Payment terms -->
+        <cbc:Note>Net 30 days</cbc:Note>
+    </cac:PaymentTerms>
+    <cac:TaxTotal>
+        <!-- Invoice total tax amount. Currency in attribute currencyID -->
+        <cbc:TaxAmount currencyID="VND">26.20</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- Sum of all taxable amounts subject to a specific tax category code and tax category rate. Currency in attribute currencyID -->
+            <cbc:TaxableAmount currencyID="VND">262.00</cbc:TaxableAmount>
+            <!-- The total VAT amount for a given tax category. Currency in attribute currencyID -->
+            <cbc:TaxAmount currencyID="VND">26.20</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- Tax category code. -->
+                <cbc:ID>S</cbc:ID>
+                <!-- Tax category rate-->
+                <cbc:Percent>10</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <!-- Sum of all taxable amounts subject to a specific tax category code and tax category rate. Currency in attribute currencyID -->
+            <cbc:TaxableAmount currencyID="VND">300.00</cbc:TaxableAmount>
+            <!-- The total VAT amount for a given VAT category. Currency in attribute currencyID -->
+            <cbc:TaxAmount currencyID="VND">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- tax category code. -->
+                <cbc:ID>Z</cbc:ID>
+                <!-- tax category rate-->
+                <cbc:Percent>0</cbc:Percent>
+                <!-- Tax exemption reason text-->
+                <cbc:TaxExemptionReason>Tax exemption reason description</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <!-- Sum of Invoice line net amount, attribute currencyID -->
+        <cbc:LineExtensionAmount currencyID="VND">562.00</cbc:LineExtensionAmount>
+        <!-- Invoice total amount without tax. Currency in attribute currencyID -->
+        <cbc:TaxExclusiveAmount currencyID="VND">562.00</cbc:TaxExclusiveAmount>
+        <!-- Invoice total amount with VAT. Currency in attribute currencyID -->
+        <cbc:TaxInclusiveAmount currencyID="VND">588.20</cbc:TaxInclusiveAmount>
+        <!-- Sum of allowances on document level-->
+        <cbc:AllowanceTotalAmount currencyID="VND">0.00</cbc:AllowanceTotalAmount>
+        <!-- Sum of charges on document level-->
+        <cbc:ChargeTotalAmount currencyID="VND">0.00</cbc:ChargeTotalAmount>
+        <!-- Amount due for payment. Currency in attribute currencyID -->
+        <cbc:PayableAmount currencyID="VND">583.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <!-- Subtotal -Amount of each individual item / service within the invoice, excluding any taxes, charges or discounts -->
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:LineExclAllowanceChargeAmount currencyID="VND">262.00</puf:LineExclAllowanceChargeAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- Invoiced Quantity. unit of measure in attribute unitCode -->
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <!-- Invoice line net amount. Currency in attribute currencyID -->
+        <cbc:LineExtensionAmount currencyID="VND">262.00</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+            <!-- Invoiced item tax amount. Currency in attribute currencyID -->
+            <cbc:TaxAmount currencyID="VND">26.20</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <!-- Invoiced item tax exemption amount. Currency in attribute currencyID -->
+                <cbc:TaxableAmount currencyID="VND">262.00</cbc:TaxableAmount>
+                <!-- Invoiced item tax amount. Currency in attribute currencyID -->
+                <cbc:TaxAmount currencyID="VND">26.20</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <!-- VAT category code. -->
+                    <cbc:ID>S</cbc:ID>
+                    <!-- VAT category rate-->
+                    <cbc:Percent>10</cbc:Percent>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
+        <cac:Item>
+            <!-- Item Description -->
+            <cbc:Description>Item description</cbc:Description>
+            <!-- Item Name-->
+            <cbc:Name>Item name</cbc:Name>
+        </cac:Item>
+        <cac:Price>
+            <!-- Item net price. Currency in attribute currencyID -->
+            <cbc:PriceAmount currencyID="VND">262.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <!-- Subtotal -Amount of each individual item / service within the invoice, excluding any taxes, charges or discounts -->
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:LineExclAllowanceChargeAmount currencyID="VND">262.00</puf:LineExclAllowanceChargeAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+        <!-- Invoiced Quantity. unit of measure in attribute unitCode -->
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <!-- Invoice line net amount. Currency in attribute currencyID -->
+        <cbc:LineExtensionAmount currencyID="VND">300.00</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+            <!-- Invoiced item tax amount. Currency in attribute currencyID -->
+            <cbc:TaxAmount currencyID="VND">0.00</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <!-- Invoiced item tax exemption amount. Currency in attribute currencyID -->
+                <cbc:TaxableAmount currencyID="VND">300.00</cbc:TaxableAmount>
+                <!-- Invoiced item tax amount. Currency in attribute currencyID -->
+                <cbc:TaxAmount currencyID="VND">0.00</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <!-- VAT category code. -->
+                    <cbc:ID>Z</cbc:ID>
+                    <!-- VAT category rate-->
+                    <cbc:Percent>0</cbc:Percent>
+                    <cbc:TaxExemptionReason>Tax exemption reason description</cbc:TaxExemptionReason>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
+        <cac:Item>
+            <!-- Item Description -->
+            <cbc:Description>Item description</cbc:Description>
+            <!-- Item Name-->
+            <cbc:Name>Item name</cbc:Name>
+        </cac:Item>
+        <cac:Price>
+            <!-- Item net price. Currency in attribute currencyID -->
+            <cbc:PriceAmount currencyID="VND">300.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
