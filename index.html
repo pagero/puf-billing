@@ -791,6 +791,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_party_identification_6">5.16.2. Party identification</a></li>
 </ul>
 </li>
+<li><a href="#_vietnam">5.17. Vietnam</a>
+<ul class="sectlevel3">
+<li><a href="#_invoice_serial_and_sequence_number">5.17.1. Invoice, Serial and Sequence Number</a></li>
+<li><a href="#_invoice_type_code_2">5.17.2. Invoice Type Code</a></li>
+<li><a href="#_limitations">5.17.3. Limitations</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_code_lists">6. Code lists</a>
@@ -13780,6 +13787,114 @@ To specify Tax Identification Number please use 'cac:PartyTaxScheme/cbc:CompanyI
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_vietnam"><a class="anchor" href="#_vietnam"></a><a class="link" href="#_vietnam">5.17. Vietnam</a></h3>
+<div class="paragraph">
+<p>This section contains information about requirements and other information concerning invoicing in Vietnam.</p>
+</div>
+<div class="sect3">
+<h4 id="_invoice_serial_and_sequence_number"><a class="anchor" href="#_invoice_serial_and_sequence_number"></a><a class="link" href="#_invoice_serial_and_sequence_number">5.17.1. Invoice, Serial and Sequence Number</a></h4>
+<div class="paragraph">
+<p>In Vietnam, each e-invoice is assigned a unique serial number, which serves as its identifier. Additionally, a sequence number is used, which increments with each new invoice issued.<br>
+An internally generated invoice number from an ERP system can be included in the 'cac:BillingReference' segment.<br>
+For enhanced search functionality in Pagero Online, it is recommended to use a combination of the Invoice Type, Serial Number, and Sequence Number in the <a href="https://pagero.github.io/puf-billing/#_cbcid">cac:ID</a> field.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:InvoiceSeries&gt;</span>
+                        <span class="tag">&lt;cbc:ID&gt;</span>X24ABC<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+                    <span class="tag">&lt;/puf:InvoiceSeries&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                        <span class="tag">&lt;puf:Key&gt;</span>SequenceNo<span class="tag">&lt;/puf:Key&gt;</span>
+                        <span class="tag">&lt;puf:Value&gt;</span>12345678<span class="tag">&lt;/puf:Value&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+                    <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;cbc:ID&gt;</span>01GTKT-X24ABC-12345678<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:BillingReference&gt;</span>
+        <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
+            <span class="tag">&lt;cbc:ID&gt;</span>11223344<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="4"></i><b>(4)</b>
+        <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
+    <span class="tag">&lt;/</span><span class="tag">&lt;cac:BillingReference&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Serial Number</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Sequence Number</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Combined Invoice Number</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>ERP generated Invoice Number</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_invoice_type_code_2"><a class="anchor" href="#_invoice_type_code_2"></a><a class="link" href="#_invoice_type_code_2">5.17.2. Invoice Type Code</a></h4>
+<div class="paragraph">
+<p>In addition to Invoice Type Code the 'name' attribute is used to provide the Vietnameese invoice type.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong>
+<em>Invoice Type Code</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">01GTKT</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_limitations"><a class="anchor" href="#_limitations"></a><a class="link" href="#_limitations">5.17.3. Limitations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>There is no support for charges in the Vietnam e-invoice format.</p>
+</li>
+<li>
+<p>Credit Note is not supported in Pagero solution.</p>
+</li>
+<li>
+<p>Cancellation is not supported in Pagero solution.</p>
+</li>
+<li>
+<p>Adjustments is not supported in Pagero solution.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -14447,6 +14562,12 @@ Only support for invoice and credit.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>No</strong></p></td>
 <td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vietnam</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only support for 'new' Invoice. See <a href="#_limitations">limitations</a> for more information.</p></td>
 </tr>
 </tbody>
 </table>
