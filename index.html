@@ -629,25 +629,26 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_document_level">4.1. Document level</a>
 <ul class="sectlevel3">
 <li><a href="#_restrictedinformation">4.1.1. RestrictedInformation</a></li>
-<li><a href="#_restrictedinformationline">4.1.2. RestrictedInformationLine</a></li>
-<li><a href="#line-extension-Classification">4.1.3. Classification</a></li>
-<li><a href="#_invoiceseries">4.1.4. InvoiceSeries</a></li>
-<li><a href="#_languagecode">4.1.5. LanguageCode</a></li>
-<li><a href="#_supplytype">4.1.6. SupplyType</a></li>
-<li><a href="#_dutystamp">4.1.7. DutyStamp</a></li>
-<li><a href="#_igstonintra">4.1.8. IGSTOnIntra</a></li>
-<li><a href="#_billing_software">4.1.9. Billing Software</a></li>
-<li><a href="#_suppliergeneratedqrstring">4.1.10. SupplierGeneratedQRString</a></li>
-<li><a href="#_self_billing_indicator">4.1.11. Self Billing Indicator</a></li>
-<li><a href="#_orderreference">4.1.12. OrderReference</a></li>
-<li><a href="#_billingreference">4.1.13. BillingReference</a></li>
-<li><a href="#_contractdocumentreference">4.1.14. ContractDocumentReference</a></li>
-<li><a href="#_party">4.1.15. Party</a></li>
-<li><a href="#_delivery">4.1.16. Delivery</a></li>
-<li><a href="#_paymentterms">4.1.17. PaymentTerms</a></li>
-<li><a href="#_prepaidpayment">4.1.18. PrepaidPayment</a></li>
-<li><a href="#_taxsubtotal">4.1.19. TaxSubTotal</a></li>
-<li><a href="#_legalmonetarytotal">4.1.20. LegalMonetaryTotal</a></li>
+<li><a href="#_returnable_restricted_information">4.1.2. Returnable Restricted Information</a></li>
+<li><a href="#_restrictedinformationline">4.1.3. RestrictedInformationLine</a></li>
+<li><a href="#line-extension-Classification">4.1.4. Classification</a></li>
+<li><a href="#_invoiceseries">4.1.5. InvoiceSeries</a></li>
+<li><a href="#_languagecode">4.1.6. LanguageCode</a></li>
+<li><a href="#_supplytype">4.1.7. SupplyType</a></li>
+<li><a href="#_dutystamp">4.1.8. DutyStamp</a></li>
+<li><a href="#_igstonintra">4.1.9. IGSTOnIntra</a></li>
+<li><a href="#_billing_software">4.1.10. Billing Software</a></li>
+<li><a href="#_suppliergeneratedqrstring">4.1.11. SupplierGeneratedQRString</a></li>
+<li><a href="#_self_billing_indicator">4.1.12. Self Billing Indicator</a></li>
+<li><a href="#_orderreference">4.1.13. OrderReference</a></li>
+<li><a href="#_billingreference">4.1.14. BillingReference</a></li>
+<li><a href="#_contractdocumentreference">4.1.15. ContractDocumentReference</a></li>
+<li><a href="#_party">4.1.16. Party</a></li>
+<li><a href="#_delivery">4.1.17. Delivery</a></li>
+<li><a href="#_paymentterms">4.1.18. PaymentTerms</a></li>
+<li><a href="#_prepaidpayment">4.1.19. PrepaidPayment</a></li>
+<li><a href="#_taxsubtotal">4.1.20. TaxSubTotal</a></li>
+<li><a href="#_legalmonetarytotal">4.1.21. LegalMonetaryTotal</a></li>
 </ul>
 </li>
 <li><a href="#_line_level">4.2. Line level</a>
@@ -7068,7 +7069,36 @@ Value relevant to the assigned key.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_restrictedinformationline"><a class="anchor" href="#_restrictedinformationline"></a><a class="link" href="#_restrictedinformationline">4.1.2. RestrictedInformationLine</a></h4>
+<h4 id="_returnable_restricted_information"><a class="anchor" href="#_returnable_restricted_information"></a><a class="link" href="#_returnable_restricted_information">4.1.2. Returnable Restricted Information</a></h4>
+<div class="paragraph">
+<p>Restricted information values created on document level with keys that have the prefix "returnInResponse_" will be returned in PUF response messages.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                        <span class="tag">&lt;puf:Key&gt;</span>returnInResponse_mySystemNumber<span class="tag">&lt;/puf:Key&gt;</span>
+                        <span class="tag">&lt;puf:Value&gt;</span>123456789<span class="tag">&lt;/puf:Value&gt;</span>
+                    <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_restrictedinformationline"><a class="anchor" href="#_restrictedinformationline"></a><a class="link" href="#_restrictedinformationline">4.1.3. RestrictedInformationLine</a></h4>
 <div class="paragraph">
 <p>RestrictedInformationLine has been added on document level in order to cater the need for additional country specific invoice lines<br></p>
 </div>
@@ -7214,7 +7244,7 @@ Definition of this element can be found <a href="#line-extension-Classification"
 </div>
 </div>
 <div class="sect3">
-<h4 id="line-extension-Classification"><a class="anchor" href="#line-extension-Classification"></a><a class="link" href="#line-extension-Classification">4.1.3. Classification</a></h4>
+<h4 id="line-extension-Classification"><a class="anchor" href="#line-extension-Classification"></a><a class="link" href="#line-extension-Classification">4.1.4. Classification</a></h4>
 <div class="paragraph">
 <p>Classification can be used on document level to set different kind of classifications e.g. Income or Expense classification<br></p>
 </div>
@@ -7330,7 +7360,7 @@ Currency of the net amount related to the classification.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoiceseries"><a class="anchor" href="#_invoiceseries"></a><a class="link" href="#_invoiceseries">4.1.4. InvoiceSeries</a></h4>
+<h4 id="_invoiceseries"><a class="anchor" href="#_invoiceseries"></a><a class="link" href="#_invoiceseries">4.1.5. InvoiceSeries</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacbillingreference">here</a>.</p>
 </div>
@@ -7421,7 +7451,7 @@ Identifier used for the series the document is part of.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_languagecode"><a class="anchor" href="#_languagecode"></a><a class="link" href="#_languagecode">4.1.5. LanguageCode</a></h4>
+<h4 id="_languagecode"><a class="anchor" href="#_languagecode"></a><a class="link" href="#_languagecode">4.1.6. LanguageCode</a></h4>
 <div class="paragraph">
 <p>In order to specify language code for the system generated PDF presentation in Pagero Online, a segment for this is added as Extension.</p>
 </div>
@@ -7525,7 +7555,7 @@ Must be in lower case alpha, ISO 639-1, format.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_supplytype"><a class="anchor" href="#_supplytype"></a><a class="link" href="#_supplytype">4.1.6. SupplyType</a></h4>
+<h4 id="_supplytype"><a class="anchor" href="#_supplytype"></a><a class="link" href="#_supplytype">4.1.7. SupplyType</a></h4>
 <div class="paragraph">
 <p>In order to specify a supply type for the invoice, following elements has been added in the below extension.</p>
 </div>
@@ -7618,7 +7648,7 @@ Code describing the type of supply.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_dutystamp"><a class="anchor" href="#_dutystamp"></a><a class="link" href="#_dutystamp">4.1.7. DutyStamp</a></h4>
+<h4 id="_dutystamp"><a class="anchor" href="#_dutystamp"></a><a class="link" href="#_dutystamp">4.1.8. DutyStamp</a></h4>
 <div class="paragraph">
 <p>In order to specify a duty stamp for the invoice, following elements has been added in the below extension.</p>
 </div>
@@ -7717,7 +7747,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 </div>
 </div>
 <div class="sect3">
-<h4 id="_igstonintra"><a class="anchor" href="#_igstonintra"></a><a class="link" href="#_igstonintra">4.1.8. IGSTOnIntra</a></h4>
+<h4 id="_igstonintra"><a class="anchor" href="#_igstonintra"></a><a class="link" href="#_igstonintra">4.1.9. IGSTOnIntra</a></h4>
 <div class="paragraph">
 <p>In order to specify if IGST (Integrated Goods and Services Tax) is applicable on intra state supplies the following elements has been added in the below extension.</p>
 </div>
@@ -7809,7 +7839,7 @@ To indicate if supply is chargeable to IGST despite the fact that the Supplier a
 </div>
 </div>
 <div class="sect3">
-<h4 id="_billing_software"><a class="anchor" href="#_billing_software"></a><a class="link" href="#_billing_software">4.1.9. Billing Software</a></h4>
+<h4 id="_billing_software"><a class="anchor" href="#_billing_software"></a><a class="link" href="#_billing_software">4.1.10. Billing Software</a></h4>
 <div class="paragraph">
 <p>In order to specify information about a billing software, following elements has been added in the below extension.</p>
 </div>
@@ -7914,7 +7944,7 @@ Description of the software identification (free text).<br></p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_suppliergeneratedqrstring"><a class="anchor" href="#_suppliergeneratedqrstring"></a><a class="link" href="#_suppliergeneratedqrstring">4.1.10. SupplierGeneratedQRString</a></h4>
+<h4 id="_suppliergeneratedqrstring"><a class="anchor" href="#_suppliergeneratedqrstring"></a><a class="link" href="#_suppliergeneratedqrstring">4.1.11. SupplierGeneratedQRString</a></h4>
 <div class="paragraph">
 <p>In order to provide a supplier generated QR string following elements has been added in the below extension.</p>
 </div>
@@ -8014,7 +8044,7 @@ Description of the software identification (free text).<br></p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_self_billing_indicator"><a class="anchor" href="#_self_billing_indicator"></a><a class="link" href="#_self_billing_indicator">4.1.11. Self Billing Indicator</a></h4>
+<h4 id="_self_billing_indicator"><a class="anchor" href="#_self_billing_indicator"></a><a class="link" href="#_self_billing_indicator">4.1.12. Self Billing Indicator</a></h4>
 <div class="paragraph">
 <p>In order to indicate that the document is self-billed, a segment for this is added as Extension.</p>
 </div>
@@ -8119,7 +8149,7 @@ Can either be <strong>true</strong> or <strong>false</strong>.<br>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_orderreference"><a class="anchor" href="#_orderreference"></a><a class="link" href="#_orderreference">4.1.12. OrderReference</a></h4>
+<h4 id="_orderreference"><a class="anchor" href="#_orderreference"></a><a class="link" href="#_orderreference">4.1.13. OrderReference</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacorderreference">here</a>.</p>
 </div>
@@ -8219,7 +8249,7 @@ Date of the sales order, date should be formatted yyyy-mm-dd.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_billingreference"><a class="anchor" href="#_billingreference"></a><a class="link" href="#_billingreference">4.1.13. BillingReference</a></h4>
+<h4 id="_billingreference"><a class="anchor" href="#_billingreference"></a><a class="link" href="#_billingreference">4.1.14. BillingReference</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacbillingreference">here</a>.</p>
 </div>
@@ -8338,7 +8368,7 @@ ID, usually assigned by the Tax Authority, of the referenced document e.g. UUID 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_contractdocumentreference"><a class="anchor" href="#_contractdocumentreference"></a><a class="link" href="#_contractdocumentreference">4.1.14. ContractDocumentReference</a></h4>
+<h4 id="_contractdocumentreference"><a class="anchor" href="#_contractdocumentreference"></a><a class="link" href="#_contractdocumentreference">4.1.15. ContractDocumentReference</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_caccontractdocumentreference">here</a>.</p>
 </div>
@@ -8437,7 +8467,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party"><a class="anchor" href="#_party"></a><a class="link" href="#_party">4.1.15. Party</a></h4>
+<h4 id="_party"><a class="anchor" href="#_party"></a><a class="link" href="#_party">4.1.16. Party</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found in the below parties:</p>
 </div>
@@ -8643,7 +8673,7 @@ The <code>puf:IDType</code> must be coded using the <a href="https://pagero.gith
 </div>
 </div>
 <div class="sect3">
-<h4 id="_delivery"><a class="anchor" href="#_delivery"></a><a class="link" href="#_delivery">4.1.16. Delivery</a></h4>
+<h4 id="_delivery"><a class="anchor" href="#_delivery"></a><a class="link" href="#_delivery">4.1.17. Delivery</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacdelivery">here</a>.</p>
 </div>
@@ -8749,7 +8779,7 @@ A code for the delivery method.</p></td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_paymentterms"><a class="anchor" href="#_paymentterms"></a><a class="link" href="#_paymentterms">4.1.17. PaymentTerms</a></h4>
+<h4 id="_paymentterms"><a class="anchor" href="#_paymentterms"></a><a class="link" href="#_paymentterms">4.1.18. PaymentTerms</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacpaymentterms">here</a>.</p>
 </div>
@@ -8849,7 +8879,7 @@ Penalty text due to late payment, if the need of explicitly stating a penalty te
 </div>
 </div>
 <div class="sect3">
-<h4 id="_prepaidpayment"><a class="anchor" href="#_prepaidpayment"></a><a class="link" href="#_prepaidpayment">4.1.18. PrepaidPayment</a></h4>
+<h4 id="_prepaidpayment"><a class="anchor" href="#_prepaidpayment"></a><a class="link" href="#_prepaidpayment">4.1.19. PrepaidPayment</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacprepaidpayment">here</a>.</p>
 </div>
@@ -9050,7 +9080,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 </div>
 </div>
 <div class="sect3">
-<h4 id="_taxsubtotal"><a class="anchor" href="#_taxsubtotal"></a><a class="link" href="#_taxsubtotal">4.1.19. TaxSubTotal</a></h4>
+<h4 id="_taxsubtotal"><a class="anchor" href="#_taxsubtotal"></a><a class="link" href="#_taxsubtotal">4.1.20. TaxSubTotal</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cactaxtotal">here</a>.</p>
 </div>
@@ -9279,7 +9309,7 @@ Tax chargeability per tax (see Italy section <a href="#_tax_chargeability_esigib
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legalmonetarytotal"><a class="anchor" href="#_legalmonetarytotal"></a><a class="link" href="#_legalmonetarytotal">4.1.20. LegalMonetaryTotal</a></h4>
+<h4 id="_legalmonetarytotal"><a class="anchor" href="#_legalmonetarytotal"></a><a class="link" href="#_legalmonetarytotal">4.1.21. LegalMonetaryTotal</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_caclegalmonetarytotal">here</a>.</p>
 </div>
