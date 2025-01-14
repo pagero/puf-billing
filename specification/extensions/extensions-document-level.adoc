@@ -4,6 +4,10 @@ Below chapters describe the different extensions added on document level.
 
 include::document-level/RestrictedInformation.adoc[]
 
+==== Returnable Restricted Information
+
+include::document-level/ReturnableRestrictedInformation.adoc[]
+
 ==== RestrictedInformationLine
 
 include::document-level/RestrictedInformationLine.adoc[]
