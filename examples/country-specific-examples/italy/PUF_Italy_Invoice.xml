@@ -42,7 +42,8 @@
         <cac:Party>
             <ext:UBLExtensions>
                 <ext:UBLExtension>
-                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>   <ext:ExtensionContent>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
                         <puf:PageroExtension>
                             <puf:PartyExtension>
                                 <!--  IT:Ufficio
@@ -56,7 +57,7 @@
                                 <puf:RegistrationData>
                                     <cbc:ID>NumeroREA</cbc:ID>
                                     <puf:IDType listID="PUF-001-REGISTRATIONDATA">IT:NumeroREA</puf:IDType>
-                                </puf:RegistrationData>  
+                                </puf:RegistrationData>
                                 <!--  IT:CapitaleSociale
                                     Only in the case of a company (SpA, SApA, SRL), the element must be filled in with the share capital  -->
                                 <puf:RegistrationData>
@@ -72,7 +73,7 @@
                                 <puf:RegistrationData>
                                     <cbc:ID>SM</cbc:ID>
                                     <puf:IDType listID="PUF-001-REGISTRATIONDATA">IT:SocioUnico</puf:IDType>
-                                </puf:RegistrationData>  
+                                </puf:RegistrationData>
                                 <!--  IT:StatoLiquidazione
                                     Indication of whether the Company is in liquidation or not.
                                     Allowed values: LS or LN.
@@ -270,18 +271,25 @@
         <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
         <!-- BT-131 Line extension amount. Line net amount. Currency in attribute currencyID (BT-5) -->
         <cbc:LineExtensionAmount currencyID="EUR">267</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="EUR">56.07</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <cbc:TaxableAmount currencyID="EUR">267</cbc:TaxableAmount>
+                <cbc:TaxAmount currencyID="EUR">56.07</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <!-- BT-151 Invoiced item VAT category code. -->
+                    <cbc:ID>S</cbc:ID>
+                    <!-- BT-152 Invoiced item VAT rate -->
+                    <cbc:Percent>21</cbc:Percent>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
         <cac:Item>
             <!-- BT-153 Article/Item Description -->
             <cbc:Name>Item name</cbc:Name>
-            <cac:ClassifiedTaxCategory>
-                <!-- BT-151 Invoiced item VAT category code. -->
-                <cbc:ID>S</cbc:ID>
-                <!-- BT-152 Invoiced item VAT rate -->
-                <cbc:Percent>21</cbc:Percent>
-                <cac:TaxScheme>
-                    <cbc:ID>VAT</cbc:ID>
-                </cac:TaxScheme>
-            </cac:ClassifiedTaxCategory>
         </cac:Item>
         <cac:Price>
             <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
