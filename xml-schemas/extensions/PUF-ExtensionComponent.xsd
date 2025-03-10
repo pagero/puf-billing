@@ -148,6 +148,7 @@
                 <xsd:element name="DeliveryExtension" minOccurs="0" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:sequence>
+                            <xsd:element name="PortCode" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
                             <xsd:element name="DeliveryMethod" minOccurs="0" maxOccurs="1">
                                 <xsd:complexType>
                                     <xsd:sequence>
@@ -207,6 +208,7 @@
                             <xsd:element name="TaxCurrencyTaxExclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
                             <xsd:element name="TaxCurrencyTaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
                             <xsd:element name="TaxCurrencyPayableAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="PaymentCurrencyTaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
                             <xsd:element name="PaymentInKind" minOccurs="0" maxOccurs="1">
                                 <xsd:complexType>
                                     <xsd:sequence>
