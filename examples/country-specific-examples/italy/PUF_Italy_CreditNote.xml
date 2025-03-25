@@ -37,6 +37,12 @@
         <!-- BT-14 Referenced Purchase Order identifier, issued by seller  -->
         <cbc:SalesOrderID>12345678</cbc:SalesOrderID>
     </cac:OrderReference>
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <!-- BT-25 Billing reference ID. The Invoice number (BT-1) of the original invoice that the credit/debit note is related to -->
+            <cbc:ID>123122</cbc:ID>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
     <!-- BG-4 Seller -->
     <cac:AccountingSupplierParty>
         <cac:Party>
@@ -112,7 +118,7 @@
             -->
             <cac:PartyTaxScheme>
                 <!-- BT-31 Seller Vat Number -->
-                <cbc:CompanyID>IT1234567890</cbc:CompanyID>
+                <cbc:CompanyID>01234567890</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -122,7 +128,7 @@
                 TaxScheme/ID - Must be TAX
             -->
             <cac:PartyTaxScheme>
-                <cbc:CompanyID>12345678901</cbc:CompanyID>
+                <cbc:CompanyID>01234567890</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>TAX</cbc:ID>
                 </cac:TaxScheme>
@@ -131,7 +137,7 @@
                 <!-- BT-27 Seller Registration Name -->
                 <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
                 <!-- BT-30 Seller Legal Registration Identifier-->
-                <cbc:CompanyID>12345678</cbc:CompanyID>
+                <cbc:CompanyID>01234567890</cbc:CompanyID>
             </cac:PartyLegalEntity>
             <cac:Contact>
                 <!-- BT-41 Seller contact name -->
@@ -180,7 +186,7 @@
             -->
             <cac:PartyTaxScheme>
                 <!-- BT-48 Buyer Vat Number if applicable -->
-                <cbc:CompanyID>IT123456789</cbc:CompanyID>
+                <cbc:CompanyID>01234567891</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -190,7 +196,7 @@
                 TaxScheme/ID - Must be TAX
             -->
             <cac:PartyTaxScheme>
-                <cbc:CompanyID>123456789</cbc:CompanyID>
+                <cbc:CompanyID>01234567891</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>TAX</cbc:ID>
                 </cac:TaxScheme>
