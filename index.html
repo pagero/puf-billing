@@ -8736,12 +8736,6 @@ The <code>puf:IDType</code> must be coded using the <a href="https://pagero.gith
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:PortCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dispatch port code</strong><br>
-A code for the dispatch port code</p></td>
-</tr>
-<tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:DeliveryMethod/cbc:Note</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delivery method note</strong><br>
 Description of the delivery method (free text).</p></td>
@@ -8754,7 +8748,7 @@ A code for the delivery method.</p></td>
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Example 1</strong><br>
+<p><strong>Example</strong><br>
 <em>Delivery method and code defined</em></p>
 </div>
 <div class="listingblock">
@@ -8781,34 +8775,6 @@ A code for the delivery method.</p></td>
   <span class="tag">&lt;/cac:Delivery&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
-</div>
-</div>
-</div>
-<div class="paragraph">
-    <p><strong>Example 2</strong><br>
-    <em>Dispatch port code</em></p>
-    </div>
-    <div class="listingblock">
-    <div class="content">
-    <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
-      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-      <span class="tag">&lt;cac:Delivery&gt;</span>
-          <span class="tag">&lt;ext:UBLExtensions&gt;</span>
-            <span class="tag">&lt;ext:UBLExtension&gt;</span>
-                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:DeliveryExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
-                <span class="tag">&lt;ext:ExtensionContent&gt;</span>
-                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
-                        <span class="tag">&lt;puf:DeliveryExtension&gt;</span>
-                                <span class="tag">&lt;puf:PortCode&gt;</span>Dispatch port code<span class="tag">&lt;/puf:PortCode&gt;</span>
-                        <span class="tag">&lt;/puf:DeliveryExtension&gt;</span>
-                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
-                <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
-            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
-          <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
-          <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-      <span class="tag">&lt;/cac:Delivery&gt;</span>
-      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -9436,17 +9402,6 @@ If the document currency and tax currency differs, payable amount in tax currenc
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:TaxCurrencyPayableAmount/@currencyID</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax currency payable amount currency code</strong><br>
 Currency of the tax currency payable amount.<br>
-For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_004_currencycode" target="_blank" rel="noopener">PUF-004-CURRENCYCODE</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:PaymentCurrencyTaxInclusiveAmount</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Payment tax currency payable amount</strong><br>
-If payment currency, tax inclusive amount in payment currency should be specified here.<br></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:PaymentCurrencyTaxInclusiveAmount/@currencyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Payment tax currency payable amount currency code</strong><br>
-Currency of the payment tax currency payable amount.<br>
 For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_004_currencycode" target="_blank" rel="noopener">PUF-004-CURRENCYCODE</a>.</p></td>
 </tr>
 <tr>
