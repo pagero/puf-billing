@@ -173,7 +173,7 @@
                 <cbc:StreetName>Street</cbc:StreetName>
                 <!-- BT-52 Buyer address City -->
                 <cbc:CityName>City</cbc:CityName>
-                <!-- BT-53 Buyer address postal code -->
+                <!-- BT-53 Buyer address postal code - Must be 5 digits, use "00000" for foreign addresses -->
                 <cbc:PostalZone>00000</cbc:PostalZone>
                 <cac:Country>
                     <!-- BT-55 Buyer address country code -->
