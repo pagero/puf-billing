@@ -37,6 +37,12 @@
         <!-- BT-14 Referenced Purchase Order identifier, issued by seller  -->
         <cbc:SalesOrderID>12345678</cbc:SalesOrderID>
     </cac:OrderReference>
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <!-- BT-25 Billing reference ID. The Invoice number (BT-1) of the original invoice that the credit/debit note is related to -->
+            <cbc:ID>123122</cbc:ID>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
     <!-- BG-4 Seller -->
     <cac:AccountingSupplierParty>
         <cac:Party>
