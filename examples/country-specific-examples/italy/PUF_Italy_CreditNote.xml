@@ -105,7 +105,7 @@
                 <cbc:AdditionalStreetName>Additional street name</cbc:AdditionalStreetName>
                 <!-- BT-37 Seller address City -->
                 <cbc:CityName>City</cbc:CityName>
-                <!-- BT-38 Seller address postal code -->
+                <!-- BT-38 Seller address postal code - Must be 5 digits, use "00000" for foreign addresses -->
                 <cbc:PostalZone>00000</cbc:PostalZone>
                 <cac:Country>
                     <!-- BT-40 Seller address country code -->
@@ -118,17 +118,17 @@
             -->
             <cac:PartyTaxScheme>
                 <!-- BT-31 Seller Vat Number -->
-                <cbc:CompanyID>IT1234567890</cbc:CompanyID>
+                <cbc:CompanyID>IT12345678903</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:PartyTaxScheme>
             <!-- Fiscal code in Italy
-                CompanyID - Can contain 11 to 16 characters
+                CompanyID - Contains 11 digits for businesses or 16 characters for individuals
                 TaxScheme/ID - Must be TAX
             -->
             <cac:PartyTaxScheme>
-                <cbc:CompanyID>12345678901</cbc:CompanyID>
+                <cbc:CompanyID>12345678903</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>TAX</cbc:ID>
                 </cac:TaxScheme>
@@ -158,11 +158,11 @@
     <!-- BG-7 Buyer -->
     <cac:AccountingCustomerParty>
         <!-- Customer number -->
-        <cbc:SupplierAssignedAccountID>18894</cbc:SupplierAssignedAccountID>
+        <cbc:SupplierAssignedAccountID>011</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- Routing code (Codice Destinatario) -->
-            <!-- B2B flow has 7 chars in CodiceDestinatario, B2G has 6 - Simplified is not supported on B2G -->
-            <!-- XXXXXXX Crossborder, 0000000 PEC-email -->
+            <!-- B2B, Crossborder and B2C flows have 7 chars in CodiceDestinatario, B2G has 6 - Simplified is not supported on B2G -->
+            <!-- XXXXXXX Crossborder (Except San Marino), 0000000 PEC-email, 2R4GTO8 San Marino -->
             <cbc:EndpointID schemeID="0201">1234567</cbc:EndpointID>
             <cac:PartyName>
                 <!-- BT-45 Buyer Trading Name -->
@@ -173,7 +173,7 @@
                 <cbc:StreetName>Street</cbc:StreetName>
                 <!-- BT-52 Buyer address City -->
                 <cbc:CityName>City</cbc:CityName>
-                <!-- BT-53 Buyer address postal code -->
+                <!-- BT-53 Buyer address postal code - Must be 5 digits, use "00000" for foreign addresses -->
                 <cbc:PostalZone>00000</cbc:PostalZone>
                 <cac:Country>
                     <!-- BT-55 Buyer address country code -->
@@ -186,17 +186,17 @@
             -->
             <cac:PartyTaxScheme>
                 <!-- BT-48 Buyer Vat Number if applicable -->
-                <cbc:CompanyID>IT123456789</cbc:CompanyID>
+                <cbc:CompanyID>IT12345678986</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:PartyTaxScheme>
             <!-- Fiscal code in Italy
-                CompanyID - Can contain 11 to 16 characters
+                CompanyID - Contains 11 digits for businesses or 16 characters for individuals
                 TaxScheme/ID - Must be TAX
             -->
             <cac:PartyTaxScheme>
-                <cbc:CompanyID>123456789</cbc:CompanyID>
+                <cbc:CompanyID>12345678986</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>TAX</cbc:ID>
                 </cac:TaxScheme>
@@ -227,8 +227,8 @@
         <!-- Tax chargeability (Esigibilita IVA) 
             Possible values to provide:
             I = VAT with immediate chargeability
-            D = VAT unrealized
-            S = Splitting of payments
+            D = VAT deferred/unrealized
+            S = Split Payment / Scissione dei pagamenti
         -->
         <!-- BT-110 Invoice total VAT amount. Currency in attribute currencyID (BT-5) -->
         <cbc:TaxAmount currencyID="EUR">56.07</cbc:TaxAmount>
