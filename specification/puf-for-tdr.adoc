@@ -1,0 +1,40 @@
+This section provides information on how to use PUF solely for the purpose of reporting tax data to tax authorities without distributing a business file, or if the business file has been distributed previously or through another channel.
+
+When using PUF exclusively for tax reporting, please consider the following:
+
+* *Dedicated Endpoint:* Tax data reports intended solely for distribution to tax authorities should be sent to the dedicated tax data report endpoint at Pagero. For the applicable endpoint, refer to the https://pagero.github.io/[Pagero connectivity tool kit^] or contact Pagero.
+* *Adjusting cbc:Profile* if applicable. See <<_cbcprofileid_2>> for more information. 
+* *Transaction Indication:* Indicate whether the PUF document refers to an invoice or receipt transaction being reported.
+
+
+Note: Even if PUF is supported in billing scenarios within a country, it may not necessarily be supported as a source for tax data reporting in that country or region.
+
+Below is a list of countries where PUF can be used as the source for tax data reporting with distribution solely to tax authorities.
+
+
+
+.Table of PUF supported countries for Tax data reporting
+[%autowidth.stretch]
+|===
+|Country |Supported by PUF |Require ext:UBLExtensions? |Comment
+
+
+|Singapore
+|*Yes*
+|*Yes*
+|*Beta version only*
+
+|===
+
+
+
+=== cbc:ProfileID
+
+include::tax-data-reporting/profileID.adoc[]
+
+
+=== Entry type
+
+include::tax-data-reporting/entryType.adoc[]
+
+
