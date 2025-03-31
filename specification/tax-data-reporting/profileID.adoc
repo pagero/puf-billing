@@ -1,0 +1,24 @@
+In cbc:ProfileID it is indicated if the PUF is to be used for reporting a sales invoice or a purchase invoice.
+
+
+*Example* +
+_cbc:ProfileID for a sales invoice to be used in reporting scenario_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example* +
+_cbc:ProfileID for a purchase invoice to be used in reporting scenario_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:ProfileID>urn:pagero.com:puf:purchase:1.0</cbc:ProfileID>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

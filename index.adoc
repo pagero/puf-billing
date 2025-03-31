@@ -40,6 +40,10 @@ include::specification/extensions.adoc[]
 
 include::specification/country-specifics.adoc[]
 
+== PUF for tax data reporting
+
+include::specification/puf-for-tdr.adoc[]
+
 == Code lists
 
 include::specification/code-lists.adoc[]

@@ -11,9 +11,9 @@ The list of supported countries/regions are updated continuously as PUF is devel
 
 === Country list
 
-The following list gives an overview of country support in PUF.
+The following list gives an overview of country support in PUF. 
 
-NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL extensions is required to be able to comply with the country requirements.
+NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL extensions is required to be able to comply with the country requirements. Also note that this list covers billing scenarios. For information and supported countries where PUF can be used as a source for tax data reporting purposes see chapter: <<_puf_for_tax_data_reporting>>.
 
 .Table of supported countries
 [%autowidth.stretch]

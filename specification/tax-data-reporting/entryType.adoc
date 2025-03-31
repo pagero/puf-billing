@@ -1,0 +1,40 @@
+Each document must have an indication if the document refers to an invoice or receipt/transaction beeing reported.
+
+The table below lists valid codes.
+
+WARNING: If no entry type is sent system will default to type Invoice.
+
+|===
+|Value |Description
+
+|`INVOICE`
+|An invoice being reported.
+
+|`RECEIPTTRANSACTION`
+|Transactions being reported (e.g. aggregated cash sales data in B2C transactions).
+
+|===
+
+The value should be provided in element <<_restrictedinformation>> with key `entryType`.
+
+*Example* +
+_A receipt transaction example_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+        <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:RestrictedInformation>
+                  <puf:Key>entryType</puf:Key>
+                  <puf:Value>RECEIPTTRANSACTION</puf:Value>
+              </puf:RestrictedInformation>
+            </puf:PageroExtension>
+        </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----

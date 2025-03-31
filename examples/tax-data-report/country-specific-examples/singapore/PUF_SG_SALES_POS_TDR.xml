@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- Values in invoice are examples values only. Example of reporting aggregated point-of-sale(“POS”)in Singapore. DRAFT -->
+    
+    <!-- Entry type. Type can be INVOICE (if simplified tax invoice) or RECEIPTTRANSACTION (if aggregated point-of-sale(“POS”)). -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>entryType</puf:Key>
+                        <puf:Value>RECEIPTTRANSACTION</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+
+    <!-- IBT-024 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- IBT-023 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- IBT-001 Invoice Number -->
+    <cbc:ID>123456</cbc:ID>
+    <!-- BT-SG-003 An identifier that uniquely identifies the invoice document -->
+    <cbc:UUID>bfeac3d0-82d8-4195-9d88-53b3547f83a3</cbc:UUID>
+    <!-- IBT-002 Invoice Issue Date  -->
+    <cbc:IssueDate>2025-01-01</cbc:IssueDate>
+    <!-- IBT-009 Due Date -->
+    <cbc:DueDate>2025-01-01</cbc:DueDate>
+    <!-- IBT-003 Invoice Type Code -->
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <!-- IBT-005 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>SGD</cbc:DocumentCurrencyCode>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- Supplier's Peppol ID -->
+            <cbc:EndpointID schemeID="0195">SGUEN4321567891</cbc:EndpointID>
+            <cac:PostalAddress>
+                <!-- IBT-035 Seller address street-->
+                <cbc:StreetName>Street Name</cbc:StreetName>
+                <!-- IBT-037 Seller address City -->
+                <cbc:CityName>City</cbc:CityName>
+                <!-- IBT-038 Seller address postal code -->
+                <cbc:PostalZone>000000</cbc:PostalZone>
+                <!-- IBT-39 Seller address province/state -->
+                <cbc:CountrySubentity>Province</cbc:CountrySubentity>
+                <cac:Country>
+                    <!-- IBT-40 Seller address country code -->
+                    <cbc:IdentificationCode>SG</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- IBT-031 Supplier's GST Registration Number -->
+                <cbc:CompanyID>SG1234567891</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- IBT-027 Seller Name -->
+                <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
+                <!-- IBT-030 Supplier's UEN -->
+                <cbc:CompanyID schemeID="0195">SG1234567891</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- IBG-07 Buyer -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- POS / STI. Depending on the data source, POS for supplies made via point-of-sale system; STI for simplified tax invoice transactions -->
+            <cbc:EndpointID schemeID="0195">POS</cbc:EndpointID>
+            <cac:PostalAddress>
+                <!-- IBT-050 Buyer address street-->
+                <cbc:StreetName>NA</cbc:StreetName>
+                <!-- IBT-052 Buyer address City -->
+                <cbc:CityName>Singapore</cbc:CityName>
+                <!-- IBT-053 Buyer address postal code -->
+                <cbc:PostalZone>NA</cbc:PostalZone>
+                <!-- IBT-054 Buyer address province/state -->
+                <cbc:CountrySubentity>Singapore</cbc:CountrySubentity>
+                <cac:Country>
+                    <!-- IBT-055 Buyer address country code -->
+                    <cbc:IdentificationCode>SG</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyLegalEntity>
+                <!-- IBT-044 Buyer Name. POS / STI. Depending on the data source, POS for supplies made via point-of-sale system; STI for simplified tax invoice transactions -->
+                <cbc:RegistrationName>POS</cbc:RegistrationName>
+                <!-- IBT-047 Buyer legal registration identifier. POS / STI. Depending on the data source, POS for supplies made via point-of-sale system; STI for simplified tax invoice transactions -->
+                <cbc:CompanyID>POS</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:TaxTotal>
+        <!-- IBT-110 Invoice total TAX amount. Currency in attribute currencyID (IBT-005) -->
+        <cbc:TaxAmount currencyID="SGD">27.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- IBT-116 Sum of all taxable amounts subject to a specific TAX category code and TAX category rate. Currency in attribute currencyID (IBT-005) -->
+            <cbc:TaxableAmount currencyID="SGD">300.00</cbc:TaxableAmount>
+            <!--  IBT-117. The total TAX amount for a given TAX category. Currency in attribute currencyID (IBT-005) -->
+            <cbc:TaxAmount currencyID="SGD">27.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- IBT-118 TAX category code. -->
+                <cbc:ID>SR</cbc:ID>
+                <!-- IBT-119 TAX category rate-->
+                <cbc:Percent>9.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <!-- IBT-106 Sum of all Invoice line net amounts in the Invoice without TAX. Currency in attribute currencyID (IBT-005)-->
+        <cbc:LineExtensionAmount currencyID="SGD">300.00</cbc:LineExtensionAmount>
+        <!-- IBT-109 Invoice total amount without TAX. Currency in attribute currencyID (IBT-005)-->
+        <cbc:TaxExclusiveAmount currencyID="SGD">300.00</cbc:TaxExclusiveAmount>
+        <!-- IBT-112 Invoice total amount with TAX. Currency in attribute currencyID (IBT-005) -->
+        <cbc:TaxInclusiveAmount currencyID="SGD">327.00</cbc:TaxInclusiveAmount>
+        <!-- IBT-115 Amount due for payment. Currency in attribute currencyID (IBT-005) -->
+        <cbc:PayableAmount currencyID="SGD">327.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <!-- IBT-126 Line ID -->
+        <cbc:ID>1</cbc:ID>
+        <!-- IBT-129 Invoiced Quantity. IBT-130 unit of measure in attribute unitCode. unitCode shall be XLT (Lot)-->
+        <cbc:InvoicedQuantity unitCode="XLT">1</cbc:InvoicedQuantity>
+        <!-- IBT-131 Line extension amount. Line net amount. Currency in attribute currencyID (IBT-005). 
+            Submit aggregated value recorded in the accounting solution. (The price of an item, excluding GST amount)-->
+        <cbc:LineExtensionAmount currencyID="SGD">300.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!--POS / STI. Depending on the data source, POS for supplies made via point-of-sale system; STI for simplified tax invoice transactions -->
+            <cbc:Name>POS</cbc:Name>
+            <!-- BG-30 LINE TAX INFORMATION -->
+            <cac:ClassifiedTaxCategory>
+                <!-- IBT-151 Invoiced item TAX category code -->
+                <cbc:ID>SR</cbc:ID>
+                <!-- IBT-152 Invoiced item TAX rate -->
+                <cbc:Percent>9.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- IBG-29 PRICE DETAILS -->
+        <cac:Price>
+            <!-- IBT-146 Item net price. Currency in attribute currencyID (IBT-005). 
+                Submit aggregated value recorded in the accounting solution. (The price of an item, excluding GST amount) -->
+            <cbc:PriceAmount currencyID="SGD">300</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
