@@ -12,6 +12,8 @@
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
     <!-- BT-1 Credit Note Number -->
     <cbc:ID>123456</cbc:ID>
+    <!-- BT-SG-003 - Unique invoice identifier for the invoice / credit note document -->
+    <cbc:UUID>5e572c8f-7b28-4197-9113-1900f9880cf0</cbc:UUID>
     <!-- BT-2 Credit Note Issue Date  -->
     <cbc:IssueDate>2018-01-01</cbc:IssueDate>
     <!-- BT-3 Credit Note Type Code -->
