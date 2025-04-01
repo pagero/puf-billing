@@ -3,8 +3,7 @@
     xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
     xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
 
-    <!-- Values in invoice are examples values only. Example of reporting Simplified tax invoice ("STI") transactions in Singapore. 
-        They are allowed to be aggregated as the transactions are typically small in value and voluminous in nature.. DRAFT -->
+    <!-- Values in invoice are examples values only. Example of reporting aggregated point-of-sale(“POS”)in Singapore. DRAFT -->
     
     <!-- Entry type. Type can be INVOICE (if simplified tax invoice) or RECEIPTTRANSACTION (if aggregated point-of-sale(“POS”)). -->
     <ext:UBLExtensions>
@@ -14,7 +13,7 @@
                 <puf:PageroExtension>
                     <puf:RestrictedInformation>
                         <puf:Key>entryType</puf:Key>
-                        <puf:Value>INVOICE</puf:Value>
+                        <puf:Value>RECEIPTTRANSACTION</puf:Value>
                     </puf:RestrictedInformation>
                 </puf:PageroExtension>
             </ext:ExtensionContent>
@@ -40,7 +39,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- Supplier's Peppol ID -->
-            <cbc:EndpointID schemeID="0195">SGUEN4321567891</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0195">SGUEN1234567891</cbc:EndpointID>
             <cac:PostalAddress>
                 <!-- IBT-035 Seller address street-->
                 <cbc:StreetName>Street Name</cbc:StreetName>
@@ -74,7 +73,7 @@
     <cac:AccountingCustomerParty>
         <cac:Party>
             <!-- POS / STI. Depending on the data source, POS for supplies made via point-of-sale system; STI for simplified tax invoice transactions -->
-            <cbc:EndpointID schemeID="0195">STI</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0195">POS</cbc:EndpointID>
             <cac:PostalAddress>
                 <!-- IBT-050 Buyer address street-->
                 <cbc:StreetName>NA</cbc:StreetName>
@@ -91,9 +90,9 @@
             </cac:PostalAddress>
             <cac:PartyLegalEntity>
                 <!-- IBT-044 Buyer Name. POS / STI. Depending on the data source, POS for supplies made via point-of-sale system; STI for simplified tax invoice transactions -->
-                <cbc:RegistrationName>STI</cbc:RegistrationName>
+                <cbc:RegistrationName>POS</cbc:RegistrationName>
                 <!-- IBT-047 Buyer legal registration identifier. POS / STI. Depending on the data source, POS for supplies made via point-of-sale system; STI for simplified tax invoice transactions -->
-                <cbc:CompanyID>STI</cbc:CompanyID>
+                <cbc:CompanyID>POS</cbc:CompanyID>
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>
@@ -136,7 +135,7 @@
         <cbc:LineExtensionAmount currencyID="SGD">300.00</cbc:LineExtensionAmount>
         <cac:Item>
             <!--POS / STI. Depending on the data source, POS for supplies made via point-of-sale system; STI for simplified tax invoice transactions -->
-            <cbc:Name>STI</cbc:Name>
+            <cbc:Name>POS</cbc:Name>
             <!-- BG-30 LINE TAX INFORMATION -->
             <cac:ClassifiedTaxCategory>
                 <!-- IBT-151 Invoiced item TAX category code -->
