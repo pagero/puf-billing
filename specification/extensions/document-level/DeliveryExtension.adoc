@@ -34,6 +34,10 @@ Below table show the definition of the additional elements added to the delivery
 |===
 |Element |Description
 
+|`puf:PortCode`
+|**Dispatch port code** +
+A code for the dispatch port code.
+
 |`puf:DeliveryMethod/cbc:Note`
 |**Delivery method note** +
 Description of the delivery method (free text).
@@ -44,7 +48,7 @@ A code for the delivery method.
 
 |===
 
-*Example* +
+*Example 1* +
 _Delivery method and code defined_
 [source,xml]
 ----
@@ -61,6 +65,31 @@ _Delivery method and code defined_
                             <cbc:Note>Text describing the delivery method</cbc:Note>
                             <puf:Code>Deliver Method Code</puf:Code>
                         </puf:DeliveryMethod>
+                    </puf:DeliveryExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <!-- Code omitted for clarity -->
+  </cac:Delivery>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example 2* +
+_Dispatch port code_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:Delivery>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:DeliveryExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:DeliveryExtension>
+                            <puf:PortCode>Dispatch Port Code</puf:PortCode>
                     </puf:DeliveryExtension>
                 </puf:PageroExtension>
             </ext:ExtensionContent>
