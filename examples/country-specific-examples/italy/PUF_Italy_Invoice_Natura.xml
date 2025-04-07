@@ -102,6 +102,7 @@
                 <cbc:CityName>City</cbc:CityName>
                 <!-- BT-38 Seller address postal code -->
                 <cbc:PostalZone>00000</cbc:PostalZone>
+                <cbc:CountrySubentity>Province</cbc:CountrySubentity>
                 <cac:Country>
                     <!-- BT-40 Seller address country code -->
                     <cbc:IdentificationCode>IT</cbc:IdentificationCode>
@@ -136,11 +137,11 @@
             </cac:PartyLegalEntity>
             <cac:Contact>
                 <!-- BT-41 Seller contact name -->
-                <cbc:Name>Contact nae</cbc:Name>
+                <cbc:Name>Contact name</cbc:Name>
                 <!-- BT-42 Seller contact telephone -->
                 <cbc:Telephone>123123123</cbc:Telephone>
                 <!-- BT-43 Seller contact email -->
-                <cbc:ElectronicMail>test@test.es</cbc:ElectronicMail>
+                <cbc:ElectronicMail>test@test.it</cbc:ElectronicMail>
             </cac:Contact>
         </cac:Party>
         <cac:AccountingContact>
@@ -156,7 +157,7 @@
         <cbc:SupplierAssignedAccountID>18894</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- Routing code (Codice Destinatario) -->
-            <cbc:EndpointID schemeID="0201">XXXXXXX</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0201">0000000</cbc:EndpointID>
             <cac:PartyName>
                 <!-- BT-45 Buyer Trading Name -->
                 <cbc:Name>Buyer trading name</cbc:Name>
@@ -168,6 +169,7 @@
                 <cbc:CityName>City</cbc:CityName>
                 <!-- BT-53 Buyer address postal code -->
                 <cbc:PostalZone>00000</cbc:PostalZone>
+                <cbc:CountrySubentity>Province</cbc:CountrySubentity>
                 <cac:Country>
                     <!-- BT-55 Buyer address country code -->
                     <cbc:IdentificationCode>IT</cbc:IdentificationCode>
@@ -199,6 +201,10 @@
                 <cbc:RegistrationName>Buyer name</cbc:RegistrationName>
             </cac:PartyLegalEntity>
         </cac:Party>
+        <cac:AccountingContact>
+            <cbc:Telephone>Customer Tel</cbc:Telephone>
+            <cbc:ElectronicMail>Customer@mainContact.com</cbc:ElectronicMail>
+        </cac:AccountingContact>
     </cac:AccountingCustomerParty>
     <cac:Delivery>
         <!-- BT-72 Actual Delivery Date-->
@@ -246,9 +252,11 @@
             <cbc:TaxAmount currencyID="EUR">0</cbc:TaxAmount>
             <cac:TaxCategory>
                 <!-- BT-118 VAT category code. -->
-                <cbc:ID>AE</cbc:ID>
+                <cbc:ID>E</cbc:ID>
                 <!-- BT-119 VAT category rate-->
                 <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReasonCode>N2.1</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>Fattura non soggetta ad IVA art 7ter del DPR 633 1972</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -278,7 +286,7 @@
                 <cbc:TaxAmount currencyID="EUR">0</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <!-- BT-151 Invoiced item VAT category code. -->
-                    <cbc:ID>AE</cbc:ID>
+                    <cbc:ID>E</cbc:ID>
                     <!-- BT-152 Invoiced item VAT rate -->
                     <cbc:Percent>0</cbc:Percent>
                     <cbc:TaxExemptionReasonCode>N2.1</cbc:TaxExemptionReasonCode>
