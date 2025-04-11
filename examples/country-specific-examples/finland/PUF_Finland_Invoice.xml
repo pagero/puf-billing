@@ -28,15 +28,11 @@
     <!-- BG-4 Seller -->
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <!-- The VAT number in this sample is a dummy value and is not valid -->
-            <cbc:EndpointID schemeID="0192">FI07654321</cbc:EndpointID>
-            <cac:PartyIdentification>
-                <!-- BT-29 additional seller party id. Dummy GLN -->
-                <cbc:ID schemeID="0037">00370765432100001 </cbc:ID>
-            </cac:PartyIdentification>
+            <!-- The OVT number in this sample is a dummy value and is not valid -->
+            <cbc:EndpointID schemeID="0216">00370765432100001</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BT-29 additional seller party id. Dummy Org nunmber -->
-                <cbc:ID schemeID="0192">0765432-1</cbc:ID>
+                <cbc:ID schemeID="0212">0765432-1</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyName>
                 <cbc:Name>Supplier</cbc:Name>
@@ -66,7 +62,7 @@
                 <!-- BT-27 Seller Name -->
                 <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
                 <!-- BT-30 Seller legal registration identifier (Org number) -->
-                <cbc:CompanyID schemeID="0216">FI0765432-1</cbc:CompanyID>
+                <cbc:CompanyID schemeID="0212">0765432-1</cbc:CompanyID>
             </cac:PartyLegalEntity>
             <!-- BG-6 SELLER CONTACT -->
             <cac:Contact>
@@ -84,14 +80,14 @@
         <!-- Customer number, not a requirement but can be useful to route document to correct recipient in Pagero Online -->
         <cbc:SupplierAssignedAccountID>1234567</cbc:SupplierAssignedAccountID>
         <cac:Party>
-            <cbc:EndpointID schemeID="0216">FI98765432</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0216">00379876543200001</cbc:EndpointID>
             <cac:PartyIdentification>
-                <!-- BT-46 additional buyer party id. Dummy GLN -->
-                <cbc:ID schemeID="0037">00379876543200001 </cbc:ID>
+                <!-- BT-46 additional buyer party id. Dummy VAT -->
+                <cbc:ID schemeID="0213">FI98765432</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyIdentification>
                 <!-- BT-46 additional buyer party id. Dummy Org number -->
-                <cbc:ID schemeID="0216">9876543-2</cbc:ID>
+                <cbc:ID schemeID="0212">9876543-2</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyName>
                 <cbc:Name>Buyer Name</cbc:Name>
@@ -121,7 +117,7 @@
                 <!-- BT-44 Buyer Name -->
                 <cbc:RegistrationName>Buyer Registration Name</cbc:RegistrationName>
                 <!-- BT-47 Buyer legal registration identifier. The Org number in this sample is a dummy value and is not valid -->
-                <cbc:CompanyID schemeID="0216">9876543-2</cbc:CompanyID>
+                <cbc:CompanyID schemeID="0212">9876543-2</cbc:CompanyID>
             </cac:PartyLegalEntity>
             <!-- BG-9 BUYER CONTACT -->
             <cac:Contact>
