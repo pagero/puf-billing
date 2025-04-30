@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <!-- Invoice appearance 
+                        Each document must have a Invoice Apperance code, the value depends on how the documents is distributed between the issuer and receiver.-->
+                    <puf:RestrictedInformation>
+                        <puf:Key>invoiceAppearance</puf:Key>
+                        <puf:Value>ELECTRONIC</puf:Value>
+                    </puf:RestrictedInformation>
+                    <!-- Customer VAT status
+                        It’s mandatory to provide the customers VAT status, this determine allowed content and rules for the customer party.-->
+                    <puf:RestrictedInformation>
+                        <puf:Key>customerVatStatus</puf:Key>
+                        <puf:Value>DOMESTIC</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- Invoice Number -->
+    <cbc:ID>INV542323134</cbc:ID>
+    <!-- Invoice Issue Date  -->
+    <cbc:IssueDate>2022-01-01</cbc:IssueDate>
+    <!-- Invoice Type Code -->
+    <cbc:InvoiceTypeCode name="NORMAL">380</cbc:InvoiceTypeCode>
+    <!-- Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <!-- Tax currency code-->
+    <cbc:TaxCurrencyCode>HUF</cbc:TaxCurrencyCode>
+    <!-- Seller -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyName>
+                <!-- Seller Trading Name -->
+                <cbc:Name>Supplier Name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!--Seller address street-->
+                <cbc:StreetName>Supplier street name</cbc:StreetName>
+                <!-- Seller address City -->
+                <cbc:CityName>Supplier city name</cbc:CityName>
+                <!-- Seller address postal code -->
+                <cbc:PostalZone>1342</cbc:PostalZone>
+                <cac:Country>
+                    <!-- Seller address country code -->
+                    <cbc:IdentificationCode>HU</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyLegalEntity>
+                <!-- Seller Registration Name -->
+                <cbc:RegistrationName>Supplier Name</cbc:RegistrationName>
+                <!-- Seller Legal Registration Identifier-->
+                <cbc:CompanyID>23542378214</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- Buyer -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <!-- Buyer Group member tax number. -->
+                <cbc:ID schemeID="HU:GroupMemberTaxpayerId">23545565414</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <!-- Buyer Trading Name -->
+                <cbc:Name>Buyer name</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- Buyer address street-->
+                <cbc:StreetName>Buyer street name</cbc:StreetName>
+                <!-- Buyer address City -->
+                <cbc:CityName>Buyer city name</cbc:CityName>
+                <!-- Buyer address postal code -->
+                <cbc:PostalZone>1342</cbc:PostalZone>
+                <cac:Country>
+                    <!-- Buyer address country code -->
+                    <cbc:IdentificationCode>HU</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyLegalEntity>
+                <!-- Buyer Name -->
+                <cbc:RegistrationName>Buyer name</cbc:RegistrationName>
+                <!-- Buyer Tax number -->
+                <cbc:CompanyID schemeID="HU:TaxpayerId">23544565214</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:TaxExchangeRate>
+        <!-- Source currency code -->
+        <cbc:SourceCurrencyCode>EUR</cbc:SourceCurrencyCode>
+        <!-- Target currency code -->
+        <cbc:TargetCurrencyCode>HUF</cbc:TargetCurrencyCode>
+        <!-- Exchange calculation rate
+            Exchange rate used for converting source currency to target currency. -->
+        <cbc:CalculationRate>361.67</cbc:CalculationRate>
+        <!-- Operation used to calculate the tax in target currency
+            Method used for calculation the convertion, value must equal "Multiply". -->
+        <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
+        <!-- Exchange rate date -->
+        <cbc:Date>2022-07-22</cbc:Date>
+    </cac:TaxExchangeRate>
+    <cac:TaxTotal>
+        <!-- Document total tax amount -->
+        <cbc:TaxAmount currencyID="EUR">67.50</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <!-- Tax currency taxable amount
+                                    Taxable amount in tax currency per subtotal.-->
+                                <puf:TaxCurrencyTaxableAmount currencyID="HUF">90417.50</puf:TaxCurrencyTaxableAmount>
+                                <!-- Tax currency tax amount
+                                    Tax amount in tax currency per subtotal. -->
+                                <puf:TaxCurrencyTaxAmount currencyID="HUF">24412.73</puf:TaxCurrencyTaxAmount>
+                                <!-- Total amount including tax
+                                    Total amount including tax per subtotal. -->
+                                <puf:TaxInclusiveAmount currencyID="EUR">317.50</puf:TaxInclusiveAmount>
+                                <!-- Total amount including tax in tax currency
+                                    Total amount including tax per subtotal in tax currency. -->
+                                <puf:TaxCurrencyTaxInclusiveAmount currencyID="HUF">114830.23</puf:TaxCurrencyTaxInclusiveAmount>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- Total taxable amount for each tax category -->
+            <cbc:TaxableAmount currencyID="EUR">250.00</cbc:TaxableAmount>
+            <!-- Total tax amount for each tax category -->
+            <cbc:TaxAmount currencyID="EUR">67.50</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- Tax category code
+                    Code for identifying the tax category.-->
+                <cbc:ID>S</cbc:ID>
+                <!-- Tax category percent
+                    Percentage rate for the tax category. -->
+                <cbc:Percent>27.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <!-- Tax scheme identfier
+                    Tax scheme for the tax category. -->
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:TaxTotal>
+        <!-- Tax currenct total tax amount -->
+        <cbc:TaxAmount currencyID="HUF">24412.73</cbc:TaxAmount>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LegalMonetaryTotalExtension>
+                            <!-- Tax currency tax exclusive amount
+                                If the document currency and tax currency differs, tax exclusive Amount in tax currency should be specified here. -->
+                            <puf:TaxCurrencyTaxExclusiveAmount currencyID="HUF">90417.50</puf:TaxCurrencyTaxExclusiveAmount>
+                            <!-- Tax currency tax inclusive amount
+                                If the document currency and tax currency differs, tax inclusive amount in tax currency should be specified here. -->
+                            <puf:TaxCurrencyTaxInclusiveAmount currencyID="HUF">114830.23</puf:TaxCurrencyTaxInclusiveAmount>
+                            <!-- Tax currency payable amount
+                                If the document currency and tax currency differs, payable amount in tax currency should be specified here. -->
+                            <puf:TaxCurrencyPayableAmount currencyID="HUF">114830.23</puf:TaxCurrencyPayableAmount>
+                        </puf:LegalMonetaryTotalExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- Summary of all lines net amount
+            Summary of all lines net amount. -->
+        <cbc:LineExtensionAmount currencyID="EUR">250.00</cbc:LineExtensionAmount>
+        <!-- Total invoice amount excluding tax
+            Documents total invoice amount, excluding taxes. -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">250.00</cbc:TaxExclusiveAmount>
+        <!-- Total invoice amount including tax
+            Documents total invoice amount, including taxes. -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">317.50</cbc:TaxInclusiveAmount>
+        <!-- Payable amount
+            Document total amount that should be paid. -->
+        <cbc:PayableAmount currencyID="EUR">317.50</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <!-- lineExpressionIndicator indicates whether the unit of the item can be expressed as a natural unit of measurement. 
+                                The indicator must be provided on each line. -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>lineExpressionIndicator</puf:Key>
+                                <puf:Value>true</puf:Value>
+                            </puf:RestrictedInformation>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:LineExtension>
+                                <!-- Tax currency line total amount
+                                    Total line amount, including tax, discount and charges in tax currency. -->
+                                <puf:TaxCurrencyTaxInclusiveLineExtensionAmount currencyID="HUF">114830.23</puf:TaxCurrencyTaxInclusiveLineExtensionAmount>
+                                <!-- Tax currency line net amount
+                                    Net amount in tax currency. -->
+                                <puf:TaxCurrencyLineExtensionAmount currencyID="HUF">90417.50</puf:TaxCurrencyLineExtensionAmount>
+                                <!-- Tax inclusive line total amount
+                                    Total line amount, including tax, discount and charges. -->
+                                <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">317.50</puf:TaxInclusiveLineExtensionAmount>
+                            </puf:LineExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- Line Identifier
+            Unique line identifier.-->
+        <cbc:ID>1</cbc:ID>
+        <!-- Invoiced Quantity-->
+        <cbc:InvoicedQuantity unitCode="PCS">1</cbc:InvoicedQuantity>
+        <!-- Net amount
+            The net amount for the invoice line. -->
+        <cbc:LineExtensionAmount currencyID="EUR">250.00</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+            <!-- Line total tax amount -->
+            <cbc:TaxAmount currencyID="EUR">67.50</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <!-- Total taxable amount for each tax category -->
+                <cbc:TaxableAmount currencyID="EUR">250.00</cbc:TaxableAmount>
+                <!-- Total tax amount for each tax category -->
+                <cbc:TaxAmount currencyID="EUR">67.50</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <!-- Tax category code
+                    Code for identifying the tax category.-->
+                    <cbc:ID>S</cbc:ID>
+                    <!-- Tax category percent
+                    Percentage rate for the tax category. -->
+                    <cbc:Percent>27.00</cbc:Percent>
+                    <cac:TaxScheme>
+                        <!-- Tax scheme identfier
+                    Tax scheme for the tax category. -->
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
+        <cac:TaxTotal>
+            <!-- Line total tax amount in tax currency-->
+            <cbc:TaxAmount currencyID="HUF">24412.73</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <!-- Item name -->
+            <cbc:Name>Item 1</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <!-- Tax category identifier
+                    Code for identifying the tax category. -->
+                <cbc:ID>S</cbc:ID>
+                <!-- Tax category percent
+                    Percentage rate for the tax category. -->
+                <cbc:Percent>27.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <!-- Tax scheme identfier
+                    Tax scheme for the tax category. -->
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- Item net price
+                Net price of the item, this value must not be negative. -->
+            <cbc:PriceAmount currencyID="EUR">250.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
