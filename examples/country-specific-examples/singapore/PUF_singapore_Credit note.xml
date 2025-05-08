@@ -28,6 +28,14 @@
         <!-- BT-14 Sales order reference -->
         <cbc:SalesOrderID>112233</cbc:SalesOrderID>
     </cac:OrderReference>
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <!-- BT-25 Billing reference ID. The Invoice number (BT-1) of the original invoice that the credit/debit note is related to -->
+            <cbc:ID>1234567</cbc:ID>
+            <!-- The date when the Preceding Document was issued -->
+            <cbc:IssueDate>2020-01-01</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
     <!-- BG-4 Seller -->
     <cac:AccountingSupplierParty>
         <cac:Party>
