@@ -205,24 +205,24 @@
                         </puf:LineExtension>
                     </puf:PageroExtension>
                 </ext:ExtensionContent>
-                <ext:UBLExtension>
-                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
-                    <ext:ExtensionContent>
-                        <puf:PageroExtension>
-                            <puf:LineExtension>
-                                <!-- Tax currency line total amount
+            </ext:UBLExtension>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <!-- Tax currency line total amount
                                     Total line amount, including tax, discount and charges in tax currency. -->
-                                <puf:TaxCurrencyTaxInclusiveLineExtensionAmount currencyID="HUF">114830.23</puf:TaxCurrencyTaxInclusiveLineExtensionAmount>
-                                <!-- Tax currency line net amount
+                            <puf:TaxCurrencyTaxInclusiveLineExtensionAmount currencyID="HUF">114830.23</puf:TaxCurrencyTaxInclusiveLineExtensionAmount>
+                            <!-- Tax currency line net amount
                                     Net amount in tax currency. -->
-                                <puf:TaxCurrencyLineExtensionAmount currencyID="HUF">90417.50</puf:TaxCurrencyLineExtensionAmount>
-                                <!-- Tax inclusive line total amount
+                            <puf:TaxCurrencyLineExtensionAmount currencyID="HUF">90417.50</puf:TaxCurrencyLineExtensionAmount>
+                            <!-- Tax inclusive line total amount
                                     Total line amount, including tax, discount and charges. -->
-                                <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">317.50</puf:TaxInclusiveLineExtensionAmount>
-                            </puf:LineExtension>
-                        </puf:PageroExtension>
-                    </ext:ExtensionContent>
-                </ext:UBLExtension>
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">317.50</puf:TaxInclusiveLineExtensionAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
             </ext:UBLExtension>
         </ext:UBLExtensions>
         <!-- Line Identifier
