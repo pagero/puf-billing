@@ -12151,20 +12151,31 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 <div class="paragraph">
 <p><strong>cbc:CountrySubentityCode</strong><br>
-Each party must contain the corresponding states code, the state code should be sent in element <code>cbc:CountrySubentityCode</code> and must be two digits.</p>
+Each party must contain the corresponding state code, the state code should be sent in element <code>cbc:CountrySubentityCode</code> and must be two digits.</p>
 </div>
 <div class="paragraph">
-<p>Valid state codes can be found on the government website <a href="https://einvoice1.gst.gov.in/Others/MasterCodes" target="_blank" rel="noopener">https://einvoice1.gst.gov.in/Others/MasterCodes</a>.</p>
-</div>
-<div class="paragraph">
-<p>The parties state code must correspond with the first two digits of the parties GSTIN number.</p>
+<p>The party&#8217;s state code must correspond with the first two digits of the party&#8217;s GSTIN number.</p>
 </div>
 <div class="paragraph">
 <p><strong>cbc:PostalZone</strong><br>
 The post code or PIN code as referred to in India must exist on all parties and must be sent in <code>cbc:PostalZone</code>.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Valid codes can be found on the government website <a href="https://einvoice1.gst.gov.in/Others/MasterCodes" target="_blank" rel="noopener">https://einvoice1.gst.gov.in/Others/MasterCodes</a>.</p>
+<p>Valid <strong>state</strong> and <strong>post codes</strong> can be found on the government website <a href="https://einvoice.gst.gov.in/einvoice/master-codes" target="_blank" rel="noopener">https://einvoice.gst.gov.in/einvoice/master-codes</a>.</p>
+</div>
+<div class="paragraph">
+<p>Note that the Indian government geo-restricts their website and thus an Indian IP is needed to browse it.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
@@ -12189,7 +12200,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
             <span class="tag">&lt;/cac:Country&gt;</span>
         <span class="tag">&lt;/cac:PostalAddress&gt;</span>
         <span class="tag">&lt;cac:PartyIdentification&gt;</span>
-            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IN:GSTIN</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>01AAAAA3212A1AA<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">IN:GSTIN</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>01AAAAA3212A1AA<span class="tag">&lt;/cbc:ID&gt;</span>
         <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
         <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
     <span class="tag">&lt;/cac:Party&gt;</span>
@@ -12210,8 +12221,22 @@ The post code or PIN code as referred to in India must exist on all parties and 
 <div class="paragraph">
 <p>Each invoice line must contain a HSN code, IRP will validate that the provided HSN code correspond with relevant taxes for that goods or service.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>All HSN codes applicable can be found on the government website <a href="https://einvoice1.gst.gov.in/Others/MasterCodes" target="_blank" rel="noopener">https://einvoice1.gst.gov.in/Others/MasterCodes</a>.</p>
+<p>All valid HSN codes can be found on the government website <a href="https://einvoice.gst.gov.in/einvoice/master-codes" target="_blank" rel="noopener">https://einvoice.gst.gov.in/einvoice/master-codes</a>.</p>
+</div>
+<div class="paragraph">
+<p>Note that the Indian government geo-restricts their website and thus an Indian IP is needed to browse it.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
