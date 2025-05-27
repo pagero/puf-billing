@@ -61,16 +61,19 @@ _Example with additional id provided in India in Party structure_
 The mandatory clearance platform IRP validate the below address information according to code lists.
 
 *cbc:CountrySubentityCode* +
-Each party must contain the corresponding states code, the state code should be sent in element `cbc:CountrySubentityCode` and must be two digits.
+Each party must contain the corresponding state code, the state code should be sent in element `cbc:CountrySubentityCode` and must be two digits.
 
-Valid state codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes[https://einvoice1.gst.gov.in/Others/MasterCodes^]. 
-
-The parties state code must correspond with the first two digits of the parties GSTIN number.
+The party's state code must correspond with the first two digits of the party's GSTIN number.
 
 *cbc:PostalZone* +
 The post code or PIN code as referred to in India must exist on all parties and must be sent in `cbc:PostalZone`. 
 
-Valid codes can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes[https://einvoice1.gst.gov.in/Others/MasterCodes^].
+[NOTE]
+====
+Valid *state* and *post codes* can be found on the government website https://einvoice.gst.gov.in/einvoice/master-codes[https://einvoice.gst.gov.in/einvoice/master-codes^]. 
+
+Note that the Indian government geo-restricts their website and thus an Indian IP is needed to browse it.
+====
 
 *Example* +
 _Example of a correct address for cac:AccountingCustomerParty_
@@ -93,7 +96,7 @@ _Example of a correct address for cac:AccountingCustomerParty_
             </cac:Country>
         </cac:PostalAddress>
         <cac:PartyIdentification>
-            <cbc:ID schemeID="IN:GSTIN">01AAAAA3212A1AA</cbc:ID><!--1-->
+            <cbc:ID schemeID="IN:GSTIN">01AAAAA3212A1AA</cbc:ID>
         </cac:PartyIdentification>
         <!-- Code omitted for clarity -->
     </cac:Party>
@@ -110,7 +113,12 @@ Tax type scheme codes for India can be found in https://pagero.github.io/puf-cod
 
 Each invoice line must contain a HSN code, IRP will validate that the provided HSN code correspond with relevant taxes for that goods or service.
 
-All HSN codes applicable can be found on the government website https://einvoice1.gst.gov.in/Others/MasterCodes[https://einvoice1.gst.gov.in/Others/MasterCodes^].
+[NOTE]
+====
+All valid HSN codes can be found on the government website https://einvoice.gst.gov.in/einvoice/master-codes[https://einvoice.gst.gov.in/einvoice/master-codes^]. 
+
+Note that the Indian government geo-restricts their website and thus an Indian IP is needed to browse it.
+====
 
 *Example* +
 _Example how to provide HSN code_
