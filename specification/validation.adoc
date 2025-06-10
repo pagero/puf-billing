@@ -21,7 +21,7 @@ _Note that the old specification identifier 'urn:cen.eu:en16931:2017#compliant#u
 |Fatal
 
 |PUF-R002
-|[PUF-R002]-Profile identifier MUST have the value 'urn:pagero.com:puf:billing:1.0'.
+|[PUF-R002]-Profile identifier MUST have the value 'urn:pagero.com:puf:billing:1.0' or 'urn:pagero.com:puf:purchase:1.0'.
 |Fatal
 
 |PUF-R003
