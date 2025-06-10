@@ -23,7 +23,7 @@
         <!-- Document level -->
         <rule context="ubl-creditnote:CreditNote | ubl-invoice:Invoice">
             <assert flag="fatal" id="PUF-R001" test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:pagero.com:puf:billing:2.0') or starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0')">[PUF-R001]-Customization identifier MUST have the value 'urn:pagero.com:puf:billing:2.0' or 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0'.</assert>
-            <assert flag="fatal" id="PUF-R002" test="starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:billing:1.0')">[PUF-R002]-Profile identifier MUST have the value 'urn:pagero.com:puf:billing:1.0'.</assert>
+            <assert flag="fatal" id="PUF-R002" test="starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:billing:1.0') or starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:purchase:1.0')">[PUF-R002]-Profile identifier MUST have the value 'urn:pagero.com:puf:billing:1.0' or 'urn:pagero.com:puf:purchase:1.0'.</assert>
         </rule>
 
         <rule context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:RegistrationData">

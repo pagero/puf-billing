@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xsl:stylesheet xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:schold="http://www.ascc.net/xml/schematron"
-                xmlns:iso="http://purl.oclc.org/dsdl/schematron"
-                xmlns:xhtml="http://www.w3.org/1999/xhtml"
+<xsl:stylesheet xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
                 xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-                xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
-                xmlns:puf="urn:pagero:ExtensionComponent:1.0"
                 xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+                xmlns:iso="http://purl.oclc.org/dsdl/schematron"
+                xmlns:puf="urn:pagero:ExtensionComponent:1.0"
+                xmlns:schold="http://www.ascc.net/xml/schematron"
+                xmlns:u="utils"
                 xmlns:ubl-creditnote="urn:pagero:PageroUniversalFormat:CreditNote:1.0"
                 xmlns:ubl-invoice="urn:pagero:PageroUniversalFormat:Invoice:1.0"
-                xmlns:u="utils"
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version="2.0"><!--Implementers: please note that overriding process-prolog or process-root is 
     the preferred method for meta-stylesheets to use where possible. -->
    <xsl:param name="archiveDirParameter"/>
@@ -20,32 +20,21 @@
    <xsl:variable name="document-uri">
       <xsl:value-of select="document-uri(/)"/>
    </xsl:variable>
-
    <!--PHASES-->
-
-
    <!--PROLOG-->
    <xsl:output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                method="xml"
                omit-xml-declaration="no"
                standalone="yes"
                indent="yes"/>
-
    <!--XSD TYPES FOR XSLT2-->
-
-
    <!--KEYS AND FUNCTIONS-->
-
-
    <!--DEFAULT RULES-->
-
-
    <!--MODE: SCHEMATRON-SELECT-FULL-PATH-->
    <!--This mode can be used to generate an ugly though full XPath for locators-->
    <xsl:template match="*" mode="schematron-select-full-path">
       <xsl:apply-templates select="." mode="schematron-get-full-path"/>
    </xsl:template>
-
    <!--MODE: SCHEMATRON-FULL-PATH-->
    <!--This mode can be used to generate an ugly though full XPath for locators-->
    <xsl:template match="*" mode="schematron-get-full-path">
@@ -84,7 +73,6 @@
          </xsl:otherwise>
       </xsl:choose>
    </xsl:template>
-
    <!--MODE: SCHEMATRON-FULL-PATH-2-->
    <!--This mode can be used to generate prefixed XPath for humans-->
    <xsl:template match="node() | @*" mode="schematron-get-full-path-2">
@@ -118,7 +106,6 @@
          <xsl:text/>/@<xsl:value-of select="name(.)"/>
       </xsl:if>
    </xsl:template>
-
    <!--MODE: GENERATE-ID-FROM-PATH -->
    <xsl:template match="/" mode="generate-id-from-path"/>
    <xsl:template match="text()" mode="generate-id-from-path">
@@ -142,7 +129,6 @@
       <xsl:text>.</xsl:text>
       <xsl:value-of select="concat('.',name(),'-',1+count(preceding-sibling::*[name()=name(current())]),'-')"/>
    </xsl:template>
-
    <!--MODE: GENERATE-ID-2 -->
    <xsl:template match="/" mode="generate-id-2">U</xsl:template>
    <xsl:template match="*" mode="generate-id-2" priority="2">
@@ -165,7 +151,6 @@
    </xsl:template>
    <!--Strip characters-->
    <xsl:template match="text()" priority="-1"/>
-
    <!--SCHEMA SETUP-->
    <xsl:template match="/">
       <svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
@@ -197,21 +182,16 @@
          <xsl:apply-templates select="/" mode="M9"/>
       </svrl:schematron-output>
    </xsl:template>
-
    <!--SCHEMATRON PATTERNS-->
    <svrl:text xmlns:svrl="http://purl.oclc.org/dsdl/svrl">Rules for Pagero Universal Format (PUF) 2.0</svrl:text>
-
    <!--PATTERN -->
-
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="ubl-creditnote:CreditNote | ubl-invoice:Invoice"
                  priority="1015"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="ubl-creditnote:CreditNote | ubl-invoice:Invoice"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:pagero.com:puf:billing:2.0') or starts-with(normalize-space(cbc:CustomizationID/text()), 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0#conformant#urn:pagero.com:puf:billing:1.0')"/>
          <xsl:otherwise>
@@ -226,33 +206,30 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
-         <xsl:when test="starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:billing:1.0')"/>
+         <xsl:when test="starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:billing:1.0') or starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:purchase:1.0')"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:billing:1.0')">
+                                test="starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:billing:1.0') or starts-with(normalize-space(cbc:ProfileID/text()), 'urn:pagero.com:puf:purchase:1.0')">
                <xsl:attribute name="id">PUF-R002</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
                   <xsl:apply-templates select="." mode="schematron-select-full-path"/>
                </xsl:attribute>
-               <svrl:text>[PUF-R002]-Profile identifier MUST have the value 'urn:pagero.com:puf:billing:1.0'.</svrl:text>
+               <svrl:text>[PUF-R002]-Profile identifier MUST have the value 'urn:pagero.com:puf:billing:1.0' or 'urn:pagero.com:puf:purchase:1.0'.</svrl:text>
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:RegistrationData"
                  priority="1014"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:RegistrationData"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="puf:IDType/@listID = 'PUF-001-REGISTRATIONDATA'"/>
          <xsl:otherwise>
@@ -269,15 +246,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:ADAID"
                  priority="1013"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:ADAID"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="puf:IDType/@listID = 'PUF-002-ADAID'"/>
          <xsl:otherwise>
@@ -294,12 +269,10 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:TaxExchangeRate" priority="1012" mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl" context="cac:TaxExchangeRate"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="not(normalize-space(cbc:SourceCurrencyCode/text()) = normalize-space(cbc:TargetCurrencyCode/text()))"/>
          <xsl:otherwise>
@@ -314,8 +287,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="string(cbc:MathematicOperatorCode) = 'Multiply'"/>
          <xsl:otherwise>
@@ -330,8 +302,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:CalculationRate"/>
          <xsl:otherwise>
@@ -345,8 +316,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:SourceCurrencyCode and cbc:TargetCurrencyCode"/>
          <xsl:otherwise>
@@ -363,15 +333,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxChargeability"
                  priority="1011"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxChargeability"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cbc:TaxTypeCode = 'I' or cbc:TaxTypeCode = 'S' or cbc:TaxTypeCode = 'D'"/>
          <xsl:otherwise>
@@ -388,15 +356,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxCurrencyTaxableAmount"
                  priority="1010"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxCurrencyTaxableAmount"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@currencyID = //cbc:TaxCurrencyCode"/>
          <xsl:otherwise>
@@ -413,15 +379,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxCurrencyTaxAmount"
                  priority="1009"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:TaxSubtotalExtension/puf:TaxCurrencyTaxAmount"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@currencyID = //cbc:TaxCurrencyCode"/>
          <xsl:otherwise>
@@ -438,15 +402,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxExclusiveAmount"
                  priority="1008"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxExclusiveAmount"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@currencyID = //cbc:TaxCurrencyCode"/>
          <xsl:otherwise>
@@ -463,15 +425,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxInclusiveAmount"
                  priority="1007"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxInclusiveAmount"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@currencyID = //cbc:TaxCurrencyCode"/>
          <xsl:otherwise>
@@ -488,15 +448,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyPayableAmount"
                  priority="1006"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:TaxCurrencyPayableAmount"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@currencyID = //cbc:TaxCurrencyCode"/>
          <xsl:otherwise>
@@ -513,15 +471,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:PaymentInKind/puf:Amount"
                  priority="1005"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:LegalMonetaryTotal/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LegalMonetaryTotalExtension/puf:PaymentInKind/puf:Amount"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@currencyID = //cbc:DocumentCurrencyCode"/>
          <xsl:otherwise>
@@ -538,20 +494,18 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:RegistrationData/puf:IDType"
                  priority="1004"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:RegistrationData/puf:IDType"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
-          <xsl:when test="                     (some $code in tokenize('IT:Ufficio IT:NumeroREA IT:CapitaleSociale IT:SocioUnico IT:StatoLiquidazione ES:Book ES:RegisterOfCompaniesLocation ES:Sheet ES:Folio ES:Section ES:Volume ES:AdditionalRegistrationData FR:DenomSociete FR:TypeSociete FR:CapitalSocial FR:RCSNumber FR:APE MY:CertEx PH:SellerType', '\s')                         satisfies normalize-space(text()) = $code)"/>
+         <xsl:when test="                 (some $code in tokenize('IT:Ufficio IT:NumeroREA IT:CapitaleSociale IT:SocioUnico IT:StatoLiquidazione ES:Book ES:RegisterOfCompaniesLocation ES:Sheet ES:Folio ES:Section ES:Volume ES:AdditionalRegistrationData FR:DenomSociete FR:TypeSociete FR:CapitalSocial FR:RCSNumber FR:APE MY:CertEx PH:SellerType', '\s')                         satisfies normalize-space(text()) = $code)"/>
          <xsl:otherwise>
             <svrl:failed-assert xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
-                                test="(some $code in tokenize('IT:Ufficio IT:NumeroREA IT:CapitaleSociale IT:SocioUnico IT:StatoLiquidazione ES:Book ES:RegisterOfCompaniesLocation ES:Sheet ES:Folio ES:Section ES:Volume ES:AdditionalRegistrationData FR:DenomSociete FR:TypeSociete FR:CapitalSocial FR:RCSNumber FR:APE', '\s') satisfies normalize-space(text()) = $code)">
+                                test="(some $code in tokenize('IT:Ufficio IT:NumeroREA IT:CapitaleSociale IT:SocioUnico IT:StatoLiquidazione ES:Book ES:RegisterOfCompaniesLocation ES:Sheet ES:Folio ES:Section ES:Volume ES:AdditionalRegistrationData FR:DenomSociete FR:TypeSociete FR:CapitalSocial FR:RCSNumber FR:APE MY:CertEx PH:SellerType', '\s') satisfies normalize-space(text()) = $code)">
                <xsl:attribute name="id">PUF-R016</xsl:attribute>
                <xsl:attribute name="flag">fatal</xsl:attribute>
                <xsl:attribute name="location">
@@ -563,15 +517,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:ADAID/puf:IDType"
                  priority="1003"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:Party/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PartyExtension/puf:ADAID/puf:IDType"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="                 (some $code in tokenize('FR:ServiceCode ES:OficinaContable ES:OrganoGestor ES:UnidadTramitadora ES:OrganoProponente GEN:UnitCode', '\s')                         satisfies normalize-space(text()) = $code)"/>
          <xsl:otherwise>
@@ -588,15 +540,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:InvoiceLine/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LineExtension/puf:LineExclAllowanceChargeAmount | cac:CreditNoteLine/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LineExtension/puf:LineExclAllowanceChargeAmount"
                  priority="1002"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:InvoiceLine/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LineExtension/puf:LineExclAllowanceChargeAmount | cac:CreditNoteLine/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension']/ext:ExtensionContent/puf:PageroExtension/puf:LineExtension/puf:LineExclAllowanceChargeAmount"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@currencyID = //cbc:DocumentCurrencyCode"/>
          <xsl:otherwise>
@@ -613,15 +563,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:InvoiceLine/cac:Price/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PriceExtension/puf:PriceInclAllowanceChargeAmount | cac:CreditNoteLine/cac:Price/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PriceExtension/puf:PriceInclAllowanceChargeAmount"
                  priority="1001"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:InvoiceLine/cac:Price/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PriceExtension/puf:PriceInclAllowanceChargeAmount | cac:CreditNoteLine/cac:Price/ext:UBLExtensions/ext:UBLExtension[ext:ExtensionURI = 'urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension']/ext:ExtensionContent/puf:PageroExtension/puf:PriceExtension/puf:PriceInclAllowanceChargeAmount"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="@currencyID = //cbc:DocumentCurrencyCode"/>
          <xsl:otherwise>
@@ -638,15 +586,13 @@
       </xsl:choose>
       <xsl:apply-templates select="*|comment()|processing-instruction()" mode="M9"/>
    </xsl:template>
-
-	  <!--RULE -->
+   <!--RULE -->
    <xsl:template match="cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal | cac:CreditNoteLine/cac:TaxTotal/cac:TaxSubtotal"
                  priority="1000"
                  mode="M9">
       <svrl:fired-rule xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
                        context="cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal | cac:CreditNoteLine/cac:TaxTotal/cac:TaxSubtotal"/>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:TaxCategory/cbc:Percent"/>
          <xsl:otherwise>
@@ -661,8 +607,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:TaxCategory[string-length(cbc:ID)&gt;0]/cbc:ID"/>
          <xsl:otherwise>
@@ -677,8 +622,7 @@
             </svrl:failed-assert>
          </xsl:otherwise>
       </xsl:choose>
-
-		    <!--ASSERT -->
+      <!--ASSERT -->
       <xsl:choose>
          <xsl:when test="cac:TaxCategory/cac:TaxScheme[string-length(cbc:ID)&gt;0]/cbc:ID"/>
          <xsl:otherwise>
