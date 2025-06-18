@@ -705,6 +705,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_customer_vat_status">5.5.3. Customer VAT status</a></li>
 <li><a href="#_line_expression_indicator">5.5.4. Line expression indicator</a></li>
 <li><a href="#_modification">5.5.5. Modification</a></li>
+<li><a href="#_advance_payment">5.5.6. Advance Payment</a></li>
 </ul>
 </li>
 <li><a href="#_india">5.6. India</a>
@@ -12063,6 +12064,110 @@ The code should match the defined distribution method, if this is unknown at the
 <td><code>lineModificationReferenceLineNumberReference</code> is the continuation of the original numbering created from the original invoice, in this example the original invoice line number was 1, then the <code>lineModificationReferenceLineNumberReference</code> will be 2.</td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_advance_payment"><a class="anchor" href="#_advance_payment"></a><a class="link" href="#_advance_payment">5.5.6. Advance Payment</a></h4>
+<div class="paragraph">
+<p>Advance payment must be sent as a separate invoice line with a negative line extension amount. The <code>lineExpressionIndicator</code> needs to be set to false and the term "advance payment/eloleg" must be sent in the invoice line item name.
+Four advanced data fields are also required.</p>
+</div>
+<div class="sect4">
+<h5 id="_advance_data_fields"><a class="anchor" href="#_advance_data_fields"></a><a class="link" href="#_advance_data_fields">Advance data fields</a></h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Advance Indicator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indication that the item is of the advance type.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Advance Original Invoice</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The serial number of the advance payment account into which the advance payment was made.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Advanded Payment Date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Payment date of advance payment.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Advanded Exchange Rate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Currency rate for advance payment.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>invoice row with advance Payment</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"> <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+            <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                        <span class="tag">&lt;puf:LineExtension&gt;</span>
+                            <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                                <span class="tag">&lt;puf:Key&gt;</span>lineExpressionIndicator<span class="tag">&lt;/puf:Key&gt;</span>
+                                <span class="tag">&lt;puf:Value&gt;</span>false<span class="tag">&lt;/puf:Value&gt;</span>
+                            <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                            <span class="comment">&lt;!-- Indication that the item is of the advance type. --&gt;</span>
+                            <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                                <span class="tag">&lt;puf:Key&gt;</span>advanceIndicator<span class="tag">&lt;/puf:Key&gt;</span>
+                                <span class="tag">&lt;puf:Value&gt;</span>true<span class="tag">&lt;/puf:Value&gt;</span>
+                            <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                            <span class="comment">&lt;!-- The serial number of the advance payment account. --&gt;</span>
+                            <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                                <span class="tag">&lt;puf:Key&gt;</span>advanceOriginalInvoice<span class="tag">&lt;/puf:Key&gt;</span>
+                                <span class="tag">&lt;puf:Value&gt;</span>AAA000567<span class="tag">&lt;/puf:Value&gt;</span>
+                            <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                            <span class="comment">&lt;!-- Payment date of advance payment. --&gt;</span>
+                            <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                                <span class="tag">&lt;puf:Key&gt;</span>advancePaymentDate<span class="tag">&lt;/puf:Key&gt;</span>
+                                <span class="tag">&lt;puf:Value&gt;</span>2021-05-10<span class="tag">&lt;/puf:Value&gt;</span>
+                            <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                            <span class="comment">&lt;!-- Currency rate for advance payment. --&gt;</span>
+                            <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                                <span class="tag">&lt;puf:Key&gt;</span>advanceExchangeRate<span class="tag">&lt;/puf:Key&gt;</span>
+                                <span class="tag">&lt;puf:Value&gt;</span>1.00<span class="tag">&lt;/puf:Value&gt;</span>
+                            <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                        <span class="tag">&lt;/puf:LineExtension&gt;</span>
+                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>2<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="tag">&lt;cbc:LineExtensionAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">HUF</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>-500000.00<span class="tag">&lt;/cbc:LineExtensionAmount&gt;</span>
+        <span class="tag">&lt;cac:Item&gt;</span>
+            <span class="comment">&lt;!-- Item name --&gt;</span>
+            <span class="tag">&lt;cbc:Name&gt;</span>Eloleg (AAA000567 számla)<span class="tag">&lt;/cbc:Name&gt;</span>
+            <span class="tag">&lt;cac:ClassifiedTaxCategory&gt;</span>
+                <span class="comment">&lt;!-- Tax category identifier
+                    Code for identifying the tax category. --&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="comment">&lt;!-- Tax category percent
+                    Percentage rate for the tax category. --&gt;</span>
+                <span class="tag">&lt;cbc:Percent&gt;</span>27.00<span class="tag">&lt;/cbc:Percent&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="comment">&lt;!-- Tax scheme identfier
+                    Tax scheme for the tax category. --&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:ClassifiedTaxCategory&gt;</span>
+        <span class="tag">&lt;/cac:Item&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span></code></pre>
+</div>
 </div>
 </div>
 </div>

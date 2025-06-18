@@ -345,3 +345,90 @@ _Credit Note with modification of Invoice_
 </CreditNote>
 ----
 <1> `lineModificationReferenceLineNumberReference` is the continuation of the original numbering created from the original invoice, in this example the original invoice line number was 1, then the `lineModificationReferenceLineNumberReference` will be 2.
+
+==== Advance Payment
+
+Advance payment must be sent as a separate invoice line with a negative line extension amount. The `lineExpressionIndicator` needs to be set to false and the term "advance payment/eloleg" must be sent in the invoice line item name.
+Four advanced data fields are also required. 
+
+
+===== Advance data fields
+
+|===
+|Value |Description
+
+|`Advance Indicator`
+|Indication that the item is of the advance type.
+
+|`Advance Original Invoice`
+|The serial number of the advance payment account into which the advance payment was made.
+
+|`Advanded Payment Date`
+|Payment date of advance payment.
+
+|`Advanded Exchange Rate`
+|Currency rate for advance payment.
+
+|===
+
+*Example* +
+_invoice row with advance Payment_
+[source,xml]
+----
+ <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:RestrictedInformation>
+                                <puf:Key>lineExpressionIndicator</puf:Key>
+                                <puf:Value>false</puf:Value>
+                            </puf:RestrictedInformation>  
+                            <!-- Indication that the item is of the advance type. -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>advanceIndicator</puf:Key>
+                                <puf:Value>true</puf:Value>
+                            </puf:RestrictedInformation>                        
+                            <!-- The serial number of the advance payment account. -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>advanceOriginalInvoice</puf:Key>
+                                <puf:Value>AAA000567</puf:Value>
+                            </puf:RestrictedInformation>
+                            <!-- Payment date of advance payment. -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>advancePaymentDate</puf:Key>
+                                <puf:Value>2021-05-10</puf:Value>
+                            </puf:RestrictedInformation>
+                            <!-- Currency rate for advance payment. -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>advanceExchangeRate</puf:Key>
+                                <puf:Value>1.00</puf:Value>
+                            </puf:RestrictedInformation>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>2</cbc:ID>
+        <cbc:LineExtensionAmount currencyID="HUF">-500000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- Item name -->
+            <cbc:Name>Eloleg (AAA000567 számla)</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <!-- Tax category identifier
+                    Code for identifying the tax category. -->
+                <cbc:ID>S</cbc:ID>
+                <!-- Tax category percent
+                    Percentage rate for the tax category. -->
+                <cbc:Percent>27.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <!-- Tax scheme identfier
+                    Tax scheme for the tax category. -->
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+    </cac:InvoiceLine>
+----
