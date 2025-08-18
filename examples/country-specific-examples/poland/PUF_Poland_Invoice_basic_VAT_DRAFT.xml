@@ -6,7 +6,7 @@
     xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     
     <!-- Values in invoice are examples values only. 
-    PUF example file of basic invoice to create a FA XML version 2 invoice. Corresponding invoice type in FA (2): VAT.
+    PUF example file of basic invoice to create a FA XML version 3 invoice. Corresponding invoice type in FA (3): VAT.
     In applicable cases the corresponding FA XML element is mentioned in parenthesis -->
     <ext:UBLExtensions>
         <ext:UBLExtension>
