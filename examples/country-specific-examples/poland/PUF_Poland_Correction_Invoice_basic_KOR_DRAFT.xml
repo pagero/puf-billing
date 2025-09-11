@@ -262,7 +262,7 @@
             <cbc:Name>Article 1</cbc:Name>
             <cac:ClassifiedTaxCategory>
                 <!-- Invoiced item VAT category code. P_12-->
-                <cbc:ID >S</cbc:ID>
+                <cbc:ID>S</cbc:ID>
                 <!-- Invoiced item VAT rate P_12-->
                 <cbc:Percent>23</cbc:Percent>
                 <cac:TaxScheme>
@@ -303,7 +303,7 @@
             <cbc:Name>Article 1</cbc:Name>
             <cac:ClassifiedTaxCategory>
                 <!-- Invoiced item VAT category code. P_12-->
-                <cbc:ID >S</cbc:ID>
+                <cbc:ID>S</cbc:ID>
                 <!-- Invoiced item VAT rate P_12-->
                 <cbc:Percent>23</cbc:Percent>
                 <cac:TaxScheme>
