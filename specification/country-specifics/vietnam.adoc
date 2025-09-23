@@ -56,9 +56,3 @@ _Invoice Type Code_
 ----
 <cbc:InvoiceTypeCode name="01GTKT">380</cbc:InvoiceTypeCode>
 ----
-
-==== Limitations
- - There is no support for charges in the Vietnam e-invoice format.
- - Credit Note is not supported in Pagero solution.
- - Cancellation is not supported in Pagero solution.
- - Adjustments is not supported in Pagero solution.

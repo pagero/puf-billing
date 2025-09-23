@@ -8,6 +8,10 @@ include::country-specifics/basque-country.adoc[]
 
 include::country-specifics/canada.adoc[]
 
+=== Croatia
+
+include::country-specifics/croatia.adoc[]
+
 === France
 
 include::country-specifics/france.adoc[]

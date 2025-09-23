@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<meta name="author" content="Copyright &copy; 2024, Pagero Group">
-<meta name="copyright" content="Pagero Group">
+<meta name="author" content="Copyright &copy; 2025, Pagero, Part of Thomson Reuters">
+<meta name="copyright" content="Pagero, Part of Thomson Reuters">
 <title>PUF Billing 2.0</title>
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -522,7 +522,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="header">
 <h1><span class="image center"><img src="images/puf-logo.png" alt="puf logo" width="100%"></span> PUF Billing 2.0</h1>
 <div class="details">
-<span id="author" class="author">Copyright &copy; 2024, Pagero Group</span><br>
+<span id="author" class="author">Copyright &copy; 2025, Pagero, Part of Thomson Reuters</span><br>
 <span id="email" class="email"><a href="https://pagero.com" class="bare">https://pagero.com</a></span><br>
 </div>
 <div id="toc" class="toc2">
@@ -687,117 +687,128 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_party_identification">5.2.2. Party identification</a></li>
 </ul>
 </li>
-<li><a href="#_france">5.3. France</a>
+<li><a href="#_croatia">5.3. Croatia</a>
 <ul class="sectlevel3">
-<li><a href="#_service_code">5.3.1. Service code</a></li>
-<li><a href="#_legal_commitments">5.3.2. Legal commitments</a></li>
+<li><a href="#_invoice_type_code_and_invoice_subtype">5.3.1. Invoice type code and invoice subtype</a></li>
+<li><a href="#_oib_croatian_tax_number">5.3.2. OIB (Croatian Tax Number)</a></li>
+<li><a href="#_operator_information_fiscalization_actor">5.3.3. Operator Information (Fiscalization Actor)</a></li>
+<li><a href="#_issue_time">5.3.4. Issue Time</a></li>
+<li><a href="#_croatian_tax_categories">5.3.5. Croatian Tax Categories</a></li>
+<li><a href="#_item_classification">5.3.6. Item Classification</a></li>
+<li><a href="#_line_level_references">5.3.7. Line-Level References</a></li>
+<li><a href="#_billing_reference_description">5.3.8. Billing Reference Description</a></li>
 </ul>
 </li>
-<li><a href="#_greece">5.4. Greece</a>
+<li><a href="#_france">5.4. France</a>
 <ul class="sectlevel3">
-<li><a href="#_mydata_xml_file_as_attachment">5.4.1. myDATA xml file as attachment</a></li>
+<li><a href="#_service_code">5.4.1. Service code</a></li>
+<li><a href="#_legal_commitments">5.4.2. Legal commitments</a></li>
 </ul>
 </li>
-<li><a href="#_hungary">5.5. Hungary</a>
+<li><a href="#_greece">5.5. Greece</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_appearance">5.5.1. Invoice appearance</a></li>
-<li><a href="#_tax_number">5.5.2. Tax number</a></li>
-<li><a href="#_customer_vat_status">5.5.3. Customer VAT status</a></li>
-<li><a href="#_line_expression_indicator">5.5.4. Line expression indicator</a></li>
-<li><a href="#_modification">5.5.5. Modification</a></li>
-<li><a href="#_advance_payment">5.5.6. Advance Payment</a></li>
+<li><a href="#_mydata_xml_file_as_attachment">5.5.1. myDATA xml file as attachment</a></li>
 </ul>
 </li>
-<li><a href="#_india">5.6. India</a>
+<li><a href="#_hungary">5.6. Hungary</a>
 <ul class="sectlevel3">
-<li><a href="#_place_of_supply">5.6.1. Place of supply</a></li>
-<li><a href="#_party_identification_2">5.6.2. Party identification</a></li>
-<li><a href="#_party_address_information">5.6.3. Party address information</a></li>
-<li><a href="#_tax_type_scheme_2">5.6.4. Tax type scheme</a></li>
-<li><a href="#_hsn_code">5.6.5. HSN code</a></li>
-<li><a href="#_supply_type">5.6.6. Supply type</a></li>
-<li><a href="#_igst_on_intra_state_transaction">5.6.7. IGST on intra state transaction</a></li>
+<li><a href="#_invoice_appearance">5.6.1. Invoice appearance</a></li>
+<li><a href="#_tax_number">5.6.2. Tax number</a></li>
+<li><a href="#_customer_vat_status">5.6.3. Customer VAT status</a></li>
+<li><a href="#_line_expression_indicator">5.6.4. Line expression indicator</a></li>
+<li><a href="#_modification">5.6.5. Modification</a></li>
+<li><a href="#_advance_payment">5.6.6. Advance Payment</a></li>
 </ul>
 </li>
-<li><a href="#_italy">5.7. Italy</a>
+<li><a href="#_india">5.7. India</a>
 <ul class="sectlevel3">
-<li><a href="#_routing_code_codice_destinatario">5.7.1. Routing code (codice destinatario)</a></li>
-<li><a href="#_duty_stamp_dati_bollo">5.7.2. Duty stamp (dati bollo)</a></li>
-<li><a href="#_tax_chargeability_esigibilita_iva">5.7.3. Tax chargeability (esigibilita IVA)</a></li>
-<li><a href="#_vat_number_and_fiscal_code">5.7.4. VAT number and fiscal code</a></li>
-<li><a href="#_registration_data_2">5.7.5. Registration data</a></li>
+<li><a href="#_place_of_supply">5.7.1. Place of supply</a></li>
+<li><a href="#_party_identification_3">5.7.2. Party identification</a></li>
+<li><a href="#_party_address_information">5.7.3. Party address information</a></li>
+<li><a href="#_tax_type_scheme_2">5.7.4. Tax type scheme</a></li>
+<li><a href="#_hsn_code">5.7.5. HSN code</a></li>
+<li><a href="#_supply_type">5.7.6. Supply type</a></li>
+<li><a href="#_igst_on_intra_state_transaction">5.7.7. IGST on intra state transaction</a></li>
 </ul>
 </li>
-<li><a href="#_malaysia">5.8. Malaysia</a>
+<li><a href="#_italy">5.8. Italy</a>
 <ul class="sectlevel3">
-<li><a href="#_party_identification_3">5.8.1. Party identification</a></li>
-<li><a href="#_tax_details">5.8.2. Tax Details</a></li>
-<li><a href="#_unit_of_measure">5.8.3. Unit of Measure</a></li>
+<li><a href="#_routing_code_codice_destinatario">5.8.1. Routing code (codice destinatario)</a></li>
+<li><a href="#_duty_stamp_dati_bollo">5.8.2. Duty stamp (dati bollo)</a></li>
+<li><a href="#_tax_chargeability_esigibilita_iva">5.8.3. Tax chargeability (esigibilita IVA)</a></li>
+<li><a href="#_vat_number_and_fiscal_code">5.8.4. VAT number and fiscal code</a></li>
+<li><a href="#_registration_data_2">5.8.5. Registration data</a></li>
 </ul>
 </li>
-<li><a href="#_philippines">5.9. Philippines</a>
+<li><a href="#_malaysia">5.9. Malaysia</a>
 <ul class="sectlevel3">
-<li><a href="#_corrective_invoice">5.9.1. Corrective Invoice</a></li>
-<li><a href="#_withholding_vat">5.9.2. Withholding VAT</a></li>
-<li><a href="#_permit_to_use_ptu">5.9.3. Permit To Use (PTU)</a></li>
-<li><a href="#_seller_tax_status">5.9.4. Seller Tax Status</a></li>
-<li><a href="#_party_branch_code">5.9.5. Party Branch Code</a></li>
-<li><a href="#_invoice_type">5.9.6. Invoice Type</a></li>
-<li><a href="#_allowance_reason_codes">5.9.7. Allowance reason codes</a></li>
+<li><a href="#_party_identification_4">5.9.1. Party identification</a></li>
+<li><a href="#_tax_details">5.9.2. Tax Details</a></li>
+<li><a href="#_unit_of_measure">5.9.3. Unit of Measure</a></li>
 </ul>
 </li>
-<li><a href="#_portugal">5.10. Portugal</a>
+<li><a href="#_philippines">5.10. Philippines</a>
 <ul class="sectlevel3">
-<li><a href="#_billing_software_certification">5.10.1. Billing software certification</a></li>
-<li><a href="#_qr_code_and_atcud">5.10.2. QR code and ATCUD</a></li>
-<li><a href="#_tax_category_codes_2">5.10.3. Tax category codes</a></li>
+<li><a href="#_corrective_invoice">5.10.1. Corrective Invoice</a></li>
+<li><a href="#_withholding_vat">5.10.2. Withholding VAT</a></li>
+<li><a href="#_permit_to_use_ptu">5.10.3. Permit To Use (PTU)</a></li>
+<li><a href="#_seller_tax_status">5.10.4. Seller Tax Status</a></li>
+<li><a href="#_party_branch_code">5.10.5. Party Branch Code</a></li>
+<li><a href="#_invoice_type">5.10.6. Invoice Type</a></li>
+<li><a href="#_allowance_reason_codes">5.10.7. Allowance reason codes</a></li>
 </ul>
 </li>
-<li><a href="#_saudi_arabia">5.11. Saudi Arabia</a>
+<li><a href="#_portugal">5.11. Portugal</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_type_code_and_invoice_subtype">5.11.1. Invoice type code and invoice subtype</a></li>
-<li><a href="#_party_identification_4">5.11.2. Party identification</a></li>
+<li><a href="#_billing_software_certification">5.11.1. Billing software certification</a></li>
+<li><a href="#_qr_code_and_atcud">5.11.2. QR code and ATCUD</a></li>
+<li><a href="#_tax_category_codes_2">5.11.3. Tax category codes</a></li>
 </ul>
 </li>
-<li><a href="#_serbia">5.12. Serbia</a>
+<li><a href="#_saudi_arabia">5.12. Saudi Arabia</a>
 <ul class="sectlevel3">
-<li><a href="#_tax_category_codes_3">5.12.1. Tax category codes</a></li>
+<li><a href="#_invoice_type_code_and_invoice_subtype_2">5.12.1. Invoice type code and invoice subtype</a></li>
 <li><a href="#_party_identification_5">5.12.2. Party identification</a></li>
 </ul>
 </li>
-<li><a href="#_singapore">5.13. Singapore</a>
+<li><a href="#_serbia">5.13. Serbia</a>
 <ul class="sectlevel3">
-<li><a href="#_tax_category_codes_4">5.13.1. Tax category codes</a></li>
+<li><a href="#_tax_category_codes_3">5.13.1. Tax category codes</a></li>
+<li><a href="#_party_identification_6">5.13.2. Party identification</a></li>
 </ul>
 </li>
-<li><a href="#_spain">5.14. Spain</a>
+<li><a href="#_singapore">5.14. Singapore</a>
 <ul class="sectlevel3">
-<li><a href="#_routing_codes_dir3">5.14.1. Routing codes (DIR3)</a></li>
+<li><a href="#_tax_category_codes_4">5.14.1. Tax category codes</a></li>
 </ul>
 </li>
-<li><a href="#_türkiye">5.15. Türkiye</a>
+<li><a href="#_spain">5.15. Spain</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_profile_id">5.15.1. Invoice profile id</a></li>
-<li><a href="#_invoice_type_code">5.15.2. Invoice type code</a></li>
-<li><a href="#_invoice_delivery_method">5.15.3. Invoice delivery method</a></li>
-<li><a href="#_first_name_and_surname">5.15.4. First name and surname</a></li>
-<li><a href="#_registered_tax_office">5.15.5. Registered tax office</a></li>
-<li><a href="#_tax_category_codes_5">5.15.6. Tax category codes</a></li>
-<li><a href="#_tax_scheme">5.15.7. Tax scheme</a></li>
-<li><a href="#_internet_sales">5.15.8. Internet Sales</a></li>
+<li><a href="#_routing_codes_dir3">5.15.1. Routing codes (DIR3)</a></li>
 </ul>
 </li>
-<li><a href="#_united_states">5.16. United States</a>
+<li><a href="#_türkiye">5.16. Türkiye</a>
 <ul class="sectlevel3">
-<li><a href="#_tax_scheme_2">5.16.1. Tax scheme</a></li>
-<li><a href="#_party_identification_6">5.16.2. Party identification</a></li>
+<li><a href="#_invoice_profile_id">5.16.1. Invoice profile id</a></li>
+<li><a href="#_invoice_type_code">5.16.2. Invoice type code</a></li>
+<li><a href="#_invoice_delivery_method">5.16.3. Invoice delivery method</a></li>
+<li><a href="#_first_name_and_surname">5.16.4. First name and surname</a></li>
+<li><a href="#_registered_tax_office">5.16.5. Registered tax office</a></li>
+<li><a href="#_tax_category_codes_5">5.16.6. Tax category codes</a></li>
+<li><a href="#_tax_scheme">5.16.7. Tax scheme</a></li>
+<li><a href="#_internet_sales">5.16.8. Internet Sales</a></li>
 </ul>
 </li>
-<li><a href="#_vietnam">5.17. Vietnam</a>
+<li><a href="#_united_states">5.17. United States</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_serial_and_sequence_number">5.17.1. Invoice, Serial and Sequence Number</a></li>
-<li><a href="#_invoice_type_code_2">5.17.2. Invoice Type Code</a></li>
-<li><a href="#_limitations">5.17.3. Limitations</a></li>
+<li><a href="#_tax_scheme_2">5.17.1. Tax scheme</a></li>
+<li><a href="#_party_identification_7">5.17.2. Party identification</a></li>
+</ul>
+</li>
+<li><a href="#_vietnam">5.18. Vietnam</a>
+<ul class="sectlevel3">
+<li><a href="#_invoice_serial_and_sequence_number">5.18.1. Invoice, Serial and Sequence Number</a></li>
+<li><a href="#_invoice_type_code_2">5.18.2. Invoice Type Code</a></li>
 </ul>
 </li>
 </ul>
@@ -11403,12 +11414,437 @@ This information is also shown to any recipients of the invoice.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_france"><a class="anchor" href="#_france"></a><a class="link" href="#_france">5.3. France</a></h3>
+<h3 id="_croatia"><a class="anchor" href="#_croatia"></a><a class="link" href="#_croatia">5.3. Croatia</a></h3>
+<div class="paragraph">
+<p>This section contains information about requirements and other information concerning invoicing in Croatia.</p>
+</div>
+<div class="sect3">
+<h4 id="_invoice_type_code_and_invoice_subtype"><a class="anchor" href="#_invoice_type_code_and_invoice_subtype"></a><a class="link" href="#_invoice_type_code_and_invoice_subtype">5.3.1. Invoice type code and invoice subtype</a></h4>
+<div class="paragraph">
+<p>In addition to providing the invoice type it is also required to provide the subtype (invoioice process).</p>
+</div>
+<div class="paragraph">
+<p>Supported types and subtype codes can be found here: <a href="https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_croatia" target="_blank" rel="noopener">Invoice type codes for Croatia</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example for Standard Invoice (P1)</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">P1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example for Corrective Invoice (P10)</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">P10</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example for Custom Process (P99)</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">P99:CustomLabel</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_oib_croatian_tax_number"><a class="anchor" href="#_oib_croatian_tax_number"></a><a class="link" href="#_oib_croatian_tax_number">5.3.2. OIB (Croatian Tax Number)</a></h4>
+<div class="paragraph">
+<p>Croatia requires the use of OIB (Osobni identifikacijski broj) - an 11-digit Croatian tax identification number.</p>
+</div>
+<div class="sect4">
+<h5 id="_endpoint_identification"><a class="anchor" href="#_endpoint_identification"></a><a class="link" href="#_endpoint_identification">Endpoint Identification</a></h5>
+<div class="paragraph">
+<p>OIB should be used in EndpointID with scheme ID <code>9934</code>:</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">9934</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>12345678901<span class="tag">&lt;/cbc:EndpointID&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">9934</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>10987654321<span class="tag">&lt;/cbc:EndpointID&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_party_identification_2"><a class="anchor" href="#_party_identification_2"></a><a class="link" href="#_party_identification_2">Party Identification</a></h5>
+<div class="paragraph">
+<p>In PartyTaxScheme, use prefix 'HR' format without @schemeID:</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+                <span class="tag">&lt;cbc:CompanyID&gt;</span>HR12345678901<span class="tag">&lt;/cbc:CompanyID&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_operator_information_fiscalization_actor"><a class="anchor" href="#_operator_information_fiscalization_actor"></a><a class="link" href="#_operator_information_fiscalization_actor">5.3.3. Operator Information (Fiscalization Actor)</a></h4>
+<div class="paragraph">
+<p>Croatian fiscalization requires mandatory operator details under SellerContact:</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+        <span class="tag">&lt;cac:SellerContact&gt;</span>
+            <span class="tag">&lt;cbc:ID&gt;</span>11111111111<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+            <span class="tag">&lt;cbc:Name&gt;</span>Operater1<span class="tag">&lt;/cbc:Name&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="tag">&lt;/cac:SellerContact&gt;</span>
+    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Operator Code</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Operator OIB</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_issue_time"><a class="anchor" href="#_issue_time"></a><a class="link" href="#_issue_time">5.3.4. Issue Time</a></h4>
+<div class="paragraph">
+<p>Issue time is mandatory in Croatia and must include the time component:</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:IssueDate&gt;</span>2025-01-15<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+    <span class="tag">&lt;cbc:IssueTime&gt;</span>14:30:00<span class="tag">&lt;/cbc:IssueTime&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_copy_indicator"><a class="anchor" href="#_copy_indicator"></a><a class="link" href="#_copy_indicator">Copy Indicator</a></h5>
+<div class="paragraph">
+<p>If data on an eInvoice is corrected in a way that does not affect tax calculation, the eInvoice is issued and sent to the recipient under the same invoice number with the value cbc:CopyIndicator set to "true".</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:CopyIndicator&gt;</span>true<span class="tag">&lt;/cbc:CopyIndicator&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_croatian_tax_categories"><a class="anchor" href="#_croatian_tax_categories"></a><a class="link" href="#_croatian_tax_categories">5.3.5. Croatian Tax Categories</a></h4>
+<div class="paragraph">
+<p>Croatia uses specific tax category labels that must be mapped appropriately.
+See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croatia" target="_blank" rel="noopener">Tax category codes Croatia</a>. for the list of valid codes.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example 25% Standard Rate</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+<span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:TaxTotal&gt;</span>
+        <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>25.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+        <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+            <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+            <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>25.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+            <span class="tag">&lt;cac:TaxCategory&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Percent&gt;</span>25<span class="tag">&lt;/cbc:Percent&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                    <span class="tag">&lt;cbc:Name&gt;</span>HR:PDV25<span class="tag">&lt;/cbc:Name&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+        <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+    <span class="tag">&lt;/cac:TaxTotal&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;cac:Item&gt;</span>
+            <span class="tag">&lt;cac:ClassifiedTaxCategory&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Percent&gt;</span>25<span class="tag">&lt;/cbc:Percent&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                    <span class="tag">&lt;cbc:Name&gt;</span>HR:PDV25<span class="tag">&lt;/cbc:Name&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:ClassifiedTaxCategory&gt;</span>
+        <span class="tag">&lt;/cac:Item&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example 25% Standard Rate and HR:POVNAK exemption</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:TaxTotal&gt;</span>
+        <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>25.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+        <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+            <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+            <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>25.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+            <span class="tag">&lt;cac:TaxCategory&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Percent&gt;</span>25<span class="tag">&lt;/cbc:Percent&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                    <span class="tag">&lt;cbc:Name&gt;</span>HR:PDV25<span class="tag">&lt;/cbc:Name&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+        <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+        <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+            <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>5.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+            <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>0.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+            <span class="tag">&lt;cac:TaxCategory&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>E<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Percent&gt;</span>0<span class="tag">&lt;/cbc:Percent&gt;</span>
+                <span class="tag">&lt;cbc:TaxExemptionReason&gt;</span>Reason for exemption<span class="tag">&lt;/cbc:TaxExemptionReason&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                    <span class="tag">&lt;cbc:Name&gt;</span>HR:POVNAK<span class="tag">&lt;/cbc:Name&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+        <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+    <span class="tag">&lt;/cac:TaxTotal&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>1<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;cac:Item&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+            <span class="tag">&lt;cac:ClassifiedTaxCategory&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Name&gt;</span>HR:PDV25<span class="tag">&lt;/cbc:Name&gt;</span>
+                <span class="tag">&lt;cbc:Percent&gt;</span>25<span class="tag">&lt;/cbc:Percent&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:ClassifiedTaxCategory&gt;</span>
+        <span class="tag">&lt;/cac:Item&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>2<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;cac:Item&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+            <span class="tag">&lt;cac:ClassifiedTaxCategory&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>E<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Name&gt;</span>HR:POVNAK<span class="tag">&lt;/cbc:Name&gt;</span>
+                <span class="tag">&lt;cbc:Percent&gt;</span>0<span class="tag">&lt;/cbc:Percent&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:ClassifiedTaxCategory&gt;</span>
+        <span class="tag">&lt;/cac:Item&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_item_classification"><a class="anchor" href="#_item_classification"></a><a class="link" href="#_item_classification">5.3.6. Item Classification</a></h4>
+<div class="paragraph">
+<p>Every invoice line must include CPA/KPD classification with listID="CG" (except for advance invoices):</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;cac:Item&gt;</span>
+            <span class="tag">&lt;cbc:Name&gt;</span>Product Name<span class="tag">&lt;/cbc:Name&gt;</span>
+            <span class="tag">&lt;cac:CommodityClassification&gt;</span>
+                <span class="tag">&lt;cbc:ItemClassificationCode</span> <span class="attribute-name">listID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">CG</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>12345<span class="tag">&lt;/cbc:ItemClassificationCode&gt;</span>
+            <span class="tag">&lt;/cac:CommodityClassification&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Item&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_line_level_references"><a class="anchor" href="#_line_level_references"></a><a class="link" href="#_line_level_references">5.3.7. Line-Level References</a></h4>
+<div class="paragraph">
+<p>Croatia supports line-level references for purchase orders, despatch advice, and receipt advice, but these are mutually exclusive with header-level references:</p>
+</div>
+<div class="sect4">
+<h5 id="_purchase_order_reference_at_line_level"><a class="anchor" href="#_purchase_order_reference_at_line_level"></a><a class="link" href="#_purchase_order_reference_at_line_level">Purchase Order Reference at Line Level</a></h5>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="tag">&lt;cac:OrderLineReference&gt;</span>
+            <span class="tag">&lt;cbc:LineID&gt;</span>1<span class="tag">&lt;/cbc:LineID&gt;</span>
+            <span class="tag">&lt;cac:OrderReference&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>PO-2025-001<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;/cac:OrderReference&gt;</span>
+        <span class="tag">&lt;/cac:OrderLineReference&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_despatch_reference_at_line_level"><a class="anchor" href="#_despatch_reference_at_line_level"></a><a class="link" href="#_despatch_reference_at_line_level">Despatch Reference at Line Level</a></h5>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="tag">&lt;cac:DespatchLineReference&gt;</span>
+            <span class="tag">&lt;cbc:LineID&gt;</span>1<span class="tag">&lt;/cbc:LineID&gt;</span>
+            <span class="tag">&lt;cac:DocumentReference&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>DESP-2025-001<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;/cac:DocumentReference&gt;</span>
+        <span class="tag">&lt;/cac:DespatchLineReference&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_receipt_reference_at_line_level"><a class="anchor" href="#_receipt_reference_at_line_level"></a><a class="link" href="#_receipt_reference_at_line_level">Receipt Reference at Line Level</a></h5>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="tag">&lt;cac:ReceiptLineReference&gt;</span>
+            <span class="tag">&lt;cbc:LineID&gt;</span>1<span class="tag">&lt;/cbc:LineID&gt;</span>
+            <span class="tag">&lt;cac:DocumentReference&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>REC-2025-001<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;/cac:DocumentReference&gt;</span>
+        <span class="tag">&lt;/cac:ReceiptLineReference&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_billing_reference_description"><a class="anchor" href="#_billing_reference_description"></a><a class="link" href="#_billing_reference_description">5.3.8. Billing Reference Description</a></h4>
+<div class="paragraph">
+<p>For previous invoice references, Croatia allows providing additional description:</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:BillingReference&gt;</span>
+        <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
+            <span class="tag">&lt;cbc:ID&gt;</span>INV-2024-999<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;cbc:IssueDate&gt;</span>2024-12-15<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+            <span class="tag">&lt;cbc:DocumentDescription&gt;</span>Prepayment allocation details<span class="tag">&lt;/cbc:DocumentDescription&gt;</span>
+        <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
+    <span class="tag">&lt;/cac:BillingReference&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_france"><a class="anchor" href="#_france"></a><a class="link" href="#_france">5.4. France</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in France.</p>
 </div>
 <div class="sect3">
-<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.3.1. Service code</a></h4>
+<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.4.1. Service code</a></h4>
 <div class="paragraph">
 <p>Service code is a routing code required by some customers to identify the correct recipient in French Government Portal.</p>
 </div>
@@ -11459,7 +11895,7 @@ This information is also shown to any recipients of the invoice.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.3.2. Legal commitments</a></h4>
+<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.4.2. Legal commitments</a></h4>
 <div class="paragraph">
 <p>Entities behind French Government portal can set up validation of certain elements called legal commitments. Therefore it&#8217;s recommended to support the below values in order to fulfill the requirements of this validation.</p>
 </div>
@@ -11553,12 +11989,12 @@ This information is also shown to any recipients of the invoice.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_greece"><a class="anchor" href="#_greece"></a><a class="link" href="#_greece">5.4. Greece</a></h3>
+<h3 id="_greece"><a class="anchor" href="#_greece"></a><a class="link" href="#_greece">5.5. Greece</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Greece.</p>
 </div>
 <div class="sect3">
-<h4 id="_mydata_xml_file_as_attachment"><a class="anchor" href="#_mydata_xml_file_as_attachment"></a><a class="link" href="#_mydata_xml_file_as_attachment">5.4.1. myDATA xml file as attachment</a></h4>
+<h4 id="_mydata_xml_file_as_attachment"><a class="anchor" href="#_mydata_xml_file_as_attachment"></a><a class="link" href="#_mydata_xml_file_as_attachment">5.5.1. myDATA xml file as attachment</a></h4>
 <div class="paragraph">
 <p>In PUF you can attach the myDATA-xml reporting file as a separate attachment to the business document.</p>
 </div>
@@ -11596,12 +12032,12 @@ This information is also shown to any recipients of the invoice.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_hungary"><a class="anchor" href="#_hungary"></a><a class="link" href="#_hungary">5.5. Hungary</a></h3>
+<h3 id="_hungary"><a class="anchor" href="#_hungary"></a><a class="link" href="#_hungary">5.6. Hungary</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Hungary and Real-Time Invoice Reporting (RTIR)</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_appearance"><a class="anchor" href="#_invoice_appearance"></a><a class="link" href="#_invoice_appearance">5.5.1. Invoice appearance</a></h4>
+<h4 id="_invoice_appearance"><a class="anchor" href="#_invoice_appearance"></a><a class="link" href="#_invoice_appearance">5.6.1. Invoice appearance</a></h4>
 <div class="paragraph">
 <p>Each document must have a Invoice Apperance code, the value depends on how the documents is distributed between the issuer and receiver.</p>
 </div>
@@ -11682,7 +12118,7 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_number"><a class="anchor" href="#_tax_number"></a><a class="link" href="#_tax_number">5.5.2. Tax number</a></h4>
+<h4 id="_tax_number"><a class="anchor" href="#_tax_number"></a><a class="link" href="#_tax_number">5.6.2. Tax number</a></h4>
 <div class="paragraph">
 <p>The syntax of Hungarian tax IDs is 11 characters.</p>
 </div>
@@ -11731,7 +12167,7 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_customer_vat_status"><a class="anchor" href="#_customer_vat_status"></a><a class="link" href="#_customer_vat_status">5.5.3. Customer VAT status</a></h4>
+<h4 id="_customer_vat_status"><a class="anchor" href="#_customer_vat_status"></a><a class="link" href="#_customer_vat_status">5.6.3. Customer VAT status</a></h4>
 <div class="paragraph">
 <p>It&#8217;s mandatory to provide the customers VAT status, this determine allowed content and rules for the customer party.</p>
 </div>
@@ -11793,7 +12229,7 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_line_expression_indicator"><a class="anchor" href="#_line_expression_indicator"></a><a class="link" href="#_line_expression_indicator">5.5.4. Line expression indicator</a></h4>
+<h4 id="_line_expression_indicator"><a class="anchor" href="#_line_expression_indicator"></a><a class="link" href="#_line_expression_indicator">5.6.4. Line expression indicator</a></h4>
 <div class="paragraph">
 <p><code>lineExpressionIndicator</code> indicates whether the unit of the item can be expressed as a natural unit of measurement. The indicator must be provided on each line.</p>
 </div>
@@ -11861,7 +12297,7 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_modification"><a class="anchor" href="#_modification"></a><a class="link" href="#_modification">5.5.5. Modification</a></h4>
+<h4 id="_modification"><a class="anchor" href="#_modification"></a><a class="link" href="#_modification">5.6.5. Modification</a></h4>
 <div class="paragraph">
 <p>Hungary RTIR flow require a special handling regarding credit and modification of documents, below section will give brief information how this must be handled.</p>
 </div>
@@ -12068,7 +12504,7 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_advance_payment"><a class="anchor" href="#_advance_payment"></a><a class="link" href="#_advance_payment">5.5.6. Advance Payment</a></h4>
+<h4 id="_advance_payment"><a class="anchor" href="#_advance_payment"></a><a class="link" href="#_advance_payment">5.6.6. Advance Payment</a></h4>
 <div class="paragraph">
 <p>Advance payment must be sent as a separate invoice line with a negative line extension amount. The <code>lineExpressionIndicator</code> needs to be set to false and the term "advance payment/eloleg" must be sent in the invoice line item name.
 Four advanced data fields are also required.</p>
@@ -12173,12 +12609,12 @@ Four advanced data fields are also required.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_india"><a class="anchor" href="#_india"></a><a class="link" href="#_india">5.6. India</a></h3>
+<h3 id="_india"><a class="anchor" href="#_india"></a><a class="link" href="#_india">5.7. India</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in India.</p>
 </div>
 <div class="sect3">
-<h4 id="_place_of_supply"><a class="anchor" href="#_place_of_supply"></a><a class="link" href="#_place_of_supply">5.6.1. Place of supply</a></h4>
+<h4 id="_place_of_supply"><a class="anchor" href="#_place_of_supply"></a><a class="link" href="#_place_of_supply">5.7.1. Place of supply</a></h4>
 <div class="paragraph">
 <p>Place of supply determines the place (the State) where the GST shall be received by the government treasury.</p>
 </div>
@@ -12211,7 +12647,7 @@ Four advanced data fields are also required.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_2"><a class="anchor" href="#_party_identification_2"></a><a class="link" href="#_party_identification_2">5.6.2. Party identification</a></h4>
+<h4 id="_party_identification_3"><a class="anchor" href="#_party_identification_3"></a><a class="link" href="#_party_identification_3">5.7.2. Party identification</a></h4>
 <div class="paragraph">
 <p>In India there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.</p>
 </div>
@@ -12250,7 +12686,7 @@ Four advanced data fields are also required.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_address_information"><a class="anchor" href="#_party_address_information"></a><a class="link" href="#_party_address_information">5.6.3. Party address information</a></h4>
+<h4 id="_party_address_information"><a class="anchor" href="#_party_address_information"></a><a class="link" href="#_party_address_information">5.7.3. Party address information</a></h4>
 <div class="paragraph">
 <p>The mandatory clearance platform IRP validate the below address information according to code lists.</p>
 </div>
@@ -12316,13 +12752,13 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_type_scheme_2"><a class="anchor" href="#_tax_type_scheme_2"></a><a class="link" href="#_tax_type_scheme_2">5.6.4. Tax type scheme</a></h4>
+<h4 id="_tax_type_scheme_2"><a class="anchor" href="#_tax_type_scheme_2"></a><a class="link" href="#_tax_type_scheme_2">5.7.4. Tax type scheme</a></h4>
 <div class="paragraph">
 <p>Tax type scheme codes for India can be found in <a href="https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme" target="_blank" rel="noopener">PUF-009-TAXTYPESCHEME</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_hsn_code"><a class="anchor" href="#_hsn_code"></a><a class="link" href="#_hsn_code">5.6.5. HSN code</a></h4>
+<h4 id="_hsn_code"><a class="anchor" href="#_hsn_code"></a><a class="link" href="#_hsn_code">5.7.5. HSN code</a></h4>
 <div class="paragraph">
 <p>Each invoice line must contain a HSN code, IRP will validate that the provided HSN code correspond with relevant taxes for that goods or service.</p>
 </div>
@@ -12364,7 +12800,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_supply_type"><a class="anchor" href="#_supply_type"></a><a class="link" href="#_supply_type">5.6.6. Supply type</a></h4>
+<h4 id="_supply_type"><a class="anchor" href="#_supply_type"></a><a class="link" href="#_supply_type">5.7.6. Supply type</a></h4>
 <div class="paragraph">
 <p>In India it&#8217;s mandatory to define the type of supply relevant for the invoice, the available codes can be found below and must be stated in the Supply type element found <a href="#_supplytype">here</a>.</p>
 </div>
@@ -12408,19 +12844,19 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </table>
 </div>
 <div class="sect3">
-<h4 id="_igst_on_intra_state_transaction"><a class="anchor" href="#_igst_on_intra_state_transaction"></a><a class="link" href="#_igst_on_intra_state_transaction">5.6.7. IGST on intra state transaction</a></h4>
+<h4 id="_igst_on_intra_state_transaction"><a class="anchor" href="#_igst_on_intra_state_transaction"></a><a class="link" href="#_igst_on_intra_state_transaction">5.7.7. IGST on intra state transaction</a></h4>
 <div class="paragraph">
 <p>In some cases IGST is applicable on intra state supplies, in order to indicate this a true or false flag must be set in element <code>puf:IGSTOnIntra</code> which can be found <a href="#_igstonintra">here</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_italy"><a class="anchor" href="#_italy"></a><a class="link" href="#_italy">5.7. Italy</a></h3>
+<h3 id="_italy"><a class="anchor" href="#_italy"></a><a class="link" href="#_italy">5.8. Italy</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Italy.</p>
 </div>
 <div class="sect3">
-<h4 id="_routing_code_codice_destinatario"><a class="anchor" href="#_routing_code_codice_destinatario"></a><a class="link" href="#_routing_code_codice_destinatario">5.7.1. Routing code (codice destinatario)</a></h4>
+<h4 id="_routing_code_codice_destinatario"><a class="anchor" href="#_routing_code_codice_destinatario"></a><a class="link" href="#_routing_code_codice_destinatario">5.8.1. Routing code (codice destinatario)</a></h4>
 <div class="paragraph">
 <p>In order to send invoices in Italy a destination code must be provided called "Codice Destinatario".</p>
 </div>
@@ -12446,7 +12882,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_duty_stamp_dati_bollo"><a class="anchor" href="#_duty_stamp_dati_bollo"></a><a class="link" href="#_duty_stamp_dati_bollo">5.7.2. Duty stamp (dati bollo)</a></h4>
+<h4 id="_duty_stamp_dati_bollo"><a class="anchor" href="#_duty_stamp_dati_bollo"></a><a class="link" href="#_duty_stamp_dati_bollo">5.8.2. Duty stamp (dati bollo)</a></h4>
 <div class="paragraph">
 <p>In order to provide Dati Bollo (Duty Stamp) required on some invoices in Italy the value can be provided in the following element <a href="#_dutystamp">Duty Stamp</a>.</p>
 </div>
@@ -12475,7 +12911,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_chargeability_esigibilita_iva"><a class="anchor" href="#_tax_chargeability_esigibilita_iva"></a><a class="link" href="#_tax_chargeability_esigibilita_iva">5.7.3. Tax chargeability (esigibilita IVA)</a></h4>
+<h4 id="_tax_chargeability_esigibilita_iva"><a class="anchor" href="#_tax_chargeability_esigibilita_iva"></a><a class="link" href="#_tax_chargeability_esigibilita_iva">5.8.3. Tax chargeability (esigibilita IVA)</a></h4>
 <div class="paragraph">
 <p>To provide tax chargeability, the extension element <code>(Invoice|CreditNote)/cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions</code> can be used.</p>
 </div>
@@ -12533,7 +12969,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_vat_number_and_fiscal_code"><a class="anchor" href="#_vat_number_and_fiscal_code"></a><a class="link" href="#_vat_number_and_fiscal_code">5.7.4. VAT number and fiscal code</a></h4>
+<h4 id="_vat_number_and_fiscal_code"><a class="anchor" href="#_vat_number_and_fiscal_code"></a><a class="link" href="#_vat_number_and_fiscal_code">5.8.4. VAT number and fiscal code</a></h4>
 <div class="paragraph">
 <p>It is possible to send a VAT number and/or a fiscal code (Codice Fiscale) in PUF, below is a description and example how to provide this.</p>
 </div>
@@ -12607,19 +13043,19 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_registration_data_2"><a class="anchor" href="#_registration_data_2"></a><a class="link" href="#_registration_data_2">5.7.5. Registration data</a></h4>
+<h4 id="_registration_data_2"><a class="anchor" href="#_registration_data_2"></a><a class="link" href="#_registration_data_2">5.8.5. Registration data</a></h4>
 <div class="paragraph">
 <p>To provide the registration data (Ufficio, NumeroREA, Capitale Sociale, Socio Unico and Stato Liquidazione) in the XML file please check the extension for <code>cac:AccountingSupplierParty</code> structure <a href="#_registration_data">here</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_malaysia"><a class="anchor" href="#_malaysia"></a><a class="link" href="#_malaysia">5.8. Malaysia</a></h3>
+<h3 id="_malaysia"><a class="anchor" href="#_malaysia"></a><a class="link" href="#_malaysia">5.9. Malaysia</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Malaysia.</p>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_3"><a class="anchor" href="#_party_identification_3"></a><a class="link" href="#_party_identification_3">5.8.1. Party identification</a></h4>
+<h4 id="_party_identification_4"><a class="anchor" href="#_party_identification_4"></a><a class="link" href="#_party_identification_4">5.9.1. Party identification</a></h4>
 <div class="paragraph">
 <p>In Malayia there is a requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.</p>
 </div>
@@ -12658,7 +13094,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_details"><a class="anchor" href="#_tax_details"></a><a class="link" href="#_tax_details">5.8.2. Tax Details</a></h4>
+<h4 id="_tax_details"><a class="anchor" href="#_tax_details"></a><a class="link" href="#_tax_details">5.9.2. Tax Details</a></h4>
 <div class="paragraph">
 <p>In order to provide the correct tax details in Malaysia the LHDN valid values must be provided in <code>cac:TaxScheme/cbc:Name</code> element.</p>
 </div>
@@ -12736,20 +13172,20 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_unit_of_measure"><a class="anchor" href="#_unit_of_measure"></a><a class="link" href="#_unit_of_measure">5.8.3. Unit of Measure</a></h4>
+<h4 id="_unit_of_measure"><a class="anchor" href="#_unit_of_measure"></a><a class="link" href="#_unit_of_measure">5.9.3. Unit of Measure</a></h4>
 <div class="paragraph">
 <p>LHDN is following the UN/ECE Recommendation 20, Revision 17 (2021). The Unit of Measure code sent in the invoice must be one of the accepted codes listed on the LHDN&#8217;s official webpage <a href="https://sdk.myinvois.hasil.gov.my/codes/unit-types/" target="_blank" rel="noopener">here</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_philippines"><a class="anchor" href="#_philippines"></a><a class="link" href="#_philippines">5.9. Philippines</a></h3>
+<h3 id="_philippines"><a class="anchor" href="#_philippines"></a><a class="link" href="#_philippines">5.10. Philippines</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Philippines.
 For more information on how to send compliant invoices in Philippines see <a href="https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/philippines" target="_blank" rel="noopener">example files</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="_corrective_invoice"><a class="anchor" href="#_corrective_invoice"></a><a class="link" href="#_corrective_invoice">5.9.1. Corrective Invoice</a></h4>
+<h4 id="_corrective_invoice"><a class="anchor" href="#_corrective_invoice"></a><a class="link" href="#_corrective_invoice">5.10.1. Corrective Invoice</a></h4>
 <div class="paragraph">
 <p>When sending a corrective invoice it is required to specify the unique id of the invoice being corrected as well as the reason code.<br></p>
 </div>
@@ -12859,7 +13295,7 @@ Sales Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_withholding_vat"><a class="anchor" href="#_withholding_vat"></a><a class="link" href="#_withholding_vat">5.9.2. Withholding VAT</a></h4>
+<h4 id="_withholding_vat"><a class="anchor" href="#_withholding_vat"></a><a class="link" href="#_withholding_vat">5.10.2. Withholding VAT</a></h4>
 <div class="paragraph">
 <p>Witholding Tax amount can be provided on <a href="#_cacwithholdingtaxtotal">header level</a> if one of the following <code>cac:TaxScheme/cbc:ID</code> is used.</p>
 </div>
@@ -12878,7 +13314,7 @@ Sales Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_permit_to_use_ptu"><a class="anchor" href="#_permit_to_use_ptu"></a><a class="link" href="#_permit_to_use_ptu">5.9.3. Permit To Use (PTU)</a></h4>
+<h4 id="_permit_to_use_ptu"><a class="anchor" href="#_permit_to_use_ptu"></a><a class="link" href="#_permit_to_use_ptu">5.10.3. Permit To Use (PTU)</a></h4>
 <div class="paragraph">
 <p>The PTU is the number issued by the Bureau of Internal Revenue allowing taxpayer&#8217;s use of  Computerized Accounting System (CAS) and must be provided in the <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>Ph_PTU</code>.</p>
 </div>
@@ -12909,7 +13345,7 @@ Sales Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_seller_tax_status"><a class="anchor" href="#_seller_tax_status"></a><a class="link" href="#_seller_tax_status">5.9.4. Seller Tax Status</a></h4>
+<h4 id="_seller_tax_status"><a class="anchor" href="#_seller_tax_status"></a><a class="link" href="#_seller_tax_status">5.10.4. Seller Tax Status</a></h4>
 <div class="paragraph">
 <p>Seller Tax Status or Seller Type can be either VAT registered or Non-VAT registered.<br>
 Allowed values: 0 or 1.<br></p>
@@ -12923,7 +13359,7 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_branch_code"><a class="anchor" href="#_party_branch_code"></a><a class="link" href="#_party_branch_code">5.9.5. Party Branch Code</a></h4>
+<h4 id="_party_branch_code"><a class="anchor" href="#_party_branch_code"></a><a class="link" href="#_party_branch_code">5.10.5. Party Branch Code</a></h4>
 <div class="paragraph">
 <p>The Party extension should be used to provide the code that identifies a headquarters or branch office.</p>
 </div>
@@ -12978,7 +13414,7 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type"><a class="anchor" href="#_invoice_type"></a><a class="link" href="#_invoice_type">5.9.6. Invoice Type</a></h4>
+<h4 id="_invoice_type"><a class="anchor" href="#_invoice_type"></a><a class="link" href="#_invoice_type">5.10.6. Invoice Type</a></h4>
 <div class="paragraph">
 <p>Available invoice type code values to be used in Philippines can be found here: <a href="https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_philippines" target="_blank" rel="noopener">Invoice type codes Philippines</a>.</p>
 </div>
@@ -13050,7 +13486,7 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_allowance_reason_codes"><a class="anchor" href="#_allowance_reason_codes"></a><a class="link" href="#_allowance_reason_codes">5.9.7. Allowance reason codes</a></h4>
+<h4 id="_allowance_reason_codes"><a class="anchor" href="#_allowance_reason_codes"></a><a class="link" href="#_allowance_reason_codes">5.10.7. Allowance reason codes</a></h4>
 <div class="paragraph">
 <p>The following codes are supported for discounts in Philippines.</p>
 </div>
@@ -13087,12 +13523,12 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_portugal"><a class="anchor" href="#_portugal"></a><a class="link" href="#_portugal">5.10. Portugal</a></h3>
+<h3 id="_portugal"><a class="anchor" href="#_portugal"></a><a class="link" href="#_portugal">5.11. Portugal</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Portugal.</p>
 </div>
 <div class="sect3">
-<h4 id="_billing_software_certification"><a class="anchor" href="#_billing_software_certification"></a><a class="link" href="#_billing_software_certification">5.10.1. Billing software certification</a></h4>
+<h4 id="_billing_software_certification"><a class="anchor" href="#_billing_software_certification"></a><a class="link" href="#_billing_software_certification">5.11.1. Billing software certification</a></h4>
 <div class="paragraph">
 <p>Invoices in Portugal must be issued via a certified software and in the extension <code>puf:BillingSoftware</code> it&#8217;s possible to provide the mandatory values.</p>
 </div>
@@ -13139,7 +13575,7 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_qr_code_and_atcud"><a class="anchor" href="#_qr_code_and_atcud"></a><a class="link" href="#_qr_code_and_atcud">5.10.2. QR code and ATCUD</a></h4>
+<h4 id="_qr_code_and_atcud"><a class="anchor" href="#_qr_code_and_atcud"></a><a class="link" href="#_qr_code_and_atcud">5.11.2. QR code and ATCUD</a></h4>
 <div class="paragraph">
 <p>In Portugal it can be required to provide a QR code and ATCUD.</p>
 </div>
@@ -13198,7 +13634,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_2"><a class="anchor" href="#_tax_category_codes_2"></a><a class="link" href="#_tax_category_codes_2">5.10.3. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_2"><a class="anchor" href="#_tax_category_codes_2"></a><a class="link" href="#_tax_category_codes_2">5.11.3. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Portugal can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_portugal" target="_blank" rel="noopener">Tax category codes Portugal</a>.</p>
 </div>
@@ -13208,12 +13644,12 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_saudi_arabia"><a class="anchor" href="#_saudi_arabia"></a><a class="link" href="#_saudi_arabia">5.11. Saudi Arabia</a></h3>
+<h3 id="_saudi_arabia"><a class="anchor" href="#_saudi_arabia"></a><a class="link" href="#_saudi_arabia">5.12. Saudi Arabia</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Saudi Arabia.</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type_code_and_invoice_subtype"><a class="anchor" href="#_invoice_type_code_and_invoice_subtype"></a><a class="link" href="#_invoice_type_code_and_invoice_subtype">5.11.1. Invoice type code and invoice subtype</a></h4>
+<h4 id="_invoice_type_code_and_invoice_subtype_2"><a class="anchor" href="#_invoice_type_code_and_invoice_subtype_2"></a><a class="link" href="#_invoice_type_code_and_invoice_subtype_2">5.12.1. Invoice type code and invoice subtype</a></h4>
 <div class="paragraph">
 <p>Available invoice type code values to be used in Saudi Arabia can be found here: <a href="https://pagero.github.io/puf-code-lists/#_invoice_type_codes_saudi_arabia" target="_blank" rel="noopener">Invoice type codes Saudi Arabia</a>.</p>
 </div>
@@ -13246,7 +13682,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_4"><a class="anchor" href="#_party_identification_4"></a><a class="link" href="#_party_identification_4">5.11.2. Party identification</a></h4>
+<h4 id="_party_identification_5"><a class="anchor" href="#_party_identification_5"></a><a class="link" href="#_party_identification_5">5.12.2. Party identification</a></h4>
 <div class="paragraph">
 <p>In Saudi Arabia there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.</p>
 </div>
@@ -13286,18 +13722,18 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_serbia"><a class="anchor" href="#_serbia"></a><a class="link" href="#_serbia">5.12. Serbia</a></h3>
+<h3 id="_serbia"><a class="anchor" href="#_serbia"></a><a class="link" href="#_serbia">5.13. Serbia</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Serbia.</p>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_3"><a class="anchor" href="#_tax_category_codes_3"></a><a class="link" href="#_tax_category_codes_3">5.12.1. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_3"><a class="anchor" href="#_tax_category_codes_3"></a><a class="link" href="#_tax_category_codes_3">5.13.1. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Serbia can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_serbia" target="_blank" rel="noopener">Tax category codes Serbia</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_5"><a class="anchor" href="#_party_identification_5"></a><a class="link" href="#_party_identification_5">5.12.2. Party identification</a></h4>
+<h4 id="_party_identification_6"><a class="anchor" href="#_party_identification_6"></a><a class="link" href="#_party_identification_6">5.13.2. Party identification</a></h4>
 <div class="paragraph">
 <p>There is a possible requirement to provide additional party identifiers that are not available in the ISO 6523 ICD list.</p>
 </div>
@@ -13337,24 +13773,24 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_singapore"><a class="anchor" href="#_singapore"></a><a class="link" href="#_singapore">5.13. Singapore</a></h3>
+<h3 id="_singapore"><a class="anchor" href="#_singapore"></a><a class="link" href="#_singapore">5.14. Singapore</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Singapore.</p>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_4"><a class="anchor" href="#_tax_category_codes_4"></a><a class="link" href="#_tax_category_codes_4">5.13.1. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_4"><a class="anchor" href="#_tax_category_codes_4"></a><a class="link" href="#_tax_category_codes_4">5.14.1. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Singapore can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_singapore" target="_blank" rel="noopener">Tax category codes Singapore</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_spain"><a class="anchor" href="#_spain"></a><a class="link" href="#_spain">5.14. Spain</a></h3>
+<h3 id="_spain"><a class="anchor" href="#_spain"></a><a class="link" href="#_spain">5.15. Spain</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Spain.</p>
 </div>
 <div class="sect3">
-<h4 id="_routing_codes_dir3"><a class="anchor" href="#_routing_codes_dir3"></a><a class="link" href="#_routing_codes_dir3">5.14.1. Routing codes (DIR3)</a></h4>
+<h4 id="_routing_codes_dir3"><a class="anchor" href="#_routing_codes_dir3"></a><a class="link" href="#_routing_codes_dir3">5.15.1. Routing codes (DIR3)</a></h4>
 <div class="paragraph">
 <p>To send documents to the Spanish government you are required to provide DIR3 codes. These are used as routing codes, definition of the codes can be found below.</p>
 </div>
@@ -13432,12 +13868,12 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_türkiye"><a class="anchor" href="#_türkiye"></a><a class="link" href="#_türkiye">5.15. Türkiye</a></h3>
+<h3 id="_türkiye"><a class="anchor" href="#_türkiye"></a><a class="link" href="#_türkiye">5.16. Türkiye</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Türkiye.</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_profile_id"><a class="anchor" href="#_invoice_profile_id"></a><a class="link" href="#_invoice_profile_id">5.15.1. Invoice profile id</a></h4>
+<h4 id="_invoice_profile_id"><a class="anchor" href="#_invoice_profile_id"></a><a class="link" href="#_invoice_profile_id">5.16.1. Invoice profile id</a></h4>
 <div class="paragraph">
 <p>For the UBL-TR format in Türkiye, it is mandatory to specify the invoice profile that&#8217;s used.</p>
 </div>
@@ -13501,7 +13937,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type_code"><a class="anchor" href="#_invoice_type_code"></a><a class="link" href="#_invoice_type_code">5.15.2. Invoice type code</a></h4>
+<h4 id="_invoice_type_code"><a class="anchor" href="#_invoice_type_code"></a><a class="link" href="#_invoice_type_code">5.16.2. Invoice type code</a></h4>
 <div class="paragraph">
 <p>In addition to the invoice profile, it is also required to indicate the invoice type. This should be indicated in the attribute <code>name`</code> belonging to the element <code>cbc:InvoiceTypeCode</code>.</p>
 </div>
@@ -13569,7 +14005,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_delivery_method"><a class="anchor" href="#_invoice_delivery_method"></a><a class="link" href="#_invoice_delivery_method">5.15.3. Invoice delivery method</a></h4>
+<h4 id="_invoice_delivery_method"><a class="anchor" href="#_invoice_delivery_method"></a><a class="link" href="#_invoice_delivery_method">5.16.3. Invoice delivery method</a></h4>
 <div class="paragraph">
 <p>If the invoice profile id is set as "EARSIVFATURA" it is mandatory to include how the invoice is being distributed.
 There are only two allowed values. If Pagero is to do the invoice distribution, you should always enter "ELEKTRONIK".
@@ -13624,7 +14060,7 @@ If an e-mail address for the buyer exists (see <code>cac:AccountingContact/cbc:E
 </div>
 </div>
 <div class="sect3">
-<h4 id="_first_name_and_surname"><a class="anchor" href="#_first_name_and_surname"></a><a class="link" href="#_first_name_and_surname">5.15.4. First name and surname</a></h4>
+<h4 id="_first_name_and_surname"><a class="anchor" href="#_first_name_and_surname"></a><a class="link" href="#_first_name_and_surname">5.16.4. First name and surname</a></h4>
 <div class="paragraph">
 <p>If the buyer is a private person (uses TCKN), the first name and surname of the buyer should be included in specific elements.</p>
 </div>
@@ -13677,7 +14113,7 @@ If an e-mail address for the buyer exists (see <code>cac:AccountingContact/cbc:E
 </div>
 </div>
 <div class="sect3">
-<h4 id="_registered_tax_office"><a class="anchor" href="#_registered_tax_office"></a><a class="link" href="#_registered_tax_office">5.15.5. Registered tax office</a></h4>
+<h4 id="_registered_tax_office"><a class="anchor" href="#_registered_tax_office"></a><a class="link" href="#_registered_tax_office">5.16.5. Registered tax office</a></h4>
 <div class="paragraph">
 <p>The specific tax office where the buyer or seller is registered for tax purposes.</p>
 </div>
@@ -13719,13 +14155,13 @@ If an e-mail address for the buyer exists (see <code>cac:AccountingContact/cbc:E
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_5"><a class="anchor" href="#_tax_category_codes_5"></a><a class="link" href="#_tax_category_codes_5">5.15.6. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_5"><a class="anchor" href="#_tax_category_codes_5"></a><a class="link" href="#_tax_category_codes_5">5.16.6. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Türkiye are numerous and can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_türkiye" target="_blank" rel="noopener">Tax category codes Türkiye</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_scheme"><a class="anchor" href="#_tax_scheme"></a><a class="link" href="#_tax_scheme">5.15.7. Tax scheme</a></h4>
+<h4 id="_tax_scheme"><a class="anchor" href="#_tax_scheme"></a><a class="link" href="#_tax_scheme">5.16.7. Tax scheme</a></h4>
 <div class="paragraph">
 <p>In Türkiye there are various types of taxes in addition to the regular VAT (known as "KDV" in Türkiye).
 Another relatively common tax is what&#8217;s known as "ÖTV", or Special Consumption Tax. This applies to sales of products such as alcohol, mobile phones, cars, and tobacco. In the event an invoice is applicable for this Special Consumption Tax, it needs to be indicated in the <code>cac:TaxScheme/cbc:ID</code> element on both line and header level.</p>
@@ -13768,7 +14204,7 @@ Another relatively common tax is what&#8217;s known as "ÖTV", or Special Consum
 </div>
 </div>
 <div class="sect3">
-<h4 id="_internet_sales"><a class="anchor" href="#_internet_sales"></a><a class="link" href="#_internet_sales">5.15.8. Internet Sales</a></h4>
+<h4 id="_internet_sales"><a class="anchor" href="#_internet_sales"></a><a class="link" href="#_internet_sales">5.16.8. Internet Sales</a></h4>
 <div class="paragraph">
 <p>If the invoice is the result of an online sale, extra information needs to be included in the invoice, if applicable.</p>
 </div>
@@ -13898,12 +14334,12 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_united_states"><a class="anchor" href="#_united_states"></a><a class="link" href="#_united_states">5.16. United States</a></h3>
+<h3 id="_united_states"><a class="anchor" href="#_united_states"></a><a class="link" href="#_united_states">5.17. United States</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in United States of America.</p>
 </div>
 <div class="sect3">
-<h4 id="_tax_scheme_2"><a class="anchor" href="#_tax_scheme_2"></a><a class="link" href="#_tax_scheme_2">5.16.1. Tax scheme</a></h4>
+<h4 id="_tax_scheme_2"><a class="anchor" href="#_tax_scheme_2"></a><a class="link" href="#_tax_scheme_2">5.17.1. Tax scheme</a></h4>
 <div class="paragraph">
 <p>Since taxes vary in different states and there are a number of local taxes as well, Pagero recommends to specify State and Local Tax in the following way:<br>
 - For State Tax use <code>cac:TaxScheme/cbc:ID</code> with value <code>STT</code>.<br>
@@ -13964,7 +14400,7 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_6"><a class="anchor" href="#_party_identification_6"></a><a class="link" href="#_party_identification_6">5.16.2. Party identification</a></h4>
+<h4 id="_party_identification_7"><a class="anchor" href="#_party_identification_7"></a><a class="link" href="#_party_identification_7">5.17.2. Party identification</a></h4>
 <div class="paragraph">
 <p>There is no party identifiers available in the ISO 6523 ICD list for USA at the moment.
 To specify Tax Identification Number please use 'cac:PartyTaxScheme/cbc:CompanyID'</p>
@@ -13997,12 +14433,12 @@ To specify Tax Identification Number please use 'cac:PartyTaxScheme/cbc:CompanyI
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vietnam"><a class="anchor" href="#_vietnam"></a><a class="link" href="#_vietnam">5.17. Vietnam</a></h3>
+<h3 id="_vietnam"><a class="anchor" href="#_vietnam"></a><a class="link" href="#_vietnam">5.18. Vietnam</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Vietnam.</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_serial_and_sequence_number"><a class="anchor" href="#_invoice_serial_and_sequence_number"></a><a class="link" href="#_invoice_serial_and_sequence_number">5.17.1. Invoice, Serial and Sequence Number</a></h4>
+<h4 id="_invoice_serial_and_sequence_number"><a class="anchor" href="#_invoice_serial_and_sequence_number"></a><a class="link" href="#_invoice_serial_and_sequence_number">5.18.1. Invoice, Serial and Sequence Number</a></h4>
 <div class="paragraph">
 <p>In Vietnam, each e-invoice is assigned a unique serial number, which serves as its identifier. Additionally, a sequence number is used, which increments with each new invoice issued.<br>
 An internally generated invoice number from an ERP system can be included in the 'cac:BillingReference' segment.<br>
@@ -14070,7 +14506,7 @@ For enhanced search functionality in Pagero Online, it is recommended to use a c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type_code_2"><a class="anchor" href="#_invoice_type_code_2"></a><a class="link" href="#_invoice_type_code_2">5.17.2. Invoice Type Code</a></h4>
+<h4 id="_invoice_type_code_2"><a class="anchor" href="#_invoice_type_code_2"></a><a class="link" href="#_invoice_type_code_2">5.18.2. Invoice Type Code</a></h4>
 <div class="paragraph">
 <p>In addition to Invoice Type Code the 'name' attribute is used to provide the Vietnameese invoice type.</p>
 </div>
@@ -14082,25 +14518,6 @@ For enhanced search functionality in Pagero Online, it is recommended to use a c
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">01GTKT</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span></code></pre>
 </div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_limitations"><a class="anchor" href="#_limitations"></a><a class="link" href="#_limitations">5.17.3. Limitations</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p>There is no support for charges in the Vietnam e-invoice format.</p>
-</li>
-<li>
-<p>Credit Note is not supported in Pagero solution.</p>
-</li>
-<li>
-<p>Cancellation is not supported in Pagero solution.</p>
-</li>
-<li>
-<p>Adjustments is not supported in Pagero solution.</p>
-</li>
-</ul>
 </div>
 </div>
 </div>

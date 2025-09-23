@@ -1,0 +1,356 @@
+This section contains information about requirements and other information concerning invoicing in Croatia.
+
+==== Invoice type code and invoice subtype 
+
+In addition to providing the invoice type it is also required to provide the subtype (invoioice process).
+
+Supported types and subtype codes can be found here: https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_croatia[Invoice type codes for Croatia^].
+
+*Example for Standard Invoice (P1)*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="P1">380</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example for Corrective Invoice (P10)*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="P10">380</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example for Custom Process (P99)*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="P99:CustomLabel">380</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== OIB (Croatian Tax Number)
+
+Croatia requires the use of OIB (Osobni identifikacijski broj) - an 11-digit Croatian tax identification number.
+
+===== Endpoint Identification
+
+OIB should be used in EndpointID with scheme ID `9934`:
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="9934">12345678901</cbc:EndpointID>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="9934">10987654321</cbc:EndpointID>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+===== Party Identification
+
+In PartyTaxScheme, use prefix 'HR' format without @schemeID:
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>HR12345678901</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Operator Information (Fiscalization Actor)
+
+Croatian fiscalization requires mandatory operator details under SellerContact:
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <cac:SellerContact>
+            <cbc:ID>11111111111</cbc:ID><!--1-->
+            <cbc:Name>Operater1</cbc:Name><!--2-->
+        </cac:SellerContact>
+    </cac:AccountingSupplierParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Operator Code
+<2> Operator OIB
+
+
+==== Issue Time
+
+Issue time is mandatory in Croatia and must include the time component:
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <cbc:IssueDate>2025-01-15</cbc:IssueDate>
+    <cbc:IssueTime>14:30:00</cbc:IssueTime>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+===== Copy Indicator
+
+If data on an eInvoice is corrected in a way that does not affect tax calculation, the eInvoice is issued and sent to the recipient under the same invoice number with the value cbc:CopyIndicator set to "true".
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <cbc:CopyIndicator>true</cbc:CopyIndicator>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Croatian Tax Categories
+
+Croatia uses specific tax category labels that must be mapped appropriately.
+See https://pagero.github.io/puf-code-lists/#_tax_category_codes_croatia[Tax category codes Croatia^]. for the list of valid codes.
+
+*Example 25% Standard Rate*
+[source,xml]
+----
+<Invoice>
+<!-- Code omitted for clarity -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- Code omitted for clarity -->
+    <cac:InvoiceLine>
+        <!-- Code omitted for clarity -->
+        <cac:Item>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+    </cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example 25% Standard Rate and HR:POVNAK exemption*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">5.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReason>Reason for exemption</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:POVNAK</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- Code omitted for clarity -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <!-- Code omitted for clarity -->
+        <cac:Item>
+            <!-- Code omitted for clarity -->
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV25</cbc:Name>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- Code omitted for clarity -->
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <!-- Code omitted for clarity -->
+        <cac:Item>
+            <!-- Code omitted for clarity -->
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Name>HR:POVNAK</cbc:Name>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- Code omitted for clarity -->
+    </cac:InvoiceLine>
+</Invoice>
+----
+
+==== Item Classification
+
+Every invoice line must include CPA/KPD classification with listID="CG" (except for advance invoices):
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:InvoiceLine>
+        <!-- Code omitted for clarity -->
+        <cac:Item>
+            <cbc:Name>Product Name</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">12345</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <!-- Code omitted for clarity -->
+        </cac:Item>
+    </cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Line-Level References
+
+Croatia supports line-level references for purchase orders, despatch advice, and receipt advice, but these are mutually exclusive with header-level references:
+
+===== Purchase Order Reference at Line Level
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:InvoiceLine>
+        <cac:OrderLineReference>
+            <cbc:LineID>1</cbc:LineID>
+            <cac:OrderReference>
+                <cbc:ID>PO-2025-001</cbc:ID>
+            </cac:OrderReference>
+        </cac:OrderLineReference>
+        <!-- Code omitted for clarity -->
+    </cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+===== Despatch Reference at Line Level
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:InvoiceLine>
+        <cac:DespatchLineReference>
+            <cbc:LineID>1</cbc:LineID>
+            <cac:DocumentReference>
+                <cbc:ID>DESP-2025-001</cbc:ID>
+            </cac:DocumentReference>
+        </cac:DespatchLineReference>
+        <!-- Code omitted for clarity -->
+    </cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+===== Receipt Reference at Line Level
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:InvoiceLine>
+        <cac:ReceiptLineReference>
+            <cbc:LineID>1</cbc:LineID>
+            <cac:DocumentReference>
+                <cbc:ID>REC-2025-001</cbc:ID>
+            </cac:DocumentReference>
+        </cac:ReceiptLineReference>
+        <!-- Code omitted for clarity -->
+    </cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Billing Reference Description
+
+For previous invoice references, Croatia allows providing additional description:
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>INV-2024-999</cbc:ID>
+            <cbc:IssueDate>2024-12-15</cbc:IssueDate>
+            <cbc:DocumentDescription>Prepayment allocation details</cbc:DocumentDescription>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
