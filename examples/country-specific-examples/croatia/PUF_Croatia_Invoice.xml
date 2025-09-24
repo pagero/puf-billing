@@ -151,6 +151,8 @@
                 <cbc:Percent>25.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
+                    <!-- HR-BT-12 Croatian tax category label -->
+                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -168,6 +170,8 @@
                 <cbc:TaxExemptionReason>Return fee exemption</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
+                    <!-- HR-BT-12 Croatian tax category label -->
+                    <cbc:Name>HR:POVNAK</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
