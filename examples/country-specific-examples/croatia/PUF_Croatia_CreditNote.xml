@@ -17,7 +17,7 @@
     <cbc:CreditNoteTypeCode name="P1">381</cbc:CreditNoteTypeCode>
     <!-- BT-5 Credit Note Document Currency (Croatia uses EUR) -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
-    
+
     <!-- BG-3 Billing Reference - Reference to original invoice -->
     <cac:BillingReference>
         <cac:InvoiceDocumentReference>
@@ -29,7 +29,7 @@
             <cbc:DocumentDescription>Original Invoice for Services Rendered</cbc:DocumentDescription>
         </cac:InvoiceDocumentReference>
     </cac:BillingReference>
-    
+
     <!-- BG-4 Seller -->
     <cac:AccountingSupplierParty>
         <cac:Party>
@@ -109,7 +109,7 @@
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>
-    
+
     <cac:PaymentMeans>
         <!-- BT-81 Payment means code. For credit note - refund to original payment method -->
         <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
@@ -175,7 +175,7 @@
             <cbc:Description>Povrat robe zbog defekta - laptop se neće uključiti</cbc:Description>
             <!-- Croatian item classification (mandatory for Croatia) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">26200</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">12.34.56</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <!-- BT-151 Credited item VAT category code. -->

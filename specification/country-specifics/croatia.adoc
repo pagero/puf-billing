@@ -261,7 +261,7 @@ Every invoice line must include CPA/KPD classification with listID="CG" (except 
         <cac:Item>
             <cbc:Name>Product Name</cbc:Name>
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">12345</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">12.34.56</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <!-- Code omitted for clarity -->
         </cac:Item>
