@@ -19,13 +19,9 @@ include::document-level/RestrictedInformationLine.adoc[]
 
 include::document-level/Classification.adoc[]
 
-==== InvoiceSeries
+==== SupplierGeneratedQRString
 
-include::document-level/InvoiceSeries.adoc[]
-
-==== LanguageCode
-
-include::document-level/LanguageCode.adoc[]
+include::document-level/SupplierGeneratedQRString.adoc[]
 
 ==== SupplyType
 
@@ -37,19 +33,23 @@ include::document-level/DutyStamp.adoc[]
 
 ==== IGSTOnIntra
 
-include::document-level/IgstOnIntra.adoc[]
+include::document-level/IGSTOnIntra.adoc[]
 
 ==== Billing Software
 
 include::document-level/BillingSoftwareExtension.adoc[]
 
-==== SupplierGeneratedQRString
+==== InvoiceSeries
 
-include::document-level/SupplierGeneratedQRString.adoc[]
+include::document-level/InvoiceSeries.adoc[]
 
 ==== Self Billing Indicator
 
-include::document-level/SelfBilled.adoc[]
+include::document-level/Selfbilled.adoc[]
+
+==== Simplified Indicator
+
+include::document-level/Simplified.adoc[]
 
 ==== OrderReference
 
@@ -75,10 +75,6 @@ include::document-level/DeliveryExtension.adoc[]
 
 include::document-level/PaymentTermsExtension.adoc[]
 
-==== PrepaidPayment
-
-include::document-level/PrepaidPaymentExtension.adoc[]
-
 ==== TaxSubTotal
 
 include::document-level/TaxSubTotalExtension.adoc[]
@@ -86,3 +82,11 @@ include::document-level/TaxSubTotalExtension.adoc[]
 ==== LegalMonetaryTotal
 
 include::document-level/LegalMonetaryTotalExtension.adoc[]
+
+==== PrepaidPayment
+
+include::document-level/PrepaidPaymentExtension.adoc[]
+
+==== LanguageCode
+
+include::document-level/LanguageCode.adoc[]

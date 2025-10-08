@@ -48,6 +48,22 @@ Code signifying the reason for credit.
 |`puf:ClearanceID`
 |**Clearance ID of the referenced document** +
 ID, usually assigned by the Tax Authority, of the referenced document e.g. UUID in Malaysia.
+
+|`puf:RestrictedInformation`
+|**Restricted information** +
+Key-value pairs for additional country-specific information related to the billing reference. Can be repeated multiple times.
+
+|`cbc:TaxableAmount`
+|**Referenced document tax base amount** +
+The tax base amount of the referenced document. Used in some countries for corrections (e.g., Spain substitutive method).
+
+|`cbc:TaxAmount`
+|**Referenced document tax amount** +
+The tax amount of the referenced document. Used in some countries for corrections (e.g., Spain substitutive method).
+
+|`puf:EquivalenceSurchargeAmount`
+|**Referenced document equivalence surcharge amount** +
+The equivalence surcharge amount of the referenced document. Used in Spain for corrections when equivalence surcharge applies.
 |===
 
 *Example* +
@@ -72,6 +88,15 @@ _Invoice document reference ID, date and extension_
                                 <!-- Reason for credit in code form, if applicable -->
                                 <puf:Code>codeValue</puf:Code>
                                 <puf:ClearanceID>Clearance ID</puf:ClearanceID>
+                                <!-- Additional country-specific information, if applicable -->
+                                <puf:RestrictedInformation>
+                                    <puf:Key>CountrySpecificKey</puf:Key>
+                                    <puf:Value>CountrySpecificValue</puf:Value>
+                                </puf:RestrictedInformation>
+                                <!-- Referenced document amounts, if applicable (e.g., Spain substitutive corrections) -->
+                                <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+                                <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
+                                <puf:EquivalenceSurchargeAmount currencyID="EUR">52.00</puf:EquivalenceSurchargeAmount>
                             </puf:BillingReferenceExtension>
                         </puf:PageroExtension>
                     </ext:ExtensionContent>

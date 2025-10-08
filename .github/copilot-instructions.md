@@ -50,6 +50,102 @@ Countries often require additional mandatory fields beyond EN 16931:
 
 ## PUF Extension Patterns
 
+### **CRITICAL: Extension Placement Rule**
+
+**Extensions MUST always be the first element in any UBL aggregate component sequence.**
+
+This is a fundamental UBL schema requirement that applies to ALL levels:
+
+#### Document Level Extensions
+```xml
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" ...>
+    <!-- CORRECT: Extensions come FIRST, before CustomizationID -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:InvoiceSeries>
+                        <cbc:ID>2025-A</cbc:ID>
+                    </puf:InvoiceSeries>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>INV-2025-001</cbc:ID>
+    <cbc:IssueDate>2025-01-15</cbc:IssueDate>
+    ...
+</Invoice>
+```
+
+#### Aggregate Component Level Extensions
+```xml
+<cac:TaxSubtotal>
+    <!-- CORRECT: Extension comes FIRST, immediately after opening tag -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:TaxSubtotalExtension>
+                        <puf:SpecialRegimeKey>01</puf:SpecialRegimeKey>
+                    </puf:TaxSubtotalExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    
+    <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+    <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
+    ...
+</cac:TaxSubtotal>
+```
+
+#### Reference Document Extensions
+```xml
+<cac:BillingReference>
+    <cac:InvoiceDocumentReference>
+        <!-- CORRECT: Extension comes FIRST -->
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:BillingReferenceExtension>
+                            <puf:Code>I</puf:Code>
+                        </puf:BillingReferenceExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        
+        <cbc:ID>INV-2025-001</cbc:ID>
+        <cbc:IssueDate>2025-01-15</cbc:IssueDate>
+    </cac:InvoiceDocumentReference>
+</cac:BillingReference>
+```
+
+#### Common Mistakes to Avoid
+```xml
+<!-- WRONG: Extension placed after other elements -->
+<Invoice ...>
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ID>INV-001</cbc:ID>
+    <ext:UBLExtensions>...</ext:UBLExtensions>  <!-- ❌ TOO LATE -->
+</Invoice>
+
+<!-- WRONG: Extension placed after data elements in TaxSubtotal -->
+<cac:TaxSubtotal>
+    <cbc:TaxableAmount>1000.00</cbc:TaxableAmount>
+    <ext:UBLExtensions>...</ext:UBLExtensions>  <!-- ❌ TOO LATE -->
+</cac:TaxSubtotal>
+```
+
+**Always validate extension placement against XSD schemas to ensure compliance.**
+
 ### Using UBL Extensions
 PUF extends UBL through the `ext:UBLExtensions` mechanism at multiple levels:
 ```xml
@@ -93,6 +189,8 @@ Always use correct BG group numbers according to EN 16931-1:2017:
 - **BG-23**: VAT breakdown (TaxTotal)
 - **BG-25**: Invoice line / Credit note line
 - **BG-27**: Document level allowances (ChargeIndicator=false)
+
+- Do NOT invent or add country-specific BT codes where the target format does not use them. Some country formats or local implementations (for example Spain / VeriFactu) do not use BT codes.
 
 ### Credit Note vs Invoice Structure Differences
 **Critical**: Credit Notes have different element placement than Invoices:
@@ -253,14 +351,17 @@ saxon -s:examples/country-specific-examples/[country]/PUF_[Country]_Invoice.xml 
 - Use realistic but anonymized data (company names, addresses, tax numbers)
 - Include country-specific mandatory fields even if not in EN 16931
 - Include comments explaining country-specific requirements
+- **ALWAYS place extensions first in element sequence** - this is a UBL schema requirement
 
 ### Critical Structural Rules
-1. **BG Group Compliance**: Always verify BG numbers match EN 16931-1:2017 exactly
-2. **Document Type Differences**: Credit Notes require different element placement than Invoices
-3. **Due Date Location**: 
+1. **Extension Placement**: Extensions (ext:UBLExtensions) MUST ALWAYS be the first child element in any aggregate component
+2. **BG Group Compliance**: Always verify BG numbers match EN 16931-1:2017 exactly
+3. **Document Type Differences**: Credit Notes require different element placement than Invoices
+4. **Due Date Location**: 
    - Invoices: `cbc:DueDate` at document level
    - Credit Notes: `cbc:PaymentDueDate` in PaymentMeans section
-4. **Allowances vs Charges**: Use correct BG groups (BG-20 for header level allowances, BG-21 for header level charges, BG-27 for line level allowances, BG-28 for line level charges)
+5. **Allowances vs Charges**: Use correct BG groups (BG-20 for header level allowances, BG-21 for header level charges, BG-27 for line level allowances, BG-28 for line level charges)
+6. **Extension URI**: Always include ext:ExtensionURI in extension blocks for proper identification
 
 ### When Extending PUF
 - Always check if existing UBL elements can accommodate the requirement

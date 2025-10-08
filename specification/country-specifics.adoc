@@ -20,7 +20,6 @@ include::country-specifics/france.adoc[]
 
 include::country-specifics/greece.adoc[]
 
-
 === Hungary
 
 include::country-specifics/hungary.adoc[]
@@ -60,6 +59,10 @@ include::country-specifics/singapore.adoc[]
 === Spain
 
 include::country-specifics/spain.adoc[]
+
+=== Spain VeriFactu
+
+include::country-specifics/spain-verifactu.adoc[]
 
 === Türkiye
 

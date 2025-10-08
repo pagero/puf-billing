@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Example: Spain VeriFactu Invoice with Multiple Tax Rates and Exemptions
+    
+    This example demonstrates:
+    - Multiple tax rates (21%, 10%)
+    - Special regime keys for different scenarios
+    - Tax exemption code E2 for export operations
+    - Export operations (special regime 02)
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+    
+    <!-- Invoice series extension -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:InvoiceSeries>
+                        <cbc:ID>2025-M</cbc:ID>
+                    </puf:InvoiceSeries>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>MIX-2025-001</cbc:ID>
+    <cbc:IssueDate>2025-01-30</cbc:IssueDate>
+    <cbc:DueDate>2025-03-01</cbc:DueDate>
+    <cbc:InvoiceTypeCode name="F1">380</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    
+    <!-- Seller Party -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyName>
+                <cbc:Name>Exportadora Internacional S.L.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Calle Exportación 88</cbc:StreetName>
+                <cbc:CityName>Bilbao</cbc:CityName>
+                <cbc:PostalZone>48001</cbc:PostalZone>
+                <cbc:CountrySubentity>Vizcaya</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>ES</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>ESB99887755</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Exportadora Internacional S.L.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    
+    <!-- Buyer Party -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:PartyName>
+                <cbc:Name>Cliente Mixto S.A.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Avenida Industria 300</cbc:StreetName>
+                <cbc:CityName>Bilbao</cbc:CityName>
+                <cbc:PostalZone>48003</cbc:PostalZone>
+                <cbc:CountrySubentity>Vizcaya</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>ES</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>ESB11223399</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Cliente Mixto S.A.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    
+    <!-- Payment Terms -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>ES3521000813610123456789</cbc:ID>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    
+    <!-- Tax Total with multiple rates and exemptions -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">310.00</cbc:TaxAmount>
+        
+        <!-- Standard rate 21% - General regime -->
+        <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <puf:SpecialRegimeKey>01</puf:SpecialRegimeKey>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>21.0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        
+        <!-- Reduced rate 10% - General regime -->
+        <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <puf:SpecialRegimeKey>01</puf:SpecialRegimeKey>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">100.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>10.0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        
+        <!-- Exempt - Export operations -->
+        <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <puf:SpecialRegimeKey>02</puf:SpecialRegimeKey>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:TaxableAmount currencyID="EUR">5000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReasonCode>E2</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>Exenta por el artículo 21 - Exportación</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    
+    <!-- Legal Monetary Total -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">7000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">7000.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">7310.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">7310.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    
+    <!-- Invoice Lines -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="PCE">20</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Equipos electrónicos</cbc:Description>
+            <cbc:Name>Ordenadores portátiles</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>21.0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">50.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="PCE">100</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Productos alimenticios</cbc:Description>
+            <cbc:Name>Alimentos básicos</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>10.0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">10.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    
+    <cac:InvoiceLine>
+        <cbc:ID>3</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="PCE">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">5000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Maquinaria para exportación</cbc:Description>
+            <cbc:Name>Equipos industriales</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">500.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    
+</Invoice>
