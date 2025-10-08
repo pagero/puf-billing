@@ -52,7 +52,7 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 
 |Croatia
 |*Yes*
-|*No*
+|*Yes*
 |
 
 |Cyprus
@@ -175,6 +175,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*No*
 |
 
+|Philippines
+|*Yes*
+|*Yes*
+|
+
 |Portugal
 |*Yes*
 |*Yes*
@@ -221,6 +226,12 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |Support for TicketBAI system in the Basque region. +
 Only support for invoice and credit.
 
+|Spain (VeriFactu)
+|*Yes*
+|*Yes*
+|Support for VeriFactu. +
+Only support for invoice and credit/correction.
+
 |Sweden
 |*Yes*
 |*No*
@@ -249,6 +260,6 @@ Only support for invoice and credit.
 |Vietnam
 |*Yes*
 |*Yes*
-|Only support for 'new' Invoice. See <<_limitations,limitations>> for more information.
+|Only support for 'new' Invoice.
 
 |===

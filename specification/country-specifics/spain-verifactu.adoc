@@ -1,0 +1,549 @@
+This section contains information about requirements and other information concerning VeriFactu e-invoicing in Spain.
+
+==== Invoice Number and Invoice Series
+
+VeriFactu requires both an invoice number and an invoice series to uniquely identify invoices.
+
+The invoice number is provided in the standard `cbc:ID` element.
+
+The invoice series must be provided using a PUF extension:
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:InvoiceSeries>
+                        <cbc:ID>2025-A</cbc:ID>
+                    </puf:InvoiceSeries>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:ID>001</cbc:ID>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Document Type Specification
+
+VeriFactu distinguishes between different document types including standard invoices, simplified invoices, and corrective invoices. The document type is specified using the `cbc:InvoiceTypeCode` element with an additional `@name` attribute containing the Spanish invoice type identifier (F1-F3 for invoices, R1-R5 for rectifications).
+
+See https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_spain_verifactu[PUF-003-INVOICETYPECODE (Spain VeriFactu)^] for the complete list of invoice type codes.
+
+===== Standard Invoices
+
+*Standard Invoice (F1)*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="F1">380</cbc:InvoiceTypeCode><!--1-->
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> F1 - Factura (art. 6, 7.2 y 7.3 del RD 1619/2012)
+
+*Simplified Invoice (F2)*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="F2">380</cbc:InvoiceTypeCode><!--1-->
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> F2 - Factura Simplificada y Facturas sin identificación del destinatario art. 6.1.d) RD 1619/2012
+
+===== Corrective Invoices
+
+Corrective invoices can be issued using either Invoice (type code 384) or CreditNote (type code 381) depending on the business scenario.
+
+*Corrective Invoice - Legal Error (R1)*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="R1">384</cbc:InvoiceTypeCode><!--1-->
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> R1 - Factura Rectificativa (Error fundado en derecho y Art. 80 Uno Dos y Seis LIVA)
+
+*Credit Note - Legal Error (R1)*
+[source,xml]
+----
+<CreditNote>
+    <cbc:CreditNoteTypeCode name="R1">381</cbc:CreditNoteTypeCode><!--1-->
+    <!-- Code omitted for clarity -->
+</CreditNote>
+----
+<1> R1 - Factura Rectificativa (Error fundado en derecho y Art. 80 Uno Dos y Seis LIVA)
+
+==== Simplified Invoice Indicator
+
+VeriFactu separates the legal invoice type (F1/F2/F3, R1-R5) from the Article 7.2/7.3 simplified qualifier. Use `cbc:InvoiceTypeCode/@name` for the invoice type (e.g. F2) and only include the `puf:Simplified` extension when the invoice meets the specific Article 7.2/7.3 conditions. For other types it must be omitted. If omitted on an F2 invoice, the default is false.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Simplified</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:Simplified>true</puf:Simplified><!--1-->
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Supported values: `true` (yes) or `false` (no - default if not provided)
+
+==== Correction Information
+
+When issuing corrective invoices (credit notes or corrections), VeriFactu requires specific information about the original invoice being corrected.
+
+===== Correction Type
+
+Spain VeriFactu requires specifying the correction method:
+
+* `I` - Correction by differences (corrección por diferencias)
+* `S` - Substitutive method (método sustitutivo)
+
+===== Billing Reference Structure
+
+The correction information is provided in the `cac:BillingReference` section with PUF extensions:
+
+*Example - Correction by Differences*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode>384</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>001</cbc:ID><!--1-->
+            <cbc:IssueDate>2025-01-15</cbc:IssueDate><!--2-->
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:BillingReferenceExtension>
+                                <puf:Code>I</puf:Code><!--3-->
+                                <puf:InvoiceSeries>
+                                    <cbc:ID>2025-A</cbc:ID><!--4-->
+                                </puf:InvoiceSeries>
+                            </puf:BillingReferenceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Corrected invoice number
+<2> Corrected invoice issue date
+<3> Correction type: `I` (differences) or `S` (substitutive)
+<4> Corrected invoice series
+
+===== Substitutive Method Additional Fields
+
+When using the substitutive method (`S`), additional fields are mandatory:
+
+*Example - Substitutive Method*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode>384</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>001</cbc:ID>
+            <cbc:IssueDate>2025-01-15</cbc:IssueDate>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:BillingReferenceExtension>
+                                <puf:Code>S</puf:Code>
+                                <puf:InvoiceSeries>
+                                    <cbc:ID>2025-A</cbc:ID>
+                                </puf:InvoiceSeries>
+                                <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount><!--1-->
+                                <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount><!--2-->
+                                <puf:EquivalenceSurchargeAmount currencyID="EUR">5.00</puf:EquivalenceSurchargeAmount><!--3-->
+                            </puf:BillingReferenceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Corrected invoice tax base (mandatory for substitutive method)
+<2> Corrected invoice tax amount (mandatory for substitutive method)
+<3> Corrected invoice equivalence surcharge (conditionally mandatory)
+
+==== Party Identification
+
+===== Seller Information
+
+The seller's Spanish Tax Identification Number (NIF) must be provided in the `cac:PartyTaxScheme` structure:
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>ESB12345678</cbc:CompanyID><!--1-->
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Spanish NIF with ES prefix
+
+===== Buyer Information
+
+For the buyer, the VAT number is conditionally mandatory. If the buyer is a Spanish entity, the NIF should be provided. If the buyer does not have a VAT number, an alternative identification must be provided.
+
+*Example - Buyer with VAT Number*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>ESB87654321</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example - Buyer with Alternative Identification*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="ES:PASSPORT">AB123456</cbc:ID><!--1-->
+            </cac:PartyIdentification>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Alternative identification using scheme codes from https://pagero.github.io/puf-code-lists/#_identification_scheme_spain[PUF-008-IDENTIFICATIONSCHEME^]
+
+==== Tax Details
+
+Spain VeriFactu requires comprehensive tax information including tax type, tax category, special regime keys, and exemption codes.
+
+===== Tax Types
+
+VeriFactu supports three tax types:
+
+* **VAT** (IVA) - Standard Spanish VAT used throughout Spain
+* **IGIC** - Special tax for the Canary Islands
+* **IPSI** - Special tax for Ceuta and Melilla
+
+The tax type is specified in `cac:TaxScheme/cbc:ID`:
+
+*Example - IVA (VAT)*
+[source,xml]
+----
+<cac:TaxCategory>
+    <cbc:ID>S</cbc:ID>
+    <cbc:Percent>21.0</cbc:Percent>
+    <cac:TaxScheme>
+        <cbc:ID>VAT</cbc:ID><!--1-->
+    </cac:TaxScheme>
+</cac:TaxCategory>
+----
+<1> Use `VAT` for IVA operations
+
+*Example - IGIC (Canary Islands)*
+[source,xml]
+----
+<cac:TaxCategory>
+    <cbc:ID>S</cbc:ID>
+    <cbc:Percent>7.0</cbc:Percent>
+    <cac:TaxScheme>
+        <cbc:ID>IGIC</cbc:ID><!--1-->
+    </cac:TaxScheme>
+</cac:TaxCategory>
+----
+<1> Use `IGIC` for Canary Islands operations
+
+*Example - IPSI (Ceuta/Melilla)*
+[source,xml]
+----
+<cac:TaxCategory>
+    <cbc:ID>S</cbc:ID>
+    <cbc:Percent>10.0</cbc:Percent>
+    <cac:TaxScheme>
+        <cbc:ID>IPSI</cbc:ID><!--1-->
+    </cac:TaxScheme>
+</cac:TaxCategory>
+----
+<1> Use `IPSI` for Ceuta and Melilla operations
+
+===== Tax Categories
+
+VeriFactu uses standard tax category codes from UNCL5305. Common codes include:
+
+* **S** - Standard rate
+* **AE** - Reverse Charge
+* **E** - Exempt from tax
+* **O** - Not subject to tax (outside scope)
+* **Z** - Zero rated
+
+See https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^] for more details.
+
+===== Special Regime Keys (ClaveRegimen)
+
+**Mandatory for VeriFactu**: Every tax breakdown must include a Special Regime Key (ClaveRegimen) that identifies the tax regime type or special transaction scheme.
+
+The special regime key is provided using a PUF extension within the `cac:TaxSubtotal` structure. The applicable codes depend on the tax type (VAT/IGIC/IPSI).
+
+For a complete list of special regime keys, see https://pagero.github.io/puf-code-lists/#_puf_022_specialregimekey[PUF-022-SPECIALREGIMEKEY^].
+
+*Example - IVA General Regime (Code 01)*
+[source,xml]
+----
+<cac:TaxSubtotal>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:TaxSubtotalExtension>
+                        <puf:SpecialRegimeKey>01</puf:SpecialRegimeKey><!--1-->
+                    </puf:TaxSubtotalExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+    <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
+    <cac:TaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>21.0</cbc:Percent>
+        <cac:TaxScheme>
+            <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+    </cac:TaxCategory>
+</cac:TaxSubtotal>
+----
+<1> Code `01` - General regime (for IVA operations)
+
+*Example - Export Operations (Code 02)*
+[source,xml]
+----
+<cac:TaxSubtotal>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:TaxSubtotalExtension>
+                        <puf:SpecialRegimeKey>02</puf:SpecialRegimeKey><!--1-->
+                    </puf:TaxSubtotalExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:TaxableAmount currencyID="EUR">5000.00</cbc:TaxableAmount>
+    <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+    <cac:TaxCategory>
+        <cbc:ID>E</cbc:ID>
+        <cbc:Percent>0</cbc:Percent>
+        <cac:TaxScheme>
+            <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+    </cac:TaxCategory>
+</cac:TaxSubtotal>
+----
+<1> Code `02` - Export operations
+
+===== Tax Exemption Codes
+
+When the tax category is **E** (Exempt) or **O** (Outside scope), a tax exemption reason code must be provided.
+
+See https://pagero.github.io/puf-code-lists/#_tax_exemption_codes_in_spain_verifactu[PUF-013-TAXEXEMPTIONCODE (Spain section)^] for the complete list of exemption codes.
+
+*Example - Exempt Operation (Article 21)*
+[source,xml]
+----
+<cac:TaxSubtotal>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:TaxSubtotalExtension>
+                        <puf:SpecialRegimeKey>01</puf:SpecialRegimeKey><!--3-->
+                    </puf:TaxSubtotalExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:TaxableAmount currencyID="EUR">2000.00</cbc:TaxableAmount>
+    <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+    <cac:TaxCategory>
+        <cbc:ID>E</cbc:ID>
+        <cbc:Percent>0</cbc:Percent>
+        <cbc:TaxExemptionReasonCode>E2</cbc:TaxExemptionReasonCode><!--1-->
+        <cbc:TaxExemptionReason>Exenta por el artículo 21</cbc:TaxExemptionReason><!--2-->
+        <cac:TaxScheme>
+            <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+    </cac:TaxCategory>
+</cac:TaxSubtotal>
+----
+<1> Exemption code `E2` - Exempt pursuant to Article 21
+<2> Human-readable exemption reason
+<3> Special regime key is still required for exempt operations
+
+*Example - Not Subject (Location Rules)*
+[source,xml]
+----
+<cac:TaxSubtotal>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:TaxSubtotalExtension>
+                        <puf:SpecialRegimeKey>01</puf:SpecialRegimeKey><!--3-->
+                    </puf:TaxSubtotalExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:TaxableAmount currencyID="EUR">3000.00</cbc:TaxableAmount>
+    <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+    <cac:TaxCategory>
+        <cbc:ID>O</cbc:ID>
+        <cbc:Percent>0</cbc:Percent>
+        <cbc:TaxExemptionReasonCode>N2</cbc:TaxExemptionReasonCode><!--1-->
+        <cbc:TaxExemptionReason>No sujeta por reglas de localización</cbc:TaxExemptionReason><!--2-->
+        <cac:TaxScheme>
+            <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+    </cac:TaxCategory>
+</cac:TaxSubtotal>
+----
+<1> No-subject code `N2` - Not subject due to location rules
+<2> Human-readable reason
+<3> Special regime key is still required for not-subject operations
+
+===== Equivalence Surcharge (Recargo de Equivalencia)
+
+The equivalence surcharge is a special tax regime applicable to certain retail traders in Spain. When applicable, both the rate and amount must be provided using PUF extensions.
+
+*Example - Equivalence Surcharge*
+[source,xml]
+----
+<cac:TaxSubtotal>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:TaxSubtotalExtension>
+                        <puf:SpecialRegimeKey>18</puf:SpecialRegimeKey><!--2-->
+                        <puf:EquivalenceSurcharge>
+                            <cbc:Percent>5.2</cbc:Percent><!--3-->
+                            <puf:Amount currencyID="EUR">52.00</puf:Amount><!--4-->
+                        </puf:EquivalenceSurcharge>
+                    </puf:TaxSubtotalExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+    <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount><!--1-->
+    <cac:TaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>21.0</cbc:Percent>
+        <cac:TaxScheme>
+            <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+    </cac:TaxCategory>
+</cac:TaxSubtotal>
+----
+<1> Tax amount (IVA) = 1000.00 × 21% = 210.00
+<2> Special regime key `18` indicates equivalence surcharge
+<3> Equivalence surcharge rate (5.2%)
+<4> Equivalence surcharge amount = 1000.00 × 5.2% = 52.00
+
+===== Tax Base at Cost
+
+For special group regimes, a tax base at cost may be required:
+
+*Example - Tax Base at Cost*
+[source,xml]
+----
+<cac:TaxSubtotal>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:TaxSubtotalExtension>
+                        <puf:SpecialRegimeKey>06</puf:SpecialRegimeKey><!--1-->
+                        <puf:TaxBaseAtCost currencyID="EUR">950.00</puf:TaxBaseAtCost><!--2-->
+                    </puf:TaxSubtotalExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+    <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
+    <cac:TaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>21.0</cbc:Percent>
+        <cac:TaxScheme>
+            <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+    </cac:TaxCategory>
+</cac:TaxSubtotal>
+----
+<1> Special regime key `06` - VAT group advanced level
+<2> Tax base at cost for special group regime calculation
+
+==== Related Resources
+
+* https://pagero.github.io/puf-code-lists/#_puf_003_invoicetypecode[PUF-003-INVOICETYPECODE^] - Invoice type codes
+* https://pagero.github.io/puf-code-lists/#_identification_scheme_spain[PUF-008-IDENTIFICATIONSCHEME (Spain)^] - Spanish identification schemes
+* https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^] - Tax category codes
+* https://pagero.github.io/puf-code-lists/#_tax_exemption_codes_in_spain_verifactu[PUF-013-TAXEXEMPTIONCODE (Spain)^] - Tax exemption and no-subject codes
+* https://pagero.github.io/puf-code-lists/#_puf_022_specialregimekey[PUF-022-SPECIALREGIMEKEY^] - Special regime keys for Spanish tax operations

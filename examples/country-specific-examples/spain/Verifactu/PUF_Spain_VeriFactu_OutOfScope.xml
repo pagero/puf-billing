@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Example: Spain VeriFactu Invoice - Out of Scope Transactions
+    
+    This example demonstrates:
+    - Not subject to VAT transactions (outside scope)
+    - Tax exemption code N2 (location rules)
+    - Special regime key for out of scope operations
+    - Services provided outside Spain
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+    
+    <!-- Invoice series extension -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:InvoiceSeries>
+                        <cbc:ID>2025-O</cbc:ID>
+                    </puf:InvoiceSeries>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>OOS-2025-001</cbc:ID>
+    <cbc:IssueDate>2025-02-01</cbc:IssueDate>
+    <cbc:DueDate>2025-03-03</cbc:DueDate>
+    <cbc:InvoiceTypeCode name="F1">380</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    
+    <!-- Seller Party -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyName>
+                <cbc:Name>Consultora Internacional S.L.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Calle Servicios 77</cbc:StreetName>
+                <cbc:CityName>Madrid</cbc:CityName>
+                <cbc:PostalZone>28002</cbc:PostalZone>
+                <cbc:CountrySubentity>Madrid</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>ES</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>ESB66778899</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Consultora Internacional S.L.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    
+    <!-- Buyer Party - Foreign company -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:PartyName>
+                <cbc:Name>Foreign Company Ltd.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>123 Business Street</cbc:StreetName>
+                <cbc:CityName>London</cbc:CityName>
+                <cbc:PostalZone>SW1A 1AA</cbc:PostalZone>
+                <cbc:CountrySubentity>England</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>GB</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>GB123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Foreign Company Ltd.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    
+    <!-- Payment Terms -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>ES4521000813610987654321</cbc:ID>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    
+    <!-- Tax Total - Not subject to VAT -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+        
+        <!-- Not subject - Location rules (Article 7) -->
+        <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <puf:SpecialRegimeKey>01</puf:SpecialRegimeKey>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:TaxableAmount currencyID="EUR">5000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>O</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReasonCode>N2</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>No sujeta por reglas de localización - Artículo 7 LIVA</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    
+    <!-- Legal Monetary Total -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">5000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">5000.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">5000.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">5000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    
+    <!-- Invoice Lines -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">200</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">5000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Servicios de consultoría prestados en el Reino Unido</cbc:Description>
+            <cbc:Name>Consultoría técnica internacional</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>O</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">25.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    
+</Invoice>

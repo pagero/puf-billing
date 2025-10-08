@@ -36,13 +36,26 @@ Below table lists all additional elements added to the extension.
 |===
 |Element |Description
 
+|`puf:SpecialRegimeKey`
+|**Special regime key** +
+Code identifying the special tax regime or transaction type. Mandatory in some countries (e.g., Spain VeriFactu ClaveRegimen). +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_022_specialregimekey[PUF-022-SPECIALREGIMEKEY^].
+
+|`puf:TaxBaseAtCost`
+|**Tax base at cost** +
+Tax base calculated at cost for special group regimes. Used in certain countries (e.g., Spain) for specific tax regime scenarios.
+
+|`puf:TaxBaseAtCost/@currencyID`
+|**Currency of TaxBaseAtCost** +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
+
 |`puf:TaxCurrencyTaxableAmount`
 |**Tax currency taxable amount** +
 Taxable amount in tax currency per subtotal.
 
 |`puf:TaxCurrencyTaxableAmount/@currencyID`
 |**Tax currency taxable amount currency** +
-Currency of taxable amount in tax currency per subtotal.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`puf:TaxCurrencyTaxAmount`
 |**Tax currency tax amount** +
@@ -50,7 +63,7 @@ Tax amount in tax currency per subtotal.
 
 |`puf:TaxCurrencyTaxAmount/@currencyID`
 |**Tax currency tax amount currency** +
-Currency of tax amount in tax currency per subtotal.
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`puf:TaxInclusiveAmount`
 |**Total amount including tax** +
@@ -71,6 +84,18 @@ For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004
 |`puf:TaxChargeability/cbc:TaxTypeCode`
 |**Tax chargeability** +
 Tax chargeability per tax (see Italy section <<_tax_chargeability_esigibilita_iva, here>>).
+
+|`puf:EquivalenceSurcharge/cbc:Percent`
+|**Equivalence surcharge percentage** +
+The percentage rate of the equivalence surcharge (Recargo de Equivalencia). Used in Spain for certain retail traders.
+
+|`puf:EquivalenceSurcharge/puf:Amount`
+|**Equivalence surcharge amount** +
+The amount of the equivalence surcharge (Recargo de Equivalencia). Used in Spain for certain retail traders.
+
+|`puf:EquivalenceSurcharge/puf:Amount/@currencyID`
+|**Currency of EquivalenceSurcharge Amount** +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |===
 
@@ -164,3 +189,133 @@ See example below.
 <3> Taxable amount in tax currency for 12% rate.
 <4> Tax amount in tax currency for 12% rate.
 <5> Summary of all sub totals `TaxCurrencyTaxAmount`.
+
+===== Special regime key
+
+Some countries require a special regime key to classify the tax regime type or special transaction scheme. This is mandatory in certain jurisdictions (e.g., Spain VeriFactu).
+
+The special regime key is provided using `puf:SpecialRegimeKey` within the `TaxSubtotalExtension`.
+
+For a complete list of special regime keys, see https://pagero.github.io/puf-code-lists/#_puf_022_specialregimekey[PUF-022-SPECIALREGIMEKEY^].
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:TaxTotal>
+      <cac:TaxSubtotal>
+          <ext:UBLExtensions>
+              <ext:UBLExtension>
+                  <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                  <ext:ExtensionContent>
+                      <puf:PageroExtension>
+                          <puf:TaxSubtotalExtension>
+                              <puf:SpecialRegimeKey>01</puf:SpecialRegimeKey> <!--1-->
+                          </puf:TaxSubtotalExtension>
+                      </puf:PageroExtension>
+                  </ext:ExtensionContent>
+              </ext:UBLExtension>
+          </ext:UBLExtensions>
+          <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+          <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
+          <cac:TaxCategory>
+              <cbc:ID>S</cbc:ID>
+              <cbc:Percent>21.0</cbc:Percent>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:TaxCategory>
+      </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Special regime key code (e.g., `01` for general regime in Spain).
+
+===== Equivalence surcharge
+
+The equivalence surcharge (Recargo de Equivalencia) is a special tax regime applicable to certain retail traders in Spain. When applicable, both the rate and amount must be provided.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:TaxTotal>
+      <cac:TaxSubtotal>
+          <ext:UBLExtensions>
+              <ext:UBLExtension>
+                  <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                  <ext:ExtensionContent>
+                      <puf:PageroExtension>
+                          <puf:TaxSubtotalExtension>
+                              <puf:SpecialRegimeKey>18</puf:SpecialRegimeKey> <!--1-->
+                              <puf:EquivalenceSurcharge>
+                                  <cbc:Percent>5.2</cbc:Percent> <!--2-->
+                                  <puf:Amount currencyID="EUR">52.00</puf:Amount> <!--3-->
+                              </puf:EquivalenceSurcharge>
+                          </puf:TaxSubtotalExtension>
+                      </puf:PageroExtension>
+                  </ext:ExtensionContent>
+              </ext:UBLExtension>
+          </ext:UBLExtensions>
+          <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+          <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount> <!--4-->
+          <cac:TaxCategory>
+              <cbc:ID>S</cbc:ID>
+              <cbc:Percent>21.0</cbc:Percent>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:TaxCategory>
+      </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Special regime key `18` indicates equivalence surcharge applies.
+<2> Equivalence surcharge rate (5.2%).
+<3> Equivalence surcharge amount = 1000.00 × 5.2% = 52.00.
+<4> Tax amount (IVA) = 1000.00 × 21% = 210.00.
+
+===== Tax base at cost
+
+For special group regimes in certain countries (e.g., Spain), a tax base at cost may be required in addition to the standard taxable amount.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:TaxTotal>
+      <cac:TaxSubtotal>
+          <ext:UBLExtensions>
+              <ext:UBLExtension>
+                  <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                  <ext:ExtensionContent>
+                      <puf:PageroExtension>
+                          <puf:TaxSubtotalExtension>
+                              <puf:SpecialRegimeKey>06</puf:SpecialRegimeKey> <!--1-->
+                              <puf:TaxBaseAtCost currencyID="EUR">800.00</puf:TaxBaseAtCost> <!--2-->
+                          </puf:TaxSubtotalExtension>
+                      </puf:PageroExtension>
+                  </ext:ExtensionContent>
+              </ext:UBLExtension>
+          </ext:UBLExtensions>
+          <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+          <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
+          <cac:TaxCategory>
+              <cbc:ID>S</cbc:ID>
+              <cbc:Percent>21.0</cbc:Percent>
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:TaxCategory>
+      </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Special regime key `06` - VAT group advanced level.
+<2> Tax base calculated at cost for the special group regime.

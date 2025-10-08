@@ -1,0 +1,64 @@
+This indicator can be used in conjunction with the regular invoice types to indicate if it is a simplified invoice, simplified credit note etc. +
+Please note that what is to be considered as simplified may vary between different countries (for example invoices below a certain amount etc).
+
+WARNING: Note that not all markets are supported in Pagero Online. +
+Please contact Pagero to learn in which markets we support simplified invoice in.
+
+The UBL extension to be used for below elements can be found <<_extublextensions, here>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/Simplified`. 
+
+See example below as well as the URI to be used for this extension.
+
+*Example* +
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+      <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Simplified</ext:ExtensionURI> <!--1-->
+          <ext:ExtensionContent>
+              <puf:PageroExtension>
+                <puf:Simplified/> <!--2-->
+              </puf:PageroExtension>
+          </ext:ExtensionContent>
+      </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table shows the definition of the elements added to the extension.
+
+.Elements added to puf:PageroExtension/puf:Simplified
+|===
+|Element |Description
+
+|`puf:Simplified`
+|**Simplified Invoice Indicator** +
+Can either be *true* or *false*. +
+**Note that if the element is missing Pagero Online treat it as false**
+
+|===
+
+*Example* +
+_Simplified Invoice_
+[source,xml]
+----
+<Invoice>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Simplified</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:Simplified>true</puf:Simplified>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+
+----
