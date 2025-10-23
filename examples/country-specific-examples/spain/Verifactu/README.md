@@ -10,7 +10,6 @@ VeriFactu is a voluntary e-invoicing framework regulated by the Spanish Tax Agen
 - Invoice type codes with Spanish identifiers (F1-F3, R1-R5)
 - Special regime keys (ClaveRegimen) - mandatory for all tax breakdowns
 - Tax exemption codes
-- Equivalence surcharge (Recargo de Equivalencia)
 - Correction methods (differences and substitutive)
 
 ## Example Files
@@ -42,39 +41,19 @@ Demonstrates:
 Demonstrates:
 
 - Invoice type F2 (Factura Simplificada)
-- Simplified invoice qualifier (`puf:Simplified` extension) for Article 7.2/7.3 applicability
+- Simplified invoice qualifier (`puf:Simplified` extension)
 - Alternative buyer identification (passport) when VAT number not available
 - Simplified invoice characteristics per Article 6.1.d) RD 1619/2012
 
 **Key Features:**
 
 - Document type: 380 with name="F2"
-- `puf:Simplified` boolean extension (`true` indicates Article 7.2/7.3 simplified case)
+- `puf:Simplified` boolean extension (`true` indicates simplified case)
 - Buyer identification using scheme ES:PASSPORT
 
 ---
 
-### 3. PUF_Spain_VeriFactu_Rectificative_Differences.xml
-
-**Rectificative Invoice - Correction by Differences (R1)**
-
-Demonstrates:
-
-- Rectificative invoice type R1 (Error fundado en derecho)
-- Correction method "I" (corrección por diferencias)
-- BillingReference with correction information
-- Referenced invoice series and issue date
-
-**Key Features:**
-
-- Document type: 384 with name="R1"
-- BillingReferenceExtension with Code="I"
-- Referenced invoice series in extension
-- Negative amounts for corrections
-
----
-
-### 4. PUF_Spain_VeriFactu_CreditNote_Substitutive.xml
+### 3. PUF_Spain_VeriFactu_CreditNote_Substitutive.xml
 
 **Credit Note - Substitutive Method (R1)**
 
@@ -85,20 +64,17 @@ Demonstrates:
 - Referenced invoice amounts (mandatory for substitutive method):
   - TaxableAmount
   - TaxAmount
-  - EquivalenceSurchargeAmount
-- Complete credit note with equivalence surcharge
+- Complete credit note
 
 **Key Features:**
 
 - Document type: 381 with name="R1"
 - BillingReferenceExtension with Code="S"
 - All referenced amounts included in extension
-- Special regime key `18` (Equivalence surcharge)
-- EquivalenceSurcharge extension with rate and amount
 
 ---
 
-### 5. PUF_Spain_VeriFactu_MultipleTaxRates.xml
+### 4. PUF_Spain_VeriFactu_MultipleTaxRates.xml
 
 #### Invoice with Multiple Tax Rates and Exemptions
 
@@ -119,7 +95,7 @@ Demonstrates:
 
 ---
 
-### 6. PUF_Spain_VeriFactu_OutOfScope.xml
+### 5. PUF_Spain_VeriFactu_OutOfScope.xml
 
 #### Invoice with Not Subject to VAT Transactions
 

@@ -3,11 +3,14 @@
     Example: Spain VeriFactu Simplified Invoice (F2)
     
     This example demonstrates:
-    - Simplified invoice type (F2)
-    - Simplified invoice indicator (RestrictedInformation)
+    - Simplified invoice type (F2) - inherently simplified by definition
+    - puf:Simplified extension set to true (optional for F2)
     - No buyer VAT identification required
     - Alternative buyer identification (passport)
     - IVA tax with special regime key
+    
+    Note: F2 invoices should NOT include simplified_art7273 RestrictedInformation.
+    The Articles 7.2/7.3 qualification is only valid for F1, F3, R1, R2, R3, R4.
 -->
 <Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
          xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
@@ -15,7 +18,7 @@
          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
          xmlns:puf="urn:pagero:ExtensionComponent:1.0">
     
-    <!-- Invoice series and simplified invoice indicator (Article 7.2/7.3) -->
+    <!-- Invoice series and puf:Simplified indicator -->
     <ext:UBLExtensions>
         <ext:UBLExtension>
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:InvoiceSeries</ext:ExtensionURI>

@@ -83,19 +83,24 @@ Corrective invoices can be issued using either Invoice (type code 384) or Credit
 
 ==== Simplified Invoice Indicator
 
-VeriFactu separates the legal invoice type (F1/F2/F3, R1-R5) from the Article 7.2/7.3 simplified qualifier. Use `cbc:InvoiceTypeCode/@name` for the invoice type (e.g. F2) and only include the `puf:Simplified` extension when the invoice meets the specific Article 7.2/7.3 conditions. For other types it must be omitted. If omitted on an F2 invoice, the default is false.
+**IMPORTANT**: The `puf:Simplified` extension indicates whether an invoice qualifies under Articles 7.2 and 7.3 of RD 1619/2012. This is **distinct** from the F2 simplified invoice type.
 
-*Example*
+The `puf:Simplified` extension can **only** be used with invoice types: *F1*, *F3*, *R1*, *R2*, *R3*, or *R4*.
+
+**Do NOT use this extension with F2 or R5 invoice types**, as it will cause a validation error.
+
+*Example - F1 Invoice with Articles 7.2/7.3 Qualification*
 [source,xml]
 ----
 <Invoice>
+    <cbc:InvoiceTypeCode name="F1">380</cbc:InvoiceTypeCode><!--1-->
     <!-- Code omitted for clarity -->
     <ext:UBLExtensions>
         <ext:UBLExtension>
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Simplified</ext:ExtensionURI>
             <ext:ExtensionContent>
                 <puf:PageroExtension>
-                    <puf:Simplified>true</puf:Simplified><!--1-->
+                    <puf:Simplified>true</puf:Simplified><!--2-->
                 </puf:PageroExtension>
             </ext:ExtensionContent>
         </ext:UBLExtension>
@@ -103,7 +108,60 @@ VeriFactu separates the legal invoice type (F1/F2/F3, R1-R5) from the Article 7.
     <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> Supported values: `true` (yes) or `false` (no - default if not provided)
+<1> F1 invoice type (standard invoice)
+<2> Indicates this F1 invoice qualifies under Articles 7.2/7.3. Supported values: `true` (qualifies) or `false` (does not qualify)
+
+==== Articles 7.2/7.3 Qualification (FacturaSimplificadaArt7273)
+
+VeriFactu has a separate indicator for invoices that qualify under Articles 7.2 and 7.3 of RD 1619/2012. This is **distinct** from the F2 simplified invoice type and is provided using a restricted information value.
+
+[IMPORTANT]
+====
+The `FacturaSimplificadaArt7273` field can **only** be used with invoice types: *F1*, *F3*, *R1*, *R2*, *R3*, or *R4*.
+
+**Do NOT use this indicator with F2 or R5 invoice types**, as it will cause a validation error.
+====
+
+===== Structure
+
+The Articles 7.2/7.3 qualification is provided using a `RestrictedInformation` extension with the key `simplified_art7273`:
+
+*Example - F1 Invoice with Articles 7.2/7.3 Qualification*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="F1">380</cbc:InvoiceTypeCode><!--1-->
+    <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>simplified_art7273</puf:Key><!--2-->
+                        <puf:Value>true</puf:Value><!--3-->
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> F1 invoice type (standard invoice)
+<2> Key identifying the Articles 7.2/7.3 qualification indicator
+<3> Value: `true` (yes, qualifies) or `false` (no, does not qualify)
+
+===== Valid Invoice Types
+
+The Articles 7.2/7.3 qualification can be applied to:
+
+* **F1** - Standard invoice
+* **F3** - Issued in substitution of simplified invoices
+* **R1** - Corrective invoice (legal error)
+* **R2** - Corrective invoice (Article 80.3)
+* **R3** - Corrective invoice (Article 80.4)
+* **R4** - Corrective invoice (remaining cases)
 
 ==== Correction Information
 
