@@ -5,7 +5,7 @@
     This example demonstrates:
     - Credit note type with R1 code
     - Substitutive correction method "S"
-    - Referenced invoice amounts (TaxableAmount, TaxAmount, EquivalenceSurchargeAmount)
+    - Referenced invoice amounts (TaxableAmount, TaxAmount)
     - Full credit note with new values
 -->
 <CreditNote xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0">
@@ -45,7 +45,6 @@
                                 <puf:Code>S</puf:Code>
                                 <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
                                 <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
-                                <puf:EquivalenceSurchargeAmount currencyID="EUR">52.00</puf:EquivalenceSurchargeAmount>
                             </puf:BillingReferenceExtension>
                         </puf:PageroExtension>
                     </ext:ExtensionContent>
@@ -110,26 +109,10 @@
         </cac:Party>
     </cac:AccountingCustomerParty>
 
-    <!-- Tax Total with Equivalence Surcharge -->
+    <!-- Tax Total -->
     <cac:TaxTotal>
-        <cbc:TaxAmount currencyID="EUR">262.00</cbc:TaxAmount>
+        <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
         <cac:TaxSubtotal>
-            <ext:UBLExtensions>
-                <ext:UBLExtension>
-                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
-                    <ext:ExtensionContent>
-                        <puf:PageroExtension>
-                            <puf:TaxSubtotalExtension>
-                                <puf:SpecialRegimeKey>18</puf:SpecialRegimeKey>
-                                <puf:EquivalenceSurcharge>
-                                    <cbc:Percent>5.2</cbc:Percent>
-                                    <puf:Amount currencyID="EUR">52.00</puf:Amount>
-                                </puf:EquivalenceSurcharge>
-                            </puf:TaxSubtotalExtension>
-                        </puf:PageroExtension>
-                    </ext:ExtensionContent>
-                </ext:UBLExtension>
-            </ext:UBLExtensions>
             <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
             <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
             <cac:TaxCategory>
@@ -146,8 +129,8 @@
     <cac:LegalMonetaryTotal>
         <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
         <cbc:TaxExclusiveAmount currencyID="EUR">1000.00</cbc:TaxExclusiveAmount>
-        <cbc:TaxInclusiveAmount currencyID="EUR">1262.00</cbc:TaxInclusiveAmount>
-        <cbc:PayableAmount currencyID="EUR">1262.00</cbc:PayableAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">1210.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">1210.00</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>
 
     <!-- Credit Note Line -->
