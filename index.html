@@ -14271,6 +14271,33 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 <div class="paragraph">
 <p>See <a href="https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_spain_verifactu" target="_blank" rel="noopener">PUF-003-INVOICETYPECODE (Spain VeriFactu)</a> for the complete list of invoice type codes.</p>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>puf:Simplified</code> and invoice type <code>F2</code> both indicate a simplified invoice (Factura simplificada). They represent the same concept.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you declare a simplified invoice, the document type MUST be <code>F2</code>. You MAY include <code>puf:Simplified</code> with value <code>true</code>, but it is redundant.</p>
+</li>
+<li>
+<p>Do not use <code>puf:Simplified</code> with non‑F2 invoice types.</p>
+</li>
+<li>
+<p>Do not confuse <code>puf:Simplified</code>/F2 with <code>simplified_art7273</code> (Articles 7.2/7.3 qualification). They are different.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="sect4">
 <h5 id="_standard_invoices"><a class="anchor" href="#_standard_invoices"></a><a class="link" href="#_standard_invoices">Standard Invoices</a></h5>
 <div class="paragraph">
@@ -14360,45 +14387,59 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 <div class="sect3">
 <h4 id="_simplified_invoice_indicator"><a class="anchor" href="#_simplified_invoice_indicator"></a><a class="link" href="#_simplified_invoice_indicator">5.16.3. Simplified Invoice Indicator</a></h4>
 <div class="paragraph">
-<p><strong>IMPORTANT</strong>: The <code>puf:Simplified</code> extension indicates whether an invoice qualifies under Articles 7.2 and 7.3 of RD 1619/2012. This is <strong>distinct</strong> from the F2 simplified invoice type.</p>
+<p><code>puf:Simplified</code> is equivalent to using the F2 document type. Both mark the document as a simplified invoice (Factura simplificada).</p>
 </div>
 <div class="paragraph">
-<p>The <code>puf:Simplified</code> extension can <strong>only</strong> be used with invoice types: <strong>F1</strong>, <strong>F3</strong>, <strong>R1</strong>, <strong>R2</strong>, <strong>R3</strong>, or <strong>R4</strong>.</p>
+<p>Rules
+- If the invoice is simplified, set <code>cbc:InvoiceTypeCode @name="F2"</code>.
+- You MAY add <code>puf:Simplified</code> with value <code>true</code> for clarity, but never <code>false</code>.
+- Do not include <code>puf:Simplified</code> on non‑F2 invoices.</p>
 </div>
 <div class="paragraph">
-<p><strong>Do NOT use this extension with F2 or R5 invoice types</strong>, as it will cause a validation error.</p>
+<p>Examples</p>
 </div>
 <div class="paragraph">
-<p><strong>Example - F1 Invoice with Articles 7.2/7.3 Qualification</strong></p>
+<p><strong>Example — F2 simplified invoice (no extension needed)</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
-    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">F1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">F2</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- No puf:Simplified is required --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example — F2 simplified invoice with explicit puf:Simplified (optional)</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">F2</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
     <span class="tag">&lt;ext:UBLExtensions&gt;</span>
         <span class="tag">&lt;ext:UBLExtension&gt;</span>
             <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:Simplified<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
             <span class="tag">&lt;ext:ExtensionContent&gt;</span>
                 <span class="tag">&lt;puf:PageroExtension&gt;</span>
-                    <span class="tag">&lt;puf:Simplified&gt;</span>true<span class="tag">&lt;/puf:Simplified&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+                    <span class="tag">&lt;puf:Simplified&gt;</span>true<span class="tag">&lt;/puf:Simplified&gt;</span>
                 <span class="tag">&lt;/puf:PageroExtension&gt;</span>
             <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
         <span class="tag">&lt;/ext:UBLExtension&gt;</span>
     <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
-    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
-<div class="colist arabic">
+<div class="admonitionblock important">
 <table>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>F1 invoice type (standard invoice)</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Indicates this F1 invoice qualifies under Articles 7.2/7.3. Supported values: <code>true</code> (qualifies) or <code>false</code> (does not qualify)</td>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>puf:Simplified</code> must not appear with F1, F3, R1, R2, R3, or R4. Use <code>F2</code> for simplified invoices.</p>
+</div>
+</td>
 </tr>
 </table>
 </div>
@@ -14470,34 +14511,6 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 <td>Value: <code>true</code> (yes, qualifies) or <code>false</code> (no, does not qualify)</td>
 </tr>
 </table>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_valid_invoice_types"><a class="anchor" href="#_valid_invoice_types"></a><a class="link" href="#_valid_invoice_types">Valid Invoice Types</a></h5>
-<div class="paragraph">
-<p>The Articles 7.2/7.3 qualification can be applied to:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>F1</strong> - Standard invoice</p>
-</li>
-<li>
-<p><strong>F3</strong> - Issued in substitution of simplified invoices</p>
-</li>
-<li>
-<p><strong>R1</strong> - Corrective invoice (legal error)</p>
-</li>
-<li>
-<p><strong>R2</strong> - Corrective invoice (Article 80.3)</p>
-</li>
-<li>
-<p><strong>R3</strong> - Corrective invoice (Article 80.4)</p>
-</li>
-<li>
-<p><strong>R4</strong> - Corrective invoice (remaining cases)</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
