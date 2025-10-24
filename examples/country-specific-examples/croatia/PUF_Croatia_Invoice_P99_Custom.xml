@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+
+    <!-- Croatian Custom Process Invoice (P99) Example -->
+    <!-- This example demonstrates custom process type with label -->
+
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>HR-2025-CUSTOM-777</cbc:ID>
+    <!-- BT-2 Invoice Issue Date  -->
+    <cbc:IssueDate>2025-02-25</cbc:IssueDate>
+    <!-- HR-BT-2 Issue time (mandatory in Croatia) -->
+    <cbc:IssueTime>09:30:00</cbc:IssueTime>
+    <!-- BT-9 Due Date -->
+    <cbc:DueDate>2025-03-25</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code with Croatian process type P99 (Custom with label) -->
+    <cbc:InvoiceTypeCode name="P99:EUGrantProject2025">380</cbc:InvoiceTypeCode>
+    <!-- BT-22 Invoice Note -->
+    <cbc:Note>Faktura za EU projekt sufinanciranja - specifičan proces izvan standardnih kategorija</cbc:Note>
+    <!-- BT-5 Invoice Document Currency (Croatia uses EUR) -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>EU-GRANT-2025-DIGITAL</cbc:BuyerReference>
+    <!-- BT-12 Contract reference -->
+    <cac:ContractDocumentReference>
+        <cbc:ID>EU-CONTRACT-2025-HR-DIG-001</cbc:ID>
+    </cac:ContractDocumentReference>
+    <!-- BT-11 Project reference -->
+    <cac:ProjectReference>
+        <cbc:ID>EU-DIGITAL-TRANSFORMATION-2025</cbc:ID>
+    </cac:ProjectReference>   
+
+    <!-- BG-4 Seller -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller endpoint ID with Croatian OIB -->
+            <cbc:EndpointID schemeID="9934">33445566778</cbc:EndpointID>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Digital Innovation Hub Croatia d.o.o.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!--BT-35 Seller address street-->
+                <cbc:StreetName>Radnička cesta 100</cbc:StreetName>
+                <!-- BT-37 Seller address City -->
+                <cbc:CityName>Zagreb</cbc:CityName>
+                <!-- BT-38 Seller address postal code -->
+                <cbc:PostalZone>10000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Seller address country code -->
+                    <cbc:IdentificationCode>HR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-31 Seller Vat Number with Croatian HR prefix -->
+                <cbc:CompanyID>HR33445566778</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Registration Name -->
+                <cbc:RegistrationName>Digital Innovation Hub Croatia d.o.o.</cbc:RegistrationName>
+                <!--BT-33 Company Legal Form-->
+                <cbc:CompanyLegalForm>d.o.o. osnovana na Trgovačkom sudu u Zagrebu, temeljni kapital 80.000,00 EUR</cbc:CompanyLegalForm>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <!-- HR-BT-4 and HR-BT-5 Operator information (mandatory for Croatian fiscalization) -->
+        <cac:SellerContact>
+            <!-- HR-BT-5 Operator OIB -->
+            <cbc:ID>77777777777</cbc:ID>
+            <!-- HR-BT-4 Operator Name -->
+            <cbc:Name>Marko Ivić</cbc:Name>
+        </cac:SellerContact>
+    </cac:AccountingSupplierParty>
+    <!-- BG-7 Buyer -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>EU-ORG-999</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-49 Buyer endpoint ID with Croatian OIB -->
+            <cbc:EndpointID schemeID="9934">44556677889</cbc:EndpointID>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Ministarstvo za digitalizaciju RH</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- BT-50 Buyer address street-->
+                <cbc:StreetName>Ulica grada Vukovara 78</cbc:StreetName>
+                <!-- BT-52 Buyer address City -->
+                <cbc:CityName>Zagreb</cbc:CityName>
+                <!-- BT-53 Buyer address postal code -->
+                <cbc:PostalZone>10000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Buyer address country code -->
+                    <cbc:IdentificationCode>HR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer Vat Number if applicable -->
+                <cbc:CompanyID>HR44556677889</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Name -->
+                <cbc:RegistrationName>Ministarstvo za digitalizaciju RH</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <!-- BT-83 Remittance information -->
+        <cbc:PaymentID>EU-GRANT-2025-HR</cbc:PaymentID>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Financial account identifier -->
+            <cbc:ID>HR5523600001234567890</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 Payment service provider identifier -->
+                <cbc:ID>RZBHHR2X</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BT-20 Payment terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Plaćanje iz EU fondova sukladno ugovoru o sufinanciranju. Rok plaćanja 30 dana od primitka fakture.</cbc:Note>
+    </cac:PaymentTerms>
+    <!-- BG-23 VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">2500.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">10000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">2500.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <!-- HR-BT-12 Croatian tax category label -->
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of all Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">10000.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">10000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">12500.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">12500.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <!-- BG-25 Invoice lines -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">100</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">5000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Razvoj digitalnih rješenja za javnu upravu u sklopu EU projekta digitalne transformacije Hrvatske</cbc:Description>
+            <cbc:Name>Usluge digitalne transformacije javne uprave - EU projekt</cbc:Name>
+            <!-- Croatian item classification (mandatory) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">62.02.10</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">50.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">50</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">3000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Edukacija zaposlenika javne uprave u korištenju novih digitalnih platformi i alata</cbc:Description>
+            <cbc:Name>Obuka službenika za korištenje digitalnih alata</cbc:Name>
+            <!-- Croatian item classification (mandatory) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">85.59.19</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">60.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>3</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">2000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Izrada projektne dokumentacije, izvještaja i materijala za praćenje napretka EU projekta</cbc:Description>
+            <cbc:Name>Dokumentacija i izvještavanje za EU fond</cbc:Name>
+            <!-- Croatian item classification (mandatory) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">82.99.19</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">2000.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

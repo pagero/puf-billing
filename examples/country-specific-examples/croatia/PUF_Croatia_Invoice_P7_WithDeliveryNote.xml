@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+
+    <!-- Croatian Invoice with Delivery Note Reference (P7) Example -->
+    <!-- This example demonstrates invoice with despatch advice reference -->
+
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>HR-2025-DEL-567</cbc:ID>
+    <!-- BT-2 Invoice Issue Date  -->
+    <cbc:IssueDate>2025-02-10</cbc:IssueDate>
+    <!-- HR-BT-2 Issue time (mandatory in Croatia) -->
+    <cbc:IssueTime>13:45:00</cbc:IssueTime>
+    <!-- BT-9 Due Date -->
+    <cbc:DueDate>2025-03-10</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code with Croatian process type P7 (with delivery note) -->
+    <cbc:InvoiceTypeCode name="P7">380</cbc:InvoiceTypeCode>
+    <!-- BT-22 Invoice Note -->
+    <cbc:Note>Faktura za isporučenu robu prema otpremnici DN-2025-123</cbc:Note>
+    <!-- BT-5 Invoice Document Currency (Croatia uses EUR) -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>DELIVERY-2025-FEB</cbc:BuyerReference>
+    <!-- BT-13 Purchase order reference -->
+    <cac:OrderReference>
+        <cbc:ID>PO-2025-OFFICE-SUPPLIES</cbc:ID>
+    </cac:OrderReference>
+    <!-- BT-16 Despatch advice reference (mandatory for P7) -->
+    <cac:DespatchDocumentReference>
+        <cbc:ID>DN-2025-123</cbc:ID>
+    </cac:DespatchDocumentReference>
+    
+    <!-- BG-4 Seller -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller endpoint ID with Croatian OIB -->
+            <cbc:EndpointID schemeID="9934">67890123456</cbc:EndpointID>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Veleprodaja Karlovac d.o.o.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!--BT-35 Seller address street-->
+                <cbc:StreetName>Banija 15</cbc:StreetName>
+                <!-- BT-37 Seller address City -->
+                <cbc:CityName>Karlovac</cbc:CityName>
+                <!-- BT-38 Seller address postal code -->
+                <cbc:PostalZone>47000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Seller address country code -->
+                    <cbc:IdentificationCode>HR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-31 Seller Vat Number with Croatian HR prefix -->
+                <cbc:CompanyID>HR67890123456</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Registration Name -->
+                <cbc:RegistrationName>Veleprodaja Karlovac d.o.o.</cbc:RegistrationName>
+                <!--BT-33 Company Legal Form-->
+                <cbc:CompanyLegalForm>d.o.o. osnovana na Trgovačkom sudu u Karlovcu, temeljni kapital 30.000,00 EUR</cbc:CompanyLegalForm>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <!-- HR-BT-4 and HR-BT-5 Operator information (mandatory for Croatian fiscalization) -->
+        <cac:SellerContact>
+            <!-- HR-BT-5 Operator OIB -->
+            <cbc:ID>44444444444</cbc:ID>
+            <!-- HR-BT-4 Operator Name -->
+            <cbc:Name>Petra Kovačić</cbc:Name>
+        </cac:SellerContact>
+    </cac:AccountingSupplierParty>
+    <!-- BG-7 Buyer -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>CRO-OFF-789</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-49 Buyer endpoint ID with Croatian OIB -->
+            <cbc:EndpointID schemeID="9934">78901234567</cbc:EndpointID>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Ured Pula d.o.o.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- BT-50 Buyer address street-->
+                <cbc:StreetName>Forum 5</cbc:StreetName>
+                <!-- BT-52 Buyer address City -->
+                <cbc:CityName>Pula</cbc:CityName>
+                <!-- BT-53 Buyer address postal code -->
+                <cbc:PostalZone>52100</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Buyer address country code -->
+                    <cbc:IdentificationCode>HR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer Vat Number if applicable -->
+                <cbc:CompanyID>HR78901234567</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Name -->
+                <cbc:RegistrationName>Ured Pula d.o.o.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Delivery information -->
+    <cac:Delivery>
+        <!-- BT-72 Actual Delivery Date -->
+        <cbc:ActualDeliveryDate>2025-02-08</cbc:ActualDeliveryDate>
+        <!-- Delivery location -->
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <cbc:StreetName>Forum 5</cbc:StreetName>
+                <cbc:CityName>Pula</cbc:CityName>
+                <cbc:PostalZone>52100</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>HR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <!-- BT-83 Remittance information -->
+        <cbc:PaymentID>HR-2025-DEL-567</cbc:PaymentID>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Financial account identifier -->
+            <cbc:ID>HR9624070001234567890</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 Payment service provider identifier -->
+                <cbc:ID>ZABAHR2X</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BG-23 VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">67.50</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">270.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">67.50</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <!-- HR-BT-12 Croatian tax category label -->
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of all Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">270.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">270.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">337.50</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">337.50</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <!-- BG-25 Invoice lines -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">120.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Papir A4 bijeli 80g/m2 - 500 listova</cbc:Name>
+            <!-- Croatian item classification (mandatory) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">17.12.11</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">12.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">5</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">75.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Toneri za pisač HP LaserJet</cbc:Name>
+            <!-- Croatian item classification (mandatory) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">20.30.24</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">15.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>3</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">15</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">75.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Kemijske olovke plave</cbc:Name>
+            <!-- Croatian item classification (mandatory) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">32.99.13</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

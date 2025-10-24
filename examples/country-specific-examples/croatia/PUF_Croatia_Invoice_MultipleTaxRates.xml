@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+
+    <!-- Croatian Invoice with Multiple Tax Rates Example -->
+    <!-- This example demonstrates all major Croatian tax categories in one invoice -->
+
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>HR-2025-MULTI-999</cbc:ID>
+    <!-- BT-2 Invoice Issue Date  -->
+    <cbc:IssueDate>2025-02-15</cbc:IssueDate>
+    <!-- HR-BT-2 Issue time (mandatory in Croatia) -->
+    <cbc:IssueTime>15:20:00</cbc:IssueTime>
+    <!-- BT-9 Due Date -->
+    <cbc:DueDate>2025-03-15</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code with Croatian process type P1 -->
+    <cbc:InvoiceTypeCode name="P1">380</cbc:InvoiceTypeCode>
+    <!-- BT-22 Invoice Note -->
+    <cbc:Note>Faktura s višestrukim poreznim kategorijama - demonstracija svih hrvatskih PDV stopa</cbc:Note>
+    <!-- BT-5 Invoice Document Currency (Croatia uses EUR) -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>MULTI-TAX-2025</cbc:BuyerReference>
+
+    <!-- BG-4 Seller -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller endpoint ID with Croatian OIB -->
+            <cbc:EndpointID schemeID="9934">89012345678</cbc:EndpointID>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Universal Trade Dubrovnik d.o.o.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!--BT-35 Seller address street-->
+                <cbc:StreetName>Stradun 25</cbc:StreetName>
+                <!-- BT-37 Seller address City -->
+                <cbc:CityName>Dubrovnik</cbc:CityName>
+                <!-- BT-38 Seller address postal code -->
+                <cbc:PostalZone>20000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Seller address country code -->
+                    <cbc:IdentificationCode>HR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-31 Seller Vat Number with Croatian HR prefix -->
+                <cbc:CompanyID>HR89012345678</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Registration Name -->
+                <cbc:RegistrationName>Universal Trade Dubrovnik d.o.o.</cbc:RegistrationName>
+                <!--BT-33 Company Legal Form-->
+                <cbc:CompanyLegalForm>d.o.o. osnovana na Trgovačkom sudu u Dubrovniku</cbc:CompanyLegalForm>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <!-- HR-BT-4 and HR-BT-5 Operator information (mandatory for Croatian fiscalization) -->
+        <cac:SellerContact>
+            <!-- HR-BT-5 Operator OIB -->
+            <cbc:ID>55555555555</cbc:ID>
+            <!-- HR-BT-4 Operator Name -->
+            <cbc:Name>Luka Marić</cbc:Name>
+        </cac:SellerContact>
+    </cac:AccountingSupplierParty>
+    <!-- BG-7 Buyer -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>CRO-MULTI-111</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-49 Buyer endpoint ID with Croatian OIB -->
+            <cbc:EndpointID schemeID="9934">90123456789</cbc:EndpointID>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Trgovina Mixed d.d.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- BT-50 Buyer address street-->
+                <cbc:StreetName>Trg bana Jelačića 1</cbc:StreetName>
+                <!-- BT-52 Buyer address City -->
+                <cbc:CityName>Zagreb</cbc:CityName>
+                <!-- BT-53 Buyer address postal code -->
+                <cbc:PostalZone>10000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Buyer address country code -->
+                    <cbc:IdentificationCode>HR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer Vat Number if applicable -->
+                <cbc:CompanyID>HR90123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Name -->
+                <cbc:RegistrationName>Trgovina Mixed d.d.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <!-- BT-83 Remittance information -->
+        <cbc:PaymentID>HR-2025-MULTI-999</cbc:PaymentID>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Financial account identifier -->
+            <cbc:ID>HR1223600001234567890</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 Payment service provider identifier -->
+                <cbc:ID>ZABAHR2X</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BG-23 VAT breakdown - demonstrating all major Croatian tax categories -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">438.50</cbc:TaxAmount>
+
+        <!-- Standard rate 25% (HR:PDV25) -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">250.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+
+        <!-- Reduced rate 13% (HR:PDV13) -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">500.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">65.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>13.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV13</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+
+        <!-- Super-reduced rate 5% (HR:PDV5) -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">2500.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">125.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV5</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+
+        <!-- Reverse charge (HR:AE) -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">300.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>AE</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cbc:TaxExemptionReason>Obrnuto oporezivanje - kupac obračunava PDV</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:AE</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+
+        <!-- Exempt from tax (HR:E) -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">200.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cbc:TaxExemptionReason>Oslobođeno poreza sukladno članku PDV zakona</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:E</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+
+        <!-- Free export item (HR:G) -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">1500.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>G</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cbc:TaxExemptionReason>Izvoz robe - PDV se ne naplaćuje</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:G</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+
+        <!-- Zero rated goods (HR:Z) -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">400.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>Z</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cbc:TaxExemptionReason>Nulta stopa PDV-a</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:Z</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+
+        <!-- Return fee exemption (HR:POVNAK) -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cbc:TaxExemptionReason>Povratna naknada za ambalažu</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:POVNAK</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of all Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">6500.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">6500.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">6938.50</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">6938.50</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice lines demonstrating different tax treatments -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Računala - standardna stopa PDV 25%</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">26.20.11</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">50</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">500.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Usluge smještaja - snižena stopa 13%</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">55.10.10</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>13</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV13</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">10.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <cac:InvoiceLine>
+        <cbc:ID>3</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">500</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">2500.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Knjige - super snižena stopa 5%</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">58.11.10</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>5</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV5</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <cac:InvoiceLine>
+        <cbc:ID>4</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">300.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Građevinski radovi - obrnuto oporezivanje (HR:AE)</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">41.00.30</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>AE</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReason>Obrnuto oporezivanje</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:AE</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">300.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <cac:InvoiceLine>
+        <cbc:ID>5</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">200.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Obrazovne usluge - oslobođeno PDV (HR:E)</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">85.42.10</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReason>Oslobođeno</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:E</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">200.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <cac:InvoiceLine>
+        <cbc:ID>6</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">1500.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Izvoz robe (HR:G)</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">28.29.39</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>G</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReason>Izvoz</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:G</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">1500.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <cac:InvoiceLine>
+        <cbc:ID>7</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">20</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">400.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Nulta stopa roba (HR:Z)</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">21.20.11</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>Z</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReason>Nulta stopa</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:Z</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">20.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <cac:InvoiceLine>
+        <cbc:ID>8</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>Povratna naknada za ambalažu (HR:POVNAK)</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">38.32.12</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReason>Povratna naknada</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:POVNAK</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
