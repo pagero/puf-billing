@@ -83,7 +83,7 @@ For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004
 
 |`puf:TaxChargeability/cbc:TaxTypeCode`
 |**Tax chargeability** +
-Tax chargeability per tax (see Italy section <<_tax_chargeability_esigibilita_iva, here>>).
+Tax chargeability or split payment.
 
 |`puf:EquivalenceSurcharge/cbc:Percent`
 |**Equivalence surcharge percentage** +

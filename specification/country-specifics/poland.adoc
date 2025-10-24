@@ -1,0 +1,230 @@
+This section contains information about requirements and other data for invoicing in Poland.
+
+==== Full payment indicator & date
+
+Indicator that the invoice amount has been paid in full and the date the payment was made. Populate this field only if the full amount was paid in advance.
+
+*Example* +
+_Extension with the full payment indicator and date_
+[source,xml]
+----
+<Invoice>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:FullPaymentExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:FullPaymentDetails>
+                        <puf:FullPaymentIndicator>true</puf:FullPaymentIndicator>
+                        <puf:DateOfFullPayment>2025-10-23</puf:DateOfFullPayment>
+                    </puf:FullPaymentDetails>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+
+----
+
+==== Document types
+
+Currently PUF has support for the docment types VAT (380 - Basic Invoice) and KOR (384 - Corrected Invoice). Please note that the document type Credit Note (381) is not accepted by KSef. 
+
+==== Tax category codes
+
+Tax category codes for Poland can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland[Tax category codes Poland^]. 
+
+Please note that in addition to the ISO tax codes, the Poland-specific tax type is also required for non-standard taxes.
+
+==== Tax type
+
+For non-standard tax categories, use the cbc:Name element in the tax section at both the header and line levels to convey the tax type. Tax type codes for Poland can be found in https://pagero.github.io/puf-code-lists/#_poland[Tax types Poland^].
+
+*Example* +
+_Tax type Reverse Charge in cac:TaxTotal on document level_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="PLN">10.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="PLN">100.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="PLN">10.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>AE</cbc:ID>
+                <cbc:Name>OO</cbc:Name>
+                <cbc:Percent>10</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- Code omitted for clarity -->
+</Invoice>
+
+----
+
+*Example* +
+_Tax type Exempt in cac:ClassifiedTaxCategory on line level_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+        <cac:Item>
+            <cbc:Name>Product A</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Name>ZW</cbc:Name>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+    <!-- Code omitted for clarity -->
+</Invoice>
+
+----
+
+==== Original line indicator
+
+There are three ways to correct a line in Poland, and PUF supports all three. This element applies to Method 1, where an indicator flags the line being corrected. When set, the indicator voids the original line.
+
+*Example* +
+_The below key in puf:RestrictedInformation can be used to indicate an original line_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:RestrictedInformation>
+                                <puf:Key>originalLine</puf:Key>
+                                <puf:Value>true</puf:Value>
+                            </puf:RestrictedInformation>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- Code omitted for clarity -->
+    </cac:InvoiceLine>
+</Invoice>
+
+----
+
+For Methods 2 and 3, no indicator is required:
+
+- Method 2: send the original line as a negative amount, then send the corrected line as it should appear. Similar to the first method, this method voids the original line, but by using a negative line instead. This method can be used when the receiver does not support the "original line" indicator in their receiving format, and it is more general and widely accepted.
+
+- Method 3: send only the difference between the incorrect and corrected amounts.
+
+Example (intended price $50, invoiced $100):
+
+- Method 2: one line for -$100 and one line for $50.
+
+- Method 3: one line for -$50 (bringing the total to $50).
+
+==== Split payment
+
+To indicate a split payment, set the Tax Chargeability Code to:
+
+- *S* = Split payment
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:TaxTotal>
+        <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <puf:TaxChargeability>
+                                    <cbc:TaxTypeCode>S</cbc:TaxTypeCode>
+                                </puf:TaxChargeability>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- Code omitted for clarity -->
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Document reference in corrected invoice
+
+To forward the details of the invoice being corrected, in a corrected invoice (KOR) the segments below can be used: 
+
+*Correction type*: Indicates the correction type and can be one of the values below:
+
+- 1 - Correction effective on the date of the original invoice.
+- 2 - Correction effective on the issue date of the correcting invoice.
+- 3 - Correction resulting in a different date, including when items on the correcting invoice have different dates.
+
+*KSeF reference number*: The unique ID assigned to the original invoice by KSeF.
+
+*Original invoice date*: Date when the referenced invoice was sent to KSeF.
+
+*Reason for correction*: Textual note describing the reason for issuing a correction.
+
+*Original invoice number*: The invoice number of the original invoice to which the correction relates.
+
+*Example* +
+_The below keys in puf:RestrictedInformation can be used to to indlude the details_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:BillingReferenceExtension>
+                                <puf:RestrictedInformation>
+                                    <!-- Correction type -->
+                                    <puf:Key>correctionType</puf:Key>
+                                    <puf:Value>1</puf:Value>
+                                </puf:RestrictedInformation>
+                                <!-- KSeF reference number -->
+                                <puf:RestrictedInformation>
+                                    <puf:Key>KSEFReferenceNumber</puf:Key>
+                                    <puf:Value>8375460033-20230829-F9E05396E2B1-FB</puf:Value>
+                                </puf:RestrictedInformation>
+                                <!-- Original invoice date -->
+                                <puf:RestrictedInformation>
+                                    <puf:Key>sentToKSEFDate</puf:Key>
+                                    <puf:Value>2025-10-24</puf:Value>
+                                </puf:RestrictedInformation>
+                                <!-- Reason for correction -->
+                                <cbc:Note>Textual note describing the reason for issuing a correction</cbc:Note>
+                            </puf:BillingReferenceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- Original invoice number -->
+            <cbc:ID>1234567</cbc:ID>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
