@@ -122,19 +122,6 @@ Issue time is mandatory in Croatia and must include the time component:
 </Invoice>
 ----
 
-===== Copy Indicator
-
-If data on an eInvoice is corrected in a way that does not affect tax calculation, the eInvoice is issued and sent to the recipient under the same invoice number with the value cbc:CopyIndicator set to "true".
-
-*Example*
-[source,xml]
-----
-<Invoice>
-    <cbc:CopyIndicator>true</cbc:CopyIndicator>
-    <!-- Code omitted for clarity -->
-</Invoice>
-----
-
 ==== Croatian Tax Categories
 
 Croatia uses specific tax category labels that must be mapped appropriately.

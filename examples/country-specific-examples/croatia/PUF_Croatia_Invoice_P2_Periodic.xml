@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+
+    <!-- Croatian Periodic Invoice (P2) Example -->
+    <!-- This example demonstrates monthly periodic billing with multiple tax rates -->
+
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>HR-2025-P2-00045</cbc:ID>
+    <!-- BT-2 Invoice Issue Date  -->
+    <cbc:IssueDate>2025-01-31</cbc:IssueDate>
+    <!-- HR-BT-2 Issue time (mandatory in Croatia) -->
+    <cbc:IssueTime>16:45:00</cbc:IssueTime>
+    <!-- BT-9 Due Date -->
+    <cbc:DueDate>2025-02-28</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code with Croatian process type P2 (Periodic) -->
+    <cbc:InvoiceTypeCode name="P2">380</cbc:InvoiceTypeCode>
+    <!-- BT-22 Invoice Note -->
+    <cbc:Note>Mjesečna faktura za siječanj 2025 - usluge održavanja</cbc:Note>
+    <!-- BT-5 Invoice Document Currency (Croatia uses EUR) -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>CONTRACT-2024-789</cbc:BuyerReference>
+    <!-- BG-14 Invoicing period -->
+    <cac:InvoicePeriod>
+        <!-- BT-73 Invoicing period start date -->
+        <cbc:StartDate>2025-01-01</cbc:StartDate>
+        <!-- BT-74 Invoicing period end date -->
+        <cbc:EndDate>2025-01-31</cbc:EndDate>
+    </cac:InvoicePeriod>
+    <!-- BT-13 Purchase order reference -->
+    <cac:OrderReference>
+        <cbc:ID>PO-2024-12-MAINT</cbc:ID>
+    </cac:OrderReference>
+    <!-- BT-12 Contract reference -->
+    <cac:ContractDocumentReference>
+        <cbc:ID>SERVICE-AGREEMENT-2024-789</cbc:ID>
+    </cac:ContractDocumentReference>
+    
+    <!-- BG-4 Seller -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller endpoint ID with Croatian OIB -->
+            <cbc:EndpointID schemeID="9934">23456789012</cbc:EndpointID>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>IT Solutions Rijeka d.o.o.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!--BT-35 Seller address street-->
+                <cbc:StreetName>Korzo 15</cbc:StreetName>
+                <!-- BT-37 Seller address City -->
+                <cbc:CityName>Rijeka</cbc:CityName>
+                <!-- BT-38 Seller address postal code -->
+                <cbc:PostalZone>51000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Seller address country code -->
+                    <cbc:IdentificationCode>HR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-31 Seller Vat Number with Croatian HR prefix -->
+                <cbc:CompanyID>HR23456789012</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Registration Name -->
+                <cbc:RegistrationName>IT Solutions Rijeka d.o.o.</cbc:RegistrationName>
+                <!--BT-33 Company Legal Form-->
+                <cbc:CompanyLegalForm>d.o.o. osnovana na Trgovačkom sudu u Rijeci, temeljni kapital 50.000,00 EUR, direktor Ana Novak</cbc:CompanyLegalForm>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <!-- HR-BT-4 and HR-BT-5 Operator information (mandatory for Croatian fiscalization) -->
+        <cac:SellerContact>
+            <!-- HR-BT-5 Operator OIB -->
+            <cbc:ID>22222222222</cbc:ID>
+            <!-- HR-BT-4 Operator Name -->
+            <cbc:Name>Ana Novak</cbc:Name>
+        </cac:SellerContact>
+    </cac:AccountingSupplierParty>
+    <!-- BG-7 Buyer -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>CRO-CORP-123</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-49 Buyer endpoint ID with Croatian OIB -->
+            <cbc:EndpointID schemeID="9934">34567890123</cbc:EndpointID>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Proizvodnja Osijek d.d.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- BT-50 Buyer address street-->
+                <cbc:StreetName>Industrijska zona bb</cbc:StreetName>
+                <!-- BT-52 Buyer address City -->
+                <cbc:CityName>Osijek</cbc:CityName>
+                <!-- BT-53 Buyer address postal code -->
+                <cbc:PostalZone>31000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Buyer address country code -->
+                    <cbc:IdentificationCode>HR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer Vat Number if applicable -->
+                <cbc:CompanyID>HR34567890123</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Name -->
+                <cbc:RegistrationName>Proizvodnja Osijek d.d.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <!-- BT-83 Remittance information -->
+        <cbc:PaymentID>HR-2025-P2-00045</cbc:PaymentID>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Financial account identifier -->
+            <cbc:ID>HR6523600001234567890</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 Payment service provider identifier -->
+                <cbc:ID>RZBHHR2X</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BG-23 VAT breakdown - demonstrating multiple Croatian tax rates -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">168.50</cbc:TaxAmount>
+        <!-- Standard rate 25% -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">500.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">125.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <!-- HR-BT-12 Croatian tax category label -->
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <!-- Reduced rate 13% -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">200.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">26.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>13.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <!-- HR-BT-12 Croatian tax category label -->
+                    <cbc:Name>HR:PDV13</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <!-- Super-reduced rate 5% -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">350.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">17.50</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <!-- HR-BT-12 Croatian tax category label -->
+                    <cbc:Name>HR:PDV5</cbc:Name>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of all Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">1050.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">1050.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">1218.50</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">1218.50</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <!-- BG-25 Invoice lines -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">500.00</cbc:LineExtensionAmount>
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2025-01-01</cbc:StartDate>
+            <cbc:EndDate>2025-01-31</cbc:EndDate>
+        </cac:InvoicePeriod>
+        <cac:Item>
+            <cbc:Name>Usluge održavanja IT sustava - standardne</cbc:Name>
+            <!-- Croatian item classification (mandatory) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">62.02.30</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>25</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV25</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">6.25</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">40</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">200.00</cbc:LineExtensionAmount>
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2025-01-01</cbc:StartDate>
+            <cbc:EndDate>2025-01-31</cbc:EndDate>
+        </cac:InvoicePeriod>
+        <cac:Item>
+            <cbc:Name>Usluge obuke zaposlenika</cbc:Name>
+            <!-- Croatian item classification (mandatory) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">85.59.19</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>13</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV13</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>3</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">50</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">350.00</cbc:LineExtensionAmount>
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2025-01-01</cbc:StartDate>
+            <cbc:EndDate>2025-01-31</cbc:EndDate>
+        </cac:InvoicePeriod>
+        <cac:Item>
+            <cbc:Name>Tiskane priručnike za korisnike</cbc:Name>
+            <!-- Croatian item classification (mandatory) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CG">58.11.40</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>5</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>HR:PDV5</cbc:Name>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">7.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

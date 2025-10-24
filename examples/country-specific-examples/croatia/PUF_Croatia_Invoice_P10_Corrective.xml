@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<CreditNote xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0">
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
 
-    <!-- Values in credit note are examples values only. -->
+    <!-- Croatian Corrective Invoice (P10) Example -->
+    <!-- This example demonstrates a corrective invoice that cancels/corrects a previous invoice -->
 
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
-    <!-- BT-1 Credit Note Number -->
-    <cbc:ID>HR-2025-CN-00001</cbc:ID>
-    <!--HR-BT-1 Copy Indicator -->
-    <cbc:CopyIndicator>false</cbc:CopyIndicator>
-    <!-- BT-2 Credit Note Issue Date  -->
-    <cbc:IssueDate>2025-01-20</cbc:IssueDate>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>HR-2025-CORR-123</cbc:ID>
+    <!-- BT-2 Invoice Issue Date  -->
+    <cbc:IssueDate>2025-02-05</cbc:IssueDate>
     <!-- HR-BT-2 Issue time (mandatory in Croatia) -->
-    <cbc:IssueTime>09:15:00</cbc:IssueTime>
-    <!-- BT-3 Credit Note Type Code with Croatian process type -->
-    <cbc:CreditNoteTypeCode name="P1">381</cbc:CreditNoteTypeCode>
-    <!-- BT-5 Credit Note Document Currency (Croatia uses EUR) -->
+    <cbc:IssueTime>11:30:00</cbc:IssueTime>
+    <!-- BT-9 Due Date -->
+    <cbc:DueDate>2025-03-05</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code 384 (Corrected invoice) with Croatian process type P10 -->
+    <cbc:InvoiceTypeCode name="P10">384</cbc:InvoiceTypeCode>
+    <!-- BT-22 Invoice Note -->
+    <cbc:Note>Ispravak fakture HR-2025-00123 zbog pogreške u opisu artikla</cbc:Note>
+    <!-- BT-5 Invoice Document Currency (Croatia uses EUR) -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>CORR-REF-2025</cbc:BuyerReference>
 
-    <!-- BG-3 Billing Reference - Reference to original invoice -->
+    <!-- BG-3 Billing Reference - Reference to original invoice (mandatory for P10) -->
     <cac:BillingReference>
         <cac:InvoiceDocumentReference>
             <!-- BT-25 Preceding Invoice Number -->
             <cbc:ID>HR-2025-00123</cbc:ID>
-            <!-- BT-26 Preceding Invoice Issue Date -->
+            <!-- BT-26 Preceding Invoice Issue Date (HR-BR-6: mandatory when billing reference is used) -->
             <cbc:IssueDate>2025-01-15</cbc:IssueDate>
-            <!-- HR-BT-3 Preceding Invoice Document Description -->
-            <cbc:DocumentDescription>Original Invoice for Services Rendered</cbc:DocumentDescription>
+            <!-- Croatian-specific: Billing reference description -->
+            <cbc:DocumentDescription>Originalna faktura s pogrešnim opisom artikla - ispravak bez utjecaja na porez</cbc:DocumentDescription>
         </cac:InvoiceDocumentReference>
     </cac:BillingReference>
 
@@ -62,7 +67,7 @@
                 <!-- BT-27 Seller Registration Name -->
                 <cbc:RegistrationName>Trgovina Zagreb d.o.o.</cbc:RegistrationName>
                 <!--BT-33 Company Legal Form-->
-                <cbc:CompanyLegalForm>d.o.o. osnovana na Trgovačkom sudu u Osijeku, temeljni kapital 20.000,00 EUR, direktor Ivan Perić, Odgovorna osoba: Marica Horvat</cbc:CompanyLegalForm>
+                <cbc:CompanyLegalForm>d.o.o. osnovana na Trgovačkom sudu u Osijeku, temeljni kapital 20.000,00 EUR, direktor Ivan Perić</cbc:CompanyLegalForm>
             </cac:PartyLegalEntity>
         </cac:Party>
         <!-- HR-BT-4 and HR-BT-5 Operator information (mandatory for Croatian fiscalization) -->
@@ -75,7 +80,6 @@
     </cac:AccountingSupplierParty>
     <!-- BG-7 Buyer -->
     <cac:AccountingCustomerParty>
-        <!-- Customer number, useful to route document to correct recipient in pageroonline -->
         <cbc:SupplierAssignedAccountID>CRO-CUST-001</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- BT-49 Buyer endpoint ID with Croatian OIB -->
@@ -97,7 +101,7 @@
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
-                <!-- BT-48 Buyer Vat Number if applicable (Croatian OIB format) -->
+                <!-- BT-48 Buyer Vat Number if applicable -->
                 <cbc:CompanyID>HR10987654321</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
@@ -109,37 +113,29 @@
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>
-
     <cac:PaymentMeans>
-        <!-- BT-81 Payment means code. For credit note - refund to original payment method -->
+        <!-- BT-81 Payment means code -->
         <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
-        <!-- BT-9 Due Date for credit note -->
-        <cbc:PaymentDueDate>2025-02-20</cbc:PaymentDueDate>
         <!-- BT-83 Remittance information -->
-        <cbc:PaymentID>HR7623400001234567890</cbc:PaymentID>
+        <cbc:PaymentID>HR-2025-CORR-123</cbc:PaymentID>
         <cac:PayeeFinancialAccount>
-            <!-- BT-84 A unique identifier of the financial payment account -->
+            <!-- BT-84 Financial account identifier -->
             <cbc:ID>HR1724020061100003456</cbc:ID>
             <cac:FinancialInstitutionBranch>
-                <!-- BT-86 An identifier for the payment service provider where a payment account is located. Such as a BIC or a national clearing code where required -->
+                <!-- BT-86 Payment service provider identifier -->
                 <cbc:ID>HPBZHR2X</cbc:ID>
             </cac:FinancialInstitutionBranch>
         </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>
-
     <!-- BG-23 VAT breakdown -->
     <cac:TaxTotal>
-        <!-- BT-110 Credit Note total VAT amount. Currency in attribute currencyID (BT-5) -->
+        <!-- BT-110 Invoice total VAT amount -->
         <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
         <cac:TaxSubtotal>
-            <!-- BT-116 Sum of all taxable amounts subject to a specific VAT category code and VAT category rate. Currency in attribute currencyID (BT-5) -->
             <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
-            <!--  BT-117. The total VAT amount for a given VAT category. Currency in attribute currencyID (BT-5) -->
             <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
             <cac:TaxCategory>
-                <!-- BT-118 VAT category code. -->
                 <cbc:ID>S</cbc:ID>
-                <!-- BT-119 VAT category rate (Croatian standard rate 25%)-->
                 <cbc:Percent>25.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
@@ -151,47 +147,39 @@
     </cac:TaxTotal>
     <!-- BG-22 Document totals -->
     <cac:LegalMonetaryTotal>
-        <!-- BT-106 Sum of all Credit Note line net amounts in the Credit Note without VAT. Currency in attribute currencyID (BT-5)-->
+        <!-- BT-106 Sum of all Invoice line net amounts -->
         <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
-        <!-- BT-109 Credit Note total amount without VAT. Currency in attribute currencyID (BT-5)-->
+        <!-- BT-109 Invoice total amount without VAT -->
         <cbc:TaxExclusiveAmount currencyID="EUR">100.00</cbc:TaxExclusiveAmount>
-        <!-- BT-112 Credit Note total amount with VAT. Currency in attribute currencyID (BT-5) -->
+        <!-- BT-112 Invoice total amount with VAT -->
         <cbc:TaxInclusiveAmount currencyID="EUR">125.00</cbc:TaxInclusiveAmount>
-        <!-- BT-115 Amount due for payment. Currency in attribute currencyID (BT-5) -->
+        <!-- BT-115 Amount due for payment -->
         <cbc:PayableAmount currencyID="EUR">125.00</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>
-    <!-- BG-25 Credit note line -->
-    <cac:CreditNoteLine>
-        <!-- BT-126 Line ID -->
+    <!-- BG-25 Invoice line -->
+    <cac:InvoiceLine>
         <cbc:ID>1</cbc:ID>
-        <!-- BT-129 Credited Quantity. BT-130 unit of measure in attribute unitCode -->
-        <cbc:CreditedQuantity unitCode="EA">1</cbc:CreditedQuantity>
-        <!-- BT-131 Line extension amount. Line net amount. Currency in attribute currencyID (BT-5) -->
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
         <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
         <cac:Item>
-            <!-- BT-153 Article/Item Description -->
-            <cbc:Name>Povrat - Laptop računalo HP ProBook (defektno)</cbc:Name>
-            <!-- BT-154 Article/Item Description -->
-            <cbc:Description>Povrat robe zbog defekta - laptop se neće uključiti</cbc:Description>
-            <!-- Croatian item classification (mandatory for Croatia) -->
+            <!-- Corrected item description -->
+            <cbc:Description>Ispravan opis: Laptop računalo HP ProBook 450 G10, Intel Core i5-1335U, 16GB RAM, 512GB SSD, 15.6" FHD</cbc:Description>
+            <cbc:Name>Laptop računalo HP ProBook 450 G10 - ISPRAVLJENO</cbc:Name>
+            <!-- Croatian item classification (mandatory) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">12.34.56</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">26.20.11</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
-                <!-- BT-151 Credited item VAT category code. -->
                 <cbc:ID>S</cbc:ID>
-                <!-- BT-152 Credited item VAT rate (Croatian standard rate) -->
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
                     <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
         <cac:Price>
-            <!-- BT-146 Item net price. Currency in attribute currencyID (BT-5) -->
             <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
         </cac:Price>
-    </cac:CreditNoteLine>
-</CreditNote>
+    </cac:InvoiceLine>
+</Invoice>
