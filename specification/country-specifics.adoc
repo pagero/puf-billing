@@ -40,6 +40,10 @@ include::country-specifics/malaysia.adoc[]
 
 include::country-specifics/philippines.adoc[]
 
+=== Poland
+
+include::country-specifics/poland.adoc[]
+
 === Portugal
 
 include::country-specifics/portugal.adoc[]
