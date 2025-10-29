@@ -180,6 +180,12 @@
                 <cbc:Percent>0</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
+                    <!-- 
+                        Tax type for non-standard tax 
+                        Please see the valid codes here:
+                        https://pagero.github.io/puf-code-lists/#_poland
+                    -->
+                    <cbc:Name>0-KR</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
