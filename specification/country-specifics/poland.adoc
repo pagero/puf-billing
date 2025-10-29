@@ -53,11 +53,11 @@ _Tax type Reverse Charge in cac:TaxTotal on document level_
             <cbc:TaxableAmount currencyID="PLN">100.00</cbc:TaxableAmount>
             <cbc:TaxAmount currencyID="PLN">10.00</cbc:TaxAmount>
             <cac:TaxCategory>
-                <cbc:ID>AE</cbc:ID>
-                <cbc:Name>OO</cbc:Name>
+                <cbc:ID>AE</cbc:ID>                
                 <cbc:Percent>10</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>OO</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -76,11 +76,11 @@ _Tax type Exempt in cac:ClassifiedTaxCategory on line level_
         <cac:Item>
             <cbc:Name>Product A</cbc:Name>
             <cac:ClassifiedTaxCategory>
-                <cbc:ID>E</cbc:ID>
-                <cbc:Name>ZW</cbc:Name>
+                <cbc:ID>E</cbc:ID>                
                 <cbc:Percent>0</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
+                    <cbc:Name>ZW</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>

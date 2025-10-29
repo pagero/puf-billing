@@ -138,17 +138,17 @@
             <cac:TaxCategory>
                 <!-- VAT category code to determine (P_13_1 - P_13_10) and (P_14_1 - P_14_5) -->
                 <cbc:ID>Z</cbc:ID>
-                <!-- 
-                    Tax type for non-standard tax 
-                    Please see the valid codes here:
-                    https://pagero.github.io/puf-code-lists/#_poland
-                -->
-                <cbc:Name>0-KR</cbc:Name>
                 <!--VAT category rate to determine (P_13_1 - P_13_10) and (P_14_1 - P_14_5)-->
                 <cbc:Percent>0.00</cbc:Percent>
                 <cac:TaxScheme>
                     <!-- Use: "VAT" -->
                     <cbc:ID>VAT</cbc:ID>
+                    <!-- 
+                        Tax type for non-standard tax 
+                        Please see the valid codes here:
+                        https://pagero.github.io/puf-code-lists/#_poland
+                    -->
+                    <cbc:Name>0-KR</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
