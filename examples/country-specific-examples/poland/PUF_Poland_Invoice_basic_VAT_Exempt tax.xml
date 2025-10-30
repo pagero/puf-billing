@@ -138,6 +138,12 @@
             <cac:TaxCategory>
                 <!-- VAT category code to determine (P_13_1 - P_13_10) and (P_14_1 - P_14_5) -->
                 <cbc:ID>E</cbc:ID>
+                <!--
+                    Tax type for non-standard tax 
+                    Please see the valid codes here:
+                    https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland
+                -->
+                <cbc:Name>ZW</cbc:Name>
                 <!--VAT category rate to determine (P_13_1 - P_13_10) and (P_14_1 - P_14_5)-->
                 <cbc:Percent>0.00</cbc:Percent>
                 <!-- Reason for exemption -->
@@ -145,12 +151,6 @@
                 <cac:TaxScheme>
                     <!-- Use: "VAT" -->
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- 
-                        Tax type for non-standard tax 
-                        Please see the valid codes here:
-                        https://pagero.github.io/puf-code-lists/#_poland
-                     -->
-                    <cbc:Name>ZW</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -178,16 +178,16 @@
             <cac:ClassifiedTaxCategory>
                 <!-- Invoiced item VAT category code. P_12-->
                 <cbc:ID>E</cbc:ID>
+                <!--
+                    Tax type for non-standard tax 
+                    Please see the valid codes here:
+                    https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland
+                -->
+                <cbc:Name>ZW</cbc:Name>
                 <!-- Invoiced item VAT rate P_12-->
                 <cbc:Percent>0</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- 
-                        Tax type for non-standard tax 
-                        Please see the valid codes here:
-                        https://pagero.github.io/puf-code-lists/#_poland
-                     -->
-                    <cbc:Name>ZW</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>

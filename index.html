@@ -763,7 +763,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel3">
 <li><a href="#_full_payment_indicator_date">5.11.1. Full payment indicator &amp; date</a></li>
 <li><a href="#_document_types">5.11.2. Document types</a></li>
-<li><a href="#_tax_category_codes_2">5.11.3. Tax category codes</a></li>
+<li><a href="#_tax_category_id">5.11.3. Tax category ID</a></li>
 <li><a href="#_tax_type">5.11.4. Tax type</a></li>
 <li><a href="#_original_line_indicator">5.11.5. Original line indicator</a></li>
 <li><a href="#_split_payment">5.11.6. Split payment</a></li>
@@ -774,7 +774,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel3">
 <li><a href="#_billing_software_certification">5.12.1. Billing software certification</a></li>
 <li><a href="#_qr_code_and_atcud">5.12.2. QR code and ATCUD</a></li>
-<li><a href="#_tax_category_codes_3">5.12.3. Tax category codes</a></li>
+<li><a href="#_tax_category_codes_2">5.12.3. Tax category codes</a></li>
 </ul>
 </li>
 <li><a href="#_saudi_arabia">5.13. Saudi Arabia</a>
@@ -785,13 +785,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#_serbia">5.14. Serbia</a>
 <ul class="sectlevel3">
-<li><a href="#_tax_category_codes_4">5.14.1. Tax category codes</a></li>
+<li><a href="#_tax_category_codes_3">5.14.1. Tax category codes</a></li>
 <li><a href="#_party_identification_6">5.14.2. Party identification</a></li>
 </ul>
 </li>
 <li><a href="#_singapore">5.15. Singapore</a>
 <ul class="sectlevel3">
-<li><a href="#_tax_category_codes_5">5.15.1. Tax category codes</a></li>
+<li><a href="#_tax_category_codes_4">5.15.1. Tax category codes</a></li>
 </ul>
 </li>
 <li><a href="#_spain">5.16. Spain</a>
@@ -818,7 +818,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_invoice_delivery_method">5.18.3. Invoice delivery method</a></li>
 <li><a href="#_first_name_and_surname">5.18.4. First name and surname</a></li>
 <li><a href="#_registered_tax_office">5.18.5. Registered tax office</a></li>
-<li><a href="#_tax_category_codes_6">5.18.6. Tax category codes</a></li>
+<li><a href="#_tax_category_codes_5">5.18.6. Tax category codes</a></li>
 <li><a href="#_tax_scheme">5.18.7. Tax scheme</a></li>
 <li><a href="#_internet_sales">5.18.8. Internet Sales</a></li>
 </ul>
@@ -4749,9 +4749,16 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxCategory/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Allowance or charge tax category code</strong><br>
-Code to indicate the tax category.<br>
-<em>E.g. "S".</em><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Allowance or charge tax category identifier</strong><br>
+Code for identifying the tax category.<br>
+<em>E.g. tax category ID "S".</em><br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxCategory/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Allowance or charge tax category name</strong><br>
+Code for identifying the local tax type or name.<br>
+<em>E.g. tax category name "HR:PDV13".</em><br>
 For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
 </tr>
 <tr>
@@ -4947,9 +4954,16 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category code</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category identifier</strong><br>
 Code for identifying the tax category.<br>
-<em>E.g. tax category "S".</em><br>
+<em>E.g. tax category ID "S".</em><br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category name</strong><br>
+Code for identifying the local tax type or name.<br>
+<em>E.g. tax category name "HR:PDV13".</em><br>
 For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
 </tr>
 <tr>
@@ -5080,9 +5094,16 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category code</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category identifier</strong><br>
 Code for identifying the tax category.<br>
-<em>E.g. tax category "S".</em><br>
+<em>E.g. tax category ID "S".</em><br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category name</strong><br>
+Code for identifying the local tax category name.<br>
+<em>E.g. tax category name "HR:PDV13".</em><br>
 For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
 </tr>
 <tr>
@@ -6455,9 +6476,16 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Line tax category code</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category identifier</strong><br>
 Code for identifying the tax category.<br>
-<em>E.g. tax category "S"</em><br>
+<em>E.g. tax category ID "S".</em><br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category name</strong><br>
+Code for identifying the local tax type or name.<br>
+<em>E.g. tax category name "HR:PDV13".</em><br>
 For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
 </tr>
 <tr>
@@ -6638,9 +6666,16 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Line tax category code</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category identifier</strong><br>
 Code for identifying the tax category.<br>
-<em>E.g. tax category "S"</em><br>
+<em>E.g. tax category ID "S".</em><br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxSubtotal/cac:TaxCategory/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category name</strong><br>
+Code for identifying the local tax category name.<br>
+<em>E.g. tax category name "HR:PDV13".</em><br>
 For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
 </tr>
 <tr>
@@ -6779,7 +6814,14 @@ Scheme version identifier of the items classification code.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:ClassifiedTaxCategory/cbc:ID</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category identifier</strong><br>
 Code for identifying the tax category.<br>
-<em>E.g. tax category "S".</em><br>
+<em>E.g. tax category ID "S".</em><br>
+For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:ClassifiedTaxCategory/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax category name</strong><br>
+Code for identifying the local tax type or name.<br>
+<em>E.g. tax category name "NP-II".</em><br>
 For valid values see code list <a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a>.</p></td>
 </tr>
 <tr>
@@ -11963,10 +12005,10 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
             <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>25.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
             <span class="tag">&lt;cac:TaxCategory&gt;</span>
                 <span class="tag">&lt;cbc:ID&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Name&gt;</span>HR:PDV25<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;cbc:Percent&gt;</span>25<span class="tag">&lt;/cbc:Percent&gt;</span>
                 <span class="tag">&lt;cac:TaxScheme&gt;</span>
                     <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
-                    <span class="tag">&lt;cbc:Name&gt;</span>HR:PDV25<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;/cac:TaxScheme&gt;</span>
             <span class="tag">&lt;/cac:TaxCategory&gt;</span>
         <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
@@ -11977,10 +12019,10 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
         <span class="tag">&lt;cac:Item&gt;</span>
             <span class="tag">&lt;cac:ClassifiedTaxCategory&gt;</span>
                 <span class="tag">&lt;cbc:ID&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Name&gt;</span>HR:PDV25<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;cbc:Percent&gt;</span>25<span class="tag">&lt;/cbc:Percent&gt;</span>
                 <span class="tag">&lt;cac:TaxScheme&gt;</span>
                     <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
-                    <span class="tag">&lt;cbc:Name&gt;</span>HR:PDV25<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;/cac:TaxScheme&gt;</span>
             <span class="tag">&lt;/cac:ClassifiedTaxCategory&gt;</span>
         <span class="tag">&lt;/cac:Item&gt;</span>
@@ -12003,10 +12045,10 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
             <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>25.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
             <span class="tag">&lt;cac:TaxCategory&gt;</span>
                 <span class="tag">&lt;cbc:ID&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Name&gt;</span>HR:PDV25<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;cbc:Percent&gt;</span>25<span class="tag">&lt;/cbc:Percent&gt;</span>
                 <span class="tag">&lt;cac:TaxScheme&gt;</span>
                     <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
-                    <span class="tag">&lt;cbc:Name&gt;</span>HR:PDV25<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;/cac:TaxScheme&gt;</span>
             <span class="tag">&lt;/cac:TaxCategory&gt;</span>
         <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
@@ -12015,11 +12057,11 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
             <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>0.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
             <span class="tag">&lt;cac:TaxCategory&gt;</span>
                 <span class="tag">&lt;cbc:ID&gt;</span>E<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Name&gt;</span>HR:POVNAK<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;cbc:Percent&gt;</span>0<span class="tag">&lt;/cbc:Percent&gt;</span>
                 <span class="tag">&lt;cbc:TaxExemptionReason&gt;</span>Reason for exemption<span class="tag">&lt;/cbc:TaxExemptionReason&gt;</span>
                 <span class="tag">&lt;cac:TaxScheme&gt;</span>
                     <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
-                    <span class="tag">&lt;cbc:Name&gt;</span>HR:POVNAK<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;/cac:TaxScheme&gt;</span>
             <span class="tag">&lt;/cac:TaxCategory&gt;</span>
         <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
@@ -13914,18 +13956,18 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_2"><a class="anchor" href="#_tax_category_codes_2"></a><a class="link" href="#_tax_category_codes_2">5.11.3. Tax category codes</a></h4>
+<h4 id="_tax_category_id"><a class="anchor" href="#_tax_category_id"></a><a class="link" href="#_tax_category_id">5.11.3. Tax category ID</a></h4>
 <div class="paragraph">
-<p>Tax category codes for Poland can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland" target="_blank" rel="noopener">Tax category codes Poland</a>.</p>
+<p>Tax category identifiers for Poland can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland" target="_blank" rel="noopener">Tax category codes Poland</a>.</p>
 </div>
 <div class="paragraph">
-<p>Please note that in addition to the ISO tax codes, the Poland-specific tax type is also required for non-standard taxes.</p>
+<p>Please note that in addition to the tax identifier, the Poland-specific tax type is also required for non-standard taxes.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_tax_type"><a class="anchor" href="#_tax_type"></a><a class="link" href="#_tax_type">5.11.4. Tax type</a></h4>
 <div class="paragraph">
-<p>For non-standard tax categories, use the cbc:Name element in the tax section at both the header and line levels to convey the tax type. Tax type codes for Poland can be found in <a href="https://pagero.github.io/puf-code-lists/#_poland" target="_blank" rel="noopener">Tax types Poland</a>.</p>
+<p>For non-standard tax categories, use the cbc:Name element in the tax section at both the header and line levels to convey the tax type. Tax type codes for Poland can be found in <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland" target="_blank" rel="noopener">Tax category codes Poland</a>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
@@ -13942,10 +13984,10 @@ Allowed values: 0 or 1.<br></p>
             <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PLN</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>10.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
             <span class="tag">&lt;cac:TaxCategory&gt;</span>
                 <span class="tag">&lt;cbc:ID&gt;</span>AE<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Name&gt;</span>OO<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;cbc:Percent&gt;</span>10<span class="tag">&lt;/cbc:Percent&gt;</span>
                 <span class="tag">&lt;cac:TaxScheme&gt;</span>
                     <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
-                    <span class="tag">&lt;cbc:Name&gt;</span>OO<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;/cac:TaxScheme&gt;</span>
             <span class="tag">&lt;/cac:TaxCategory&gt;</span>
         <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
@@ -13966,10 +14008,10 @@ Allowed values: 0 or 1.<br></p>
             <span class="tag">&lt;cbc:Name&gt;</span>Product A<span class="tag">&lt;/cbc:Name&gt;</span>
             <span class="tag">&lt;cac:ClassifiedTaxCategory&gt;</span>
                 <span class="tag">&lt;cbc:ID&gt;</span>E<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;cbc:Name&gt;</span>ZW<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;cbc:Percent&gt;</span>0<span class="tag">&lt;/cbc:Percent&gt;</span>
                 <span class="tag">&lt;cac:TaxScheme&gt;</span>
                     <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
-                    <span class="tag">&lt;cbc:Name&gt;</span>ZW<span class="tag">&lt;/cbc:Name&gt;</span>
                 <span class="tag">&lt;/cac:TaxScheme&gt;</span>
             <span class="tag">&lt;/cac:ClassifiedTaxCategory&gt;</span>
         <span class="tag">&lt;/cac:Item&gt;</span>
@@ -14275,7 +14317,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_3"><a class="anchor" href="#_tax_category_codes_3"></a><a class="link" href="#_tax_category_codes_3">5.12.3. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_2"><a class="anchor" href="#_tax_category_codes_2"></a><a class="link" href="#_tax_category_codes_2">5.12.3. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Portugal can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_portugal" target="_blank" rel="noopener">Tax category codes Portugal</a>.</p>
 </div>
@@ -14368,7 +14410,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 <p>This section contains information about requirements and other information concerning invoicing in Serbia.</p>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_4"><a class="anchor" href="#_tax_category_codes_4"></a><a class="link" href="#_tax_category_codes_4">5.14.1. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_3"><a class="anchor" href="#_tax_category_codes_3"></a><a class="link" href="#_tax_category_codes_3">5.14.1. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Serbia can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_serbia" target="_blank" rel="noopener">Tax category codes Serbia</a>.</p>
 </div>
@@ -14419,7 +14461,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 <p>This section contains information about requirements and other information concerning invoicing in Singapore.</p>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_5"><a class="anchor" href="#_tax_category_codes_5"></a><a class="link" href="#_tax_category_codes_5">5.15.1. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_4"><a class="anchor" href="#_tax_category_codes_4"></a><a class="link" href="#_tax_category_codes_4">5.15.1. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Singapore can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_singapore" target="_blank" rel="noopener">Tax category codes Singapore</a>.</p>
 </div>
@@ -15764,7 +15806,7 @@ If an e-mail address for the buyer exists (see <code>cac:AccountingContact/cbc:E
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_6"><a class="anchor" href="#_tax_category_codes_6"></a><a class="link" href="#_tax_category_codes_6">5.18.6. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_5"><a class="anchor" href="#_tax_category_codes_5"></a><a class="link" href="#_tax_category_codes_5">5.18.6. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Türkiye are numerous and can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_türkiye" target="_blank" rel="noopener">Tax category codes Türkiye</a>.</p>
 </div>
@@ -16391,7 +16433,10 @@ cbc:EmbeddedDocumentBinaryObject/@mimeCode</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Tax category codes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxCategory/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:TaxCategory/cbc:ID</code><br>
+<code>cac:TaxCategory/cbc:Name</code><br>
+<code>cac:Item/cac:ClassifiedTaxCategory/cbc:ID</code><br>
+<code>cac:Item/cac:ClassifiedTaxCategory/cbc:Name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode" target="_blank" rel="noopener">PUF-012-TAXCATEGORYCODE</a></p></td>
 </tr>
 <tr>

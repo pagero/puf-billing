@@ -55,7 +55,13 @@ Scheme version identifier of the items classification code.
 |`cac:ClassifiedTaxCategory/cbc:ID`
 |**Tax category identifier** +
 Code for identifying the tax category. +
-_E.g. tax category "S"._ +
+_E.g. tax category ID "S"._ +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
+
+|`cac:ClassifiedTaxCategory/cbc:Name`
+|**Tax category name** +
+Code for identifying the local tax type or name. +
+_E.g. tax category name "NP-II"._ +
 For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
 
 |`cac:ClassifiedTaxCategory/cbc:Percent`
