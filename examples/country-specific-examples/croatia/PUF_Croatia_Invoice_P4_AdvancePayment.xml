@@ -135,12 +135,12 @@
             <cbc:TaxableAmount currencyID="EUR">15000.00</cbc:TaxableAmount>
             <cbc:TaxAmount currencyID="EUR">3750.00</cbc:TaxAmount>
             <cac:TaxCategory>
-                <cbc:ID>S</cbc:ID>
+                <cbc:ID>S</cbc:ID>                
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -168,11 +168,11 @@
             <cbc:Name>Predujam za građevinske radove - 30% ukupne vrijednosti projekta (50.000 EUR)</cbc:Name>
             <!-- Note: Item classification NOT required for advance invoices per HR-BR-25 -->
             <cac:ClassifiedTaxCategory>
-                <cbc:ID>S</cbc:ID>
+                <cbc:ID>S</cbc:ID>                
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>

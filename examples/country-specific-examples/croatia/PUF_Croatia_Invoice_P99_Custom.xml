@@ -29,7 +29,7 @@
     <!-- BT-11 Project reference -->
     <cac:ProjectReference>
         <cbc:ID>EU-DIGITAL-TRANSFORMATION-2025</cbc:ID>
-    </cac:ProjectReference>   
+    </cac:ProjectReference>
 
     <!-- BG-4 Seller -->
     <cac:AccountingSupplierParty>
@@ -136,11 +136,11 @@
             <cbc:TaxAmount currencyID="EUR">2500.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -170,10 +170,10 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -194,10 +194,10 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -218,10 +218,10 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>

@@ -38,9 +38,15 @@ Total tax amount currency, must be the same as `cbc:DocumentCurrencyCode`. +
 For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cac:TaxSubtotal/cac:TaxCategory/cbc:ID`
-|**Tax category code** +
+|**Tax category identifier** +
 Code for identifying the tax category. +
-_E.g. tax category "S"._ +
+_E.g. tax category ID "S"._ +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
+
+|`cac:TaxSubtotal/cac:TaxCategory/cbc:Name`
+|**Tax category name** +
+Code for identifying the local tax type or name. +
+_E.g. tax category name "HR:PDV13"._ +
 For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
 
 |`cac:TaxSubtotal/cac:TaxCategory/cbc:Percent`

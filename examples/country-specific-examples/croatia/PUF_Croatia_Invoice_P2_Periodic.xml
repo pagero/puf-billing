@@ -37,7 +37,7 @@
     <cac:ContractDocumentReference>
         <cbc:ID>SERVICE-AGREEMENT-2024-789</cbc:ID>
     </cac:ContractDocumentReference>
-    
+
     <!-- BG-4 Seller -->
     <cac:AccountingSupplierParty>
         <cac:Party>
@@ -140,11 +140,11 @@
             <cbc:TaxAmount currencyID="EUR">125.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -154,11 +154,11 @@
             <cbc:TaxAmount currencyID="EUR">26.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:PDV13</cbc:Name>
                 <cbc:Percent>13.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:PDV13</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -168,11 +168,11 @@
             <cbc:TaxAmount currencyID="EUR">17.50</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:PDV5</cbc:Name>
                 <cbc:Percent>5.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:PDV5</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -205,10 +205,10 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -232,10 +232,10 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV13</cbc:Name>
                 <cbc:Percent>13</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV13</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -259,10 +259,10 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV5</cbc:Name>
                 <cbc:Percent>5</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV5</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>

@@ -40,9 +40,15 @@ Base amount currency. +
 For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_004_currencycode[PUF-004-CURRENCYCODE^].
 
 |`cac:TaxCategory/cbc:ID`
-|**Allowance or charge tax category code** +
-Code to indicate the tax category. +
-_E.g. "S"._ +
+|**Allowance or charge tax category identifier** +
+Code for identifying the tax category. +
+_E.g. tax category ID "S"._ +
+For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
+
+|`cac:TaxCategory/cbc:Name`
+|**Allowance or charge tax category name** +
+Code for identifying the local tax type or name. +
+_E.g. tax category name "HR:PDV13"._ +
 For valid values see code list https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^].
 
 |`cac:TaxCategory/cbc:Percent`

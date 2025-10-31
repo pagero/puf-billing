@@ -124,14 +124,14 @@
         <cac:TaxCategory>
             <!-- BT-95 Document level allowance VAT category code. -->
             <cbc:ID>E</cbc:ID>
+            <!-- HR-BT-6 Croatian tax category label for charge -->
+            <cbc:Name>HR:POVNAK</cbc:Name>
             <!-- BT-96 The VAT rate, represented as percentage that applies to the document level allowance. -->
             <cbc:Percent>0</cbc:Percent>
             <!-- HR-BT-7 Tax exemption reason text for charge -->
             <cbc:TaxExemptionReason>Return fee exemption</cbc:TaxExemptionReason>
             <cac:TaxScheme>
                 <cbc:ID>VAT</cbc:ID>
-                <!-- HR-BT-6 Croatian tax category label for charge -->
-                <cbc:Name>HR:POVNAK</cbc:Name>
             </cac:TaxScheme>
         </cac:TaxCategory>
     </cac:AllowanceCharge>
@@ -147,12 +147,12 @@
             <cac:TaxCategory>
                 <!-- BT-118 VAT category code. -->
                 <cbc:ID>S</cbc:ID>
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <!-- BT-119 VAT category rate (Croatian standard rate 25%)-->
                 <cbc:Percent>25.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -164,14 +164,14 @@
             <cac:TaxCategory>
                 <!-- BT-118 VAT category code. -->
                 <cbc:ID>E</cbc:ID>
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:POVNAK</cbc:Name>
                 <!-- BT-119 VAT category rate-->
                 <cbc:Percent>0</cbc:Percent>
                 <!-- BT-120 VAT exemption reason text. -->
                 <cbc:TaxExemptionReason>Return fee exemption</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:POVNAK</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -214,12 +214,12 @@
             <cac:ClassifiedTaxCategory>
                 <!-- BT-151 Invoiced item VAT category code. -->
                 <cbc:ID>S</cbc:ID>
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <!-- BT-152 Invoiced item VAT rate (Croatian standard rate) -->
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -246,14 +246,14 @@
             <cac:ClassifiedTaxCategory>
                 <!-- BT-151 Invoiced item VAT category code. -->
                 <cbc:ID>E</cbc:ID>
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:POVNAK</cbc:Name>
                 <!-- BT-152 Invoiced item VAT rate -->
                 <cbc:Percent>0</cbc:Percent>
                 <!-- HR-BT-13 Croatian tax exemption reason -->
                 <cbc:TaxExemptionReason>Return fee exemption</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:POVNAK</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>

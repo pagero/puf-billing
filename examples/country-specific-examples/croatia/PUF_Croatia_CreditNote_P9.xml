@@ -137,12 +137,12 @@
             <cac:TaxCategory>
                 <!-- BT-118 VAT category code. -->
                 <cbc:ID>S</cbc:ID>
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <!-- BT-119 VAT category rate (Croatian standard rate 25%)-->
                 <cbc:Percent>25.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -178,12 +178,12 @@
             <cac:ClassifiedTaxCategory>
                 <!-- BT-151 Credited item VAT category code. -->
                 <cbc:ID>S</cbc:ID>
+                <!-- HR-BT-12 Croatian tax category label -->
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <!-- BT-152 Credited item VAT rate (Croatian standard rate) -->
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <!-- HR-BT-12 Croatian tax category label -->
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>

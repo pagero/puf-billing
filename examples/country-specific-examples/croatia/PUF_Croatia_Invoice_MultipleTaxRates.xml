@@ -126,10 +126,10 @@
             <cbc:TaxAmount currencyID="EUR">250.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -140,10 +140,10 @@
             <cbc:TaxAmount currencyID="EUR">65.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV13</cbc:Name>
                 <cbc:Percent>13.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV13</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -154,10 +154,10 @@
             <cbc:TaxAmount currencyID="EUR">125.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV5</cbc:Name>
                 <cbc:Percent>5.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV5</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -168,11 +168,11 @@
             <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>AE</cbc:ID>
+                <cbc:Name>HR:AE</cbc:Name>
                 <cbc:Percent>0.00</cbc:Percent>
                 <cbc:TaxExemptionReason>Obrnuto oporezivanje - kupac obračunava PDV</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:AE</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -183,11 +183,11 @@
             <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>E</cbc:ID>
+                <cbc:Name>HR:E</cbc:Name>
                 <cbc:Percent>0.00</cbc:Percent>
                 <cbc:TaxExemptionReason>Oslobođeno poreza sukladno članku PDV zakona</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:E</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -198,11 +198,11 @@
             <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>G</cbc:ID>
+                <cbc:Name>HR:G</cbc:Name>
                 <cbc:Percent>0.00</cbc:Percent>
                 <cbc:TaxExemptionReason>Izvoz robe - PDV se ne naplaćuje</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:G</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -213,11 +213,11 @@
             <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>Z</cbc:ID>
+                <cbc:Name>HR:Z</cbc:Name>
                 <cbc:Percent>0.00</cbc:Percent>
                 <cbc:TaxExemptionReason>Nulta stopa PDV-a</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:Z</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -228,11 +228,11 @@
             <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>E</cbc:ID>
+                <cbc:Name>HR:POVNAK</cbc:Name>
                 <cbc:Percent>0.00</cbc:Percent>
                 <cbc:TaxExemptionReason>Povratna naknada za ambalažu</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:POVNAK</cbc:Name>
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -262,10 +262,10 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV25</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -285,10 +285,10 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV13</cbc:Name>
                 <cbc:Percent>13</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV13</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -308,10 +308,10 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV5</cbc:Name>
                 <cbc:Percent>5</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV5</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -331,11 +331,11 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>AE</cbc:ID>
+                <cbc:Name>HR:AE</cbc:Name>
                 <cbc:Percent>0</cbc:Percent>
                 <cbc:TaxExemptionReason>Obrnuto oporezivanje</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:AE</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -355,11 +355,11 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>E</cbc:ID>
+                <cbc:Name>HR:E</cbc:Name>
                 <cbc:Percent>0</cbc:Percent>
                 <cbc:TaxExemptionReason>Oslobođeno</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:E</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -379,11 +379,11 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>G</cbc:ID>
+                <cbc:Name>HR:G</cbc:Name>
                 <cbc:Percent>0</cbc:Percent>
                 <cbc:TaxExemptionReason>Izvoz</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:G</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -402,12 +402,12 @@
                 <cbc:ItemClassificationCode listID="CG">21.20.11</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
-                <cbc:ID>Z</cbc:ID>
+                <cbc:ID>Z</cbc:ID>                
+                <cbc:Name>HR:Z</cbc:Name>
                 <cbc:Percent>0</cbc:Percent>
                 <cbc:TaxExemptionReason>Nulta stopa</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:Z</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -427,11 +427,11 @@
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>E</cbc:ID>
+                <cbc:Name>HR:POVNAK</cbc:Name>
                 <cbc:Percent>0</cbc:Percent>
                 <cbc:TaxExemptionReason>Povratna naknada</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:POVNAK</cbc:Name>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>

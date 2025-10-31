@@ -139,10 +139,10 @@ See https://pagero.github.io/puf-code-lists/#_tax_category_codes_croatia[Tax cat
             <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
-                    <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV25</cbc:Name>
+                    <cbc:ID>VAT</cbc:ID>                    
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -153,10 +153,10 @@ See https://pagero.github.io/puf-code-lists/#_tax_category_codes_croatia[Tax cat
         <cac:Item>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
-                    <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV25</cbc:Name>
+                    <cbc:ID>VAT</cbc:ID>                    
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
         </cac:Item>
@@ -177,10 +177,10 @@ See https://pagero.github.io/puf-code-lists/#_tax_category_codes_croatia[Tax cat
             <cbc:TaxAmount currencyID="EUR">25.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
+                <cbc:Name>HR:PDV25</cbc:Name>
                 <cbc:Percent>25</cbc:Percent>
                 <cac:TaxScheme>
-                    <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:PDV25</cbc:Name>
+                    <cbc:ID>VAT</cbc:ID>                    
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>
@@ -189,11 +189,11 @@ See https://pagero.github.io/puf-code-lists/#_tax_category_codes_croatia[Tax cat
             <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>E</cbc:ID>
+                <cbc:Name>HR:POVNAK</cbc:Name>
                 <cbc:Percent>0</cbc:Percent>
                 <cbc:TaxExemptionReason>Reason for exemption</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
-                    <cbc:ID>VAT</cbc:ID>
-                    <cbc:Name>HR:POVNAK</cbc:Name>
+                    <cbc:ID>VAT</cbc:ID>                    
                 </cac:TaxScheme>
             </cac:TaxCategory>
         </cac:TaxSubtotal>

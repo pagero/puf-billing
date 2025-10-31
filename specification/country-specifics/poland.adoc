@@ -31,15 +31,15 @@ _Extension with the full payment indicator and date_
 
 Currently PUF has support for the docment types VAT (380 - Basic Invoice) and KOR (384 - Corrected Invoice). Please note that the document type Credit Note (381) is not accepted by KSef. 
 
-==== Tax category codes
+==== Tax category ID
 
-Tax category codes for Poland can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland[Tax category codes Poland^]. 
+Tax category identifiers for Poland can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland[Tax category codes Poland^]. 
 
-Please note that in addition to the ISO tax codes, the Poland-specific tax type is also required for non-standard taxes.
+Please note that in addition to the tax identifier, the Poland-specific tax type is also required for non-standard taxes.
 
 ==== Tax type
 
-For non-standard tax categories, use the cbc:Name element in the tax section at both the header and line levels to convey the tax type. Tax type codes for Poland can be found in https://pagero.github.io/puf-code-lists/#_poland[Tax types Poland^].
+For non-standard tax categories, use the cbc:Name element in the tax section at both the header and line levels to convey the tax type. Tax type codes for Poland can be found in https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland[Tax category codes Poland^].
 
 *Example* +
 _Tax type Reverse Charge in cac:TaxTotal on document level_

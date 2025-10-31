@@ -70,7 +70,10 @@ cbc:EmbeddedDocumentBinaryObject/@mimeCode`
 |https://pagero.github.io/puf-code-lists/#_puf_011_allowancechargereasoncode[PUF-011-ALLOWANCECHARGEREASONCODE^]
 
 |Tax category codes
-|`cac:TaxCategory/cbc:ID`
+|`cac:TaxCategory/cbc:ID` +
+`cac:TaxCategory/cbc:Name` +
+`cac:Item/cac:ClassifiedTaxCategory/cbc:ID` +
+`cac:Item/cac:ClassifiedTaxCategory/cbc:Name`
 |https://pagero.github.io/puf-code-lists/#_puf_012_taxcategorycode[PUF-012-TAXCATEGORYCODE^]
 
 |Tax exemption codes
