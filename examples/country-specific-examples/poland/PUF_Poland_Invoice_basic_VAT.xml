@@ -13,17 +13,21 @@
         <ext:UBLExtension>
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
             <ext:ExtensionContent>
-                <puf:PageroExtension>
-                    <!-- Simplified procedure indicator. (P_23) -->
-                    <puf:RestrictedInformation>
-                        <puf:Key>simplifiedIndicator</puf:Key>
-                        <puf:Value>false</puf:Value>
-                    </puf:RestrictedInformation>
+                <puf:PageroExtension>      
                     <!-- Checkout method (P_16) -->
                     <puf:RestrictedInformation>
                         <puf:Key>checkoutMethod</puf:Key>
                         <puf:Value>false</puf:Value>
                     </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Simplified</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <!-- Simplified procedure indicator. (P_23) -->
+                    <puf:Simplified>true</puf:Simplified>
                 </puf:PageroExtension>
             </ext:ExtensionContent>
         </ext:UBLExtension>
