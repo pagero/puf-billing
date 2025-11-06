@@ -179,7 +179,7 @@ To forward the details of the invoice being corrected, in a corrected invoice (K
 
 *KSeF reference number*: The unique ID assigned to the original invoice by KSeF.
 
-*Original invoice date*: Date when the referenced invoice was sent to KSeF.
+*Original date sent to KSeF*: Date when the referenced invoice was sent to KSeF.
 
 *Reason for correction*: Textual note describing the reason for issuing a correction.
 
@@ -199,22 +199,19 @@ _The below keys in puf:RestrictedInformation can be used to to indlude the detai
                     <ext:ExtensionContent>
                         <puf:PageroExtension>
                             <puf:BillingReferenceExtension>
+                                <!-- KSeF reference number -->
+                                <puf:ClearanceID>8375460033-20230829-F9E05396E2B1-FB</puf:ClearanceID>
+                                <!-- Correction type -->
                                 <puf:RestrictedInformation>
-                                    <!-- Correction type -->
                                     <puf:Key>correctionType</puf:Key>
                                     <puf:Value>1</puf:Value>
-                                </puf:RestrictedInformation>
-                                <!-- KSeF reference number -->
-                                <puf:RestrictedInformation>
-                                    <puf:Key>KSEFReferenceNumber</puf:Key>
-                                    <puf:Value>8375460033-20230829-F9E05396E2B1-FB</puf:Value>
-                                </puf:RestrictedInformation>
-                                <!-- Original invoice date -->
+                                </puf:RestrictedInformation>                                
+                                <!-- Date when referenced invoice was sent to KSeF -->
                                 <puf:RestrictedInformation>
                                     <puf:Key>sentToKSEFDate</puf:Key>
-                                    <puf:Value>2025-10-24</puf:Value>
+                                    <puf:Value>2023-08-29</puf:Value>
                                 </puf:RestrictedInformation>
-                                <!-- Reason for correction -->
+                                <!-- Reason for correction (PrzyczynaKorekty) -->
                                 <cbc:Note>Textual note describing the reason for issuing a correction</cbc:Note>
                             </puf:BillingReferenceExtension>
                         </puf:PageroExtension>
