@@ -29,6 +29,8 @@
                     <ext:ExtensionContent>
                         <puf:PageroExtension>
                             <puf:BillingReferenceExtension>
+                                <!-- Reference to the KSeF reference number of the referenced invoice (DaneFaKorygowanej/NrKSeFFaKorygowanej) -->
+                                <puf:ClearanceID>8375460033-20230829-F9E05396E2B1-FB</puf:ClearanceID>
                                 <puf:RestrictedInformation>
                                     <!-- Type of correction (TypKorekty)-->
                                     <puf:Key>correctionType</puf:Key>
@@ -39,8 +41,6 @@
                                     <puf:Key>sentToKSEFDate</puf:Key>
                                     <puf:Value>2023-08-29</puf:Value>
                                 </puf:RestrictedInformation>
-                                <!-- Reference to the KSeF reference number of the referenced invoice (DaneFaKorygowanej/NrKSeFFaKorygowanej) -->
-                                <puf:ClearanceID>8375460033-20230829-F9E05396E2B1-FB</puf:ClearanceID>
                                 <!-- Reason for correction (PrzyczynaKorekty) -->
                                 <cbc:Note>Textual note describing the reason for issuing a correction</cbc:Note>
                             </puf:BillingReferenceExtension>
