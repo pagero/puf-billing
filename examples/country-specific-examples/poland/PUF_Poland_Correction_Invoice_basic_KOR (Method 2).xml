@@ -41,7 +41,7 @@
                                 <puf:RestrictedInformation>
                                     <puf:Key>sentToKSEFDate</puf:Key>
                                     <puf:Value>2023-08-29</puf:Value>
-                                </puf:RestrictedInformation>                                
+                                </puf:RestrictedInformation>
                                 <!-- Reason for correction (PrzyczynaKorekty) -->
                                 <cbc:Note>Textual note describing the reason for issuing a correction</cbc:Note>
                             </puf:BillingReferenceExtension>
