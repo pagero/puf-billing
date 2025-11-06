@@ -211,7 +211,7 @@ _The below keys in puf:RestrictedInformation can be used to to indlude the detai
                                     <puf:Key>sentToKSEFDate</puf:Key>
                                     <puf:Value>2023-08-29</puf:Value>
                                 </puf:RestrictedInformation>
-                                <!-- Reason for correction (PrzyczynaKorekty) -->
+                                <!-- Reason for correction -->
                                 <cbc:Note>Textual note describing the reason for issuing a correction</cbc:Note>
                             </puf:BillingReferenceExtension>
                         </puf:PageroExtension>
