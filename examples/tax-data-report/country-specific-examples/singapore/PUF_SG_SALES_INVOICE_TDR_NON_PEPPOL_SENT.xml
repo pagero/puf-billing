@@ -90,9 +90,9 @@
     <!-- IBG-07 Buyer -->
     <cac:AccountingCustomerParty>
         <cac:Party>
-            <!-- C5UIDYYYYYYYYYY (C5UID = C5 UserID YYYYYYYYYY = Customer's UEN). Even when the customer has a valid Peppol ID. -->
+            <!-- C5UIDYYYYYYYYYY (C5UID = C5 UserID YYYYYYYYYY = Customer's UEN). Even when the customer has a valid Peppol ID. OR NA (For customers who are individuals)-->
             <cbc:EndpointID schemeID="0195">C5UIDYYYYYYYYYY</cbc:EndpointID>
-            <!-- IBT-045 Trading Name -->
+            <!-- IBT-045 Trading Name OR NA (For customers who are individuals)-->
             <cac:PartyName>
                 <cbc:Name>Buyer Name</cbc:Name>
             </cac:PartyName>
@@ -118,9 +118,9 @@
                 </cac:TaxScheme>
             </cac:PartyTaxScheme>
             <cac:PartyLegalEntity>
-                <!-- IBT-044 Buyer Name -->
+                <!-- IBT-044 Buyer Name OR NA (For customers who are individuals)-->
                 <cbc:RegistrationName>Buyer Registration Name</cbc:RegistrationName>
-                <!-- IBT-047 Buyer legal registration identifier. -->
+                <!-- IBT-047 Buyer legal registration identifier (customers UEN). OR NA (For customers who are individuals)-->
                 <cbc:CompanyID schemeID="0195">SG4321567891</cbc:CompanyID>
             </cac:PartyLegalEntity>
             <!-- BG-09 BUYER CONTACT -->
