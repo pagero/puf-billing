@@ -201,7 +201,7 @@
             <cbc:Name>Usluge održavanja IT sustava - standardne</cbc:Name>
             <!-- Croatian item classification (mandatory) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">62.02.30</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">62.20.30</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -228,7 +228,7 @@
             <cbc:Name>Usluge obuke zaposlenika</cbc:Name>
             <!-- Croatian item classification (mandatory) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">85.59.19</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">85.59.09</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -255,7 +255,7 @@
             <cbc:Name>Tiskane priručnike za korisnike</cbc:Name>
             <!-- Croatian item classification (mandatory) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">58.11.40</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">58.11.41</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>

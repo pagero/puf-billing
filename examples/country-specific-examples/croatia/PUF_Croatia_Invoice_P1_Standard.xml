@@ -209,7 +209,7 @@
             <cbc:Name>Laptop računalo HP ProBook</cbc:Name>
             <!-- Croatian item classification (mandatory for Croatia) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">12.34.56</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">26.20.11</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <!-- BT-151 Invoiced item VAT category code. -->
@@ -241,7 +241,7 @@
             <cbc:Name>Povratna naknada za ambalažu</cbc:Name>
             <!-- Croatian item classification (mandatory for Croatia) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">12.34.56</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">38.32.12</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <!-- BT-151 Invoiced item VAT category code. -->

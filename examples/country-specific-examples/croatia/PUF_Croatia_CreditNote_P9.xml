@@ -173,7 +173,7 @@
             <cbc:Name>Povrat - Laptop računalo HP ProBook (defektno)</cbc:Name>
             <!-- Croatian item classification (mandatory for Croatia) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">12.34.56</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">26.20.11</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <!-- BT-151 Credited item VAT category code. -->

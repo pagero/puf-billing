@@ -161,6 +161,15 @@ Demonstrates:
 - Multiple invoice lines with different tax treatments
 - Document and line-level allowances/charges
 
+**Validation Note:**
+
+⚠️ This file is a **reference/educational example** designed to demonstrate all possible Croatian tax categories. It will **fail EN 16931 validation** because:
+
+- EN 16931 rule BR-E-01 requires exactly ONE VAT breakdown per exempt category code
+- This example intentionally shows multiple exempt-type categories (E, Z) in one invoice
+- Real production invoices should not combine all these tax types together
+- Use this file as a **developer reference** for individual tax category implementation, not as a production template
+
 ---
 
 ### 8. PUF_Croatia_Invoice_LineLevelReferences.xml
