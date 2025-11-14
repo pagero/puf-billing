@@ -3,6 +3,13 @@
 
     <!-- Croatian Invoice with Multiple Tax Rates Example -->
     <!-- This example demonstrates all major Croatian tax categories in one invoice -->
+    
+    <!-- VALIDATION WARNING: This is a REFERENCE/EDUCATIONAL example that intentionally demonstrates -->
+    <!-- ALL possible Croatian tax categories. It will FAIL EN 16931 validation because: -->
+    <!--   - BR-E-01: Requires exactly ONE VAT breakdown per exempt category code (E) -->
+    <!--   - This example has multiple exempt-type categories (E, Z, POVNAK) for demonstration -->
+    <!--   - Real production invoices should NOT combine all these tax types in one document -->
+    <!-- Use this file as a DEVELOPER REFERENCE for individual tax category patterns, not as a production template. -->
 
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
@@ -281,7 +288,7 @@
         <cac:Item>
             <cbc:Name>Usluge smještaja - snižena stopa 13%</cbc:Name>
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">55.10.10</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">55.10.00</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -304,7 +311,7 @@
         <cac:Item>
             <cbc:Name>Knjige - super snižena stopa 5%</cbc:Name>
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">58.11.10</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">58.11.11</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -327,7 +334,7 @@
         <cac:Item>
             <cbc:Name>Građevinski radovi - obrnuto oporezivanje (HR:AE)</cbc:Name>
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">41.00.30</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">41.00.31</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>AE</cbc:ID>
@@ -351,7 +358,7 @@
         <cac:Item>
             <cbc:Name>Obrazovne usluge - oslobođeno PDV (HR:E)</cbc:Name>
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">85.42.10</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">85.40.11</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>E</cbc:ID>
@@ -375,7 +382,7 @@
         <cac:Item>
             <cbc:Name>Izvoz robe (HR:G)</cbc:Name>
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">28.29.39</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">28.29.33</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>G</cbc:ID>

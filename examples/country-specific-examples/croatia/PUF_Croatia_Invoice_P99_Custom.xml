@@ -166,7 +166,7 @@
             <cbc:Name>Usluge digitalne transformacije javne uprave - EU projekt</cbc:Name>
             <!-- Croatian item classification (mandatory) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">62.02.10</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">62.20.10</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -190,7 +190,7 @@
             <cbc:Name>Obuka službenika za korištenje digitalnih alata</cbc:Name>
             <!-- Croatian item classification (mandatory) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">85.59.19</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">85.59.09</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -214,7 +214,7 @@
             <cbc:Name>Dokumentacija i izvještavanje za EU fond</cbc:Name>
             <!-- Croatian item classification (mandatory) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">82.99.19</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">82.99.09</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>

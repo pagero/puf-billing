@@ -164,7 +164,7 @@
             <cbc:Name>Strojevi za pakiranje - naručeni prema narudžbenici</cbc:Name>
             <!-- Croatian item classification (mandatory) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">28.29.39</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">28.29.33</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -198,7 +198,7 @@
             <cbc:Name>Rezervni dijelovi - isporučeni prema otpremnici</cbc:Name>
             <!-- Croatian item classification (mandatory) -->
             <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="CG">28.11.42</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listID="CG">28.11.41</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
