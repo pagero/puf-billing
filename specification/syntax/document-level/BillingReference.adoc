@@ -17,6 +17,10 @@ Identifier of a previous issued invoice.
 Issue date of previous issued invoice. +
 _Format "YYYY-MM-DD"._
 
+|`cbc:DocumentTypeCode`
+|**Referenced document type code** +
+A code that specifies the type of document being referenced, such as an invoice, credit note, or other document type.
+
 |===
 
 *Example* +
@@ -24,13 +28,14 @@ _cbc:Note example_
 [source,xml]
 ----
 <Invoice>
-  <!-- Code omitted for clarity -->
-  <cac:BillingReference>
-    <cac:InvoiceDocumentReference>
-      <cbc:ID>1144884</cbc:ID>
-      <cbc:IssueDate>2021-01-01</cbc:IssueDate>
-    </cac:InvoiceDocumentReference>
-  </<cac:BillingReference>
-  <!-- Code omitted for clarity -->
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>1144884</cbc:ID>
+            <cbc:IssueDate>2021-01-01</cbc:IssueDate>
+            <cbc:DocumentTypeCode>380</cbc:DocumentTypeCode>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
 </Invoice>
 ----

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="author" content="Copyright &copy; 2025, Pagero, Part of Thomson Reuters">
 <meta name="copyright" content="Pagero, Part of Thomson Reuters">
 <title>PUF Billing 2.0</title>
@@ -650,6 +650,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_legalmonetarytotal">4.1.20. LegalMonetaryTotal</a></li>
 <li><a href="#_prepaidpayment">4.1.21. PrepaidPayment</a></li>
 <li><a href="#_languagecode">4.1.22. LanguageCode</a></li>
+<li><a href="#_restricted_information_party">4.1.23. Restricted Information Party</a></li>
 </ul>
 </li>
 <li><a href="#_line_level">4.2. Line level</a>
@@ -1994,6 +1995,11 @@ Identifier of a previous issued invoice.</p></td>
 Issue date of previous issued invoice.<br>
 <em>Format "YYYY-MM-DD".</em></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:DocumentTypeCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Referenced document type code</strong><br>
+A code that specifies the type of document being referenced, such as an invoice, credit note, or other document type.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -2003,14 +2009,15 @@ Issue date of previous issued invoice.<br>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
-  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-  <span class="tag">&lt;cac:BillingReference&gt;</span>
-    <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
-      <span class="tag">&lt;cbc:ID&gt;</span>1144884<span class="tag">&lt;/cbc:ID&gt;</span>
-      <span class="tag">&lt;cbc:IssueDate&gt;</span>2021-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
-    <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
-  <span class="tag">&lt;/</span><span class="tag">&lt;cac:BillingReference&gt;</span>
-  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:BillingReference&gt;</span>
+        <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
+            <span class="tag">&lt;cbc:ID&gt;</span>1144884<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;cbc:IssueDate&gt;</span>2021-01-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+            <span class="tag">&lt;cbc:DocumentTypeCode&gt;</span>380<span class="tag">&lt;/cbc:DocumentTypeCode&gt;</span>
+        <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
+    <span class="tag">&lt;/cac:BillingReference&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
@@ -10048,6 +10055,201 @@ Must be in lower case alpha, ISO 639-1, format.</p></td>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_restricted_information_party"><a class="anchor" href="#_restricted_information_party"></a><a class="link" href="#_restricted_information_party">4.1.23. Restricted Information Party</a></h4>
+<div class="paragraph">
+<p>RestrictedInformationParty has been added on document level in order to cater the need for additional country specific parties</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Note that no customer specific information can be added without prior consulting with Pagero.<br>
+If country specific information is available as restricted information party, this can be found in the Country specifics section.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The UBL extension to be used for below elements can be found <a href="#_extublextensions">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/RestrictedInformationParty</code>.</p>
+</div>
+<div class="paragraph">
+<p>See example below as well as the URI to be used for this extension.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+            <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty<span class="tag">&lt;/ext:ExtensionURI&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                    <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                <span class="tag">&lt;puf:RestrictedInformationParty&gt;</span>
+                                    <span class="tag">&lt;puf:Key&gt;</span>dummy-key<span class="tag">&lt;/puf:Key&gt;</span>
+                                    <span class="tag">&lt;cac:Party&gt;</span>
+                                        <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                                            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0088</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1234567890123<span class="tag">&lt;/cbc:ID&gt;</span>
+                                        <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+                                    <span class="tag">&lt;cac:Party&gt;</span>
+                                <span class="tag">&lt;/puf:RestrictedInformationParty&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                            <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>URI to be used if this extension is added.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Structure to be used if information from this extension will be used.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Below table shows the definition of the new elements added to the extension.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 60. Elements added to puf:PageroExtension/puf:RestrictedInformationParty</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:Key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Key identifying the party</strong><br>
+Key describing the restricted party.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyIdentification/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party identification</strong><br>
+Restricted party identification.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyName/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party name</strong><br>
+Restricted party name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:StreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
+Restricted party postal address street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:BuildingNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
+Restricted party postal address building number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CityName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
+Restricted party postal address city name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:PostalZone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
+Restricted party postal address postal zone.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
+Restricted party postal address country subentity.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
+Restricted party postal address country identification code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cbc:CompanyID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax registration identifier</strong><br>
+Restricted party tax registration identifier.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme</strong><br>
+Restricted party tax scheme identifier.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:RegistrationName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registration name</strong><br>
+Restricted party legal registration name.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Restricted Information Party</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+            <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                <span class="tag">&lt;puf:RestrictedInformationParty&gt;</span>
+                                    <span class="tag">&lt;puf:Key&gt;</span>dummy-key<span class="tag">&lt;/puf:Key&gt;</span>
+                                    <span class="tag">&lt;cac:Party&gt;</span>
+                                        <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                                            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0088</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1234567890123<span class="tag">&lt;/cbc:ID&gt;</span>
+                                        <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+                                        <span class="tag">&lt;cac:PartyName&gt;</span>
+                                            <span class="tag">&lt;cbc:Name&gt;</span>Dummy Company Name<span class="tag">&lt;/cbc:Name&gt;</span>
+                                        <span class="tag">&lt;/cac:PartyName&gt;</span>
+                                        <span class="tag">&lt;cac:PostalAddress&gt;</span>
+                                            <span class="tag">&lt;cbc:StreetName&gt;</span>Dummy Street 1<span class="tag">&lt;/cbc:StreetName&gt;</span>
+                                            <span class="tag">&lt;cbc:BuildingNumber&gt;</span>10A<span class="tag">&lt;/cbc:BuildingNumber&gt;</span>
+                                            <span class="tag">&lt;cbc:CityName&gt;</span>Dummy City<span class="tag">&lt;/cbc:CityName&gt;</span>
+                                            <span class="tag">&lt;cbc:PostalZone&gt;</span>12345<span class="tag">&lt;/cbc:PostalZone&gt;</span>
+                                            <span class="tag">&lt;cbc:CountrySubentity&gt;</span>Region<span class="tag">&lt;/cbc:CountrySubentity&gt;</span>
+                                            <span class="tag">&lt;cac:Country&gt;</span>
+                                                <span class="tag">&lt;cbc:IdentificationCode&gt;</span>SE<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+                                            <span class="tag">&lt;/cac:Country&gt;</span>
+                                        <span class="tag">&lt;/cac:PostalAddress&gt;</span>
+                                        <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+                                            <span class="tag">&lt;cbc:CompanyID&gt;</span>9999999999<span class="tag">&lt;/cbc:CompanyID&gt;</span>
+                                            <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                                                <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                                            <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+                                        <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+                                        <span class="tag">&lt;cac:PartyLegalEntity&gt;</span>
+                                            <span class="tag">&lt;cbc:RegistrationName&gt;</span>Name<span class="tag">&lt;/cbc:RegistrationName&gt;</span>
+                                        <span class="tag">&lt;/cac:PartyLegalEntity&gt;</span>
+                                    <span class="tag">&lt;/cac:Party&gt;</span>
+                                <span class="tag">&lt;/puf:RestrictedInformationParty&gt;</span>
+                            <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_line_level"><a class="anchor" href="#_line_level"></a><a class="link" href="#_line_level">4.2. Line level</a></h3>
@@ -10123,7 +10325,7 @@ If country specific information is available as restricted information value, th
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 60. Elements added in puf:RestrictedInformation</caption>
+<caption class="title">Table 61. Elements added in puf:RestrictedInformation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10232,7 +10434,7 @@ Value relevant to the assigned key.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 61. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 62. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10352,7 +10554,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 62. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 63. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10475,7 +10677,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 63. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 64. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10595,7 +10797,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 64. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 65. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10721,7 +10923,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 65. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
+<caption class="title">Table 66. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10832,7 +11034,7 @@ Date of issue of the referenced tender, date should be formatted "yyyy-mm-dd".</
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 66. Elements added to puf:LineExtension/puf:ProjectReference</caption>
+<caption class="title">Table 67. Elements added to puf:LineExtension/puf:ProjectReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10943,7 +11145,7 @@ Identification of the project reference.</p></td>
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 67. Elements added in puf:OrderLineReference</caption>
+<caption class="title">Table 68. Elements added in puf:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -11057,7 +11259,7 @@ Date of the sales order, date should be formatted "yyyy-mm-dd".</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 68. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
+<caption class="title">Table 69. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -11178,7 +11380,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 69. Elements added to puf:ItemExtension</caption>
+<caption class="title">Table 70. Elements added to puf:ItemExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -11283,7 +11485,7 @@ Type of item, valid values are <code>GOODS</code> or <code>SERVICE</code>.</p></
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 70. Elements added to puf:PriceExtension</caption>
+<caption class="title">Table 71. Elements added to puf:PriceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -16207,7 +16409,7 @@ For enhanced search functionality in Pagero Online, it is recommended to use a c
 <p>Below is a list of countries where PUF can be used as the source for tax data reporting with distribution solely to tax authorities.</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 71. Table of PUF supported countries for Tax data reporting</caption>
+<caption class="title">Table 72. Table of PUF supported countries for Tax data reporting</caption>
 <colgroup>
 <col>
 <col>
@@ -16356,7 +16558,7 @@ If no entry type is sent system will default to type Invoice.
 <div class="sect2">
 <h3 id="_code_lists_for_coded_elements"><a class="anchor" href="#_code_lists_for_coded_elements"></a><a class="link" href="#_code_lists_for_coded_elements">7.1. Code lists for coded elements</a></h3>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 72. Table of the code lists used</caption>
+<caption class="title">Table 73. Table of the code lists used</caption>
 <colgroup>
 <col>
 <col>
@@ -16537,7 +16739,7 @@ cbc:ItemClassificationCode/@listID</code></p></td>
 <p>The validation artefacts are also available on <a href="https://github.com/pagero/puf-billing/tree/master/validation-artefacts" target="_blank" rel="noopener">GitHub</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 73. Schematron rules in PUF</caption>
+<caption class="title">Table 74. Schematron rules in PUF</caption>
 <colgroup>
 <col>
 <col>
@@ -16717,7 +16919,7 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 </table>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 74. Table of supported countries</caption>
+<caption class="title">Table 75. Table of supported countries</caption>
 <colgroup>
 <col>
 <col>
@@ -16924,6 +17126,12 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Poland</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only standard invoice and correction invocie support.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Portugal</p></td>
