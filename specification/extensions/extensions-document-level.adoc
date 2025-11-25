@@ -90,3 +90,7 @@ include::document-level/PrepaidPaymentExtension.adoc[]
 ==== LanguageCode
 
 include::document-level/LanguageCode.adoc[]
+
+==== Restricted Information Party
+
+include::document-level/RestrictedInformationParty.adoc[]
