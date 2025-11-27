@@ -31,6 +31,14 @@
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
+                <xsd:element name="RestrictedInformationParty" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="Key" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element ref="cac:Party" minOccurs="1" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
                 <xsd:element name="RestrictedInformationLine" minOccurs="0" maxOccurs="unbounded">
                     <xsd:complexType>
                         <xsd:sequence>
@@ -38,7 +46,7 @@
                             <xsd:element ref="cbc:ID" minOccurs="0" maxOccurs="1"/>
                             <xsd:element ref="cbc:LineExtensionAmount" minOccurs="0" maxOccurs="1"/>
                             <xsd:element ref="cac:TaxTotal" minOccurs="0" maxOccurs="1"/>
-                            <xsd:element ref="Classification" minOccurs="0" maxOccurs="unbounded"/>                                                                       
+                            <xsd:element ref="Classification" minOccurs="0" maxOccurs="unbounded"/>
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
@@ -65,6 +73,14 @@
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
+                <xsd:element name="FullPaymentExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="FullPaymentIndicator" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="DateOfFullPayment" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
                 <xsd:element name="IGSTOnIntra" type="PUFIndicatorType" minOccurs="0" maxOccurs="1"/>
                 <xsd:element name="BillingSoftware" minOccurs="0" maxOccurs="1">
                     <xsd:complexType>
@@ -77,6 +93,7 @@
                 </xsd:element>
                 <xsd:element ref="InvoiceSeries" minOccurs="0" maxOccurs="1"/>
                 <xsd:element name="SelfBilled" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="Simplified" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
                 <xsd:element name="OrderReferenceExtension" minOccurs="0" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:sequence>
@@ -100,6 +117,9 @@
                                     </xsd:sequence>
                                 </xsd:complexType>
                             </xsd:element>
+                            <xsd:element ref="cbc:TaxableAmount" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element ref="cbc:TaxAmount" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="EquivalenceSurchargeAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
@@ -138,7 +158,7 @@
                                 <xsd:complexType>
                                     <xsd:sequence>
                                         <xsd:element ref="cbc:ID" minOccurs="1" maxOccurs="1"/>
-                                      </xsd:sequence>
+                                    </xsd:sequence>
                                 </xsd:complexType>
                             </xsd:element>
                             <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
@@ -178,6 +198,8 @@
                 <xsd:element name="TaxSubtotalExtension" minOccurs="0" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:sequence>
+                            <xsd:element name="SpecialRegimeKey" type="PUFTextType" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="TaxBaseAtCost" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
                             <xsd:element name="TaxCurrencyTaxableAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
                             <xsd:element name="TaxCurrencyTaxAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
                             <xsd:element name="TaxInclusiveAmount" type="PUFAmountType" minOccurs="0" maxOccurs="1"/>
