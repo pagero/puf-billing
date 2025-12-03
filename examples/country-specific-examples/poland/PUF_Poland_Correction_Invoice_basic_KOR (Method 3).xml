@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" 
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" 
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0" 
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" 
+    xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <!-- 
         Values in this file are example values only. 
         PUF example file of a basic correction invoice to create a FA XML version 3 correction invoice. 
@@ -35,7 +39,7 @@
                                     <!-- Type of correction (TypKorekty)-->
                                     <puf:Key>correctionType</puf:Key>
                                     <puf:Value>1</puf:Value>
-                                </puf:RestrictedInformation>                                
+                                </puf:RestrictedInformation>
                                 <!-- Date when referenced invoice was sent to KSeF (DaneFaKorygowanej/DataWystFaKorygowanej) -->
                                 <puf:RestrictedInformation>
                                     <puf:Key>sentToKSEFDate</puf:Key>
@@ -168,7 +172,7 @@
             <!-- Sum of all taxable amounts subject to a specific VAT category code and VAT category rate. Currency in attribute currencyID (P_13_1) -->
             <cbc:TaxableAmount currencyID="PLN">-100</cbc:TaxableAmount>
             <!--  The total VAT amount for a given VAT category. Currency in attribute currencyID (P_14_1)-->
-            <cbc:TaxAmount currencyID="PLN">23.00</cbc:TaxAmount>
+            <cbc:TaxAmount currencyID="PLN">-23.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <!-- VAT category code to determine (P_13_1 - P_13_10) and (P_14_1 - P_14_5) -->
                 <cbc:ID>S</cbc:ID>
@@ -190,7 +194,7 @@
         <cbc:TaxInclusiveAmount currencyID="PLN">-123.60</cbc:TaxInclusiveAmount>
         <!-- Amount due for payment. Currency in attribute currencyID (P_15)-->
         <cbc:PayableAmount currencyID="PLN">-123.60</cbc:PayableAmount>
-    </cac:LegalMonetaryTotal>    
+    </cac:LegalMonetaryTotal>
     <!-- Add a new line with an amount equal to the difference between the original amount and the corrected amount -->
     <cac:InvoiceLine>
         <!-- Line ID -->
