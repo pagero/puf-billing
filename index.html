@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <meta name="author" content="Copyright &copy; 2025, Pagero, Part of Thomson Reuters">
 <meta name="copyright" content="Pagero, Part of Thomson Reuters">
 <title>PUF Billing 2.0</title>
@@ -10095,6 +10095,7 @@ If country specific information is available as restricted information party, th
                             <span class="tag">&lt;puf:PageroExtension&gt;</span>
                                 <span class="tag">&lt;puf:RestrictedInformationParty&gt;</span>
                                     <span class="tag">&lt;puf:Key&gt;</span>dummy-key<span class="tag">&lt;/puf:Key&gt;</span>
+                                    <span class="tag">&lt;cbc:Description&gt;</span>Party description<span class="tag">&lt;/cbc:Description&gt;</span>
                                     <span class="tag">&lt;cac:Party&gt;</span>
                                         <span class="tag">&lt;cac:PartyIdentification&gt;</span>
                                             <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0088</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1234567890123<span class="tag">&lt;/cbc:ID&gt;</span>
@@ -10141,6 +10142,11 @@ If country specific information is available as restricted information party, th
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:Key</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Key identifying the party</strong><br>
 Key describing the restricted party.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:Description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Description of the party</strong><br>
+The description of the role of the restricted party.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyIdentification/cbc:ID</code></p></td>
@@ -10213,6 +10219,7 @@ Restricted party legal registration name.</p></td>
                             <span class="tag">&lt;puf:PageroExtension&gt;</span>
                                 <span class="tag">&lt;puf:RestrictedInformationParty&gt;</span>
                                     <span class="tag">&lt;puf:Key&gt;</span>dummy-key<span class="tag">&lt;/puf:Key&gt;</span>
+                                    <span class="tag">&lt;cbc:Description&gt;</span>Party description<span class="tag">&lt;/cbc:Description&gt;</span>
                                     <span class="tag">&lt;cac:Party&gt;</span>
                                         <span class="tag">&lt;cac:PartyIdentification&gt;</span>
                                             <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0088</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1234567890123<span class="tag">&lt;/cbc:ID&gt;</span>

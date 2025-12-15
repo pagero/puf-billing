@@ -20,6 +20,7 @@ See example below as well as the URI to be used for this extension.
                             <puf:PageroExtension>
                                 <puf:RestrictedInformationParty>
                                     <puf:Key>dummy-key</puf:Key>
+                                    <cbc:Description>Party description</cbc:Description>
                                     <cac:Party>
                                         <cac:PartyIdentification>
                                             <cbc:ID schemeID="0088">1234567890123</cbc:ID>
@@ -45,6 +46,10 @@ Below table shows the definition of the new elements added to the extension.
 |`puf:Key`
 |**Key identifying the party** +
 Key describing the restricted party.
+
+|`cbc:Description`
+|**Description of the party** +
+The description of the role of the restricted party.
 
 |`cac:Party/cac:PartyIdentification/cbc:ID`
 |**Party identification** +
@@ -104,6 +109,7 @@ _Restricted Information Party_
                             <puf:PageroExtension>
                                 <puf:RestrictedInformationParty>
                                     <puf:Key>dummy-key</puf:Key>
+                                    <cbc:Description>Party description</cbc:Description>
                                     <cac:Party>
                                         <cac:PartyIdentification>
                                             <cbc:ID schemeID="0088">1234567890123</cbc:ID>
