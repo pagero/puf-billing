@@ -40,11 +40,6 @@
                                     <puf:Key>correctionType</puf:Key>
                                     <puf:Value>1</puf:Value>
                                 </puf:RestrictedInformation>
-                                <!-- Date when referenced invoice was sent to KSeF (DaneFaKorygowanej/DataWystFaKorygowanej) -->
-                                <puf:RestrictedInformation>
-                                    <puf:Key>sentToKSEFDate</puf:Key>
-                                    <puf:Value>2023-08-29</puf:Value>
-                                </puf:RestrictedInformation>
                                 <!-- Reason for correction (PrzyczynaKorekty) -->
                                 <cbc:Note>Textual note describing the reason for issuing a correction</cbc:Note>
                             </puf:BillingReferenceExtension>
@@ -54,6 +49,8 @@
             </ext:UBLExtensions>
             <!-- Billing reference ID. The Invoice number of the original invoice that the correction is related to (DaneFaKorygowanej/NrFaKorygowanej) -->
             <cbc:ID>1234567</cbc:ID>
+            <!-- Billing reference Issue Date. The Issue date of the original invoice that the correction is related to (DaneFaKorygowanej/DataWystFaKorygowanej) -->
+            <cbc:IssueDate>2023-08-29</cbc:IssueDate>
         </cac:InvoiceDocumentReference>
     </cac:BillingReference>
     <!-- Seller Party (Podmiot1) -->
