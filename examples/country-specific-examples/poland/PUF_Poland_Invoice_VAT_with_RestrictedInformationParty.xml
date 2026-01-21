@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" 
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" 
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0" 
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" 
+    xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <!-- 
         Values in this file are example values only.
         PUF example file of basic invoice to create a FA XML version 3 invoice. Corresponding invoice type in FA (3): VAT.
@@ -19,11 +23,14 @@
             </ext:ExtensionContent>
         </ext:UBLExtension>
         <ext:UBLExtension>
-            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Simplified</ext:ExtensionURI>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
             <ext:ExtensionContent>
                 <puf:PageroExtension>
-                    <!-- Simplified procedure indicator. (P_23) -->
-                    <puf:Simplified>false</puf:Simplified>
+                    <!-- Simplified tripartite procedure (P_23) -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>simplifiedTriangularProcedure</puf:Key>
+                        <puf:Value>true</puf:Value>
+                    </puf:RestrictedInformation>
                 </puf:PageroExtension>
             </ext:ExtensionContent>
         </ext:UBLExtension>
