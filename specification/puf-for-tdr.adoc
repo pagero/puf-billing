@@ -18,6 +18,10 @@ Below is a list of countries where PUF can be used as the source for tax data re
 |===
 |Country |Supported by PUF |Require ext:UBLExtensions? |Comment
 
+|France
+|*Yes*
+|*Yes*
+|*Beta version only*
 
 |Singapore
 |*Yes*
