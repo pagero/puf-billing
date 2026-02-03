@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 5: Employee Business Expenses (Invoice in Company Name)
+    (Frais payés par des collaborateurs avec facture au nom de l'entreprise)
+    
+    Business Scenario:
+    - Employee pays for business lunch with personal funds
+    - Invoice issued in COMPANY name (not employee's personal name)
+    - Company will reimburse employee
+    - Employee identified by matricule (employee ID) for GDPR compliance
+    
+    Key Requirements:
+    - Business process B2: Already-paid invoice
+    - BT-113 (Prepaid amount): Equal to BT-112 (employee paid full amount)
+    - BT-115 (Amount due): 0 (nothing owed to seller)
+    - Third-party PAYER: Employee (via EXT-FR-FE-BG-02 using EXTENDED-CTC-FR profile)
+    - GDPR: Use employee matricule instead of name
+    
+    Financial Breakdown:
+    - Business lunch: 145.00 EUR (net)
+    - VAT 10% (restaurant reduced rate): 14.50 EUR
+    - Total with VAT: 159.50 EUR
+    - Employee paid: 159.50 EUR (full amount)
+    - Amount due to seller: 0.00 EUR
+    
+    Workflow:
+    1. Employee hosts business lunch, pays with personal card
+    2. Seller issues e-invoice to COMPANY (BUYER), not to employee personally
+    3. Company receives e-invoice via PPF platform
+    4. Company reimburses employee via internal expense process
+    
+    French Text Codes (BT-21/BT-22):
+    - #REG#: Company legal form and share capital
+    - #ABL#: Trade register number (RCS)
+    - #AAI#: APE business activity code
+    - #PMD#: Late payment penalties
+    - #PMT#: Fixed collection costs indemnity (€40)
+    - #BAR#: Treatment type (B2B e-invoicing)
+    - #PAI#: Third party payment information (employee paid, will be reimbursed)
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- Extension for third-party PAYER (EXT-FR-FE-BG-02) - Employee who paid -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <!-- Third-party PAYER information - Employee (identified by matricule for GDPR) -->
+                    <puf:RestrictedInformationParty>
+                        <puf:Key>payerParty</puf:Key>
+                        <cac:Party>
+                            <ext:UBLExtensions>
+                                <ext:UBLExtension>
+                                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                                    <ext:ExtensionContent>
+                                        <puf:PageroExtension>
+                                            <puf:PartyExtension>
+                                                <!-- EXT-FR-FE-44: Party role code (PR = Payer) -->
+                                                <puf:RoleCode>
+                                                    <cbc:ID>PR</cbc:ID>
+                                                </puf:RoleCode>
+                                            </puf:PartyExtension>
+                                        </puf:PageroExtension>
+                                    </ext:ExtensionContent>
+                                </ext:UBLExtension>
+                            </ext:UBLExtensions>
+                            <!-- EXT-FR-FE-46: PAYER party identification (Employee matricule - GDPR compliant) -->
+                            <cac:PartyIdentification>
+                                <cbc:ID schemeID="ZZZ">MAT-2024-5678</cbc:ID>
+                            </cac:PartyIdentification>
+                            <!-- EXT-FR-FE-43: PAYER legal entity (Employee matricule instead of name - GDPR) -->
+                            <cac:PartyLegalEntity>
+                                <cbc:RegistrationName>Matricule MAT-2024-5678</cbc:RegistrationName>
+                            </cac:PartyLegalEntity>
+                            <!-- PAYER contact information (employee email for reconciliation) -->
+                            <cac:Contact>
+                                <cbc:ElectronicMail>employee.5678@transport-rhone.fr</cbc:ElectronicMail>
+                            </cac:Contact>
+                        </cac:Party>
+                    </puf:RestrictedInformationParty>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type - B2: Already-paid invoice (Dépôt d'une facture déjà payée) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>REST-2026-0234</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-01-29</cbc:IssueDate>
+    <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
+    <cbc:InvoiceTypeCode name="B2">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes -->
+    <!-- REG: Company legal form and share capital (BT-33 alternative method) -->
+    <cbc:Note>#REG#SAS au capital de 500000.00 EUR</cbc:Note>
+    <!-- ABL: Legal information - Trade register (BT-33 alternative method) -->
+    <cbc:Note>#ABL#RCS Lyon B 123 456 789</cbc:Note>
+    <!-- AAI: General information - APE code (business activity classification) -->
+    <cbc:Note>#AAI#APE 5610A - Restauration traditionnelle</cbc:Note>
+    <!-- PMD: Late payment penalties (French mandatory payment terms) -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- PMT: Fixed indemnity for collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- PAI: Third party payment information (MANDATORY for UC5 - employee paid, company reimburses) -->
+    <cbc:Note>#PAI#Facture payée par le collaborateur (matricule MAT-2024-5678) avec ses fonds personnels. Montant total : 159.50 EUR. L'entreprise remboursera le collaborateur selon la procédure interne de remboursement de frais. Repas d'affaires - réunion client du 29/01/2026.</cbc:Note>
+    <!-- BAR: Treatment type qualification - B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference (mandatory for French e-invoicing) -->
+    <cbc:BuyerReference>FRAIS-COLLAB-2026-0089</cbc:BuyerReference>
+
+    <!-- BT-13 Purchase Order Reference (internal expense reference) -->
+    <cac:OrderReference>
+        <cbc:ID>NOTE-FRAIS-2026-0089</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BG-4 Seller Information (Restaurant) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller electronic address (endpoint for e-invoicing) -->
+            <cbc:EndpointID schemeID="0009">12345678901234</cbc:EndpointID>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">12345678901234</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Le Gourmet Lyonnais</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <!-- BT-35 Street name -->
+                <cbc:StreetName>45 Rue de la République</cbc:StreetName>
+                <!-- BT-37 City -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-38 Postal code -->
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR12345678901</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Legal Name -->
+                <cbc:RegistrationName>Le Gourmet Lyonnais SAS</cbc:RegistrationName>
+                <!-- BT-30 SIREN -->
+                <cbc:CompanyID schemeID="0002">123456789</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 Seller Contact -->
+            <cac:Contact>
+                <!-- BT-41 Contact name -->
+                <cbc:Name>Service Commercial</cbc:Name>
+                <!-- BT-42 Contact telephone -->
+                <cbc:Telephone>+33 4 78 12 34 56</cbc:Telephone>
+                <!-- BT-43 Contact email -->
+                <cbc:ElectronicMail>contact@gourmet-lyonnais.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information (Company - NOT the employee) -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>ENTREPRISE-3456</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-49 Buyer electronic address - Special routing for employee expenses -->
+            <cbc:EndpointID schemeID="0002">333444555_FRAISCOLLABORATEUR</cbc:EndpointID>
+            <!-- BT-46 Buyer Identifier - SIRET -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">33344455566778</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Transport Express Rhône SARL</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <!-- BT-50 Street name -->
+                <cbc:StreetName>89 Rue de la République</cbc:StreetName>
+                <!-- BT-52 City -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-53 Postal code -->
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR33344455566</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Legal Name -->
+                <cbc:RegistrationName>Transport Express Rhône SARL</cbc:RegistrationName>
+                <!-- BT-47 Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">333444555</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-9 Buyer Contact (HR/Expense department) -->
+            <cac:Contact>
+                <cbc:Name>Service Ressources Humaines - Gestion des Frais</cbc:Name>
+                <cbc:Telephone>+33 4 72 11 22 33</cbc:Telephone>
+                <cbc:ElectronicMail>rh.frais@transport-rhone.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-16 Payment Means (employee paid with personal card) -->
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code - 48: Bank card -->
+        <cbc:PaymentMeansCode>48</cbc:PaymentMeansCode>
+        <!-- BT-83 Remittance information (employee card reference) -->
+        <cbc:PaymentID>CB-****-****-****-5678</cbc:PaymentID>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms -->
+        <cbc:Note>Facture déjà payée par le collaborateur (matricule MAT-2024-5678) le 29/01/2026 avec carte bancaire personnelle. Montant total : 159.50 EUR. L'entreprise Transport Express Rhône SARL remboursera le collaborateur selon la procédure interne de gestion des notes de frais.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">14.50</cbc:TaxAmount>
+        <!-- Tax subtotal for 10% VAT (restaurant reduced rate) -->
+        <cac:TaxSubtotal>
+            <!-- BT-116 Taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">145.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">14.50</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code - AA: Lower rate (10% for restaurants) -->
+                <cbc:ID>AA</cbc:ID>
+                <!-- BT-119 VAT category rate -->
+                <cbc:Percent>10.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">145.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">145.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">159.50</cbc:TaxInclusiveAmount>
+        <!-- BT-113 Paid amount - Employee paid full amount -->
+        <cbc:PrepaidAmount currencyID="EUR">159.50</cbc:PrepaidAmount>
+        <!-- BT-115 Amount due for payment - 0 (already paid by employee) -->
+        <cbc:PayableAmount currencyID="EUR">0.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- ========================================
+         INVOICE LINE 1: Business lunch - Main courses
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Déjeuner d'affaires - 3 personnes - Plats principaux</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="C62">3</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">75.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Menu déjeuner affaires: entrée, plat du jour (coq au vin), dessert maison, café</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Menu Déjeuner Affaires</cbc:Name>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code - AA: Lower rate (10%) -->
+                <cbc:ID>AA</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>10.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">25.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- ========================================
+         INVOICE LINE 2: Business lunch - Beverages
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Déjeuner d'affaires - Boissons</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">45.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Boissons: 1 bouteille de vin blanc régional (Mâcon), 3 eaux minérales, 3 cafés</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Boissons - Déjeuner d'affaires</cbc:Name>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code - AA: Lower rate (10%) -->
+                <cbc:ID>AA</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>10.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">45.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- ========================================
+         INVOICE LINE 3: Service charge
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Service</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">25.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Service et couvert - 3 personnes</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Service</cbc:Name>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code - AA: Lower rate (10%) -->
+                <cbc:ID>AA</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>10.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">25.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

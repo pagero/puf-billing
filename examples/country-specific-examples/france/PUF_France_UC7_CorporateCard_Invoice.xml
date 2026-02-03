@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 7: Invoice Following Purchase Paid with Corporate Card
+    (Facture suite à achat payé par carte logée)
+    
+    Business Scenario:
+    - Employee books hotel room for business trip
+    - Payment made with company corporate purchase card
+    - Card manager pays hotel directly
+    - Hotel issues already-paid invoice to company
+    - Company reconciles invoice with card statement
+    - Company pays monthly statement to card manager
+    
+    Key Requirements:
+    - Business process B2: Already-paid invoice
+    - BT-113 (Prepaid amount): Equal to BT-112 (card manager paid full amount)
+    - BT-115 (Amount due): 0 (nothing owed to seller)
+    - NO third-party PAYER block (purchase card is BUYER's payment means, not separate payer)
+    - BT-87 (Card account number): Last 4-6 digits MANDATORY
+    - BT-88 (Cardholder name): Optional
+    - Payment means code: 48 (Bank card)
+    
+    Financial Breakdown:
+    - Hotel room: 180.00 EUR (net)
+    - VAT 10% (lodging reduced rate): 18.00 EUR
+    - Total with VAT: 198.00 EUR
+    - Corporate card paid: 198.00 EUR (full amount to hotel)
+    - Amount due to seller: 0.00 EUR
+    - Company will pay card manager via monthly statement
+    
+    Workflow:
+    1. Employee books hotel with corporate card
+    2. Card manager pays hotel (198.00 EUR)
+    3. Hotel creates e-invoice to COMPANY (already paid)
+    4. Company receives invoice via PPF platform
+    5. Company reconciles invoice with card statement
+    6. Company pays monthly statement to card manager
+    
+    French Text Codes (BT-21/BT-22):
+    - #REG#: Company legal form and share capital
+    - #ABL#: Trade register number (RCS)
+    - #AAI#: APE business activity code
+    - #PMD#: Late payment penalties
+    - #PMT#: Fixed collection costs indemnity (€40)
+    - #BAR#: Treatment type (B2B e-invoicing)
+    - #PAI#: Third party payment information (corporate card payment via card manager)
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type - B2: Already-paid invoice (Dépôt d'une facture déjà payée) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>HOTEL-2026-1234</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-01-28</cbc:IssueDate>
+    <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
+    <cbc:InvoiceTypeCode name="B2">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes -->
+    <!-- REG: Company legal form and share capital (BT-33 alternative method) -->
+    <cbc:Note>#REG#SAS au capital de 1000000.00 EUR</cbc:Note>
+    <!-- ABL: Legal information - Trade register (BT-33 alternative method) -->
+    <cbc:Note>#ABL#RCS Lyon B 555 666 777</cbc:Note>
+    <!-- AAI: General information - APE code (business activity classification) -->
+    <cbc:Note>#AAI#APE 5510Z - Hôtels et hébergement similaire</cbc:Note>
+    <!-- PMD: Late payment penalties (French mandatory payment terms) -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- PMT: Fixed indemnity for collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- PAI: Third party payment information (corporate card via card manager) -->
+    <cbc:Note>#PAI#Paiement effectué par carte bancaire d'entreprise (carte logée) le 28/01/2026. Montant total : 198.00 EUR. Transaction réglée par le gestionnaire de cartes auprès de l'hôtel. L'entreprise règlera le gestionnaire de cartes selon relevé mensuel d'opérations.</cbc:Note>
+    <!-- BAR: Treatment type qualification - B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference (mandatory for French e-invoicing) -->
+    <cbc:BuyerReference>DEPLACEMENT-2026-0156</cbc:BuyerReference>
+
+    <!-- BG-4 Seller Information (Hotel) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller electronic address (endpoint for e-invoicing) -->
+            <cbc:EndpointID schemeID="0009">55566677788990</cbc:EndpointID>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">55566677788990</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Hôtel Le Grand Lyon</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <!-- BT-35 Street name -->
+                <cbc:StreetName>25 Place Bellecour</cbc:StreetName>
+                <!-- BT-37 City -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-38 Postal code -->
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR55566677788</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Legal Name -->
+                <cbc:RegistrationName>Hôtel Le Grand Lyon SAS</cbc:RegistrationName>
+                <!-- BT-30 SIREN -->
+                <cbc:CompanyID schemeID="0002">555666777</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 Seller Contact -->
+            <cac:Contact>
+                <!-- BT-41 Contact name -->
+                <cbc:Name>Réception et Facturation</cbc:Name>
+                <!-- BT-42 Contact telephone -->
+                <cbc:Telephone>+33 4 78 55 66 77</cbc:Telephone>
+                <!-- BT-43 Contact email -->
+                <cbc:ElectronicMail>facturation@hotel-grandlyon.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information (Company - invoice recipient) -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>ENTREPRISE-7890</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-49 Buyer electronic address -->
+            <cbc:EndpointID schemeID="0009">33344455566778</cbc:EndpointID>
+            <!-- BT-46 Buyer Identifier - SIRET -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">33344455566778</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Transport Express Rhône SARL</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <!-- BT-50 Street name -->
+                <cbc:StreetName>89 Rue de la République</cbc:StreetName>
+                <!-- BT-52 City -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-53 Postal code -->
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR33344455566</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Legal Name -->
+                <cbc:RegistrationName>Transport Express Rhône SARL</cbc:RegistrationName>
+                <!-- BT-47 Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">333444555</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-9 Buyer Contact -->
+            <cac:Contact>
+                <cbc:Name>Service Comptabilité</cbc:Name>
+                <cbc:Telephone>+33 4 72 11 22 33</cbc:Telephone>
+                <cbc:ElectronicMail>compta@transport-rhone.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-16 Payment Means (Corporate card) -->
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code - 48: Bank card -->
+        <cbc:PaymentMeansCode>48</cbc:PaymentMeansCode>
+        <!-- BT-83 Remittance information (transaction reference) -->
+        <cbc:PaymentID>TXN-2026-01-28-15478</cbc:PaymentID>
+        <!-- BG-18 Payment Card Information -->
+        <cac:CardAccount>
+            <!-- BT-87 Payment card primary account number (MANDATORY - last 4-6 digits) -->
+            <cbc:PrimaryAccountNumberID>4523</cbc:PrimaryAccountNumberID>
+            <!--BT-87-1 Network -->
+            <cbc:NetworkID>VISA</cbc:NetworkID>
+            <!-- BT-88 Payment card holder name (optional) -->
+            <cbc:HolderName>TRANSPORT EXPRESS RHONE</cbc:HolderName>
+        </cac:CardAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms -->
+        <cbc:Note>Facture déjà payée par carte bancaire d'entreprise (carte logée) le 28/01/2026. Montant total : 198.00 EUR. Transaction carte réglée par le gestionnaire de cartes (carte d'achat) auprès de l'hôtel. L'entreprise règlera le gestionnaire de cartes selon le relevé mensuel d'opérations. Référence transaction : TXN-2026-01-28-15478.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">18.00</cbc:TaxAmount>
+        <!-- Tax subtotal for 10% VAT (lodging reduced rate) -->
+        <cac:TaxSubtotal>
+            <!-- BT-116 Taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">180.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">18.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code - AA: Lower rate (10% for lodging) -->
+                <cbc:ID>AA</cbc:ID>
+                <!-- BT-119 VAT category rate -->
+                <cbc:Percent>10.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">180.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">180.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">198.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113 Paid amount - Corporate card manager paid full amount to hotel -->
+        <cbc:PrepaidAmount currencyID="EUR">198.00</cbc:PrepaidAmount>
+        <!-- BT-115 Amount due for payment - 0 (already paid via corporate card) -->
+        <cbc:PayableAmount currencyID="EUR">0.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- ========================================
+         INVOICE LINE 1: Hotel room - Night 1
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Séjour professionnel - Chambre double supérieure - 27/01/2026</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="DAY">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">90.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Chambre double supérieure avec vue sur la place Bellecour, petit-déjeuner inclus</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Chambre Double Supérieure - Nuitée</cbc:Name>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code - AA: Lower rate (10%) -->
+                <cbc:ID>AA</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>10.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Date</cbc:Name>
+                <cbc:Value>27/01/2026</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Numéro de chambre</cbc:Name>
+                <cbc:Value>305</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">90.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- ========================================
+         INVOICE LINE 2: Hotel room - Night 2
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Séjour professionnel - Chambre double supérieure - 28/01/2026</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="DAY">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">90.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Chambre double supérieure avec vue sur la place Bellecour, petit-déjeuner inclus</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Chambre Double Supérieure - Nuitée</cbc:Name>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code - AA: Lower rate (10%) -->
+                <cbc:ID>AA</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>10.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Date</cbc:Name>
+                <cbc:Value>28/01/2026</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Numéro de chambre</cbc:Name>
+                <cbc:Value>305</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">90.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC20 - Prepayment Invoice (Facture d'acompte)
+    
+    Use Case: Prepayment Invoice - Payment in Advance of Service Completion
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Prepayment Invoice (Type 386)
+    Business Process: S1 (Prepayment on services)
+    
+    Scenario Description:
+    Moving company (DéménagementPro Services SARL) requires 30% prepayment before
+    performing residential moving service from Paris to Lyon. Customer (Martin & 
+    Dupont SARL - consulting firm relocating office) pays prepayment, triggering
+    MANDATORY prepayment invoice under French Tax Code Article 289-I.1.c.
+    
+    Legal Framework:
+    - Article 289-I.1.c French Tax Code (CGI): All taxable entities MUST issue
+      invoices for prepayments received before operations are performed
+    - VAT becomes exigible upon prepayment collection (both goods and services)
+    - Prepayment invoices recorded in BALANCE SHEET (not P&L):
+      * SELLER: "Client prepayment" (acompte client)
+      * BUYER: "Supplier prepayment" (acompte fournisseur)
+    
+    Coupled Lifecycle:
+    - UC20 (this file): Prepayment invoice issued when 30% payment collected
+    - UC21 (separate file): Final invoice after service completion, referencing
+      this prepayment invoice and deducting amount already paid
+    
+    Critical Field Requirements:
+    
+    1. BT-3: Invoice Type Code = 386 (Prepayment invoice)
+       - MANDATORY (M), Legal requirement, Tech requirement
+       - Distinguishes prepayment from standard invoices (380)
+    
+    2. BT-23: Business Process Type = S1 (Prepayment on services)
+       - MANDATORY (M), Legal requirement, Tech requirement
+       - Alternative values:
+         * B1: Prepayment on goods (Acompte sur Biens)
+         * M1: Prepayment on mixed provision (Acompte sur prestation Mixte)
+    
+    3. Line-Level Content (BT-153/BT-154):
+       - Simple reference to quote with prepayment percentage
+       - Example: "Acompte de 30% sur devis DEV-2026-1234"
+    
+    VAT Calculation Rules:
+    - VAT applies to EACH LINE as in standard invoicing
+    - Multiple VAT rates: Create SEPARATE prepayment lines for each rate
+    - Allocate prepayment amount PRO RATA across VAT categories
+    - Example: 30% prepayment on 6,000 EUR @ 20% + 4,000 EUR @ 5.5%
+      → Line 1: 1,800 EUR @ 20% VAT
+      → Line 2: 1,200 EUR @ 5.5% VAT
+    
+    Accounting Treatment:
+    - NOT recorded in P&L (profit/loss accounts)
+    - SELLER: Balance sheet "acompte client" (customer prepayment)
+    - BUYER: Balance sheet "acompte fournisseur" (supplier prepayment)
+    - Differs fundamentally from standard invoices hitting revenue/expense
+    
+    Business Scenario:
+    Moving company requires prepayment before performing residential move.
+    Customer relocating consulting office from Paris to Lyon. Estimated total
+    service cost 10,000 EUR (excluding VAT). Company policy: 30% prepayment
+    required to secure booking and cover initial logistics costs.
+    
+    Service Scope:
+    - Packing materials and labor (Paris office)
+    - Loading and transport Paris → Lyon (650 km)
+    - Unloading and unpacking (Lyon office)
+    - Furniture disassembly/reassembly
+    - Insurance coverage for goods in transit
+    
+    Prepayment Calculation:
+    - Estimated total service: 10,000.00 EUR (net)
+    - Prepayment percentage: 30%
+    - Prepayment amount: 3,000.00 EUR
+    - VAT (20% standard rate): 600.00 EUR
+    - Total prepayment due: 3,600.00 EUR
+    
+    Payment Status:
+    This prepayment invoice represents an ALREADY-PAID prepayment scenario
+    (Workflow Step 1: "Creation of already-paid prepayment invoice to BUYER").
+    Customer paid prepayment before invoice creation. Invoice documents the
+    prepayment collection for tax/accounting compliance.
+    
+    Lifecycle Status:
+    - Customer paid 3,600 EUR on 2026-01-25 (before invoice)
+    - SELLER collected prepayment on 2026-01-25
+    - SELLER creates prepayment invoice on 2026-01-28 (this document)
+    - Status will be "Encaissée" (Collected) immediately after emission
+    
+    Next Step (UC21):
+    After moving service completion, SELLER will issue final invoice (type 380)
+    that:
+    - References this prepayment invoice (BT-25: Preceding invoice reference)
+    - Shows full service amount (10,000 EUR + VAT 2,000 EUR = 12,000 EUR)
+    - Deducts this prepayment (3,600 EUR already paid)
+    - Calculates net amount due (8,400 EUR remaining)
+    
+    Key Characteristics:
+    - Invoice type 386: Prepayment invoice
+    - Business process S1: Prepayment on services
+    - BG-4 SELLER: DéménagementPro Services SARL (moving company)
+    - BG-7 BUYER: Martin & Dupont SARL (consulting firm)
+    - Total prepayment: 3,600.00 EUR (3,000.00 + 600.00 VAT)
+    - Payment terms: Already paid (collected before invoice)
+    - Service date: Planned for 2026-02-15 (moving date)
+    
+    Reference: XP Z12-014 Annexe A, Section 3.2.19 - Cas n°20
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>DPRO-AC-2026-0089</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-01-28</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (Already paid - prepayment collected before invoice) -->
+    <cbc:DueDate>2026-01-25</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 386 (Prepayment invoice)
+         MANDATORY for prepayment invoicing scenario -->
+    <cbc:InvoiceTypeCode name="S1">386</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - French text codes -->
+    <cbc:Note>#REG#SIRET 44455566677788 - RCS Villeurbanne - APE 4942Z (Services de déménagement) - Capital social: 50 000 EUR - N° TVA: FR44444555666</cbc:Note>
+    <cbc:Note>#ABL#FACTURE D'ACOMPTE (Type 386): Acompte de 30% sur devis DEV-2026-1234 pour prestation de déménagement résidentiel Paris → Lyon prévue le 15/02/2026. La TVA de 600,00 EUR sur cet acompte est exigible dès l'encaissement de l'acompte conformément aux règles de TVA françaises. Une facture finale (Type 380) sera émise après réalisation du déménagement, mentionnant cette facture d'acompte en référence et déduisant le montant déjà payé du solde restant dû. Devis détaillé: Emballage + chargement + transport 650 km + déchargement + déballage + démontage/remontage meubles + assurance marchandises transportées. Estimation totale: 10 000,00 EUR HT (12 000,00 EUR TTC).</cbc:Note>
+    <cbc:Note>#AAI#APE 4942Z - Services de déménagement (location de camions avec chauffeur, emballage, transport, déballage).</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
+    <cbc:Note>#PMT#ACOMPTE DÉJÀ PAYÉ: Cet acompte de 30% (3 600,00 EUR TTC) a été encaissé le 25/01/2026 par virement bancaire. Cette facture d'acompte documente le paiement déjà reçu conformément à l'article 289-I.1.c du CGI. Le solde de 8 400,00 EUR TTC sera facturé après réalisation du déménagement (prévu le 15/02/2026) et sera exigible à 30 jours fin de mois. COMPTABILISATION: Cet acompte est enregistré au bilan dans le compte "Acomptes clients" et non dans les comptes de résultat (produits).</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference -->
+    <cbc:BuyerReference>RELOC-LYON-2026</cbc:BuyerReference>
+
+    <!-- BT-13: Purchase order reference -->
+    <cac:OrderReference>
+        <cbc:ID>CMD-DEMÉNAGEMENT-2026-0567</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Moving Company -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address -->
+            <cbc:EndpointID schemeID="0002">44455566677788</cbc:EndpointID>
+
+            <!-- BT-27: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>DéménagementPro Services</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>15 Avenue de la Logistique</cbc:StreetName>
+                <!-- BT-36: Seller address line 2 -->
+                <cbc:AdditionalStreetName>Zone Industrielle du Grand Lyon</cbc:AdditionalStreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Villeurbanne</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>69100</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR44444555666</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>DéménagementPro Services SARL</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">444555666</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact -->
+            <cac:Contact>
+                <!-- BT-41: Seller contact point -->
+                <cbc:Name>Jean-Pierre Moreau - Responsable Commercial</cbc:Name>
+                <!-- BT-42: Seller contact telephone -->
+                <cbc:Telephone>+33 4 72 11 22 33</cbc:Telephone>
+                <!-- BT-43: Seller contact email -->
+                <cbc:ElectronicMail>jp.moreau@demenagementpro.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Consulting Firm -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address -->
+            <cbc:EndpointID schemeID="0002">22233344455566</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Martin &amp; Dupont Conseil</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address (Current Paris office - moving FROM) -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>45 Rue de la République</cbc:StreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Paris</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>75011</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR22222333444</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Martin &amp; Dupont SARL</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">222333444</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact -->
+            <cac:Contact>
+                <!-- BT-56: Buyer contact point -->
+                <cbc:Name>Sophie Martin - Directrice Administrative</cbc:Name>
+                <!-- BT-57: Buyer contact telephone -->
+                <cbc:Telephone>+33 1 44 55 66 77</cbc:Telephone>
+                <!-- BT-58: Buyer contact email -->
+                <cbc:ElectronicMail>s.martin@martindupont-conseil.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13: Delivery information (Service delivery location) -->
+    <cac:Delivery>
+        <!-- BT-72: Actual delivery date (Planned service date) -->
+        <cbc:ActualDeliveryDate>2026-02-15</cbc:ActualDeliveryDate>
+
+        <!-- BG-15: Deliver to address (Destination - Lyon office) -->
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <cbc:StreetName>120 Cours Gambetta</cbc:StreetName>
+                <cbc:AdditionalStreetName>Immeuble Le Confluent - 3ème étage</cbc:AdditionalStreetName>
+                <cbc:CityName>Lyon</cbc:CityName>
+                <cbc:PostalZone>69003</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+
+    <!-- BG-17: Credit transfer (Payment means) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (30 = credit transfer) -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>DPRO-AC-2026-0089</cbc:PaymentID>
+
+        <!-- BG-19: Credit transfer -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84: Payment account identifier -->
+            <cbc:ID>FR7644455566677788990011223344</cbc:ID>
+            <!-- BT-85: Payment account name -->
+            <cbc:Name>DéménagementPro Services SARL</cbc:Name>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms -->
+        <cbc:Note>ACOMPTE DÉJÀ PAYÉ: Ce montant de 3 600,00 EUR TTC a été encaissé le 25/01/2026 par virement bancaire avant émission de cette facture d'acompte. Cette facture documente le paiement déjà reçu conformément à l'article 289-I.1.c du CGI (obligation de facturer les acomptes encaissés avant réalisation de l'opération). SOLDE APRÈS SERVICE: Le solde de 8 400,00 EUR TTC sera facturé après réalisation du déménagement prévu le 15/02/2026. Ce solde sera exigible à 30 jours fin de mois par virement bancaire. CONDITIONS DE RETARD: En cas de retard de paiement du solde, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). COMPTABILISATION: Cet acompte est enregistré au bilan dans le compte "Acomptes clients" (classe 4) et non dans les comptes de produits (classe 7). Il sera soldé lors de la facturation finale après réalisation du service.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">600.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">3000.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">600.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">3000.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">3000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">3600.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113: Paid amount (Already paid before invoice) -->
+        <cbc:PrepaidAmount currencyID="EUR">3600.00</cbc:PrepaidAmount>
+        <!-- BT-115: Amount due for payment (Zero - already paid) -->
+        <cbc:PayableAmount currencyID="EUR">0.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: Invoice lines -->
+
+    <!-- Line 1: Prepayment on moving services (30% of estimated total) -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (Percentage basis) -->
+        <cbc:InvoicedQuantity unitCode="C62">30</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">3000.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Acompte de 30% (3 000,00 EUR HT) sur estimation totale de 10 000,00 EUR HT pour prestation de déménagement résidentiel Paris → Lyon. DESCRIPTION DU SERVICE: Déménagement complet d'un bureau de conseil (environ 80 m² à Paris 11e vers 120 m² à Lyon 3e). Prestations incluses: Fourniture de cartons et matériaux d'emballage - Emballage professionnel des documents, archives, équipements informatiques et mobilier de bureau - Démontage et remontage du mobilier - Chargement sur camion 40 m³ avec hayon élévateur - Transport Paris → Lyon (650 km) - Assurance "tous risques" pour marchandises transportées (valeur déclarée 50 000 EUR) - Déchargement et installation dans nouveaux locaux - Évacuation des déchets d'emballage. SERVICE PRÉVU LE: 15/02/2026 (départ Paris 07h00, arrivée Lyon 16h00 estimée). ÉQUIPE: 4 déménageurs professionnels + 1 chef d'équipe. CONDITIONS PARTICULIÈRES: Protection moquette/parquet dans les deux sites - Monte-meubles si nécessaire - Parking réservé devant les deux immeubles. Cet acompte sécurise la réservation du camion, de l'équipe et couvre les frais d'organisation logistique. FACTURE FINALE: Une facture de solde (Type 380) sera émise après réalisation du service, mentionnant cette facture d'acompte en référence (BT-25) et déduisant le montant déjà payé (3 600,00 EUR TTC) du montant total final.</cbc:Description>
+            <!-- BT-153: Item name (Simple prepayment reference) -->
+            <cbc:Name>Acompte de 30% sur devis DEV-2026-1234</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (Per percentage point) -->
+            <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

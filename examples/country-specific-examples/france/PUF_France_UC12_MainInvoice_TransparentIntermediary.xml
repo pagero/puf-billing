@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC12 - Main Commercial Invoice (Transparent Intermediary Purchase)
+    
+    Use Case: Transparent Intermediary Managing Invoices on Behalf of BUYER (Principal)
+    Invoice Type: MAIN COMMERCIAL INVOICE (1 of 2)
+    Country: France (EXTENDED-CTC-FR profile)
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 (Standard invoice)
+    
+    Scenario Description:
+    Industrial chemicals supplier (ChemTech Industries SA) issues invoice to BUYER
+    (Manufacturing Pharmaceutique Lyon SAS - pharmaceutical manufacturer) for chemical
+    reagents. The BUYER uses a transparent intermediary (Courtage Industriel Pro SARL -
+    industrial broker) to negotiate contracts and procure suppliers.
+    
+    Under French VAT law, the transparent intermediary acts "in the name and on behalf"
+    of the BUYER (commettant). The intermediary negotiated the contract and manages
+    incoming purchase invoices, but the BUYER is the legal purchaser.
+    
+    VAT Legal Framework:
+    - Transparent intermediary = representative of BUYER (not principal)
+    - BOI-TVA-CHAMP-10-10-40-40, §20: Acts for account and in name of another
+    - BOI-TVA-CHAMP-10-10-40-40, §40: Intermediation = independent service
+    - Purchase intermediation ("entremise à l'achat") - BUYER is principal
+    
+    Two-Invoice Model Required:
+    - THIS INVOICE (Invoice 1/2): Main commercial invoice SELLER → BUYER
+    - Companion Invoice (Invoice 2/2): Intermediation service invoice Intermediary → BUYER
+      (See PUF_France_UC12_IntermediationService_Invoice.xml)
+    
+    Key Implementation: Electronic Addressing Solution (Same as UC11)
+    - BT-49 uses special format: SIREN[BUYER]_[ATTRIBUTION]
+    - Example: "789012345_ACHATTR" routes invoice to intermediary's platform
+    - BUYER and Intermediary MUST use same PA-TR platform
+    - Intermediary accesses BUYER's invoices via platform delegation/rights
+    - NO special invoice fields needed - routing via electronic address only
+    
+    Key Characteristics (Main Commercial Invoice):
+    - Invoice type 380: Standard commercial invoice
+    - Business process B1: Standard invoice
+    - BG-4 SELLER: Actual supplier (ChemTech Industries SA)
+    - BG-7 BUYER: Principal/customer (Manufacturing Pharmaceutique Lyon SAS)
+    - BT-49: Special electronic address format "789012345_ACHATTR"
+    - Payment to SELLER (standard commercial transaction)
+    - Total: 15,400.00 EUR
+    - Managed by intermediary on behalf of BUYER
+    
+    Electronic Address Authority:
+    - Intermediary creates electronic address for BUYER
+    - BUYER provides mandate authorizing intermediary to manage address
+    - Mandate template available from FNFE-MPE (www.fnfe-mpe.org)
+    - Address dedicated to intermediary's purchase management activity
+    
+    Workflow:
+    1. Intermediary negotiates contract with SELLER on behalf of BUYER
+    2. SELLER issues invoice with BT-49 = "789012345_ACHATTR"
+    3. Invoice routes to intermediary's PA-TR platform
+    4. Intermediary processes invoice on behalf of BUYER
+    5. Intermediary validates, approves, schedules payment
+    6. Payment executed from BUYER's account to SELLER
+    7. Intermediary issues separate intermediation service invoice to BUYER
+    
+    Platform Requirements:
+    - BUYER registers on same PA-TR as intermediary
+    - Platform provides delegation/rights management (PA-TR)
+    - Intermediary accesses BUYER's invoices via platform authorization
+    - All lifecycle statuses visible to both BUYER and intermediary
+    
+    Invoice Lines:
+    1. 500 kg laboratory-grade acetone @ 8.50 EUR/kg = 4,250.00 EUR
+    2. 200 kg analytical-grade ethanol @ 12.00 EUR/kg = 2,400.00 EUR
+    3. 100 kg pharmaceutical-grade methanol @ 15.00 EUR/kg = 1,500.00 EUR
+    4. 50 kg high-purity isopropanol @ 18.00 EUR/kg = 900.00 EUR
+    
+    Amounts:
+    - Line extension amount: 9,050.00 EUR
+    - Document level charge (hazmat handling): 500.00 EUR
+    - Tax exclusive amount: 9,550.00 EUR
+    - VAT (20% standard rate): 1,910.00 EUR
+    - Invoice total with VAT: 11,460.00 EUR
+    - Prepaid deposit (50%): 5,730.00 EUR
+    - Amount due for payment: 5,730.00 EUR
+    
+    French Text Codes Used:
+    - #REG# Registration information
+    - #PMT# Payment terms
+    - #AAI# Additional invoice information (transparent intermediary note)
+    
+    Implementation Notes:
+    - Electronic address "789012345_ACHATTR" is CRITICAL routing mechanism
+    - SchemeID "0002" indicates SIREN-based addressing
+    - Service code "_ACHATTR" routes to intermediary's PA-TR
+    - Invoice content is standard - intermediary transparent to invoice structure
+    - BUYER maintains legal obligation (intermediary acts as representative)
+    - Intermediary will issue separate invoice for intermediation fees
+    - Solution uses same pattern as UC11 (outsourced processing)
+    
+    Date: 2026-02-02
+    Reference: XP Z12-014 Annexe A, Section 3.2.11 - Cas n°12
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>UC12-CTI-2026-0456</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-02-02</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (30 days) -->
+    <cbc:DueDate>2026-03-04</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - French text codes for registration, payment terms, additional info -->
+    <cbc:Note>#REG#Société immatriculée au RCS de Marseille sous le numéro 33344455566677, capital social 1 500 000 EUR. Spécialiste en chimie industrielle depuis 1985.</cbc:Note>
+    <cbc:Note>#PMT#Conditions de paiement: 50% d'acompte à la commande (déjà versé), solde à 30 jours fin de mois. En cas de retard de paiement, pénalités de 3 fois le taux d'intérêt légal + indemnité forfaitaire pour frais de recouvrement de 40 EUR.</cbc:Note>
+    <cbc:Note>#AAI#GESTION PAR INTERMÉDIAIRE TRANSPARENT: Cette facture est destinée au client ACHETEUR (Manufacturing Pharmaceutique Lyon SAS) mais gérée par un intermédiaire transparent (Courtage Industriel Pro SARL) agissant au nom et pour le compte du client. Le routage vers l'intermédiaire est assuré par l'adresse électronique dédiée (SIREN_ACHATTR). L'intermédiaire traite les factures d'achat pour le compte de son commettant conformément au mandat établi. Le client ACHETEUR reste légalement responsable du paiement. Une facture d'entremise séparée sera émise par l'intermédiaire au client pour les services de courtage (BOI-TVA-CHAMP-10-10-40-40).</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference (Routing identifier for intermediary processing) -->
+    <cbc:BuyerReference>789012345_ACHATTR</cbc:BuyerReference>
+
+    <!-- BT-13: Purchase order reference (Negotiated by intermediary) -->
+    <cac:OrderReference>
+        <cbc:ID>PO-PHARMA-2026-0234</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BG-3: Contract document reference -->
+    <cac:ContractDocumentReference>
+        <cbc:ID>CONTRAT-FOURNITURE-CHIMIE-2026-001</cbc:ID>
+    </cac:ContractDocumentReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address (SIRET) -->
+            <cbc:EndpointID schemeID="0009">33344455566677</cbc:EndpointID>
+
+            <!-- BT-28: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>ChemTech Industries</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>Zone Industrielle Les Aygalades, 42 Rue des Chimistes</cbc:StreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Marseille</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>13015</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR33333444555</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>ChemTech Industries SA</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">333444555</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party)
+         CRITICAL: BT-49 uses SIREN_ATTRIBUTION format for intermediary routing -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address - CRITICAL ROUTING MECHANISM
+                 Format: SIREN[BUYER]_[ATTRIBUTION]
+                 "789012345_ACHATTR" = BUYER's SIREN + purchase attribution code
+                 This routes invoice to Courtage Industriel Pro (transparent intermediary)
+                 on PA-TR platform for processing on behalf of BUYER.
+                 
+                 SchemeID "0002" = SIREN-based addressing
+                 Service code "_ACHATTR" = Routes to intermediary's PA-TR (Achat Attribution)
+                 
+                 Intermediary created this address with BUYER's mandate authorization.
+                 FNFE-MPE provides standard mandate template (www.fnfe-mpe.org).
+                 
+                 Under French VAT law, transparent intermediary acts "in name and on behalf"
+                 of BUYER (commettant). BUYER is legal purchaser, intermediary is representative. -->
+            <cbc:EndpointID schemeID="0002">789012345_ACHATTR</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Manufacturing Pharma Lyon</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>Parc d'Activités Scientifiques, 78 Boulevard Pasteur</cbc:StreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>69007</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR78789012345</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name (Actual customer - pharmaceutical manufacturer) -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Manufacturing Pharmaceutique Lyon SAS</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">789012345</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13: Delivery information -->
+    <cac:Delivery>
+        <!-- BT-72: Actual delivery date -->
+        <cbc:ActualDeliveryDate>2026-01-30</cbc:ActualDeliveryDate>
+
+        <!-- BG-15: Deliver to address (BUYER's facility) -->
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <!-- BT-75: Deliver to address line 1 -->
+                <cbc:StreetName>Parc d'Activités Scientifiques, 78 Boulevard Pasteur - Zone de Réception Matières Dangereuses</cbc:StreetName>
+                <!-- BT-77: Deliver to city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-78: Deliver to post code -->
+                <cbc:PostalZone>69007</cbc:PostalZone>
+                <!-- BT-80: Deliver to country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+
+    <!-- BG-17: Credit transfer (Payment means) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (31 = credit transfer) -->
+        <cbc:PaymentMeansCode>31</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>UC12-CTI-2026-0456</cbc:PaymentID>
+
+        <!-- BG-19: Credit transfer - SELLER's IBAN -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84: Payment account identifier (SELLER's IBAN) -->
+            <cbc:ID>FR7633344455566677889900112233</cbc:ID>
+            <!-- BT-85: Payment account name -->
+            <cbc:Name>ChemTech Industries SA</cbc:Name>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms (free text) -->
+        <cbc:Note>Conditions de paiement: 50% d'acompte à la commande (5 730,00 EUR déjà versé le 2026-01-15), solde de 5 730,00 EUR à payer à 30 jours fin de mois (échéance: 2026-03-04) par virement bancaire. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). GESTION PAR INTERMÉDIAIRE TRANSPARENT: Cette facture est gérée par Courtage Industriel Pro SARL (courtier en approvisionnements industriels) agissant au nom et pour le compte du client ACHETEUR (Manufacturing Pharmaceutique Lyon SAS), conformément au mandat établi et aux dispositions de l'article BOI-TVA-CHAMP-10-10-40-40 du Bulletin Officiel des Impôts. Le client ACHETEUR reste légalement responsable du paiement.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-22: Document level charges (Hazardous materials handling) -->
+    <cac:AllowanceCharge>
+        <!-- Charge indicator (true = charge) -->
+        <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+        <!-- BT-105: Document level charge reason code -->
+        <cbc:AllowanceChargeReasonCode>FC</cbc:AllowanceChargeReasonCode>
+        <!-- BT-104: Document level charge reason -->
+        <cbc:AllowanceChargeReason>Frais de manutention matières dangereuses (ADR) et conditionnement réglementaire</cbc:AllowanceChargeReason>
+        <!-- BT-100: Document level charge amount -->
+        <cbc:Amount currencyID="EUR">500.00</cbc:Amount>
+        <!-- BT-102: Document level charge VAT category code -->
+        <cac:TaxCategory>
+            <cbc:ID>S</cbc:ID>
+            <cbc:Percent>20.00</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">1910.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount (lines + charges) -->
+            <cbc:TaxableAmount currencyID="EUR">9550.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">1910.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code (S = Standard rate) -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate (20% standard rate) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">9050.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT (lines + charges) -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">9550.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">11460.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113: Paid amount (50% prepaid deposit) -->
+        <cbc:PrepaidAmount currencyID="EUR">5730.00</cbc:PrepaidAmount>
+        <!-- BT-115: Amount due for payment (remaining 50%) -->
+        <cbc:PayableAmount currencyID="EUR">5730.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: INVOICE LINE 1 -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (500 kg acetone) -->
+        <cbc:InvoicedQuantity unitCode="KGM">500</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">4250.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Acétone qualité laboratoire de haute pureté - Solvant organique pour applications pharmaceutiques et analytiques, pureté minimale 99.8%, teneur en eau &lt;0.1%, résidus après évaporation &lt;5 ppm, conforme pharmacopée européenne Ph.Eur., stockage en fûts métalliques hermétiques 200L avec revêtement interne anticorrosion, classification ADR: UN1090, classe 3 (liquide inflammable), groupe d'emballage II</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Acétone qualité laboratoire 99.8% Ph.Eur.</cbc:Name>
+
+            <!-- BT-155: Seller's item identification -->
+            <cac:SellersItemIdentification>
+                <cbc:ID>CHEM-ACET-LAB-500</cbc:ID>
+            </cac:SellersItemIdentification>
+
+            <!-- BT-158: Item classification (UNSPSC commodity code) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="SRV">11121600</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) - MUST be last in Item element -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Numéro CAS</cbc:Name>
+                <cbc:Value>67-64-1</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Formule chimique</cbc:Name>
+                <cbc:Value>C3H6O (CH3COCH3)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Classification réglementaire</cbc:Name>
+                <cbc:Value>ADR UN1090, Classe 3, GE II - Liquide inflammable point d'éclair &lt;23°C</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Conditionnement</cbc:Name>
+                <cbc:Value>Fûts métalliques 200L hermétiques avec revêtement anticorrosion, palette EUR consignée</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (8.50 EUR per kg) -->
+            <cbc:PriceAmount currencyID="EUR">8.50</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="KGM">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 2 -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (200 kg ethanol) -->
+        <cbc:InvoicedQuantity unitCode="KGM">200</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">2400.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Éthanol absolu qualité analytique - Alcool éthylique déshydraté pour chromatographie et analyses pharmaceutiques, pureté ≥99.9%, teneur en eau &lt;0.05%, absence de benzène, conforme norme ACS et Ph.Eur., conditionné en bonbonnes verre ambré 25L avec bouchon à vis PTFE inviolable, classification ADR: UN1170, classe 3 (liquide inflammable), groupe d'emballage II, stockage zone ventilée T° contrôlée 15-25°C</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Éthanol absolu 99.9% qualité analytique ACS/Ph.Eur.</cbc:Name>
+
+            <!-- BT-155: Seller's item identification -->
+            <cac:SellersItemIdentification>
+                <cbc:ID>CHEM-ETOH-ANA-200</cbc:ID>
+            </cac:SellersItemIdentification>
+
+            <!-- BT-158: Item classification (UNSPSC commodity code) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="SRV">11121600</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) - MUST be last in Item element -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Numéro CAS</cbc:Name>
+                <cbc:Value>64-17-5</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Formule chimique</cbc:Name>
+                <cbc:Value>C2H5OH</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Classification réglementaire</cbc:Name>
+                <cbc:Value>ADR UN1170, Classe 3, GE II - Liquide hautement inflammable</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Conditionnement</cbc:Name>
+                <cbc:Value>Bonbonnes verre ambré 25L avec protection plastique et bouchon PTFE inviolable</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (12.00 EUR per kg) -->
+            <cbc:PriceAmount currencyID="EUR">12.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="KGM">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 3 -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (100 kg methanol) -->
+        <cbc:InvoicedQuantity unitCode="KGM">100</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1500.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Méthanol qualité pharmaceutique extra-pure - Alcool méthylique pour synthèse et purification pharmaceutiques, pureté ≥99.95%, traces métalliques &lt;1 ppm, résidus non volatils &lt;2 mg/L, conforme pharmacopée européenne Ph.Eur. et USP, conditionné en fûts inox 100L avec revêtement électropoli et robinet de soutirage sécurisé, classification ADR: UN1230, classe 3 (liquide inflammable), groupe d'emballage II, très toxique par ingestion/inhalation</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Méthanol qualité pharmaceutique 99.95% Ph.Eur./USP</cbc:Name>
+
+            <!-- BT-155: Seller's item identification -->
+            <cac:SellersItemIdentification>
+                <cbc:ID>CHEM-MEOH-PHR-100</cbc:ID>
+            </cac:SellersItemIdentification>
+
+            <!-- BT-158: Item classification (UNSPSC commodity code) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="SRV">11121600</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) - MUST be last in Item element -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Numéro CAS</cbc:Name>
+                <cbc:Value>67-56-1</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Formule chimique</cbc:Name>
+                <cbc:Value>CH3OH</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Classification réglementaire</cbc:Name>
+                <cbc:Value>ADR UN1230, Classe 3 + 6.1, GE II - Liquide inflammable et toxique (H301 + H311 + H331)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Conditionnement</cbc:Name>
+                <cbc:Value>Fûts inox 100L électropolis avec robinet de soutirage sécurisé et joint PTFE</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (15.00 EUR per kg) -->
+            <cbc:PriceAmount currencyID="EUR">15.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="KGM">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 4 -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>4</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (50 kg isopropanol) -->
+        <cbc:InvoicedQuantity unitCode="KGM">50</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">900.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Isopropanol haute pureté qualité spectroscopique - Alcool isopropylique pour applications HPLC et spectrométrie, pureté ≥99.97%, traces UV &lt;0.01 AU à 250 nm, teneur en eau &lt;0.05%, acidité/alcalinité neutralisées, filtré 0.2 µm, conforme normes HPLC gradient grade, conditionné en bidons verre brun 10L avec bec verseur inox et bouchon à vis sécurité enfant, classification ADR: UN1219, classe 3, groupe d'emballage II</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Isopropanol 99.97% qualité HPLC gradient grade</cbc:Name>
+
+            <!-- BT-155: Seller's item identification -->
+            <cac:SellersItemIdentification>
+                <cbc:ID>CHEM-IPOH-HPLC-50</cbc:ID>
+            </cac:SellersItemIdentification>
+
+            <!-- BT-158: Item classification (UNSPSC commodity code) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="SRV">11121600</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) - MUST be last in Item element -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Numéro CAS</cbc:Name>
+                <cbc:Value>67-63-0</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Formule chimique</cbc:Name>
+                <cbc:Value>C3H8O ((CH3)2CHOH)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Classification réglementaire</cbc:Name>
+                <cbc:Value>ADR UN1219, Classe 3, GE II - Liquide inflammable point d'éclair 12°C</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Conditionnement</cbc:Name>
+                <cbc:Value>Bidons verre brun 10L avec bec verseur inox et bouchon sécurité enfant, carton renforcé</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (18.00 EUR per kg) -->
+            <cbc:PriceAmount currencyID="EUR">18.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="KGM">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 3: Invoice Paid by Third-Party PAYER Known at Invoicing
+    (Facture à payer par un tiers PAYEUR connu au moment de la facturation)
+    
+    Business Scenario:
+    - Known third-party PAYER will pay the ENTIRE invoice to SELLER
+    - Invoice transmitted to BUYER for validation/approval
+    - BUYER manages third-party payment process
+    - Payment not yet made (unlike UC2 - already paid)
+    
+    Key Requirements:
+    - Business process B1: Standard invoice (payment arrangement doesn't change invoice type)
+    - Third-party PAYER: EXT-FR-FE-BG-02 (mandatory for UC3)
+    - BT-115 (Amount due) = BT-112 (full amount still owed)
+    - No prepaid amount (payment will be made by third party after approval)
+    
+    Workflow:
+    1. SELLER creates invoice, transmits to BUYER via PPF
+    2. BUYER validates/approves invoice
+    3. BUYER notifies third-party PAYER of approved invoice
+    4. Third-party PAYER pays SELLER
+    5. BUYER transmits "Paiement Transmis" status
+    6. SELLER receives payment, transmits "Encaissée" status
+    
+    French Text Codes (BT-21/BT-22):
+    - #REG#: Company legal form and share capital
+    - #ABL#: Trade register number (RCS)
+    - #AAI#: APE business activity code
+    - #PMD#: Late payment penalties
+    - #PMT#: Fixed collection costs indemnity (€40)
+    - #BAR#: Treatment type (B2B e-invoicing)
+    - #PAI#: Third party payment information
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- Extension for third-party PAYER (EXT-FR-FE-BG-02) -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <!-- Third-party PAYER information (NOT repeatable - only ONE payer allowed) -->
+                    <puf:RestrictedInformationParty>
+                        <puf:Key>payerParty</puf:Key>
+                        <cac:Party>
+                            <ext:UBLExtensions>
+                                <ext:UBLExtension>
+                                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                                    <ext:ExtensionContent>
+                                        <puf:PageroExtension>
+                                            <puf:PartyExtension>
+                                                <!-- EXT-FR-FE-44: Party role code (PE = Payer) -->
+                                                <puf:RoleCode>
+                                                    <cbc:ID>PE</cbc:ID>
+                                                </puf:RoleCode>
+                                            </puf:PartyExtension>
+                                        </puf:PageroExtension>
+                                    </ext:ExtensionContent>
+                                </ext:UBLExtension>
+                            </ext:UBLExtensions>
+                            <!-- EXT-FR-FE-52: Electronic address (RECOMMENDED) -->
+                            <cbc:EndpointID schemeID="0009">11122233344556</cbc:EndpointID>
+                            <!-- EXT-FR-FE-46: PAYER party identification (SIRET) -->
+                            <cac:PartyIdentification>
+                                <cbc:ID schemeID="0009">11122233344556</cbc:ID>
+                            </cac:PartyIdentification>
+                            <!-- PAYER party name -->
+                            <cac:PartyName>
+                                <cbc:Name>Centrale d'Achat Groupe Retail France</cbc:Name>
+                            </cac:PartyName>
+                            <!-- PAYER address -->
+                            <cac:PostalAddress>
+                                <cbc:StreetName>25 Avenue de la Grande Armée</cbc:StreetName>
+                                <cbc:CityName>Paris</cbc:CityName>
+                                <cbc:PostalZone>75017</cbc:PostalZone>
+                                <cac:Country>
+                                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                                    <cbc:Name>France</cbc:Name>
+                                </cac:Country>
+                            </cac:PostalAddress>
+                            <!-- PAYER VAT number -->
+                            <cac:PartyTaxScheme>
+                                <cbc:CompanyID>FR11122233344</cbc:CompanyID>
+                                <cac:TaxScheme>
+                                    <cbc:ID>VAT</cbc:ID>
+                                </cac:TaxScheme>
+                            </cac:PartyTaxScheme>
+                            <!-- EXT-FR-FE-43: PAYER legal entity (MANDATORY) -->
+                            <cac:PartyLegalEntity>
+                                <cbc:RegistrationName>Centrale d'Achat Groupe Retail France SA</cbc:RegistrationName>
+                                <!-- EXT-FR-FE-48: Legal identifier (SIREN) -->
+                                <!-- EXT-FR-FE-49: Legal ID scheme -->
+                                <cbc:CompanyID schemeID="0002">111222333</cbc:CompanyID>
+                            </cac:PartyLegalEntity>
+                            <!-- PAYER contact information -->
+                            <cac:Contact>
+                                <cbc:Name>Service Paiements Fournisseurs</cbc:Name>
+                                <cbc:Telephone>+33 1 11 22 33 44</cbc:Telephone>
+                                <cbc:ElectronicMail>paiements@centrale-achat-groupe.fr</cbc:ElectronicMail>
+                            </cac:Contact>
+                        </cac:Party>
+                    </puf:RestrictedInformationParty>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type - B1: Standard invoice (third-party payment is organizational, not invoice type) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>INV-FR-2026-0312</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-01-25</cbc:IssueDate>
+    <!-- BT-9 Payment Due Date -->
+    <cbc:DueDate>2026-02-25</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes -->
+    <!-- REG: Company legal form and share capital (BT-33 alternative method) -->
+    <cbc:Note>#REG#SAS au capital de 500000.00 EUR</cbc:Note>
+    <!-- ABL: Legal information - Trade register (BT-33 alternative method) -->
+    <cbc:Note>#ABL#RCS Paris B 123 456 789</cbc:Note>
+    <!-- AAI: General information - APE code (business activity classification) -->
+    <cbc:Note>#AAI#APE 4690Z - Commerce de gros non spécialisé</cbc:Note>
+    <!-- PMD: Late payment penalties (French mandatory payment terms) -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- PMT: Fixed indemnity for collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- PAI: Third party payment information -->
+    <cbc:Note>#PAI#Paiement à effectuer par Centrale d'Achat Groupe Retail France SA conformément à l'accord commercial tripartite</cbc:Note>
+    <!-- BAR: Treatment type qualification - B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference (mandatory for French e-invoicing) -->
+    <cbc:BuyerReference>SERVICE-ACHAT-MAGASIN-045</cbc:BuyerReference>
+
+    <!-- Header-level order reference -->
+    <cac:OrderReference>
+        <!-- BT-13 Purchase Order Reference -->
+        <cbc:ID>PO-MAGASIN-2026-045</cbc:ID>
+        <cbc:IssueDate>2026-01-18</cbc:IssueDate>
+    </cac:OrderReference>
+
+    <!-- BG-24 Additional supporting documents (contract reference) -->
+    <cac:AdditionalDocumentReference>
+        <!-- BT-122 Supporting document reference -->
+        <cbc:ID>CONTRAT-TRIPARTITE-2025-078</cbc:ID>
+        <!-- BT-122 Issue date -->
+        <cbc:IssueDate>2025-06-15</cbc:IssueDate>
+        <!-- BT-122 Document type code - 50: Price/sales catalogue -->
+        <cbc:DocumentTypeCode>916</cbc:DocumentTypeCode>
+        <!-- BT-123 Supporting document description -->
+        <cbc:DocumentDescription>Accord commercial tripartite avec centrale d'achat pour paiement centralisé</cbc:DocumentDescription>
+    </cac:AdditionalDocumentReference>
+
+    <!-- BG-4 Seller Information -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">12345678901234</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Distributeur Équipements France</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <!-- BT-35 Street name -->
+                <cbc:StreetName>45 Rue du Commerce</cbc:StreetName>
+                <cbc:AdditionalStreetName>Zone Industrielle Nord</cbc:AdditionalStreetName>
+                <!-- BT-37 City -->
+                <cbc:CityName>Paris</cbc:CityName>
+                <!-- BT-38 Postal code -->
+                <cbc:PostalZone>75015</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR12345678901</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Legal Name -->
+                <cbc:RegistrationName>Distributeur Équipements France SAS</cbc:RegistrationName>
+                <!-- BT-30 SIREN -->
+                <cbc:CompanyID schemeID="0002">123456789</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 Seller Contact -->
+            <cac:Contact>
+                <!-- BT-41 Contact name -->
+                <cbc:Name>Jean Martin</cbc:Name>
+                <!-- BT-42 Contact telephone -->
+                <cbc:Telephone>+33 1 98 76 54 32</cbc:Telephone>
+                <!-- BT-43 Contact email -->
+                <cbc:ElectronicMail>facturation@distributeur-equipements.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information (receives invoice for validation, but PAYER pays) -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>CLIENT-MAG-5678</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-46 Buyer Identifier - SIRET -->
+            <cbc:EndpointID schemeID="0009">55566677788990</cbc:EndpointID>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Magasin Retail Paris Centre</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <!-- BT-50 Street name -->
+                <cbc:StreetName>88 Rue de Rivoli</cbc:StreetName>
+                <!-- BT-52 City -->
+                <cbc:CityName>Paris</cbc:CityName>
+                <!-- BT-53 Postal code -->
+                <cbc:PostalZone>75001</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR55566677788</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Legal Name -->
+                <cbc:RegistrationName>Magasin Retail Paris Centre SARL</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13 Delivery information -->
+    <cac:Delivery>
+        <!-- BT-72 Actual Delivery Date -->
+        <cbc:ActualDeliveryDate>2026-01-22</cbc:ActualDeliveryDate>
+        <!-- BG-15 Delivery location -->
+        <cac:DeliveryLocation>
+            <!-- BT-71 Delivery location identifier -->
+            <cbc:ID schemeID="0088">3598901234567</cbc:ID>
+            <cac:Address>
+                <cbc:StreetName>88 Rue de Rivoli</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75001</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+
+    <!-- BG-16 Payment Means -->
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code - 30: Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier - IBAN -->
+            <cbc:ID>FR7612345678901234567890123</cbc:ID>
+            <cbc:Name>Distributeur Équipements France SAS</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <!-- BIC/SWIFT -->
+                <cbc:ID>BNPAFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms -->
+        <cbc:Note>Paiement net 30 jours fin de mois. Paiement à effectuer par Centrale d'Achat Groupe Retail France SA conformément à l'accord commercial tripartite référence CONTRAT-TRIPARTITE-2025-078.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">1200.00</cbc:TaxAmount>
+        <!-- Tax subtotal for 20% VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116 Taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">6000.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">1200.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code - S: Standard rate -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT category rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">6000.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">6000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">7200.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment - Full amount (third party will pay) -->
+        <cbc:PayableAmount currencyID="EUR">7200.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- ========================================
+         INVOICE LINE 1
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Équipements professionnels pour magasin</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="EA">50</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">3000.00</cbc:LineExtensionAmount>
+
+        <!-- Line-level order reference -->
+        <cac:OrderLineReference>
+            <cbc:LineID>10</cbc:LineID>
+        </cac:OrderLineReference>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Présentoir réfrigéré vitré pour produits frais, capacité 300L, éclairage LED</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Présentoir Réfrigéré Professionnel PRO-300L</cbc:Name>
+            <!-- BG-32 Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158 Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">84183010</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Marque</cbc:Name>
+                <cbc:Value>FroidPro</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Garantie</cbc:Name>
+                <cbc:Value>3 ans pièces et main d'œuvre</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">60.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- ========================================
+         INVOICE LINE 2
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Mobilier commercial</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="EA">100</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">3000.00</cbc:LineExtensionAmount>
+
+        <!-- Line-level order reference -->
+        <cac:OrderLineReference>
+            <cbc:LineID>20</cbc:LineID>
+        </cac:OrderLineReference>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Gondole de présentation modulaire en acier, hauteur 180cm, 5 étagères réglables</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Gondole Modulaire Commerce GM-180</cbc:Name>
+            <!-- BG-32 Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158 Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">94032090</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Matériau</cbc:Name>
+                <cbc:Value>Acier laqué époxy</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Couleur</cbc:Name>
+                <cbc:Value>Blanc RAL 9016</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Installation</cbc:Name>
+                <cbc:Value>Montage inclus</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">30.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

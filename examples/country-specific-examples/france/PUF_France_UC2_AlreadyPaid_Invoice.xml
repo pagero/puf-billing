@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 2: Invoice Already Paid (Facture déjà payée)
+    
+    Business Scenario:
+    - Invoice transmitted AFTER payment has already been made
+    - Payment made shortly before invoice (NOT advance payment scenario)
+    - Third-party PAYER paid on behalf of buyer (factoring company)
+    - Full amount paid: BT-113 (Paid amount) = BT-112 (Total with VAT)
+    - Nothing due: BT-115 (Amount due) = 0
+    
+    Key Requirements:
+    - Business process B2: "Dépôt d'une facture déjà payée"
+    - BT-113 MUST equal BT-112
+    - BT-115 MUST equal 0
+    - BT-9 (Payment due date) if present ≤ Invoice date
+    - Third-party PAYER: EXT-FR-FE-BG-02 (optional)
+    
+    French Text Codes (BT-21/BT-22):
+    - #REG#: Company legal form and share capital
+    - #ABL#: Trade register number (RCS)
+    - #AAI#: APE business activity code
+    - #PMD#: Late payment penalties
+    - #PMT#: Fixed collection costs indemnity (€40)
+    - #BAR#: Treatment type (B2B e-invoicing)
+    - #PAI#: Third party payment information
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- Extension for third-party PAYER (EXT-FR-FE-BG-02) -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <!-- Third-party PAYER information -->
+                    <puf:RestrictedInformationParty>
+                        <puf:Key>payerParty</puf:Key>
+                        <cac:Party>
+                            <ext:UBLExtensions>
+                                <ext:UBLExtension>
+                                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                                    <ext:ExtensionContent>
+                                        <puf:PageroExtension>
+                                            <puf:PartyExtension>
+                                                <!-- EXT-FR-FE-44: Party role code (PR = Payer) -->
+                                                <puf:RoleCode>
+                                                    <cbc:ID>PR</cbc:ID>
+                                                </puf:RoleCode>
+                                            </puf:PartyExtension>
+                                        </puf:PageroExtension>
+                                    </ext:ExtensionContent>
+                                </ext:UBLExtension>
+                            </ext:UBLExtensions>
+                            <!-- PAYER party identification -->
+                            <cac:PartyIdentification>
+                                <cbc:ID schemeID="0009">98765432198765</cbc:ID>
+                            </cac:PartyIdentification>
+                            <!-- PAYER party name -->
+                            <cac:PartyName>
+                                <cbc:Name>France Factoring Services SAS</cbc:Name>
+                            </cac:PartyName>
+                            <!-- PAYER address -->
+                            <cac:PostalAddress>
+                                <cbc:StreetName>88 Rue de Rivoli</cbc:StreetName>
+                                <cbc:CityName>Paris</cbc:CityName>
+                                <cbc:PostalZone>75004</cbc:PostalZone>
+                                <cac:Country>
+                                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                                    <cbc:Name>France</cbc:Name>
+                                </cac:Country>
+                            </cac:PostalAddress>
+                            <!-- PAYER VAT number -->
+                            <cac:PartyTaxScheme>
+                                <cbc:CompanyID>FR98765432198</cbc:CompanyID>
+                                <cac:TaxScheme>
+                                    <cbc:ID>VAT</cbc:ID>
+                                </cac:TaxScheme>
+                            </cac:PartyTaxScheme>
+                            <!-- PAYER legal entity -->
+                            <cac:PartyLegalEntity>
+                                <cbc:RegistrationName>France Factoring Services SAS</cbc:RegistrationName>
+                                <cbc:CompanyID schemeID="0002">987654321</cbc:CompanyID>
+                            </cac:PartyLegalEntity>
+                            <!-- PAYER contact -->
+                            <cac:Contact>
+                                <cbc:Name>Service Paiements</cbc:Name>
+                                <cbc:Telephone>+33 1 98 76 54 32</cbc:Telephone>
+                                <cbc:ElectronicMail>paiements@factoring-france.fr</cbc:ElectronicMail>
+                            </cac:Contact>
+                        </cac:Party>
+                    </puf:RestrictedInformationParty>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type - B2: Already-paid invoice (Dépôt d'une facture déjà payée) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>INV-FR-2026-0235</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-01-20</cbc:IssueDate>
+    <!-- BT-9 Payment Due Date - historical (payment already made on 2026-01-18) -->
+    <cbc:DueDate>2026-01-18</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
+    <cbc:InvoiceTypeCode name="B2">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes -->
+    <!-- REG: Company legal form and share capital (BT-33 alternative method) -->
+    <cbc:Note>#REG#SAS au capital de 250000.00 EUR</cbc:Note>
+    <!-- ABL: Legal information - Trade register (BT-33 alternative method) -->
+    <cbc:Note>#ABL#RCS Lyon B 456 789 012</cbc:Note>
+    <!-- AAI: General information - APE code (business activity classification) -->
+    <cbc:Note>#AAI#APE 4639B - Commerce de gros alimentaire spécialisé</cbc:Note>
+    <!-- PMD: Late payment penalties (French mandatory payment terms) -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- PMT: Fixed indemnity for collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- PAI: Third party payment information -->
+    <cbc:Note>#PAI#Paiement effectué par société d'affacturage France Factoring Services SAS au nom du client</cbc:Note>
+    <!-- BAR: Treatment type qualification - B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-8 Tax point date code - 35: Delivery date -->
+    <cac:InvoicePeriod>
+        <cbc:DescriptionCode>35</cbc:DescriptionCode>
+    </cac:InvoicePeriod>
+
+    <!-- Header-level order reference -->
+    <cac:OrderReference>
+        <!-- BT-13 Purchase Order Reference -->
+        <cbc:ID>PO-2026-URGENT-078</cbc:ID>
+        <cbc:IssueDate>2026-01-10</cbc:IssueDate>
+    </cac:OrderReference>
+
+    <!-- BG-4 Seller Information -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">45678901234567</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Grossiste Bio Lyon</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <!-- BT-35 Street name -->
+                <cbc:StreetName>32 Cours Lafayette</cbc:StreetName>
+                <cbc:AdditionalStreetName>Bâtiment C</cbc:AdditionalStreetName>
+                <!-- BT-37 City -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-38 Postal code -->
+                <cbc:PostalZone>69003</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR45678901234</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Legal Name -->
+                <cbc:RegistrationName>Grossiste Bio Lyon SAS</cbc:RegistrationName>
+                <!-- BT-30 SIREN -->
+                <cbc:CompanyID schemeID="0002">456789012</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 Seller Contact -->
+            <cac:Contact>
+                <!-- BT-41 Contact name -->
+                <cbc:Name>Pierre Durand</cbc:Name>
+                <!-- BT-42 Contact telephone -->
+                <cbc:Telephone>+33 4 78 12 34 56</cbc:Telephone>
+                <!-- BT-43 Contact email -->
+                <cbc:ElectronicMail>contact@grossiste-bio-lyon.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>CLIENT-BIO-5432</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-46 Buyer Identifier - SIRET -->
+            <cbc:EndpointID schemeID="0009">12312312312312</cbc:EndpointID>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Magasins Bio Nature France</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <!-- BT-50 Street name -->
+                <cbc:StreetName>78 Avenue Gambetta</cbc:StreetName>
+                <!-- BT-52 City -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-53 Postal code -->
+                <cbc:PostalZone>69007</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR12312312312</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Legal Name -->
+                <cbc:RegistrationName>Magasins Bio Nature France SA</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13 Delivery information -->
+    <cac:Delivery>
+        <!-- BT-72 Actual Delivery Date -->
+        <cbc:ActualDeliveryDate>2026-01-15</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+
+    <!-- BG-16 Payment Means -->
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code - 30: Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier - IBAN -->
+            <cbc:ID>FR7645678901234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BIC/SWIFT -->
+                <cbc:ID>CCFRFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms -->
+        <cbc:Note>Facture déjà payée le 2026-01-18 par société d'affacturage</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">400.00</cbc:TaxAmount>
+        <!-- Tax subtotal for 20% VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116 Taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">2000.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">400.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code - S: Standard rate -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT category rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">2000.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">2000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">2400.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113 Paid amount - Already paid (equals BT-112) -->
+        <cbc:PrepaidAmount currencyID="EUR">2400.00</cbc:PrepaidAmount>
+        <!-- BT-115 Amount due for payment - MUST be 0 for UC2 -->
+        <cbc:PayableAmount currencyID="EUR">0.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- ========================================
+         INVOICE LINE 1
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Commande urgente - paiement anticipé à la commande</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="EA">200</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">2000.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Huile d'olive première pression à froid, certification agriculture biologique AB</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Huile d'Olive Bio Extra Vierge - 750ml</cbc:Name>
+            <!-- BG-32 Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158 Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">15091090</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Origine</cbc:Name>
+                <cbc:Value>Provence, France</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Certification</cbc:Name>
+                <cbc:Value>Agriculture Biologique AB</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Conditionnement</cbc:Name>
+                <cbc:Value>Bouteille verre 750ml</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">10.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

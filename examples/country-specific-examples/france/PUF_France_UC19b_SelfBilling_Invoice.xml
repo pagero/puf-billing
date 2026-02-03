@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC19b - Self-Billing (Auto-facturation)
+    
+    Use Case: Self-Billing - BUYER Creates Invoice TO SELLER
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 (Standard invoice)
+    
+    Scenario Description:
+    BUYER (large retail supermarket chain - SuperMarchés Bio France SAS) creates
+    and transmits invoice TO SELLER (small organic farm - Ferme Biologique Rousseau EARL).
+    This is a COMPLETE REVERSAL of normal invoicing flow, requiring formal billing
+    mandate from SELLER to BUYER.
+    
+    Critical Business Context - Role Reversal:
+    - BUYER creates the invoice (not SELLER)
+    - SELLER receives invoice for SALES (not purchases) they didn't create
+    - BUYER accounts for PURCHASE invoices they EMIT (not receive)
+    - SELLER accounts for SALES invoices they RECEIVE (not emit)
+    - BUYER still PAYS SELLER for the goods (payment not reversed)
+    
+    Key Distinctions:
+    - UC19a (Billing Agent): Agent creates invoice on behalf of SELLER, BUYER receives
+    - UC19b (Self-Billing): BUYER creates invoice on behalf of SELLER, SELLER receives
+    - Payment flow: Same direction (BUYER → SELLER)
+    - Invoice flow: Reversed direction (BUYER → SELLER instead of SELLER → BUYER)
+    
+    Legal Framework:
+    - Requires formal billing mandate agreement from SELLER to BUYER
+    - BUYER must know SELLER's VAT regime (especially franchise en base exemption)
+    - SELLER must be able to signal VAT threshold crossings to BUYER
+    - Self-billing indicator MANDATORY in PUF format
+    
+    VAT Regime Knowledge Requirement:
+    BUYER must handle SELLER's VAT status correctly:
+    - Franchise en base (VAT exemption scheme)
+    - Non-subject to VAT entities
+    - Threshold monitoring for regime changes
+    
+    Platform Architecture:
+    - PA-E (BUYER's emission platform): Creates Flux 1 to CdD PPF, emission statuses
+    - PA-R (SELLER's reception platform): Creates reception statuses
+    - SELLER (not BUYER) creates treatment statuses (« Rejetée », « Approuvée », etc.)
+    
+    Self-Billing Declaration Methods:
+    1. Self-billing indicator extension (PUF - MANDATORY)
+       - Extension: urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled
+       - Value: "true"
+       - Triggers self-billing processing rules
+    
+    2. BT-21 + BT-22 Note (RECOMMENDED in addition to indicator)
+       - BT-21: Subject code "DCL" (Declarative information)
+       - BT-22: "Auto-facturation établie par SuperMarchés Bio France SAS pour le 
+                 compte de Ferme Biologique Rousseau EARL conformément au mandat"
+       - Ensures legal clarity of self-billing arrangement
+    
+    Business Scenario:
+    Large organic supermarket chain (BUYER) uses self-billing for small farm suppliers.
+    Farm delivers fresh organic produce (vegetables). Supermarket creates invoice
+    documenting the farm's sale to the supermarket. Farm receives invoice for their
+    own sales, validates delivery/quantities, approves, and receives payment.
+    
+    Key Characteristics:
+    - Invoice type 380: Standard commercial invoice
+    - Business process B1: Standard invoice
+    - BG-4 SELLER: Ferme Biologique Rousseau EARL (organic farm - receives invoice)
+    - BG-7 BUYER: SuperMarchés Bio France SAS (supermarket - creates invoice)
+    - Self-billing indicator: true (MANDATORY)
+    - BT-21/BT-22: Self-billing mandate declaration
+    - Payment to SELLER's IBAN (BUYER pays for purchase)
+    - Total: 1,680.00 EUR
+    
+    Workflow:
+    1. SELLER and BUYER conclude formal self-billing mandate agreement
+    2. SELLER delivers organic produce to BUYER (supermarket)
+    3. BUYER creates invoice TO SELLER documenting the sale
+    4. BUYER's PA-E validates, transmits Flux 1 to CdD PPF, invoice to SELLER's PA-R
+    5. SELLER receives invoice on PA-R (for their own sales!)
+    6. SELLER validates quantities/amounts, creates treatment statuses
+    7. SELLER approves invoice (« Approuvée » status)
+    8. BUYER pays SELLER for the delivered goods
+    9. SELLER collects payment, creates « Encaissée » status
+    
+    Products:
+    - Organic tomatoes (heirloom varieties): 250kg @ 4.80 EUR/kg = 1,200.00 EUR
+    - Organic cucumbers: 80kg @ 3.00 EUR/kg = 240.00 EUR
+    - Organic lettuce (mixed varieties): 60 units @ 2.00 EUR = 120.00 EUR
+    
+    Amounts:
+    - Total produce: 1,560.00 EUR net
+    - VAT (20% standard rate): 312.00 EUR
+    - Invoice total with VAT: 1,872.00 EUR
+    - Packaging deposit (returnable crates): -192.00 EUR
+    - Amount due for payment: 1,680.00 EUR (paid to SELLER)
+    
+    French Text Codes Used:
+    - #REG# Registration information (SELLER's details as supplier)
+    - #PMT# Payment terms (BUYER pays SELLER for delivered goods)
+    - #ABL# Additional legal information (self-billing mandate declaration)
+    
+    Reference: XP Z12-014 Annexe A, Section 3.2.18.2 - Cas n°19b
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+
+    <!-- UBL Extensions for Self-Billing indicator -->
+    <ext:UBLExtensions>
+        <!-- Self-Billing Indicator - MANDATORY for UC19b
+             Indicates that this invoice is created by the BUYER on behalf of the SELLER
+             under a formal self-billing mandate agreement. -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:SelfBilled>true</puf:SelfBilled>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number (Created by BUYER for SELLER's sale) -->
+    <cbc:ID>SMBF-AF-2026-01234</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-02-02</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (30 days) -->
+    <cbc:DueDate>2026-03-04</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - French text codes for registration, payment terms, self-billing declaration -->
+    <cbc:Note>#REG#SIRET 77766655544433 - RCS Angers - APE 0113Z (Culture de légumes, de melons, de racines et de tubercules) - Capital social: 7 500 EUR - N° TVA: FR77777666555</cbc:Note>
+    <cbc:Note>#PMT#Paiement à 30 jours fin de mois par virement bancaire. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). PAIEMENT AU FOURNISSEUR: Le règlement de cette facture sera effectué par l'ACHETEUR (SuperMarchés Bio France SAS) au FOURNISSEUR (Ferme Biologique Rousseau EARL) conformément aux conditions d'achat établies.</cbc:Note>
+    <!-- Self-billing mandate declaration note (RECOMMENDED) -->
+    <cbc:Note>#DCL#AUTO-FACTURATION: Cette facture a été établie par l'ACHETEUR
+        SuperMarchés Bio France SAS (SIREN 999888777, SIRET 99988877766655) pour le compte du
+        FOURNISSEUR Ferme Biologique Rousseau EARL (SIREN 777666555, SIRET 77766655544433),
+        conformément au contrat de mandat d'auto-facturation conclu entre les parties. L'ACHETEUR
+        crée cette facture documentant les ventes du FOURNISSEUR à l'ACHETEUR. Le FOURNISSEUR
+        recevra cette facture sur sa plateforme de réception (PA-R) et devra la valider, l'approuver
+        et créer les statuts de cycle de vie appropriés. Le règlement sera effectué par l'ACHETEUR
+        au FOURNISSEUR pour les marchandises livrées. L'ACHETEUR s'engage à connaître et respecter
+        le régime de TVA du FOURNISSEUR.</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference (BUYER's internal reference for this purchase) -->
+    <cbc:BuyerReference>ORD-PRODUCE-2026-5678</cbc:BuyerReference>
+
+    <!-- BT-13: Purchase order reference (BUYER's purchase order) -->
+    <cac:OrderReference>
+        <cbc:ID>ORD-PRODUCE-2026-5678</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BT-16: Despatch advice reference (Delivery note) -->
+    <cac:DespatchDocumentReference>
+        <cbc:ID>BL-FBR-2026-0089</cbc:ID>
+    </cac:DespatchDocumentReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Organic Farm
+         CRITICAL: In self-billing, this is the party RECEIVING the invoice.
+         The SELLER (farm) is the actual supplier of goods but receives an invoice
+         documenting their own sale, created by the BUYER (supermarket).
+         
+         The SELLER will:
+         - Receive this invoice on their PA-R platform
+         - Validate quantities and amounts match delivery
+         - Create treatment statuses (« Approuvée », « En litige », etc.)
+         - Account for this as SALES (not purchases)
+         - Receive payment from BUYER -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address
+                 Routes to SELLER's PA-R (reception platform).
+                 SELLER receives invoice here and creates treatment statuses. -->
+            <cbc:EndpointID schemeID="0002">77766655544433</cbc:EndpointID>
+
+            <!-- BT-27: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>Ferme Biologique Rousseau</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>Lieu-dit La Grande Prairie</cbc:StreetName>
+                <!-- BT-36: Seller address line 2 -->
+                <cbc:AdditionalStreetName>Route de Saint-Georges</cbc:AdditionalStreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Beaupréau-en-Mauges</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>49600</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier
+                 CRITICAL: BUYER must know SELLER's VAT regime when creating invoice.
+                 If SELLER has franchise en base exemption, invoice must reflect this.
+                 SELLER must signal threshold crossings that change VAT status. -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR77777666555</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name (Actual supplier - receives self-billed invoice) -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Ferme Biologique Rousseau EARL</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">777666555</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact (Farm Owner) -->
+            <cac:Contact>
+                <!-- BT-41: Seller contact point -->
+                <cbc:Name>Claude Rousseau - Exploitant Agricole</cbc:Name>
+                <!-- BT-42: Seller contact telephone -->
+                <cbc:Telephone>+33 2 41 55 66 77</cbc:Telephone>
+                <!-- BT-43: Seller contact email -->
+                <cbc:ElectronicMail>c.rousseau@ferme-bio-rousseau.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Supermarket Chain
+         CRITICAL: In self-billing, this is the party CREATING the invoice.
+         The BUYER (supermarket) creates invoice documenting their purchase from SELLER.
+         
+         The BUYER:
+         - Creates invoice via their PA-E platform
+         - Transmits Flux 1 to CdD PPF and invoice to SELLER's PA-R
+         - Accounts for this as PURCHASES (not sales)
+         - Pays SELLER for the delivered goods -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address
+                 Routes to BUYER's PA-E (emission platform).
+                 BUYER creates and emits invoice from here. -->
+            <cbc:EndpointID schemeID="0002">99988877766655</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>SuperMarchés Bio France</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>50 Avenue du Commerce Équitable</cbc:StreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Nantes</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>44000</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR99999888777</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name (Creates invoice for their purchases) -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>SuperMarchés Bio France SAS</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">999888777</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact (Purchasing Manager) -->
+            <cac:Contact>
+                <!-- BT-56: Buyer contact point -->
+                <cbc:Name>Martine Dubois - Responsable Achats Frais</cbc:Name>
+                <!-- BT-57: Buyer contact telephone -->
+                <cbc:Telephone>+33 2 40 11 22 33</cbc:Telephone>
+                <!-- BT-58: Buyer contact email -->
+                <cbc:ElectronicMail>m.dubois@supermarches-bio.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13: Delivery information -->
+    <cac:Delivery>
+        <!-- BT-72: Actual delivery date -->
+        <cbc:ActualDeliveryDate>2026-01-30</cbc:ActualDeliveryDate>
+
+        <!-- BG-15: Deliver to address (Supermarket warehouse) -->
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <cbc:StreetName>Zone Logistique Nord - Entrepôt 3</cbc:StreetName>
+                <cbc:CityName>Nantes</cbc:CityName>
+                <cbc:PostalZone>44300</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+
+    <!-- BG-17: Credit transfer (Payment means) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (31 = credit transfer) -->
+        <cbc:PaymentMeansCode>31</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>SMBF-AF-2026-01234</cbc:PaymentID>
+
+        <!-- BG-19: Credit transfer - SELLER's IBAN
+             CRITICAL: Payment flows TO SELLER (farm) FROM BUYER (supermarket).
+             Self-billing reverses invoice flow but NOT payment flow.
+             BUYER pays for the goods they purchased. -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84: Payment account identifier (SELLER's IBAN) -->
+            <cbc:ID>FR7677766655544433221122334455</cbc:ID>
+            <!-- BT-85: Payment account name -->
+            <cbc:Name>Ferme Biologique Rousseau EARL</cbc:Name>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms (free text) -->
+        <cbc:Note>Paiement à 30 jours fin de mois par virement bancaire. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). AUTO-FACTURATION: Cette facture est établie en auto-facturation par l'ACHETEUR (SuperMarchés Bio France SAS) pour le compte du FOURNISSEUR (Ferme Biologique Rousseau EARL). Le FOURNISSEUR recevra cette facture sur sa plateforme de réception et devra la valider avant que le paiement soit effectué. Le règlement sera versé au FOURNISSEUR sur le compte bancaire indiqué (IBAN FR76 7776 6655 5444 3322 1122 3344 55). Consigne emballages: 192,00 EUR de consigne sur cagettes retournables, déduite du montant à payer, remboursable sur retour des emballages en bon état.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-21: Document level allowances (Packaging deposit deduction) -->
+    <cac:AllowanceCharge>
+        <!-- Charge indicator: false = allowance/discount -->
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+        <!-- BT-97: Document level allowance reason code -->
+        <cbc:AllowanceChargeReasonCode>ZZZ</cbc:AllowanceChargeReasonCode>
+        <!-- BT-98: Document level allowance reason -->
+        <cbc:AllowanceChargeReason>Consigne emballages retournables (cagettes plastique)</cbc:AllowanceChargeReason>
+        <!-- BT-92: Document level allowance amount -->
+        <cbc:Amount currencyID="EUR">192.00</cbc:Amount>
+        <!-- BT-95: Document level allowance VAT category code -->
+        <cac:TaxCategory>
+            <cbc:ID>S</cbc:ID>
+            <cbc:Percent>20.00</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">312.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">1560.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">312.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code (S = Standard rate) -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate (20% standard rate) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1560.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">1560.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">1872.00</cbc:TaxInclusiveAmount>
+        <!-- BT-107: Sum of allowances on document level -->
+        <cbc:AllowanceTotalAmount currencyID="EUR">192.00</cbc:AllowanceTotalAmount>
+        <!-- BT-115: Amount due for payment (1872.00 - 192.00 deposit) -->
+        <cbc:PayableAmount currencyID="EUR">1680.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: Invoice lines -->
+
+    <!-- Line 1: Organic tomatoes (heirloom varieties) -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="KGM">250</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1200.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Tomates biologiques cultivées en plein champ, mélange de variétés anciennes (Cœur de bœuf, Noire de Crimée, Ananas, Green Zebra). Certification Agriculture Biologique FR-BIO-01. Calibre 67-82mm. Catégorie I. Livrées en cagettes plastique retournables. Récolte du 29/01/2026. Conservation: 7-10 jours à température ambiante.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Tomates biologiques variétés anciennes</cbc:Name>
+
+            <!-- BG-32: Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158: Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">070200</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">4.80</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="KGM">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 2: Organic cucumbers -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="KGM">80</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">240.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Concombres biologiques cultivés sous serre froide, variété Marketmore. Certification Agriculture Biologique FR-BIO-01. Calibre 350-400g. Catégorie I. Livrés en cagettes plastique retournables. Récolte du 28/01/2026. Conservation: 5-7 jours en chambre froide 8-12°C.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Concombres biologiques</cbc:Name>
+
+            <!-- BG-32: Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158: Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">070700</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">3.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="KGM">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 3: Organic lettuce (mixed varieties) -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="PCE">60</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">120.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Salades biologiques cultivées en plein champ, mélange de variétés (Batavia blonde, Feuille de chêne rouge, Lollo Rossa). Certification Agriculture Biologique FR-BIO-01. Poids moyen 300-400g/pièce. Catégorie I. Livrées en cagettes plastique retournables. Récolte du 29/01/2026. Conservation: 3-5 jours en chambre froide 2-4°C.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Salades biologiques mélange de variétés</cbc:Name>
+
+            <!-- BG-32: Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158: Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">070519</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">2.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="PCE">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

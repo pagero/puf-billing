@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC40 - Grouped Payments/Netting (Invoice 2 of 2)
+    
+    Use Case: Cross-Purchase/Sale Scenarios with Payment Offset
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: Standard (no special code)
+    
+    CRITICAL PATTERN: Two Separate Invoices + Offset Payment
+    ========================================================
+    ❌ INCORRECT: Do NOT mix sales and purchases in single invoice using negative lines
+    ✅ CORRECT: Issue TWO separate invoices (one per direction), then net the payments
+    
+    This Document: INVOICE 2 of 2
+    ============================
+    Direction: FARMER → COOPERATIVE
+    Content: Agricultural produce (wine grapes) delivered by farmer to cooperative
+    Payment: Via offset/netting (BT-81 = code 97)
+    
+    Companion Document: INVOICE 1 of 2 (separate file)
+    ==================================================
+    Direction: COOPERATIVE → FARMER
+    Content: Services provided by cooperative to farmer
+    Payment: Via offset/netting (BT-81 = code 97)
+    
+    Net Settlement:
+    ===============
+    Invoice 1 (Coop → Farmer): 2,400.00 EUR TTC (companion invoice)
+    Invoice 2 (Farmer → Coop): 3,840.00 EUR TTC (this invoice)
+    Net Payment: 1,440.00 EUR from Cooperative to Farmer
+    (Farmer receives net amount: 3,840 - 2,400 = 1,440 EUR)
+    
+    Business Scenario - Agricultural Cooperative (ROLES REVERSED):
+    ==============================================================
+    
+    Bidirectional Trading Relationship:
+    ====================================
+    Party A: EARL Martin Viticulture (FARMER) - NOW THE SELLER in this invoice
+    Party B: Coopérative Agricole Provence (COOP) - NOW THE BUYER in this invoice
+    
+    Transaction 2 (This Invoice): FARMER → COOP Grapes
+    ====================================
+    Period: January 2026 (winter delivery from cold storage)
+    Produce delivered by farmer to cooperative:
+    
+    White wine grapes (Chardonnay):
+    - Quantity: 1,200 kg
+    - Quality: Raisins de cuve AOC Côtes du Rhône
+    - Storage: Chambre froide 2-4°C depuis vendanges septembre 2025
+    - Use: Vinification vin blanc sec cooperative
+    - Price: 2.00 EUR/kg (tarif coopérative 2026)
+    - Amount: 2,400.00 EUR
+    
+    Red wine grapes (Syrah):
+    - Quantity: 800 kg
+    - Quality: Raisins de cuve AOC Côtes du Rhône Villages
+    - Storage: Chambre froide 2-4°C depuis vendanges septembre 2025
+    - Use: Assemblage vins rouges premium cooperative
+    - Price: 2.50 EUR/kg (tarif premium Syrah 2026)
+    - Amount: 2,000.00 EUR
+    
+    Total produce: 3,200.00 EUR net + 640.00 EUR VAT = 3,840.00 EUR TTC
+    
+    Transaction 1 (Companion Invoice): COOP → FARMER Services
+    ===================================
+    Period: January 2026
+    Services: Tractor rental, sprayer equipment, technical advice, supplies
+    Total: 2,000.00 EUR net + 400.00 EUR VAT = 2,400.00 EUR TTC
+    
+    Net Settlement Calculation (SAME AS INVOICE 1):
+    ===================================
+    Coop owes Farmer (this invoice - grapes): 3,840.00 EUR
+    Farmer owes Coop (companion invoice - services): 2,400.00 EUR
+    Net amount: 3,840 - 2,400 = 1,440.00 EUR
+    Direction: COOP pays FARMER (because Coop owes more)
+    Payment date: February 15, 2026 (15th of following month)
+    
+    Payment Means Code 97 - "Clearing between partners":
+    ===================================
+    BT-81 = 97 signals payment via offset/netting (SAME code as companion invoice).
+    Both parties understand that payment is part of compensation arrangement.
+    
+    VAT Exigibility (Cash Basis - SAME PRINCIPLE):
+    ===================================
+    Both parties use cash-basis VAT.
+    VAT for BOTH invoices becomes exigible at moment of net payment:
+    - Farmer collects 640 EUR VAT on grapes (this invoice)
+    - Coop collects 400 EUR VAT on services (companion invoice)
+    - Both VAT amounts exigible on February 15, 2026 (net payment date)
+    
+    Role Reversal - CRITICAL UNDERSTANDING:
+    =======================================
+    This invoice has OPPOSITE party roles compared to Invoice 1:
+    
+    Invoice 1 (COOP-2026-0234):
+    - SELLER: Coopérative Agricole Provence
+    - BUYER: EARL Martin Viticulture
+    - Content: Services
+    
+    Invoice 2 (THIS INVOICE - EARL-2026-0089):
+    - SELLER: EARL Martin Viticulture (FARMER)
+    - BUYER: Coopérative Agricole Provence (COOP)
+    - Content: Wine grapes
+    
+    Separate Invoice Numbers:
+    - Invoice 1: COOP-2026-0234 (from Coop's invoice sequence)
+    - Invoice 2: EARL-2026-0089 (from Farmer's invoice sequence)
+    
+    Each invoice is complete, independent, and has proper SELLER/BUYER structure.
+    The ONLY connection is payment netting (code 97) and business relationship.
+    
+    Reference: XP Z12-014 Annexe A, Section 3.2.39 - Cas n°40
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (ProfileID URN only, standard B2B) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number (FARMER's invoice sequence) -->
+    <cbc:ID>EARL-2026-0089</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-02-03</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (Net settlement date - SAME as Invoice 1) -->
+    <cbc:DueDate>2026-02-15</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - Netting/compensation context -->
+    <cbc:Note>#REG#SIRET 55566677788899 - RCS Avignon - APE 0121Z (Culture de la vigne) - Capital social: 50 000 EUR - N° TVA: FR55555666777</cbc:Note>
+    <cbc:Note>#ABL#LIVRAISON RAISINS DE CUVE HIVER: Cette facture documente la livraison de raisins de cuve stockés en chambre froide depuis les vendanges de septembre 2025. CONSERVATION: Raisins maintenus à 2-4°C en atmosphère contrôlée (CO2 3%, O2 5%) pour préserver qualité et éviter fermentation prématurée. Contrôle hebdomadaire température et hygrométrie. QUALITÉ CERTIFIÉE: Raisins AOC Côtes du Rhône et AOC Côtes du Rhône Villages conformes cahier des charges INAO. Viticulture biologique certifiée AB (Ecocert FR-BIO-01). Analyses laboratoire: Degré potentiel 12,5% vol., acidité totale 5,2 g/L H2SO4, pH 3,4. VARIÉTÉS: Chardonnay (raisins blancs, vinification vin blanc sec assemblage Côtes du Rhône blanc, 1 200 kg) + Syrah (raisins rouges, assemblage vins rouges premium Villages, 800 kg). TRAÇABILITÉ: Parcelles cadastrales identifiées, registre viticulture bio tenu, certificat conformité AOC disponible. TARIFS COOPÉRATIVE 2026: Chardonnay 2,00 EUR/kg (tarif standard blanc) - Syrah 2,50 EUR/kg (tarif premium rouge). Tarifs fixés en AG coopérative décembre 2025. COMPENSATION MENSUELLE: En tant qu'adhérent de la Coopérative, je bénéficie du système de compensation mensuelle entre mes livraisons (cette facture) et les services que la Coopérative me fournit (facture COOP-2026-0234). Règlement net le 15 du mois suivant. DEUX FACTURES OBLIGATOIRES: La réglementation e-invoicing impose deux factures distinctes avec rôles VENDEUR/ACHETEUR inversés. Impossible de mélanger dans une seule facture avec lignes négatives.</cbc:Note>
+    <cbc:Note>#AAI#APE 0121Z - Culture de la vigne (exploitation viticole produisant raisins de cuve pour vinification AOC).</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
+    <cbc:Note>#PMT#PAIEMENT PAR COMPENSATION (NETTING): Cette facture fait partie d'un arrangement de compensation avec Coopérative Agricole Provence. RÈGLEMENT NET: Le paiement de cette facture (3 840,00 EUR TTC - raisins livrés à la Coopérative) sera compensé avec la facture Coop COOP-2026-0234 du 05/02/2026 (2 400,00 EUR TTC - services fournis par la Coopérative). CALCUL DE COMPENSATION: Montant dû par la Coop (mes raisins): 3 840,00 EUR - Montant dû par moi (services Coop): 2 400,00 EUR - SOLDE NET: 1 440,00 EUR en ma faveur. PAIEMENT EFFECTIF: La Coopérative me versera 1 440,00 EUR par virement bancaire le 15/02/2026 (15 du mois suivant selon notre accord d'adhésion). CODE MOYEN DE PAIEMENT 97: Le code 97 "Compensation entre partenaires" signale que le paiement s'effectue par compensation/netting et non par règlement direct du montant total de cette facture. RÉGIME TVA: Mon EARL et la Coopérative appliquent tous deux la TVA sur les encaissements. La TVA de 640,00 EUR sur cette facture et la TVA de 400,00 EUR sur la facture Coop de services deviendront exigibles simultanément le 15/02/2026 lors du règlement net. COMPTABILISATION: Mes comptes refléteront: Produit vente raisins 3 840,00 EUR + Charge services Coop 2 400,00 EUR = Créance nette 1 440,00 EUR à recevoir.</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference -->
+    <cbc:BuyerReference>LIVRAISON-RAISINS-2026-01</cbc:BuyerReference>
+
+    <!-- BT-13: Contract reference (Cooperative membership - same contract) -->
+    <cac:ContractDocumentReference>
+        <cbc:ID>ADHESION-COOP-2020-MARTIN</cbc:ID>
+    </cac:ContractDocumentReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Wine Grape Farmer (ROLES REVERSED) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address -->
+            <cbc:EndpointID schemeID="0002">55566677788899</cbc:EndpointID>
+
+            <!-- BT-27: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>Martin Viticulture</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>Domaine Les Coteaux du Rhône</cbc:StreetName>
+                <!-- BT-36: Seller address line 2 -->
+                <cbc:AdditionalStreetName>Chemin des Vignerons</cbc:AdditionalStreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Gigondas</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>84190</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR55555666777</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>EARL Martin Viticulture</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">555666777</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact -->
+            <cac:Contact>
+                <!-- BT-41: Seller contact point -->
+                <cbc:Name>Jean-Pierre Martin - Viticulteur</cbc:Name>
+                <!-- BT-42: Seller contact telephone -->
+                <cbc:Telephone>+33 6 78 90 12 34</cbc:Telephone>
+                <!-- BT-43: Seller contact email -->
+                <cbc:ElectronicMail>jp.martin@earl-martin-viti.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Agricultural Cooperative (ROLES REVERSED) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address -->
+            <cbc:EndpointID schemeID="0002">11122233344455</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Coopérative Agricole Provence</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>Zone Artisanale Les Vignes</cbc:StreetName>
+                <!-- BT-51: Buyer address line 2 -->
+                <cbc:AdditionalStreetName>Route de Carpentras</cbc:AdditionalStreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Châteauneuf-du-Pape</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>84230</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR11111222333</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Coopérative Agricole Provence - Société Coopérative Agricole</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">111222333</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact -->
+            <cac:Contact>
+                <!-- BT-56: Buyer contact point -->
+                <cbc:Name>Service Achats et Réception Raisins</cbc:Name>
+                <!-- BT-57: Buyer contact telephone -->
+                <cbc:Telephone>+33 4 90 83 55 77</cbc:Telephone>
+                <!-- BT-58: Buyer contact email -->
+                <cbc:ElectronicMail>achats@coop-agri-provence.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13: Delivery information -->
+    <cac:Delivery>
+        <!-- BT-72: Actual delivery date (Grapes delivered to cooperative) -->
+        <cbc:ActualDeliveryDate>2026-01-28</cbc:ActualDeliveryDate>
+
+        <!-- Delivery location (Cooperative facility) -->
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <cbc:StreetName>Zone Artisanale Les Vignes</cbc:StreetName>
+                <cbc:AdditionalStreetName>Chai de réception - Quai 3</cbc:AdditionalStreetName>
+                <cbc:CityName>Châteauneuf-du-Pape</cbc:CityName>
+                <cbc:PostalZone>84230</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+
+    <!-- BG-17: Payment means -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code = 97 (Clearing between partners / Compensation)
+             CRITICAL: SAME code as companion invoice - signals offset payment -->
+        <cbc:PaymentMeansCode>97</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>COMPENSATION-2026-02-MARTIN</cbc:PaymentID>
+
+        <!-- BG-19: Payment account (Farmer account for NET payment reception) -->
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR89 9876 5432 1098 7654 3210 134</cbc:ID>
+            <cbc:Name>EARL Martin Viticulture</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>AGRIFRPP</cbc:ID>
+                <cbc:Name>Crédit Agricole Provence Côte d'Azur</cbc:Name>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms -->
+        <cbc:Note>PAIEMENT PAR COMPENSATION (CODE 97): Cette facture de 3 840,00 EUR TTC sera réglée par compensation avec la facture de la Coopérative COOP-2026-0234 du 05/02/2026 (2 400,00 EUR TTC). CALCUL NET: La Coopérative me doit 3 840 EUR (raisins) - Je dois à la Coopérative 2 400 EUR (services) = SOLDE NET 1 440 EUR en ma faveur. VIREMENT NET: La Coopérative me versera 1 440,00 EUR par virement SEPA le 15/02/2026 sur mon compte EARL (IBAN FR89****34). DÉTAIL COMPENSATION: Montant brut facture Martin→Coop: 3 840,00 EUR - Montant brut facture Coop→Martin: 2 400,00 EUR - Montant net reçu par Martin: 1 440,00 EUR (dans le sens Coop vers Martin car Coop doit plus). EXIGIBILITÉ TVA: Les deux factures étant soumises à TVA sur encaissements, la TVA de 640 EUR sur cette facture et la TVA de 400 EUR sur la facture Coop de services deviendront exigibles simultanément le 15/02/2026 au moment du règlement net. ACCORD COMMERCIAL: Règlement mensuel par compensation selon accord d'adhésion à la Coopérative signé en 2020 (ADHESION-COOP-2020-MARTIN). Paiement effectué le 15 du mois suivant les opérations. FACTURES CONCERNÉES: (1) EARL-2026-0089 (cette facture): Raisins janvier 2026 - 3 840 EUR TTC. (2) COOP-2026-0234 (facture Coop): Services janvier 2026 - 2 400 EUR TTC. STATUTS LIFECYCLE: Les deux factures passeront au statut "Paiement Transmis" puis "Encaissée" au moment du virement net du 15/02/2026. RETARD DE PAIEMENT: En cas de contestation ou retard, pénalités au taux légal applicable aux deux factures proportionnellement.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">640.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">3200.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">640.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">3200.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">3200.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">3840.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115: Amount due for payment (Full amount - net settlement via compensation) -->
+        <cbc:PayableAmount currencyID="EUR">3840.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: Invoice lines -->
+
+    <!-- Line 1: White wine grapes (Chardonnay) -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="KGM">1200</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">2400.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Raisins de cuve blancs variété Chardonnay, AOC Côtes du Rhône, viticulture biologique certifiée AB (Ecocert FR-BIO-01). RÉCOLTE: Vendanges manuelles septembre 2025, parcelle cadastrale Gigondas section B n°234 (1,5 ha exposition sud-est, sol argilo-calcaire). Tri rigoureux à la vigne et au chai, sélection grappes saines uniquement. CONSERVATION: Stockage en chambre froide depuis vendanges (température 2-4°C, atmosphère contrôlée CO2 3% O2 5%, hygrométrie 85%). Contrôles hebdomadaires température/humidité, aucune fermentation prématurée détectée. QUALITÉ ANALYSÉE: Laboratoire œnologique Avignon le 20/01/2026 - Degré potentiel 12,5% vol. (bon équilibre sucres) - Acidité totale 5,2 g/L H2SO4 (fraîcheur préservée) - pH 3,4 (stabilité microbiologique) - Absence moisissures et altérations. DESTINATION: Vinification vin blanc sec de la Coopérative, assemblage Côtes du Rhône blanc 2026 (fermentation thermo-régulée 16-18°C, levures neutres, élevage cuve inox 6 mois). CONDITIONNEMENT LIVRAISON: Caisses plastique ajourées 20 kg, 60 caisses total (1 200 kg), pesée contrôle réception Coopérative le 28/01/2026 (balance agréée DGCCRF). TRAÇABILITÉ: Certificat conformité AOC INAO, registre viticulture bio complet, parcelle identifiée cadastralement, analyses laboratoire jointes. TARIF 2026: Prix fixé AG Coopérative décembre 2025, 2,00 EUR/kg pour Chardonnay (tarif standard raisins blancs qualité vinification), paiement net par compensation mensuelle.</cbc:Description>
+            <cbc:Name>Raisins de cuve blancs - Chardonnay AOC Côtes du Rhône</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">2.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="KGM">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 2: Red wine grapes (Syrah) -->
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="KGM">800</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">2000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Raisins de cuve rouges variété Syrah, AOC Côtes du Rhône Villages (appellation supérieure), viticulture biologique certifiée AB (Ecocert FR-BIO-01). RÉCOLTE: Vendanges manuelles fin septembre 2025, parcelle cadastrale Gigondas section C n°156 (1 ha exposition plein sud, terrasses caillouteuses galets roulés, 45 ans d'âge). Tri sévère double (vigne + table tri), grappes mûres physiologiquement (pépins bruns, rafles aoûtées). CONSERVATION: Stockage en chambre froide climat contrôlé depuis vendanges (température 2-4°C stable, atmosphère enrichie CO2 3% O2 5% pour ralentir métabolisme, hygrométrie 85%, obscurité totale). Suivi quotidien paramètres, aucune dégradation qualitative observée. QUALITÉ PREMIUM ANALYSÉE: Laboratoire œnologique certifié le 22/01/2026 - Degré potentiel 13,8% vol. (maturité optimale, très bon millésime 2025) - Acidité totale 4,8 g/L H2SO4 (structure équilibrée, bon potentiel garde) - pH 3,6 (stabilité colorante anthocyanes) - Indice polyphénols totaux (IPT) 68 (excellente richesse tannique) - Potentiel colorant élevé (robe profonde garantie). DESTINATION: Assemblage vins rouges premium Coopérative, cuvée Côtes du Rhône Villages Gigondas 2026 (macération longue 21 jours, pigeages quotidiens, élevage fûts chêne 12 mois, haut de gamme export). VALEUR AJOUTÉE: Syrah de terroir exceptionnel, vignes vieilles, terrasses caillouteuses typiques Gigondas (concentration aromatique poivre noir, violette, fruits noirs, complexité tannique). CONDITIONNEMENT LIVRAISON: Caisses plastique ajourées 20 kg, 40 caisses total (800 kg), pesée contrôle réception Coopérative le 28/01/2026 (balance agréée). TRAÇABILITÉ RENFORCÉE: Certificat conformité AOC INAO Villages, registre viticulture bio détaillé, parcelle identifiée, analyses laboratoire, photos maturité. TARIF PREMIUM 2026: Prix fixé AG Coopérative décembre 2025, 2,50 EUR/kg pour Syrah Villages (+25% vs standard rouge, prime qualité terroir et appellation supérieure), paiement net par compensation mensuelle.</cbc:Description>
+            <cbc:Name>Raisins de cuve rouges - Syrah AOC Côtes du Rhône Villages</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">2.50</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="KGM">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

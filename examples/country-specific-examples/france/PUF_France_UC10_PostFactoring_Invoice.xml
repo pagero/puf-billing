@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC10 - Post-Factoring (Factor Unknown at Invoice Creation)
+    
+    Use Case: Invoice Paid to Third-Party Beneficiary Unknown at Invoice Creation
+    Country: France (EXTENDED-CTC-FR profile)
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 (Standard invoice)
+    
+    Scenario Description:
+    Manufacturing company (IndustrialTech Lyon SA) issues a standard commercial invoice to
+    BUYER (Automotive Suppliers Network SAS) for industrial components. At invoice creation,
+    payment is expected to SELLER's account (normal commercial transaction).
+    
+    AFTER invoice transmission, SELLER decides to factor/assign the receivable to a Factor
+    (Crédit Factoring France SA). Since the invoice has already been sent and cannot be
+    modified, SELLER notifies BUYER of the beneficiary change via lifecycle status message
+    ("Affacturée" status with beneficiary change information).
+    
+    Key Characteristics (Initial Invoice at Creation):
+    - Invoice type 380: Standard commercial invoice (NOT 393 - Factor unknown)
+    - Business process B1: Standard invoice (not B2 already-paid)
+    - NO BG-10 PAYEE: Original payment to SELLER (Factor not yet involved)
+    - BG-17 Payment: SELLER's bank account (original payment destination)
+    - NO BT-21 "ACC": No subrogation notice (factoring not yet occurred)
+    - Total: 8,500.00 EUR payable to SELLER
+    
+    Post-Transmission Workflow (NOT in Invoice):
+    1. SELLER signs factoring contract with Factor
+    2. SELLER sends "Affacturée" lifecycle status to BUYER with beneficiary change info
+    3. BUYER system updates payment destination to Factor
+    4. SELLER shares invoice + all lifecycle statuses with Factor
+    5. Factor receives payment from BUYER
+    
+    Critical Point:
+    "l'Affactureur n'est pas identifié dans la facture, qui ne peut plus être modifiée"
+    The Factor is NOT identified in the invoice, which cannot be modified once sent.
+    Beneficiary change happens via lifecycle status messages, NOT invoice modification.
+    
+    Timing Constraint:
+    SELLER can change beneficiary as long as BUYER hasn't posted current transmission
+    or treatment status (prevents workflow conflicts).
+    
+    Key Differences from UC8 (Pre-Factoring):
+    - Invoice type 380 (standard), NOT 393 (factored)
+    - NO Factor in BG-10 at creation
+    - NO BT-21 "ACC" subrogation notice initially
+    - Beneficiary change via lifecycle status, NOT invoice-embedded data
+    - Invoice structure remains unchanged after transmission
+    
+    Key Requirements:
+    - Business process B1: Standard invoice
+    - Invoice type code: 380 (Standard commercial invoice)
+    - BG-17 Payment: SELLER's IBAN (original payment destination)
+    - NO BG-10 PAYEE structure (or PAYEE = SELLER)
+    - NO BT-21 "ACC" subrogation notice
+    - Amount due payable to SELLER at invoice creation
+    - Lifecycle status "Affacturée" sent POST-transmission (not in invoice)
+    
+    Invoice Lines:
+    1. 10 precision industrial gearboxes @ 650.00 EUR each = 6,500.00 EUR
+    2. 5 hydraulic servo actuators @ 400.00 EUR each = 2,000.00 EUR
+    
+    Amounts:
+    - Line extension amount: 8,500.00 EUR
+    - VAT (20% standard rate): 1,700.00 EUR
+    - Invoice total with VAT: 10,200.00 EUR
+    - Amount due for payment: 10,200.00 EUR (to SELLER initially)
+    
+    Post-Factoring Flow (Lifecycle Status):
+    - SELLER posts "Affacturée" status with Factor details
+    - BUYER updates payment destination based on status
+    - Factor receives payment from BUYER
+    - SELLER receives advance from Factor (80-90%)
+    - Factor retains reserve (10-20%) until final settlement
+    
+    French Text Codes Used:
+    - #REG# Registration information
+    - #PMT# Payment terms
+    - #AAI# Additional invoice information
+    
+    Implementation Notes:
+    - This example shows the INITIAL invoice (before factoring assignment)
+    - Invoice type 380 and SELLER payment details reflect pre-factoring state
+    - Beneficiary change to Factor happens via lifecycle status AFTER transmission
+    - Invoice content cannot be modified once sent (French e-invoicing constraint)
+    - Platform (PA-E) may offer optional Factor replication/sharing service
+    
+    Date: 2026-01-30
+    Reference: XP Z12-014 Annexe A, Section 3.2.9.5 - Cas n°10
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>UC10-IND-2026-0345</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-01-30</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (30 days standard payment terms) -->
+    <cbc:DueDate>2026-03-01</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice)
+         CRITICAL: Type 380 because Factor unknown at invoice creation
+         NOT 393 (factored invoice) - that would be for UC8 pre-factoring
+         Factoring assignment happens AFTER transmission via lifecycle status -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - French text codes for registration, payment terms, additional info -->
+    <cbc:Note>#REG#Société immatriculée au RCS de Lyon sous le numéro 11122233344455, capital social 500 000 EUR.</cbc:Note>
+    <cbc:Note>#PMT#Paiement à 30 jours fin de mois. En cas de retard de paiement, pénalités de 3 fois le taux d'intérêt légal + indemnité forfaitaire pour frais de recouvrement de 40 EUR. Aucun escompte pour paiement anticipé.</cbc:Note>
+    <cbc:Note>#AAI#Facture standard - Paiement initialement attendu sur compte du VENDEUR. IMPORTANT: Le VENDEUR se réserve le droit d'affacturer cette facture après transmission. En cas de cession ou subrogation, un statut de cycle de vie "Affacturée" sera transmis avec les coordonnées du nouveau bénéficiaire. Le paiement devra alors être effectué au bénéficiaire désigné dans le statut.</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference (Routing identifier) -->
+    <cbc:BuyerReference>777888999</cbc:BuyerReference>
+
+    <!-- BG-3: Preceding invoice reference (N/A for this use case) -->
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address -->
+            <cbc:EndpointID schemeID="0009">11122233344455</cbc:EndpointID>
+
+            <!-- BT-28: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>IndustrialTech Lyon</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>45 Avenue de la Métallurgie</cbc:StreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>69003</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR11111222333</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>IndustrialTech Lyon SA</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">111222333</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address -->
+            <cbc:EndpointID schemeID="0009">77788899900112</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>ASN Automotive</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>12 Boulevard de l'Industrie Automobile</cbc:StreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Saint-Étienne</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>42000</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR77777888999</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Automotive Suppliers Network SAS</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">777888999</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-10: PAYEE - NOT USED in initial invoice (Factor unknown at creation)
+         Payment expected to SELLER's account at invoice creation.
+         After factoring assignment (post-transmission), lifecycle status "Affacturée"
+         will notify BUYER of new payment beneficiary (Factor).
+         Invoice itself cannot be modified once transmitted. -->
+
+    <!-- BG-17: Credit transfer (Payment means) - SELLER's bank account initially -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (31 = credit transfer) -->
+        <cbc:PaymentMeansCode>31</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment account name (SELLER initially, may change to Factor post-transmission) -->
+        <cbc:PaymentID>UC10-IND-2026-0345</cbc:PaymentID>
+
+        <!-- BG-18: Payment card information (N/A) -->
+
+        <!-- BG-19: Credit transfer - SELLER's IBAN (initial payment destination) -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84: Payment account identifier (SELLER's IBAN at invoice creation) -->
+            <cbc:ID>FR7611122233344455667788990123</cbc:ID>
+            <!-- BT-85: Payment account name -->
+            <cbc:Name>IndustrialTech Lyon SA</cbc:Name>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms (free text) -->
+        <cbc:Note>Paiement à 30 jours fin de mois par virement bancaire sur compte VENDEUR. ATTENTION: Cette facture peut faire l'objet d'une cession ou subrogation (affacturage) après transmission. En cas de cession, un statut de cycle de vie "Affacturée" sera envoyé avec les coordonnées du nouveau bénéficiaire. Le paiement devra alors être effectué exclusivement au bénéficiaire désigné dans le statut de cycle de vie, conformément aux articles L. 313-23 à L. 313-35 du Code monétaire et financier (loi Dailly). Tout paiement effectué au VENDEUR après notification de cession ne constituerait pas un paiement libératoire.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">1700.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">8500.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">1700.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code (S = Standard rate) -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate (20% standard rate) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">8500.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">8500.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">10200.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113: Paid amount (0 - standard invoice, not prepaid) -->
+        <cbc:PrepaidAmount currencyID="EUR">0.00</cbc:PrepaidAmount>
+        <!-- BT-115: Amount due for payment (full amount to SELLER initially) -->
+        <cbc:PayableAmount currencyID="EUR">10200.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: INVOICE LINE 1 -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (10 gearboxes) -->
+        <cbc:InvoicedQuantity unitCode="PCE">10</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">6500.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Réducteur industriel de précision pour applications haute performance - Construction robuste en alliage aluminium-magnésium avec traitement thermique, engrenages taillés rectifiés classe DIN 5, roulements à billes haute précision, étanchéité par joints SPI double lèvre, lubrification permanente par graisse synthétique, température de fonctionnement -20°C à +80°C</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Réducteur industriel précision GBX-IND-500</cbc:Name>
+
+            <!-- BT-157: Item standard identifier (EAN/GTIN) -->
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5901234567890</cbc:ID>
+            </cac:StandardItemIdentification>
+
+            <!-- BT-158: Item classification (UNSPSC commodity code) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="SRV">31171500</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Rapport de réduction</cbc:Name>
+                <cbc:Value>1:5 (ratio précis 5.00:1 ±0.01)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Couple de sortie nominal</cbc:Name>
+                <cbc:Value>500 Nm</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Rendement mécanique</cbc:Name>
+                <cbc:Value>≥ 96% (mesure selon EN 12786)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Garantie fabricant</cbc:Name>
+                <cbc:Value>2 ans pièces et main-d'œuvre avec support technique 24/7</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (650.00 EUR per gearbox) -->
+            <cbc:PriceAmount currencyID="EUR">650.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="PCE">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 2 -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (5 actuators) -->
+        <cbc:InvoicedQuantity unitCode="PCE">5</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">2000.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Actionneur hydraulique servo-commandé pour systèmes de positionnement industriel - Vérin hydraulique double effet avec capteur de position intégré, contrôle proportionnel haute précision, corps en acier inoxydable 316L résistant à la corrosion, joints haute performance NBR/FKM selon application, course réglable 0-250mm, pression de service 50-210 bar, débit nominal 15 L/min</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Actionneur hydraulique servo ACT-HYD-250</cbc:Name>
+
+            <!-- BT-157: Item standard identifier (EAN/GTIN) -->
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5901234567906</cbc:ID>
+            </cac:StandardItemIdentification>
+
+            <!-- BT-158: Item classification (UNSPSC commodity code) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="SRV">40101800</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) - MUST be last in Item element -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Force de poussée/traction</cbc:Name>
+                <cbc:Value>2500 N (poussée) / 2000 N (traction) à 100 bar</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Précision de positionnement</cbc:Name>
+                <cbc:Value>±0.05 mm répétabilité ±0.1 mm linéarité (avec feedback analogique 4-20mA)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Température de fonctionnement</cbc:Name>
+                <cbc:Value>-10°C à +60°C (fluide hydraulique ISO VG 46)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Garantie fabricant</cbc:Name>
+                <cbc:Value>18 mois pièces avec extension possible à 3 ans</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (400.00 EUR per actuator) -->
+            <cbc:PriceAmount currencyID="EUR">400.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="PCE">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>
