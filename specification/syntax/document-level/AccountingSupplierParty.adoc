@@ -1,4 +1,4 @@
-Below table show available fields in `cac:AccountingSupplierParty`, note that additional elements has also been added to the extension available in <<_party>>.
+Below table show available fields in `cac:AccountingSupplierParty`. For common `cac:Party` elements, refer to <<_party>>.
 
 .Additional elements added within cac:AccountingSupplierParty
 |===
@@ -8,180 +8,20 @@ Below table show available fields in `cac:AccountingSupplierParty`, note that ad
 |**Customer Account ID** +
 Supplier ID, assigned by the buyer.
 
-|`cac:Party/ext:UBLExtensions`
-|**Extension Content** +
-Extension is added to provide additional information in the `cac:Party` element, the information available can be found <<_party, here>>.
+|`cac:Party`
+|**Party** +
+See <<_party>> for all available elements within `cac:Party`.
 
-|`cac:Party/cbc:WebsiteURI`
-|**Seller website** +
-The Uniform Resource Identifier (URI) that identifies this party's web site; i.e., the web site's Uniform Resource Locator (URL).
+|`cac:Party/cac:AgentParty`
+|**AgentParty** +
+A party who acts as an agent for this party. +
+For all available elements, refer to <<_party>>. +
+**Note:** `cac:AgentParty` directly contains party elements (e.g., `cac:PostalAddress`, `cac:PartyLegalEntity`) without an intermediate `cac:Party` sub-element.
 
-|`cac:Party/cbc:EndpointID`
-|**Electronic Identifier** +
-Seller's electronic address. +
-
-|`cac:Party/cbc:EndpointID/@schemeID`
-|**Electronic Identifier scheme ID** +
-Scheme identifier of electronic address. +
-Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_007_endpointscheme[PUF-007-ENDPOINTSCHEME^].
-
-|`cac:Party/cbc:IndustryClassificationCode`
-|**Industry Classification Code** +
-Seller Industry classification code.
-
-|`cac:Party/cbc:IndustryClassificationCode/@name`
-|**Industry Classification Name** +
-Corresponding name of the classification code.
-
-|`cac:Party/cac:PartyIdentification/cbc:ID`
-|**Seller Identifier** +
-Identifier of the seller.
-
-|`cac:Party/cac:PartyIdentification/cbc:ID/@schemeID`
-|**Seller Identifier** +
-Scheme identifier of seller identifier. +
-Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
-
-|`cac:Party/cac:PartyName/cbc:Name`
-|**Seller name** +
-Seller name.
-
-|`cac:Party/cac:PostalAddress/cbc:ID`
-|**Address ID** +
-Seller's postal address id. +
-Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.
-
-|`cac:Party/cac:PostalAddress/cbc:Postbox`
-|**Postal box** +
-Seller's postal address post box.
-
-|`cac:Party/cac:PostalAddress/cbc:Floor`
-|**Floor** +
-Seller's postal address floor. +
-An addressable floor of a building.
-
-|`cac:Party/cac:PostalAddress/cbc:Room`
-|**Room** +
-Seller's postal address room. +
-A room, suite, or apartment of a building.
-
-|`cac:Party/cac:PostalAddress/cbc:StreetName`
-|**Street name** +
-Seller's postal address street name.
-
-|`cac:Party/cac:PostalAddress/cbc:AdditionalStreetName`
-|**Additional Street name** +
-Seller's postal address additional street name.
-
-|`cac:Party/cac:PostalAddress/cbc:BuildingName`
-|**Building name** +
-Seller's postal address building name.
-
-|`cac:Party/cac:PostalAddress/cbc:BuildingNumber`
-|**Building number** +
-Seller's postal address building number.
-
-|`cac:Party/cac:PostalAddress/cbc:Department`
-|**Department** +
-Seller's postal address department.
-
-|`cac:Party/cac:PostalAddress/cbc:PlotIdentification`
-|**Plot Identification** +
-Seller's postal address plot identification. +
-Additional address number. An identifier for the piece of land associated with this address.
-
-|`cac:Party/cac:PostalAddress/cbc:CitySubdivisionName`
-|**City Subdvision Name** +
-Seller's postal address city subdivision name. +
-The name of the subdivision of the Seller city, town, or village in which its address is located, such as the name of its district or borough.
-
-|`cac:Party/cac:PostalAddress/cbc:CityName`
-|**City name** +
-Seller's postal address city name.
-
-|`cac:Party/cac:PostalAddress/cbc:PostalZone`
-|**Postal zone** +
-Seller's postal address post code.
-
-|`cac:Party/cac:PostalAddress/cbc:CountrySubentity`
-|**Country subentity** +
-Seller's postal address province or state.
-
-|`cac:Party/cac:PostalAddress/cbc:CountrySubentityCode`
-|**Country subentity code** +
-Seller's postal address province or state code.
-
-|`cac:Party/cac:PostalAddress/cbc:Region`
-|**Region** +
-Seller's postal address region. +
-Seller's addressable region or group of countries.
-
-|`cac:Party/cac:PostalAddress/cbc:District`
-|**District** +
-Seller's postal address district. +
-A district or borough, may be a subdivision of a city for this address.
-
-|`cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line`
-|**Additional address line** +
-Note that `cbc:StreetName` and `cbc:AdditionalStreetName` should be populated prior of using this element.
-
-|`cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode`
-|**Country code** +
-Seller's postal address country code.
-
-|`cac:Party/cac:PostalAddress/cac:Country/cbc:Name`
-|**Country name** +
-Seller's postal address country name.
-
-|`cac:Party/cac:PartyTaxScheme/cbc:CompanyID`
-|**Company identifier** +
-Seller's tax registration number.
-
-|`cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID`
-|**Tax scheme identifier** +
-Seller's tax registration number tax scheme Identifier. +
-_If `cac:PartyTaxScheme/cbc:CompanyID` is to be intepreted as a VAT registration text for Sweden and Norway e.g. "Godkänd för F-Skatt" or "Foretaksregisteret", `cac:TaxScheme/cbc:ID` must be "TAX"._
-
-|`cac:Party/cac:PartyLegalEntity/cbc:RegistrationName`
-|**Registration name** +
-Seller's formal name or company name.
-
-|`cac:Party/cac:PartyLegalEntity/cbc:CompanyID`
-|**Legal company identifier** +
-Seller's legal registration identifier.
-
-|`cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID`
-|**Legal company scheme identifier** +
-Seller's legal registration identifier scheme identifier +
-Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
-
-|`cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalForm`
-|**Company legal form** +
-Relevant legal information regarding the seller.
-
-|`cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName`
-|**Registered tax office** +
-Seller's registered tax office.
-
-|`cac:Party/cac:Contact/cbc:Name`
-|**Contact name** +
-Name of contact person.
-
-|`cac:Party/cac:Contact/cbc:Telephone`
-|**Contact telephone** +
-Phone number of contact person.
-
-|`cac:Party/cac:Contact/cbc:ElectronicMail`
-|**Contact E-mail** +
-E-mail of contact person.
-
-|`cac:Party/cac:Person/cbc:FirstName`
-|**Person first name** +
-First name of person. Should only be used if seller is a private individual.
-
-|`cac:Party/cac:Person/cbc:FamilyName`
-|**Person surname** +
-Surname of person. Should only be used if seller is a private individual.
+|`cac:Party/cac:ServiceProviderParty`
+|**ServiceProviderParty** +
+A party providing services for this party. +
+Contains a nested `cac:Party` element. For all available elements within the nested party, refer to <<_party>>.
 
 |`cac:AccountingContact/cbc:Name`
 |**Accounting name** +

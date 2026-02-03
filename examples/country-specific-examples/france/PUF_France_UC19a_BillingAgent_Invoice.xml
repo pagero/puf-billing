@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC19a - Invoice Issued by Billing Agent with Mandate
+    
+    Use Case: Mandated Billing - Billing Agent Creates Invoice on Behalf of SELLER
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 (Standard invoice)
+    
+    Scenario Description:
+    A Billing Agent (Mandataire Facturant) - professional accounting service firm
+    (ComptaExpert Services SARL) creates and transmits an invoice ON BEHALF OF the
+    SELLER (small artisan furniture maker - Ébénisterie Artisanale Dubois EURL).
+    
+    The SELLER retains full ownership of the receivable and collects payment directly.
+    The Billing Agent only handles invoice creation, transmission, and lifecycle status
+    management under a formal billing mandate agreement.
+    
+    Key Distinctions from Other Use Cases:
+    - UC8 (Factoring): Factor OWNS the receivable and collects payment
+    - UC9 (Distributor): Third party listed as payee, not invoice creator
+    - UC11 (Processor): Technical processing only, no billing mandate
+    - UC19a: Agent creates invoice IN SELLER'S NAME, SELLER collects payment
+    
+    Critical Business Context:
+    The billing agent is NOT the seller. They are an authorized third party creating
+    invoices in the SELLER's name with legal mandate. The SELLER remains the supplier
+    of goods/services and the party entitled to receive payment.
+    
+    Legal Framework:
+    - French Tax Doctrine: BOI-TVA-DECLA-30-20-10-30 (§210)
+    - Billing mandate agreement between SELLER and Agent
+    - Agent must know SELLER's VAT regime (especially franchise en base exemption)
+    
+    Platform Architecture: Option 1 (Shared PA-E)
+    - SELLER and Billing Agent share same PA-E platform
+    - Both parties have access to invoices and lifecycle statuses
+    - Agent creates invoice via PA-E on behalf of SELLER
+    - Lifecycle statuses visible to both SELLER and Agent
+    
+    Alternative: Option 2 (Separate PA-E)
+    - Agent must share invoice with SELLER before emission
+    - Agent must transmit created invoice to SELLER after emission
+    - Agent must share all lifecycle statuses with SELLER
+    - SELLER informs Agent of payment collection for « Encaissée » status
+    
+    Electronic Addressing Strategy:
+    - BT-34: Routes to Agent's PA-E for status reception and management
+    - Agent manages lifecycle status visibility to SELLER
+    - SELLER can track via shared platform access
+    
+    Billing Agent Declaration Methods:
+    1. cac:ServiceProviderParty within SELLER's party (PUF pattern - used in this example)
+       - Billing agent placed within AccountingSupplierParty/Party/ServiceProviderParty
+       - Role code "II" (Invoicer - UNTDID 3035)
+       - Complete agent party identification
+    
+    2. BT-21 + BT-22 Note (RECOMMENDED in addition to structure)
+       - BT-21: Subject code "DCL" (Declarative information)
+       - BT-22: "Facture établie par ComptaExpert Services SARL au nom et pour 
+                 le compte de Ébénisterie Artisanale Dubois EURL"
+       - Ensures legal clarity of mandate relationship
+    
+    Business Scenario:
+    Small artisan furniture maker (SELLER) engages professional accounting firm
+    (Billing Agent) to handle invoicing. Artisan delivers custom-made furniture
+    to corporate office buyer. Billing Agent creates invoice per mandate, routes
+    lifecycle statuses, SELLER collects payment from BUYER.
+    
+    Key Characteristics:
+    - Invoice type 380: Standard commercial invoice
+    - Business process B1: Standard invoice
+    - BG-4 SELLER: Ébénisterie Artisanale Dubois EURL (furniture maker)
+    - BG-7 BUYER: Solutions Bureau Corporate SAS (office furnisher)
+    - Billing Agent: ComptaExpert Services SARL (accounting firm)
+    - RestrictedInformationParty extension: Billing agent identification
+    - BT-21/BT-22: Mandate declaration note
+    - BT-34: Electronic address routing to Agent's PA-E
+    - Payment to SELLER's IBAN
+    - Total: 8,400.00 EUR
+    
+    Workflow:
+    1. SELLER and Billing Agent conclude formal billing mandate agreement
+    2. SELLER delivers furniture to BUYER (custom executive desk, chairs)
+    3. Billing Agent creates invoice on behalf of SELLER via PA-E
+    4. PA-E validates, transmits Flux 1 to CdD PPF, invoice to BUYER's PA-R
+    5. BUYER receives invoice, processes, creates lifecycle statuses
+    6. Billing Agent receives statuses, shares with SELLER (shared platform)
+    7. BUYER pays SELLER directly (not the agent)
+    8. SELLER collects payment, informs Agent (or creates « Encaissée » status)
+    9. Agent creates « Encaissée » status if needed, transmits to CdD and PA-R
+    
+    Products:
+    - Custom executive desk (solid oak): 4,500.00 EUR
+    - Executive office chair (leather, ergonomic): 1,200.00 EUR x 2 = 2,400.00 EUR
+    - Delivery and assembly service: 300.00 EUR
+    
+    Amounts:
+    - Total furniture and services: 7,200.00 EUR net
+    - VAT (20% standard rate): 1,200.00 EUR
+    - Invoice total with VAT: 8,400.00 EUR
+    - Amount due for payment: 8,400.00 EUR (paid to SELLER)
+    
+    French Text Codes Used:
+    - #REG# Registration information (SELLER's details)
+    - #PMT# Payment terms (30 days, payment to SELLER)
+    - #ABL# Additional legal information (mandate declaration)
+    
+    Reference: XP Z12-014 Annexe A, Section 3.2.18.1 - Cas n°19a
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>EAD-2026-0234</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-02-02</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (30 days) -->
+    <cbc:DueDate>2026-03-04</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - French text codes for registration, payment terms, mandate declaration -->
+    <cbc:Note>#REG#SIRET 55544433322211 - RCS Lyon - APE 3109B (Fabrication de meubles de bureau et de magasin) - Capital social: 10 000 EUR - N° TVA: FR55555444333</cbc:Note>
+    <cbc:Note>#PMT#Paiement à 30 jours fin de mois par virement bancaire. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). PAIEMENT AU VENDEUR: Le règlement de cette facture doit être effectué directement au VENDEUR (Ébénisterie Artisanale Dubois EURL) et non au mandataire facturant (ComptaExpert Services SARL).</cbc:Note>
+    <!-- Mandate declaration note (RECOMMENDED) -->
+    <cbc:Note>#DCL#Facture établie par ComptaExpert Services SARL (SIREN 888777666,
+        SIRET 88877766655544) au nom et pour le compte de Ébénisterie Artisanale Dubois EURL (SIREN
+        555444333, SIRET 55544433322211), conformément au contrat de mandat de facturation conclu
+        entre les parties. Le mandataire facturant agit en qualité d'intermédiaire pour la création
+        et la transmission des factures, mais n'intervient pas dans la relation commerciale ni dans
+        le paiement. Tous les droits et obligations liés à la vente restent attachés au VENDEUR
+        (Ébénisterie Artisanale Dubois EURL). Référence juridique: BOI-TVA-DECLA-30-20-10-30 (§210).</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference -->
+    <cbc:BuyerReference>ORD-FURN-2026-089</cbc:BuyerReference>
+
+    <!-- BT-13: Purchase order reference -->
+    <cac:OrderReference>
+        <cbc:ID>ORD-FURN-2026-089</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Artisan Furniture Maker
+         CRITICAL: The SELLER is the artisan (Ébénisterie Artisanale Dubois EURL).
+         The Billing Agent (ComptaExpert Services) creates this invoice on behalf of
+         the SELLER under formal billing mandate, but the SELLER remains the supplier. -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address - CRITICAL ROUTING MECHANISM
+                 Routes to Billing Agent's PA-E (88877766655544) for lifecycle status
+                 reception and management. The Agent manages statuses on behalf of SELLER.
+                 
+                 SchemeID "0002" = SIRET-based addressing
+                 
+                 Platform Option 1 (Used Here): SELLER and Agent share same PA-E
+                 - Both parties access same platform and see same invoices/statuses
+                 - Agent creates invoice via shared PA-E
+                 - SELLER monitors lifecycle via shared access
+                 
+                 Alternative Platform Option 2: SELLER has NO access to Agent's PA-E
+                 - Agent must share invoice with SELLER before emission
+                 - Agent must transmit created invoice to SELLER after emission
+                 - Agent must share all lifecycle statuses with SELLER
+                 - SELLER informs Agent of payment collection -->
+            <cbc:EndpointID schemeID="0002">88877766655544</cbc:EndpointID>
+
+            <!-- BT-27: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>Ébénisterie Artisanale Dubois</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>45 Rue des Artisans</cbc:StreetName>
+                <!-- BT-36: Seller address line 2 -->
+                <cbc:AdditionalStreetName>Zone Artisanale du Bois Joli</cbc:AdditionalStreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Villeurbanne</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>69100</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR55555444333</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name (Actual supplier - Artisan furniture maker) -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Ébénisterie Artisanale Dubois EURL</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">555444333</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact (Owner/Master Craftsman) -->
+            <cac:Contact>
+                <!-- BT-41: Seller contact point -->
+                <cbc:Name>Jean-Pierre Dubois - Maître Ébéniste</cbc:Name>
+                <!-- BT-42: Seller contact telephone -->
+                <cbc:Telephone>+33 4 72 34 56 78</cbc:Telephone>
+                <!-- BT-43: Seller contact email -->
+                <cbc:ElectronicMail>jp.dubois@ebenisterie-dubois.fr</cbc:ElectronicMail>
+            </cac:Contact>
+
+            <!-- Billing Agent (Invoicer) - Third Party Creating Invoice on Behalf of SELLER
+                 Under French billing mandate (Mandataire Facturant), the agent creates
+                 invoices in the SELLER's name. The agent is identified here as the service
+                 provider party with role code "II" (Invoicer - UNTDID 3035).
+                 
+                 The billing agent handles:
+                 - Invoice creation and transmission
+                 - Lifecycle status management
+                 - Platform coordination
+                 
+                 The SELLER retains:
+                 - Ownership of receivable
+                 - Right to collect payment
+                 - Legal responsibility for sale -->
+            <cac:ServiceProviderParty>
+                <cac:Party>
+                    <!-- Billing Agent Role Code: II (Invoicer) -->
+                    <ext:UBLExtensions>
+                        <ext:UBLExtension>
+                            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                            <ext:ExtensionContent>
+                                <puf:PageroExtension>
+                                    <puf:PartyExtension>
+                                        <puf:RoleCode>
+                                            <cbc:ID>II</cbc:ID>
+                                        </puf:RoleCode>
+                                    </puf:PartyExtension>
+                                </puf:PageroExtension>
+                            </ext:ExtensionContent>
+                        </ext:UBLExtension>
+                    </ext:UBLExtensions>
+
+                    <!-- Billing Agent Electronic Address (Status Reception) -->
+                    <cbc:EndpointID schemeID="0002">88877766655544</cbc:EndpointID>
+
+                    <!-- Billing Agent Trading Name -->
+                    <cac:PartyName>
+                        <cbc:Name>ComptaExpert Services</cbc:Name>
+                    </cac:PartyName>
+
+                    <!-- Billing Agent Postal Address -->
+                    <cac:PostalAddress>
+                        <cbc:StreetName>12 Rue de la Comptabilité</cbc:StreetName>
+                        <cbc:CityName>Lyon</cbc:CityName>
+                        <cbc:PostalZone>69002</cbc:PostalZone>
+                        <cac:Country>
+                            <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                        </cac:Country>
+                    </cac:PostalAddress>
+
+                    <!-- Billing Agent VAT Identifier -->
+                    <cac:PartyTaxScheme>
+                        <cbc:CompanyID>FR88888777666</cbc:CompanyID>
+                        <cac:TaxScheme>
+                            <cbc:ID>VAT</cbc:ID>
+                        </cac:TaxScheme>
+                    </cac:PartyTaxScheme>
+
+                    <!-- Billing Agent Legal Entity (Company details for billing administration) -->
+                    <cac:PartyLegalEntity>
+                        <cbc:RegistrationName>ComptaExpert Services SARL</cbc:RegistrationName>
+                        <!-- Billing Agent SIREN -->
+                        <cbc:CompanyID schemeID="0002">888777666</cbc:CompanyID>
+                    </cac:PartyLegalEntity>
+
+                    <!-- Billing Agent Contact -->
+                    <cac:Contact>
+                        <cbc:Name>Marie Dupont - Responsable Facturation</cbc:Name>
+                        <cbc:Telephone>+33 4 78 90 12 34</cbc:Telephone>
+                        <cbc:ElectronicMail>facturation@comptaexpert-services.fr</cbc:ElectronicMail>
+                    </cac:Contact>
+                </cac:Party>
+            </cac:ServiceProviderParty>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Corporate Office Buyer -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address -->
+            <cbc:EndpointID schemeID="0002">11122233344455</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Solutions Bureau Corporate</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>25 Boulevard des Entreprises</cbc:StreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>69003</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR11111222333</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Solutions Bureau Corporate SAS</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">111222333</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact -->
+            <cac:Contact>
+                <!-- BT-56: Buyer contact point -->
+                <cbc:Name>Sylvie Moreau - Responsable Achats</cbc:Name>
+                <!-- BT-57: Buyer contact telephone -->
+                <cbc:Telephone>+33 4 78 12 34 56</cbc:Telephone>
+                <!-- BT-58: Buyer contact email -->
+                <cbc:ElectronicMail>s.moreau@sbc-lyon.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-17: Credit transfer (Payment means) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (31 = credit transfer) -->
+        <cbc:PaymentMeansCode>31</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>EAD-2026-0234</cbc:PaymentID>
+
+        <!-- BG-19: Credit transfer - SELLER's IBAN
+             CRITICAL: Payment MUST be made to SELLER (artisan), NOT to Billing Agent.
+             The agent creates invoice but has NO right to collect payment. -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84: Payment account identifier (SELLER's IBAN) -->
+            <cbc:ID>FR7655544433322211112222333344</cbc:ID>
+            <!-- BT-85: Payment account name -->
+            <cbc:Name>Ébénisterie Artisanale Dubois EURL</cbc:Name>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms (free text) -->
+        <cbc:Note>Paiement à 30 jours fin de mois par virement bancaire. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). IMPORTANT - FACTURATION MANDATÉE: Cette facture a été établie par le mandataire facturant ComptaExpert Services SARL pour le compte du VENDEUR Ébénisterie Artisanale Dubois EURL. Le règlement doit être effectué directement au VENDEUR sur le compte bancaire indiqué (IBAN FR76 5554 4433 3222 1111 2222 3333 44). Le mandataire facturant n'est pas habilité à recevoir le paiement et n'intervient que pour la création et la transmission de la facture conformément au contrat de mandat.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">1200.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">7200.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">1200.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code (S = Standard rate) -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate (20% standard rate) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">7200.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">7200.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">8400.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115: Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">8400.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: Invoice lines -->
+
+    <!-- Line 1: Custom executive desk (solid oak) -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="PCE">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">4500.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Bureau de direction de prestige fabriqué artisanalement en chêne massif français. Dimensions: L200 x P100 x H75 cm. Finition vernis mat haute qualité. Inclut tiroirs avec serrure, passe-câbles intégrés. Fabrication sur mesure selon spécifications client. Garantie artisan 5 ans.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Bureau de direction sur mesure en chêne massif</cbc:Name>
+
+            <!-- BG-32: Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158: Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">310910</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">4500.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="PCE">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 2: Executive office chairs (leather, ergonomic) -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="PCE">2</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">2400.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Fauteuil de direction ergonomique avec structure en bois massif (chêne) et assise/dossier en cuir pleine fleur tanné végétal. Mécanisme synchrone haut de gamme. Réglages multiples: hauteur, profondeur d'assise, tension dossier, accoudoirs 4D. Support lombaire intégré. Finition cuir couleur cognac. Base 5 branches étoile en bois tourné. Roulettes adaptées parquet. Garantie artisan 3 ans.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Fauteuil de direction en cuir pleine fleur</cbc:Name>
+
+            <!-- BG-32: Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158: Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">310910</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">1200.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="PCE">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 3: Delivery and assembly service -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="HUR">4</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">300.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Service de livraison et d'installation professionnelle du mobilier sur site client. Inclut: transport sécurisé avec camion adapté (protection meubles), portage jusqu'au bureau (3ème étage), montage et assemblage complet du bureau et des fauteuils, réglages ergonomiques personnalisés, nettoyage et évacuation des emballages. Intervention artisan qualifié. Durée estimée: 4 heures.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Livraison et montage sur site</cbc:Name>
+
+            <!-- BG-32: Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158: Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">494100</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">75.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC40 - Grouped Payments/Netting (Invoice 1 of 2)
+    
+    Use Case: Cross-Purchase/Sale Scenarios with Payment Offset
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: Standard (no special code)
+    
+    CRITICAL PATTERN: Two Separate Invoices + Offset Payment
+    ========================================================
+    ❌ INCORRECT: Do NOT mix sales and purchases in single invoice using negative lines
+    ✅ CORRECT: Issue TWO separate invoices (one per direction), then net the payments
+    
+    This Document: INVOICE 1 of 2
+    ============================
+    Direction: COOPERATIVE → FARMER
+    Content: Services provided by cooperative to farmer
+    Payment: Via offset/netting (BT-81 = code 97)
+    
+    Companion Document: INVOICE 2 of 2 (separate file)
+    ==================================================
+    Direction: FARMER → COOPERATIVE
+    Content: Agricultural produce delivered by farmer to cooperative
+    Payment: Via offset/netting (BT-81 = code 97)
+    
+    Net Settlement:
+    ===============
+    Invoice 1 (Coop → Farmer): 2,400.00 EUR TTC (this invoice)
+    Invoice 2 (Farmer → Coop): 3,840.00 EUR TTC (companion invoice)
+    Net Payment: 1,440.00 EUR from Cooperative to Farmer
+    (Farmer receives net amount: 3,840 - 2,400 = 1,440 EUR)
+    
+    Business Scenario - Agricultural Cooperative:
+    =============================================
+    
+    Bidirectional Trading Relationship:
+    ====================================
+    Party A: Coopérative Agricole Provence (COOP) - Agricultural cooperative
+    Party B: EARL Martin Viticulture (FARMER) - Wine grape grower
+    
+    Relationship Pattern:
+    - FARMER sells grapes to COOP (harvest delivery)
+    - COOP provides services to FARMER (equipment rental, technical advice, supplies)
+    - Settlement: Monthly netting of mutual amounts owed
+    
+    Transaction 1 (This Invoice): COOP → FARMER Services
+    ====================================================
+    Period: January 2026
+    Services provided by cooperative to farmer:
+    1. Tractor rental (Fendt 724 Vario) - 5 days for vineyard work
+    2. Sprayer equipment rental (sulfate treatment) - 3 days
+    3. Technical advisory services (viticulture expert consultation)
+    4. Agricultural supplies (fertilizers, sulfate treatments)
+    
+    Total services: 2,000.00 EUR net + 400.00 EUR VAT = 2,400.00 EUR TTC
+    
+    Transaction 2 (Companion Invoice): FARMER → COOP Grapes
+    
+    Period: January 2026 (winter delivery from cold storage)
+    Produce delivered by farmer to cooperative:
+    - White wine grapes (Chardonnay): 1,200 kg @ 2.00 EUR/kg
+    - Red wine grapes (Syrah): 800 kg @ 2.50 EUR/kg
+    
+    Total produce: 3,200.00 EUR net + 640.00 EUR VAT = 3,840.00 EUR TTC
+    
+    Net Settlement Calculation:
+    ===========================
+    Farmer owes Coop (services): 2,400.00 EUR
+    Coop owes Farmer (grapes): 3,840.00 EUR
+    Net amount: 3,840 - 2,400 = 1,440.00 EUR
+    Direction: COOP pays FARMER (because Coop owes more)
+    Payment date: February 15, 2026 (15th of following month)
+    
+    Payment Means Code 97 - "Clearing between partners":
+    ====================================================
+    BT-81 = 97 signals that payment will be via offset/netting mechanism.
+    This code indicates to both parties and tax authorities that:
+    - Payment is not independent/direct for this invoice alone
+    - Payment is part of compensation/netting arrangement
+    - Net settlement calculated across multiple invoices
+    - Enables proper account reconciliation (lettrage)
+    
+    VAT Exigibility (Cash Basis):
+    ============================
+    Both parties use cash-basis VAT ("TVA sur les encaissements").
+    VAT becomes exigible for BOTH invoices at moment of net payment:
+    - When: February 15, 2026 (net payment date)
+    - Coop VAT: Collects 400 EUR on services invoice
+    - Farmer VAT: Collects 640 EUR on grapes invoice
+    - Net payment of 1,440 EUR triggers VAT exigibility for both directions
+    
+    Lifecycle Statuses:
+    ===================
+    1. Invoice 1 (Coop → Farmer): « Paiement Transmis » when net payment made
+    2. Invoice 2 (Farmer → Coop): « Paiement Transmis » when net payment received
+    3. Both invoices: « Encaissée » after net settlement reconciled
+    
+    Industry Context:
+    =================
+    Agricultural cooperatives commonly use bidirectional netting:
+    - Farmers deliver harvest (weekly/monthly deliveries)
+    - Cooperatives provide year-round services (equipment, expertise, supplies)
+    - Monthly settlement nets mutual obligations
+    - Simplifies cash flow (single net payment vs. multiple gross payments)
+    - Reduces transaction costs and bank fees
+    
+    Regulatory Compliance:
+    ====================
+    Two separate invoices required per French e-invoicing rules:
+    - Each direction of sale = separate invoice with proper SELLER/BUYER roles
+    - Cannot combine opposite flows in single invoice with negative lines
+    - BT-81 code 97 transparently signals netting arrangement
+    - Tax authorities can trace both VAT collections despite net payment
+    
+    Reference: XP Z12-014 Annexe A, Section 3.2.39 - Cas n°40
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (ProfileID URN only, standard B2B) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>COOP-2026-0234</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-02-05</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (Net settlement date) -->
+    <cbc:DueDate>2026-02-15</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - Netting/compensation context -->
+    <cbc:Note>#REG#SIRET 11122233344455 - RCS Avignon - APE 0161Z (Activités de soutien aux cultures) - Capital social: 250 000 EUR - N° TVA: FR11111222333</cbc:Note>
+    <cbc:Note>#ABL#RELATION COMMERCIALE BIDIRECTIONNELLE: En tant que membre adhérent de notre Coopérative Agricole, vous bénéficiez de nos services (location matériel, conseil technique, fournitures agricoles) ET vous nous livrez votre production (raisins de cuve). COMPENSATION MENSUELLE: Chaque mois, nous établissons deux factures distinctes: (1) Facture Coopérative → Adhérent pour les services fournis dans le mois (cette facture), (2) Facture Adhérent → Coopérative pour les livraisons de production dans le mois (votre facture EARL-2026-0089). Puis nous compensons les montants pour un règlement net unique le 15 du mois suivant. INTERDICTION FACTURE UNIQUE: La réglementation française e-invoicing INTERDIT de mélanger ventes et achats dans une seule facture avec lignes négatives. OBLIGATION: Deux factures séparées avec rôles VENDEUR/ACHETEUR inversés, puis compensation des paiements. AVANTAGES: Simplifie la trésorerie (un seul flux de paiement net au lieu de deux flux bruts croisés), réduit les frais bancaires, facilite la comptabilité. TRANSPARENCE FISCALE: Les autorités fiscales peuvent tracer les deux flux de TVA (400 EUR de TVA collectée par Coop sur services + 640 EUR de TVA collectée par Adhérent sur raisins) malgré le paiement net unique de 1 440 EUR. PÉRIODE CONCERNÉE: Janvier 2026 - Services fournis et production livrée pendant le mois de janvier 2026.</cbc:Note>
+    <cbc:Note>#AAI#APE 0161Z - Activités de soutien aux cultures (coopérative agricole fournissant services et conseils aux producteurs membres).</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
+    <cbc:Note>#PMT#PAIEMENT PAR COMPENSATION (NETTING): Cette facture fait partie d'un arrangement de compensation avec EARL Martin Viticulture. RÈGLEMENT NET: Le paiement de cette facture (2 400,00 EUR TTC - services fournis par la Coopérative) sera compensé avec votre facture EARL-2026-0089 du 03/02/2026 (3 840,00 EUR TTC - raisins livrés par vous). CALCUL DE COMPENSATION: Montant dû par vous (services Coop): 2 400,00 EUR - Montant dû par nous (vos raisins): 3 840,00 EUR - SOLDE NET: 1 440,00 EUR en votre faveur. PAIEMENT EFFECTIF: La Coopérative vous versera 1 440,00 EUR par virement bancaire le 15/02/2026 (15 du mois suivant selon notre accord commercial). CODE MOYEN DE PAIEMENT 97: Le code 97 "Compensation entre partenaires" signale que le paiement s'effectue par compensation/netting et non par règlement direct du montant total de cette facture. RÉGIME TVA: Notre coopérative et votre EARL appliquent tous deux la TVA sur les encaissements. La TVA de 400,00 EUR sur cette facture et la TVA de 640,00 EUR sur votre facture de raisins deviendront exigibles simultanément le 15/02/2026 lors du règlement net. COMPTABILISATION: Vos comptes refléteront: Charge services Coop 2 400,00 EUR + Produit vente raisins 3 840,00 EUR = Créance nette 1 440,00 EUR à recevoir.</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <!-- BT-10: Buyer reference -->
+    <cbc:BuyerReference>MEMBRE-COOP-45678</cbc:BuyerReference>
+    <!-- BG-14: Invoicing period (Services provided in January 2026) -->
+    <cac:InvoicePeriod>
+        <!-- BT-73: Invoicing period start date -->
+        <cbc:StartDate>2026-01-01</cbc:StartDate>
+        <!-- BT-74: Invoicing period end date -->
+        <cbc:EndDate>2026-01-31</cbc:EndDate>
+    </cac:InvoicePeriod>
+
+    <!-- BT-13: Contract reference (Cooperative membership agreement) -->
+    <cac:ContractDocumentReference>
+        <cbc:ID>ADHESION-COOP-2020-MARTIN</cbc:ID>
+    </cac:ContractDocumentReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Agricultural Cooperative -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address -->
+            <cbc:EndpointID schemeID="0002">11122233344455</cbc:EndpointID>
+
+            <!-- BT-27: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>Coopérative Agricole Provence</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>Zone Artisanale Les Vignes</cbc:StreetName>
+                <!-- BT-36: Seller address line 2 -->
+                <cbc:AdditionalStreetName>Route de Carpentras</cbc:AdditionalStreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Châteauneuf-du-Pape</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>84230</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR11111222333</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Coopérative Agricole Provence - Société Coopérative Agricole</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">111222333</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact -->
+            <cac:Contact>
+                <!-- BT-41: Seller contact point -->
+                <cbc:Name>Service Adhérents et Comptabilité</cbc:Name>
+                <!-- BT-42: Seller contact telephone -->
+                <cbc:Telephone>+33 4 90 83 55 66</cbc:Telephone>
+                <!-- BT-43: Seller contact email -->
+                <cbc:ElectronicMail>adherents@coop-agri-provence.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Wine Grape Farmer -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address -->
+            <cbc:EndpointID schemeID="0002">55566677788899</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Martin Viticulture</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>Domaine Les Coteaux du Rhône</cbc:StreetName>
+                <!-- BT-51: Buyer address line 2 -->
+                <cbc:AdditionalStreetName>Chemin des Vignerons</cbc:AdditionalStreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Gigondas</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>84190</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR55555666777</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>EARL Martin Viticulture</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">555666777</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact -->
+            <cac:Contact>
+                <!-- BT-56: Buyer contact point -->
+                <cbc:Name>Jean-Pierre Martin - Viticulteur</cbc:Name>
+                <!-- BT-57: Buyer contact telephone -->
+                <cbc:Telephone>+33 6 78 90 12 34</cbc:Telephone>
+                <!-- BT-58: Buyer contact email -->
+                <cbc:ElectronicMail>jp.martin@earl-martin-viti.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-17: Payment means -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code = 97 (Clearing between partners / Compensation)
+             CRITICAL: This code signals offset/netting payment arrangement -->
+        <cbc:PaymentMeansCode>97</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>COMPENSATION-2026-02-MARTIN</cbc:PaymentID>
+
+        <!-- BG-19: Payment account (Cooperative account for NET payment) -->
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR76 1234 5678 9012 3456 7890 123</cbc:ID>
+            <cbc:Name>Coopérative Agricole Provence</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>AGRIFRPP</cbc:ID>
+                <cbc:Name>Crédit Agricole Provence Côte d'Azur</cbc:Name>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms -->
+        <cbc:Note>PAIEMENT PAR COMPENSATION (CODE 97): Cette facture de 2 400,00 EUR TTC sera réglée par compensation avec votre facture de livraison de raisins EARL-2026-0089 du 03/02/2026 (3 840,00 EUR TTC). CALCUL NET: Vous devez 2 400 EUR (services Coop) - Nous vous devons 3 840 EUR (raisins) = SOLDE NET 1 440 EUR en votre faveur. VIREMENT NET: La Coopérative vous versera 1 440,00 EUR par virement SEPA le 15/02/2026 sur votre compte EARL (IBAN FR89****34). DÉTAIL COMPENSATION: Montant brut facture Coop→Martin: 2 400,00 EUR - Montant brut facture Martin→Coop: 3 840,00 EUR - Montant net payé par Coop: 1 440,00 EUR (dans le sens Coop vers Martin car Coop doit plus). EXIGIBILITÉ TVA: Les deux factures étant soumises à TVA sur encaissements, la TVA de 400 EUR sur cette facture et la TVA de 640 EUR sur votre facture de raisins deviendront exigibles simultanément le 15/02/2026 au moment du règlement net. ACCORD COMMERCIAL: Règlement mensuel par compensation selon accord d'adhésion à la Coopérative signé en 2020 (ADHESION-COOP-2020-MARTIN). Paiement effectué le 15 du mois suivant les opérations. FACTURES CONCERNÉES: (1) COOP-2026-0234 (cette facture): Services janvier 2026 - 2 400 EUR TTC. (2) EARL-2026-0089 (votre facture): Raisins janvier 2026 - 3 840 EUR TTC. STATUTS LIFECYCLE: Les deux factures passeront au statut "Paiement Transmis" puis "Encaissée" au moment du virement net du 15/02/2026. RETARD DE PAIEMENT: En cas de contestation ou retard, pénalités au taux légal applicable aux deux factures proportionnellement.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">400.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">2000.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">400.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">2000.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">2000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">2400.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115: Amount due for payment (Full amount - net settlement via compensation) -->
+        <cbc:PayableAmount currencyID="EUR">2400.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: Invoice lines -->
+
+    <!-- Line 1: Tractor rental -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="DAY">5</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">750.00</cbc:LineExtensionAmount>
+
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2026-01-10</cbc:StartDate>
+            <cbc:EndDate>2026-01-14</cbc:EndDate>
+        </cac:InvoicePeriod>
+        <cac:Item>
+            <cbc:Description>Location de tracteur agricole haute puissance (240 ch) pour travaux viticoles janvier 2026. Matériel: Fendt 724 Vario (240 CV), modèle 2023, transmission Vario à variation continue, cabine climatisée, GPS RTK intégré. Équipements fournis: Charrue vigneronne réversible 5 corps, cultivateur inter-rangs 2m50, épandeur d'engrais 1500L. Utilisation: Labour des parcelles nord (3 ha) + travail du sol inter-rangs sur parcelles Syrah (2,5 ha) + épandage engrais organique sur l'ensemble du vignoble (8 ha). Période: 10 au 14 janvier 2026 (5 jours consécutifs). Carburant: GNR (Gazole Non Routier) fourni par l'adhérent (environ 250 litres consommés). Chauffeur: Exploitation par l'adhérent Jean-Pierre Martin (formation tractoriste validée). Tarif: 150 EUR HT par jour (tarif adhérent coopérative, 30% moins cher que location commerciale externe). Conditions: Matériel restitué propre et en bon état, vérification avant/après location par technicien Coop, assurance RC comprise dans le tarif.</cbc:Description>
+            <cbc:Name>Location tracteur Fendt 724 Vario avec équipements</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">150.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 2: Sprayer equipment rental -->
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="DAY">3</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">450.00</cbc:LineExtensionAmount>
+
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2026-01-20</cbc:StartDate>
+            <cbc:EndDate>2026-01-22</cbc:EndDate>
+        </cac:InvoicePeriod>
+        <cac:Item>
+            <cbc:Description>Location de pulvérisateur spécialisé pour traitement sulfate hivernal des vignes. Matériel: Grégoire G7.260 (pulvérisateur enjambeur automoteur), rampe 6m, cuve 1000L, buses anti-dérive, GPS et débit automatique. Traitement réalisé: Traitement d'hiver au sulfate de cuivre (bouillie bordelaise) contre le mildiou et les maladies du bois sur l'ensemble du vignoble (8 hectares). Application: 3 passages complets du vignoble (20, 21 et 22 janvier) pour atteindre la dose recommandée de 6 kg cuivre/ha/an conforme à la réglementation bio. Conditions météo: Température > 5°C, pas de pluie prévue sous 6h, vent &lt; 15 km/h (conditions optimales respectées). Produits: Sulfate de cuivre fourni par l'adhérent (48 kg total), conforme cahier des charges bio AB. Chauffeur: Jean-Pierre Martin certifié Certiphyto (certificat individuel produits phytosanitaires). Tarif: 150 EUR HT par jour (tarif préférentiel adhérent coop). Sécurité: EPI fournis (combinaison, gants, masque), rinçage cuve effectué sur aire de lavage agréée de la Coopérative.</cbc:Description>
+            <cbc:Name>Location pulvérisateur viticole automoteur</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">150.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 3: Technical advisory services -->
+    <cac:InvoiceLine>
+        <cbc:ID>3</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">4</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">400.00</cbc:LineExtensionAmount>
+
+        <cac:Item>
+            <cbc:Description>Consultation et accompagnement technique par ingénieur agronome spécialisé viticulture de la Coopérative. Expert: Marc Dubois, Ingénieur agronome INA Paris-Grignon, spécialité viticulture et œnologie, 20 ans d'expérience. Interventions janvier 2026: Visite du vignoble le 15/01 (2h) - Analyse visuelle de l'état sanitaire des vignes après taille d'hiver, diagnostic des maladies du bois (esca, eutypiose) sur parcelle Grenache nord, recommandations de soins et mesures prophylactiques. Analyse parcellaire (1h bureau) - Étude des résultats d'analyse de sol réalisée en décembre 2025 (pH, matière organique, éléments minéraux), élaboration du plan de fumure 2026 adapté aux besoins spécifiques de chaque cépage (Syrah: besoin azote modéré, Chardonnay: besoin potasse élevé). Planification travaux 2026 (1h) - Établissement du calendrier cultural annuel (taille, labour, traitements, vendanges), optimisation des interventions en fonction du cycle végétatif et des prévisions météo. Tarif: 100 EUR HT par heure (tarif adhérent, incluant déplacement dans rayon 20 km). Valeur: Économise erreurs coûteuses, optimise rendement et qualité, conforme cahier charges bio AB.</cbc:Description>
+            <cbc:Name>Conseil technique viticole - Expert agronome</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 4: Agricultural supplies -->
+    <cac:InvoiceLine>
+        <cbc:ID>4</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">400.00</cbc:LineExtensionAmount>
+
+        <cac:Item>
+            <cbc:Description>Fournitures et produits agricoles achetés via la Coopérative en janvier 2026, livrés au domaine. ENGRAIS ORGANIQUES BIO: Fumier de bovin composté certifié AB (5 tonnes @ 40 EUR/t = 200 EUR) - Amendement organique NPK 2-1-2, matière sèche 65%, utilisable agriculture biologique, épandage prévu mars 2026 pour fertilisation de fond avant débourrement. SULFATE DE CUIVRE: Bouillie bordelaise 20% cuivre métal (48 kg @ 3,50 EUR/kg = 168 EUR) - Fongicide minéral autorisé bio AB, dose annuelle 6 kg Cu/ha, traitement hivernal contre mildiou et maladies cryptogamiques, homologation AMM n°2010206. PIQUETS DE VIGNE: 50 piquets acacia traité autoclave classe 4 (2,20m hauteur, Ø 8-10 cm) pour remplacement piquets endommagés sur parcelle Syrah (1 EUR/piquet = 50 EUR). Avantage achat groupé Coop: Prix négociés 15-20% moins cher que fournisseurs individuels grâce au volume d'achat mutualisé de la Coopérative. Livraison: Directe au domaine Martin le 25/01/2026, camion Coop. Stockage: Produits entreposés dans hangar agricole conforme réglementation (local phyto ventilé, sol étanche, rétention). Traçabilité: Registre phytosanitaire tenu conformément arrêté 04/05/2017.</cbc:Description>
+            <cbc:Name>Fournitures agricoles - Engrais et produits phytosanitaires</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">400.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

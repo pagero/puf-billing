@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC21 - Final Invoice After Prepayment
+    
+    Use Case: Final Invoice Referencing and Deducting Prepayment
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B2 (Final invoice after prepayment)
+    
+    Scenario Description:
+    Moving company (DéménagementPro Services SARL) completes residential moving
+    service from Paris to Lyon. Issues final invoice that REFERENCES the prepayment
+    invoice (UC20: DPRO-AC-2026-0089) and DEDUCTS the amount already paid, showing
+    net amount due for remaining balance.
+    
+    Legal Framework:
+    - Article 289-I.1.c French Tax Code (CGI): Final invoice must properly
+      account for prepayment already invoiced and paid
+    - VAT calculation: VAT charged on FULL service amount, with VAT on prepayment
+      already collected and deducted from final amount due
+    
+    Coupled Lifecycle:
+    - UC20 (separate file): Prepayment invoice (Type 386) for 30% advance payment
+      * Invoice number: DPRO-AC-2026-0089
+      * Prepayment amount: 3,600.00 EUR (3,000.00 + 600.00 VAT)
+      * Issued: 2026-01-28
+      * Status: Already paid (collected 2026-01-25)
+    
+    - UC21 (this file): Final invoice after service completion
+      * Invoice type: 380 (Standard commercial invoice)
+      * References prepayment via BT-25 (Preceding invoice reference)
+      * Shows FULL service amount: 10,000.00 EUR + VAT 2,000.00 EUR
+      * Deducts prepayment: -3,600.00 EUR (already paid)
+      * Net amount due: 8,400.00 EUR
+    
+    Critical Field Requirements:
+    
+    1. BT-3: Invoice Type Code = 380 (Standard commercial invoice)
+       - Final invoice uses standard type (not prepayment type 386)
+    
+    2. BT-23: Business Process Type = B2 (Final invoice after prepayment)
+       - Distinguishes from initial prepayment (S1) and standard invoice (B1)
+    
+    3. BT-25: Preceding Invoice Reference = DPRO-AC-2026-0089
+       - MANDATORY reference to prepayment invoice
+       - Links final invoice to prepayment for audit trail
+       - Enables proper accounting reconciliation
+    
+    4. BT-113: Prepaid Amount = 3,600.00 EUR
+       - Documents amount already paid via prepayment invoice
+       - Deducted from invoice total to calculate net due (BT-115)
+    
+    5. BT-115: Amount Due for Payment
+       - Calculation: (BT-112 Invoice total) - (BT-113 Prepaid amount)
+       - Example: 12,000.00 EUR - 3,600.00 EUR = 8,400.00 EUR
+    
+    VAT Calculation Rules:
+    - VAT calculated on FULL service amount (10,000.00 EUR)
+    - Total VAT: 2,000.00 EUR (20% on 10,000.00 EUR)
+    - VAT on prepayment: 600.00 EUR (already collected with prepayment)
+    - Remaining VAT: 1,400.00 EUR (collected with final payment)
+    - Invoice shows TOTAL VAT (2,000.00 EUR), prepayment deduction handles split
+    
+    Accounting Treatment:
+    - SELLER: 
+      * Recognize full revenue (10,000.00 EUR) in P&L
+      * Clear balance sheet "acompte client" account (3,000.00 EUR)
+      * Collect remaining 7,000.00 EUR + 1,400.00 VAT
+    - BUYER:
+      * Record full expense (10,000.00 EUR) in P&L
+      * Clear balance sheet "acompte fournisseur" account (3,000.00 EUR)
+      * Pay remaining 8,400.00 EUR
+    
+    Business Scenario:
+    Moving company successfully completed office relocation on 2026-02-15.
+    Service performed as quoted with minor additional charges for extra boxes.
+    Final total slightly higher than estimate (10,200.00 EUR vs 10,000.00 EUR).
+    
+    Actual Service Performed:
+    - Packing materials: 150 EUR (20 additional archive boxes beyond estimate)
+    - Packing labor: 1,800 EUR (1 day, 3 packers)
+    - Loading: 800 EUR (4 movers, 3 hours)
+    - Transport Paris → Lyon: 3,500 EUR (650 km, 40m³ truck, fuel, tolls, driver)
+    - Unloading and installation: 1,200 EUR (4 movers, 4 hours)
+    - Furniture disassembly/reassembly: 800 EUR (specialist, 1 day)
+    - Insurance coverage: 450 EUR (50,000 EUR declared value)
+    - Monte-meubles rental: 300 EUR (lift equipment for 3rd floor Lyon office)
+    - Parking reservations: 200 EUR (both Paris and Lyon sites, 2 days)
+    - Total: 10,200.00 EUR net
+    
+    Final Invoice Calculation:
+    - Total service performed: 10,200.00 EUR (net)
+    - VAT (20% standard rate): 2,040.00 EUR
+    - Invoice total with VAT: 12,240.00 EUR
+    - Less: Prepayment already paid: -3,600.00 EUR
+    - Net amount due for payment: 8,640.00 EUR
+    
+    Payment Terms:
+    - Balance due: 30 days end of month (due 2026-03-31)
+    - Payment method: Bank transfer
+    - Late payment penalties: 3x legal interest rate + 40 EUR fixed fee
+    
+    Reference: XP Z12-014 Annexe A, Section 3.2.19 - Cas n°21
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number (Final invoice) -->
+    <cbc:ID>DPRO-2026-0234</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-02-17</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (30 days end of month) -->
+    <cbc:DueDate>2026-03-31</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice)
+         Final invoice uses standard type, not prepayment type 386 -->
+    <cbc:InvoiceTypeCode name="B2">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - French text codes -->
+    <cbc:Note>#REG#SIRET 44455566677788 - RCS Villeurbanne - APE 4942Z (Services de déménagement) - Capital social: 50 000 EUR - N° TVA: FR44444555666</cbc:Note>
+    <cbc:Note>#ABL#FACTURE FINALE APRÈS ACOMPTE (Type 380, Business Process B2): Cette facture fait suite à la facture d'acompte DPRO-AC-2026-0089 du 28/01/2026 (Type 386) d'un montant de 3 600,00 EUR TTC. Le service de déménagement a été réalisé le 15/02/2026 conformément au devis DEV-2026-1234. Le montant total de la prestation s'élève à 12 240,00 EUR TTC (10 200,00 EUR HT + 2 040,00 EUR de TVA). Après déduction de l'acompte déjà encaissé (3 600,00 EUR TTC dont 600,00 EUR de TVA), le solde restant dû s'élève à 8 640,00 EUR TTC (7 200,00 EUR HT + 1 440,00 EUR de TVA). COMPTABILISATION: Cette facture finale est enregistrée en produits (classe 7) et solde le compte d'acompte client (classe 4) précédemment comptabilisé. ÉCART PAR RAPPORT AU DEVIS: Le montant final (10 200,00 EUR HT) est légèrement supérieur à l'estimation initiale (10 000,00 EUR HT) en raison de fournitures supplémentaires (20 cartons d'archives non prévus au devis, soit +150,00 EUR HT) et de la location d'un monte-meubles pour le déchargement au 3ème étage sans ascenseur à Lyon (+50,00 EUR HT au-delà de l'estimation).</cbc:Note>
+    <cbc:Note>#AAI#APE 4942Z - Services de déménagement (location de camions avec chauffeur, emballage, transport, déballage).</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
+    <cbc:Note>#PMT#Paiement du solde (8 640,00 EUR TTC) à 30 jours fin de mois par virement bancaire (échéance: 31/03/2026). En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). ACOMPTE DÉDUIT: Un acompte de 3 600,00 EUR TTC (facture DPRO-AC-2026-0089 du 28/01/2026) a déjà été encaissé et est déduit du montant total de cette facture. Le montant restant dû est donc de 8 640,00 EUR TTC.</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference -->
+    <cbc:BuyerReference>RELOC-LYON-2026</cbc:BuyerReference>
+
+    <!-- BT-13: Purchase order reference -->
+    <cac:OrderReference>
+        <cbc:ID>CMD-DEMÉNAGEMENT-2026-0567</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BT-25: Preceding invoice reference - CRITICAL for prepayment lifecycle
+         References the prepayment invoice (UC20) to establish audit trail -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <!-- Prepayment invoice number -->
+            <cbc:ID>DPRO-AC-2026-0089</cbc:ID>
+            <!-- Prepayment invoice issue date -->
+            <cbc:IssueDate>2026-01-28</cbc:IssueDate>
+            <!-- Prepayment invoice type code = 386 (Prepayment invoice) -->
+            <cbc:DocumentTypeCode>386</cbc:DocumentTypeCode>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Moving Company -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address -->
+            <cbc:EndpointID schemeID="0002">44455566677788</cbc:EndpointID>
+
+            <!-- BT-27: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>DéménagementPro Services</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>15 Avenue de la Logistique</cbc:StreetName>
+                <!-- BT-36: Seller address line 2 -->
+                <cbc:AdditionalStreetName>Zone Industrielle du Grand Lyon</cbc:AdditionalStreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Villeurbanne</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>69100</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR44444555666</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>DéménagementPro Services SARL</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">444555666</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact -->
+            <cac:Contact>
+                <!-- BT-41: Seller contact point -->
+                <cbc:Name>Jean-Pierre Moreau - Responsable Commercial</cbc:Name>
+                <!-- BT-42: Seller contact telephone -->
+                <cbc:Telephone>+33 4 72 11 22 33</cbc:Telephone>
+                <!-- BT-43: Seller contact email -->
+                <cbc:ElectronicMail>jp.moreau@demenagementpro.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Consulting Firm -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address -->
+            <cbc:EndpointID schemeID="0002">22233344455566</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Martin &amp; Dupont Conseil</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address (NEW Lyon office - moved TO) -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>120 Cours Gambetta</cbc:StreetName>
+                <!-- BT-51: Buyer address line 2 -->
+                <cbc:AdditionalStreetName>Immeuble Le Confluent - 3ème étage</cbc:AdditionalStreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>69003</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR22222333444</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Martin &amp; Dupont SARL</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">222333444</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact -->
+            <cac:Contact>
+                <!-- BT-56: Buyer contact point -->
+                <cbc:Name>Sophie Martin - Directrice Administrative</cbc:Name>
+                <!-- BT-57: Buyer contact telephone -->
+                <cbc:Telephone>+33 1 44 55 66 77</cbc:Telephone>
+                <!-- BT-58: Buyer contact email -->
+                <cbc:ElectronicMail>s.martin@martindupont-conseil.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13: Delivery information -->
+    <cac:Delivery>
+        <!-- BT-72: Actual delivery date (Service completion date) -->
+        <cbc:ActualDeliveryDate>2026-02-15</cbc:ActualDeliveryDate>
+
+        <!-- BG-15: Deliver to address (Destination - Lyon office) -->
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <cbc:StreetName>120 Cours Gambetta</cbc:StreetName>
+                <cbc:AdditionalStreetName>Immeuble Le Confluent - 3ème étage</cbc:AdditionalStreetName>
+                <cbc:CityName>Lyon</cbc:CityName>
+                <cbc:PostalZone>69003</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+
+    <!-- BG-17: Credit transfer (Payment means) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (30 = credit transfer) -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>DPRO-2026-0234</cbc:PaymentID>
+
+        <!-- BG-19: Credit transfer -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84: Payment account identifier -->
+            <cbc:ID>FR7644455566677788990011223344</cbc:ID>
+            <!-- BT-85: Payment account name -->
+            <cbc:Name>DéménagementPro Services SARL</cbc:Name>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms -->
+        <cbc:Note>SOLDE APRÈS DÉDUCTION ACOMPTE: Paiement du solde de 8 640,00 EUR TTC à 30 jours fin de mois par virement bancaire. Échéance: 31/03/2026. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). ACOMPTE PRÉCÉDEMMENT ENCAISSÉ: Cette facture fait suite à la facture d'acompte DPRO-AC-2026-0089 du 28/01/2026 d'un montant de 3 600,00 EUR TTC (3 000,00 EUR HT + 600,00 EUR de TVA), déjà encaissé le 25/01/2026. CALCUL DU SOLDE: Montant total de la prestation: 12 240,00 EUR TTC (10 200,00 EUR HT + 2 040,00 EUR de TVA) - Acompte déjà payé: 3 600,00 EUR TTC (3 000,00 EUR HT + 600,00 EUR de TVA) = Solde restant dû: 8 640,00 EUR TTC (7 200,00 EUR HT + 1 440,00 EUR de TVA). COMPTABILISATION: Cette facture finale est enregistrée en produits (classe 7) pour le montant total de 10 200,00 EUR HT et solde le compte d'acompte client (classe 4) de 3 000,00 EUR HT précédemment comptabilisé lors de l'encaissement de l'acompte.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount (FULL VAT on total service) -->
+        <cbc:TaxAmount currencyID="EUR">2040.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount (FULL service amount) -->
+            <cbc:TaxableAmount currencyID="EUR">10200.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount (FULL VAT calculated) -->
+            <cbc:TaxAmount currencyID="EUR">2040.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount (FULL service amount) -->
+        <cbc:LineExtensionAmount currencyID="EUR">10200.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT (FULL service net) -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">10200.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT (FULL service with VAT) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">12240.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113: Prepaid amount (Deducted from total to calculate net due) -->
+        <cbc:PrepaidAmount currencyID="EUR">3600.00</cbc:PrepaidAmount>
+        <!-- BT-115: Amount due for payment (Total minus prepayment = Net balance) -->
+        <cbc:PayableAmount currencyID="EUR">8640.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: Invoice lines -->
+
+    <!-- Line 1: Packing materials (extra boxes beyond estimate) -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="XPK">20</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">150.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Cartons d'archives renforcés triple épaisseur (60x40x40 cm) fournis en sus du devis initial. Demande client pour archivage sécurisé de dossiers confidentiels supplémentaires découverts lors du tri pré-déménagement. Cartons certifiés pour stockage longue durée avec poignées de portage renforcées.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Cartons d'archives renforcés - Suppléments</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">7.50</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="XPK">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 2: Packing labor -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="DAY">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1800.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Équipe de 3 emballeurs professionnels pendant 1 journée (14/02/2026, 08h00-17h00). Emballage sécurisé de: Documents et archives (50 cartons) - Équipements informatiques (15 ordinateurs, 3 serveurs, écrans, imprimantes) avec protection antistatique - Mobilier de bureau (bureaux, chaises, armoires, étagères) avec housses de protection - Objets fragiles et décoratifs. Fourniture de: Films bulles, papier kraft, sangles, housses, étiquettes de repérage par pièce de destination.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Main d'œuvre emballage professionnel</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">1800.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 3: Loading service -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="HUR">3</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">800.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Chargement du mobilier et des cartons dans camion 40 m³ avec hayon élévateur (15/02/2026, 07h00-10h00). Équipe de 4 déménageurs professionnels + 1 chef d'équipe. Protection des parties communes de l'immeuble (escaliers, ascenseur, portes) avec moquettes et films de protection. Arrimage sécurisé de la marchandise avec sangles professionnelles pour transport longue distance. Volume chargé: environ 35 m³. Départ Paris 11e à 10h30.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Chargement avec hayon élévateur</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">266.67</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 4: Transport Paris to Lyon -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>4</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="KMT">650</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">3500.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Transport de marchandises par route Paris → Lyon (650 km). Camion porteur 40 m³ avec hayon élévateur et suspension pneumatique pour transport sécurisé d'équipements informatiques. Chauffeur professionnel expérimenté en déménagements longue distance. Trajet effectué le 15/02/2026: Départ Paris 10h30, arrivée Lyon 16h00 (pause réglementaire incluse). Prestations incluses: Carburant, péages autoroutiers (A6/A7), assurance transport, amortissement véhicule, temps chauffeur. Respect des normes environnementales Euro 6.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Transport longue distance Paris → Lyon</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">5.38</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="KMT">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 5: Unloading and installation -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>5</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="HUR">4</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1200.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Déchargement et installation du mobilier et des cartons dans les nouveaux locaux à Lyon 3e (15/02/2026, 16h00-20h00). Équipe de 4 déménageurs professionnels. Protection des parties communes (escaliers jusqu'au 3ème étage, pas d'ascenseur). Installation du mobilier selon plan fourni par le client. Positionnement des cartons dans les pièces correspondantes selon étiquetage. Déballage partiel des équipements informatiques critiques (serveurs, postes de travail prioritaires) pour permettre reprise d'activité le lendemain. Évacuation des déchets d'emballage volumineux.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Déchargement et installation dans nouveaux locaux</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">300.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 6: Furniture disassembly/reassembly -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>6</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="DAY">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">800.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Technicien spécialisé en montage de mobilier de bureau pendant 1 journée (14/02/2026 à Paris + 16/02/2026 à Lyon). DÉMONTAGE À PARIS: 8 bureaux modulaires avec caissons intégrés, 2 bibliothèques murales sur mesure, 1 grande table de réunion modulaire (12 places), système de cloisons amovibles (15 m²). REMONTAGE À LYON: Réinstallation de l'ensemble du mobilier selon nouveau plan d'aménagement. Réglage des niveaux, fixations murales sécurisées, vérification de la stabilité. Outils professionnels et petites pièces de rechange (vis, chevilles, etc.) inclus.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Démontage et remontage mobilier spécialisé</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">800.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 7: Insurance coverage -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>7</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">450.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Assurance "tous risques" couvrant les marchandises transportées pendant toute la durée du déménagement (emballage, chargement, transport, déchargement, installation). Valeur déclarée: 50 000 EUR (inventaire détaillé fourni). Couverture: Dommages accidentels, vol, incendie, dégâts des eaux, bris d'objets fragiles. Franchise: 150 EUR. Police d'assurance professionnelle souscrite auprès d'AXA Assurances spécialisée déménagements. Certificat d'assurance fourni avant le déménagement. Aucun sinistre constaté lors de cette prestation.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Assurance tous risques transport et manutention</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">450.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 8: Monte-meubles rental (additional charge beyond estimate) -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>8</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="DAY">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">300.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Location de monte-meubles électrique pour déchargement au 3ème étage sans ascenseur à Lyon (15/02/2026). Élévateur extérieur à plateforme (capacité 300 kg, hauteur max 12 m) installé devant l'immeuble avec autorisation mairie (fournie par client). Location journée complète incluant: Transport aller-retour de l'équipement, installation et démontage par technicien spécialisé, assurance matériel. JUSTIFICATION SUPPLÉMENT: Absence d'ascenseur non mentionnée lors du devis initial (visite des lieux à Lyon effectuée après signature). Monte-meubles nécessaire pour meubles volumineux (bibliothèques, table de réunion) incompatibles avec escalier étroit. Supplément de 50 EUR HT par rapport à l'estimation initiale de 250 EUR HT.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Location monte-meubles électrique - Supplément</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">300.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 9: Parking reservations -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>9</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="DAY">2</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">200.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Réservations de stationnement pour camion 40 m³ devant les deux immeubles. PARIS 11e (14-15/02/2026): Arrêté municipal de stationnement poids lourds Rue de la République, zone de livraison réservée 07h00-12h00 les deux jours (emballage J-1 + chargement J). Frais administratifs mairie + signalisation temporaire. LYON 3e (15-16/02/2026): Autorisation stationnement Cours Gambetta, zone réservée 14h00-20h00 (déchargement J + installation J+1). Frais administratifs mairie + signalisation temporaire + agent de circulation (3h) pour sécuriser manœuvres monte-meubles. Coordination avec gestionnaires d'immeubles pour information résidents/commerçants.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Réservations stationnement poids lourds</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Generic Credit Note Example
+    
+    Business Scenario:
+    - Simple B2B credit note with standard French mandatory elements
+    - References original invoice
+    - Single line item with negative quantity (credit)
+    - Standard VAT rate (20%)
+    
+    French Mandatory Elements:
+    - BT-23: Business process type (B1 = Goods invoice/credit note)
+    - French text codes (BT-21/BT-22):
+      * #REG#: Company legal form and share capital
+      * #ABL#: Trade register number (RCS)
+      * #AAI#: APE business activity code
+      * #PMD#: Late payment penalties
+      * #PMT#: Fixed collection costs indemnity (€40)
+      * #BAR#: Treatment type (B2B e-invoicing)
+    - SIRET identifier (BT-29)
+    - French address format
+    - Billing reference to original invoice (BT-25)
+    
+    This example demonstrates a standard credit note for product return
+    in French B2B e-invoicing context.
+-->
+<CreditNote xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Credit Note Number -->
+    <cbc:ID>FR-CN-2026-001</cbc:ID>
+    <!-- BT-2 Credit Note Issue Date -->
+    <cbc:IssueDate>2026-02-15</cbc:IssueDate>
+    <!-- BT-3 Credit Note Type Code - 381: Credit note -->
+    <!-- @name attribute contains business process type: B1 = Goods credit note -->
+    <cbc:CreditNoteTypeCode name="B1">381</cbc:CreditNoteTypeCode>
+
+    <!-- BT-21/BT-22: Credit Note notes with French text codes (mandatory for France) -->
+    <!-- #REG#: Company legal form and share capital -->
+    <cbc:Note>#REG#SARL au capital de 100000.00 EUR</cbc:Note>
+    <!-- #ABL#: Legal information - Trade register -->
+    <cbc:Note>#ABL#RCS Lyon B 987 654 321</cbc:Note>
+    <!-- #AAI#: APE code (business activity classification) -->
+    <cbc:Note>#AAI#APE 4651Z - Commerce de gros d'ordinateurs</cbc:Note>
+    <!-- #PMD#: Late payment penalties (French mandatory payment terms) -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- #PMT#: Fixed indemnity for collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- #BAR#: Treatment type qualification - B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!-- Additional note explaining credit reason -->
+    <cbc:Note>Avoir pour retour de marchandise défectueuse - Référence facture FR-INV-2026-001</cbc:Note>
+
+    <!-- BT-5 Credit Note Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer Reference -->
+    <cbc:BuyerReference>BUYER-REF-2026-001</cbc:BuyerReference>
+    
+    <!-- BT-13 Purchase Order Reference (from original invoice) -->
+    <cac:OrderReference>
+        <cbc:ID>PO-2026-FR-001</cbc:ID>
+        <cbc:IssueDate>2026-01-25</cbc:IssueDate>
+    </cac:OrderReference>
+
+    <!-- BT-25 Preceding Invoice Reference (mandatory for credit notes) -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>FR-INV-2026-001</cbc:ID>
+            <cbc:IssueDate>2026-02-01</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+
+    <!-- BG-4 Seller Information -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-29 SIRET identifier (mandatory for French entities) -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">98765432100012</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>TechDistrib France</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <!-- BT-35 Street name -->
+                <cbc:StreetName>12 Rue de la République</cbc:StreetName>
+                <!-- BT-37 City -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-38 Postal code -->
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <!-- BT-40 Country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR12987654321</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-27 Seller legal registration identifier -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>TechDistrib France SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">987654321</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 Seller Contact -->
+            <cac:Contact>
+                <cbc:Name>Service Commercial</cbc:Name>
+                <cbc:Telephone>+33 4 72 00 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>commercial@techdistrib.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-46 Buyer identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">12345678900034</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Entreprise Client France</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <!-- BT-50 Street name -->
+                <cbc:StreetName>45 Avenue de la Liberté</cbc:StreetName>
+                <!-- BT-52 City -->
+                <cbc:CityName>Paris</cbc:CityName>
+                <!-- BT-53 Postal code -->
+                <cbc:PostalZone>75008</cbc:PostalZone>
+                <!-- BT-55 Country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR34123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-44 Buyer legal registration identifier -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Entreprise Client France SA</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">123456789</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-9 Buyer Contact -->
+            <cac:Contact>
+                <cbc:Name>Service Comptabilité</cbc:Name>
+                <cbc:Telephone>+33 1 45 00 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>comptabilite@client.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment Instructions -->
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means type code - 30: Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <!-- BT-83 Payment account identifier (IBAN) -->
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7630006000011234567890189</cbc:ID>
+            <cbc:Name>TechDistrib France SARL</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-84 Payment service provider identifier (BIC) -->
+                <cbc:ID>BNPAFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms -->
+        <cbc:Note>Remboursement par virement bancaire sous 15 jours</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Credit Note total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">40.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- BT-116 VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">200.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">40.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code - S: Standard rate -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT rate - 20% standard rate in France -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of Credit Note line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">200.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Credit Note total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">200.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Credit Note total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">240.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment (credit amount) -->
+        <cbc:PayableAmount currencyID="EUR">240.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Credit Note Line -->
+    <cac:CreditNoteLine>
+        <!-- BT-126 Credit Note line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-129 Credited quantity -->
+        <cbc:CreditedQuantity unitCode="H87">2</cbc:CreditedQuantity>
+        <!-- BT-131 Credit Note line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">200.00</cbc:LineExtensionAmount>
+        <!-- BT-132 Referenced purchase order line reference -->
+        <cac:OrderLineReference>
+            <cbc:LineID>1</cbc:LineID>
+        </cac:OrderLineReference>
+        <!-- BG-31 Item Information -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Ordinateur portable 15 pouces, Intel Core i7, 16GB RAM, 512GB SSD - Retour pour défaut</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Ordinateur portable professionnel</cbc:Name>
+            <!-- BG-30 Line VAT Information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Credited item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Credited item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- BG-29 Price Details -->
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
+            <!-- BT-149 Item price base quantity -->
+            <cbc:BaseQuantity unitCode="H87">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:CreditNoteLine>
+
+</CreditNote>

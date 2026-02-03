@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC12 - Intermediation Service Invoice (Brokerage Fees)
+    
+    Use Case: Transparent Intermediary Managing Invoices on Behalf of BUYER (Principal)
+    Invoice Type: INTERMEDIATION SERVICE INVOICE (2 of 2)
+    Country: France (EXTENDED-CTC-FR profile)
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 (Standard invoice)
+    
+    Scenario Description:
+    Industrial broker (Courtage Industriel Pro SARL - transparent intermediary) issues
+    invoice to BUYER (Manufacturing Pharmaceutique Lyon SAS) for intermediation/brokerage
+    services. This is the SECOND invoice in the two-invoice model required for transparent
+    intermediaries under French VAT law.
+    
+    VAT Legal Framework:
+    - Transparent intermediary services = independent service (BOI-TVA-CHAMP-10-10-40-40, §40)
+    - "Les opérations d'entremise pour ce type d'intermédiaire sont considérées comme des
+      prestations de service indépendantes de la prestation objet de l'entremise elle-même"
+    - Intermediation service follows its own VAT regime (separate from main purchase)
+    
+    Two-Invoice Model Required:
+    - Companion Invoice (Invoice 1/2): Main commercial invoice SELLER → BUYER
+      (See PUF_France_UC12_MainInvoice_TransparentIntermediary.xml)
+    - THIS INVOICE (Invoice 2/2): Intermediation service invoice Intermediary → BUYER
+    
+    Services Provided by Transparent Intermediary:
+    1. Supplier identification and qualification (market research, due diligence)
+    2. Contract negotiation on behalf of BUYER (pricing, terms, delivery conditions)
+    3. Purchase order management (placing orders, tracking, expediting)
+    4. Invoice processing and validation (receipt, verification, approval workflow)
+    5. Supplier relationship management (communications, issue resolution)
+    6. Regulatory compliance support (ADR hazmat transport, documentation)
+    
+    Intermediation Fee Structure:
+    - Monthly retainer: 800.00 EUR (management and overhead)
+    - Transaction fee: 2% of purchase value (9,050.00 EUR × 2% = 181.00 EUR)
+    - Compliance services: 150.00 EUR (hazmat documentation and ADR compliance)
+    - Total intermediation fees: 1,131.00 EUR net
+    - VAT (20%): 226.20 EUR
+    - Total with VAT: 1,357.20 EUR
+    
+    Key Characteristics (Intermediation Service Invoice):
+    - Invoice type 380: Standard commercial invoice for services
+    - Business process B1: Standard invoice
+    - BG-4 SELLER: Transparent intermediary (Courtage Industriel Pro SARL)
+    - BG-7 BUYER: Principal/customer (Manufacturing Pharmaceutique Lyon SAS)
+    - BT-49: BUYER's standard electronic address (not routed to intermediary)
+    - Payment to intermediary (standard service invoice)
+    - Total: 1,357.20 EUR
+    - Reference to main invoice UC12-CTI-2026-0456 in notes
+    
+    Workflow:
+    1. Intermediary negotiates contract with SELLER on behalf of BUYER
+    2. SELLER issues main invoice to BUYER (managed by intermediary via PA-TR)
+    3. Intermediary processes main invoice on behalf of BUYER
+    4. Intermediary issues THIS service invoice to BUYER for intermediation fees
+    5. BUYER pays intermediary for brokerage services
+    6. BUYER pays SELLER for main purchase (managed by intermediary)
+    
+    French Text Codes Used:
+    - #REG# Registration information
+    - #PMT# Payment terms
+    - #AAI# Additional invoice information (transparent intermediary service note)
+    
+    Implementation Notes:
+    - This is INDEPENDENT service invoice (not routing via SIREN_SERVICECODE)
+    - BT-49 uses BUYER's standard address (intermediary invoicing as supplier)
+    - Invoice content describes intermediation services rendered
+    - Both invoices (main + intermediation) must use e-invoicing platforms (B2B in France)
+    - Intermediation service = taxable service under own VAT regime
+    - Transaction reference links to main purchase invoice
+    
+    Date: 2026-02-02
+    Reference: XP Z12-014 Annexe A, Section 3.2.11 - Cas n°12
+    Reference: BOI-TVA-CHAMP-10-10-40-40, §20 and §40
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>CIP-2026-FEVRIER-0078</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-02-02</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (15 days for service invoice) -->
+    <cbc:DueDate>2026-02-17</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - French text codes for registration, payment terms, additional info -->
+    <cbc:Note>#REG#Société immatriculée au RCS de Lyon sous le numéro 55566677788899, capital social 50 000 EUR. Courtier en approvisionnements industriels, spécialiste produits chimiques et matières dangereuses.</cbc:Note>
+    <cbc:Note>#PMT#Paiement à 15 jours par virement bancaire. En cas de retard de paiement, pénalités de 3 fois le taux d'intérêt légal + indemnité forfaitaire pour frais de recouvrement de 40 EUR.</cbc:Note>
+    <cbc:Note>#AAI#FACTURE D'ENTREMISE - INTERMÉDIAIRE TRANSPARENT: Conformément aux dispositions de l'article BOI-TVA-CHAMP-10-10-40-40 (§20 et §40) du Bulletin Officiel des Impôts, cette facture d'entremise facture les services de courtage rendus au client commettant (Manufacturing Pharmaceutique Lyon SAS) dans le cadre de l'achat de produits chimiques. Les opérations d'entremise sont considérées comme des prestations de service indépendantes de la prestation objet de l'entremise elle-même. Cette facture se rapporte à la transaction principale documentée par la facture UC12-CTI-2026-0456 (ChemTech Industries SA) d'un montant de 11 460,00 EUR TTC. Le courtier a agi au nom et pour le compte du client ACHETEUR conformément au mandat établi.</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference -->
+    <cbc:BuyerReference>789012345</cbc:BuyerReference>
+
+    <!-- BG-3: Additional document reference (Link to main purchase invoice) -->
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>UC12-CTI-2026-0456</cbc:ID>
+        <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode>
+        <cbc:DocumentDescription>Facture principale: ChemTech Industries SA - Produits chimiques laboratoire (11 460,00 EUR TTC) - Transaction pour laquelle les services d'entremise sont facturés</cbc:DocumentDescription>
+    </cac:AdditionalDocumentReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Transparent Intermediary -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address (SIRET) -->
+            <cbc:EndpointID schemeID="0009">55566677788899</cbc:EndpointID>
+
+            <!-- BT-28: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>Courtage Industriel Pro</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>35 Cours Gambetta</cbc:StreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>69003</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR55555666777</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Courtage Industriel Pro SARL</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">555666777</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Principal -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address (Standard address, not routed to intermediary)
+                 This is a service invoice FROM intermediary TO buyer.
+                 BT-49 uses BUYER's standard electronic address, NOT SIREN_ACHATTR format
+                 (that format is only for routing main purchase invoices TO intermediary). -->
+            <cbc:EndpointID schemeID="0009">78901234500011</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Manufacturing Pharma Lyon</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>Parc d'Activités Scientifiques, 78 Boulevard Pasteur</cbc:StreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>69007</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR78789012345</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Manufacturing Pharmaceutique Lyon SAS</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">789012345</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-17: Credit transfer (Payment means) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (31 = credit transfer) -->
+        <cbc:PaymentMeansCode>31</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>CIP-2026-FEVRIER-0078</cbc:PaymentID>
+
+        <!-- BG-19: Credit transfer - Intermediary's IBAN -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84: Payment account identifier (Intermediary's IBAN) -->
+            <cbc:ID>FR7655566677788899001122334455</cbc:ID>
+            <!-- BT-85: Payment account name -->
+            <cbc:Name>Courtage Industriel Pro SARL</cbc:Name>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms (free text) -->
+        <cbc:Note>Paiement à 15 jours par virement bancaire. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). FACTURE D'ENTREMISE: Cette facture documente les services de courtage rendus dans le cadre de la transaction principale UC12-CTI-2026-0456 (ChemTech Industries SA, 11 460,00 EUR TTC). Conformément au mandat établi et aux dispositions de l'article BOI-TVA-CHAMP-10-10-40-40, les services d'entremise sont facturés indépendamment de la prestation principale.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">226.20</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">1131.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">226.20</cbc:TaxAmount>
+            <!-- BT-118: VAT category code (S = Standard rate) -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate (20% standard rate) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1131.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">1131.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">1357.20</cbc:TaxInclusiveAmount>
+        <!-- BT-115: Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">1357.20</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: INVOICE LINE 1 - Monthly retainer -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="MON">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">800.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Forfait mensuel de gestion - Services d'entremise à l'achat pour produits chimiques et matières dangereuses: identification et qualification fournisseurs, négociation contrats cadres, gestion relations fournisseurs, veille réglementaire ADR/CLP, support conformité documentaire, assistance administrative, coordination logistique. Prestations rendues pour le mois de février 2026 conformément au mandat d'intermédiaire transparent.</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Services de courtage - Forfait mensuel février 2026</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">800.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="MON">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 2 - Transaction fee -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="PCE">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">181.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Commission d'entremise sur transaction - Facture principale UC12-CTI-2026-0456 (ChemTech Industries SA): négociation commerciale pour achat de solvants chimiques (acétone 500kg, éthanol 200kg, méthanol 100kg, isopropanol 50kg), montant total transaction 11 460,00 EUR TTC (9 050,00 EUR HT). Commission calculée à 2% du montant hors taxes conformément au mandat et aux conditions tarifaires établies. Services rendus: prospection fournisseurs, comparaison offres, négociation prix/conditions, validation qualité produits, coordination livraison matières dangereuses ADR.</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Commission transaction 2% - Achat produits chimiques ChemTech</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) - MUST be last in Item element -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Base de calcul commission</cbc:Name>
+                <cbc:Value>9 050,00 EUR HT (montant facture principale hors taxes)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Taux de commission</cbc:Name>
+                <cbc:Value>2% du montant HT de la transaction</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">181.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="PCE">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 3 - Compliance services -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="PCE">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">150.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Services réglementaires matières dangereuses - Accompagnement conformité ADR pour transaction UC12-CTI-2026-0456: validation classification produits (UN1090, UN1170, UN1230, UN1219 - classe 3 liquides inflammables), vérification étiquetage et emballages conformes, contrôle documents transport ADR (consignes écrites, fiches données sécurité), coordination avec transporteur agréé matières dangereuses, assistance déclarations réglementaires, support technique sécurité. Prestations spécialisées pour produits chimiques inflammables et toxiques nécessitant expertise ADR/CLP.</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Services conformité réglementaire ADR - Matières dangereuses</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) - MUST be last in Item element -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Produits concernés</cbc:Name>
+                <cbc:Value>Solvants inflammables classe 3 ADR (acétone, éthanol, méthanol, isopropanol)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Prestations réalisées</cbc:Name>
+                <cbc:Value>Classification ADR, validation emballages/étiquetage, documents transport, coordination transporteur agréé</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">150.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="PCE">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

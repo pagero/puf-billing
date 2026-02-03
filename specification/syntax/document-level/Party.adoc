@@ -1,0 +1,182 @@
+This section describes the common elements available within `cac:Party` that are used across different party types in PUF (AccountingSupplierParty, AccountingCustomerParty, BuyerCustomerParty, PayeeParty, TaxRepresentativeParty).
+
+.Elements available within cac:Party
+|===
+|Path |Description
+
+|`ext:UBLExtensions`
+|**Extension Content** +
+Extension is added to provide additional information in the `cac:Party` element.
+
+|`cbc:WebsiteURI`
+|**Party website** +
+The Uniform Resource Identifier (URI) that identifies this party's web site; i.e., the web site's Uniform Resource Locator (URL).
+
+|`cbc:EndpointID`
+|**Electronic Identifier** +
+Party's electronic address.
+
+|`cbc:EndpointID/@schemeID`
+|**Electronic Identifier scheme ID** +
+Scheme identifier of electronic address. +
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_007_endpointscheme[PUF-007-ENDPOINTSCHEME^].
+
+|`cbc:IndustryClassificationCode`
+|**Industry Classification Code** +
+Party's industry classification code.
+
+|`cbc:IndustryClassificationCode/@name`
+|**Industry Classification Name** +
+Corresponding name of the classification code.
+
+|`cac:PartyIdentification/cbc:ID`
+|**Party Identifier** +
+Identifier of the party.
+
+|`cac:PartyIdentification/cbc:ID/@schemeID`
+|**Party Identifier Scheme** +
+Scheme identifier of party identifier. +
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
+
+|`cac:PartyName/cbc:Name`
+|**Party name** +
+Party name.
+
+|`cac:PostalAddress/cbc:ID`
+|**Address ID** +
+Party's postal address id. +
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.
+
+|`cac:PostalAddress/cbc:Postbox`
+|**Postal box** +
+Party's postal address post box.
+
+|`cac:PostalAddress/cbc:Floor`
+|**Floor** +
+Party's postal address floor. +
+An addressable floor of a building.
+
+|`cac:PostalAddress/cbc:Room`
+|**Room** +
+Party's postal address room. +
+A room, suite, or apartment of a building.
+
+|`cac:PostalAddress/cbc:StreetName`
+|**Street name** +
+Party's postal address street name.
+
+|`cac:PostalAddress/cbc:AdditionalStreetName`
+|**Additional Street name** +
+Party's postal address additional street name.
+
+|`cac:PostalAddress/cbc:BuildingName`
+|**Building name** +
+Party's postal address building name.
+
+|`cac:PostalAddress/cbc:BuildingNumber`
+|**Building number** +
+Party's postal address building number.
+
+|`cac:PostalAddress/cbc:Department`
+|**Department** +
+Party's postal address department.
+
+|`cac:PostalAddress/cbc:PlotIdentification`
+|**Plot Identification** +
+Party's postal address plot identification. +
+Additional address number. An identifier for the piece of land associated with this address.
+
+|`cac:PostalAddress/cbc:CitySubdivisionName`
+|**City Subdivision Name** +
+Party's postal address city subdivision name. +
+The name of the subdivision of the party's city, town, or village in which its address is located, such as the name of its district or borough.
+
+|`cac:PostalAddress/cbc:CityName`
+|**City name** +
+Party's postal address city name.
+
+|`cac:PostalAddress/cbc:PostalZone`
+|**Postal zone** +
+Party's postal address post code.
+
+|`cac:PostalAddress/cbc:CountrySubentity`
+|**Country subentity** +
+Party's postal address province or state.
+
+|`cac:PostalAddress/cbc:CountrySubentityCode`
+|**Country subentity code** +
+Party's postal address province or state code.
+
+|`cac:PostalAddress/cbc:Region`
+|**Region** +
+Party's postal address region. +
+Party's addressable region or group of countries.
+
+|`cac:PostalAddress/cbc:District`
+|**District** +
+Party's postal address district. +
+A district or borough, may be a subdivision of a city for this address.
+
+|`cac:PostalAddress/cac:AddressLine/cbc:Line`
+|**Additional address line** +
+Note that `cbc:StreetName` and `cbc:AdditionalStreetName` should be populated prior to using this element.
+
+|`cac:PostalAddress/cac:Country/cbc:IdentificationCode`
+|**Country code** +
+Party's postal address country code.
+
+|`cac:PostalAddress/cac:Country/cbc:Name`
+|**Country name** +
+Party's postal address country name.
+
+|`cac:PartyTaxScheme/cbc:CompanyID`
+|**Company identifier** +
+Party's tax registration number.
+
+|`cac:PartyTaxScheme/cac:TaxScheme/cbc:ID`
+|**Tax scheme identifier** +
+Party's tax registration number tax scheme Identifier. +
+_If `cac:PartyTaxScheme/cbc:CompanyID` is to be interpreted as a VAT registration text for Sweden and Norway e.g. "Godkänd för F-Skatt" or "Foretaksregisteret", `cac:TaxScheme/cbc:ID` must be "TAX"._
+
+|`cac:PartyLegalEntity/cbc:RegistrationName`
+|**Registration name** +
+Party's formal name or company name.
+
+|`cac:PartyLegalEntity/cbc:CompanyID`
+|**Legal company identifier** +
+Party's legal registration identifier.
+
+|`cac:PartyLegalEntity/cbc:CompanyID/@schemeID`
+|**Legal company scheme identifier** +
+Party's legal registration identifier scheme identifier. +
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
+
+|`cac:PartyLegalEntity/cbc:CompanyLegalForm`
+|**Company legal form** +
+Relevant legal information regarding the party.
+
+|`cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName`
+|**Registered tax office** +
+Party's registered tax office.
+
+|`cac:Contact/cbc:Name`
+|**Contact name** +
+Name of contact person.
+
+|`cac:Contact/cbc:Telephone`
+|**Contact telephone** +
+Phone number of contact person.
+
+|`cac:Contact/cbc:ElectronicMail`
+|**Contact E-mail** +
+E-mail of contact person.
+
+|`cac:Person/cbc:FirstName`
+|**Person first name** +
+First name of person. Should only be used if the party is a private individual.
+
+|`cac:Person/cbc:FamilyName`
+|**Person surname** +
+Surname of person. Should only be used if the party is a private individual.
+
+|===

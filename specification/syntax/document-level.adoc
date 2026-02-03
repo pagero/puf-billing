@@ -157,3 +157,7 @@ include::document-level/WithholdingTaxTotal.adoc[]
 ==== cac:LegalMonetaryTotal
 
 include::document-level/LegalMonetaryTotal.adoc[]
+
+==== Party (Common Elements)
+
+include::document-level/Party.adoc[]

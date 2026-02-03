@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC32 Case 2a - Monthly Payments with Credit/Refund Due
+    
+    Use Case: Year-End Reconciliation Invoice After Monthly Prepayments (Overpayment Scenario)
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Credit Note (Type 381)
+    Business Process: Standard (no special code - reconciliation with refund)
+    
+    Scenario Description:
+    Energy supplier issues year-end reconciliation CREDIT NOTE to B2C customer after 12 months
+    of monthly estimated payments. Actual consumption was LOWER than estimates, resulting in
+    overpayment. Customer is entitled to refund or credit toward next year's consumption.
+    
+    Payment Structure - Monthly Prepayments (E-Reporting):
+    Customer made 12 monthly payments during 2025 based on ESTIMATED annual consumption.
+    Each monthly payment was e-reported (NOT invoiced) via:
+    - Flux 10.3: Transaction data (monthly estimated consumption)
+    - Flux 10.4: Payment data (monthly payment amount) - IF seller not on accrual basis
+    
+    Total monthly payments: 12 × 90.00 EUR = 1,080.00 EUR
+    (Based on estimated 6,000 kWh annual consumption @ 0.15 EUR/kWh + 20% VAT)
+    
+    Actual Consumption vs. Estimate:
+    - Estimated: 6,000 kWh
+    - Actual: 5,200 kWh (-800 kWh = -13.3% variance)
+    - Reason: Mild winter + extended vacation periods = reduced heating/usage
+    
+    Reconciliation Calculation:
+    - Actual consumption cost: 5,200 kWh × 0.15 EUR = 780.00 EUR net
+    - VAT (20%): 156.00 EUR
+    - Total actual: 936.00 EUR
+    - Already paid (monthly): 1,080.00 EUR
+    - Overpayment (CREDIT): 144.00 EUR
+    
+    VAT Treatment - Cash Basis ("TVA sur les encaissements"):
+    SELLER has NOT opted for accrual basis VAT. VAT exigible upon collection.
+    - VAT on monthly payments: Already collected and e-reported via Flux 10.4 (180.00 EUR)
+    - VAT on overpayment: Credit of 24.00 EUR (to be refunded or deducted from future VAT)
+    
+    E-Reporting Context (Already Transmitted):
+    Monthly during 2025 (12 months):
+    - Flux 10.3: 12 transaction reports (estimated monthly consumption)
+    - Flux 10.4: 12 payment reports (90.00 EUR × 12 months)
+    - Total e-reported: 1,080.00 EUR TTC
+    
+    This Reconciliation Credit Note (Flux 1):
+    - Shows TOTAL actual consumption: 780.00 EUR net + 156.00 EUR VAT
+    - References monthly payments: 1,080.00 EUR already collected
+    - Credit amount: 144.00 EUR (to be refunded or credited)
+    - Type 381: Credit note (standard for refund scenarios)
+    
+    Refund Options:
+    1. Direct bank transfer refund (customer choice in this example)
+    2. Credit toward 2026 monthly payments (alternative)
+    3. Reduced monthly payments in 2026 until credit exhausted
+    
+    Key Fields:
+    - BT-3: Invoice type 381 (credit note - for refund scenario)
+    - BT-23: No special business process code (standard reconciliation credit)
+    - Document shows actual consumption and overpayment credit
+    - Customer chooses refund by bank transfer
+    
+    Business Context:
+    SELLER: ÉnergieVerte Provence SAS (electricity supplier)
+    BUYER: Residential customer (B2C - Monsieur Pierre Lefèvre, homeowner)
+    Service period: January 1, 2025 - December 31, 2025 (full year)
+    Meter reading: January 8, 2026 (actual consumption determined)
+    Credit note issued: January 18, 2026 (reconciliation after meter reading)
+    Refund: Bank transfer within 30 days (by February 17, 2026)
+    
+    Monthly Payment History (E-Reported):
+    Jan-Dec 2025: 12 × 90.00 EUR = 1,080.00 EUR
+    (Each month: estimated 500 kWh)
+    Total estimated: 6,000 kWh
+    
+    Actual Consumption (Meter Reading):
+    Start meter (Jan 1, 2025): 32,800 kWh
+    End meter (Dec 31, 2025): 38,000 kWh
+    Actual consumption: 5,200 kWh
+    Variance: -800 kWh (-13.3% under estimate)
+    
+    Reference: XP Z12-014 Annexe A, Section 3.2.31 - Case 2a (Figure 43)
+-->
+<CreditNote xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (ProfileID URN only, no special code for this scenario) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Credit note number -->
+    <cbc:ID>EVP-AV-2026-0008</cbc:ID>
+
+    <!-- BT-2: Credit note issue date (Reconciliation credit note after meter reading) -->
+    <cbc:IssueDate>2026-01-18</cbc:IssueDate>
+    <!-- BT-7: Tax point date (Meter reading date - actual consumption determination) -->
+    <cbc:TaxPointDate>2026-01-08</cbc:TaxPointDate>
+    <!-- BT-3: Invoice type code = 381 (Credit note - for refund/overpayment scenario) -->
+    <cbc:CreditNoteTypeCode>381</cbc:CreditNoteTypeCode>
+
+    <!-- BT-22: Notes - French text codes for reconciliation credit context -->
+    <cbc:Note>#REG#SIRET 22233344455566 - RCS Marseille - APE 3513Z (Commerce d'électricité) - Capital social: 5 000 000 EUR - N° TVA: FR22222333444</cbc:Note>
+    <cbc:Note>#ABL#RÉGIME TVA SUR LES ENCAISSEMENTS: Notre société n'a PAS opté pour la TVA sur les débits. La TVA est donc exigible sur les encaissements (paiements effectifs). TVA SUR MENSUALITÉS: La TVA sur les 12 mensualités (180,00 EUR total sur 1 080,00 EUR TTC) a déjà été collectée et déclarée au fur et à mesure des encaissements mensuels en 2025, e-reportée via Flux 10.4. TVA SUR TROP-PERÇU: La TVA sur le trop-perçu de régularisation (24,00 EUR sur 144,00 EUR TTC) sera déduite de notre TVA collectée de janvier 2026 lors du remboursement. E-REPORTING: Cet avoir génère un Flux 1 (avoir B2C) pour documenter le trop-perçu et sa régularisation fiscale. Les 1 080,00 EUR de mensualités ont déjà été e-reportés mensuellement en 2025. PÉRIODE DE CONSOMMATION: 01/01/2025 au 31/12/2025 (365 jours). RELEVÉ DE COMPTEUR: Compteur n°EV-32800-SM - Index début 32 800 kWh (01/01/2025) - Index fin 38 000 kWh (31/12/2025) - Consommation réelle 5 200 kWh. TARIF APPLIQUÉ: Tarif Bleu résidentiel 0,15 EUR/kWh HT (tarif réglementé 2025, option base). NOUVELLE ESTIMATION 2026: Sur la base de votre consommation réelle 2025 (5 200 kWh), vos mensualités 2026 seront ajustées à 78,00 EUR/mois (936,00 EUR/an ÷ 12 mois) pour mieux refléter votre consommation habituelle. Un courrier séparé vous confirmera ce nouveau montant mensuel. MODALITÉS DE REMBOURSEMENT: Virement bancaire SEPA de 144,00 EUR sur votre compte bancaire IBAN FR89****56 (compte Crédit Agricole vérifié dans notre système) - Virement effectué sous 30 jours calendaires à compter de l'émission de cet avoir (date limite: 17/02/2026) - Libellé virement: "AVOIR ELEC 2025 - EVP-AV-2026-0008 - LEFÈVRE".</cbc:Note>
+    <cbc:Note>#AAI#APE 3513Z - Commerce d'électricité (fourniture et distribution d'électricité pour clients résidentiels et professionnels).</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
+    <cbc:Note>#PMT#AVOIR DE RÉGULARISATION ANNUELLE: Cet avoir régularise votre consommation réelle d'électricité pour l'année 2025 (du 01/01/2025 au 31/12/2025) par rapport aux paiements mensuels estimatifs déjà effectués. PAIEMENTS MENSUELS DÉJÀ ENCAISSÉS: Vous avez versé 12 mensualités de 90,00 EUR TTC (total: 1 080,00 EUR) basées sur une consommation estimée de 6 000 kWh/an. Ces paiements mensuels ont été e-reportés aux autorités fiscales via les flux d'e-reporting (Flux 10.3 + Flux 10.4) mais n'ont PAS fait l'objet de factures mensuelles. CONSOMMATION RÉELLE: Le relevé de compteur du 08/01/2026 établit votre consommation réelle à 5 200 kWh (contre 6 000 kWh estimés), soit une économie de -800 kWh (-13,3%). RAISON: Hiver 2024-2025 particulièrement doux (températures 2°C au-dessus de la normale saisonnière) + absences prolongées pour vacances (3 semaines en février ski + 4 semaines en août) = réduction significative du chauffage et de la consommation générale. MONTANT TOTAL RÉEL: 936,00 EUR TTC (780,00 EUR HT + 156,00 EUR de TVA à 20%). TROP-PERÇU: 144,00 EUR TTC (1 080,00 EUR payés - 936,00 EUR consommation réelle). REMBOURSEMENT: Vous avez choisi le remboursement par virement bancaire sur votre compte (IBAN FR89****56). Le virement de 144,00 EUR sera effectué sous 30 jours (avant le 17/02/2026). OPTION ALTERNATIVE: Vous auriez pu choisir de conserver ce montant en crédit pour vos mensualités 2026 (aurait réduit les 2 premières mensualités de 2026 à 18,00 EUR au lieu de 90,00 EUR).</cbc:Note>
+    <cbc:Note>#BAR#B2C</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <!-- BG-14: Invoicing period (Annual consumption period) -->
+    <cac:InvoicePeriod>
+        <!-- BT-73: Invoicing period start date -->
+        <cbc:StartDate>2025-01-01</cbc:StartDate>
+        <!-- BT-74: Invoicing period end date -->
+        <cbc:EndDate>2025-12-31</cbc:EndDate>
+    </cac:InvoicePeriod>
+    <!-- BT-13: Contract reference -->
+    <cac:ContractDocumentReference>
+        <cbc:ID>CONTRAT-ELEC-2022-89012</cbc:ID>
+    </cac:ContractDocumentReference>
+
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Energy Supplier -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address -->
+            <cbc:EndpointID schemeID="0002">22233344455566</cbc:EndpointID>
+
+            <!-- BT-27: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>ÉnergieVerte Provence</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>145 Avenue du Prado</cbc:StreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Marseille</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>13008</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR22222333444</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>ÉnergieVerte Provence SAS</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">222333444</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact -->
+            <cac:Contact>
+                <!-- BT-41: Seller contact point -->
+                <cbc:Name>Service Client Résidentiel</cbc:Name>
+                <!-- BT-42: Seller contact telephone -->
+                <cbc:Telephone>+33 4 91 55 66 77</cbc:Telephone>
+                <!-- BT-43: Seller contact email -->
+                <cbc:ElectronicMail>clients@energieverte-provence.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Residential Customer (B2C) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-45: Buyer trading name (Individual - residential customer) -->
+            <cac:PartyName>
+                <cbc:Name>Pierre Lefèvre</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address (Service delivery address) -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>142 Boulevard Longchamp</cbc:StreetName>
+                <!-- BT-51: Buyer address line 2 -->
+                <cbc:AdditionalStreetName>Maison individuelle avec jardin</cbc:AdditionalStreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Marseille</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>13001</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-44: Buyer legal name (Individual person) -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Monsieur Pierre LEFÈVRE</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact -->
+            <cac:Contact>
+                <!-- BT-56: Buyer contact point -->
+                <cbc:Name>Pierre Lefèvre</cbc:Name>
+                <!-- BT-57: Buyer contact telephone -->
+                <cbc:Telephone>+33 6 98 76 54 32</cbc:Telephone>
+                <!-- BT-58: Buyer contact email -->
+                <cbc:ElectronicMail>p.lefevre@example.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-17: Payment means (Bank transfer for refund) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (30 = credit transfer) -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>REMB-AVOIR-2026-EVP-AV-0008</cbc:PaymentID>
+
+        <!-- BG-19: Payee financial account (Customer account for refund) -->
+        <cac:PayeeFinancialAccount>
+            <!-- Customer IBAN for refund (partially masked) -->
+            <cbc:ID>FR89**********************56</cbc:ID>
+            <cbc:Name>Pierre LEFÈVRE</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>AGRIFRPP882</cbc:ID>
+                <cbc:Name>Crédit Agricole Provence Côte d'Azur</cbc:Name>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms (Refund terms) -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms -->
+        <cbc:Note>REMBOURSEMENT PAR VIREMENT BANCAIRE: Le trop-perçu de régularisation de 144,00 EUR vous sera remboursé par virement SEPA sur votre compte bancaire Crédit Agricole (IBAN FR89****56) sous 30 jours calendaires à compter de l'émission de cet avoir, soit au plus tard le 17/02/2026. Libellé du virement: "AVOIR ELEC 2025 - EVP-AV-2026-0008 - LEFÈVRE". MENSUALITÉS DÉJÀ PAYÉES: Vous avez versé 12 mensualités de 90,00 EUR pendant l'année 2025 (janvier à décembre), prélevées mensuellement le 5 de chaque mois. Total déjà payé: 1 080,00 EUR. RÉGULARISATION: Cet avoir régularise votre consommation réelle (5 200 kWh) par rapport à l'estimation (6 000 kWh). ÉCONOMIE: -800 kWh dus à un hiver doux (températures +2°C au-dessus de la normale de novembre 2024 à mars 2025) + absences prolongées pour vacances (3 semaines février ski Alpes + 4 semaines août vacances Corse) = réduction chauffage électrique et consommation générale. TARIF: Tarif Bleu résidentiel option base à 0,15 EUR/kWh HT (tarif réglementé 2025). TVA: 20% (taux normal). OPTION ALTERNATIVE NON CHOISIE: Vous auriez pu conserver ce montant en crédit pour vos mensualités 2026, ce qui aurait réduit vos 2 premières mensualités de janvier et février 2026 à 18,00 EUR chacune au lieu de 90,00 EUR (144 EUR de crédit ÷ 2 = 72 EUR de réduction par mois). Vous avez préféré le remboursement immédiat. NOUVELLE ESTIMATION 2026: Sur la base de votre consommation réelle 2025 (5 200 kWh), vos mensualités 2026 seront ajustées à 78,00 EUR/mois (936,00 EUR/an ÷ 12 mois) pour mieux refléter votre profil de consommation habituel et éviter un nouvel écart important. Un courrier séparé vous confirmera ce nouveau montant mensuel qui sera prélevé à partir de mars 2026.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Credit note total VAT amount (on TOTAL actual consumption) -->
+        <cbc:TaxAmount currencyID="EUR">156.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount (TOTAL actual consumption) -->
+            <cbc:TaxableAmount currencyID="EUR">780.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount (TOTAL VAT on actual consumption) -->
+            <cbc:TaxAmount currencyID="EUR">156.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals (Credit note shows actual consumption, overpayment implicit) -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Credit note line net amount (TOTAL actual consumption) -->
+        <cbc:LineExtensionAmount currencyID="EUR">780.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Credit note total amount without VAT (TOTAL actual consumption) -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">780.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Credit note total amount with VAT (TOTAL actual with VAT) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">936.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113: Paid amount (Sum of 12 monthly payments already collected) -->
+        <cbc:PrepaidAmount currencyID="EUR">1080.00</cbc:PrepaidAmount>
+        <!-- BT-115: Amount due for payment (NEGATIVE - refund/credit due to customer)
+             Note: In UBL credit note, this represents refund amount -->
+        <cbc:PayableAmount currencyID="EUR">-144.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: Credit note line (Annual electricity consumption - actual) -->
+    <cac:CreditNoteLine>
+        <!-- BT-126: Credit note line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Credited quantity (Actual kWh consumed) -->
+        <cbc:CreditedQuantity unitCode="KWH">5200</cbc:CreditedQuantity>
+
+        <!-- BT-131: Credit note line net amount (Actual consumption) -->
+        <cbc:LineExtensionAmount currencyID="EUR">780.00</cbc:LineExtensionAmount>
+
+        <!-- BG-26: Credit note line period (Annual consumption period) -->
+        <cac:InvoicePeriod>
+            <!-- BT-134: Line start date -->
+            <cbc:StartDate>2025-01-01</cbc:StartDate>
+            <!-- BT-135: Line end date -->
+            <cbc:EndDate>2025-12-31</cbc:EndDate>
+        </cac:InvoicePeriod>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>AVOIR DE RÉGULARISATION ANNUELLE - Consommation réelle d'électricité pour l'année 2025 (365 jours du 01/01/2025 au 31/12/2025). Cet avoir documente le trop-perçu résultant de la différence entre vos paiements mensuels estimatifs et votre consommation réelle mesurée. POINT DE LIVRAISON: 142 Boulevard Longchamp, 13001 Marseille - Maison individuelle avec jardin. COMPTEUR: Numéro EV-32800-SM (compteur Linky communicant). RELEVÉ DE COMPTEUR: Index de début au 01/01/2025: 32 800 kWh - Index de fin au 31/12/2025: 38 000 kWh - Consommation réelle mesurée: 5 200 kWh. TARIF APPLIQUÉ: Tarif Bleu résidentiel option base (puissance souscrite 6 kVA) - Prix unitaire 0,15 EUR/kWh HT (tarif réglementé 2025 fixé par la CRE - Commission de Régulation de l'Énergie). TVA: 20% (taux normal applicable à l'électricité). CONSOMMATION ESTIMÉE VS. RÉELLE: Estimation mensuelle basée sur historique 2024: 500 kWh/mois × 12 = 6 000 kWh/an - Consommation réelle 2025: 5 200 kWh - Écart: -800 kWh (-13,3% d'économie par rapport à l'estimation). ANALYSE DE L'ÉCONOMIE: Hiver 2024-2025 particulièrement doux (température moyenne +2°C au-dessus de la normale saisonnière de novembre 2024 à mars 2025 selon Météo France) - Réduction significative de l'utilisation du chauffage électrique (chauffage central électrique moins sollicité, économie estimée -350 kWh sur période hivernale) - Absences prolongées pour vacances: 3 semaines en février (ski dans les Alpes, maison fermée et chauffage abaissé à 12°C mode hors-gel, économie -120 kWh) + 4 semaines en août (vacances en Corse, maison complètement éteinte sauf réfrigérateur, économie -200 kWh) - Remplacement du lave-linge en juin 2025 par modèle classe A+++ (ancien modèle classe B, économie estimée -130 kWh sur 6 mois). MENSUALITÉS DÉJÀ PAYÉES: 12 prélèvements de 90,00 EUR TTC effectués mensuellement (le 5 de chaque mois de janvier à décembre 2025) - Total encaissé: 1 080,00 EUR TTC (900,00 EUR HT + 180,00 EUR de TVA) - Consommation couverte par les mensualités: 6 000 kWh (estimation). TROP-PERÇU DE RÉGULARISATION: Consommation en moins par rapport à l'estimation: 800 kWh × 0,15 EUR = 120,00 EUR HT + 24,00 EUR TVA = 144,00 EUR TTC - Ce montant vous sera remboursé par virement bancaire sous 30 jours (avant le 17/02/2026) sur votre compte Crédit Agricole IBAN FR89****56. CONSOMMATION MENSUELLE DÉTAILLÉE 2025: Janv: 480 kWh (hiver doux) - Fév: 280 kWh (absence ski 3 sem) - Mars: 420 kWh - Avril: 380 kWh (printemps) - Mai: 360 kWh - Juin: 340 kWh (été) - Juil: 320 kWh - Août: 180 kWh (absence Corse 4 sem) - Sept: 360 kWh (automne) - Oct: 400 kWh - Nov: 420 kWh (automne) - Déc: 460 kWh (hiver doux). AJUSTEMENT 2026: Vos mensualités 2026 seront réduites à 78,00 EUR/mois (basées sur 5 200 kWh de consommation annuelle constatée en 2025) pour mieux refléter votre profil de consommation réel et éviter un nouvel écart important lors de la prochaine régularisation. Un courrier séparé vous confirmera ce nouveau montant mensuel qui débutera en mars 2026. CHOIX DE REMBOURSEMENT: Vous avez choisi le remboursement immédiat par virement plutôt que la conservation du crédit pour réduire vos mensualités 2026. Option confirmée lors de votre appel téléphonique du 15/01/2026 avec notre service client.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Électricité - Consommation annuelle 2025 (Régularisation - Avoir)</cbc:Name>
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">0.15</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="KWH">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:CreditNoteLine>
+
+</CreditNote>

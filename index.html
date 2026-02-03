@@ -600,6 +600,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_cactaxtotal">cac:TaxTotal</a></li>
 <li><a href="#_cacwithholdingtaxtotal">cac:WithholdingTaxTotal</a></li>
 <li><a href="#_caclegalmonetarytotal">cac:LegalMonetaryTotal</a></li>
+<li><a href="#_party_common_elements">Party (Common Elements)</a></li>
 </ul>
 </li>
 <li><a href="#_cacinvoiceline">3.2. cac:InvoiceLine</a>
@@ -703,8 +704,14 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#_france">5.4. France</a>
 <ul class="sectlevel3">
-<li><a href="#_service_code">5.4.1. Service code</a></li>
-<li><a href="#_legal_commitments">5.4.2. Legal commitments</a></li>
+<li><a href="#_french_e_invoicing_mandate_2026">5.4.1. French E-Invoicing Mandate (2026)</a></li>
+<li><a href="#_invoice_type_code_and_business_process_type">5.4.2. Invoice Type Code and Business Process Type</a></li>
+<li><a href="#_french_text_codes_note_elements">5.4.3. French Text Codes (Note Elements)</a></li>
+<li><a href="#_self_billing_indicator_2">5.4.4. Self-Billing Indicator</a></li>
+<li><a href="#_business_and_vat_identification">5.4.5. Business and VAT Identification</a></li>
+<li><a href="#_mandate_scenarios_agent_parties">5.4.6. Mandate Scenarios - Agent Parties</a></li>
+<li><a href="#_service_code">5.4.7. Service code</a></li>
+<li><a href="#_legal_commitments">5.4.8. Legal commitments</a></li>
 </ul>
 </li>
 <li><a href="#_greece">5.5. Greece</a>
@@ -2448,7 +2455,7 @@ An identifier of the project.</p></td>
 <div class="sect3">
 <h4 id="_cacaccountingsupplierparty"><a class="anchor" href="#_cacaccountingsupplierparty"></a><a class="link" href="#_cacaccountingsupplierparty">cac:AccountingSupplierParty</a></h4>
 <div class="paragraph">
-<p>Below table show available fields in <code>cac:AccountingSupplierParty</code>, note that additional elements has also been added to the extension available in <a href="#_party">Party</a>.</p>
+<p>Below table show available fields in <code>cac:AccountingSupplierParty</code>. For common <code>cac:Party</code> elements, refer to <a href="#_party">Party</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 11. Additional elements added within cac:AccountingSupplierParty</caption>
@@ -2469,220 +2476,22 @@ An identifier of the project.</p></td>
 Supplier ID, assigned by the buyer.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/ext:UBLExtensions</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
-Extension is added to provide additional information in the <code>cac:Party</code> element, the information available can be found <a href="#_party">here</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party</strong><br>
+See <a href="#_party">Party</a> for all available elements within <code>cac:Party</code>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cbc:WebsiteURI</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Seller website</strong><br>
-The Uniform Resource Identifier (URI) that identifies this party&#8217;s web site; i.e., the web site&#8217;s Uniform Resource Locator (URL).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>AgentParty</strong><br>
+A party who acts as an agent for this party.<br>
+For all available elements, refer to <a href="#_party">Party</a>.<br>
+<strong>Note:</strong> <code>cac:AgentParty</code> directly contains party elements (e.g., <code>cac:PostalAddress</code>, <code>cac:PartyLegalEntity</code>) without an intermediate <code>cac:Party</code> sub-element.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cbc:EndpointID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Electronic Identifier</strong><br>
-Seller&#8217;s electronic address.<br></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cbc:EndpointID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Electronic Identifier scheme ID</strong><br>
-Scheme identifier of electronic address.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_007_endpointscheme" target="_blank" rel="noopener">PUF-007-ENDPOINTSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cbc:IndustryClassificationCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Industry Classification Code</strong><br>
-Seller Industry classification code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cbc:IndustryClassificationCode/@name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Industry Classification Name</strong><br>
-Corresponding name of the classification code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyIdentification/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Seller Identifier</strong><br>
-Identifier of the seller.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyIdentification/cbc:ID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Seller Identifier</strong><br>
-Scheme identifier of seller identifier.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyName/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Seller name</strong><br>
-Seller name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address ID</strong><br>
-Seller&#8217;s postal address id.<br>
-Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Postbox</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
-Seller&#8217;s postal address post box.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Floor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
-Seller&#8217;s postal address floor.<br>
-An addressable floor of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Room</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
-Seller&#8217;s postal address room.<br>
-A room, suite, or apartment of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:StreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
-Seller&#8217;s postal address street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:AdditionalStreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
-Seller&#8217;s postal address additional street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:BuildingName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
-Seller&#8217;s postal address building name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:BuildingNumber</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
-Seller&#8217;s postal address building number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Department</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
-Seller&#8217;s postal address department.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:PlotIdentification</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
-Seller&#8217;s postal address plot identification.<br>
-Additional address number. An identifier for the piece of land associated with this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CitySubdivisionName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
-Seller&#8217;s postal address city subdivision name.<br>
-The name of the subdivision of the Seller city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
-Seller&#8217;s postal address city name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:PostalZone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
-Seller&#8217;s postal address post code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentity</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
-Seller&#8217;s postal address province or state.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
-Seller&#8217;s postal address province or state code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Region</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
-Seller&#8217;s postal address region.<br>
-Seller&#8217;s addressable region or group of countries.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:District</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
-Seller&#8217;s postal address district.<br>
-A district or borough, may be a subdivision of a city for this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
-Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
-Seller&#8217;s postal address country code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:Country/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
-Seller&#8217;s postal address country name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cbc:CompanyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company identifier</strong><br>
-Seller&#8217;s tax registration number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme identifier</strong><br>
-Seller&#8217;s tax registration number tax scheme Identifier.<br>
-<em>If <code>cac:PartyTaxScheme/cbc:CompanyID</code> is to be intepreted as a VAT registration text for Sweden and Norway e.g. "Godkänd för F-Skatt" or "Foretaksregisteret", <code>cac:TaxScheme/cbc:ID</code> must be "TAX".</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:RegistrationName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registration name</strong><br>
-Seller&#8217;s formal name or company name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:CompanyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company identifier</strong><br>
-Seller&#8217;s legal registration identifier.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company scheme identifier</strong><br>
-Seller&#8217;s legal registration identifier scheme identifier<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalForm</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company legal form</strong><br>
-Relevant legal information regarding the seller.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registered tax office</strong><br>
-Seller&#8217;s registered tax office.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact name</strong><br>
-Name of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:Telephone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact telephone</strong><br>
-Phone number of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:ElectronicMail</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact E-mail</strong><br>
-E-mail of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FirstName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person first name</strong><br>
-First name of person. Should only be used if seller is a private individual.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FamilyName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person surname</strong><br>
-Surname of person. Should only be used if seller is a private individual.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:ServiceProviderParty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ServiceProviderParty</strong><br>
+A party providing services for this party.<br>
+Contains a nested <code>cac:Party</code> element. For all available elements within the nested party, refer to <a href="#_party">Party</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:AccountingContact/cbc:Name</code></p></td>
@@ -2776,7 +2585,7 @@ The e-mail address for the accounting contact of the organization.</p></td>
 <div class="sect3">
 <h4 id="_cacaccountingcustomerparty"><a class="anchor" href="#_cacaccountingcustomerparty"></a><a class="link" href="#_cacaccountingcustomerparty">cac:AccountingCustomerParty</a></h4>
 <div class="paragraph">
-<p>Below table show available fields in <code>cac:AccountingCustomerParty</code>, note that additional elements has also been added to the extension available in <a href="#_party">Party</a>.</p>
+<p>Below table show available fields in <code>cac:AccountingCustomerParty</code>. For common <code>cac:Party</code> elements, refer to <a href="#_party">Party</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 12. Additional elements added within cac:AccountingCustomerParty</caption>
@@ -2797,208 +2606,14 @@ The e-mail address for the accounting contact of the organization.</p></td>
 Customer ID, assigned by the seller.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/ext:UBLExtensions</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
-Extension is added to provide additional information in the <code>cac:Party</code> element, the information available can be found <a href="#_party">here</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cbc:EndpointID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Electronic Identifier</strong><br>
-Buyer&#8217;s electronic address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cbc:EndpointID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Electronic Identifier scheme ID</strong><br>
-Scheme identifier of electronic address.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_007_endpointscheme" target="_blank" rel="noopener">PUF-007-ENDPOINTSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyIdentification/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Buyer Identifier</strong><br>
-Identifier of the Buyer.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyIdentification/cbc:ID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Buyer Identifier</strong><br>
-Scheme identifier of Buyer identifier.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyName/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Buyer name</strong><br>
-Buyer name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address ID</strong><br>
-Buyer&#8217;s postal address id.<br>
-Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Postbox</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
-Buyer&#8217;s postal address post box.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Floor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
-Buyer&#8217;s postal address floor.<br>
-An addressable floor of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Room</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
-Buyer&#8217;s postal address room.<br>
-A room, suite, or apartment of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:StreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
-Buyer&#8217;s postal address street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:AdditionalStreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
-Buyer&#8217;s postal address additional street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:BuildingName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
-Buyer&#8217;s postal address building name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:BuildingNumber</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
-Buyer&#8217;s postal address building number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Department</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
-Buyer&#8217;s postal address department.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:PlotIdentification</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
-Buyer&#8217;s postal address plot identification.<br>
-Additional address number. An identifier for the piece of land associated with this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CitySubdivisionName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
-Buyer&#8217;s postal address city subdivision name.<br>
-The name of the subdivision of the Buyer city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
-Buyer&#8217;s postal address city name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:PostalZone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
-Buyer&#8217;s postal address post code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentity</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
-Buyer&#8217;s postal address province or state.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
-Buyer&#8217;s postal address province or state code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Region</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
-Buyer&#8217;s postal address region.<br>
-Buyer&#8217;s addressable region or group of countries.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:District</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
-Buyer&#8217;s postal address district.<br>
-A district or borough, may be a subdivision of a city for this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
-Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
-Buyer&#8217;s postal address country code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:Country/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
-Buyer&#8217;s postal address country name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cbc:CompanyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company identifier</strong><br>
-Buyer&#8217;s tax registration number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme identifier</strong><br>
-Buyer&#8217;s tax registration number tax scheme Identifier.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:RegistrationName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registration name</strong><br>
-Buyer&#8217;s formal name or company name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:CompanyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company identifier</strong><br>
-Buyer&#8217;s legal registration identifier.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company scheme identifier</strong><br>
-Buyer&#8217;s legal registration identifier scheme identifier.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalForm</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company legal form</strong><br>
-Relevant legal information regarding the buyer.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registered tax office</strong><br>
-Buyer&#8217;s registered tax office.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact name</strong><br>
-Name of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:Telephone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact telephone</strong><br>
-Phone number of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:ElectronicMail</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact E-mail</strong><br>
-E-mail of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FirstName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person first name</strong><br>
-First name of person. Should only be used if buyer is a private individual.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FamilyName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person surname</strong><br>
-Surname of person. Should only be used if buyer is a private individual.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party</strong><br>
+See <a href="#_party">Party</a> for all available elements within <code>cac:Party</code>.</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 13. Additional party elements within cac:AccountingCustomerParty/cac:Party</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3012,200 +2627,17 @@ Surname of person. Should only be used if buyer is a private individual.</p></td
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>AgentParty </strong><br>
-A party who acts as an agent for this party.</p></td>
-</tr>
-</tbody>
-</table>
-<details>
-<summary class="title"><strong>Click here for a complete list of fields for the agent party.</strong></summary>
-<div class="content">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Path</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/ext:UBLExtensions</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
-Extension is added to set the type of the AgentParty,
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_021_rolecode" target="_blank" rel="noopener">PUF-021-ROLECODE</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>AgentParty</strong><br>
+A party who acts as an agent for this party.<br>
+For all available elements, refer to <a href="#_party">Party</a>.<br>
+<strong>Note:</strong> <code>cac:AgentParty</code> directly contains party elements (e.g., <code>cac:PostalAddress</code>, <code>cac:PartyLegalEntity</code>) without an intermediate <code>cac:Party</code> sub-element.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:Postbox</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
-Agent&#8217;s postal address post box.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:ServiceProviderParty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ServiceProviderParty</strong><br>
+A party providing services for this party.<br>
+Contains a nested <code>cac:Party</code> element. For all available elements within the nested party, refer to <a href="#_party">Party</a>.</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:Floor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
-Agent&#8217;s postal address floor.<br>
-An addressable floor of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:Room</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
-Agent&#8217;s postal address room.<br>
-A room, suite, or apartment of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:StreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
-Agent&#8217;s postal address street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:AdditionalStreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
-Agent&#8217;s postal address additional street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:BuildingName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
-Agent&#8217;s postal address building name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:BuildingNumber</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
-Agent&#8217;s postal address building number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:Department</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
-Agent&#8217;s postal address department.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:PlotIdentification</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
-Agent&#8217;s postal address plot identification.<br>
-Additional address number. An identifier for the piece of land associated with this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:CitySubdivisionName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
-Agent&#8217;s postal address city subdivision name.<br>
-The name of the subdivision of the Buyer city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
-Agent&#8217;s postal address city name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:PostalZone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
-Agent&#8217;s postal address post code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:CountrySubentity</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
-Agent&#8217;s postal address province or state.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
-Agent&#8217;s postal address province or state code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:Region</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
-Agent&#8217;s postal address region.<br>
-Agent&#8217;s addressable region or group of countries.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cbc:District</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
-Agent&#8217;s postal address district.<br>
-A district or borough, may be a subdivision of a city for this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
-Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
-Agent&#8217;s postal address country code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PostalAddress/cac:Country/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
-Agent&#8217;s postal address country name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyTaxScheme/cbc:CompanyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company identifier</strong><br>
-Agent&#8217;s tax registration number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme identifier</strong><br>
-Agent&#8217;s tax registration number tax scheme Identifier.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyLegalEntity/cbc:RegistrationName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registration name</strong><br>
-Agent&#8217;s formal name or company name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyLegalEntity/cbc:CompanyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company identifier</strong><br>
-Agent&#8217;s legal registration identifier.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyLegalEntity/cbc:CompanyID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company scheme identifier</strong><br>
-Agent&#8217;s legal registration identifier scheme identifier.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyLegalEntity/cbc:CompanyLegalForm</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company legal form</strong><br>
-Relevant legal information regarding the Agent.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registered tax office</strong><br>
-Agent&#8217;s registered tax office.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:Contact/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact name</strong><br>
-Name of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:Contact/cbc:Telephone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact telephone</strong><br>
-Phone number of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:AgentParty/cac:Contact/cbc:ElectronicMail</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact E-mail</strong><br>
-E-mail of contact person.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</details>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Path</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:AccountingContact/cbc:Name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Accounting name</strong><br>
@@ -3291,48 +2723,12 @@ The e-mail address for the accounting contact of the organization.<br>
 </div>
 <div class="sect3">
 <h4 id="_cacpayeeparty"><a class="anchor" href="#_cacpayeeparty"></a><a class="link" href="#_cacpayeeparty">cac:PayeeParty</a></h4>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. Additional elements added within cac:PayeeParty</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Path</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyIdentification/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Payee Identifier</strong><br>
-Identifier of the payee.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyIdentification/cbc:ID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Payee scheme Identifier</strong><br>
-Scheme identifier of payee identifier.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyName/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Payee name</strong><br>
-Payee name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyLegalEntity/cbc:CompanyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company identifier</strong><br>
-Payee&#8217;s legal registration identifier.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyLegalEntity/cbc:CompanyID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company identifier scheme identifier</strong><br>
-Payee&#8217;s legal registration identifier scheme identifier.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<p>For all available <code>cac:PayeeParty</code> elements, refer to <a href="#_party">Party</a>.</p>
+</div>
+<div class="paragraph">
+<p>Note: <code>cac:PayeeParty</code> is a direct <code>cac:Party</code> element without additional wrapper elements.</p>
+</div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
 <em>cac:PayeeParty example</em></p>
@@ -3366,7 +2762,7 @@ Value must be according to code list <a href="https://pagero.github.io/puf-code-
 <p>If <code>cac:BuyerCustomerParty</code> is used, the <code>cac:AccountingCustomerParty</code> is to be considered the receiver of the document.</p>
 </div>
 <div class="paragraph">
-<p>Below table show available fields in <code>cac:BuyerCustomerParty</code>, note that additional elements has also been added to the extension available in <a href="#_party">Party</a></p>
+<p>Below table show available fields in <code>cac:BuyerCustomerParty</code>. For common <code>cac:Party</code> elements, refer to <a href="#_party">Party</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 14. Elements added in cac:BuyerCustomerParty</caption>
@@ -3387,204 +2783,9 @@ Value must be according to code list <a href="https://pagero.github.io/puf-code-
 Customer ID, assigned by the seller.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/ext:UBLExtensions</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
-Extension is added to provide additional information in the <code>cac:Party</code> element, the information available can be found <a href="#_party">here</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cbc:EndpointID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Electronic Identifier</strong><br>
-Buyer&#8217;s electronic address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cbc:EndpointID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Electronic Identifier scheme ID</strong><br>
-Scheme identifier of electronic address.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_007_endpointscheme" target="_blank" rel="noopener">PUF-007-ENDPOINTSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyIdentification/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Buyer Identifier</strong><br>
-Identifier of the Buyer.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyIdentification/cbc:ID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Buyer Identifier</strong><br>
-Scheme identifier of Buyer identifier.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyName/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Buyer name</strong><br>
-Buyer name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address ID</strong><br>
-Buyer&#8217;s postal address id.<br>
-Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Postbox</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
-Buyer&#8217;s postal address post box.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Floor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
-Buyer&#8217;s postal address floor.<br>
-An addressable floor of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Room</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
-Buyer&#8217;s postal address room.<br>
-A room, suite, or apartment of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:StreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
-Buyer&#8217;s postal address street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:AdditionalStreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
-Buyer&#8217;s postal address additional street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:BuildingName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
-Buyer&#8217;s postal address building name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:BuildingNumber</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
-Buyer&#8217;s postal address building number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Department</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
-Buyer&#8217;s postal address department.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:PlotIdentification</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
-Buyer&#8217;s postal address plot identification.<br>
-Additional address number. An identifier for the piece of land associated with this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CitySubdivisionName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
-Buyer&#8217;s postal address city subdivision name.<br>
-The name of the subdivision of the Buyer city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
-Buyer&#8217;s postal address city name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:PostalZone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
-Buyer&#8217;s postal address post code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentity</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
-Buyer&#8217;s postal address province or state.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
-Buyer&#8217;s postal address province or state code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Region</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
-Buyer&#8217;s postal address region.<br>
-Buyer&#8217;s addressable region or group of countries.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:District</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
-Buyer&#8217;s postal address district.<br>
-A district or borough, may be a subdivision of a city for this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
-Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
-Buyer&#8217;s postal address country code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:Country/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
-Buyer&#8217;s postal address country name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cbc:CompanyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company identifier</strong><br>
-Buyer&#8217;s tax registration number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme identifier</strong><br>
-Buyer&#8217;s tax registration number tax scheme Identifier.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:RegistrationName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registration name</strong><br>
-Buyer&#8217;s formal name or company name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:CompanyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company identifier</strong><br>
-Buyer&#8217;s legal registration identifier.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:CompanyID/@schemeID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company scheme identifier</strong><br>
-Buyer&#8217;s legal registration identifier scheme identifier.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cbc:CompanyLegalForm</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company legal form</strong><br>
-Relevant legal information regarding the Buyer.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registered tax office</strong><br>
-Buyer&#8217;s registered tax office.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact name</strong><br>
-Name of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:Telephone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact telephone</strong><br>
-Phone number of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Contact/cbc:ElectronicMail</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact E-mail</strong><br>
-E-mail of contact person.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FirstName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person first name</strong><br>
-First name of person. Should only be used if buyer is a private individual.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:Person/cbc:FamilyName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person surname</strong><br>
-Surname of person. Should only be used if buyer is a private individual.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party</strong><br>
+See <a href="#_party">Party</a> for all available elements within <code>cac:Party</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:AccountingContact/cbc:Name</code></p></td>
@@ -3721,143 +2922,12 @@ Please note that NOT all e-invoice formats support both invoice recipient and bu
 </div>
 <div class="sect3">
 <h4 id="_cactaxrepresentativeparty"><a class="anchor" href="#_cactaxrepresentativeparty"></a><a class="link" href="#_cactaxrepresentativeparty">cac:TaxRepresentativeParty</a></h4>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 15. Additional elements added within cac:TaxRepresentativeParty</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Path</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyName/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Seller&#8217;s tax representative name</strong><br>
-Seller&#8217;s tax representative name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address ID</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address id.<br>
-Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Postbox</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address post box.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Floor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address floor.<br>
-An addressable floor of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Room</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address room.<br>
-A room, suite, or apartment of a building.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:StreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:AdditionalStreetName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address additional street name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:BuildingName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address building name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:BuildingNumber</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address building number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Department</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address department.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:PlotIdentification</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address plot identification.<br>
-Additional address number. An identifier for the piece of land associated with this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CitySubdivisionName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdvision Name</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address city subdivision name.<br>
-The name of the subdivision of the seller&#8217;s tax representative&#8217;s city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CityName</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address city name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:PostalZone</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address post code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentity</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address province or state.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address province or state code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:Region</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address region.<br>
-Seller&#8217;s tax representative&#8217;s addressable region or group of countries.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cbc:District</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address district.<br>
-A district or borough, may be a subdivision of a city for this address.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
-Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior of using this element.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address country code.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PostalAddress/cac:Country/cbc:Name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
-Seller&#8217;s tax representative&#8217;s postal address country name.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cbc:CompanyID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company identifier</strong><br>
-Seller&#8217;s tax representative&#8217;s tax registration number.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Party/cac:PartyTaxScheme/cac:TaxScheme/cbc:ID</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme identifier</strong><br>
-Seller&#8217;s tax representative&#8217;s tax registration number tax scheme Identifier.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<p>For all available <code>cac:TaxRepresentativeParty</code> elements, refer to <a href="#_party">Party</a>.</p>
+</div>
+<div class="paragraph">
+<p>Note: <code>cac:TaxRepresentativeParty</code> is a direct <code>cac:Party</code> element without additional wrapper elements.</p>
+</div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
 <em>cac:TaxRepresentativeParty example</em></p>
@@ -3902,7 +2972,7 @@ Seller&#8217;s tax representative&#8217;s tax registration number tax scheme Ide
 <p>Below table show available fields in <code>cac:Delivery</code>, note that additional elements has also been added to the extension available in <a href="#_delivery">cac:Delivery</a> and <a href="#_party">cac:Delivery/cac:DeliveryParty</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 16. Elements added in cac:Delivery</caption>
+<caption class="title">Table 15. Elements added in cac:Delivery</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4296,7 +3366,7 @@ E-mail of contact person.</p></td>
 <div class="sect3">
 <h4 id="_cacdeliveryterms"><a class="anchor" href="#_cacdeliveryterms"></a><a class="link" href="#_cacdeliveryterms">cac:DeliveryTerms</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 17. Elements added in cac:DeliveryTerms</caption>
+<caption class="title">Table 16. Elements added in cac:DeliveryTerms</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4352,7 +3422,7 @@ A description of the responsibility for the loss risk.</p></td>
 <div class="sect3">
 <h4 id="_cacpaymentmeans"><a class="anchor" href="#_cacpaymentmeans"></a><a class="link" href="#_cacpaymentmeans">cac:PaymentMeans</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 18. Elements available in cac:PaymentMeans</caption>
+<caption class="title">Table 17. Elements available in cac:PaymentMeans</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4584,7 +3654,7 @@ Account to be debited in a direct debit payment.</p></td>
 <p>Below table show available fields in <code>cac:PaymentTerms</code>, note that additional elements has also been added to the extension available in <a href="#_paymentterms">PaymentTerms</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 19. Elements added in cac:PaymentTerms</caption>
+<caption class="title">Table 18. Elements added in cac:PaymentTerms</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4636,7 +3706,7 @@ Penalty interest rate, numberic value only.</p></td>
 <p>Below table show available fields in <code>cac:PrepaidPayment</code>, note that additional elements has also been added to the extension available in <a href="#_prepaidpayment">PrepaidPayment</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 20. Elements added in cac:PrepaidPayment</caption>
+<caption class="title">Table 19. Elements added in cac:PrepaidPayment</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4697,7 +3767,7 @@ The date on which this payment was made.</p></td>
 <div class="sect3">
 <h4 id="_cacallowancecharge"><a class="anchor" href="#_cacallowancecharge"></a><a class="link" href="#_cacallowancecharge">cac:AllowanceCharge</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 21. Elements added in cac:AllowanceCharge</caption>
+<caption class="title">Table 20. Elements added in cac:AllowanceCharge</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4836,7 +3906,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <div class="sect3">
 <h4 id="_cactaxexchangerate"><a class="anchor" href="#_cactaxexchangerate"></a><a class="link" href="#_cactaxexchangerate">cac:TaxExchangeRate</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 22. Elements added in cac:TaxExchangeRate</caption>
+<caption class="title">Table 21. Elements added in cac:TaxExchangeRate</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4907,7 +3977,7 @@ Date when the exchange rate was fetched.<br>
 <p>Below table show available fields in <code>cac:TaxTotal/cac:TaxSubtotal</code>, note that additional elements has also been added to the extension available in <a href="#_taxsubtotal">cac:TaxTotal/cac:TaxSubtotal</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 23. Elements added in cac:TaxTotal</caption>
+<caption class="title">Table 22. Elements added in cac:TaxTotal</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5047,7 +4117,7 @@ Can be used to specify type of local tax.</p></td>
 <p>Below table show available fields in <code>cac:WithholdingTaxTotal/cac:TaxSubtotal</code>, note that additional elements has also been added to the extension available in <a href="#_taxsubtotal">cac:WithholdingTaxTotal/cac:TaxSubtotal</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 24. Elements added in cac:WithholdingTaxTotal</caption>
+<caption class="title">Table 23. Elements added in cac:WithholdingTaxTotal</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5176,7 +4246,7 @@ Can be used to specify type of local tax.</p></td>
 <p>Below table show available fields in cac:LegalMonetaryTotal, note that additional elements has also been added to the extension available in <a href="#_legalmonetarytotal">cac:LegalMonetaryTotal</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 25. Elements added in cac:LegalMonetaryTotal</caption>
+<caption class="title">Table 24. Elements added in cac:LegalMonetaryTotal</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -5303,6 +4373,243 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_party_common_elements"><a class="anchor" href="#_party_common_elements"></a><a class="link" href="#_party_common_elements">Party (Common Elements)</a></h4>
+<div class="paragraph">
+<p>This section describes the common elements available within <code>cac:Party</code> that are used across different party types in PUF (AccountingSupplierParty, AccountingCustomerParty, BuyerCustomerParty, PayeeParty, TaxRepresentativeParty).</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 25. Elements available within cac:Party</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ext:UBLExtensions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Extension Content</strong><br>
+Extension is added to provide additional information in the <code>cac:Party</code> element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:WebsiteURI</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party website</strong><br>
+The Uniform Resource Identifier (URI) that identifies this party&#8217;s web site; i.e., the web site&#8217;s Uniform Resource Locator (URL).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:EndpointID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Electronic Identifier</strong><br>
+Party&#8217;s electronic address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:EndpointID/@schemeID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Electronic Identifier scheme ID</strong><br>
+Scheme identifier of electronic address.<br>
+Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_007_endpointscheme" target="_blank" rel="noopener">PUF-007-ENDPOINTSCHEME</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:IndustryClassificationCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Industry Classification Code</strong><br>
+Party&#8217;s industry classification code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:IndustryClassificationCode/@name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Industry Classification Name</strong><br>
+Corresponding name of the classification code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyIdentification/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party Identifier</strong><br>
+Identifier of the party.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyIdentification/cbc:ID/@schemeID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party Identifier Scheme</strong><br>
+Scheme identifier of party identifier.<br>
+Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyName/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party name</strong><br>
+Party name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Address ID</strong><br>
+Party&#8217;s postal address id.<br>
+Address identifier. Might be given by the authorities as standard numerical equivalent corresponding to neighborhood, plaza, streets etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:Postbox</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal box</strong><br>
+Party&#8217;s postal address post box.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:Floor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Floor</strong><br>
+Party&#8217;s postal address floor.<br>
+An addressable floor of a building.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:Room</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Room</strong><br>
+Party&#8217;s postal address room.<br>
+A room, suite, or apartment of a building.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:StreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Street name</strong><br>
+Party&#8217;s postal address street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:AdditionalStreetName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional Street name</strong><br>
+Party&#8217;s postal address additional street name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:BuildingName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building name</strong><br>
+Party&#8217;s postal address building name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:BuildingNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Building number</strong><br>
+Party&#8217;s postal address building number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:Department</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Department</strong><br>
+Party&#8217;s postal address department.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:PlotIdentification</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Plot Identification</strong><br>
+Party&#8217;s postal address plot identification.<br>
+Additional address number. An identifier for the piece of land associated with this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:CitySubdivisionName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City Subdivision Name</strong><br>
+Party&#8217;s postal address city subdivision name.<br>
+The name of the subdivision of the party&#8217;s city, town, or village in which its address is located, such as the name of its district or borough.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:CityName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>City name</strong><br>
+Party&#8217;s postal address city name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:PostalZone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Postal zone</strong><br>
+Party&#8217;s postal address post code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:CountrySubentity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity</strong><br>
+Party&#8217;s postal address province or state.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:CountrySubentityCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country subentity code</strong><br>
+Party&#8217;s postal address province or state code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:Region</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Region</strong><br>
+Party&#8217;s postal address region.<br>
+Party&#8217;s addressable region or group of countries.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cbc:District</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>District</strong><br>
+Party&#8217;s postal address district.<br>
+A district or borough, may be a subdivision of a city for this address.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cac:AddressLine/cbc:Line</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional address line</strong><br>
+Note that <code>cbc:StreetName</code> and <code>cbc:AdditionalStreetName</code> should be populated prior to using this element.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cac:Country/cbc:IdentificationCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country code</strong><br>
+Party&#8217;s postal address country code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PostalAddress/cac:Country/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Country name</strong><br>
+Party&#8217;s postal address country name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyTaxScheme/cbc:CompanyID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company identifier</strong><br>
+Party&#8217;s tax registration number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyTaxScheme/cac:TaxScheme/cbc:ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Tax scheme identifier</strong><br>
+Party&#8217;s tax registration number tax scheme Identifier.<br>
+<em>If <code>cac:PartyTaxScheme/cbc:CompanyID</code> is to be interpreted as a VAT registration text for Sweden and Norway e.g. "Godkänd för F-Skatt" or "Foretaksregisteret", <code>cac:TaxScheme/cbc:ID</code> must be "TAX".</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyLegalEntity/cbc:RegistrationName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registration name</strong><br>
+Party&#8217;s formal name or company name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyLegalEntity/cbc:CompanyID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company identifier</strong><br>
+Party&#8217;s legal registration identifier.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyLegalEntity/cbc:CompanyID/@schemeID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Legal company scheme identifier</strong><br>
+Party&#8217;s legal registration identifier scheme identifier.<br>
+Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyLegalEntity/cbc:CompanyLegalForm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Company legal form</strong><br>
+Relevant legal information regarding the party.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyLegalEntity/cac:RegistrationAddress/cbc:CityName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Registered tax office</strong><br>
+Party&#8217;s registered tax office.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Contact/cbc:Name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact name</strong><br>
+Name of contact person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Contact/cbc:Telephone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact telephone</strong><br>
+Phone number of contact person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Contact/cbc:ElectronicMail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Contact E-mail</strong><br>
+E-mail of contact person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Person/cbc:FirstName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person first name</strong><br>
+First name of person. Should only be used if the party is a private individual.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Person/cbc:FamilyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Person surname</strong><br>
+Surname of person. Should only be used if the party is a private individual.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -8591,23 +7898,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <div class="sect3">
 <h4 id="_party"><a class="anchor" href="#_party"></a><a class="link" href="#_party">4.1.16. Party</a></h4>
 <div class="paragraph">
-<p>The UBL extension to be used for below elements can be found in the below parties:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#_cacaccountingsupplierparty">cac:AccountingSupplierParty</a></p>
-</li>
-<li>
-<p><a href="#_cacaccountingcustomerparty">cac:AccountingCustomerParty</a></p>
-</li>
-<li>
-<p><a href="#_cacbuyercustomerparty">cac:BuyerCustomerParty</a></p>
-</li>
-<li>
-<p><a href="#_cacdelivery">cac:Delivery/cac:DeliveryParty</a></p>
-</li>
-</ul>
+<p>The UBL extension to be used for below elements can be found in <a href="#_party">cac:Party</a>.</p>
 </div>
 <div class="paragraph">
 <p>The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/PartyExtension</code>.</p>
@@ -8703,6 +7994,12 @@ The <code>puf:IDType</code> must be coded using the <a href="https://pagero.gith
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:ADAID/puf:IDType/@listID</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Additional destination address list identifier</strong><br>
 <code>puf:IDType</code> must have a list identifier attribute “PUF-002-ADAID”.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:RoleCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party role code</strong><br>
+To specify the role of the party in the context of the invoice.<br>
+The <code>puf:RoleCode</code> must be coded using the <a href="https://pagero.github.io/puf-code-lists/#_puf_021_rolecode" target="_blank" rel="noopener">PUF-021-ROLECODE</a> code list.</p></td>
 </tr>
 </tbody>
 </table>
@@ -12452,7 +11749,611 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 <p>This section contains information about requirements and other information concerning invoicing in France.</p>
 </div>
 <div class="sect3">
-<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.4.1. Service code</a></h4>
+<h4 id="_french_e_invoicing_mandate_2026"><a class="anchor" href="#_french_e_invoicing_mandate_2026"></a><a class="link" href="#_french_e_invoicing_mandate_2026">5.4.1. French E-Invoicing Mandate (2026)</a></h4>
+<div class="paragraph">
+<p>France implemented a mandatory B2B/B2G e-invoicing system starting in 2026, requiring all invoices between French entities to be transmitted through certified platforms (Plateformes Agréées - PA).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_invoice_type_code_and_business_process_type"><a class="anchor" href="#_invoice_type_code_and_business_process_type"></a><a class="link" href="#_invoice_type_code_and_business_process_type">5.4.2. Invoice Type Code and Business Process Type</a></h4>
+<div class="paragraph">
+<p>In addition to the standard invoice type code, France requires the business process type to be specified using the <code>@name</code> attribute on <code>cbc:InvoiceTypeCode</code>.</p>
+</div>
+<div class="paragraph">
+<p>The business process type (Cadre de facturation) indicates the nature of the transaction and affects VAT treatment. For the complete list of supported codes and their descriptions, see the <a href="https://pagero.github.io/puf-code-lists/#_business_process_codes_for_france" target="_blank" rel="noopener">PUF Code Lists specification</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example for Standard B2B Invoice</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">B1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example for Standard B2G Invoice</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">S1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example for Marketplace Invoice</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">M1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_french_text_codes_note_elements"><a class="anchor" href="#_french_text_codes_note_elements"></a><a class="link" href="#_french_text_codes_note_elements">5.4.3. French Text Codes (Note Elements)</a></h4>
+<div class="paragraph">
+<p>France requires specific information to be provided in invoice notes using standardized text code prefixes. These text codes identify the type of legal, regulatory, or commercial information being provided.</p>
+</div>
+<div class="sect4">
+<h5 id="_text_code_format"><a class="anchor" href="#_text_code_format"></a><a class="link" href="#_text_code_format">Text Code Format</a></h5>
+<div class="paragraph">
+<p>Each text code must be provided in a separate <code>cbc:Note</code> element with the format: <code>#CODE#value</code></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_available_text_codes"><a class="anchor" href="#_available_text_codes"></a><a class="link" href="#_available_text_codes">Available Text Codes</a></h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 25%;">
+<col style="width: 37.5%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Required Value (if applicable)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>ABL</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Legal information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trade register number (RCS) or other legal registration information</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>PMD</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Late payment penalties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Payment terms regarding late payment penalties</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>PMT</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collection costs (€40)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fixed €40 indemnity for collection costs in case of late payment</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>AAI</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">General elements typically found at the bottom of paper invoices (e.g., APE code, capital social)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>BAR</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Treatment type qualification</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expected treatment type for the invoice</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>One of:</strong> <code>B2B</code>, <code>B2BINT</code>, <code>B2C</code>, <code>OUTOFSCOPE</code>, <code>ARCHIVEONLY</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>TXD</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Single taxable person member</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indication that member is part of a single taxable person (for transactions external to the group)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required:</strong> <code>Membre d&#8217;un assujetti unique</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>BLU</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Eco-participation/Eco-contribution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Eco-participation or Eco-contribution WEEE (can also be used for other taxes including eco-tax)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required:</strong> <code>Eco-participation (L. 541-10 du code de l&#8217;environnement)</code> or <code>Eco-contribution DEEE</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>AAB</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Early payment discount</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Statement whether customer can apply discount if paying before due date</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>ACC</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subrogation factoring clause</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Factoring arrangement details and subrogation clauses</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>SUR</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Supplier notes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional remarks from the supplier</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>CUS</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Customs information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Customs-related details and information</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>PAI</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Third party payment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information about third-party payment arrangements</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><mark>ADN</mark></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B2G indicator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates if invoice is subject to B2G treatment (additional CHORUS PRO rules apply)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>IMPORTANT:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <mark>PMT</mark> fixed indemnity amount is legally set at €40.00 per Article L441-10 of the French Commercial Code</p>
+</li>
+<li>
+<p><mark>BAR</mark> is mandatory and must contain exactly ONE of the specified values: <code>B2B</code> (e-invoicing), <code>B2BINT</code> (B2B international e-reporting), <code>B2C</code> (B2C e-reporting), <code>OUTOFSCOPE</code> (outside reform scope), or <code>ARCHIVEONLY</code> (internal credit note - no transmission)</p>
+</li>
+<li>
+<p>Only ONE <mark>BAR</mark> note is allowed per invoice</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_implementation_example"><a class="anchor" href="#_implementation_example"></a><a class="link" href="#_implementation_example">Implementation Example</a></h5>
+<div class="paragraph">
+<p><strong>Complete Example with Common Text Codes</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">B1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+
+    <span class="comment">&lt;!-- French text codes --&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#ABL#RCS Lyon B 987 654 321<span class="tag">&lt;/cbc:Note&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#AAI#SARL au capital de 100000.00 EUR - APE 4651Z - Commerce de gros d'ordinateurs<span class="tag">&lt;/cbc:Note&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage<span class="tag">&lt;/cbc:Note&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR<span class="tag">&lt;/cbc:Note&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#BAR#B2B<span class="tag">&lt;/cbc:Note&gt;</span>
+
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example with Single Taxable Person</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#TXD#Membre d'un assujetti unique<span class="tag">&lt;/cbc:Note&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#BAR#B2B<span class="tag">&lt;/cbc:Note&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example with Eco-participation</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#BLU#Eco-participation (L. 541-10 du code de l'environnement)<span class="tag">&lt;/cbc:Note&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#BAR#B2B<span class="tag">&lt;/cbc:Note&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These text codes apply to both Invoice and CreditNote document types.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_self_billing_indicator_2"><a class="anchor" href="#_self_billing_indicator_2"></a><a class="link" href="#_self_billing_indicator_2">5.4.4. Self-Billing Indicator</a></h4>
+<div class="paragraph">
+<p>Self-billing invoices can be indicated in two ways:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Using Invoice Type Code</strong>: Set <code>cbc:InvoiceTypeCode</code> to <code>389</code> (self-billed invoice) or <code>261</code> (self-billed credit note) with the appropriate <a href="https://pagero.github.io/puf-code-lists/#_business_process_codes_for_france" target="_blank" rel="noopener">business process code</a> in the <code>@name</code> attribute</p>
+</li>
+<li>
+<p><strong>Using Extension Indicator</strong>: Use the dedicated <code>SelfBilled</code> extension with value <code>true</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Both methods are supported, and implementations may choose either approach based on their requirements.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example using Invoice Type Code</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">B1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>389<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example using Extension Indicator</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:SelfBilled&gt;</span>true<span class="tag">&lt;/puf:SelfBilled&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_business_and_vat_identification"><a class="anchor" href="#_business_and_vat_identification"></a><a class="link" href="#_business_and_vat_identification">5.4.5. Business and VAT Identification</a></h4>
+<div class="paragraph">
+<p>France uses SIRET (14-digit) and SIREN (9-digit) numbers for business identification.</p>
+</div>
+<div class="sect4">
+<h5 id="_endpoint_identification_2"><a class="anchor" href="#_endpoint_identification_2"></a><a class="link" href="#_endpoint_identification_2">Endpoint Identification</a></h5>
+<div class="paragraph">
+<p>For electronic addressing in the French e-invoicing system, two schemes are supported:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Scheme 0009 - SIRET</strong>: 14-digit business identifier</p>
+</li>
+<li>
+<p><strong>Scheme 0225 - Electronic Address</strong>: SIREN-based electronic address for e-invoicing platforms</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Example with SIRET (scheme 0009)</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>12345678901234<span class="tag">&lt;/cbc:EndpointID&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>98765432109876<span class="tag">&lt;/cbc:EndpointID&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example with Electronic Address (scheme 0225)</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0225</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>123456789<span class="tag">&lt;/cbc:EndpointID&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0225</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>987654321<span class="tag">&lt;/cbc:EndpointID&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Scheme 0224 (CODE ROUTAGE) is used for platform routing identifiers when required by specific certified platforms.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_party_identification_siren"><a class="anchor" href="#_party_identification_siren"></a><a class="link" href="#_party_identification_siren">Party Identification - SIREN</a></h5>
+<div class="paragraph">
+<p>SIREN (9-digit) can be provided in PartyLegalEntity/CompanyID with scheme ID <code>0002</code>:</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cac:PartyLegalEntity&gt;</span>
+                <span class="tag">&lt;cbc:CompanyID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0002</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>123456789<span class="tag">&lt;/cbc:CompanyID&gt;</span>
+                <span class="tag">&lt;cbc:RegistrationName&gt;</span>Company Legal Name<span class="tag">&lt;/cbc:RegistrationName&gt;</span>
+            <span class="tag">&lt;/cac:PartyLegalEntity&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_vat_identification"><a class="anchor" href="#_vat_identification"></a><a class="link" href="#_vat_identification">VAT Identification</a></h5>
+<div class="paragraph">
+<p>French VAT numbers should use the 'FR' prefix format:</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+                <span class="tag">&lt;cbc:CompanyID&gt;</span>FR12345678901<span class="tag">&lt;/cbc:CompanyID&gt;</span>
+                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+            <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mandate_scenarios_agent_parties"><a class="anchor" href="#_mandate_scenarios_agent_parties"></a><a class="link" href="#_mandate_scenarios_agent_parties">5.4.6. Mandate Scenarios - Agent Parties</a></h4>
+<div class="paragraph">
+<p>France supports multiple mandate scenarios requiring agent party information. Party roles are indicated using the PUF RoleCode extension.</p>
+</div>
+<div class="paragraph">
+<p>For the complete list of available role codes and their descriptions, see the <a href="https://pagero.github.io/puf-code-lists/#_puf_021_rolecode" target="_blank" rel="noopener">PUF Code Lists specification</a>.</p>
+</div>
+<div class="sect4">
+<h5 id="_buyers_agent"><a class="anchor" href="#_buyers_agent"></a><a class="link" href="#_buyers_agent">Buyer&#8217;s Agent</a></h5>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cac:AgentParty&gt;</span>
+                <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                        <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                        <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                <span class="tag">&lt;puf:RoleCode&gt;</span>AB<span class="tag">&lt;/puf:RoleCode&gt;</span>
+                            <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                        <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+                <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+                <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                    <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>11111111111111<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+                <span class="tag">&lt;cac:PartyName&gt;</span>
+                    <span class="tag">&lt;cbc:Name&gt;</span>Buyer Agent Name<span class="tag">&lt;/cbc:Name&gt;</span>
+                <span class="tag">&lt;/cac:PartyName&gt;</span>
+                <span class="tag">&lt;cac:PostalAddress&gt;</span>
+                    <span class="tag">&lt;cac:Country&gt;</span>
+                        <span class="tag">&lt;cbc:IdentificationCode&gt;</span>FR<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+                    <span class="tag">&lt;/cac:Country&gt;</span>
+                <span class="tag">&lt;/cac:PostalAddress&gt;</span>
+            <span class="tag">&lt;/cac:AgentParty&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sellers_agent"><a class="anchor" href="#_sellers_agent"></a><a class="link" href="#_sellers_agent">Seller&#8217;s Agent</a></h5>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cac:AgentParty&gt;</span>
+                <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                        <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                        <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                <span class="tag">&lt;puf:RoleCode&gt;</span>SR<span class="tag">&lt;/puf:RoleCode&gt;</span>
+                            <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                        <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+                <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+                <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                    <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>22222222222222<span class="tag">&lt;/cbc:ID&gt;</span>
+                <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+                <span class="tag">&lt;cac:PartyName&gt;</span>
+                    <span class="tag">&lt;cbc:Name&gt;</span>Seller Agent Name<span class="tag">&lt;/cbc:Name&gt;</span>
+                <span class="tag">&lt;/cac:PartyName&gt;</span>
+                <span class="tag">&lt;cac:PostalAddress&gt;</span>
+                    <span class="tag">&lt;cac:Country&gt;</span>
+                        <span class="tag">&lt;cbc:IdentificationCode&gt;</span>FR<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+                    <span class="tag">&lt;/cac:Country&gt;</span>
+                <span class="tag">&lt;/cac:PostalAddress&gt;</span>
+            <span class="tag">&lt;/cac:AgentParty&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_invoicing_mandate_invoicerinvoicee"><a class="anchor" href="#_invoicing_mandate_invoicerinvoicee"></a><a class="link" href="#_invoicing_mandate_invoicerinvoicee">Invoicing Mandate (Invoicer/Invoicee)</a></h5>
+<div class="paragraph">
+<p>For invoicing mandate scenarios, use ServiceProviderParty with the RoleCode extension:</p>
+</div>
+<div class="paragraph">
+<p><strong>Invoicer Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cac:ServiceProviderParty&gt;</span>
+                <span class="tag">&lt;cac:Party&gt;</span>
+                    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                                    <span class="tag">&lt;puf:RoleCode&gt;</span>II<span class="tag">&lt;/puf:RoleCode&gt;</span>
+                                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+                    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+                    <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                        <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>33333333333333<span class="tag">&lt;/cbc:ID&gt;</span>
+                    <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+                    <span class="tag">&lt;cac:PartyName&gt;</span>
+                        <span class="tag">&lt;cbc:Name&gt;</span>Invoicing Entity Name<span class="tag">&lt;/cbc:Name&gt;</span>
+                    <span class="tag">&lt;/cac:PartyName&gt;</span>
+                <span class="tag">&lt;/cac:Party&gt;</span>
+            <span class="tag">&lt;/cac:ServiceProviderParty&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The role code for Invoicer MUST be exactly <code>II</code> as per French business rules.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_payee_with_role_code"><a class="anchor" href="#_payee_with_role_code"></a><a class="link" href="#_payee_with_role_code">Payee with Role Code</a></h5>
+<div class="paragraph">
+<p>For payment delegation scenarios (e.g., factoring - Case 14), use PayeeParty with the RoleCode extension:</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:PayeeParty&gt;</span>
+        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+            <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                        <span class="tag">&lt;puf:RoleCode&gt;</span>DL<span class="tag">&lt;/puf:RoleCode&gt;</span>
+                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>44444444444444<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+        <span class="tag">&lt;cac:PartyName&gt;</span>
+            <span class="tag">&lt;cbc:Name&gt;</span>Factor Company Name<span class="tag">&lt;/cbc:Name&gt;</span>
+        <span class="tag">&lt;/cac:PartyName&gt;</span>
+    <span class="tag">&lt;/cac:PayeeParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.4.7. Service code</a></h4>
 <div class="paragraph">
 <p>Service code is a routing code required by some customers to identify the correct recipient in French Government Portal.</p>
 </div>
@@ -12503,7 +12404,7 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.4.2. Legal commitments</a></h4>
+<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.4.8. Legal commitments</a></h4>
 <div class="paragraph">
 <p>Entities behind French Government portal can set up validation of certain elements called legal commitments. Therefore it&#8217;s recommended to support the below values in order to fulfill the requirements of this validation.</p>
 </div>

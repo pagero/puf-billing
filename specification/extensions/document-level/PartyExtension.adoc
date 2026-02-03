@@ -1,9 +1,4 @@
-The UBL extension to be used for below elements can be found in the below parties:
-
-- <<_cacaccountingsupplierparty, cac:AccountingSupplierParty>>
-- <<_cacaccountingcustomerparty, cac:AccountingCustomerParty>>
-- <<_cacbuyercustomerparty, cac:BuyerCustomerParty>>
-- <<_cacdelivery, cac:Delivery/cac:DeliveryParty>>
+The UBL extension to be used for below elements can be found in <<_party, cac:Party>>.
 
 The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/PartyExtension`.
 
@@ -68,6 +63,11 @@ The `puf:IDType` must be coded using the https://pagero.github.io/puf-code-lists
 |`puf:ADAID/puf:IDType/@listID`
 |**Additional destination address list identifier** +
 `puf:IDType` must have a list identifier attribute “PUF-002-ADAID”.
+
+|`puf:RoleCode`
+|**Party role code** +
+To specify the role of the party in the context of the invoice. +
+The `puf:RoleCode` must be coded using the https://pagero.github.io/puf-code-lists/#_puf_021_rolecode[PUF-021-ROLECODE^] code list.
 
 |===
 

@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC15 - BUYER AGENT Media Buying (Order & Payment by Third Party)
+    
+    Use Case: Sales Invoice Following Order (and Payment) by Third Party on Behalf of BUYER
+    Country: France (EXTENDED-CTC-FR profile)
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 (Standard invoice)
+    
+    Scenario Description:
+    Advertising publisher (Média Presse Digital SA - "régie publicitaire") issues invoice
+    to advertiser (Cosmétiques Premium Paris SAS - "annonceur") for digital advertising
+    campaign. A media agency (AgenceComm360 SARL - "agence média") acts as BUYER AGENT,
+    having placed the order on behalf of the advertiser and managing invoice validation
+    and payment.
+    
+    Classic Media Buying Model:
+    - BUYER (Annonceur): Cosmétiques Premium Paris SAS - Advertiser/brand paying for ads
+    - BUYER AGENT (Agence Media): AgenceComm360 SARL - Places orders, validates invoices, pays
+    - SELLER (Régie publicitaire): Média Presse Digital SA - Advertising publisher
+    
+    BUYER AGENT Responsibilities:
+    1. Places advertising orders on behalf of BUYER (advertiser)
+    2. Negotiates rates and placement with SELLER (publisher)
+    3. Validates invoice accuracy and campaign delivery
+    4. Approves invoice for payment
+    5. OPTIONALLY: Pays invoice on behalf of BUYER (shown in this example)
+    6. Posts lifecycle statuses on PA-TR platform
+    
+    General Applicability Beyond Media Buying:
+    - Procurement consulting agencies
+    - Purchasing cooperatives with ordering authority
+    - Category management specialists
+    - Strategic sourcing consultants
+    - Any scenario where agent organizes purchases and validation for BUYER
+    
+    Key Implementation: BUYER AGENT in cac:BuyerCustomerParty
+    - BUYER AGENT placed within cac:AccountingCustomerParty after cac:Contact
+    - Third party (BUYER AGENT) identified with role code "AB" (Buyer's agent)
+    - Uses cbc:IndustryClassificationCode with listID="UNCL3035"
+    - Provides complete party details: name, SIREN/SIRET, VAT, address
+    - Enables platform delegation and rights management
+    
+    Electronic Addressing Solution (Same pattern as UC11/UC12):
+    - BT-49 uses special format: SIREN[BUYER]_[CATEGORY]
+    - Example: "234567890_ACHATPUB" routes invoice to media agency's PA-TR
+    - BUYER and BUYER AGENT MUST use same PA-TR platform (or interoperability)
+    - BUYER AGENT manages invoices via platform delegation/rights
+    
+    PA-TR Platform Model A (Common): BUYER AGENT Proposes Platform
+    - BUYER AGENT proposes their preferred PA-TR
+    - BUYER agrees and becomes "simple user" of this PA-TR
+    - BUYER accesses invoices via own PA acting as OD/SC (Compatible Solution)
+    - Invoice/status replication via API between platforms
+    
+    Payment Model: BUYER AGENT Pays on Behalf of BUYER
+    - Payment to SELLER from BUYER AGENT's account
+    - BUYER AGENT later invoices BUYER for services + reimbursement
+    - Separate agency commission invoice (not shown here)
+    
+    Key Characteristics:
+    - Invoice type 380: Standard commercial invoice
+    - Business process B1: Standard invoice
+    - BG-4 SELLER: Advertising publisher (Média Presse Digital SA)
+    - BG-7 BUYER: Advertiser/brand (Cosmétiques Premium Paris SAS)
+    - EXT-FR-FE-BG-01 BUYER AGENT: Media agency (AgenceComm360 SARL)
+    - BT-49: Electronic address "234567890_ACHATPUB" (SIREN_ACHATPUB format)
+    - Payment to SELLER via BUYER AGENT
+    - Total: 36,000.00 EUR
+    
+    Workflow:
+    1. BUYER (advertiser) engages BUYER AGENT (media agency) via mandate/contract
+    2. BUYER AGENT negotiates advertising campaign with SELLER (publisher)
+    3. BUYER AGENT places order on behalf of BUYER
+    4. SELLER delivers advertising services (campaign runs)
+    5. SELLER issues invoice with BT-49 = "234567890_ACHATPUB"
+    6. Invoice routes to BUYER AGENT's PA-TR platform
+    7. BUYER AGENT validates invoice (checks campaign delivery, rates, placement)
+    8. BUYER AGENT approves invoice and posts lifecycle status
+    9. BUYER AGENT pays SELLER from their account
+    10. BUYER accesses invoice via PA-TR or own PA (OD/SC interoperability)
+    11. BUYER AGENT later invoices BUYER for advertising cost + agency commission
+    
+    Campaign Details:
+    - Digital advertising campaign Q1 2026 for luxury skincare product launch
+    - Display banner ads (premium sites): 15,000.00 EUR
+    - Video pre-roll ads (YouTube/streaming): 12,000.00 EUR
+    - Social media sponsored posts (Instagram/Facebook): 9,000.00 EUR
+    
+    Amounts:
+    - Total advertising services: 36,000.00 EUR net
+    - VAT (20% standard rate): 7,200.00 EUR
+    - Invoice total with VAT: 43,200.00 EUR
+    - Amount due for payment: 43,200.00 EUR (paid by BUYER AGENT)
+    
+    French Text Codes Used:
+    - #REG# Registration information
+    - #PMT# Payment terms
+    - #AAI# Additional invoice information (BUYER AGENT note)
+    
+    Implementation Notes:
+    - EXTENDED-CTC-FR profile mandatory for EXT-FR-FE-BG-01 extension
+    - Electronic address "234567890_ACHATPUB" routes to media agency's PA-TR
+    - SchemeID "0002" indicates SIREN-based addressing
+    - Service code "_ACHATPUB" dedicated to advertising purchases
+    - BUYER AGENT identified in extension with role code "AB"
+    - Third party must have delegated rights on platform
+    - Payment terms explain BUYER AGENT payment arrangement
+    - BUYER maintains legal obligation (BUYER AGENT acts as authorized agent)
+    
+    Date: 2026-02-02
+    Reference: XP Z12-014 Annexe A, Section 3.2.13 - Cas n°15
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>MPD-2026-Q1-ADV-0892</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-02-02</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (30 days) -->
+    <cbc:DueDate>2026-03-04</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - French text codes for registration, payment terms, additional info -->
+    <cbc:Note>#REG#Société immatriculée au RCS de Paris sous le numéro 11122233344455, capital social 5 000 000 EUR. Régie publicitaire digitale leader, membre du Syndicat des Régies Internet (SRI).</cbc:Note>
+    <cbc:Note>#PMT#Conditions de paiement: 30 jours fin de mois par virement bancaire. En cas de retard de paiement, pénalités de 3 fois le taux d'intérêt légal + indemnité forfaitaire pour frais de recouvrement de 40 EUR. PAIEMENT PAR AGENT D'ACHETEUR: Cette facture sera payée par l'agence média AgenceComm360 SARL (SIREN 999888777) agissant pour le compte de l'annonceur ACHETEUR (Cosmétiques Premium Paris SAS), conformément au contrat cadre établi entre la régie et l'agence. L'agence média dispose d'un mandat de représentation et de délégation de paiement pour cette catégorie d'achats publicitaires.</cbc:Note>
+    <cbc:Note>#AAI#FACTURE GÉRÉE PAR AGENT D'ACHETEUR (AGENCE MÉDIA): Cette facture publicitaire est destinée au client ACHETEUR/annonceur (Cosmétiques Premium Paris SAS) mais gérée et payée par l'agence média AgenceComm360 SARL agissant en qualité d'AGENT d'ACHETEUR. L'agence média a passé commande pour le compte de l'annonceur, validé les emplacements publicitaires et la diffusion de la campagne, et procédera au paiement pour le compte de son client conformément au mandat établi. Le routage vers l'agence est assuré par l'adresse électronique dédiée aux achats publicitaires (SIREN_ACHATPUB). L'agence média opère sur la plateforme PA-TR choisie en accord avec l'annonceur. L'annonceur ACHETEUR conserve la responsabilité légale finale et accède aux factures via interopérabilité PA-TR/PA-R. Campagne digitale Q1 2026 pour lancement gamme soins anti-âge premium.</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference (Routing identifier for BUYER AGENT processing) -->
+    <cbc:BuyerReference>234567890_ACHATPUB</cbc:BuyerReference>
+
+    <!-- BT-13: Purchase order reference (Placed by BUYER AGENT on behalf of BUYER) -->
+    <cac:OrderReference>
+        <cbc:ID>AGENCE-CMD-PUB-Q1-2026-0234</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BG-3: Contract document reference (Framework agreement between publisher and agency) -->
+    <cac:ContractDocumentReference>
+        <cbc:ID>CONTRAT-CADRE-REGIE-AGENCE-2025-2027</cbc:ID>
+    </cac:ContractDocumentReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Advertising Publisher -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address (SIRET) -->
+            <cbc:EndpointID schemeID="0009">11122233344455</cbc:EndpointID>
+
+            <!-- BT-28: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>MPD - Média Presse Digital</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>Tour Media, 25 Rue de la Presse</cbc:StreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Paris</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>75002</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR11111222333</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Média Presse Digital SA</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">111222333</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Advertiser/Brand
+         CRITICAL: BT-49 uses SIREN_ACHATPUB format for BUYER AGENT routing -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address - CRITICAL ROUTING MECHANISM
+                 Format: SIREN[BUYER]_[CATEGORY]
+                 "234567890_ACHATPUB" = BUYER's SIREN + advertising purchase category code
+                 This routes invoice to AgenceComm360 (media agency / BUYER AGENT)
+                 on PA-TR platform for validation and payment processing on behalf of BUYER.
+                 
+                 SchemeID "0002" = SIREN-based addressing
+                 Service code "_ACHATPUB" = Routes to BUYER AGENT's PA-TR (Achat Publicité)
+                 
+                 BUYER AGENT created this address with BUYER's mandate authorization.
+                 BUYER dedicates this address to advertising purchases managed by agency.
+                 
+                 BUYER AGENT operates on PA-TR platform with delegated rights to:
+                 - Validate invoice accuracy and campaign delivery
+                 - Approve invoice for payment
+                 - Pay SELLER on behalf of BUYER
+                 - Post lifecycle statuses
+                 
+                 BUYER accesses invoices via PA-TR or own PA acting as OD/SC. -->
+            <cbc:EndpointID schemeID="0002">234567890_ACHATPUB</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Cosmétiques Premium</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>15 Rue du Faubourg Saint-Honoré</cbc:StreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Paris</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>75008</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR23234567890</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name (Actual customer - Advertiser/Brand) -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Cosmétiques Premium Paris SAS</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">234567890</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact (Marketing Director - authorized representative) -->
+            <cac:Contact>
+                <!-- BT-56: Buyer contact point -->
+                <cbc:Name>Sophie Martin - Directrice Marketing</cbc:Name>
+                <!-- BT-57: Buyer contact telephone -->
+                <cbc:Telephone>+33 1 42 66 77 88</cbc:Telephone>
+                <!-- BT-58: Buyer contact email -->
+                <cbc:ElectronicMail>s.martin@cosmetiques-premium.fr</cbc:ElectronicMail>
+            </cac:Contact>
+
+            <!-- BUYER AGENT (Agent d'ACHETEUR) - Third Party Acting on Behalf of BUYER
+                 Role Code "AB" = Buyer's agent (UNTDID 3035)
+                 
+                 The BUYER AGENT (media agency AgenceComm360 SARL) acts on behalf of the
+                 BUYER (advertiser Cosmétiques Premium Paris SAS) to:
+                 - Place advertising orders with SELLER (publisher)
+                 - Validate invoice accuracy and campaign delivery
+                 - Approve invoice for payment
+                 - Pay SELLER on behalf of BUYER
+                 - Post lifecycle statuses on PA-TR platform
+                 
+                 Platform Requirements:
+                 - BUYER AGENT must be identified on emission OR reception platform
+                 - Must have delegated rights to act on behalf of BUYER
+                 - Rights enable invoice processing, validation, payment -->
+            <cac:AgentParty>
+                <!-- BUYER AGENT Role Code -->
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionURI>
+                                urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                        <ext:ExtensionContent>
+                            <puf:PageroExtension>
+                                <puf:PartyExtension>
+                                    <puf:RoleCode>
+                                        <cbc:ID>AB</cbc:ID>
+                                    </puf:RoleCode>
+                                </puf:PartyExtension>
+                            </puf:PageroExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
+                <!-- BUYER AGENT Electronic Address -->
+                <cbc:EndpointID schemeID="0002">99988877766655</cbc:EndpointID>
+
+                <!-- BUYER AGENT Trading Name -->
+                <cac:PartyName>
+                    <cbc:Name>AgenceComm360</cbc:Name>
+                </cac:PartyName>
+
+                <!-- BUYER AGENT Postal Address -->
+                <cac:PostalAddress>
+                    <cbc:StreetName>88 Avenue des Champs-Élysées</cbc:StreetName>
+                    <cbc:CityName>Paris</cbc:CityName>
+                    <cbc:PostalZone>75008</cbc:PostalZone>
+                    <cac:Country>
+                        <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    </cac:Country>
+                </cac:PostalAddress>
+
+                <!-- BUYER AGENT VAT Identifier -->
+                <cac:PartyTaxScheme>
+                    <cbc:CompanyID>FR99999888777</cbc:CompanyID>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:PartyTaxScheme>
+                
+                <!-- BUYER AGENT Legal Entity -->
+                <cac:PartyLegalEntity>
+                    <cbc:RegistrationName>AgenceComm360 SARL</cbc:RegistrationName>
+                    <!-- BUYER AGENT SIREN -->
+                    <cbc:CompanyID schemeID="0002">999888777</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+
+            </cac:AgentParty>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-17: Credit transfer (Payment means) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (31 = credit transfer) -->
+        <cbc:PaymentMeansCode>31</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>MPD-2026-Q1-ADV-0892</cbc:PaymentID>
+
+        <!-- BG-19: Credit transfer - SELLER's IBAN
+             Payment will be made by BUYER AGENT (media agency) on behalf of BUYER -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84: Payment account identifier (SELLER's IBAN) -->
+            <cbc:ID>FR7611122233344455667788990011</cbc:ID>
+            <!-- BT-85: Payment account name -->
+            <cbc:Name>Média Presse Digital SA</cbc:Name>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms (free text) -->
+        <cbc:Note>Paiement à 30 jours fin de mois par virement bancaire. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). PAIEMENT PAR AGENT D'ACHETEUR: Cette facture publicitaire sera réglée par l'agence média AgenceComm360 SARL (SIREN 999888777, SIRET 99988877766655) agissant pour le compte de l'annonceur ACHETEUR (Cosmétiques Premium Paris SAS), conformément au contrat cadre de représentation établi entre la régie publicitaire et l'agence média. L'agence média dispose d'un mandat de délégation pour la passation de commandes publicitaires, la validation des campagnes et le paiement des factures pour cette catégorie d'achats (achats média digitaux). L'annonceur ACHETEUR conserve la responsabilité légale finale et sera refacturé par l'agence pour les coûts publicitaires + commission d'agence selon contrat séparé.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">7200.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">36000.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">7200.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code (S = Standard rate) -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate (20% standard rate) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">36000.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">36000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">43200.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115: Amount due for payment (paid by BUYER AGENT) -->
+        <cbc:PayableAmount currencyID="EUR">43200.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: INVOICE LINE 1 - Display Banner Advertising -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (Campaign delivery impressions) -->
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">15000.00</cbc:LineExtensionAmount>
+
+        <!-- BT-72: Actual delivery date (Campaign period) -->
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2026-01-15</cbc:StartDate>
+            <cbc:EndDate>2026-01-31</cbc:EndDate>
+        </cac:InvoicePeriod>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Campagne publicitaire display bannières premium - Lancement gamme soins anti-âge "Éternelle Jeunesse": diffusion bannières 300x250 et 728x90 sur sites éditoriaux premium beauté/lifestyle (Marie Claire, Elle, Cosmopolitan, Vogue digital), audience qualifiée femmes CSP+ 30-55 ans, garantie visibilité 100% above the fold, fréquence capping 3 impressions/jour/utilisateur, ciblage géographique Île-de-France + grandes métropoles, période du 15 au 31 janvier 2026, objectif 2,5 millions d'impressions livrées, CTR garanti ≥0.8%, tracking pixels conversion installés, rapport hebdomadaire de performance fourni</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Publicité Display Bannières Premium - Campagne "Éternelle Jeunesse" Q1 2026</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) - MUST be last in Item element -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Impressions livrées</cbc:Name>
+                <cbc:Value>2 547 892 impressions (objectif 2,5M atteint à 102%)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Taux de clic (CTR)</cbc:Name>
+                <cbc:Value>0.92% (objectif ≥0.8% dépassé)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Formats bannières</cbc:Name>
+                <cbc:Value>300x250 pixels (Medium Rectangle) + 728x90 pixels (Leaderboard)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Sites éditoriaux premium</cbc:Name>
+                <cbc:Value>Marie Claire, Elle, Cosmopolitan, Vogue digital, Madame Figaro</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">15000.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 2 - Video Pre-Roll Advertising -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (Campaign delivery) -->
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">12000.00</cbc:LineExtensionAmount>
+
+        <!-- BT-72: Actual delivery date (Campaign period) -->
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2026-01-15</cbc:StartDate>
+            <cbc:EndDate>2026-01-31</cbc:EndDate>
+        </cac:InvoicePeriod>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Campagne vidéo pre-roll publicitaire - Lancement "Éternelle Jeunesse": diffusion spot vidéo 15 secondes non skippable avant contenus vidéo premium beauté/bien-être sur YouTube et plateformes streaming partenaires (6Play, MyTF1, France.TV Publicité), audience qualifiée femmes 30-55 ans intéressées beauté/cosmétiques, ciblage comportemental + contextuel (contenus beauté/lifestyle), VTR garanti ≥75%, taux de complétion ≥90%, période du 15 au 31 janvier 2026, objectif 800 000 vues complètes livrées, tracking post-view conversion 30 jours, rapport détaillé performance vidéo fourni</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Publicité Vidéo Pre-Roll Premium - Campagne "Éternelle Jeunesse" Q1 2026</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) - MUST be last in Item element -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Vues complètes livrées</cbc:Name>
+                <cbc:Value>834 267 vues complètes (objectif 800K atteint à 104%)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Taux de complétion</cbc:Name>
+                <cbc:Value>93.2% (objectif ≥90% dépassé)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Format vidéo</cbc:Name>
+                <cbc:Value>Spot 15 secondes non skippable, format 16:9 HD 1080p</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Plateformes diffusion</cbc:Name>
+                <cbc:Value>YouTube Premium Beauty, 6Play, MyTF1, France.TV Publicité</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">12000.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 3 - Social Media Sponsored Posts -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (Campaign delivery) -->
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">9000.00</cbc:LineExtensionAmount>
+
+        <!-- BT-72: Actual delivery date (Campaign period) -->
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2026-01-15</cbc:StartDate>
+            <cbc:EndDate>2026-01-31</cbc:EndDate>
+        </cac:InvoicePeriod>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Campagne réseaux sociaux posts sponsorisés - Lancement "Éternelle Jeunesse": diffusion posts sponsorisés Instagram Stories + Feed, Facebook News Feed, ciblage précis audiences lookalike basées base clients premium marque (femmes CSP+ 30-55 ans, intérêt cosmétiques haut de gamme/anti-âge), création visuelle carousel 3 slides fournie par annonceur, optimisation placement automatique Meta Ads, objectif reach 500K utilisateurs uniques + 50K engagements (likes, commentaires, partages, clics vers site), période du 15 au 31 janvier 2026, A/B testing 2 variantes visuels, remarketing audiences engagées, rapport social media analytics complet fourni</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Publicité Social Media Sponsorisée - Campagne "Éternelle Jeunesse" Q1 2026</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- BT-160: Item attributes (Additional item properties) - MUST be last in Item element -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Reach utilisateurs uniques</cbc:Name>
+                <cbc:Value>547 892 utilisateurs uniques (objectif 500K atteint à 110%)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Engagements totaux</cbc:Name>
+                <cbc:Value>58 234 engagements (objectif 50K atteint à 116%)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Taux d'engagement</cbc:Name>
+                <cbc:Value>10.6% (moyenne industrie beauté: 3-5%)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Plateformes réseaux sociaux</cbc:Name>
+                <cbc:Value>Instagram Stories + Feed (70%), Facebook News Feed (30%)</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">9000.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

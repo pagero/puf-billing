@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 1: Multi-Order / Multi-Delivery Invoice
+    
+    Business Scenario:
+    - Consolidated invoice covering multiple purchase orders
+    - Multiple delivery locations across different invoice lines
+    - Demonstrates French extensions (EXTENDED-CTC-FR profile)
+    
+    Key Extensions Used:
+    - EXT-FR-FE-135: Order reference at line level
+    - EXT-FR-FE-140/141: Despatch advice reference at line level
+    - EXT-FR-FE-BG-10: Delivery information group at line level
+    - EXT-FR-FE-146/148/149: Location identifiers at line level
+    - EXT-FR-FE-150: Delivery address at line level
+    
+    French Text Codes (BT-21/BT-22):
+    - #REG#: Company legal form and share capital
+    - #ABL#: Trade register number (RCS)
+    - #AAI#: APE business activity code
+    - #PMD#: Late payment penalties
+    - #PMT#: Fixed collection costs indemnity (€40)
+    - #BAR#: Treatment type (B2B e-invoicing)
+    
+    Example Pattern:
+    - Invoice Line 1: Order PO-2026-001 → Warehouse Lyon
+    - Invoice Line 2: Order PO-2026-002 → Store Paris Centre
+    - Invoice Line 3: Order PO-2026-002 → Store Marseille
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type - B1: Goods invoice -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>INV-FR-2026-0158</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-01-15</cbc:IssueDate>
+    <!-- BT-9 Payment Due Date -->
+    <cbc:DueDate>2026-02-14</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes -->
+    <!-- REG: Company legal form and share capital (BT-33 alternative method) -->
+    <cbc:Note>#REG#SAS au capital de 500000.00 EUR</cbc:Note>
+    <!-- ABL: Legal information - Trade register (BT-33 alternative method) -->
+    <cbc:Note>#ABL#RCS Paris B 123 456 789</cbc:Note>
+    <!-- AAI: General information - APE code (business activity classification) -->
+    <cbc:Note>#AAI#APE 4690Z - Commerce de gros</cbc:Note>
+    <!-- PMD: Late payment penalties (French mandatory payment terms) -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- PMT: Fixed indemnity for collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- BAR: Treatment type qualification - B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-8 Tax point date code - 35: Delivery date -->
+    <cac:InvoicePeriod>
+        <cbc:DescriptionCode>35</cbc:DescriptionCode>
+    </cac:InvoicePeriod>
+
+    <!-- Header-level order references (BT-13): Lists all orders consolidated in this invoice -->
+    <cac:OrderReference>
+        <!-- BT-13 Purchase Order Reference - First order -->
+        <cbc:ID>PO-2026-001</cbc:ID>
+        <cbc:IssueDate>2026-01-05</cbc:IssueDate>
+    </cac:OrderReference>
+
+    <!-- Additional order reference using AdditionalDocumentReference for second order -->
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>PO-2026-002</cbc:ID>
+        <cbc:IssueDate>2026-01-08</cbc:IssueDate>
+        <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode>
+        <cbc:DocumentDescription>Consolidated purchase order reference</cbc:DocumentDescription>
+    </cac:AdditionalDocumentReference>
+
+    <!-- BG-4 Seller Information -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">12345678901234</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Distributeur France Alimentaire</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <!-- BT-35 Street name -->
+                <cbc:StreetName>25 Avenue des Champs-Élysées</cbc:StreetName>
+                <cbc:AdditionalStreetName>Bâtiment A, 3ème étage</cbc:AdditionalStreetName>
+                <!-- BT-37 City -->
+                <cbc:CityName>Paris</cbc:CityName>
+                <!-- BT-38 Postal code -->
+                <cbc:PostalZone>75008</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR12345678901</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Legal Name -->
+                <cbc:RegistrationName>Distributeur France Alimentaire SAS</cbc:RegistrationName>
+                <!-- BT-30 SIREN -->
+                <cbc:CompanyID schemeID="0002">123456789</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 Seller Contact -->
+            <cac:Contact>
+                <!-- BT-41 Contact name -->
+                <cbc:Name>Marie Dubois</cbc:Name>
+                <!-- BT-42 Contact telephone -->
+                <cbc:Telephone>+33 1 23 45 67 89</cbc:Telephone>
+                <!-- BT-43 Contact email -->
+                <cbc:ElectronicMail>factures@distributeur-france.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>CUST-FR-98765</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-46 Buyer Identifier - SIRET -->
+            <cbc:EndpointID schemeID="0009">98765432109876</cbc:EndpointID>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Chaîne Magasins Retail France</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <!-- BT-50 Street name -->
+                <cbc:StreetName>150 Boulevard Haussmann</cbc:StreetName>
+                <!-- BT-52 City -->
+                <cbc:CityName>Paris</cbc:CityName>
+                <!-- BT-53 Postal code -->
+                <cbc:PostalZone>75009</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR98765432109</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Legal Name -->
+                <cbc:RegistrationName>Chaîne Magasins Retail France SA</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13 Delivery information (header level - actual delivery handled at line level for UC1) -->
+    <cac:Delivery>
+        <!-- BT-72 Actual Delivery Date (general delivery date, specific dates at line level) -->
+        <cbc:ActualDeliveryDate>2026-01-12</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+
+    <!-- BG-16 Payment Means -->
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code - 30: Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier - IBAN -->
+            <cbc:ID>FR7612345678901234567890123</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BIC/SWIFT -->
+                <cbc:ID>BNPAFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms -->
+        <cbc:Note>Paiement à 30 jours fin de mois</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">600.00</cbc:TaxAmount>
+        <!-- Tax subtotal for 20% VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116 Taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">3000.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">600.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code - S: Standard rate -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT category rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">3000.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">3000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">3600.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">3600.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- ========================================
+         INVOICE LINE 1: Order PO-2026-001, Delivery to Lyon Warehouse
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Livraison entrepôt principal Lyon</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="EA">100</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+
+        <!-- EXT-FR-FE-135: Order reference at line level -->
+        <cac:OrderLineReference>
+            <!-- Order line reference -->
+            <cbc:LineID>5</cbc:LineID>
+            <cac:OrderReference>
+                <!-- Purchase order number for this specific line -->
+                <cbc:ID>PO-2026-001</cbc:ID>
+                <cbc:IssueDate>2026-01-05</cbc:IssueDate>
+            </cac:OrderReference>
+        </cac:OrderLineReference>
+
+        <!-- EXT-FR-FE-BG-07: Despatch advice reference at line level -->
+        <cac:DespatchLineReference>
+            <!-- EXT-FR-FE-141: Despatch advice line reference -->
+            <cbc:LineID>3</cbc:LineID>
+            <cac:DocumentReference>
+                <!-- EXT-FR-FE-140: Despatch advice identifier -->
+                <cbc:ID>DN-2026-0045</cbc:ID>
+                <cbc:IssueDate>2026-01-10</cbc:IssueDate>
+            </cac:DocumentReference>
+        </cac:DespatchLineReference>
+
+        <!-- EXT-FR-FE-BG-10: Delivery Information at line level -->
+        <cac:Delivery>
+            <!-- EXT-FR-FE-158: Actual delivery date at line level -->
+            <cbc:ActualDeliveryDate>2026-01-12</cbc:ActualDeliveryDate>
+            <!-- EXT-FR-FE-BG-10: Delivery location details -->
+            <cac:DeliveryLocation>
+                <!-- EXT-FR-FE-146: Location identifier (GLN) -->
+                <cbc:ID schemeID="0088">3597890123456</cbc:ID>
+                <!-- EXT-FR-FE-149: Location name -->
+                <cbc:Name>Entrepôt Central Lyon</cbc:Name>
+                <!-- EXT-FR-FE-150: Delivery address at line level -->
+                <cac:Address>
+                    <!-- EXT-FR-FE-151: Street name -->
+                    <cbc:StreetName>45 Rue de la Logistique</cbc:StreetName>
+                    <cbc:AdditionalStreetName>Zone Industrielle Nord</cbc:AdditionalStreetName>
+                    <!-- EXT-FR-FE-154: City -->
+                    <cbc:CityName>Lyon</cbc:CityName>
+                    <!-- EXT-FR-FE-155: Postal code -->
+                    <cbc:PostalZone>69007</cbc:PostalZone>
+                    <!-- EXT-FR-FE-156: Country subdivision (optional) -->
+                    <cbc:CountrySubentity>Auvergne-Rhône-Alpes</cbc:CountrySubentity>
+                    <cac:Country>
+                        <!-- EXT-FR-FE-157: Country code -->
+                        <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                        <cbc:Name>France</cbc:Name>
+                    </cac:Country>
+                </cac:Address>
+            </cac:DeliveryLocation>
+        </cac:Delivery>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Café 100% Arabica torréfaction artisanale, origine Colombie</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Café Arabica Premium - Grains 1kg</cbc:Name>
+            <!-- BG-32 Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158 Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">09012100</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Origine</cbc:Name>
+                <cbc:Value>Colombie</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Certification</cbc:Name>
+                <cbc:Value>Bio AB</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <!-- BG-29 Price details -->
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">10.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- ========================================
+         INVOICE LINE 2: Order PO-2026-002, Delivery to Paris Centre Store
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Livraison magasin Paris Centre</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="EA">50</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1250.00</cbc:LineExtensionAmount>
+
+        <!-- EXT-FR-FE-135: Order reference at line level (different order from line 1) -->
+        <cac:OrderLineReference>
+            <cbc:LineID>8</cbc:LineID>
+            <cac:OrderReference>
+                <!-- This line references a different purchase order -->
+                <cbc:ID>PO-2026-002</cbc:ID>
+                <cbc:IssueDate>2026-01-08</cbc:IssueDate>
+            </cac:OrderReference>
+        </cac:OrderLineReference>
+
+        <!-- EXT-FR-FE-BG-07: Despatch advice reference at line level -->
+        <cac:DespatchLineReference>
+            <!-- EXT-FR-FE-141: Despatch advice line reference -->
+            <cbc:LineID>1</cbc:LineID>
+            <cac:DocumentReference>
+                <!-- EXT-FR-FE-140: Different despatch advice for this delivery -->
+                <cbc:ID>DN-2026-0046</cbc:ID>
+                <cbc:IssueDate>2026-01-11</cbc:IssueDate>
+            </cac:DocumentReference>
+        </cac:DespatchLineReference>
+
+        <!-- EXT-FR-FE-BG-10: Delivery Information at line level (different location) -->
+        <cac:Delivery>
+            <!-- EXT-FR-FE-158: Actual delivery date at line level -->
+            <cbc:ActualDeliveryDate>2026-01-13</cbc:ActualDeliveryDate>
+            <!-- Delivery location details -->
+            <cac:DeliveryLocation>
+                <!-- EXT-FR-FE-146: Location identifier (GLN for Paris store) -->
+                <cbc:ID schemeID="0088">3597890234567</cbc:ID>
+                <!-- EXT-FR-FE-149: Location name -->
+                <cbc:Name>Magasin Paris Centre - Opéra</cbc:Name>
+                <!-- EXT-FR-FE-150: Delivery address at line level (Paris store address) -->
+                <cac:Address>
+                    <!-- EXT-FR-FE-151: Street name -->
+                    <cbc:StreetName>12 Boulevard des Capucines</cbc:StreetName>
+                    <!-- EXT-FR-FE-154: City -->
+                    <cbc:CityName>Paris</cbc:CityName>
+                    <!-- EXT-FR-FE-155: Postal code -->
+                    <cbc:PostalZone>75009</cbc:PostalZone>
+                    <!-- EXT-FR-FE-156: Country subdivision -->
+                    <cbc:CountrySubentity>Île-de-France</cbc:CountrySubentity>
+                    <cac:Country>
+                        <!-- EXT-FR-FE-157: Country code -->
+                        <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                        <cbc:Name>France</cbc:Name>
+                    </cac:Country>
+                </cac:Address>
+            </cac:DeliveryLocation>
+        </cac:Delivery>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Thé vert parfumé à la bergamote, sachets individuels</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Thé Vert Earl Grey - Boîte 100 sachets</cbc:Name>
+            <!-- BG-32 Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158 Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">09023000</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Type</cbc:Name>
+                <cbc:Value>Thé vert</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Conditionnement</cbc:Name>
+                <cbc:Value>100 sachets</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">25.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- ========================================
+         INVOICE LINE 3: Order PO-2026-002, Delivery to Marseille Store
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Livraison magasin Marseille Vieux-Port</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="EA">30</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">750.00</cbc:LineExtensionAmount>
+
+        <!-- EXT-FR-FE-135: Order reference at line level (same order as line 2, different delivery) -->
+        <cac:OrderLineReference>
+            <cbc:LineID>12</cbc:LineID>
+            <cac:OrderReference>
+                <!-- This line also references PO-2026-002, but delivers to different location -->
+                <cbc:ID>PO-2026-002</cbc:ID>
+                <cbc:IssueDate>2026-01-08</cbc:IssueDate>
+            </cac:OrderReference>
+        </cac:OrderLineReference>
+
+        <!-- EXT-FR-FE-BG-07: Despatch advice reference at line level -->
+        <cac:DespatchLineReference>
+            <!-- EXT-FR-FE-141: Despatch advice line reference -->
+            <cbc:LineID>5</cbc:LineID>
+            <cac:DocumentReference>
+                <!-- EXT-FR-FE-140: Same despatch advice as line 2, different line -->
+                <cbc:ID>DN-2026-0046</cbc:ID>
+                <cbc:IssueDate>2026-01-11</cbc:IssueDate>
+            </cac:DocumentReference>
+        </cac:DespatchLineReference>
+
+        <!-- EXT-FR-FE-BG-10: Delivery Information at line level (Marseille location) -->
+        <cac:Delivery>
+            <!-- EXT-FR-FE-158: Actual delivery date at line level -->
+            <cbc:ActualDeliveryDate>2026-01-14</cbc:ActualDeliveryDate>
+            <!-- Delivery location details -->
+            <cac:DeliveryLocation>
+                <!-- EXT-FR-FE-146: Location identifier (GLN for Marseille store) -->
+                <cbc:ID schemeID="0088">3597890345678</cbc:ID>
+                <!-- EXT-FR-FE-149: Location name -->
+                <cbc:Name>Magasin Marseille - Vieux-Port</cbc:Name>
+                <!-- EXT-FR-FE-150: Delivery address at line level (Marseille store address) -->
+                <cac:Address>
+                    <!-- EXT-FR-FE-151: Street name -->
+                    <cbc:StreetName>7 Quai du Port</cbc:StreetName>
+                    <!-- EXT-FR-FE-154: City -->
+                    <cbc:CityName>Marseille</cbc:CityName>
+                    <!-- EXT-FR-FE-155: Postal code -->
+                    <cbc:PostalZone>13002</cbc:PostalZone>
+                    <!-- EXT-FR-FE-156: Country subdivision -->
+                    <cbc:CountrySubentity>Provence-Alpes-Côte d'Azur</cbc:CountrySubentity>
+                    <cac:Country>
+                        <!-- EXT-FR-FE-157: Country code -->
+                        <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                        <cbc:Name>France</cbc:Name>
+                    </cac:Country>
+                </cac:Address>
+            </cac:DeliveryLocation>
+        </cac:Delivery>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Thé vert parfumé à la bergamote, sachets individuels</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Thé Vert Earl Grey - Boîte 100 sachets</cbc:Name>
+            <!-- BG-32 Item classification -->
+            <cac:CommodityClassification>
+                <!-- BT-158 Item classification identifier -->
+                <cbc:ItemClassificationCode listID="STI">09023000</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Type</cbc:Name>
+                <cbc:Value>Thé vert</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Conditionnement</cbc:Name>
+                <cbc:Value>100 sachets</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">25.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

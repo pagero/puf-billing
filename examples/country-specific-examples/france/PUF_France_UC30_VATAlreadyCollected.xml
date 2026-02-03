@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC30 - VAT Already Collected (B2C E-Reporting → B2B Invoice)
+    
+    Use Case: Invoice After VAT Already Reported via E-Reporting
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: S7 (VAT Already Collected - Services)
+    
+    Scenario Description:
+    Transaction initially treated as B2C (consumer sale) and reported via e-reporting
+    flows (Flux 10.3 transaction data + Flux 10.4 payment data if applicable).
+    Customer subsequently reveals they are a business entity and requests formal
+    B2B invoice to claim VAT deduction.
+    
+    Core Problem - Double VAT Accounting Risk:
+    - VAT already collected and reported via e-reporting (Flux 10.3/10.4)
+    - Now creating B2B invoice generating Flux 1 to tax authorities
+    - Risk: Same transaction counted TWICE for SELLER's VAT liability
+    
+    Solution - Business Process Code S7:
+    Special code signals to tax authorities that:
+    - Transaction data already transmitted via e-reporting (Flux 10.3)
+    - Payment/VAT data already transmitted (Flux 10.4 if applicable)
+    - Flux 1 from this invoice should NOT be counted for SELLER's VAT liability
+    - Flux 1 SHOULD be counted for BUYER's VAT deduction (enables VAT reclaim)
+    
+    Legal Framework:
+    - French e-reporting obligations for B2C transactions
+    - Customer right to VAT deduction requires formal B2B invoice
+    - Special business process codes prevent double-counting
+    - Section 3.2.29 XP Z12-014 Annexe A
+    
+    Business Process Code Options:
+    - B7: VAT already collected (Goods)
+    - S7: VAT already collected (Services) - USED IN THIS EXAMPLE
+    - M7: VAT already collected (Mixed provision)
+    
+    Real-World Example - Florist Business:
+    - Business: "Fleurs & Événements Rousseau SARL" (florist and event coordinator)
+    - Services: Event coordination (B2B - hotels, B2C - individuals)
+    - Goods: Plant and flower sales (B2B and B2C)
+    - POS System: Cash register recording all transactions
+    - Obligations:
+      * E-invoicing for B2B operations (Flux 1)
+      * E-reporting for B2C operations (Flux 10.3 + 10.4)
+    
+    Transaction Timeline:
+    
+    Stage 1: Initial B2C Transaction (E-Reporting)
+    1. 2026-01-15: Customer purchases floral decoration service (appears to be consumer)
+       - Service: Wedding bouquet consultation + event coordination
+       - Amount: 850.00 EUR + 170.00 EUR VAT = 1,020.00 EUR
+       - Payment: Credit card (collected immediately)
+       - Transaction recorded in cash register system
+    
+    2. 2026-01-15 EOD: Daily Z-Report generated
+       - Cumulative transaction data compiled
+    
+    3. 2026-01-20: E-Reporting transmission (per configured frequency F)
+       - Flux 10.3: Cumulative transaction data transmitted to tax authorities
+       - Flux 10.4: Payment data transmitted (if SELLER not on "TVA sur débits")
+       - VAT STATUS: Already collected and reported via e-reporting
+    
+    Stage 2: B2B Invoice Issuance (This Document)
+    4. 2026-01-28: Customer contacts florist
+       - Reveals: "I'm actually a corporate event planning company"
+       - Requests: Formal B2B invoice to claim VAT deduction
+       - Customer identification: EventPro Corporate SARL (event planning agency)
+    
+    5. 2026-01-30: Florist issues B2B invoice (this document)
+       - Type 380: Standard commercial invoice
+       - Business Process S7: VAT Already Collected (Services)
+       - Same amounts as B2C transaction (850.00 + 170.00 VAT)
+       - Payment status: Already collected on 2026-01-15
+       - Electronic transmission: Generates Flux 1 to tax authorities
+    
+    Critical S7 Business Process Logic:
+    Without S7 code:
+    - Tax authorities count transaction TWICE:
+      * Once from e-reporting Flux 10.3 (B2C transaction)
+      * Again from invoice Flux 1 (B2B invoice)
+    - SELLER pays VAT twice on same transaction (incorrect)
+    
+    With S7 code:
+    - Tax authorities recognize VAT already reported via e-reporting
+    - Flux 1 NOT counted for SELLER's VAT liability (prevents double taxation)
+    - Flux 1 IS counted for BUYER's VAT deduction (enables reclaim)
+    - Net result: Correct single VAT accounting
+    
+    Service Details:
+    - Wedding floral consultation and design (2 hours)
+    - Event coordination for wedding reception flowers
+    - Custom bouquet design (bride + 4 bridesmaids)
+    - Centerpiece design coordination (12 tables)
+    - Supplier liaison (flower market, delivery, setup)
+    - On-site installation supervision
+    
+    Amounts:
+    - Service total: 850.00 EUR net
+    - VAT (20% standard rate): 170.00 EUR
+    - Total with VAT: 1,020.00 EUR
+    - Payment status: Already collected 2026-01-15 (credit card)
+    - Amount due: 0.00 EUR (BT-115)
+    
+    BUYER Use Case:
+    EventPro Corporate SARL uses this invoice to:
+    - Claim 170.00 EUR VAT deduction on corporate tax return
+    - Account for expense in business books (event planning cost)
+    - Justify expense to their client (corporate wedding event)
+    
+    Platform Flow:
+    - SELLER's PA-E: Creates invoice, transmits Flux 1 to CdD PPF (with S7 code)
+    - Tax authorities: Recognize S7, do NOT count for SELLER's VAT liability
+    - BUYER's PA-R: Receives invoice, processes for VAT reclaim
+    - Tax authorities: Count BUYER's VAT deduction (normal B2B flow)
+    
+    Reference: XP Z12-014 Annexe A, Section 3.2.29 - Cas n°30
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>FER-2026-0145</cbc:ID>
+
+    <!-- BT-2: Invoice issue date (B2B invoice creation date) -->
+    <cbc:IssueDate>2026-01-30</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (Already paid during B2C transaction) -->
+    <cbc:DueDate>2026-01-15</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice)
+         @name attribute = S7 (VAT Already Collected - Services)
+         CRITICAL: S7 prevents double VAT accounting -->
+    <cbc:InvoiceTypeCode name="S7">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - French text codes for registration, payment, VAT reporting -->
+    <cbc:Note>#REG#SIRET 66677788899900 - RCS Lyon - APE 4776Z (Commerce de détail de fleurs, plantes, graines, engrais, animaux de compagnie et aliments pour ces animaux en magasin spécialisé) - Capital social: 15 000 EUR - N° TVA: FR66666777888</cbc:Note>
+    <cbc:Note>#ABL#TVA DÉJÀ COLLECTÉE - BUSINESS PROCESS S7: ATTENTION - Cette facture fait suite à une transaction initialement traitée en B2C et déjà reportée aux autorités fiscales via les flux d'e-reporting (Flux 10.3: données de transaction cumulatives transmises le 20/01/2026 + Flux 10.4: données de paiement si applicable). Le code de processus métier S7 ("TVA déjà collectée - Services") signale à l'administration fiscale que: (1) La TVA de 170,00 EUR a DÉJÀ été collectée lors de la transaction B2C du 15/01/2026, (2) Cette TVA a DÉJÀ été reportée via l'e-reporting, (3) Le Flux 1 généré par cette facture B2B NE DOIT PAS être compté pour la dette de TVA du VENDEUR (évite le double comptage), (4) Le Flux 1 DOIT être compté pour la déduction de TVA de l'ACHETEUR (permet la récupération de TVA). JUSTIFICATION ÉMISSION: Client EventPro Corporate SARL a contacté le fleuriste le 28/01/2026 pour révéler qu'il s'agissait d'une société (et non d'un particulier) et demander une facture B2B formelle pour pouvoir récupérer la TVA dans le cadre de ses activités professionnelles d'organisation d'événements corporate. TRANSACTION INITIALE: Consultation et coordination florale pour événement mariage corporate (prestation réalisée le 15/01/2026, payée immédiatement par carte bancaire, enregistrée en caisse comme vente B2C). SYSTÈME POINT DE VENTE: Transaction enregistrée dans le logiciel de caisse, incluse dans le rapport Z journalier du 15/01/2026, données cumulatives transmises via e-reporting le 20/01/2026 (fréquence F configurée).</cbc:Note>
+    <cbc:Note>#AAI#APE 4776Z - Commerce de détail de fleurs, plantes, graines, engrais et animaux de compagnie en magasin spécialisé.</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
+    <cbc:Note>#PMT#PAIEMENT DÉJÀ ENCAISSÉ: Cette facture documente une transaction initialement réalisée en B2C le 15/01/2026 et payée par carte bancaire (1 020,00 EUR TTC). Le paiement a déjà été encaissé. Cette facture B2B est émise à la demande du client (EventPro Corporate SARL) qui a révélé ultérieurement son statut de société et souhaite récupérer la TVA déductible. Aucun paiement supplémentaire n'est requis. COMPTABILISATION CLIENT: Le client peut utiliser cette facture pour comptabiliser la charge en frais professionnels et récupérer la TVA de 170,00 EUR sur sa déclaration de TVA.</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference -->
+    <cbc:BuyerReference>WEDDING-CORPORATE-2026-JAN</cbc:BuyerReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Florist -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address -->
+            <cbc:EndpointID schemeID="0002">66677788899900</cbc:EndpointID>
+
+            <!-- BT-27: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>Fleurs &amp; Événements Rousseau</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>28 Place Bellecour</cbc:StreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR66666777888</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Fleurs &amp; Événements Rousseau SARL</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">666777888</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact -->
+            <cac:Contact>
+                <!-- BT-41: Seller contact point -->
+                <cbc:Name>Claire Rousseau - Fleuriste et Coordinatrice Événementielle</cbc:Name>
+                <!-- BT-42: Seller contact telephone -->
+                <cbc:Telephone>+33 4 78 22 33 44</cbc:Telephone>
+                <!-- BT-43: Seller contact email -->
+                <cbc:ElectronicMail>c.rousseau@fleurs-evenements-rousseau.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Corporate Event Planning Company -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address -->
+            <cbc:EndpointID schemeID="0002">33344455566677</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>EventPro Corporate</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>75 Rue de la République</cbc:StreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR33333444555</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>EventPro Corporate SARL</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">333444555</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact -->
+            <cac:Contact>
+                <!-- BT-56: Buyer contact point -->
+                <cbc:Name>Marc Dubois - Responsable Événements Corporate</cbc:Name>
+                <!-- BT-57: Buyer contact telephone -->
+                <cbc:Telephone>+33 4 78 33 44 55</cbc:Telephone>
+                <!-- BT-58: Buyer contact email -->
+                <cbc:ElectronicMail>m.dubois@eventpro-corporate.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13: Delivery information (Service delivery date) -->
+    <cac:Delivery>
+        <!-- BT-72: Actual delivery date (Service performed) -->
+        <cbc:ActualDeliveryDate>2026-01-15</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+
+    <!-- BG-17: Credit transfer (Payment means) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (48 = payment card) -->
+        <cbc:PaymentMeansCode>48</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>CB-2026-01-15-1420</cbc:PaymentID>
+
+        <!-- Payment card information (already paid during B2C transaction) -->
+        <cac:CardAccount>
+            <!-- Last 4 digits of card (masked for security) -->
+            <cbc:PrimaryAccountNumberID>****1234</cbc:PrimaryAccountNumberID>
+            <cbc:NetworkID>VISA</cbc:NetworkID>
+        </cac:CardAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms -->
+        <cbc:Note>PAIEMENT DÉJÀ ENCAISSÉ LE 15/01/2026: Cette transaction a été payée par carte bancaire VISA (****1234) lors de l'achat initial en magasin le 15/01/2026 à 14h20 pour un montant de 1 020,00 EUR TTC (850,00 EUR HT + 170,00 EUR de TVA). Aucun paiement supplémentaire n'est requis. CONTEXTE FACTURATION B2B APRÈS B2C: Cette facture est émise à la demande du client EventPro Corporate SARL qui a révélé le 28/01/2026 qu'il s'agissait d'une société (et non d'un particulier comme initialement supposé lors de l'achat en magasin). Le client souhaite récupérer la TVA déductible de 170,00 EUR dans le cadre de ses activités professionnelles d'organisation d'événements corporate. STATUT E-REPORTING: La transaction initiale a été enregistrée comme vente B2C dans notre système de caisse le 15/01/2026, incluse dans le rapport Z journalier, et les données cumulatives ont été transmises aux autorités fiscales via l'e-reporting (Flux 10.3 + Flux 10.4 si applicable) le 20/01/2026 selon notre fréquence de transmission configurée. CODE BUSINESS PROCESS S7: Le code S7 ("TVA déjà collectée - Services") signale à l'administration fiscale que cette facture documente une transaction dont la TVA a déjà été reportée via l'e-reporting, évitant ainsi le double comptage de la TVA pour notre société tout en permettant au client de récupérer la TVA sur sa déclaration.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">170.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">850.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">170.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">850.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">850.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">1020.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113: Paid amount (Already paid during B2C transaction) -->
+        <cbc:PrepaidAmount currencyID="EUR">1020.00</cbc:PrepaidAmount>
+        <!-- BT-115: Amount due for payment (Zero - already paid) -->
+        <cbc:PayableAmount currencyID="EUR">0.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: Invoice lines -->
+
+    <!-- Line 1: Floral consultation and event coordination service -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (hours of consultation/coordination) -->
+        <cbc:InvoicedQuantity unitCode="HUR">2</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">400.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Consultation personnalisée et coordination événementielle pour mariage corporate (15/01/2026, 2 heures). Services fournis: Consultation initiale avec le client pour comprendre le thème et les attentes (palette de couleurs blush et or, style romantique chic) - Conception sur mesure de bouquets de mariée et demoiselles d'honneur (5 bouquets total) avec croquis et sélection des variétés florales (roses David Austin, pivoines, lisianthus, eucalyptus) - Design des centres de table pour réception (12 tables rondes de 10 personnes, compositions basses pour faciliter la conversation) - Coordination avec les fournisseurs du marché aux fleurs pour approvisionnement en fleurs fraîches de saison - Liaison avec le lieu de réception (Château de la Rivière, Tassin-la-Demi-Lune) pour planification de l'installation - Supervision de la mise en place sur site le jour J (installation des centres de table, vérification de la fraîcheur, ajustements finaux). CONTEXTE ÉVÉNEMENT: Mariage corporate organisé par EventPro Corporate SARL pour un de leurs clients entreprise (événement de team-building/célébration d'équipe sous forme de mariage thématique). CLIENT INITIALEMENT IDENTIFIÉ COMME PARTICULIER: Lors de l'achat en magasin le 15/01/2026, le client s'est présenté comme un particulier organisant son mariage. Paiement immédiat par carte bancaire. Transaction enregistrée comme B2C dans le système de caisse. CLIENT A RÉVÉLÉ SON STATUT D'ENTREPRISE: Contact ultérieur le 28/01/2026 pour demander facture B2B et récupération de TVA, révélant qu'il s'agissait d'EventPro Corporate SARL utilisant le service dans le cadre de ses activités professionnelles d'organisation d'événements corporate.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Consultation et coordination florale pour événement corporate</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">200.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 2: Custom bouquet design service -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (number of custom bouquets) -->
+        <cbc:InvoicedQuantity unitCode="C62">5</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">250.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Service professionnel de conception et design sur mesure pour 5 bouquets coordonnés (événement mariage corporate du 15/01/2026). Prestations intellectuelles de design floral: Recherche créative et développement du concept visuel selon le thème client (romantique chic, palette blush et or) - Création de planches d'ambiance (mood boards) avec sélection colorimétrique et textures - Croquis techniques détaillés pour chaque bouquet (dimensions, proportions, points focaux) - Sélection experte des variétés florales (roses David Austin "Juliet" et "Patience", pivoines Sarah Bernhardt, lisianthus blanc, eucalyptus silver dollar) - Calcul des quantités nécessaires par variété - Documentation photographique des designs finaux pour portefeuille. BOUQUETS CONÇUS: 1 bouquet de mariée cascade (format généreux, 40 cm hauteur) + 4 bouquets demoiselles d'honneur ronds (format moyen, 25 cm diamètre, versions coordonnées mais légèrement simplifiées). EXPERTISE FLORALE: Design par Claire Rousseau, fleuriste diplômée CAP et BP Fleuriste, 15 ans d'expérience en événementiel haut de gamme. Conseil sur la tenue des fleurs, techniques de conservation, timing de préparation optimal. NOTE: Ce service facture la prestation intellectuelle de design et coordination. Les fleurs et fournitures matérielles seraient facturées séparément si commandées (non inclus dans cette transaction qui concerne uniquement la consultation et coordination). TRANSACTION B2C INITIALE: Service acheté en magasin le 15/01/2026, client identifié comme particulier, paiement carte bancaire immédiat, enregistré comme vente B2C. CONVERSION B2B: Demande client du 28/01/2026 après révélation statut société EventPro Corporate SARL.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Conception sur mesure de bouquets - Service design professionnel</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">50.00</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Line 3: Centerpiece coordination and supplier liaison -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (number of tables coordinated) -->
+        <cbc:InvoicedQuantity unitCode="C62">12</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">200.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Service de coordination professionnelle pour 12 centres de table (réception mariage corporate 120 personnes, 12 tables rondes de 10). Prestations de gestion et coordination: Design conceptuel des centres de table (compositions basses style romantique chic, hauteur max 30 cm pour faciliter la conversation entre convives) - Sélection des contenants (vases cylindriques verre transparent 15 cm diamètre) - Définition de la composition florale par table (roses spray, lisianthus, eucalyptus, accent de gypsophile) - Calcul du budget matières par centre de table - Coordination avec fournisseurs du marché aux fleurs de Lyon-Corbas pour approvisionnement en gros (négociation des prix, garantie de fraîcheur, commande confirmée avec arrhes) - Liaison avec le lieu de réception Château de la Rivière (Tassin-la-Demi-Lune) pour: Visite préalable des salles et mesures des tables - Coordination du timing d'installation (accès salle à partir de 08h00, mariage à 15h00) - Vérification de la disponibilité de points d'eau sur site - Organisation logistique pour livraison et installation. VALEUR AJOUTÉE: Optimisation du rapport qualité-prix grâce aux relations fournisseurs établies, expertise en conservation florale (conseils pour maintien de la fraîcheur pendant 8+ heures d'événement), gestion des imprévus (fleurs de remplacement en backup). SERVICE INTELLECTUEL: Cette ligne facture la coordination et gestion professionnelle. L'exécution matérielle (achat des fleurs, création physique des compositions, installation sur site) serait facturée séparément si commandée. CONTEXTE TRANSACTION: Achat en magasin 15/01/2026 comme B2C, conversion en facture B2B à demande client 28/01/2026 après révélation statut EventPro Corporate SARL.</cbc:Description>
+            <!-- BT-153: Item name -->
+            <cbc:Name>Coordination centres de table et liaison fournisseurs</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price -->
+            <cbc:PriceAmount currencyID="EUR">16.67</cbc:PriceAmount>
+            <!-- BT-149: Base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

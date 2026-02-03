@@ -1,30 +1,6 @@
-.Additional elements added within cac:PayeeParty
-|===
-|Path |Description
+For all available `cac:PayeeParty` elements, refer to <<_party>>.
 
-|`cac:PartyIdentification/cbc:ID`
-|**Payee Identifier** +
-Identifier of the payee.
-
-|`cac:PartyIdentification/cbc:ID/@schemeID`
-|**Payee scheme Identifier** +
-Scheme identifier of payee identifier. +
-Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
-
-|`cac:PartyName/cbc:Name`
-|**Payee name** +
-Payee name.
-
-|`cac:PartyLegalEntity/cbc:CompanyID`
-|**Legal company identifier** +
-Payee's legal registration identifier.
-
-|`cac:PartyLegalEntity/cbc:CompanyID/@schemeID`
-|**Legal company identifier scheme identifier** +
-Payee's legal registration identifier scheme identifier. +
-Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
-
-|===
+Note: `cac:PayeeParty` is a direct `cac:Party` element without additional wrapper elements.
 
 *Example* +
 _cac:PayeeParty example_

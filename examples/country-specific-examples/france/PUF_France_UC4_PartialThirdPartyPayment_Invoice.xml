@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 4: Invoice Partially Paid by Third Party Known at Invoicing
+    (Facture à payer par l'acheteur et prise en charge partiellement par un tiers connu à la facturation)
+    
+    Business Scenario:
+    - Car repair invoice with insurance coverage
+    - Third-party PAYER (insurer) pays part of the invoice to SELLER
+    - BUYER pays remainder (deductible + ALL VAT)
+    - Classic insurance scenario with deductible franchise
+    
+    Key Requirements:
+    - Business process B1: Standard invoice
+    - BT-113 (Prepaid amount): Amount to be paid by third-party PAYER (insurer portion)
+    - BT-115 (Amount due): BT-112 - BT-113 (BUYER pays deductible + VAT)
+    - Third-party PAYER: EXT-FR-FE-BG-02 (recommended for UC4)
+    
+    Financial Breakdown Example:
+    - Repair services: 3000.00 EUR (net)
+    - VAT 20%: 600.00 EUR
+    - Total with VAT: 3600.00 EUR
+    - Insurance deductible: 500.00 EUR
+    - Insurer pays: 2500.00 EUR (3000 - 500 deductible, NO VAT)
+    - BUYER pays: 1100.00 EUR (500 deductible + 600 VAT)
+    
+    Critical VAT Rule:
+    - Insurer ONLY pays non-VAT amount (minus deductible)
+    - BUYER must pay ALL VAT + deductible
+    - Prevents double VAT benefit for deductible companies
+    
+    French Text Codes (BT-21/BT-22):
+    - #REG#: Company legal form and share capital
+    - #ABL#: Trade register number (RCS)
+    - #AAI#: APE business activity code
+    - #PMD#: Late payment penalties
+    - #PMT#: Fixed collection costs indemnity (€40)
+    - #BAR#: Treatment type (B2B e-invoicing)
+    - #PAI#: MANDATORY - Third party payment information (partial payment by insurer)
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- Extension for third-party PAYER (EXT-FR-FE-BG-02) - Insurance company -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <!-- Third-party PAYER information - Insurance company paying partial amount -->
+                    <puf:RestrictedInformationParty>
+                        <puf:Key>payerParty</puf:Key>
+                        <cac:Party>
+                            <ext:UBLExtensions>
+                                <ext:UBLExtension>
+                                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                                    <ext:ExtensionContent>
+                                        <puf:PageroExtension>
+                                            <puf:PartyExtension>
+                                                <!-- EXT-FR-FE-44: Party role code (PR = Payer) -->
+                                                <puf:RoleCode>
+                                                    <cbc:ID>PR</cbc:ID>
+                                                </puf:RoleCode>
+                                            </puf:PartyExtension>
+                                        </puf:PageroExtension>
+                                    </ext:ExtensionContent>
+                                </ext:UBLExtension>
+                            </ext:UBLExtensions>
+                            <!-- EXT-FR-FE-52: Electronic address (RECOMMENDED) -->
+                            <cbc:EndpointID schemeID="0009">77788899900112</cbc:EndpointID>
+                            <!-- EXT-FR-FE-46: PAYER party identification (SIRET) -->
+                            <cac:PartyIdentification>
+                                <cbc:ID schemeID="0009">77788899900112</cbc:ID>
+                            </cac:PartyIdentification>
+                            <!-- PAYER party name -->
+                            <cac:PartyName>
+                                <cbc:Name>Assurance Auto France</cbc:Name>
+                            </cac:PartyName>
+                            <!-- PAYER address -->
+                            <cac:PostalAddress>
+                                <cbc:StreetName>12 Boulevard de la Défense</cbc:StreetName>
+                                <cbc:CityName>Paris</cbc:CityName>
+                                <cbc:PostalZone>92400</cbc:PostalZone>
+                                <cac:Country>
+                                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                                    <cbc:Name>France</cbc:Name>
+                                </cac:Country>
+                            </cac:PostalAddress>
+                            <!-- PAYER VAT number -->
+                            <cac:PartyTaxScheme>
+                                <cbc:CompanyID>FR77788899900</cbc:CompanyID>
+                                <cac:TaxScheme>
+                                    <cbc:ID>VAT</cbc:ID>
+                                </cac:TaxScheme>
+                            </cac:PartyTaxScheme>
+                            <!-- EXT-FR-FE-43: PAYER legal entity (MANDATORY) -->
+                            <cac:PartyLegalEntity>
+                                <cbc:RegistrationName>Assurance Auto France SA</cbc:RegistrationName>
+                                <!-- EXT-FR-FE-48: Legal identifier (SIREN) -->
+                                <!-- EXT-FR-FE-49: Legal ID scheme -->
+                                <cbc:CompanyID schemeID="0002">777888999</cbc:CompanyID>
+                            </cac:PartyLegalEntity>
+                            <!-- PAYER contact information -->
+                            <cac:Contact>
+                                <cbc:Name>Service Sinistres Automobiles</cbc:Name>
+                                <cbc:Telephone>+33 1 77 88 99 00</cbc:Telephone>
+                                <cbc:ElectronicMail>sinistres.auto@assurance-france.fr</cbc:ElectronicMail>
+                            </cac:Contact>
+                        </cac:Party>
+                    </puf:RestrictedInformationParty>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type - B1: Standard invoice -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>REP-2026-0845</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-01-28</cbc:IssueDate>
+    <!-- BT-9 Payment Due Date -->
+    <cbc:DueDate>2026-02-28</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes -->
+    <!-- REG: Company legal form and share capital (BT-33 alternative method) -->
+    <cbc:Note>#REG#SARL au capital de 150000.00 EUR</cbc:Note>
+    <!-- ABL: Legal information - Trade register (BT-33 alternative method) -->
+    <cbc:Note>#ABL#RCS Lyon B 987 654 321</cbc:Note>
+    <!-- AAI: General information - APE code (business activity classification) -->
+    <cbc:Note>#AAI#APE 4520A - Entretien et réparation de véhicules automobiles légers</cbc:Note>
+    <!-- PMD: Late payment penalties (French mandatory payment terms) -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- PMT: Fixed indemnity for collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- PAI: Third party payment information (MANDATORY for UC4) -->
+    <cbc:Note>#PAI#Paiement partiel par Assurance Auto France SA à hauteur de 2500.00 EUR (montant HT hors franchise). Le client règle la franchise de 500.00 EUR et la TVA de 600.00 EUR, soit 1100.00 EUR. Dossier sinistre n° SIN-2026-AUTO-15478.</cbc:Note>
+    <!-- BAR: Treatment type qualification - B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference (mandatory for French e-invoicing) -->
+    <cbc:BuyerReference>SINISTRE-AUTO-2026-15478</cbc:BuyerReference>
+
+    <!-- BG-24 Additional supporting documents (insurance claim reference) -->
+    <cac:AdditionalDocumentReference>
+        <!-- BT-122 Supporting document reference -->
+        <cbc:ID>SIN-2026-AUTO-15478</cbc:ID>
+        <!-- BT-122 Issue date -->
+        <cbc:IssueDate>2026-01-15</cbc:IssueDate>
+        <!-- BT-122 Document type code - 916: Related document -->
+        <cbc:DocumentTypeCode>916</cbc:DocumentTypeCode>
+        <!-- BT-123 Supporting document description -->
+        <cbc:DocumentDescription>Dossier de sinistre automobile - Prise en charge partielle par assureur avec franchise 500 EUR</cbc:DocumentDescription>
+    </cac:AdditionalDocumentReference>
+
+    <!-- BG-4 Seller Information (Car repair shop) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">98765432109876</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Garage Auto Réparation Lyon</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <!-- BT-35 Street name -->
+                <cbc:StreetName>56 Avenue Jean Jaurès</cbc:StreetName>
+                <cbc:AdditionalStreetName>Zone Artisanale Sud</cbc:AdditionalStreetName>
+                <!-- BT-37 City -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-38 Postal code -->
+                <cbc:PostalZone>69007</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR98765432109</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Legal Name -->
+                <cbc:RegistrationName>Garage Auto Réparation Lyon SARL</cbc:RegistrationName>
+                <!-- BT-30 SIREN -->
+                <cbc:CompanyID schemeID="0002">987654321</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 Seller Contact -->
+            <cac:Contact>
+                <!-- BT-41 Contact name -->
+                <cbc:Name>Service Facturation</cbc:Name>
+                <!-- BT-42 Contact telephone -->
+                <cbc:Telephone>+33 4 78 90 12 34</cbc:Telephone>
+                <!-- BT-43 Contact email -->
+                <cbc:ElectronicMail>facturation@garage-auto-lyon.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information (Car owner - pays deductible + VAT) -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>CLIENT-AUTO-3456</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-46 Buyer Identifier - SIRET -->
+            <cbc:EndpointID schemeID="0009">33344455566778</cbc:EndpointID>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Transport Express Rhône SARL</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <!-- BT-50 Street name -->
+                <cbc:StreetName>89 Rue de la République</cbc:StreetName>
+                <!-- BT-52 City -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-53 Postal code -->
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR33344455566</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Legal Name -->
+                <cbc:RegistrationName>Transport Express Rhône SARL</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+            <!-- BG-9 Buyer Contact -->
+            <cac:Contact>
+                <cbc:Name>Service Comptabilité</cbc:Name>
+                <cbc:Telephone>+33 4 72 11 22 33</cbc:Telephone>
+                <cbc:ElectronicMail>compta@transport-rhone.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-16 Payment Means -->
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code - 30: Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier - IBAN -->
+            <cbc:ID>FR7698765432109876543210987</cbc:ID>
+            <cbc:Name>Garage Auto Réparation Lyon SARL</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <!-- BIC/SWIFT -->
+                <cbc:ID>CMCIFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms -->
+        <cbc:Note>Paiement net 30 jours. Montant dû par le client : 1100.00 EUR (franchise 500 EUR + TVA 600 EUR). Montant pris en charge par Assurance Auto France SA : 2500.00 EUR (montant HT hors franchise). Référence sinistre : SIN-2026-AUTO-15478.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">600.00</cbc:TaxAmount>
+        <!-- Tax subtotal for 20% VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116 Taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">3000.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">600.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code - S: Standard rate -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT category rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">3000.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">3000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">3600.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113 Paid amount - Amount to be paid by insurer (2500 EUR) -->
+        <cbc:PrepaidAmount currencyID="EUR">2500.00</cbc:PrepaidAmount>
+        <!-- BT-115 Amount due for payment - BUYER pays: deductible (500) + VAT (600) = 1100 EUR -->
+        <cbc:PayableAmount currencyID="EUR">1100.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- ========================================
+         INVOICE LINE 1: Labor charges
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Main d'œuvre réparation carrosserie suite accident</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="HUR">20</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1200.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Réparation carrosserie: redressage portière avant gauche, traitement anti-corrosion, apprêt et peinture</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Main d'œuvre carrosserie</cbc:Name>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">60.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- ========================================
+         INVOICE LINE 2: Replacement parts
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Pièces de rechange d'origine constructeur</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1500.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Portière avant gauche complète avec vitre électrique, rétroviseur électrique et peinture assortie</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Portière avant gauche - Kit complet</cbc:Name>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Référence pièce</cbc:Name>
+                <cbc:Value>DOOR-FL-2024-ABC123</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Type</cbc:Name>
+                <cbc:Value>Pièce d'origine constructeur</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">1500.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- ========================================
+         INVOICE LINE 3: Paint and finishing materials
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Peinture et produits de finition</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">300.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Peinture bicouche teinte d'origine, vernis de finition, apprêt, mastic de carrosserie et consommables</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Peinture et matériaux de finition</cbc:Name>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">300.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

@@ -1,5 +1,466 @@
 This section contains information about requirements and other information concerning invoicing in France.
 
+==== French E-Invoicing Mandate (2026)
+
+France implemented a mandatory B2B/B2G e-invoicing system starting in 2026, requiring all invoices between French entities to be transmitted through certified platforms (Plateformes Agréées - PA).
+
+==== Invoice Type Code and Business Process Type
+
+In addition to the standard invoice type code, France requires the business process type to be specified using the `@name` attribute on `cbc:InvoiceTypeCode`.
+
+The business process type (Cadre de facturation) indicates the nature of the transaction and affects VAT treatment. For the complete list of supported codes and their descriptions, see the https://pagero.github.io/puf-code-lists/#_business_process_codes_for_france[PUF Code Lists specification^].
+
+*Example for Standard B2B Invoice*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example for Standard B2G Invoice*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example for Marketplace Invoice*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="M1">380</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== French Text Codes (Note Elements)
+
+France requires specific information to be provided in invoice notes using standardized text code prefixes. These text codes identify the type of legal, regulatory, or commercial information being provided.
+
+===== Text Code Format
+
+Each text code must be provided in a separate `cbc:Note` element with the format: `#CODE#value`
+
+===== Available Text Codes
+
+[cols="1,2,3,2", options="header"]
+|===
+|Code |Name |Description |Required Value (if applicable)
+
+|#ABL#
+|Legal information
+|Trade register number (RCS) or other legal registration information
+|
+
+|#PMD#
+|Late payment penalties
+|Payment terms regarding late payment penalties
+|
+
+|#PMT#
+|Collection costs (€40)
+|Fixed €40 indemnity for collection costs in case of late payment
+|
+
+|#AAI#
+|General information
+|General elements typically found at the bottom of paper invoices (e.g., APE code, capital social)
+|
+
+|#BAR#
+|Treatment type qualification
+|Expected treatment type for the invoice
+|*One of:* `B2B`, `B2BINT`, `B2C`, `OUTOFSCOPE`, `ARCHIVEONLY`
+
+|#TXD#
+|Single taxable person member
+|Indication that member is part of a single taxable person (for transactions external to the group)
+|*Required:* `Membre d'un assujetti unique`
+
+|#BLU#
+|Eco-participation/Eco-contribution
+|Eco-participation or Eco-contribution WEEE (can also be used for other taxes including eco-tax)
+|*Required:* `Eco-participation (L. 541-10 du code de l'environnement)` or `Eco-contribution DEEE`
+
+|#AAB#
+|Early payment discount
+|Statement whether customer can apply discount if paying before due date
+|
+
+|#ACC#
+|Subrogation factoring clause
+|Factoring arrangement details and subrogation clauses
+|
+
+|#SUR#
+|Supplier notes
+|Additional remarks from the supplier
+|
+
+|#CUS#
+|Customs information
+|Customs-related details and information
+|
+
+|#PAI#
+|Third party payment
+|Information about third-party payment arrangements
+|
+
+|#ADN#
+|B2G indicator
+|Indicates if invoice is subject to B2G treatment (additional CHORUS PRO rules apply)
+|
+|===
+
+IMPORTANT: 
+
+* The #PMT# fixed indemnity amount is legally set at €40.00 per Article L441-10 of the French Commercial Code
+* #BAR# is mandatory and must contain exactly ONE of the specified values: `B2B` (e-invoicing), `B2BINT` (B2B international e-reporting), `B2C` (B2C e-reporting), `OUTOFSCOPE` (outside reform scope), or `ARCHIVEONLY` (internal credit note - no transmission)
+* Only ONE #BAR# note is allowed per invoice
+
+===== Implementation Example
+
+*Complete Example with Common Text Codes*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+    
+    <!-- French text codes -->
+    <cbc:Note>#ABL#RCS Lyon B 987 654 321</cbc:Note>
+    <cbc:Note>#AAI#SARL au capital de 100000.00 EUR - APE 4651Z - Commerce de gros d'ordinateurs</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example with Single Taxable Person*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cbc:Note>#TXD#Membre d'un assujetti unique</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example with Eco-participation*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cbc:Note>#BLU#Eco-participation (L. 541-10 du code de l'environnement)</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+NOTE: These text codes apply to both Invoice and CreditNote document types.
+
+==== Self-Billing Indicator
+
+Self-billing invoices can be indicated in two ways:
+
+1. **Using Invoice Type Code**: Set `cbc:InvoiceTypeCode` to `389` (self-billed invoice) or `261` (self-billed credit note) with the appropriate https://pagero.github.io/puf-code-lists/#_business_process_codes_for_france[business process code^] in the `@name` attribute
+2. **Using Extension Indicator**: Use the dedicated `SelfBilled` extension with value `true`
+
+Both methods are supported, and implementations may choose either approach based on their requirements.
+
+*Example using Invoice Type Code*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cbc:InvoiceTypeCode name="B1">389</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example using Extension Indicator*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:SelfBilled>true</puf:SelfBilled>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Business and VAT Identification
+
+France uses SIRET (14-digit) and SIREN (9-digit) numbers for business identification.
+
+===== Endpoint Identification
+
+For electronic addressing in the French e-invoicing system, two schemes are supported:
+
+1. **Scheme 0009 - SIRET**: 14-digit business identifier
+2. **Scheme 0225 - Electronic Address**: SIREN-based electronic address for e-invoicing platforms
+
+*Example with SIRET (scheme 0009)*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">12345678901234</cbc:EndpointID>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">98765432109876</cbc:EndpointID>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example with Electronic Address (scheme 0225)*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0225">123456789</cbc:EndpointID>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0225">987654321</cbc:EndpointID>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+NOTE: Scheme 0224 (CODE ROUTAGE) is used for platform routing identifiers when required by specific certified platforms.
+
+===== Party Identification - SIREN
+
+SIREN (9-digit) can be provided in PartyLegalEntity/CompanyID with scheme ID `0002`:
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyLegalEntity>
+                <cbc:CompanyID schemeID="0002">123456789</cbc:CompanyID>
+                <cbc:RegistrationName>Company Legal Name</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+===== VAT Identification
+
+French VAT numbers should use the 'FR' prefix format:
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR12345678901</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Mandate Scenarios - Agent Parties
+
+France supports multiple mandate scenarios requiring agent party information. Party roles are indicated using the PUF RoleCode extension.
+
+For the complete list of available role codes and their descriptions, see the https://pagero.github.io/puf-code-lists/#_puf_021_rolecode[PUF Code Lists specification^].
+
+===== Buyer's Agent
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:AgentParty>
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                        <ext:ExtensionContent>
+                            <puf:PageroExtension>
+                                <puf:RoleCode>AB</puf:RoleCode>
+                            </puf:PageroExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
+                <cac:PartyIdentification>
+                    <cbc:ID schemeID="0009">11111111111111</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                    <cbc:Name>Buyer Agent Name</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                    <cac:Country>
+                        <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    </cac:Country>
+                </cac:PostalAddress>
+            </cac:AgentParty>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+===== Seller's Agent
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:AgentParty>
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                        <ext:ExtensionContent>
+                            <puf:PageroExtension>
+                                <puf:RoleCode>SR</puf:RoleCode>
+                            </puf:PageroExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
+                <cac:PartyIdentification>
+                    <cbc:ID schemeID="0009">22222222222222</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                    <cbc:Name>Seller Agent Name</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                    <cac:Country>
+                        <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    </cac:Country>
+                </cac:PostalAddress>
+            </cac:AgentParty>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+===== Invoicing Mandate (Invoicer/Invoicee)
+
+For invoicing mandate scenarios, use ServiceProviderParty with the RoleCode extension:
+
+*Invoicer Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:ServiceProviderParty>
+                <cac:Party>
+                    <ext:UBLExtensions>
+                        <ext:UBLExtension>
+                            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                            <ext:ExtensionContent>
+                                <puf:PageroExtension>
+                                    <puf:RoleCode>II</puf:RoleCode>
+                                </puf:PageroExtension>
+                            </ext:ExtensionContent>
+                        </ext:UBLExtension>
+                    </ext:UBLExtensions>
+                    <cac:PartyIdentification>
+                        <cbc:ID schemeID="0009">33333333333333</cbc:ID>
+                    </cac:PartyIdentification>
+                    <cac:PartyName>
+                        <cbc:Name>Invoicing Entity Name</cbc:Name>
+                    </cac:PartyName>
+                </cac:Party>
+            </cac:ServiceProviderParty>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+NOTE: The role code for Invoicer MUST be exactly `II` as per French business rules.
+
+===== Payee with Role Code
+
+For payment delegation scenarios (e.g., factoring - Case 14), use PayeeParty with the RoleCode extension:
+
+*Example*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:PayeeParty>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:RoleCode>DL</puf:RoleCode>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cac:PartyIdentification>
+            <cbc:ID schemeID="0009">44444444444444</cbc:ID>
+        </cac:PartyIdentification>
+        <cac:PartyName>
+            <cbc:Name>Factor Company Name</cbc:Name>
+        </cac:PartyName>
+    </cac:PayeeParty>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
 ==== Service code
 
 Service code is a routing code required by some customers to identify the correct recipient in French Government Portal.

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC11 - Outsourced Invoice Processing (Third Party on Behalf of BUYER)
+    
+    Use Case: Invoice Received and Processed by Third Party on Behalf of BUYER
+    Country: France (EXTENDED-CTC-FR profile)
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 (Standard invoice)
+    
+    Scenario Description:
+    Office equipment supplier (Bureau Pro Solutions SA) issues a standard invoice to
+    BUYER (Conseil & Expertise Lyon SARL - consulting firm). The BUYER has outsourced
+    accounts payable processing to a shared services center (Centre Services Partagés
+    Auvergne-Rhône-Alpes - CSP-ARA), which receives and processes all invoices on
+    behalf of the buyer.
+    
+    Key Implementation: Electronic Addressing Solution (RECOMMENDED)
+    - BT-49 uses special format: SIREN[buyer]_[SERVICE_CODE]
+    - Example: "456789012_CSPARA" routes invoice to third party processor
+    - BUYER and Third Party MUST use same PA-R platform
+    - Third party accesses BUYER's invoices via platform delegation/rights
+    - NO special invoice fields needed - routing via electronic address only
+    
+    Key Characteristics (Standard Invoice Structure):
+    - Invoice type 380: Standard commercial invoice
+    - Business process B1: Standard invoice
+    - BG-7 BUYER: Actual customer (Conseil & Expertise Lyon SARL)
+    - BT-49: Special electronic address format "456789012_CSPARA"
+    - NO "Deliver To" or special third-party fields
+    - Payment to SELLER (standard commercial transaction)
+    - Total: 1,890.00 EUR
+    
+    Electronic Address Authority:
+    - Third party (CSP-ARA) creates electronic address for BUYER
+    - BUYER provides mandate authorizing third party to manage address
+    - Mandate template available from FNFE-MPE (www.fnfe-mpe.org)
+    - Address dedicated to third party's processing activity
+    
+    Workflow:
+    1. SELLER issues invoice with BT-49 = "456789012_CSPARA"
+    2. Invoice routes to CSP-ARA on shared PA-R platform
+    3. CSP-ARA processes invoice on behalf of BUYER
+    4. CSP-ARA validates, approves, schedules payment
+    5. BUYER maintains legal responsibility (CSP-ARA acts as agent)
+    6. Payment executed from BUYER's account to SELLER
+    
+    Platform Requirements:
+    - BUYER registers on same PA-R as CSP-ARA
+    - Platform provides delegation/rights management
+    - CSP-ARA accesses BUYER's invoices via platform authorization
+    - All lifecycle statuses visible to both BUYER and CSP-ARA
+    
+    Key Benefits:
+    - Transparent routing via electronic addressing
+    - Compatible with international standards (PEPPOL)
+    - No invoice field complexity
+    - Works with both MINIMUM and EXTENDED profiles
+    - Maintains directory transparency
+    - Simple PA-R implementation
+    
+    Invoice Lines:
+    1. 3 multifunction printers @ 450.00 EUR each = 1,350.00 EUR
+    2. 5 reams premium paper @ 18.00 EUR each = 90.00 EUR
+    
+    Amounts:
+    - Line extension amount: 1,440.00 EUR
+    - VAT (20% standard rate): 288.00 EUR
+    - Invoice total with VAT: 1,728.00 EUR
+    - Delivery charge: 120.00 EUR net + 24.00 EUR VAT = 144.00 EUR
+    - Amount due for payment: 1,890.00 EUR (including 18.00 EUR rounding)
+    
+    French Text Codes Used:
+    - #REG# Registration information
+    - #PMT# Payment terms
+    - #AAI# Additional invoice information (third-party processing note)
+    
+    Implementation Notes:
+    - Electronic address "456789012_CSPARA" is CRITICAL routing mechanism
+    - SchemeID "0002" indicates SIREN-based addressing
+    - Service code "_CSPARA" routes to shared services center
+    - Invoice content is standard - third party transparent
+    - BUYER maintains legal obligation despite third-party processing
+    - Solution recommended by French e-invoicing working groups
+    
+    Date: 2026-01-30
+    Reference: XP Z12-014 Annexe A, Section 3.2.10 - Cas n°11
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>UC11-BPS-2026-0789</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-01-30</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (30 days standard payment terms) -->
+    <cbc:DueDate>2026-03-01</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22: Notes - French text codes for registration, payment terms, additional info -->
+    <cbc:Note>#REG#Société immatriculée au RCS de Lyon sous le numéro 22233344455566, capital social 250 000 EUR.</cbc:Note>
+    <cbc:Note>#PMT#Paiement à 30 jours fin de mois par virement bancaire. En cas de retard de paiement, pénalités de 3 fois le taux d'intérêt légal + indemnité forfaitaire pour frais de recouvrement de 40 EUR.</cbc:Note>
+    <cbc:Note>#AAI#Cette facture est destinée à un client dont la gestion comptable est assurée par un centre de services partagés (CSP). Le routage vers le CSP est géré par l'adresse électronique du client (SIREN_SERVICECODE). Le CSP traite les factures pour le compte du client ACHETEUR conformément au mandat établi. Le client ACHETEUR reste légalement responsable du paiement.</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference (Routing identifier for CSP processing) -->
+    <cbc:BuyerReference>456789012_CSP</cbc:BuyerReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address (SIRET) -->
+            <cbc:EndpointID schemeID="0009">22233344455566</cbc:EndpointID>
+
+            <!-- BT-28: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>Bureau Pro Solutions</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>18 Rue du Commerce</cbc:StreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR22222333444</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Bureau Pro Solutions SA</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">222333444</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party)
+         CRITICAL: BT-49 uses SIREN_SERVICECODE format for third-party routing -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address - CRITICAL ROUTING MECHANISM
+                 Format: SIREN[buyer]_[SERVICE_CODE]
+                 "456789012_CSPARA" = BUYER's SIREN + CSP service code
+                 This routes invoice to Centre Services Partagés Auvergne-Rhône-Alpes
+                 on shared PA-R platform for processing on behalf of BUYER.
+                 
+                 SchemeID "0002" = SIREN-based addressing
+                 Service code "_CSPARA" = Routes to shared services center
+                 
+                 Third party created this address with BUYER's mandate authorization.
+                 FNFE-MPE provides standard mandate template (www.fnfe-mpe.org). -->
+            <cbc:EndpointID schemeID="0002">456789012_CSPARA</cbc:EndpointID>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Conseil &amp; Expertise Lyon</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>25 Avenue Victor Hugo</cbc:StreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>69003</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR45456789012</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name (Actual customer - consulting firm) -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Conseil &amp; Expertise Lyon SARL</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">456789012</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13: Delivery information (Delivery to BUYER's office) -->
+    <cac:Delivery>
+        <!-- BT-72: Actual delivery date -->
+        <cbc:ActualDeliveryDate>2026-01-28</cbc:ActualDeliveryDate>
+
+        <!-- BG-15: Deliver to address (BUYER's office location) -->
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <!-- BT-75: Deliver to address line 1 -->
+                <cbc:StreetName>25 Avenue Victor Hugo</cbc:StreetName>
+                <!-- BT-77: Deliver to city -->
+                <cbc:CityName>Lyon</cbc:CityName>
+                <!-- BT-78: Deliver to post code -->
+                <cbc:PostalZone>69003</cbc:PostalZone>
+                <!-- BT-80: Deliver to country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+
+    <!-- BG-17: Credit transfer (Payment means) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (31 = credit transfer) -->
+        <cbc:PaymentMeansCode>31</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>UC11-BPS-2026-0789</cbc:PaymentID>
+
+        <!-- BG-19: Credit transfer - SELLER's IBAN -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84: Payment account identifier (SELLER's IBAN) -->
+            <cbc:ID>FR7622233344455566778899001234</cbc:ID>
+            <!-- BT-85: Payment account name -->
+            <cbc:Name>Bureau Pro Solutions SA</cbc:Name>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms (free text) -->
+        <cbc:Note>Paiement à 30 jours fin de mois par virement bancaire. Escompte de 2% pour paiement sous 8 jours. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). TRAITEMENT PAR TIERS: Cette facture sera traitée par le Centre Services Partagés Auvergne-Rhône-Alpes (CSP-ARA) pour le compte du client ACHETEUR, conformément au mandat établi. Le client ACHETEUR reste légalement responsable du paiement.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-21: Document level allowances (N/A) -->
+
+    <!-- BG-22: Document level charges -->
+    <cac:AllowanceCharge>
+        <!-- Charge indicator (true = charge) -->
+        <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+        <!-- BT-105: Document level charge reason code -->
+        <cbc:AllowanceChargeReasonCode>FC</cbc:AllowanceChargeReasonCode>
+        <!-- BT-104: Document level charge reason -->
+        <cbc:AllowanceChargeReason>Frais de livraison et installation</cbc:AllowanceChargeReason>
+        <!-- BT-100: Document level charge amount -->
+        <cbc:Amount currencyID="EUR">120.00</cbc:Amount>
+        <!-- BT-102: Document level charge VAT category code -->
+        <cac:TaxCategory>
+            <cbc:ID>S</cbc:ID>
+            <cbc:Percent>20.00</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">312.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount (lines + charges) -->
+            <cbc:TaxableAmount currencyID="EUR">1560.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">312.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code (S = Standard rate) -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate (20% standard rate) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1440.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT (lines + charges) -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">1560.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">1872.00</cbc:TaxInclusiveAmount>
+        <!-- BT-114: Rounding amount -->
+        <cbc:PayableRoundingAmount currencyID="EUR">18.00</cbc:PayableRoundingAmount>
+        <!-- BT-115: Amount due for payment (with rounding) -->
+        <cbc:PayableAmount currencyID="EUR">1890.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: INVOICE LINE 1 -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (3 printers) -->
+        <cbc:InvoicedQuantity unitCode="PCE">3</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1350.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Imprimante multifonction professionnelle A4 couleur - Impression recto-verso automatique, scanner recto-verso une passe, copieur, fax, vitesse 30 ppm couleur/35 ppm N&amp;B, résolution 1200×1200 dpi, mémoire 512 Mo, disque dur 320 Go, connectivité Ethernet Gigabit + Wi-Fi + USB 3.0, chargeur automatique 100 feuilles, bacs 2×250 feuilles + bypass 100 feuilles, finisseur agrafeuse optionnel</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Imprimante multifonction PRO-MFP-3500C</cbc:Name>
+
+            <!-- BT-156: Buyer's item identification -->
+            <cac:BuyersItemIdentification>
+                <cbc:ID>REF-CLIENT-MFP3500</cbc:ID>
+            </cac:BuyersItemIdentification>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (450.00 EUR per printer) -->
+            <cbc:PriceAmount currencyID="EUR">450.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="PCE">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 2 -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (5 reams) -->
+        <cbc:InvoicedQuantity unitCode="PCE">5</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">90.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Papier premium haute qualité pour impression professionnelle - Format A4 (210×297 mm), grammage 100 g/m², blancheur CIE 168, opacité 96%, certification FSC Mix (gestion durable des forêts), compatible tous types d'imprimantes (laser, jet d'encre, photocopieurs), emballage protecteur anti-humidité</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Papier A4 premium 100g - Ramette 500 feuilles</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (18.00 EUR per ream) -->
+            <cbc:PriceAmount currencyID="EUR">18.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="PCE">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

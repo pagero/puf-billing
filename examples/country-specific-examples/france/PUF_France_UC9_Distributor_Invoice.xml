@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 9: Payment to Third Party - Distributor/Agent
+    (Facture à payer à un tiers qui gère aussi la commande/réception - Distributeur/Dépositaire)
+    
+    Business Scenario:
+    - Third party (distributor/agent) manages commercial functions: ordering, receipt, invoicing
+    - Third party receives payment on behalf of SELLER
+    - NOT factoring - no legal transfer of receivable ownership
+    - Distributor acts as commercial intermediary, not financial institution
+    
+    Key Differences from UC8 (Factoring):
+    - Invoice type 380 (standard commercial), NOT 393 (factored)
+    - NO subrogation/assignment notice (BT-21="ACC")
+    - Role qualification "PE" (Payee), NOT "DL" (Factor)
+    - Simplified workflow - replication to third party not mandatory
+    
+    Key Requirements:
+    - Business process B1: Standard invoice
+    - Invoice type code: 380 (Standard commercial invoice)
+    - BG-10 PAYEE: Distributor information (BT-59, BT-60, BT-61)
+    - EXT-FR-FE-26: "PE" (Payee - distributor receives payment)
+    - BG-17 Payment: Distributor's IBAN (BT-84)
+    - NO BT-21 "ACC" subrogation notice
+    - Amount due payable to Distributor
+    
+    Financial Flow:
+    - Invoice total: 4500.00 EUR (net) + 900.00 EUR VAT = 5400.00 EUR
+    - BUYER pays: 5400.00 EUR to Distributor
+    - Distributor manages: Commercial relationship and payment collection
+    - Distributor remits: Payment to SELLER (minus commission, per separate agreement)
+    
+    Workflow:
+    1. SELLER creates e-invoice with Distributor as PAYEE
+    2. BUYER receives invoice via PPF platform
+    3. BUYER pays Distributor directly (Distributor's IBAN in BT-84)
+    4. Distributor receives payment from BUYER
+    5. Distributor notifies SELLER of payment receipt
+    6. SELLER posts "Encaissée" status when Distributor confirms settlement
+    
+    French Text Codes (BT-21/BT-22):
+    - #REG#: Company legal form and share capital
+    - #ABL#: Trade register number (RCS)
+    - #AAI#: APE business activity code
+    - #PMD#: Late payment penalties (payable to Distributor)
+    - #PMT#: Fixed collection costs indemnity (€40 - payable to Distributor)
+    - #BAR#: Treatment type (B2B e-invoicing)
+    - NO ACC: No subrogation notice (not factoring)
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>INV-2026-3456</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-01-29</cbc:IssueDate>
+    <!-- BT-9 Payment Due Date -->
+    <cbc:DueDate>2026-02-28</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code - 380: Standard commercial invoice (NOT factoring) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes -->
+    <!-- REG: Company legal form and share capital (BT-33 alternative method) -->
+    <cbc:Note>#REG#SA au capital de 500000.00 EUR</cbc:Note>
+    <!-- ABL: Legal information - Trade register (BT-33 alternative method) -->
+    <cbc:Note>#ABL#RCS Toulouse B 567 890 123</cbc:Note>
+    <!-- AAI: General information - APE code (business activity classification) -->
+    <cbc:Note>#AAI#APE 2620Z - Fabrication d'ordinateurs et d'équipements périphériques</cbc:Note>
+    <!-- PMD: Late payment penalties (payable to Distributor as payment recipient) -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage. Pénalités payables à TechDistrib France SAS, mandataire commercial.</cbc:Note>
+    <!-- PMT: Fixed indemnity for collection costs (payable to Distributor) -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR. Payable à TechDistrib France SAS.</cbc:Note>
+    <!-- BAR: Treatment type qualification - B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- NOTE: NO ACC subrogation notice - this is NOT factoring, no legal transfer of receivable -->
+    <!-- Payment terms explain distributor arrangement without Dailly law language -->
+
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference (mandatory for French e-invoicing) -->
+    <cbc:BuyerReference>REF-ACHAT-IT-2026-0156</cbc:BuyerReference>
+
+    <!-- BT-13 Purchase Order Reference -->
+    <cac:OrderReference>
+        <cbc:ID>PO-IT-2026-0234</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BG-4 Seller Information (Original manufacturer - payment managed by Distributor) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller electronic address (endpoint for e-invoicing) -->
+            <cbc:EndpointID schemeID="0009">56789012345678</cbc:EndpointID>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">56789012345678</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>TechnoSystems Toulouse</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <!-- BT-35 Street name -->
+                <cbc:StreetName>22 Rue de la Technopole</cbc:StreetName>
+                <cbc:AdditionalStreetName>Parc Technologique du Canal</cbc:AdditionalStreetName>
+                <!-- BT-37 City -->
+                <cbc:CityName>Toulouse</cbc:CityName>
+                <!-- BT-38 Postal code -->
+                <cbc:PostalZone>31520</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR56789012345</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Legal Name -->
+                <cbc:RegistrationName>TechnoSystems Toulouse SA</cbc:RegistrationName>
+                <!-- BT-30 SIREN -->
+                <cbc:CompanyID schemeID="0002">567890123</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 Seller Contact -->
+            <cac:Contact>
+                <!-- BT-41 Contact name -->
+                <cbc:Name>Service Commercial</cbc:Name>
+                <!-- BT-42 Contact telephone -->
+                <cbc:Telephone>+33 5 61 23 45 67</cbc:Telephone>
+                <!-- BT-43 Contact email -->
+                <cbc:ElectronicMail>ventes@technosystems-toulouse.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>CLIENT-ENT-7890</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-49 Buyer electronic address -->
+            <cbc:EndpointID schemeID="0009">88899900011223</cbc:EndpointID>
+            <!-- BT-46 Buyer Identifier - SIRET -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">88899900011223</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Solutions Informatiques Entreprises</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <!-- BT-50 Street name -->
+                <cbc:StreetName>78 Avenue des Systèmes d'Information</cbc:StreetName>
+                <cbc:AdditionalStreetName>Immeuble Le Numérique</cbc:AdditionalStreetName>
+                <!-- BT-52 City -->
+                <cbc:CityName>Bordeaux</cbc:CityName>
+                <!-- BT-53 Postal code -->
+                <cbc:PostalZone>33000</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT Number -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR88899900011</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Legal Name -->
+                <cbc:RegistrationName>Solutions Informatiques Entreprises SAS</cbc:RegistrationName>
+                <!-- BT-47 Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">888999000</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-9 Buyer Contact -->
+            <cac:Contact>
+                <cbc:Name>Direction des Achats IT</cbc:Name>
+                <cbc:Telephone>+33 5 56 78 90 12</cbc:Telephone>
+                <cbc:ElectronicMail>achats.it@sie-bordeaux.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-10 PAYEE (Distributor - commercial intermediary managing payment) -->
+    <cac:PayeeParty>
+        <!-- Extension for Distributor role qualification (EXT-FR-FE-26 using EXTENDED-CTC-FR) -->
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:PartyExtension>
+                            <!-- EXT-FR-FE-26: Party role code (PE = Payee - distributor receives payment) -->
+                            <puf:RoleCode>
+                                <cbc:ID>PE</cbc:ID>
+                            </puf:RoleCode>
+                        </puf:PartyExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- BT-60 Payee identifier (SIRET) -->
+        <cac:PartyIdentification>
+            <cbc:ID schemeID="0009">33344455566778</cbc:ID>
+        </cac:PartyIdentification>
+        <!-- BT-59 Payee name (MANDATORY) -->
+        <cac:PartyName>
+            <cbc:Name>TechDistrib France SAS</cbc:Name>
+        </cac:PartyName>
+        <!-- Payee address -->
+        <cac:PostalAddress>
+            <cbc:StreetName>45 Boulevard de la Distribution</cbc:StreetName>
+            <cbc:CityName>Lyon</cbc:CityName>
+            <cbc:PostalZone>69003</cbc:PostalZone>
+            <cac:Country>
+                <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                <cbc:Name>France</cbc:Name>
+            </cac:Country>
+        </cac:PostalAddress>
+        <!-- BT-61 Payee legal identifier (SIREN) -->
+        <cac:PartyLegalEntity>
+            <cbc:CompanyID schemeID="0002">333444555</cbc:CompanyID>
+        </cac:PartyLegalEntity>
+    </cac:PayeeParty>
+
+    <!-- BG-16 Payment Means -->
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code - 30: Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <!-- BG-17 Credit Transfer (Distributor's account - NOT Seller's) -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier - Distributor's IBAN (CRITICAL) -->
+            <cbc:ID>FR7633344455566778899001234</cbc:ID>
+            <!-- BT-85 Payment account name -->
+            <cbc:Name>TechDistrib France SAS - Compte Clients</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 Payment service provider identifier (BIC/SWIFT) -->
+                <cbc:ID>BNPAFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms -->
+        <cbc:Note>Paiement net 30 jours fin de mois. ARRANGEMENT COMMERCIAL - DISTRIBUTEUR AGRÉÉ : Cette facture est émise par TechnoSystems Toulouse SA. Le paiement DOIT être effectué sur le compte bancaire de TechDistrib France SAS (IBAN : FR76 3334 4455 5667 7889 9001 234), notre distributeur agréé qui gère la relation commerciale et l'encaissement pour notre compte. TechDistrib France SAS est mandataire commercial, pas affactureur - aucune cession de créance.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">900.00</cbc:TaxAmount>
+        <!-- Tax subtotal for 20% VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116 Taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">4500.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">900.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code - S: Standard rate -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT category rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">4500.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">4500.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">5400.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment - Payable to Distributor -->
+        <cbc:PayableAmount currencyID="EUR">5400.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- ========================================
+         INVOICE LINE 1: Professional workstations
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Poste de travail professionnel haute performance pour CAO/DAO</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="C62">5</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">3500.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Station de travail professionnelle: processeur 12 cœurs, 32 Go RAM, carte graphique professionnelle 8 Go, SSD 1 To NVMe, écran 27 pouces 4K</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Workstation PRO-CAD-3000</cbc:Name>
+            <!-- BT-156 Buyer's item identification -->
+            <cac:BuyersItemIdentification>
+                <cbc:ID>WKS-CAD-PRO</cbc:ID>
+            </cac:BuyersItemIdentification>
+            <!-- BT-157 Seller's item identification -->
+            <cac:SellersItemIdentification>
+                <cbc:ID>TS-WKS-3000-2025</cbc:ID>
+            </cac:SellersItemIdentification>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Processeur</cbc:Name>
+                <cbc:Value>12 cœurs 3.8 GHz</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Garantie</cbc:Name>
+                <cbc:Value>3 ans constructeur sur site</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">700.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- ========================================
+         INVOICE LINE 2: Network equipment
+         ======================================== -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-132 Invoice line note -->
+        <cbc:Note>Commutateur réseau entreprise manageable</cbc:Note>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="C62">2</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+
+        <!-- BG-25 Invoice line -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Commutateur réseau 24 ports Gigabit Ethernet + 4 ports SFP+ 10 Gb, manageable, VLAN, QoS, PoE+, rack 19 pouces</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Switch Manageable 24 Ports GigE + 4x10G</cbc:Name>
+            <!-- BT-156 Buyer's item identification -->
+            <cac:BuyersItemIdentification>
+                <cbc:ID>NET-SW-24G-10G</cbc:ID>
+            </cac:BuyersItemIdentification>
+            <!-- BT-157 Seller's item identification -->
+            <cac:SellersItemIdentification>
+                <cbc:ID>TS-NET-SW24-2025</cbc:ID>
+            </cac:SellersItemIdentification>
+            <!-- BG-30 Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-31 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Capacité PoE</cbc:Name>
+                <cbc:Value>370W total</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Garantie</cbc:Name>
+                <cbc:Value>Garantie à vie limitée</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">500.00</cbc:PriceAmount>
+            <!-- BT-149 Base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>
