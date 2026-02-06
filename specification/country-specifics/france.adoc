@@ -10,7 +10,7 @@ In addition to the standard invoice type code, France requires the business proc
 
 The business process type (Cadre de facturation) indicates the nature of the transaction and affects VAT treatment. For the complete list of supported codes and their descriptions, see the https://pagero.github.io/puf-code-lists/#_business_process_codes_for_france[PUF Code Lists specification^].
 
-*Example for Standard B2B Invoice*
+*Example for Goods Invoice*
 [source,xml]
 ----
 <Invoice>
@@ -19,7 +19,7 @@ The business process type (Cadre de facturation) indicates the nature of the tra
 </Invoice>
 ----
 
-*Example for Standard B2G Invoice*
+*Example for Service Invoice*
 [source,xml]
 ----
 <Invoice>
@@ -28,7 +28,7 @@ The business process type (Cadre de facturation) indicates the nature of the tra
 </Invoice>
 ----
 
-*Example for Marketplace Invoice*
+*Example for Mixed (Goods and Services) Invoice*
 [source,xml]
 ----
 <Invoice>
