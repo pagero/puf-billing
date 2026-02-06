@@ -12044,63 +12044,48 @@ These text codes apply to both Invoice and CreditNote document types.
 <div class="sect4">
 <h5 id="_endpoint_identification_2"><a class="anchor" href="#_endpoint_identification_2"></a><a class="link" href="#_endpoint_identification_2">Endpoint Identification</a></h5>
 <div class="paragraph">
-<p>For electronic addressing in the French e-invoicing system, two schemes are supported:</p>
+<p>For electronic addressing in the French e-invoicing system, <strong>schemeID 0225</strong> is the primary electronic addressing scheme. The endpoint value can contain composite information combining SIREN, SIRET, and optional routing identifiers.</p>
+</div>
+<div class="paragraph">
+<p><strong>Endpoint Registration Formats (schemeID 0225):</strong></p>
+</div>
+<div class="paragraph">
+<p>There are four possible registration formats in the French e-invoicing directory (annuaire):</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Scheme 0009 - SIRET</strong>: 14-digit business identifier</p>
+<p><code>SIREN</code> - Company identifier only</p>
 </li>
 <li>
-<p><strong>Scheme 0225 - Electronic Address</strong>: SIREN-based electronic address for e-invoicing platforms</p>
+<p><code>SIREN_SUFFIX</code> - Company identifier with custom suffix</p>
+</li>
+<li>
+<p><code>SIREN_SIRET</code> - Company and establishment identifiers</p>
+</li>
+<li>
+<p><code>SIREN_SIRET_CODEROUTAGE</code> - Full identifier with routing code</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p><strong>Example with SIRET (scheme 0009)</strong></p>
+<p>Where:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
-    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
-        <span class="tag">&lt;cac:Party&gt;</span>
-            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>12345678901234<span class="tag">&lt;/cbc:EndpointID&gt;</span>
-            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-        <span class="tag">&lt;/cac:Party&gt;</span>
-    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
-    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
-        <span class="tag">&lt;cac:Party&gt;</span>
-            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>98765432109876<span class="tag">&lt;/cbc:EndpointID&gt;</span>
-            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-        <span class="tag">&lt;/cac:Party&gt;</span>
-    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
-    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-<span class="tag">&lt;/Invoice&gt;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Example with Electronic Address (scheme 0225)</strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
-    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
-        <span class="tag">&lt;cac:Party&gt;</span>
-            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0225</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>123456789<span class="tag">&lt;/cbc:EndpointID&gt;</span>
-            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-        <span class="tag">&lt;/cac:Party&gt;</span>
-    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
-    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
-        <span class="tag">&lt;cac:Party&gt;</span>
-            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0225</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>987654321<span class="tag">&lt;/cbc:EndpointID&gt;</span>
-            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-        <span class="tag">&lt;/cac:Party&gt;</span>
-    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
-    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-<span class="tag">&lt;/Invoice&gt;</span></code></pre>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>SIREN</strong> (schemeID 0002) - 9-digit company identifier</p>
+</li>
+<li>
+<p><strong>SIRET</strong> (schemeID 0009) - 14-digit establishment identifier</p>
+</li>
+<li>
+<p><strong>SUFFIX</strong> - Custom suffix appended directly to SIREN (no separate scheme code)</p>
+</li>
+<li>
+<p><strong>CODE ROUTAGE</strong> (schemeID 0224) - Buyer-defined routing code for internal distribution (e.g., department, cost center, or business unit)</p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -12109,19 +12094,32 @@ These text codes apply to both Invoice and CreditNote document types.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Scheme 0224 (CODE ROUTAGE) is used for platform routing identifiers when required by specific certified platforms.
+SUFFIX and CODE ROUTAGE achieve similar functionality at different organizational levels. Both are entirely determined by the buyer for routing invoices to the appropriate internal recipient. The platform must register such addresses in the French e-invoicing registry.
 </td>
 </tr>
 </table>
 </div>
-</div>
-<div class="sect4">
-<h5 id="_party_identification_siren"><a class="anchor" href="#_party_identification_siren"></a><a class="link" href="#_party_identification_siren">Party Identification - SIREN</a></h5>
 <div class="paragraph">
-<p>SIREN (9-digit) can be provided in PartyLegalEntity/CompanyID with scheme ID <code>0002</code>:</p>
+<p><strong>Party Structure Requirements:</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Example</strong></p>
+<p>In addition to the endpoint (schemeID 0225), the individual identifier components should be provided in the party structure:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>SIREN</strong> → <code>PartyLegalEntity/CompanyID</code> with schemeID <code>0002</code></p>
+</li>
+<li>
+<p><strong>SIRET</strong> → <code>PartyIdentification/ID</code> with schemeID <code>0009</code></p>
+</li>
+<li>
+<p><strong>CODE ROUTAGE</strong> → <code>PartyIdentification/ID</code> with schemeID <code>0224</code> (when applicable)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example with Electronic Address (schemeID 0225)</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12129,16 +12127,58 @@ Scheme 0224 (CODE ROUTAGE) is used for platform routing identifiers when require
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
     <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
         <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="comment">&lt;!-- Endpoint: SIREN --&gt;</span>
+            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0225</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>123456789<span class="tag">&lt;/cbc:EndpointID&gt;</span>
+            <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>12345678901234<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
             <span class="tag">&lt;cac:PartyLegalEntity&gt;</span>
                 <span class="tag">&lt;cbc:CompanyID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0002</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>123456789<span class="tag">&lt;/cbc:CompanyID&gt;</span>
-                <span class="tag">&lt;cbc:RegistrationName&gt;</span>Company Legal Name<span class="tag">&lt;/cbc:RegistrationName&gt;</span>
+                <span class="tag">&lt;cbc:RegistrationName&gt;</span>Supplier Company Name<span class="tag">&lt;/cbc:RegistrationName&gt;</span>
             <span class="tag">&lt;/cac:PartyLegalEntity&gt;</span>
             <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
         <span class="tag">&lt;/cac:Party&gt;</span>
     <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="comment">&lt;!-- Endpoint: SIREN_SIRET_CODEROUTAGE --&gt;</span>
+            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0225</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>987654321_98765432109876_DEPT01<span class="tag">&lt;/cbc:EndpointID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+            <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>98765432109876<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+            <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0224</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>DEPT01<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="3"></i><b>(3)</b>
+            <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;cac:PartyLegalEntity&gt;</span>
+                <span class="tag">&lt;cbc:CompanyID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0002</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>987654321<span class="tag">&lt;/cbc:CompanyID&gt;</span><i class="conum" data-value="4"></i><b>(4)</b>
+                <span class="tag">&lt;cbc:RegistrationName&gt;</span>Buyer Company Name<span class="tag">&lt;/cbc:RegistrationName&gt;</span>
+            <span class="tag">&lt;/cac:PartyLegalEntity&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Endpoint combining SIREN, SIRET, and CODE ROUTAGE</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>SIRET provided in PartyIdentification with schemeID 0009</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>CODE ROUTAGE provided in PartyIdentification with schemeID 0224</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>SIREN provided in PartyLegalEntity with schemeID 0002</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect4">
