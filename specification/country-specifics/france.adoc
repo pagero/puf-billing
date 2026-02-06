@@ -211,76 +211,78 @@ France uses SIRET (14-digit) and SIREN (9-digit) numbers for business identifica
 
 ===== Endpoint Identification
 
-For electronic addressing in the French e-invoicing system, two schemes are supported:
+For electronic addressing in the French e-invoicing system, **schemeID 0225** is the primary electronic addressing scheme. The endpoint value can contain composite information combining SIREN, SIRET, and optional routing identifiers.
 
-1. **Scheme 0009 - SIRET**: 14-digit business identifier
-2. **Scheme 0225 - Electronic Address**: SIREN-based electronic address for e-invoicing platforms
+**Endpoint Registration Formats (schemeID 0225):**
 
-*Example with SIRET (scheme 0009)*
+There are four possible registration formats in the French e-invoicing directory (annuaire):
+
+1. `SIREN` - Company identifier only
+2. `SIREN_SUFFIX` - Company identifier with custom suffix
+3. `SIREN_SIRET` - Company and establishment identifiers
+4. `SIREN_SIRET_CODEROUTAGE` - Full identifier with routing code
+
+Where:
+
+* **SIREN** (schemeID 0002) - 9-digit company identifier
+* **SIRET** (schemeID 0009) - 14-digit establishment identifier
+* **SUFFIX** - Custom suffix appended directly to SIREN (no separate scheme code)
+* **CODE ROUTAGE** (schemeID 0224) - Buyer-defined routing code for internal distribution (e.g., department, cost center, or business unit)
+
+NOTE: SUFFIX and CODE ROUTAGE achieve similar functionality at different organizational levels. Both are entirely determined by the buyer for routing invoices to the appropriate internal recipient. The platform must register such addresses in the French e-invoicing registry.
+
+**Party Structure Requirements:**
+
+In addition to the endpoint (schemeID 0225), the individual identifier components should be provided in the party structure:
+
+* **SIREN** → `PartyLegalEntity/CompanyID` with schemeID `0002`
+* **SIRET** → `PartyIdentification/ID` with schemeID `0009`
+* **CODE ROUTAGE** → `PartyIdentification/ID` with schemeID `0224` (when applicable)
+
+*Example with Electronic Address (schemeID 0225)*
 [source,xml]
 ----
 <Invoice>
     <!-- Code omitted for clarity -->
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0009">12345678901234</cbc:EndpointID>
-            <!-- Code omitted for clarity -->
-        </cac:Party>
-    </cac:AccountingSupplierParty>
-    <cac:AccountingCustomerParty>
-        <cac:Party>
-            <cbc:EndpointID schemeID="0009">98765432109876</cbc:EndpointID>
-            <!-- Code omitted for clarity -->
-        </cac:Party>
-    </cac:AccountingCustomerParty>
-    <!-- Code omitted for clarity -->
-</Invoice>
-----
-
-*Example with Electronic Address (scheme 0225)*
-[source,xml]
-----
-<Invoice>
-    <!-- Code omitted for clarity -->
-    <cac:AccountingSupplierParty>
-        <cac:Party>
+            <!-- Endpoint: SIREN -->
             <cbc:EndpointID schemeID="0225">123456789</cbc:EndpointID>
-            <!-- Code omitted for clarity -->
-        </cac:Party>
-    </cac:AccountingSupplierParty>
-    <cac:AccountingCustomerParty>
-        <cac:Party>
-            <cbc:EndpointID schemeID="0225">987654321</cbc:EndpointID>
-            <!-- Code omitted for clarity -->
-        </cac:Party>
-    </cac:AccountingCustomerParty>
-    <!-- Code omitted for clarity -->
-</Invoice>
-----
-
-NOTE: Scheme 0224 (CODE ROUTAGE) is used for platform routing identifiers when required by specific certified platforms.
-
-===== Party Identification - SIREN
-
-SIREN (9-digit) can be provided in PartyLegalEntity/CompanyID with scheme ID `0002`:
-
-*Example*
-[source,xml]
-----
-<Invoice>
-    <!-- Code omitted for clarity -->
-    <cac:AccountingSupplierParty>
-        <cac:Party>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">12345678901234</cbc:ID>
+            </cac:PartyIdentification>
             <cac:PartyLegalEntity>
                 <cbc:CompanyID schemeID="0002">123456789</cbc:CompanyID>
-                <cbc:RegistrationName>Company Legal Name</cbc:RegistrationName>
+                <cbc:RegistrationName>Supplier Company Name</cbc:RegistrationName>
             </cac:PartyLegalEntity>
             <!-- Code omitted for clarity -->
         </cac:Party>
     </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- Endpoint: SIREN_SIRET_CODEROUTAGE -->
+            <cbc:EndpointID schemeID="0225">987654321_98765432109876_DEPT01</cbc:EndpointID><!--1-->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">98765432109876</cbc:ID><!--2-->
+            </cac:PartyIdentification>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0224">DEPT01</cbc:ID><!--3-->
+            </cac:PartyIdentification>
+            <cac:PartyLegalEntity>
+                <cbc:CompanyID schemeID="0002">987654321</cbc:CompanyID><!--4-->
+                <cbc:RegistrationName>Buyer Company Name</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingCustomerParty>
     <!-- Code omitted for clarity -->
 </Invoice>
 ----
+
+<1> Endpoint combining SIREN, SIRET, and CODE ROUTAGE
+<2> SIRET provided in PartyIdentification with schemeID 0009
+<3> CODE ROUTAGE provided in PartyIdentification with schemeID 0224
+<4> SIREN provided in PartyLegalEntity with schemeID 0002
 
 ===== VAT Identification
 
