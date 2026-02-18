@@ -8,7 +8,7 @@ France implemented a mandatory B2B/B2G e-invoicing system starting in 2026, requ
 
 In addition to the standard invoice type code, France requires the business process type to be specified using the `@name` attribute on `cbc:InvoiceTypeCode`.
 
-The business process type (Cadre de facturation) indicates the nature of the transaction and affects VAT treatment. For the complete list of supported codes and their descriptions, see the https://pagero.github.io/puf-code-lists/#_business_process_codes_for_france[PUF Code Lists specification^].
+The business process type (Cadre de facturation) indicates the nature of the transaction and affects VAT treatment. For the complete list of supported codes, their descriptions, and guidance on when to use each code, see the https://pagero.github.io/puf-code-lists/#_business_process_codes_for_france[PUF Code Lists specification^].
 
 *Example for Goods Invoice*
 [source,xml]
@@ -33,6 +33,31 @@ The business process type (Cadre de facturation) indicates the nature of the tra
 ----
 <Invoice>
     <cbc:InvoiceTypeCode name="M1">380</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example for Prepayment Invoice (advance payment for goods)*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="B1">386</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example for Final Invoice After Prepayment (deducting the advance)*
+[source,xml]
+----
+<Invoice>
+    <cbc:InvoiceTypeCode name="B4">380</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>PREPAYMENT-INV-001</cbc:ID>
+            <cbc:IssueDate>2025-01-15</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
     <!-- Code omitted for clarity -->
 </Invoice>
 ----

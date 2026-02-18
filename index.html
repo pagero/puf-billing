@@ -11760,7 +11760,7 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 <p>In addition to the standard invoice type code, France requires the business process type to be specified using the <code>@name</code> attribute on <code>cbc:InvoiceTypeCode</code>.</p>
 </div>
 <div class="paragraph">
-<p>The business process type (Cadre de facturation) indicates the nature of the transaction and affects VAT treatment. For the complete list of supported codes and their descriptions, see the <a href="https://pagero.github.io/puf-code-lists/#_business_process_codes_for_france" target="_blank" rel="noopener">PUF Code Lists specification</a>.</p>
+<p>The business process type (Cadre de facturation) indicates the nature of the transaction and affects VAT treatment. For the complete list of supported codes, their descriptions, and guidance on when to use each code, see the <a href="https://pagero.github.io/puf-code-lists/#_business_process_codes_for_france" target="_blank" rel="noopener">PUF Code Lists specification</a>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Example for Goods Invoice</strong></p>
@@ -11791,6 +11791,35 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
     <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">M1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example for Prepayment Invoice (advance payment for goods)</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">B1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>386<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example for Final Invoice After Prepayment (deducting the advance)</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">B4</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:BillingReference&gt;</span>
+        <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
+            <span class="tag">&lt;cbc:ID&gt;</span>PREPAYMENT-INV-001<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;cbc:IssueDate&gt;</span>2025-01-15<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+        <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
+    <span class="tag">&lt;/cac:BillingReference&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
