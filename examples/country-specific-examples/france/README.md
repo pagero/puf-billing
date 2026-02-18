@@ -6,7 +6,7 @@ This directory contains example PUF invoice files demonstrating France's e-invoi
 
 French e-invoicing requires specific mandatory elements regulated by the French tax authorities (DGFiP). These examples demonstrate key French requirements including:
 
-- Business process types (B1-B7, S1-S7, M1-M7)
+- Business process types (B1, B2, B4, B7, S1, S2, S4, S5, S6, S7, M1, M2, M4)
 - French text codes (REG, ABL, AAI, PMD, PMT, BAR)
 - SIRET identification (14-digit business identifier)
 - RCS registration and APE codes
@@ -464,23 +464,24 @@ French e-invoicing uses business process types in the `InvoiceTypeCode/@name` at
 ### B-Series (Goods)
 
 - **B1**: Goods invoice
-- **B2**: Export goods invoice
-- **B4**: Intra-community goods invoice
+- **B2**: Goods invoice (already paid)
+- **B4**: Final invoice for goods (after down payment)
+- **B7**: Goods invoice (e-reporting VAT collected)
 
 ### S-Series (Services)
 
-- **S1**: Service invoice
-- **S2**: Export service invoice
-- **S4**: Intra-community service invoice
-- **S5**: Service invoice with reverse charge
-- **S6**: Service invoice with VAT exemption
-- **S7**: Service invoice for specific sectors
+- **S1**: Services invoice
+- **S2**: Services invoice (already paid)
+- **S4**: Final invoice for services (after down payment)
+- **S5**: Subcontractor services invoice
+- **S6**: Co-contractor services invoice
+- **S7**: Services invoice (e-reporting VAT collected)
 
 ### M-Series (Mixed)
 
-- **M1**: Mixed goods and services invoice
-- **M2**: Export mixed invoice
-- **M4**: Intra-community mixed invoice
+- **M1**: Mixed invoice (goods + services)
+- **M2**: Mixed invoice (already paid)
+- **M4**: Double final invoice (after down payment)
 
 ## Identification Schemes
 
