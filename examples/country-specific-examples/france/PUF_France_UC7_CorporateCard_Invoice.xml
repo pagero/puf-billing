@@ -12,7 +12,7 @@
     - Company pays monthly statement to card manager
     
     Key Requirements:
-    - Business process B2: Already-paid invoice
+    - Business process S2: Services invoice (already paid)
     - BT-113 (Prepaid amount): Equal to BT-112 (card manager paid full amount)
     - BT-115 (Amount due): 0 (nothing owed to seller)
     - NO third-party PAYER block (purchase card is BUYER's payment means, not separate payer)
@@ -43,7 +43,6 @@
     - #PMD#: Late payment penalties
     - #PMT#: Fixed collection costs indemnity (€40)
     - #BAR#: Treatment type (B2B e-invoicing)
-    - #PAI#: Third party payment information (corporate card payment via card manager)
 -->
 <Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
 
@@ -56,7 +55,7 @@
     <!-- BT-2 Invoice Issue Date -->
     <cbc:IssueDate>2026-01-28</cbc:IssueDate>
     <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
-    <cbc:InvoiceTypeCode name="B2">380</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode name="S2">380</cbc:InvoiceTypeCode>
 
     <!-- BT-21/BT-22: Invoice notes with French text codes -->
     <!-- REG: Company legal form and share capital (BT-33 alternative method) -->
@@ -69,8 +68,6 @@
     <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
     <!-- PMT: Fixed indemnity for collection costs -->
     <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
-    <!-- PAI: Third party payment information (corporate card via card manager) -->
-    <cbc:Note>#PAI#Paiement effectué par carte bancaire d'entreprise (carte logée) le 28/01/2026. Montant total : 198.00 EUR. Transaction réglée par le gestionnaire de cartes auprès de l'hôtel. L'entreprise règlera le gestionnaire de cartes selon relevé mensuel d'opérations.</cbc:Note>
     <!-- BAR: Treatment type qualification - B2B e-invoicing -->
     <cbc:Note>#BAR#B2B</cbc:Note>
 

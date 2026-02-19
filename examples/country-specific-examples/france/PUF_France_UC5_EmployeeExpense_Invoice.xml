@@ -10,7 +10,7 @@
     - Employee identified by matricule (employee ID) for GDPR compliance
     
     Key Requirements:
-    - Business process B2: Already-paid invoice
+    - Business process S2: Services invoice (already paid)
     - BT-113 (Prepaid amount): Equal to BT-112 (employee paid full amount)
     - BT-115 (Amount due): 0 (nothing owed to seller)
     - Third-party PAYER: Employee (via EXT-FR-FE-BG-02 using EXTENDED-CTC-FR profile)
@@ -93,7 +93,7 @@
     <!-- BT-2 Invoice Issue Date -->
     <cbc:IssueDate>2026-01-29</cbc:IssueDate>
     <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
-    <cbc:InvoiceTypeCode name="B2">380</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode name="S2">380</cbc:InvoiceTypeCode>
 
     <!-- BT-21/BT-22: Invoice notes with French text codes -->
     <!-- REG: Company legal form and share capital (BT-33 alternative method) -->

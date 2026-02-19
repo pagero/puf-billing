@@ -6,7 +6,7 @@
     Country: France
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Standard Commercial Invoice (Type 380)
-    Business Process: Standard (no special code - reconciliation after prepayments)
+    Business Process: S1 (Services invoice - energy supply reconciliation)
     
     Scenario Description:
     Energy supplier issues year-end reconciliation invoice to B2C customer after 12 months
@@ -109,8 +109,8 @@
     <cbc:DueDate>2026-01-29</cbc:DueDate>
 
     <!-- BT-3: Invoice type code = 380 (Standard commercial invoice)
-         No special business process code - standard reconciliation after prepayments -->
-    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+         BT-23: Business process type = S1 (Services invoice - energy supply) -->
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
 
     <!-- BT-22: Notes - French text codes for reconciliation context -->
     <cbc:Note>#REG#SIRET 22233344455566 - RCS Marseille - APE 3513Z (Commerce d'électricité) - Capital social: 5 000 000 EUR - N° TVA: FR22222333444</cbc:Note>

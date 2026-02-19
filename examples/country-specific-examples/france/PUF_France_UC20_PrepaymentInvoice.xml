@@ -36,8 +36,8 @@
     2. BT-23: Business Process Type = S1 (Prepayment on services)
        - MANDATORY (M), Legal requirement, Tech requirement
        - Alternative values:
-         * B1: Prepayment on goods (Acompte sur Biens)
-         * M1: Prepayment on mixed provision (Acompte sur prestation Mixte)
+         * B1: Goods invoice (if prepayment is for goods)
+         * M1: Mixed invoice (if prepayment covers both goods and services)
     
     3. Line-Level Content (BT-153/BT-154):
        - Simple reference to quote with prepayment percentage
@@ -133,11 +133,18 @@
 
     <!-- BT-22: Notes - French text codes -->
     <cbc:Note>#REG#SIRET 44455566677788 - RCS Villeurbanne - APE 4942Z (Services de déménagement) - Capital social: 50 000 EUR - N° TVA: FR44444555666</cbc:Note>
-    <cbc:Note>#ABL#FACTURE D'ACOMPTE (Type 386): Acompte de 30% sur devis DEV-2026-1234 pour prestation de déménagement résidentiel Paris → Lyon prévue le 15/02/2026. La TVA de 600,00 EUR sur cet acompte est exigible dès l'encaissement de l'acompte conformément aux règles de TVA françaises. Une facture finale (Type 380) sera émise après réalisation du déménagement, mentionnant cette facture d'acompte en référence et déduisant le montant déjà payé du solde restant dû. Devis détaillé: Emballage + chargement + transport 650 km + déchargement + déballage + démontage/remontage meubles + assurance marchandises transportées. Estimation totale: 10 000,00 EUR HT (12 000,00 EUR TTC).</cbc:Note>
     <cbc:Note>#AAI#APE 4942Z - Services de déménagement (location de camions avec chauffeur, emballage, transport, déballage).</cbc:Note>
     <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
     <cbc:Note>#PMT#ACOMPTE DÉJÀ PAYÉ: Cet acompte de 30% (3 600,00 EUR TTC) a été encaissé le 25/01/2026 par virement bancaire. Cette facture d'acompte documente le paiement déjà reçu conformément à l'article 289-I.1.c du CGI. Le solde de 8 400,00 EUR TTC sera facturé après réalisation du déménagement (prévu le 15/02/2026) et sera exigible à 30 jours fin de mois. COMPTABILISATION: Cet acompte est enregistré au bilan dans le compte "Acomptes clients" et non dans les comptes de résultat (produits).</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>FACTURE D'ACOMPTE (Type 386): Acompte de 30% sur devis DEV-2026-1234 pour prestation
+        de déménagement résidentiel Paris → Lyon prévue le 15/02/2026. La TVA de 600,00 EUR sur cet
+        acompte est exigible dès l'encaissement de l'acompte conformément aux règles de TVA
+        françaises. Une facture finale (Type 380) sera émise après réalisation du déménagement,
+        mentionnant cette facture d'acompte en référence et déduisant le montant déjà payé du solde
+        restant dû. Devis détaillé: Emballage + chargement + transport 650 km + déchargement +
+        déballage + démontage/remontage meubles + assurance marchandises transportées. Estimation
+        totale: 10 000,00 EUR HT (12 000,00 EUR TTC).</cbc:Note>
 
     <!-- BT-5: Invoice currency code -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>

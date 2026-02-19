@@ -50,9 +50,9 @@
                                     <ext:ExtensionContent>
                                         <puf:PageroExtension>
                                             <puf:PartyExtension>
-                                                <!-- EXT-FR-FE-44: Party role code (PE = Payer) -->
+                                                <!-- EXT-FR-FE-44: Party role code (PR = Payer) -->
                                                 <puf:RoleCode>
-                                                    <cbc:ID>PE</cbc:ID>
+                                                    <cbc:ID>PR</cbc:ID>
                                                 </puf:RoleCode>
                                             </puf:PartyExtension>
                                         </puf:PageroExtension>

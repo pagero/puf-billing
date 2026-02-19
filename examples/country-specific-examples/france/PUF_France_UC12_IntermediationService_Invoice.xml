@@ -7,7 +7,7 @@
     Country: France (EXTENDED-CTC-FR profile)
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Standard Commercial Invoice (Type 380)
-    Business Process: B1 (Standard invoice)
+    Business Process: S1 (Services invoice)
     
     Scenario Description:
     Industrial broker (Courtage Industriel Pro SARL - transparent intermediary) issues
@@ -97,7 +97,7 @@
     <cbc:DueDate>2026-02-17</cbc:DueDate>
 
     <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
-    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
 
     <!-- BT-22: Notes - French text codes for registration, payment terms, additional info -->
     <cbc:Note>#REG#Société immatriculée au RCS de Lyon sous le numéro 55566677788899, capital social 50 000 EUR. Courtier en approvisionnements industriels, spécialiste produits chimiques et matières dangereuses.</cbc:Note>
