@@ -6,7 +6,7 @@
     Country: France (EXTENDED-CTC-FR profile)
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Standard Commercial Invoice (Type 380)
-    Business Process: B1 (Standard invoice)
+    Business Process: S1 (Services invoice)
     
     Scenario Description:
     Advertising publisher (Média Presse Digital SA - "régie publicitaire") issues invoice
@@ -38,7 +38,6 @@
     Key Implementation: BUYER AGENT in cac:BuyerCustomerParty
     - BUYER AGENT placed within cac:AccountingCustomerParty after cac:Contact
     - Third party (BUYER AGENT) identified with role code "AB" (Buyer's agent)
-    - Uses cbc:IndustryClassificationCode with listID="UNCL3035"
     - Provides complete party details: name, SIREN/SIRET, VAT, address
     - Enables platform delegation and rights management
     
@@ -61,7 +60,7 @@
     
     Key Characteristics:
     - Invoice type 380: Standard commercial invoice
-    - Business process B1: Standard invoice
+    - Business process S1: Services invoice
     - BG-4 SELLER: Advertising publisher (Média Presse Digital SA)
     - BG-7 BUYER: Advertiser/brand (Cosmétiques Premium Paris SAS)
     - EXT-FR-FE-BG-01 BUYER AGENT: Media agency (AgenceComm360 SARL)
@@ -132,7 +131,7 @@
     <cbc:DueDate>2026-03-04</cbc:DueDate>
 
     <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
-    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
 
     <!-- BT-22: Notes - French text codes for registration, payment terms, additional info -->
     <cbc:Note>#REG#Société immatriculée au RCS de Paris sous le numéro 11122233344455, capital social 5 000 000 EUR. Régie publicitaire digitale leader, membre du Syndicat des Régies Internet (SRI).</cbc:Note>
@@ -300,7 +299,7 @@
                     </ext:UBLExtension>
                 </ext:UBLExtensions>
                 <!-- BUYER AGENT Electronic Address -->
-                <cbc:EndpointID schemeID="0002">99988877766655</cbc:EndpointID>
+                <cbc:EndpointID schemeID="0009">99988877766655</cbc:EndpointID>
 
                 <!-- BUYER AGENT Trading Name -->
                 <cac:PartyName>

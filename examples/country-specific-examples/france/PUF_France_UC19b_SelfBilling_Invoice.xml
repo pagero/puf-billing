@@ -90,10 +90,11 @@
     
     Amounts:
     - Total produce: 1,560.00 EUR net
-    - VAT (20% standard rate): 312.00 EUR
-    - Invoice total with VAT: 1,872.00 EUR
-    - Packaging deposit (returnable crates): -192.00 EUR
-    - Amount due for payment: 1,680.00 EUR (paid to SELLER)
+    - Document-level allowance (packaging deposit): -192.00 EUR
+    - Taxable base (BT-109): 1,368.00 EUR
+    - VAT (20% standard rate on 1,368.00): 273.60 EUR
+    - Invoice total with VAT: 1,641.60 EUR
+    - Amount due for payment: 1,641.60 EUR (paid to SELLER)
     
     French Text Codes Used:
     - #REG# Registration information (SELLER's details as supplier)
@@ -136,7 +137,7 @@
     <!-- BT-9: Payment due date (30 days) -->
     <cbc:DueDate>2026-03-04</cbc:DueDate>
 
-    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) - Could be 389 (Self-billing invoice) but not needed since self-billing is indicated in extension -->
     <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
 
     <!-- BT-22: Notes - French text codes for registration, payment terms, self-billing declaration -->
@@ -368,14 +369,14 @@
     <!-- BG-23: VAT breakdown -->
     <cac:TaxTotal>
         <!-- BT-110: Invoice total VAT amount -->
-        <cbc:TaxAmount currencyID="EUR">312.00</cbc:TaxAmount>
+        <cbc:TaxAmount currencyID="EUR">273.60</cbc:TaxAmount>
 
         <!-- BG-23: VAT category taxable amount and VAT -->
         <cac:TaxSubtotal>
-            <!-- BT-116: VAT category taxable amount -->
-            <cbc:TaxableAmount currencyID="EUR">1560.00</cbc:TaxableAmount>
-            <!-- BT-117: VAT category tax amount -->
-            <cbc:TaxAmount currencyID="EUR">312.00</cbc:TaxAmount>
+            <!-- BT-116: VAT category taxable amount (line totals 1560.00 minus document allowance 192.00) -->
+            <cbc:TaxableAmount currencyID="EUR">1368.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount (1368.00 × 20%) -->
+            <cbc:TaxAmount currencyID="EUR">273.60</cbc:TaxAmount>
             <!-- BT-118: VAT category code (S = Standard rate) -->
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -392,14 +393,14 @@
     <cac:LegalMonetaryTotal>
         <!-- BT-106: Sum of Invoice line net amount -->
         <cbc:LineExtensionAmount currencyID="EUR">1560.00</cbc:LineExtensionAmount>
-        <!-- BT-109: Invoice total amount without VAT -->
-        <cbc:TaxExclusiveAmount currencyID="EUR">1560.00</cbc:TaxExclusiveAmount>
-        <!-- BT-112: Invoice total amount with VAT -->
-        <cbc:TaxInclusiveAmount currencyID="EUR">1872.00</cbc:TaxInclusiveAmount>
+        <!-- BT-109: Invoice total amount without VAT (1560.00 - 192.00 allowance) -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">1368.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT (1368.00 + 273.60) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">1641.60</cbc:TaxInclusiveAmount>
         <!-- BT-107: Sum of allowances on document level -->
         <cbc:AllowanceTotalAmount currencyID="EUR">192.00</cbc:AllowanceTotalAmount>
-        <!-- BT-115: Amount due for payment (1872.00 - 192.00 deposit) -->
-        <cbc:PayableAmount currencyID="EUR">1680.00</cbc:PayableAmount>
+        <!-- BT-115: Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">1641.60</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>
 
     <!-- BG-25: Invoice lines -->

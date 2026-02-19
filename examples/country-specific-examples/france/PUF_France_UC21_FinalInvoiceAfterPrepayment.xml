@@ -6,7 +6,7 @@
     Country: France
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Standard Commercial Invoice (Type 380)
-    Business Process: B2 (Final invoice after prepayment)
+    Business Process: S4 (Final invoice for services after down payment)
     
     Scenario Description:
     Moving company (DéménagementPro Services SARL) completes residential moving
@@ -30,17 +30,17 @@
     - UC21 (this file): Final invoice after service completion
       * Invoice type: 380 (Standard commercial invoice)
       * References prepayment via BT-25 (Preceding invoice reference)
-      * Shows FULL service amount: 10,000.00 EUR + VAT 2,000.00 EUR
+      * Shows FULL service amount: 9,197.01 EUR + VAT 1,839.40 EUR
       * Deducts prepayment: -3,600.00 EUR (already paid)
-      * Net amount due: 8,400.00 EUR
+      * Net amount due: 7,436.41 EUR
     
     Critical Field Requirements:
     
     1. BT-3: Invoice Type Code = 380 (Standard commercial invoice)
        - Final invoice uses standard type (not prepayment type 386)
     
-    2. BT-23: Business Process Type = B2 (Final invoice after prepayment)
-       - Distinguishes from initial prepayment (S1) and standard invoice (B1)
+    2. BT-23: Business Process Type = S4 (Final invoice for services after down payment)
+       - Matches the services nature of the prepayment (UC20 uses S1)
     
     3. BT-25: Preceding Invoice Reference = DPRO-AC-2026-0089
        - MANDATORY reference to prepayment invoice
@@ -53,7 +53,7 @@
     
     5. BT-115: Amount Due for Payment
        - Calculation: (BT-112 Invoice total) - (BT-113 Prepaid amount)
-       - Example: 12,000.00 EUR - 3,600.00 EUR = 8,400.00 EUR
+       - Example: 11,036.41 EUR - 3,600.00 EUR = 7,436.41 EUR
     
     VAT Calculation Rules:
     - VAT calculated on FULL service amount (10,000.00 EUR)
@@ -81,20 +81,20 @@
     - Packing materials: 150 EUR (20 additional archive boxes beyond estimate)
     - Packing labor: 1,800 EUR (1 day, 3 packers)
     - Loading: 800 EUR (4 movers, 3 hours)
-    - Transport Paris → Lyon: 3,500 EUR (650 km, 40m³ truck, fuel, tolls, driver)
+    - Transport Paris → Lyon: 3,497.00 EUR (650 km × 5.38 EUR/km)
     - Unloading and installation: 1,200 EUR (4 movers, 4 hours)
     - Furniture disassembly/reassembly: 800 EUR (specialist, 1 day)
     - Insurance coverage: 450 EUR (50,000 EUR declared value)
     - Monte-meubles rental: 300 EUR (lift equipment for 3rd floor Lyon office)
     - Parking reservations: 200 EUR (both Paris and Lyon sites, 2 days)
-    - Total: 10,200.00 EUR net
+    - Total: 9,197.01 EUR net
     
     Final Invoice Calculation:
-    - Total service performed: 10,200.00 EUR (net)
-    - VAT (20% standard rate): 2,040.00 EUR
-    - Invoice total with VAT: 12,240.00 EUR
+    - Total service performed: 9,197.01 EUR (net)
+    - VAT (20% standard rate): 1,839.40 EUR
+    - Invoice total with VAT: 11,036.41 EUR
     - Less: Prepayment already paid: -3,600.00 EUR
-    - Net amount due for payment: 8,640.00 EUR
+    - Net amount due for payment: 7,436.41 EUR
     
     Payment Terms:
     - Balance due: 30 days end of month (due 2026-03-31)
@@ -124,14 +124,14 @@
 
     <!-- BT-3: Invoice type code = 380 (Standard commercial invoice)
          Final invoice uses standard type, not prepayment type 386 -->
-    <cbc:InvoiceTypeCode name="B2">380</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode name="S4">380</cbc:InvoiceTypeCode>
 
     <!-- BT-22: Notes - French text codes -->
     <cbc:Note>#REG#SIRET 44455566677788 - RCS Villeurbanne - APE 4942Z (Services de déménagement) - Capital social: 50 000 EUR - N° TVA: FR44444555666</cbc:Note>
-    <cbc:Note>#ABL#FACTURE FINALE APRÈS ACOMPTE (Type 380, Business Process B2): Cette facture fait suite à la facture d'acompte DPRO-AC-2026-0089 du 28/01/2026 (Type 386) d'un montant de 3 600,00 EUR TTC. Le service de déménagement a été réalisé le 15/02/2026 conformément au devis DEV-2026-1234. Le montant total de la prestation s'élève à 12 240,00 EUR TTC (10 200,00 EUR HT + 2 040,00 EUR de TVA). Après déduction de l'acompte déjà encaissé (3 600,00 EUR TTC dont 600,00 EUR de TVA), le solde restant dû s'élève à 8 640,00 EUR TTC (7 200,00 EUR HT + 1 440,00 EUR de TVA). COMPTABILISATION: Cette facture finale est enregistrée en produits (classe 7) et solde le compte d'acompte client (classe 4) précédemment comptabilisé. ÉCART PAR RAPPORT AU DEVIS: Le montant final (10 200,00 EUR HT) est légèrement supérieur à l'estimation initiale (10 000,00 EUR HT) en raison de fournitures supplémentaires (20 cartons d'archives non prévus au devis, soit +150,00 EUR HT) et de la location d'un monte-meubles pour le déchargement au 3ème étage sans ascenseur à Lyon (+50,00 EUR HT au-delà de l'estimation).</cbc:Note>
+    <cbc:Note>#ABL#FACTURE FINALE APRÈS ACOMPTE (Type 380, Business Process S4): Cette facture fait suite à la facture d'acompte DPRO-AC-2026-0089 du 28/01/2026 (Type 386) d'un montant de 3 600,00 EUR TTC. Le service de déménagement a été réalisé le 15/02/2026 conformément au devis DEV-2026-1234. Le montant total de la prestation s'élève à 11 036,41 EUR TTC (9 197,01 EUR HT + 1 839,40 EUR de TVA). Après déduction de l'acompte déjà encaissé (3 600,00 EUR TTC dont 600,00 EUR de TVA), le solde restant dû s'élève à 7 436,41 EUR TTC (6 197,01 EUR HT + 1 239,40 EUR de TVA). COMPTABILISATION: Cette facture finale est enregistrée en produits (classe 7) et solde le compte d'acompte client (classe 4) précédemment comptabilisé.</cbc:Note>
     <cbc:Note>#AAI#APE 4942Z - Services de déménagement (location de camions avec chauffeur, emballage, transport, déballage).</cbc:Note>
     <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
-    <cbc:Note>#PMT#Paiement du solde (8 640,00 EUR TTC) à 30 jours fin de mois par virement bancaire (échéance: 31/03/2026). En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). ACOMPTE DÉDUIT: Un acompte de 3 600,00 EUR TTC (facture DPRO-AC-2026-0089 du 28/01/2026) a déjà été encaissé et est déduit du montant total de cette facture. Le montant restant dû est donc de 8 640,00 EUR TTC.</cbc:Note>
+    <cbc:Note>#PMT#Paiement du solde (7 436,41 EUR TTC) à 30 jours fin de mois par virement bancaire (échéance: 31/03/2026). En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). ACOMPTE DÉDUIT: Un acompte de 3 600,00 EUR TTC (facture DPRO-AC-2026-0089 du 28/01/2026) a déjà été encaissé et est déduit du montant total de cette facture. Le montant restant dû est donc de 7 436,41 EUR TTC.</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
 
     <!-- BT-5: Invoice currency code -->
@@ -305,20 +305,20 @@
     <!-- BG-20: Payment terms -->
     <cac:PaymentTerms>
         <!-- BT-20: Payment terms -->
-        <cbc:Note>SOLDE APRÈS DÉDUCTION ACOMPTE: Paiement du solde de 8 640,00 EUR TTC à 30 jours fin de mois par virement bancaire. Échéance: 31/03/2026. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). ACOMPTE PRÉCÉDEMMENT ENCAISSÉ: Cette facture fait suite à la facture d'acompte DPRO-AC-2026-0089 du 28/01/2026 d'un montant de 3 600,00 EUR TTC (3 000,00 EUR HT + 600,00 EUR de TVA), déjà encaissé le 25/01/2026. CALCUL DU SOLDE: Montant total de la prestation: 12 240,00 EUR TTC (10 200,00 EUR HT + 2 040,00 EUR de TVA) - Acompte déjà payé: 3 600,00 EUR TTC (3 000,00 EUR HT + 600,00 EUR de TVA) = Solde restant dû: 8 640,00 EUR TTC (7 200,00 EUR HT + 1 440,00 EUR de TVA). COMPTABILISATION: Cette facture finale est enregistrée en produits (classe 7) pour le montant total de 10 200,00 EUR HT et solde le compte d'acompte client (classe 4) de 3 000,00 EUR HT précédemment comptabilisé lors de l'encaissement de l'acompte.</cbc:Note>
+        <cbc:Note>SOLDE APRÈS DÉDUCTION ACOMPTE: Paiement du solde de 7 436,41 EUR TTC à 30 jours fin de mois par virement bancaire. Échéance: 31/03/2026. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). ACOMPTE PRÉCÉDEMMENT ENCAISSÉ: Cette facture fait suite à la facture d'acompte DPRO-AC-2026-0089 du 28/01/2026 d'un montant de 3 600,00 EUR TTC (3 000,00 EUR HT + 600,00 EUR de TVA), déjà encaissé le 25/01/2026. CALCUL DU SOLDE: Montant total de la prestation: 11 036,41 EUR TTC (9 197,01 EUR HT + 1 839,40 EUR de TVA) - Acompte déjà payé: 3 600,00 EUR TTC (3 000,00 EUR HT + 600,00 EUR de TVA) = Solde restant dû: 7 436,41 EUR TTC (6 197,01 EUR HT + 1 239,40 EUR de TVA). COMPTABILISATION: Cette facture finale est enregistrée en produits (classe 7) pour le montant total de 9 197,01 EUR HT et solde le compte d'acompte client (classe 4) de 3 000,00 EUR HT précédemment comptabilisé lors de l'encaissement de l'acompte.</cbc:Note>
     </cac:PaymentTerms>
 
     <!-- BG-23: VAT breakdown -->
     <cac:TaxTotal>
         <!-- BT-110: Invoice total VAT amount (FULL VAT on total service) -->
-        <cbc:TaxAmount currencyID="EUR">2040.00</cbc:TaxAmount>
+        <cbc:TaxAmount currencyID="EUR">1839.40</cbc:TaxAmount>
 
         <!-- BG-23: VAT category taxable amount and VAT -->
         <cac:TaxSubtotal>
             <!-- BT-116: VAT category taxable amount (FULL service amount) -->
-            <cbc:TaxableAmount currencyID="EUR">10200.00</cbc:TaxableAmount>
-            <!-- BT-117: VAT category tax amount (FULL VAT calculated) -->
-            <cbc:TaxAmount currencyID="EUR">2040.00</cbc:TaxAmount>
+            <cbc:TaxableAmount currencyID="EUR">9197.01</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount (9197.01 × 20%) -->
+            <cbc:TaxAmount currencyID="EUR">1839.40</cbc:TaxAmount>
             <!-- BT-118: VAT category code -->
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -333,16 +333,16 @@
 
     <!-- BG-22: Document totals -->
     <cac:LegalMonetaryTotal>
-        <!-- BT-106: Sum of Invoice line net amount (FULL service amount) -->
-        <cbc:LineExtensionAmount currencyID="EUR">10200.00</cbc:LineExtensionAmount>
-        <!-- BT-109: Invoice total amount without VAT (FULL service net) -->
-        <cbc:TaxExclusiveAmount currencyID="EUR">10200.00</cbc:TaxExclusiveAmount>
-        <!-- BT-112: Invoice total amount with VAT (FULL service with VAT) -->
-        <cbc:TaxInclusiveAmount currencyID="EUR">12240.00</cbc:TaxInclusiveAmount>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">9197.01</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">9197.01</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT (9197.01 + 1839.40) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">11036.41</cbc:TaxInclusiveAmount>
         <!-- BT-113: Prepaid amount (Deducted from total to calculate net due) -->
         <cbc:PrepaidAmount currencyID="EUR">3600.00</cbc:PrepaidAmount>
-        <!-- BT-115: Amount due for payment (Total minus prepayment = Net balance) -->
-        <cbc:PayableAmount currencyID="EUR">8640.00</cbc:PayableAmount>
+        <!-- BT-115: Amount due for payment (11036.41 - 3600.00) -->
+        <cbc:PayableAmount currencyID="EUR">7436.41</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>
 
     <!-- BG-25: Invoice lines -->
@@ -433,8 +433,8 @@
         <!-- BT-129: Invoiced quantity -->
         <cbc:InvoicedQuantity unitCode="HUR">3</cbc:InvoicedQuantity>
 
-        <!-- BT-131: Invoice line net amount -->
-        <cbc:LineExtensionAmount currencyID="EUR">800.00</cbc:LineExtensionAmount>
+        <!-- BT-131: Invoice line net amount (3 × 266.67) -->
+        <cbc:LineExtensionAmount currencyID="EUR">800.01</cbc:LineExtensionAmount>
 
         <!-- BG-31: Item information -->
         <cac:Item>
@@ -472,8 +472,8 @@
         <!-- BT-129: Invoiced quantity -->
         <cbc:InvoicedQuantity unitCode="KMT">650</cbc:InvoicedQuantity>
 
-        <!-- BT-131: Invoice line net amount -->
-        <cbc:LineExtensionAmount currencyID="EUR">3500.00</cbc:LineExtensionAmount>
+        <!-- BT-131: Invoice line net amount (650 km × 5.38 EUR/km) -->
+        <cbc:LineExtensionAmount currencyID="EUR">3497.00</cbc:LineExtensionAmount>
 
         <!-- BG-31: Item information -->
         <cac:Item>

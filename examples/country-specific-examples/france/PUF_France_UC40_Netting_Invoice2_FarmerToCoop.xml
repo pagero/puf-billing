@@ -6,7 +6,7 @@
     Country: France
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Standard Commercial Invoice (Type 380)
-    Business Process: Standard (no special code)
+    Business Process: B1 (Goods invoice)
     
     CRITICAL PATTERN: Two Separate Invoices + Offset Payment
     ========================================================
@@ -28,9 +28,9 @@
     Net Settlement:
     ===============
     Invoice 1 (Coop → Farmer): 2,400.00 EUR TTC (companion invoice)
-    Invoice 2 (Farmer → Coop): 3,840.00 EUR TTC (this invoice)
-    Net Payment: 1,440.00 EUR from Cooperative to Farmer
-    (Farmer receives net amount: 3,840 - 2,400 = 1,440 EUR)
+    Invoice 2 (Farmer → Coop): 5,280.00 EUR TTC (this invoice)
+    Net Payment: 2,880.00 EUR from Cooperative to Farmer
+    (Farmer receives net amount: 5,280 - 2,400 = 2,880 EUR)
     
     Business Scenario - Agricultural Cooperative (ROLES REVERSED):
     ==============================================================
@@ -61,7 +61,7 @@
     - Price: 2.50 EUR/kg (tarif premium Syrah 2026)
     - Amount: 2,000.00 EUR
     
-    Total produce: 3,200.00 EUR net + 640.00 EUR VAT = 3,840.00 EUR TTC
+    Total produce: 4,400.00 EUR net + 880.00 EUR VAT = 5,280.00 EUR TTC
     
     Transaction 1 (Companion Invoice): COOP → FARMER Services
     ===================================
@@ -71,9 +71,9 @@
     
     Net Settlement Calculation (SAME AS INVOICE 1):
     ===================================
-    Coop owes Farmer (this invoice - grapes): 3,840.00 EUR
+    Coop owes Farmer (this invoice - grapes): 5,280.00 EUR
     Farmer owes Coop (companion invoice - services): 2,400.00 EUR
-    Net amount: 3,840 - 2,400 = 1,440.00 EUR
+    Net amount: 5,280 - 2,400 = 2,880.00 EUR
     Direction: COOP pays FARMER (because Coop owes more)
     Payment date: February 15, 2026 (15th of following month)
     
@@ -86,7 +86,7 @@
     ===================================
     Both parties use cash-basis VAT.
     VAT for BOTH invoices becomes exigible at moment of net payment:
-    - Farmer collects 640 EUR VAT on grapes (this invoice)
+    - Farmer collects 880 EUR VAT on grapes (this invoice)
     - Coop collects 400 EUR VAT on services (companion invoice)
     - Both VAT amounts exigible on February 15, 2026 (net payment date)
     
@@ -132,15 +132,16 @@
     <!-- BT-9: Payment due date (Net settlement date - SAME as Invoice 1) -->
     <cbc:DueDate>2026-02-15</cbc:DueDate>
 
-    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
-    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice)
+         BT-23: Business process type = B1 (Goods invoice - agricultural produce) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
 
     <!-- BT-22: Notes - Netting/compensation context -->
     <cbc:Note>#REG#SIRET 55566677788899 - RCS Avignon - APE 0121Z (Culture de la vigne) - Capital social: 50 000 EUR - N° TVA: FR55555666777</cbc:Note>
     <cbc:Note>#ABL#LIVRAISON RAISINS DE CUVE HIVER: Cette facture documente la livraison de raisins de cuve stockés en chambre froide depuis les vendanges de septembre 2025. CONSERVATION: Raisins maintenus à 2-4°C en atmosphère contrôlée (CO2 3%, O2 5%) pour préserver qualité et éviter fermentation prématurée. Contrôle hebdomadaire température et hygrométrie. QUALITÉ CERTIFIÉE: Raisins AOC Côtes du Rhône et AOC Côtes du Rhône Villages conformes cahier des charges INAO. Viticulture biologique certifiée AB (Ecocert FR-BIO-01). Analyses laboratoire: Degré potentiel 12,5% vol., acidité totale 5,2 g/L H2SO4, pH 3,4. VARIÉTÉS: Chardonnay (raisins blancs, vinification vin blanc sec assemblage Côtes du Rhône blanc, 1 200 kg) + Syrah (raisins rouges, assemblage vins rouges premium Villages, 800 kg). TRAÇABILITÉ: Parcelles cadastrales identifiées, registre viticulture bio tenu, certificat conformité AOC disponible. TARIFS COOPÉRATIVE 2026: Chardonnay 2,00 EUR/kg (tarif standard blanc) - Syrah 2,50 EUR/kg (tarif premium rouge). Tarifs fixés en AG coopérative décembre 2025. COMPENSATION MENSUELLE: En tant qu'adhérent de la Coopérative, je bénéficie du système de compensation mensuelle entre mes livraisons (cette facture) et les services que la Coopérative me fournit (facture COOP-2026-0234). Règlement net le 15 du mois suivant. DEUX FACTURES OBLIGATOIRES: La réglementation e-invoicing impose deux factures distinctes avec rôles VENDEUR/ACHETEUR inversés. Impossible de mélanger dans une seule facture avec lignes négatives.</cbc:Note>
     <cbc:Note>#AAI#APE 0121Z - Culture de la vigne (exploitation viticole produisant raisins de cuve pour vinification AOC).</cbc:Note>
     <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
-    <cbc:Note>#PMT#PAIEMENT PAR COMPENSATION (NETTING): Cette facture fait partie d'un arrangement de compensation avec Coopérative Agricole Provence. RÈGLEMENT NET: Le paiement de cette facture (3 840,00 EUR TTC - raisins livrés à la Coopérative) sera compensé avec la facture Coop COOP-2026-0234 du 05/02/2026 (2 400,00 EUR TTC - services fournis par la Coopérative). CALCUL DE COMPENSATION: Montant dû par la Coop (mes raisins): 3 840,00 EUR - Montant dû par moi (services Coop): 2 400,00 EUR - SOLDE NET: 1 440,00 EUR en ma faveur. PAIEMENT EFFECTIF: La Coopérative me versera 1 440,00 EUR par virement bancaire le 15/02/2026 (15 du mois suivant selon notre accord d'adhésion). CODE MOYEN DE PAIEMENT 97: Le code 97 "Compensation entre partenaires" signale que le paiement s'effectue par compensation/netting et non par règlement direct du montant total de cette facture. RÉGIME TVA: Mon EARL et la Coopérative appliquent tous deux la TVA sur les encaissements. La TVA de 640,00 EUR sur cette facture et la TVA de 400,00 EUR sur la facture Coop de services deviendront exigibles simultanément le 15/02/2026 lors du règlement net. COMPTABILISATION: Mes comptes refléteront: Produit vente raisins 3 840,00 EUR + Charge services Coop 2 400,00 EUR = Créance nette 1 440,00 EUR à recevoir.</cbc:Note>
+    <cbc:Note>#PMT#PAIEMENT PAR COMPENSATION (NETTING): Cette facture fait partie d'un arrangement de compensation avec Coopérative Agricole Provence. RÈGLEMENT NET: Le paiement de cette facture (5 280,00 EUR TTC - raisins livrés à la Coopérative) sera compensé avec la facture Coop COOP-2026-0234 du 05/02/2026 (2 400,00 EUR TTC - services fournis par la Coopérative). CALCUL DE COMPENSATION: Montant dû par la Coop (mes raisins): 5 280,00 EUR - Montant dû par moi (services Coop): 2 400,00 EUR - SOLDE NET: 2 880,00 EUR en ma faveur. PAIEMENT EFFECTIF: La Coopérative me versera 2 880,00 EUR par virement bancaire le 15/02/2026 (15 du mois suivant selon notre accord d'adhésion). CODE MOYEN DE PAIEMENT 97: Le code 97 "Compensation entre partenaires" signale que le paiement s'effectue par compensation/netting et non par règlement direct du montant total de cette facture. RÉGIME TVA: Mon EARL et la Coopérative appliquent tous deux la TVA sur les encaissements. La TVA de 880,00 EUR sur cette facture et la TVA de 400,00 EUR sur la facture Coop de services deviendront exigibles simultanément le 15/02/2026 lors du règlement net. COMPTABILISATION: Mes comptes refléteront: Produit vente raisins 5 280,00 EUR + Charge services Coop 2 400,00 EUR = Créance nette 2 880,00 EUR à recevoir.</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
 
     <!-- BT-5: Invoice currency code -->
@@ -304,20 +305,20 @@
     <!-- BG-20: Payment terms -->
     <cac:PaymentTerms>
         <!-- BT-20: Payment terms -->
-        <cbc:Note>PAIEMENT PAR COMPENSATION (CODE 97): Cette facture de 3 840,00 EUR TTC sera réglée par compensation avec la facture de la Coopérative COOP-2026-0234 du 05/02/2026 (2 400,00 EUR TTC). CALCUL NET: La Coopérative me doit 3 840 EUR (raisins) - Je dois à la Coopérative 2 400 EUR (services) = SOLDE NET 1 440 EUR en ma faveur. VIREMENT NET: La Coopérative me versera 1 440,00 EUR par virement SEPA le 15/02/2026 sur mon compte EARL (IBAN FR89****34). DÉTAIL COMPENSATION: Montant brut facture Martin→Coop: 3 840,00 EUR - Montant brut facture Coop→Martin: 2 400,00 EUR - Montant net reçu par Martin: 1 440,00 EUR (dans le sens Coop vers Martin car Coop doit plus). EXIGIBILITÉ TVA: Les deux factures étant soumises à TVA sur encaissements, la TVA de 640 EUR sur cette facture et la TVA de 400 EUR sur la facture Coop de services deviendront exigibles simultanément le 15/02/2026 au moment du règlement net. ACCORD COMMERCIAL: Règlement mensuel par compensation selon accord d'adhésion à la Coopérative signé en 2020 (ADHESION-COOP-2020-MARTIN). Paiement effectué le 15 du mois suivant les opérations. FACTURES CONCERNÉES: (1) EARL-2026-0089 (cette facture): Raisins janvier 2026 - 3 840 EUR TTC. (2) COOP-2026-0234 (facture Coop): Services janvier 2026 - 2 400 EUR TTC. STATUTS LIFECYCLE: Les deux factures passeront au statut "Paiement Transmis" puis "Encaissée" au moment du virement net du 15/02/2026. RETARD DE PAIEMENT: En cas de contestation ou retard, pénalités au taux légal applicable aux deux factures proportionnellement.</cbc:Note>
+        <cbc:Note>PAIEMENT PAR COMPENSATION (CODE 97): Cette facture de 5 280,00 EUR TTC sera réglée par compensation avec la facture de la Coopérative COOP-2026-0234 du 05/02/2026 (2 400,00 EUR TTC). CALCUL NET: La Coopérative me doit 5 280 EUR (raisins) - Je dois à la Coopérative 2 400 EUR (services) = SOLDE NET 2 880 EUR en ma faveur. VIREMENT NET: La Coopérative me versera 2 880,00 EUR par virement SEPA le 15/02/2026 sur mon compte EARL (IBAN FR89****34). DÉTAIL COMPENSATION: Montant brut facture Martin→Coop: 5 280,00 EUR - Montant brut facture Coop→Martin: 2 400,00 EUR - Montant net reçu par Martin: 2 880,00 EUR (dans le sens Coop vers Martin car Coop doit plus). EXIGIBILITÉ TVA: Les deux factures étant soumises à TVA sur encaissements, la TVA de 880 EUR sur cette facture et la TVA de 400 EUR sur la facture Coop de services deviendront exigibles simultanément le 15/02/2026 au moment du règlement net. ACCORD COMMERCIAL: Règlement mensuel par compensation selon accord d'adhésion à la Coopérative signé en 2020 (ADHESION-COOP-2020-MARTIN). Paiement effectué le 15 du mois suivant les opérations. FACTURES CONCERNÉES: (1) EARL-2026-0089 (cette facture): Raisins janvier 2026 - 5 280 EUR TTC. (2) COOP-2026-0234 (facture Coop): Services janvier 2026 - 2 400 EUR TTC. STATUTS LIFECYCLE: Les deux factures passeront au statut "Paiement Transmis" puis "Encaissée" au moment du virement net du 15/02/2026. RETARD DE PAIEMENT: En cas de contestation ou retard, pénalités au taux légal applicable aux deux factures proportionnellement.</cbc:Note>
     </cac:PaymentTerms>
 
     <!-- BG-23: VAT breakdown -->
     <cac:TaxTotal>
-        <!-- BT-110: Invoice total VAT amount -->
-        <cbc:TaxAmount currencyID="EUR">640.00</cbc:TaxAmount>
+        <!-- BT-110: Invoice total VAT amount (4400.00 × 20%) -->
+        <cbc:TaxAmount currencyID="EUR">880.00</cbc:TaxAmount>
 
         <!-- BG-23: VAT category taxable amount and VAT -->
         <cac:TaxSubtotal>
-            <!-- BT-116: VAT category taxable amount -->
-            <cbc:TaxableAmount currencyID="EUR">3200.00</cbc:TaxableAmount>
-            <!-- BT-117: VAT category tax amount -->
-            <cbc:TaxAmount currencyID="EUR">640.00</cbc:TaxAmount>
+            <!-- BT-116: VAT category taxable amount (1200 × 2.00 + 800 × 2.50) -->
+            <cbc:TaxableAmount currencyID="EUR">4400.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount (4400.00 × 20%) -->
+            <cbc:TaxAmount currencyID="EUR">880.00</cbc:TaxAmount>
             <!-- BT-118: VAT category code -->
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -332,14 +333,14 @@
 
     <!-- BG-22: Document totals -->
     <cac:LegalMonetaryTotal>
-        <!-- BT-106: Sum of Invoice line net amount -->
-        <cbc:LineExtensionAmount currencyID="EUR">3200.00</cbc:LineExtensionAmount>
+        <!-- BT-106: Sum of Invoice line net amount (2400.00 + 2000.00) -->
+        <cbc:LineExtensionAmount currencyID="EUR">4400.00</cbc:LineExtensionAmount>
         <!-- BT-109: Invoice total amount without VAT -->
-        <cbc:TaxExclusiveAmount currencyID="EUR">3200.00</cbc:TaxExclusiveAmount>
-        <!-- BT-112: Invoice total amount with VAT -->
-        <cbc:TaxInclusiveAmount currencyID="EUR">3840.00</cbc:TaxInclusiveAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">4400.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT (4400.00 + 880.00) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">5280.00</cbc:TaxInclusiveAmount>
         <!-- BT-115: Amount due for payment (Full amount - net settlement via compensation) -->
-        <cbc:PayableAmount currencyID="EUR">3840.00</cbc:PayableAmount>
+        <cbc:PayableAmount currencyID="EUR">5280.00</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>
 
     <!-- BG-25: Invoice lines -->

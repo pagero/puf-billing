@@ -6,7 +6,7 @@
     Country: France
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Standard Commercial Invoice (Type 380)
-    Business Process: Standard (no special code)
+    Business Process: S1 (Services invoice)
     
     CRITICAL PATTERN: Two Separate Invoices + Offset Payment
     ========================================================
@@ -28,9 +28,9 @@
     Net Settlement:
     ===============
     Invoice 1 (Coop → Farmer): 2,400.00 EUR TTC (this invoice)
-    Invoice 2 (Farmer → Coop): 3,840.00 EUR TTC (companion invoice)
-    Net Payment: 1,440.00 EUR from Cooperative to Farmer
-    (Farmer receives net amount: 3,840 - 2,400 = 1,440 EUR)
+    Invoice 2 (Farmer → Coop): 5,280.00 EUR TTC (companion invoice)
+    Net Payment: 2,880.00 EUR from Cooperative to Farmer
+    (Farmer receives net amount: 5,280 - 2,400 = 2,880 EUR)
     
     Business Scenario - Agricultural Cooperative:
     =============================================
@@ -63,13 +63,13 @@
     - White wine grapes (Chardonnay): 1,200 kg @ 2.00 EUR/kg
     - Red wine grapes (Syrah): 800 kg @ 2.50 EUR/kg
     
-    Total produce: 3,200.00 EUR net + 640.00 EUR VAT = 3,840.00 EUR TTC
+    Total produce: 4,400.00 EUR net + 880.00 EUR VAT = 5,280.00 EUR TTC
     
     Net Settlement Calculation:
     ===========================
     Farmer owes Coop (services): 2,400.00 EUR
-    Coop owes Farmer (grapes): 3,840.00 EUR
-    Net amount: 3,840 - 2,400 = 1,440.00 EUR
+    Coop owes Farmer (grapes): 5,280.00 EUR
+    Net amount: 5,280 - 2,400 = 2,880.00 EUR
     Direction: COOP pays FARMER (because Coop owes more)
     Payment date: February 15, 2026 (15th of following month)
     
@@ -88,8 +88,8 @@
     VAT becomes exigible for BOTH invoices at moment of net payment:
     - When: February 15, 2026 (net payment date)
     - Coop VAT: Collects 400 EUR on services invoice
-    - Farmer VAT: Collects 640 EUR on grapes invoice
-    - Net payment of 1,440 EUR triggers VAT exigibility for both directions
+    - Farmer VAT: Collects 880 EUR on grapes invoice
+    - Net payment of 2,880 EUR triggers VAT exigibility for both directions
     
     Lifecycle Statuses:
     ===================
@@ -135,15 +135,16 @@
     <!-- BT-9: Payment due date (Net settlement date) -->
     <cbc:DueDate>2026-02-15</cbc:DueDate>
 
-    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice) -->
-    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice)
+         BT-23: Business process type = S1 (Services invoice - cooperative services) -->
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
 
     <!-- BT-22: Notes - Netting/compensation context -->
     <cbc:Note>#REG#SIRET 11122233344455 - RCS Avignon - APE 0161Z (Activités de soutien aux cultures) - Capital social: 250 000 EUR - N° TVA: FR11111222333</cbc:Note>
-    <cbc:Note>#ABL#RELATION COMMERCIALE BIDIRECTIONNELLE: En tant que membre adhérent de notre Coopérative Agricole, vous bénéficiez de nos services (location matériel, conseil technique, fournitures agricoles) ET vous nous livrez votre production (raisins de cuve). COMPENSATION MENSUELLE: Chaque mois, nous établissons deux factures distinctes: (1) Facture Coopérative → Adhérent pour les services fournis dans le mois (cette facture), (2) Facture Adhérent → Coopérative pour les livraisons de production dans le mois (votre facture EARL-2026-0089). Puis nous compensons les montants pour un règlement net unique le 15 du mois suivant. INTERDICTION FACTURE UNIQUE: La réglementation française e-invoicing INTERDIT de mélanger ventes et achats dans une seule facture avec lignes négatives. OBLIGATION: Deux factures séparées avec rôles VENDEUR/ACHETEUR inversés, puis compensation des paiements. AVANTAGES: Simplifie la trésorerie (un seul flux de paiement net au lieu de deux flux bruts croisés), réduit les frais bancaires, facilite la comptabilité. TRANSPARENCE FISCALE: Les autorités fiscales peuvent tracer les deux flux de TVA (400 EUR de TVA collectée par Coop sur services + 640 EUR de TVA collectée par Adhérent sur raisins) malgré le paiement net unique de 1 440 EUR. PÉRIODE CONCERNÉE: Janvier 2026 - Services fournis et production livrée pendant le mois de janvier 2026.</cbc:Note>
+    <cbc:Note>#ABL#RELATION COMMERCIALE BIDIRECTIONNELLE: En tant que membre adhérent de notre Coopérative Agricole, vous bénéficiez de nos services (location matériel, conseil technique, fournitures agricoles) ET vous nous livrez votre production (raisins de cuve). COMPENSATION MENSUELLE: Chaque mois, nous établissons deux factures distinctes: (1) Facture Coopérative → Adhérent pour les services fournis dans le mois (cette facture), (2) Facture Adhérent → Coopérative pour les livraisons de production dans le mois (votre facture EARL-2026-0089). Puis nous compensons les montants pour un règlement net unique le 15 du mois suivant. INTERDICTION FACTURE UNIQUE: La réglementation française e-invoicing INTERDIT de mélanger ventes et achats dans une seule facture avec lignes négatives. OBLIGATION: Deux factures séparées avec rôles VENDEUR/ACHETEUR inversés, puis compensation des paiements. AVANTAGES: Simplifie la trésorerie (un seul flux de paiement net au lieu de deux flux bruts croisés), réduit les frais bancaires, facilite la comptabilité. TRANSPARENCE FISCALE: Les autorités fiscales peuvent tracer les deux flux de TVA (400 EUR de TVA collectée par Coop sur services + 880 EUR de TVA collectée par Adhérent sur raisins) malgré le paiement net unique de 2 880 EUR. PÉRIODE CONCERNÉE: Janvier 2026 - Services fournis et production livrée pendant le mois de janvier 2026.</cbc:Note>
     <cbc:Note>#AAI#APE 0161Z - Activités de soutien aux cultures (coopérative agricole fournissant services et conseils aux producteurs membres).</cbc:Note>
     <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
-    <cbc:Note>#PMT#PAIEMENT PAR COMPENSATION (NETTING): Cette facture fait partie d'un arrangement de compensation avec EARL Martin Viticulture. RÈGLEMENT NET: Le paiement de cette facture (2 400,00 EUR TTC - services fournis par la Coopérative) sera compensé avec votre facture EARL-2026-0089 du 03/02/2026 (3 840,00 EUR TTC - raisins livrés par vous). CALCUL DE COMPENSATION: Montant dû par vous (services Coop): 2 400,00 EUR - Montant dû par nous (vos raisins): 3 840,00 EUR - SOLDE NET: 1 440,00 EUR en votre faveur. PAIEMENT EFFECTIF: La Coopérative vous versera 1 440,00 EUR par virement bancaire le 15/02/2026 (15 du mois suivant selon notre accord commercial). CODE MOYEN DE PAIEMENT 97: Le code 97 "Compensation entre partenaires" signale que le paiement s'effectue par compensation/netting et non par règlement direct du montant total de cette facture. RÉGIME TVA: Notre coopérative et votre EARL appliquent tous deux la TVA sur les encaissements. La TVA de 400,00 EUR sur cette facture et la TVA de 640,00 EUR sur votre facture de raisins deviendront exigibles simultanément le 15/02/2026 lors du règlement net. COMPTABILISATION: Vos comptes refléteront: Charge services Coop 2 400,00 EUR + Produit vente raisins 3 840,00 EUR = Créance nette 1 440,00 EUR à recevoir.</cbc:Note>
+    <cbc:Note>#PMT#PAIEMENT PAR COMPENSATION (NETTING): Cette facture fait partie d'un arrangement de compensation avec EARL Martin Viticulture. RÈGLEMENT NET: Le paiement de cette facture (2 400,00 EUR TTC - services fournis par la Coopérative) sera compensé avec votre facture EARL-2026-0089 du 03/02/2026 (5 280,00 EUR TTC - raisins livrés par vous). CALCUL DE COMPENSATION: Montant dû par vous (services Coop): 2 400,00 EUR - Montant dû par nous (vos raisins): 5 280,00 EUR - SOLDE NET: 2 880,00 EUR en votre faveur. PAIEMENT EFFECTIF: La Coopérative vous versera 2 880,00 EUR par virement bancaire le 15/02/2026 (15 du mois suivant selon notre accord commercial). CODE MOYEN DE PAIEMENT 97: Le code 97 "Compensation entre partenaires" signale que le paiement s'effectue par compensation/netting et non par règlement direct du montant total de cette facture. RÉGIME TVA: Notre coopérative et votre EARL appliquent tous deux la TVA sur les encaissements. La TVA de 400,00 EUR sur cette facture et la TVA de 880,00 EUR sur votre facture de raisins deviendront exigibles simultanément le 15/02/2026 lors du règlement net. COMPTABILISATION: Vos comptes refléteront: Charge services Coop 2 400,00 EUR + Produit vente raisins 5 280,00 EUR = Créance nette 2 880,00 EUR à recevoir.</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
 
     <!-- BT-5: Invoice currency code -->
@@ -294,7 +295,7 @@
     <!-- BG-20: Payment terms -->
     <cac:PaymentTerms>
         <!-- BT-20: Payment terms -->
-        <cbc:Note>PAIEMENT PAR COMPENSATION (CODE 97): Cette facture de 2 400,00 EUR TTC sera réglée par compensation avec votre facture de livraison de raisins EARL-2026-0089 du 03/02/2026 (3 840,00 EUR TTC). CALCUL NET: Vous devez 2 400 EUR (services Coop) - Nous vous devons 3 840 EUR (raisins) = SOLDE NET 1 440 EUR en votre faveur. VIREMENT NET: La Coopérative vous versera 1 440,00 EUR par virement SEPA le 15/02/2026 sur votre compte EARL (IBAN FR89****34). DÉTAIL COMPENSATION: Montant brut facture Coop→Martin: 2 400,00 EUR - Montant brut facture Martin→Coop: 3 840,00 EUR - Montant net payé par Coop: 1 440,00 EUR (dans le sens Coop vers Martin car Coop doit plus). EXIGIBILITÉ TVA: Les deux factures étant soumises à TVA sur encaissements, la TVA de 400 EUR sur cette facture et la TVA de 640 EUR sur votre facture de raisins deviendront exigibles simultanément le 15/02/2026 au moment du règlement net. ACCORD COMMERCIAL: Règlement mensuel par compensation selon accord d'adhésion à la Coopérative signé en 2020 (ADHESION-COOP-2020-MARTIN). Paiement effectué le 15 du mois suivant les opérations. FACTURES CONCERNÉES: (1) COOP-2026-0234 (cette facture): Services janvier 2026 - 2 400 EUR TTC. (2) EARL-2026-0089 (votre facture): Raisins janvier 2026 - 3 840 EUR TTC. STATUTS LIFECYCLE: Les deux factures passeront au statut "Paiement Transmis" puis "Encaissée" au moment du virement net du 15/02/2026. RETARD DE PAIEMENT: En cas de contestation ou retard, pénalités au taux légal applicable aux deux factures proportionnellement.</cbc:Note>
+        <cbc:Note>PAIEMENT PAR COMPENSATION (CODE 97): Cette facture de 2 400,00 EUR TTC sera réglée par compensation avec votre facture de livraison de raisins EARL-2026-0089 du 03/02/2026 (5 280,00 EUR TTC). CALCUL NET: Vous devez 2 400 EUR (services Coop) - Nous vous devons 5 280 EUR (raisins) = SOLDE NET 2 880 EUR en votre faveur. VIREMENT NET: La Coopérative vous versera 2 880,00 EUR par virement SEPA le 15/02/2026 sur votre compte EARL (IBAN FR89****34). DÉTAIL COMPENSATION: Montant brut facture Coop→Martin: 2 400,00 EUR - Montant brut facture Martin→Coop: 5 280,00 EUR - Montant net payé par Coop: 2 880,00 EUR (dans le sens Coop vers Martin car Coop doit plus). EXIGIBILITÉ TVA: Les deux factures étant soumises à TVA sur encaissements, la TVA de 400 EUR sur cette facture et la TVA de 880 EUR sur votre facture de raisins deviendront exigibles simultanément le 15/02/2026 au moment du règlement net. ACCORD COMMERCIAL: Règlement mensuel par compensation selon accord d'adhésion à la Coopérative signé en 2020 (ADHESION-COOP-2020-MARTIN). Paiement effectué le 15 du mois suivant les opérations. FACTURES CONCERNÉES: (1) COOP-2026-0234 (cette facture): Services janvier 2026 - 2 400 EUR TTC. (2) EARL-2026-0089 (votre facture): Raisins janvier 2026 - 5 280 EUR TTC. STATUTS LIFECYCLE: Les deux factures passeront au statut "Paiement Transmis" puis "Encaissée" au moment du virement net du 15/02/2026. RETARD DE PAIEMENT: En cas de contestation ou retard, pénalités au taux légal applicable aux deux factures proportionnellement.</cbc:Note>
     </cac:PaymentTerms>
 
     <!-- BG-23: VAT breakdown -->

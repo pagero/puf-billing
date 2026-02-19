@@ -6,7 +6,7 @@
     Country: France
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Credit Note (Type 381)
-    Business Process: Standard (no special code - reconciliation with refund)
+    Business Process: S1 (Services credit note - energy supply reconciliation)
     
     Scenario Description:
     Energy supplier issues year-end reconciliation CREDIT NOTE to B2C customer after 12 months
@@ -100,8 +100,9 @@
     <cbc:IssueDate>2026-01-18</cbc:IssueDate>
     <!-- BT-7: Tax point date (Meter reading date - actual consumption determination) -->
     <cbc:TaxPointDate>2026-01-08</cbc:TaxPointDate>
-    <!-- BT-3: Invoice type code = 381 (Credit note - for refund/overpayment scenario) -->
-    <cbc:CreditNoteTypeCode>381</cbc:CreditNoteTypeCode>
+    <!-- BT-3: Invoice type code = 381 (Credit note - for refund/overpayment scenario)
+         BT-23: Business process type = S1 (Services credit note - energy supply) -->
+    <cbc:CreditNoteTypeCode name="S1">381</cbc:CreditNoteTypeCode>
 
     <!-- BT-22: Notes - French text codes for reconciliation credit context -->
     <cbc:Note>#REG#SIRET 22233344455566 - RCS Marseille - APE 3513Z (Commerce d'électricité) - Capital social: 5 000 000 EUR - N° TVA: FR22222333444</cbc:Note>
