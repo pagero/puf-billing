@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 22a: Early Payment Discount - Services Invoice (VAT on Cash Receipt)
+
+    Business Scenario:
+    - Consulting firm (SELLER) provides IT consulting services for 10,000 EUR HT + 20% VAT
+    - Invoice offers 2% early payment discount (escompte) if paid within 10 days
+    - The discount amount does NOT appear on the invoice - only the conditions are mentioned
+    - Invoice is issued for the full amount (no discount deducted)
+
+    Key UC22a Mechanism:
+    - VAT is due on cash receipt (services, à l'encaissement)
+    - The discount is reflected in the "Cashed" (Encaissée) lifecycle status
+    - The "Encaissée" status declares the amount actually received (TTC minus discount)
+    - No credit note is needed - the administration sees the actual amount via lifecycle status
+
+    Mandatory Discount Mention:
+    - BT-21 = AAB (Conditions of sale)
+    - BT-22 = Discount conditions text
+    - This mention is MANDATORY even when no discount is offered (in that case: "Néant")
+
+    Worked Example:
+    - Total HT (BT-109): 10,000.00 EUR
+    - Total VAT (BT-110) @ 20%: 2,000.00 EUR
+    - Total TTC (BT-112): 12,000.00 EUR
+    - Amount Due (BT-115): 12,000.00 EUR (full amount, discount not yet applied)
+    - If BUYER takes discount: pays 11,760.00 EUR (12,000 - 240 = 2% of TTC)
+    - "Encaissée" status amount: 11,760.00 EUR
+
+    Source: XP Z12-014 Annexe A v1.3, Section 3.2.20
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>FR-INV-2026-022A</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-03-01</cbc:IssueDate>
+    <!-- BT-9 Payment Due Date (30 days) -->
+    <cbc:DueDate>2026-03-31</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
+    <!-- @name = S1: Services invoice -->
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes (mandatory for France) -->
+    <!-- #REG#: Company legal form and share capital -->
+    <cbc:Note>#REG#SAS au capital de 250000.00 EUR</cbc:Note>
+    <!-- #ABL#: Legal information - Trade register -->
+    <cbc:Note>#ABL#RCS Paris B 456 789 012</cbc:Note>
+    <!-- #AAI#: APE code (business activity classification) -->
+    <cbc:Note>#AAI#APE 6202A - Conseil en systèmes et logiciels informatiques</cbc:Note>
+    <!-- #PMD#: Late payment penalties (French mandatory payment terms) -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- #PMT#: Fixed indemnity for collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- #BAR#: Treatment type qualification - B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!-- #AAB#: Early payment discount mention (MANDATORY - UC22 specific) -->
+    <!-- BT-21 = AAB (Conditions of sale), BT-22 = Discount conditions -->
+    <cbc:Note>#AAB#Escompte de 2% pour paiement sous 10 jours. Base d'escompte : montant TTC.</cbc:Note>
+
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer Reference -->
+    <cbc:BuyerReference>BUYER-REF-2026-022A</cbc:BuyerReference>
+
+    <!-- BT-13 Purchase Order Reference -->
+    <cac:OrderReference>
+        <cbc:ID>PO-2026-FR-022</cbc:ID>
+        <cbc:IssueDate>2026-02-15</cbc:IssueDate>
+    </cac:OrderReference>
+
+    <!-- BG-4 Seller Information -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-29 SIRET identifier (mandatory for French entities) -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">45678901200015</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>ConseilTech Solutions</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <!-- BT-35 Street name -->
+                <cbc:StreetName>8 Boulevard Haussmann</cbc:StreetName>
+                <!-- BT-37 City -->
+                <cbc:CityName>Paris</cbc:CityName>
+                <!-- BT-38 Postal code -->
+                <cbc:PostalZone>75009</cbc:PostalZone>
+                <!-- BT-40 Country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR56456789012</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-27 Seller legal registration identifier -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>ConseilTech Solutions SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">456789012</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 Seller Contact -->
+            <cac:Contact>
+                <cbc:Name>Service Facturation</cbc:Name>
+                <cbc:Telephone>+33 1 42 00 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>facturation@conseiltech.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-46 Buyer identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">12345678900034</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Entreprise Client France</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <!-- BT-50 Street name -->
+                <cbc:StreetName>45 Avenue de la Liberté</cbc:StreetName>
+                <!-- BT-52 City -->
+                <cbc:CityName>Paris</cbc:CityName>
+                <!-- BT-53 Postal code -->
+                <cbc:PostalZone>75008</cbc:PostalZone>
+                <!-- BT-55 Country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR34123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-44 Buyer legal registration identifier -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Entreprise Client France SA</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">123456789</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-9 Buyer Contact -->
+            <cac:Contact>
+                <cbc:Name>Service Comptabilité</cbc:Name>
+                <cbc:Telephone>+33 1 45 00 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>comptabilite@client.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment Instructions -->
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means type code - 30: Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <!-- BT-83 Payment account identifier (IBAN) -->
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7630004000031234567890143</cbc:ID>
+            <cbc:Name>ConseilTech Solutions SAS</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-84 Payment service provider identifier (BIC) -->
+                <cbc:ID>BNPAFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms -->
+        <cbc:Note>Paiement à 30 jours fin de mois. Escompte de 2% pour paiement sous 10 jours.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">2000.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- BT-116 VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">10000.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">2000.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code - S: Standard rate -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT rate - 20% standard rate in France -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <!-- NOTE: Invoice is for FULL amount - discount is NOT deducted on the invoice -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">10000.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">10000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">12000.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment (full amount - discount applied at payment time) -->
+        <cbc:PayableAmount currencyID="EUR">12000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice Line 1: IT Architecture Consulting -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-129 Invoiced quantity (days of consulting) -->
+        <cbc:InvoicedQuantity unitCode="DAY">8</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">6400.00</cbc:LineExtensionAmount>
+        <!-- BT-132 Referenced purchase order line reference -->
+        <cac:OrderLineReference>
+            <cbc:LineID>1</cbc:LineID>
+        </cac:OrderLineReference>
+        <!-- BG-31 Item Information -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Conseil en architecture SI - Audit et recommandations pour migration cloud</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Conseil architecture informatique</cbc:Name>
+            <!-- BG-30 Line VAT Information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- BG-29 Price Details -->
+        <cac:Price>
+            <!-- BT-146 Item net price (daily rate) -->
+            <cbc:PriceAmount currencyID="EUR">800.00</cbc:PriceAmount>
+            <!-- BT-149 Item price base quantity -->
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25 Invoice Line 2: Security Audit -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-129 Invoiced quantity (days of consulting) -->
+        <cbc:InvoicedQuantity unitCode="DAY">4</cbc:InvoicedQuantity>
+        <!-- BT-131 Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">3600.00</cbc:LineExtensionAmount>
+        <!-- BT-132 Referenced purchase order line reference -->
+        <cac:OrderLineReference>
+            <cbc:LineID>2</cbc:LineID>
+        </cac:OrderLineReference>
+        <!-- BG-31 Item Information -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Audit de sécurité informatique - Tests d'intrusion et rapport de conformité</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Audit sécurité informatique</cbc:Name>
+            <!-- BG-30 Line VAT Information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- BG-29 Price Details -->
+        <cac:Price>
+            <!-- BT-146 Item net price (daily rate) -->
+            <cbc:PriceAmount currencyID="EUR">900.00</cbc:PriceAmount>
+            <!-- BT-149 Item price base quantity -->
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

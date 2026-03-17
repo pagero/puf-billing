@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC17a - Payment Intermediary / Marketplace
+    INVOICE F2: PAYMENT INTERMEDIARY → SELLER (Service Fee Invoice)
+
+    Use Case: Intermediary's Service/Commission Fee Invoice to SELLER
+    Country: France (EXTENDED-CTC-FR profile)
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: S2 (Already-paid services invoice)
+
+    Scenario Description:
+    The gourmet food marketplace (GourmetMarché France SAS - PAYMENT INTERMEDIARY) issues
+    a service fee invoice to the wine producer (Domaine Viticole Château Bellevue SARL -
+    SELLER) for marketplace commission on the sale to the restaurant buyer. This invoice
+    is already-paid via netting: the intermediary retained fees from the BUYER's payment
+    before remitting the net amount to the SELLER.
+
+    This is the COMPANION invoice to F1 (PUF_France_UC17a_PaymentIntermediary_F1_Sale_Invoice.xml).
+
+    Payment Settlement (Netting):
+    - BUYER paid 2,400.00 EUR TTC to INTERMEDIARY
+    - INTERMEDIARY retained 192.00 EUR TTC (this invoice F2)
+    - INTERMEDIARY remitted 2,208.00 EUR net to SELLER
+    - F2 is therefore already-paid via netting (compensation entre partenaires)
+
+    Already-Paid Invoice Rules (UC2 pattern):
+    - BT-23 (Business process): S2 (already-paid service invoice)
+    - BT-113 (Paid amount) = BT-112 (Total with VAT) = 192.00 EUR
+    - BT-115 (Amount due) = 0.00 EUR
+    - BT-81 (Payment means): 97 (Clearing between partners) - netting settlement
+
+    Key Characteristics:
+    - Invoice type 380, Business process S2 (already-paid service)
+    - BG-4 SELLER: Marketplace (GourmetMarché France SAS) - invoicing party
+    - BG-7 BUYER: Wine producer (Domaine Viticole Château Bellevue SARL) - receiving party
+    - BT-81 = 97 (Clearing between partners)
+    - Commission: 8% of 2,000.00 EUR HT = 160.00 EUR HT + 32.00 EUR VAT = 192.00 EUR TTC
+
+    French Text Codes Used:
+    - #REG# Registration information
+    - #ABL# Trade register number (RCS)
+    - #AAI# Additional info (service fee netting explanation)
+    - #PMD# Late payment penalties
+    - #PMT# Fixed collection costs
+    - #BAR# Treatment type (B2B)
+
+    Note: This F2 invoice is identical for both UC17a and UC17b variants.
+
+    Date: 2026-03-05
+    Reference: XP Z12-014 Annexe A, Section 3.2.15 - Cas n°17a
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>GM-FEE-2026-03-07821</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-03-05</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date - historical (settled via netting on 2026-03-03)
+         For already-paid invoices: BT-9 ≤ BT-2 -->
+    <cbc:DueDate>2026-03-03</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice)
+         @name = S2 (Already-paid services invoice) -->
+    <cbc:InvoiceTypeCode name="S2">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes -->
+    <!-- #REG#: Company legal form and share capital -->
+    <cbc:Note>#REG#SAS au capital de 2 000 000 EUR</cbc:Note>
+    <!-- #ABL#: Trade register number (RCS) -->
+    <cbc:Note>#ABL#RCS Paris B 555 666 777</cbc:Note>
+    <!-- #AAI#: Additional info - service fee netting explanation -->
+    <cbc:Note>#AAI#FACTURE DE COMMISSION MARKETPLACE - DÉJÀ PAYÉE PAR COMPENSATION: Cette facture documente les frais de service marketplace pour la transaction DVCB-2026-0412 (vente de vins du Domaine Viticole Château Bellevue au Restaurant Le Grand Véfour). Le montant de la commission (192,00 EUR TTC) a été retenu par compensation (netting) sur le produit de la vente de 2 400,00 EUR TTC collecté auprès de l'acheteur. Le montant net de 2 208,00 EUR a été reversé au vendeur le 03/03/2026. Le code moyen de paiement 97 (Clearing between partners) reflète ce règlement par compensation entre partenaires.</cbc:Note>
+    <!-- #PMD#: Late payment penalties -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- #PMT#: Fixed collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- #BAR#: Treatment type - B2B -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference -->
+    <cbc:BuyerReference>DVCB-2026-0412</cbc:BuyerReference>
+
+    <!-- Reference to the main sale invoice (F1) -->
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>DVCB-2026-0412</cbc:ID>
+        <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode>
+        <cbc:DocumentDescription>Facture principale de vente: Domaine Viticole Château Bellevue → Restaurant Le Grand Véfour (2 400,00 EUR TTC) - Transaction pour laquelle la commission marketplace est facturée</cbc:DocumentDescription>
+    </cac:AdditionalDocumentReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Marketplace / Payment Intermediary
+         In F2, the marketplace is the SELLER (invoicing its service fees) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address (SIRET) -->
+            <cbc:EndpointID schemeID="0009">55566677700011</cbc:EndpointID>
+
+            <!-- BT-29: SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">55566677700011</cbc:ID>
+            </cac:PartyIdentification>
+
+            <!-- BT-28: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>GourmetMarché France</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>50 Avenue des Champs-Élysées</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75008</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR55555666777</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>GourmetMarché France SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">555666777</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact -->
+            <cac:Contact>
+                <cbc:Name>Service Partenaires Vendeurs</cbc:Name>
+                <cbc:Telephone>+33 1 80 00 55 66</cbc:Telephone>
+                <cbc:ElectronicMail>vendeurs@gourmetmarche.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Wine Producer (receiving service fee invoice)
+         In F2, the original SELLER becomes the buyer of intermediary services -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address -->
+            <cbc:EndpointID schemeID="0009">22233344400011</cbc:EndpointID>
+
+            <!-- BT-46: Buyer identifier (SIRET) -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">22233344400011</cbc:ID>
+            </cac:PartyIdentification>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Domaine Viticole Château Bellevue</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>Lieu-dit Château Bellevue, Route des Vignobles</cbc:StreetName>
+                <cbc:CityName>Saint-Émilion</cbc:CityName>
+                <cbc:PostalZone>33330</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR22222333444</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Domaine Viticole Château Bellevue SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">222333444</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-16: Payment Means
+         BT-81 = 97 (Clearing between partners) - settled via netting:
+         intermediary retains fees from BUYER's payment before remitting net to SELLER -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (97 = Clearing between partners) -->
+        <cbc:PaymentMeansCode>97</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>GM-FEE-2026-03-07821</cbc:PaymentID>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Facture déjà payée par compensation (netting). La commission marketplace de 192,00 EUR TTC a été retenue sur le produit de la vente (2 400,00 EUR TTC) avant reversement du montant net de 2 208,00 EUR au vendeur le 03/03/2026. Règlement effectué conformément aux conditions générales de la plateforme GourmetMarché France.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">32.00</cbc:TaxAmount>
+
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">160.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">32.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals - ALREADY PAID PATTERN (via netting)
+         BT-113 (PrepaidAmount) = BT-112 (TaxInclusiveAmount) = 192.00
+         BT-115 (PayableAmount) = 0.00 -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">160.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">160.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">192.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113: Paid amount - Already paid via netting (equals BT-112) -->
+        <cbc:PrepaidAmount currencyID="EUR">192.00</cbc:PrepaidAmount>
+        <!-- BT-115: Amount due for payment - MUST be 0 for already-paid -->
+        <cbc:PayableAmount currencyID="EUR">0.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: INVOICE LINE 1 - Marketplace commission -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">160.00</cbc:LineExtensionAmount>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Commission marketplace GourmetMarché - Transaction DVCB-2026-0412: services de mise en relation vendeur-acheteur, hébergement catalogue produits, gestion des commandes, traitement du paiement sécurisé, service client acheteur, référencement et visibilité produits sur la plateforme. Taux de commission: 8% du montant hors taxes de la transaction (2 000,00 EUR HT). Commission calculée: 160,00 EUR HT. Réglée par compensation (netting) sur le produit de la vente conformément aux conditions générales vendeur GourmetMarché France.</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Commission marketplace 8% - Vente vins Château Bellevue</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+
+            <!-- Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Base de calcul commission</cbc:Name>
+                <cbc:Value>2 000,00 EUR HT (montant facture principale F1 hors taxes)</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Taux de commission</cbc:Name>
+                <cbc:Value>8% du montant HT de la transaction</cbc:Value>
+            </cac:AdditionalItemProperty>
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Montant reversé au vendeur</cbc:Name>
+                <cbc:Value>2 208,00 EUR (F1 TTC 2 400,00 EUR − F2 TTC 192,00 EUR)</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">160.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

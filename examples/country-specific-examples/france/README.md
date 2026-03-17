@@ -283,6 +283,50 @@ Demonstrates:
 
 ---
 
+#### UC13: PUF_France_UC13_SellerAgent_CoContractor_Invoice.xml
+
+**Seller Agent - Co-Contractor Invoice**
+
+Demonstrates:
+
+- Co-contractor invoice with seller agent (platform acting on behalf of seller)
+- Seller agent party (EXT-FR-FE-BG-03) with role code "SR"
+- Construction subcontractor as seller
+- Platform managing invoice lifecycle on behalf of seller
+
+**Key Features:**
+
+- Business process S6 (Co-contractor services invoice)
+- Seller agent in `cac:AccountingSupplierParty/cac:Party/cac:AgentParty`
+- Role code "SR" (Seller's agent) per UNTDID 3035
+- Complete agent party details (SIREN/SIRET, VAT, address)
+- Co-contractor agreement reference
+- Construction services scenario (structural reinforcement, waterproofing)
+
+---
+
+#### UC14: PUF_France_UC14_BuyerAgent_SellerAgent_CoContractor_Invoice.xml
+
+**Buyer Agent + Seller Agent - Dual Agent Co-Contractor Invoice**
+
+Demonstrates:
+
+- Co-contractor invoice with both buyer agent AND seller agent
+- Seller agent party (EXT-FR-FE-BG-03) with role code "SR"
+- Buyer agent party (EXT-FR-FE-BG-01) with role code "AB"
+- Dual agent management of invoice lifecycle
+
+**Key Features:**
+
+- Business process S6 (Co-contractor services invoice)
+- Seller agent in `cac:AccountingSupplierParty/cac:Party/cac:AgentParty` (role "SR")
+- Buyer agent in `cac:AccountingCustomerParty/cac:Party/cac:AgentParty` (role "AB")
+- BT-49 electronic address with SIREN_ACHATIT format for buyer agent routing
+- Complete agent party details for both agents
+- IT co-contractor services scenario (software architecture, cybersecurity audit)
+
+---
+
 #### UC15: PUF_France_UC15_BuyerAgent_MediaBuying_Invoice.xml
 
 **Buyer Agent - Media Buying**
@@ -298,6 +342,57 @@ Demonstrates:
 - Buyer agent identification
 - Media buying category codes
 - Agent commission handling
+
+---
+
+#### UC17a: Payment Intermediary / Marketplace (F1 + F2)
+
+**PUF_France_UC17a_PaymentIntermediary_F1_Sale_Invoice.xml** — Sale Invoice (SELLER → BUYER)
+**PUF_France_UC17a_PaymentIntermediary_F2_ServiceFee_Invoice.xml** — Service Fee Invoice (INTERMEDIARY → SELLER)
+
+Demonstrates:
+
+- Sale through payment intermediary (marketplace) with two-invoice model
+- F1: Already-paid goods invoice from SELLER to BUYER (UC2 pattern)
+- F2: Service fee/commission invoice from marketplace to SELLER (settled via netting)
+- SELLER creates and transmits F1 via their own PA-E
+
+**Key Features (F1 - Sale Invoice):**
+
+- Business process B2 (already-paid goods invoice)
+- BT-113 (PrepaidAmount) = BT-112, BT-115 (PayableAmount) = 0
+- BT-81 = 57 (Standing Agreement) — SELLER doesn't know BUYER's payment method at marketplace
+- Wine sale scenario (Saint-Émilion Grand Cru, Pomerol, Bordeaux Blanc)
+
+**Key Features (F2 - Service Fee Invoice):**
+
+- Business process S2 (already-paid service invoice)
+- BT-113 = BT-112, BT-115 = 0
+- BT-81 = 97 (Clearing between partners) — settled via netting
+- 8% marketplace commission on F1 sale amount
+- Reference to companion F1 invoice
+
+---
+
+#### UC17b: PUF_France_UC17b_BillingMandate_F1_Sale_Invoice.xml
+
+**Payment Intermediary with Billing Mandate (F1 only — F2 same as UC17a)**
+
+Demonstrates:
+
+- Intermediary creates F1 on behalf of SELLER under billing mandate (UC19a rules)
+- Billing mandatary identified via EXT-FR-FE-BG-05 (ServiceProviderParty, role "II")
+- BT-34 routes to facturant's PA-T (not SELLER's PA-E)
+- Mandate declaration via #DCL# text code
+
+**Key Features (differences from UC17a F1):**
+
+- EXT-FR-FE-BG-05 in `cac:AccountingSupplierParty/cac:Party/cac:ServiceProviderParty`
+- Role code "II" (Invoicer) per UNTDID 3035
+- BT-81 = 48 (Bank card) — actual payment method known by intermediary
+- BT-34: Routes to facturant's PA-T for lifecycle status management
+- #DCL# mandate declaration note per BOI-TVA-DECLA-30-20-10-30 (§210)
+- Same invoice lines and amounts as UC17a F1
 
 ---
 
@@ -373,6 +468,138 @@ Demonstrates:
 
 ---
 
+#### UC22a: PUF_France_UC22a_EarlyPaymentDiscount_Services_Invoice.xml
+
+**Early Payment Discount - Services Invoice (VAT on Cash Receipt)**
+
+Demonstrates:
+
+- Services invoice with mandatory early payment discount mention (escompte)
+- Full amount invoiced — discount is NOT deducted on the invoice
+- BT-21/BT-22 with AAB code (Conditions of sale) describing discount terms
+- VAT due on cash receipt — discount reflected via "Encaissée" lifecycle status (no credit note needed)
+
+**Key Features:**
+
+- Business process S1 (Services invoice)
+- `#AAB#` text code with discount conditions (mandatory even when no discount exists)
+- Invoice totals at full amount (BT-115 = BT-112)
+- IT consulting scenario: 10,000 EUR HT + 20% VAT = 12,000 EUR TTC
+- If BUYER takes 2% discount: pays 11,760 EUR, "Encaissée" status declares 11,760 EUR
+
+---
+
+#### UC22b: PUF_France_UC22b_EarlyPaymentDiscount_CreditNote.xml
+
+**Early Payment Discount - Tax-Free Credit Note (VATEX-FR-CNWVAT)**
+
+Demonstrates:
+
+- Tax-free credit note for early payment discount on goods invoice
+- VATEX-FR-CNWVAT exemption code (Approach 2: avoir net de taxe)
+- Preceding invoice reference (BG-3) to original goods invoice
+- Faculty (not obligation) — SELLER may issue this to inform tax administration
+
+**Key Features:**
+
+- Document type 381 (Credit note) with business process B1
+- BT-118 = E (Exempt), BT-121 = `VATEX-FR-CNWVAT`
+- BT-117 = 0 (no VAT on credit note)
+- Business rule G6.21: VATEX-FR-CNWVAT requires BT-3 in {261, 381, 396}
+- Goods scenario: 3% discount on 6,000 EUR TTC = 180 EUR credit note
+- VATEX-FR-CNWVAT applies to all types of tax-free credit notes, not just discounts
+
+---
+
+#### UC25: PUF_France_UC25_BUU_Sale_Invoice.xml
+
+**Single-Purpose Voucher (BUU) Sale Invoice**
+
+Demonstrates:
+
+- B2B sale of single-purpose vouchers (bons à usage unique) by the issuer
+- VAT charged at issuance because place of supply and VAT are determinable (BUU definition)
+- Standard invoice format — no special voucher-specific data elements required
+- Entertainment venue selling concert access vouchers to a corporate buyer
+
+**Key Features:**
+
+- Business process S1 (Services invoice)
+- BUU = place of supply + VAT known at issuance → VAT at each transfer
+- Sale to taxable person = e-invoicing; sale to individual = e-reporting
+- If Issuer = Supplier: redemption is NOT a separate taxable event
+- 50 vouchers at 50 EUR each = 2,500 EUR HT + 20% VAT
+
+> **Note**: This use case is still under discussion per the specification and subject to significant additions.
+
+---
+
+#### UC25 (alt): PUF_France_UC25_Redemption_SupplierToIssuer_Invoice.xml
+
+**Voucher Redemption — Supplier to Issuer Invoice (Three-Party Flow)**
+
+Demonstrates:
+
+- Three-party voucher redemption where Issuer ≠ Supplier
+- **Party role inversion**: the voucher ISSUER becomes the BUYER (AccountingCustomerParty)
+- Supplier is deemed to have supplied goods/services to the Issuer, not the end user
+- Restaurant invoicing a gift card network after end user redeems voucher
+
+**Key Features:**
+
+- Business process S1 (Services invoice)
+- Supplier (restaurant) = AccountingSupplierParty
+- Issuer (gift card network) = AccountingCustomerParty (party role inversion)
+- 10% reduced VAT rate for on-premise restaurant services
+- Voucher face value 150 EUR TTC; HT = 136.36 EUR
+- Commissions/management fees must be invoiced separately (not on this invoice)
+
+> **Note**: This use case is still under discussion per the specification and subject to significant additions.
+
+---
+
+#### UC26: PUF_France_UC26_ReservationClause_Invoice.xml
+
+**Invoice with Contractual Reservation Clause (Retenue de Garantie)**
+
+Demonstrates:
+
+- Full invoice with contractual retention guarantee (retenue de garantie) of 5%
+- Retention expressed ONLY via free-text note: BT-21 = `ABU` (Contract clause) + BT-22
+- Invoice issued for 100% of the amount — retention is a payment timing arrangement, not a deduction
+- EN 16931 and EXTENDED-CTC-FR do NOT support structured payment schedules for reservations
+
+**Key Features:**
+
+- Business process S1 (Services invoice — construction/renovation)
+- `#ABU#` text code with detailed retention terms (mandatory for this use case)
+- BT-115 (PayableAmount) = full 100% amount (48,000 EUR TTC)
+- Payment split described only in BT-20 and `#ABU#` notes: 95% immediate + 5% withheld
+- Construction scenario: structural renovation + waterproofing (40,000 EUR HT + 20% VAT)
+- For VAT on cash basis: SELLER transmits partial "Encaissée" statuses (95% then 5%)
+
+---
+
+#### UC26 (alt): PUF_France_UC26_ReservationClause_CreditNote.xml
+
+**Reservation Clause Enforced — Credit Note for Withheld Retention**
+
+Demonstrates:
+
+- Mandatory credit note when the reservation clause is definitively enforced
+- References original invoice (FR-INV-2026-026) via BG-3
+- Pro-rata credit across original invoice lines (proportional to original amounts)
+- For VAT on cash basis: no "Encaissée" status needed for balance or credit note
+
+**Key Features:**
+
+- Document type 381 (Credit note) with business process S1
+- 5% retention of original 48,000 TTC = 2,400 TTC credit note (2,000 HT + 400 VAT)
+- Two credit note lines matching original invoice line proportions
+- Issued ~1 year after original invoice (after guarantee period expiry)
+
+---
+
 #### UC30: PUF_France_UC30_VATAlreadyCollected.xml
 
 **VAT Already Collected**
@@ -443,6 +670,14 @@ Demonstrates:
 - Netting agreement reference
 - Cross-invoice references
 - Net settlement calculation
+
+---
+
+### E-Reporting Examples (Flux 10.1 — Invoice Reporting)
+
+Invoice e-reporting examples (UC43, UC44) are located in the **tax-data-report** directory:
+- **Invoice reporting**: [`examples/tax-data-report/country-specific-examples/france/`](../tax-data-report/country-specific-examples/france/)
+- **Payment reporting**: [`puf-tax-report/examples/country-specific-examples/france/`](../../../../puf-tax-report/examples/country-specific-examples/france/)
 
 ---
 

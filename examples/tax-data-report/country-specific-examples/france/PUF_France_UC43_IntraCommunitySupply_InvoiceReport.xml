@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 43: E-Reporting for International B2B - Intra-Community Supply (Flux 10.1)
+
+    Business Scenario:
+    - French SELLER exports industrial machinery to a German BUYER
+    - This is an intra-community supply of goods (livraison intracommunautaire)
+    - NO e-invoicing obligation for international B2B — only e-reporting (Flux 10)
+    - The invoice is transmitted as a Flux 10.1 unit record
+
+    Key UC43 Concepts:
+    - #BAR#B2BINT treatment type signals international B2B e-reporting (BR-FR-20)
+    - VAT category K (intra-community supply) with VATEX-EU-IC exemption
+    - Buyer identified with EU VAT number (schemeID 0223) per BR-FR-MAP-16
+    - Seller identified with SIREN (schemeID 0002)
+    - Currency: EUR; if non-EUR, BT-6 (tax currency code) is mandatory
+    - At reform launch (Sept 2026): header-level data only
+    - From Sept 2027: line-level data and allowances/charges also required (G6.15)
+
+    Invoice Reporting Format:
+    - Uses standard PUF Invoice format with reporting-specific extensions
+    - Extensions in UBLExtensions for: entryType, transactionType, report period, etc.
+    - Classification via ProfileID: urn:pagero.com:puf:billing:1.0 (sales)
+
+    Relaxed Business Rules for International B2B:
+    - BR-FR-11: No SIREN requirement for international buyer (BT-47)
+    - BR-FR-21: Buyer electronic address unrestricted
+    - BR-FR-22: Seller electronic address unrestricted for self-billed
+
+    Source: XP Z12-014 Annexe A v1.3, Section 3.2.42
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- ================================================================ -->
+    <!-- Reporting-specific extensions (UBLExtensions)                     -->
+    <!-- These fields are specific to invoice e-reporting (Flux 10.1)     -->
+    <!-- ================================================================ -->
+    <ext:UBLExtensions>
+        <!-- TT-1: Issuer assigned report id -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>issuerAssignedReportId</puf:Key>
+                        <puf:Value>RPT-2026-043-001</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- TT-29: Entry type (INVOICE for individual B2B invoice reporting) -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>entryType</puf:Key>
+                        <puf:Value>INVOICE</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- Transaction type: B2B (international) -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>transactionType</puf:Key>
+                        <puf:Value>B2B</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- TT-17: Report period start date -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>reportPeriodStart</puf:Key>
+                        <puf:Value>2026-03-01</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- TT-18: Report period end date -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>reportPeriodEnd</puf:Key>
+                        <puf:Value>2026-03-31</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- Classification: urn:pagero.com:puf:billing:1.0 = Sales invoice reporting -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>FR-INV-2026-043</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-03-20</cbc:IssueDate>
+    <!-- BT-9 Payment Due Date -->
+    <cbc:DueDate>2026-04-19</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
+    <!-- @name = B1: Goods invoice -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes -->
+    <cbc:Note>#REG#SAS au capital de 500000.00 EUR</cbc:Note>
+    <cbc:Note>#ABL#RCS Lyon B 111 222 333</cbc:Note>
+    <cbc:Note>#AAI#APE 2899B - Fabrication d'autres machines d'usage général</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- #BAR#: Treatment type = B2BINT (international B2B e-reporting) per BR-FR-20 -->
+    <!-- This signals to PA-E that the invoice should be processed as Flux 10 (e-reporting) -->
+    <!-- not Flux 1 (domestic e-invoicing) -->
+    <cbc:Note>#BAR#B2BINT</cbc:Note>
+    <!-- #AAB#: Early payment discount mention (mandatory) -->
+    <cbc:Note>#AAB#Pas d'escompte accordé</cbc:Note>
+
+    <!-- BT-5 Document currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer Reference -->
+    <cbc:BuyerReference>DE-BUYER-REF-2026-043</cbc:BuyerReference>
+
+    <!-- BT-13 Purchase Order Reference -->
+    <cac:OrderReference>
+        <cbc:ID>PO-2026-DE-043</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BG-4 Seller Information (French seller) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">11122233300015</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>MachinesPro France</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>45 Zone Industrielle des Platanes</cbc:StreetName>
+                <cbc:CityName>Lyon</cbc:CityName>
+                <cbc:PostalZone>69007</cbc:PostalZone>
+                <!-- BT-40 Country code: FR -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR23111222333</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-30 / BT-27 Seller legal registration (SIREN, schemeID 0002) -->
+            <!-- TT-33: Seller identifier in Flux 10.1 uses SIREN (0002) for French entities -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>MachinesPro France SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">111222333</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Service Export</cbc:Name>
+                <cbc:Telephone>+33 4 78 00 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>export@machinespro.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information (German buyer) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-46 Buyer identifier -->
+            <!-- TT-37: EU buyer identified by intra-community VAT number (schemeID 0223) per BR-FR-MAP-16 -->
+            <!-- BR-FR-11: No SIREN requirement for international buyer -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0223">DE123456789</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Maschinenbau München GmbH</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>Industriestraße 42</cbc:StreetName>
+                <cbc:CityName>München</cbc:CityName>
+                <cbc:PostalZone>80331</cbc:PostalZone>
+                <!-- BT-55 Country code: DE -->
+                <cac:Country>
+                    <cbc:IdentificationCode>DE</cbc:IdentificationCode>
+                    <cbc:Name>Germany</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>DE123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-44 Buyer legal registration -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Maschinenbau München GmbH</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0223">DE123456789</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13 Delivery Information -->
+    <cac:Delivery>
+        <cbc:ActualDeliveryDate>2026-03-18</cbc:ActualDeliveryDate>
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <cbc:StreetName>Industriestraße 42</cbc:StreetName>
+                <cbc:CityName>München</cbc:CityName>
+                <cbc:PostalZone>80331</cbc:PostalZone>
+                <!-- BT-80 Delivery country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>DE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+
+    <!-- BG-19 Payment Instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7630001007941234567890185</cbc:ID>
+            <cbc:Name>MachinesPro France SAS</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>SOGEFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Paiement à 30 jours date de facture</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <!-- Intra-community supply: VAT category K, 0%, exempt with VATEX-EU-IC -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount = 0 (intra-community exempt) -->
+        <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- BT-116 VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">75000.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code: K = Intra-community supply -->
+                <cbc:ID>K</cbc:ID>
+                <!-- BT-119 VAT rate: 0% -->
+                <cbc:Percent>0.00</cbc:Percent>
+                <!-- BT-121 VAT exemption reason code -->
+                <cbc:TaxExemptionReasonCode>VATEX-EU-IC</cbc:TaxExemptionReasonCode>
+                <!-- BT-120 VAT exemption reason text -->
+                <cbc:TaxExemptionReason>Exonération de TVA - Livraison intracommunautaire - article 138 Directive 2006/112/CE</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">75000.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Total without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">75000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Total with VAT (= total without VAT since VAT = 0) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">75000.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due -->
+        <cbc:PayableAmount currencyID="EUR">75000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice Line 1 -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">50000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Presse hydraulique industrielle 200 tonnes, modèle PH-200X, avec système de contrôle numérique</cbc:Description>
+            <cbc:Name>Presse hydraulique PH-200X</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <!-- K: Intra-community supply of goods -->
+                <cbc:ID>K</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">25000.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25 Invoice Line 2 -->
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">25000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Robot de soudure automatisé 6 axes, modèle RS-600, avec poste de programmation</cbc:Description>
+            <cbc:Name>Robot de soudure RS-600</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>K</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">25000.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>
