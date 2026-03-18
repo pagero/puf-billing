@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 26: Reservation Clause Enforced - Credit Note for Withheld Retention
+
+    Business Scenario:
+    - Construction company (SELLER) previously issued invoice FR-INV-2026-026 for 48,000 EUR TTC
+    - A 5% retention guarantee (2,400 EUR TTC) was withheld by the BUYER
+    - After the guarantee period, defects were found and the reservation clause was enforced
+    - SELLER must issue a credit note for the withheld retention amount (mandatory)
+
+    Key UC26 Credit Note Concepts:
+    - When the reservation clause is definitively enforced, SELLER MUST issue a credit note
+    - The credit note covers only the withheld portion (5% = 2,400 EUR TTC)
+    - For VAT on cash basis: no "Encaissée" status needed for balance or credit note
+    - For VAT on debits: credit note adjusts the VAT already declared at invoice issuance
+
+    Worked Example:
+    - Original invoice: 40,000 HT + 8,000 VAT = 48,000 TTC
+    - Retention amount: 5% of 48,000 = 2,400 TTC
+    - Credit note HT: 2,000.00 EUR
+    - Credit note VAT @ 20%: 400.00 EUR
+    - Credit note TTC: 2,400.00 EUR
+
+    Source: XP Z12-014 Annexe A v1.3, Section 3.2.25
+-->
+<CreditNote xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Credit Note Number -->
+    <cbc:ID>FR-CN-2026-026</cbc:ID>
+    <!-- BT-2 Credit Note Issue Date -->
+    <cbc:IssueDate>2027-04-20</cbc:IssueDate>
+    <!-- BT-3 Credit Note Type Code - 381: Credit note -->
+    <!-- @name = S1: Services credit note -->
+    <cbc:CreditNoteTypeCode name="S1">381</cbc:CreditNoteTypeCode>
+
+    <!-- BT-21/BT-22: Credit Note notes with French text codes (mandatory for France) -->
+    <cbc:Note>#REG#SARL au capital de 200000.00 EUR</cbc:Note>
+    <cbc:Note>#ABL#RCS Marseille B 234 567 890</cbc:Note>
+    <cbc:Note>#AAI#APE 4120A - Construction de bâtiments résidentiels</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!-- Explanation of credit note reason -->
+    <cbc:Note>Avoir suite à mise en œuvre de la retenue de garantie de 5% sur facture FR-INV-2026-026. Clause de réserve contractuelle exercée pour défauts constatés lors de la levée de réserves.</cbc:Note>
+
+    <!-- BT-5 Credit Note Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer Reference -->
+    <cbc:BuyerReference>BUYER-REF-2026-026</cbc:BuyerReference>
+
+    <!-- BT-25 Preceding Invoice Reference (mandatory for credit notes) -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>FR-INV-2026-026</cbc:ID>
+            <cbc:IssueDate>2026-03-15</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+
+    <!-- BG-4 Seller Information (same construction company as original invoice) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">23456789000030</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>BâtiRénov Méditerranée</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>25 Boulevard Michelet</cbc:StreetName>
+                <cbc:CityName>Marseille</cbc:CityName>
+                <cbc:PostalZone>13008</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR67234567890</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>BâtiRénov Méditerranée SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">234567890</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Service Facturation Chantiers</cbc:Name>
+                <cbc:Telephone>+33 4 91 00 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>facturation@batirenov-med.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information (same property developer as original invoice) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">12345678900034</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Immobilière du Sud</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>10 Cours Julien</cbc:StreetName>
+                <cbc:CityName>Marseille</cbc:CityName>
+                <cbc:PostalZone>13006</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR34123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Immobilière du Sud SA</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">123456789</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Direction des Travaux</cbc:Name>
+                <cbc:Telephone>+33 4 91 50 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>travaux@immobiliere-sud.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment Instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7610096000201234567890134</cbc:ID>
+            <cbc:Name>BâtiRénov Méditerranée SARL</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>CMCIFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Avoir pour retenue de garantie définitivement acquise - pas de remboursement dû</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <!-- Credit for the 5% retention: 2,000 HT + 400 VAT = 2,400 TTC -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">400.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">2000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">400.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <!-- 5% retention of original 48,000 TTC = 2,400 TTC -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">2000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">2000.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">2400.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">2400.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Credit Note Line -->
+    <!-- Pro-rata credit across original invoice lines (proportional to original amounts) -->
+    <cac:CreditNoteLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:CreditedQuantity unitCode="C62">1</cbc:CreditedQuantity>
+        <!-- 5% of original line 1 (25,000 HT) = 1,250 HT -->
+        <cbc:LineExtensionAmount currencyID="EUR">1250.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Retenue de garantie 5% - Rénovation structurelle bâtiment B (facture FR-INV-2026-026, ligne 1)</cbc:Description>
+            <cbc:Name>Retenue de garantie - Rénovation structurelle</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">1250.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:CreditNoteLine>
+
+    <cac:CreditNoteLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:CreditedQuantity unitCode="C62">1</cbc:CreditedQuantity>
+        <!-- 5% of original line 2 (15,000 HT) = 750 HT -->
+        <cbc:LineExtensionAmount currencyID="EUR">750.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Retenue de garantie 5% - Étanchéité et isolation thermique (facture FR-INV-2026-026, ligne 2)</cbc:Description>
+            <cbc:Name>Retenue de garantie - Étanchéité et isolation</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">750.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:CreditNoteLine>
+
+</CreditNote>

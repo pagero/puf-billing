@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC14 - BUYER AGENT + SELLER AGENT Co-Contractor Invoice
+
+    Use Case: Sales Invoice with Both Buyer Agent and Seller Agent (Dual Agent Co-Contractor)
+    Country: France (EXTENDED-CTC-FR profile)
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: S6 (Co-contractor services invoice)
+
+    Scenario Description:
+    An IT services company (InfoTech Conseil Bordeaux SAS - "sous-traitant") provides
+    co-contractor IT consulting services to a large enterprise (Aéronautique Toulouse SA -
+    "donneur d'ordres"). A digital platform (GestionFacture360 SARL) acts as SELLER AGENT,
+    managing invoice issuance on behalf of the IT subcontractor. A procurement agency
+    (AchatsPro Consulting SAS) acts as BUYER AGENT, managing invoice reception, validation,
+    and payment on behalf of the buyer.
+
+    Dual Agent Co-Contractor Model:
+    - SELLER (Sous-traitant IT): InfoTech Conseil Bordeaux SAS - IT services subcontractor
+    - SELLER AGENT (Plateforme): GestionFacture360 SARL - Platform managing invoices for seller
+    - BUYER (Donneur d'ordres): Aéronautique Toulouse SA - Principal enterprise
+    - BUYER AGENT (Agence achats): AchatsPro Consulting SAS - Procurement agent for buyer
+
+    SELLER AGENT Responsibilities:
+    1. Manages invoice creation and issuance on behalf of SELLER
+    2. Handles document lifecycle on PA-TR platform (emission side)
+    3. Ensures regulatory compliance of invoice format
+    4. Manages electronic archiving obligations for SELLER
+
+    BUYER AGENT Responsibilities:
+    1. Receives and validates invoices on behalf of BUYER
+    2. Manages procurement workflow and approval
+    3. Posts lifecycle statuses on PA-TR platform (reception side)
+    4. Optionally pays on behalf of BUYER
+    5. Manages supplier relationship for BUYER
+
+    Key Implementation: Both Agent Parties
+    - SELLER AGENT in cac:AccountingSupplierParty/cac:Party/cac:AgentParty (role code "SR")
+    - BUYER AGENT in cac:AccountingCustomerParty/cac:Party/cac:AgentParty (role code "AB")
+
+    Electronic Addressing Solution:
+    - BT-49 uses format: SIREN[BUYER]_[CATEGORY]
+    - "456789012_ACHATIT" routes invoice to buyer agent's PA-TR platform
+    - BUYER and BUYER AGENT must use same PA-TR (or interoperability)
+
+    Key Characteristics:
+    - Invoice type 380: Standard commercial invoice
+    - Business process S6: Co-contractor services invoice
+    - BG-4 SELLER: IT subcontractor (InfoTech Conseil Bordeaux SAS)
+    - EXT-FR-FE-BG-03 SELLER AGENT: Platform (GestionFacture360 SARL)
+    - BG-7 BUYER: Principal enterprise (Aéronautique Toulouse SA)
+    - EXT-FR-FE-BG-01 BUYER AGENT: Procurement agency (AchatsPro Consulting SAS)
+    - BT-49: Electronic address "456789012_ACHATIT" (SIREN_ACHATIT format)
+    - Total: 42,500.00 EUR
+
+    Workflow:
+    1. BUYER engages BUYER AGENT for procurement management
+    2. SELLER engages SELLER AGENT for invoicing management
+    3. SELLER performs co-contractor IT services for BUYER
+    4. SELLER AGENT creates and issues invoice on behalf of SELLER
+    5. Invoice routes to BUYER AGENT via BT-49 "456789012_ACHATIT"
+    6. BUYER AGENT validates invoice and posts lifecycle statuses
+    7. BUYER AGENT approves payment
+    8. BUYER pays SELLER directly (or via BUYER AGENT)
+
+    French Text Codes Used:
+    - #REG# Registration information
+    - #ABL# Trade register number (RCS)
+    - #AAI# Additional info (dual agent co-contractor explanation)
+    - #PMD# Late payment penalties
+    - #PMT# Fixed collection costs
+    - #BAR# Treatment type (B2B)
+
+    Date: 2026-03-01
+    Reference: XP Z12-014 Annexe A, Section 3.2.13 - Cas n°14
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>ITC-2026-COTR-0187</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-03-01</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date (45 days) -->
+    <cbc:DueDate>2026-04-15</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice)
+         @name = S6 (Co-contractor services invoice) -->
+    <cbc:InvoiceTypeCode name="S6">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes -->
+    <!-- #REG#: Company legal form and share capital -->
+    <cbc:Note>#REG#SAS au capital de 500 000 EUR</cbc:Note>
+    <!-- #ABL#: Trade register number (RCS) -->
+    <cbc:Note>#ABL#RCS Bordeaux B 111 222 333</cbc:Note>
+    <!-- #AAI#: Additional invoice information - dual agent co-contractor explanation -->
+    <cbc:Note>#AAI#FACTURE DE CO-TRAITANCE AVEC DOUBLE MANDATAIRE (AGENT VENDEUR ET AGENT ACHETEUR): Cette facture est émise dans le cadre d'un contrat de co-traitance pour la mission de transformation digitale du programme avionique A380-NEO. Le sous-traitant InfoTech Conseil Bordeaux SAS agit en qualité de co-traitant conformément à l'article 1er de la loi n°75-1334 du 31 décembre 1975. La gestion de l'émission de la facturation est assurée par GestionFacture360 SARL agissant en qualité d'agent du vendeur (code rôle SR). La réception, validation et gestion du cycle de vie côté acheteur sont assurées par AchatsPro Consulting SAS agissant en qualité d'agent d'acheteur (code rôle AB). Le routage de la facture est assuré par l'adresse électronique dédiée aux achats IT (SIREN_ACHATIT).</cbc:Note>
+    <!-- #PMD#: Late payment penalties -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- #PMT#: Fixed collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- #BAR#: Treatment type - B2B -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10: Buyer reference (Routing identifier for BUYER AGENT processing) -->
+    <cbc:BuyerReference>456789012_ACHATIT</cbc:BuyerReference>
+
+    <!-- BT-13: Purchase order reference -->
+    <cac:OrderReference>
+        <cbc:ID>AERO-PO-IT-2026-0287</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BT-12: Contract reference (Co-contractor agreement) -->
+    <cac:ContractDocumentReference>
+        <cbc:ID>CONTRAT-COTRAITANCE-IT-2025-089</cbc:ID>
+    </cac:ContractDocumentReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - IT Services Subcontractor -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address (SIRET) -->
+            <cbc:EndpointID schemeID="0009">11122233300011</cbc:EndpointID>
+
+            <!-- BT-29: SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">11122233300011</cbc:ID>
+            </cac:PartyIdentification>
+
+            <!-- BT-28: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>InfoTech Conseil Bordeaux</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <!-- BT-35: Seller address line 1 -->
+                <cbc:StreetName>Technoparc Bordeaux Aéropark, 8 Avenue Neil Armstrong</cbc:StreetName>
+                <!-- BT-37: Seller city -->
+                <cbc:CityName>Mérignac</cbc:CityName>
+                <!-- BT-38: Seller post code -->
+                <cbc:PostalZone>33700</cbc:PostalZone>
+                <!-- BT-40: Seller country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR11111222333</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>InfoTech Conseil Bordeaux SAS</cbc:RegistrationName>
+                <!-- BT-30: Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">111222333</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact -->
+            <cac:Contact>
+                <cbc:Name>Thomas Lefebvre - Chef de Projet</cbc:Name>
+                <cbc:Telephone>+33 5 56 00 33 44</cbc:Telephone>
+                <cbc:ElectronicMail>t.lefebvre@infotech-bordeaux.fr</cbc:ElectronicMail>
+            </cac:Contact>
+
+            <!-- EXT-FR-FE-BG-03: SELLER AGENT (Agent du Vendeur) - Invoicing Platform
+                 Role Code "SR" = Seller's agent (UNTDID 3035)
+
+                 The SELLER AGENT (GestionFacture360 SARL) acts on behalf of the
+                 SELLER (InfoTech Conseil Bordeaux SAS) to:
+                 - Create and issue invoices on behalf of SELLER
+                 - Manage document lifecycle on PA-TR platform (emission side)
+                 - Ensure regulatory compliance
+                 - Handle electronic archiving -->
+            <cac:AgentParty>
+                <!-- EXT-FR-FE-67: SELLER AGENT Role Code -->
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionURI>
+                                urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                        <ext:ExtensionContent>
+                            <puf:PageroExtension>
+                                <puf:PartyExtension>
+                                    <puf:RoleCode>
+                                        <cbc:ID>SR</cbc:ID>
+                                    </puf:RoleCode>
+                                </puf:PartyExtension>
+                            </puf:PageroExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
+
+                <!-- SELLER AGENT Electronic Address -->
+                <cbc:EndpointID schemeID="0009">66677788800011</cbc:EndpointID>
+
+                <!-- SELLER AGENT Trading Name -->
+                <cac:PartyName>
+                    <cbc:Name>GestionFacture360</cbc:Name>
+                </cac:PartyName>
+
+                <!-- SELLER AGENT Postal Address -->
+                <cac:PostalAddress>
+                    <cbc:StreetName>15 Place de la Bourse</cbc:StreetName>
+                    <cbc:CityName>Bordeaux</cbc:CityName>
+                    <cbc:PostalZone>33000</cbc:PostalZone>
+                    <cac:Country>
+                        <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    </cac:Country>
+                </cac:PostalAddress>
+
+                <!-- SELLER AGENT VAT Identifier -->
+                <cac:PartyTaxScheme>
+                    <cbc:CompanyID>FR66666777888</cbc:CompanyID>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:PartyTaxScheme>
+
+                <!-- SELLER AGENT Legal Entity -->
+                <cac:PartyLegalEntity>
+                    <cbc:RegistrationName>GestionFacture360 SARL</cbc:RegistrationName>
+                    <!-- SELLER AGENT SIREN -->
+                    <cbc:CompanyID schemeID="0002">666777888</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+            </cac:AgentParty>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Principal Enterprise
+         CRITICAL: BT-49 uses SIREN_ACHATIT format for BUYER AGENT routing -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address - CRITICAL ROUTING MECHANISM
+                 Format: SIREN[BUYER]_[CATEGORY]
+                 "456789012_ACHATIT" = BUYER's SIREN + IT purchase category code
+                 This routes invoice to AchatsPro Consulting (procurement agent / BUYER AGENT)
+                 on PA-TR platform for validation and payment processing on behalf of BUYER.
+
+                 SchemeID "0002" = SIREN-based addressing
+                 Service code "_ACHATIT" = Routes to BUYER AGENT's PA-TR (Achat IT) -->
+            <cbc:EndpointID schemeID="0002">456789012_ACHATIT</cbc:EndpointID>
+
+            <!-- BT-46: Buyer identifier (SIRET) -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">45678901200033</cbc:ID>
+            </cac:PartyIdentification>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Aéronautique Toulouse</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <!-- BT-50: Buyer address line 1 -->
+                <cbc:StreetName>Rond-Point Maurice Bellonte, Bâtiment A320</cbc:StreetName>
+                <!-- BT-52: Buyer city -->
+                <cbc:CityName>Blagnac</cbc:CityName>
+                <!-- BT-53: Buyer post code -->
+                <cbc:PostalZone>31700</cbc:PostalZone>
+                <!-- BT-55: Buyer country code -->
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR45456789012</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Aéronautique Toulouse SA</cbc:RegistrationName>
+                <!-- BT-47: Buyer legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">456789012</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact -->
+            <cac:Contact>
+                <cbc:Name>Claire Dupont - Direction des Systèmes d'Information</cbc:Name>
+                <cbc:Telephone>+33 5 61 00 44 55</cbc:Telephone>
+                <cbc:ElectronicMail>c.dupont@aeronautique-toulouse.fr</cbc:ElectronicMail>
+            </cac:Contact>
+
+            <!-- EXT-FR-FE-BG-01: BUYER AGENT (Agent d'Acheteur) - Procurement Agency
+                 Role Code "AB" = Buyer's agent (UNTDID 3035)
+
+                 The BUYER AGENT (AchatsPro Consulting SAS) acts on behalf of the
+                 BUYER (Aéronautique Toulouse SA) to:
+                 - Receive and validate invoices on behalf of BUYER
+                 - Manage procurement workflow and approval
+                 - Post lifecycle statuses on PA-TR platform (reception side)
+                 - Manage supplier relationships for BUYER
+
+                 Platform Requirements:
+                 - BUYER AGENT must be identified on reception platform
+                 - Must have delegated rights to act on behalf of BUYER
+                 - Rights enable invoice processing, validation, approval -->
+            <cac:AgentParty>
+                <!-- EXT-FR-FE-04: BUYER AGENT Role Code -->
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionURI>
+                                urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                        <ext:ExtensionContent>
+                            <puf:PageroExtension>
+                                <puf:PartyExtension>
+                                    <puf:RoleCode>
+                                        <cbc:ID>AB</cbc:ID>
+                                    </puf:RoleCode>
+                                </puf:PartyExtension>
+                            </puf:PageroExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
+
+                <!-- BUYER AGENT Electronic Address -->
+                <cbc:EndpointID schemeID="0009">88899900011122</cbc:EndpointID>
+
+                <!-- BUYER AGENT Trading Name -->
+                <cac:PartyName>
+                    <cbc:Name>AchatsPro Consulting</cbc:Name>
+                </cac:PartyName>
+
+                <!-- BUYER AGENT Postal Address -->
+                <cac:PostalAddress>
+                    <cbc:StreetName>22 Allées Jean Jaurès</cbc:StreetName>
+                    <cbc:CityName>Toulouse</cbc:CityName>
+                    <cbc:PostalZone>31000</cbc:PostalZone>
+                    <cac:Country>
+                        <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    </cac:Country>
+                </cac:PostalAddress>
+
+                <!-- BUYER AGENT VAT Identifier -->
+                <cac:PartyTaxScheme>
+                    <cbc:CompanyID>FR88888999000</cbc:CompanyID>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:PartyTaxScheme>
+
+                <!-- BUYER AGENT Legal Entity -->
+                <cac:PartyLegalEntity>
+                    <cbc:RegistrationName>AchatsPro Consulting SAS</cbc:RegistrationName>
+                    <!-- BUYER AGENT SIREN -->
+                    <cbc:CompanyID schemeID="0002">888999000</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+            </cac:AgentParty>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-17: Credit transfer (Payment means) -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (30 = Credit transfer) -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>ITC-2026-COTR-0187</cbc:PaymentID>
+
+        <!-- BG-19: Credit transfer - SELLER's IBAN -->
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84: Payment account identifier (SELLER's IBAN) -->
+            <cbc:ID>FR7611122233300011223344556677</cbc:ID>
+            <!-- BT-85: Payment account name -->
+            <cbc:Name>InfoTech Conseil Bordeaux SAS</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86: Payment service provider identifier (BIC) -->
+                <cbc:ID>CEPAFRPP333</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20: Payment terms (free text) -->
+        <cbc:Note>Paiement à 45 jours par virement bancaire. En cas de retard, pénalités au taux de 3 fois le taux d'intérêt légal en vigueur, plus indemnité forfaitaire de recouvrement de 40 EUR (articles L. 441-6 et D. 441-5 du Code de commerce). Facture de co-traitance émise via GestionFacture360 SARL (agent du vendeur) et gérée côté réception par AchatsPro Consulting SAS (agent d'acheteur). La validation et l'approbation du paiement sont effectuées par l'agent d'acheteur conformément au mandat de gestion des achats IT établi avec le donneur d'ordres.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">8500.00</cbc:TaxAmount>
+
+        <!-- BG-23: VAT category taxable amount and VAT -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">42500.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">8500.00</cbc:TaxAmount>
+            <!-- BT-118: VAT category code (S = Standard rate) -->
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119: VAT rate (20% standard rate) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">42500.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">42500.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">51000.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115: Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">51000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: INVOICE LINE 1 - Software architecture consulting -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>1</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (days of consulting) -->
+        <cbc:InvoicedQuantity unitCode="DAY">25</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">25000.00</cbc:LineExtensionAmount>
+
+        <!-- Invoicing period -->
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2026-02-01</cbc:StartDate>
+            <cbc:EndDate>2026-02-28</cbc:EndDate>
+        </cac:InvoicePeriod>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Prestations de conseil en architecture logicielle embarquée - Co-traitance programme avionique A380-NEO: conception architecture microservices système de gestion de vol (FMS), migration legacy Ada vers C++ embarqué certifié DO-178C niveau A, revue de code critique sécurité vol, intégration interfaces avioniques ARINC 429/664, rédaction spécifications techniques détaillées, support qualification logicielle DO-254. Prestations réalisées sur site Blagnac du 1er au 28 février 2026, 25 jours ouvrés.</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Architecture logicielle embarquée - Co-traitance A380-NEO</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (per day) -->
+            <cbc:PriceAmount currencyID="EUR">1000.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 2 - Cybersecurity audit services -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>2</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (days) -->
+        <cbc:InvoicedQuantity unitCode="DAY">10</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">12000.00</cbc:LineExtensionAmount>
+
+        <!-- Invoicing period -->
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2026-02-10</cbc:StartDate>
+            <cbc:EndDate>2026-02-21</cbc:EndDate>
+        </cac:InvoicePeriod>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Audit cybersécurité systèmes embarqués - Co-traitance programme A380-NEO: audit sécurité architecture réseau avionique embarqué, tests d'intrusion interfaces sol-bord, analyse vulnérabilités protocoles ARINC 664 Part 7, vérification conformité EUROCAE ED-202A/DO-326A (Airborne System Security), revue processus gestion des clés cryptographiques embarquées, rapport d'audit avec plan de remédiation, support mise en conformité. Prestations réalisées du 10 au 21 février 2026, 10 jours ouvrés.</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Audit cybersécurité systèmes embarqués - Co-traitance A380-NEO</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (per day) -->
+            <cbc:PriceAmount currencyID="EUR">1200.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="DAY">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 3 - Technical documentation -->
+    <cac:InvoiceLine>
+        <!-- BT-126: Invoice line identifier -->
+        <cbc:ID>3</cbc:ID>
+
+        <!-- BT-129: Invoiced quantity (units of deliverable) -->
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+
+        <!-- BT-131: Invoice line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">5500.00</cbc:LineExtensionAmount>
+
+        <!-- Invoicing period -->
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2026-02-01</cbc:StartDate>
+            <cbc:EndDate>2026-02-28</cbc:EndDate>
+        </cac:InvoicePeriod>
+
+        <!-- BG-31: Item information -->
+        <cac:Item>
+            <!-- BT-154: Item description -->
+            <cbc:Description>Rédaction documentation technique certifiée - Co-traitance programme A380-NEO: rédaction documentation DO-178C (Plan de développement logiciel, Spécification Exigences Logicielles Haut Niveau, Plan de vérification logicielle), rédaction rapport d'audit cybersécurité ED-202A, mise à jour documentation interfaces ARINC, livrable complet février 2026 incluant revue qualité interne et validation croisée avec équipe intégration Blagnac.</cbc:Description>
+
+            <!-- BT-153: Item name -->
+            <cbc:Name>Documentation technique certifiée DO-178C - Co-traitance A380-NEO</cbc:Name>
+
+            <!-- BG-30: Line VAT information -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151: Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152: Invoiced item VAT rate (20%) -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+
+        <!-- BG-29: Price details -->
+        <cac:Price>
+            <!-- BT-146: Item net price (deliverable) -->
+            <cbc:PriceAmount currencyID="EUR">5500.00</cbc:PriceAmount>
+            <!-- BT-149: Item price base quantity -->
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

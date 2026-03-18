@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 26: Invoice with Contractual Reservation Clause (Retenue de Garantie)
+
+    Business Scenario:
+    - Construction company (SELLER) invoices for building renovation services
+    - A 5% retention guarantee (retenue de garantie) applies per contract
+    - Invoice is issued for the FULL amount (100%) - retention is a payment timing arrangement
+    - BUYER pays 95% immediately; 5% withheld pending satisfactory completion
+    - The retention amount is expressed ONLY as free-text note (BT-21=ABU / BT-22)
+
+    Key UC26 Concepts:
+    - EN 16931 and EXTENDED-CTC-FR do NOT support structured payment schedules
+      with a reservation-conditioned amount
+    - Retention can ONLY be expressed via BT-21 = ABU (Contract clause) + BT-22 text
+    - BT-115 (Amount due) = full amount (100%), NOT the 95% immediate portion
+
+    VAT Treatment (This example: Services, VAT on cash basis):
+    - VAT is due only on amounts actually received
+    - SELLER transmits "Encaissée" lifecycle status for each payment:
+      * First "Encaissée" at 95% upon initial partial payment
+      * Second "Encaissée" at 5% if reservation is lifted
+    - If reservation is enforced → SELLER must issue credit note (see companion example)
+    - No "Encaissée" status needed for the credit note
+
+    Alternative VAT scenario (VAT on debits):
+    - Full VAT at invoice issuance regardless of retention
+    - No "Encaissée" lifecycle management needed
+    - If retention enforced → credit note still required
+
+    Worked Example:
+    - Total HT (BT-109): 40,000.00 EUR
+    - Total VAT (BT-110) @ 20%: 8,000.00 EUR
+    - Total TTC (BT-112): 48,000.00 EUR
+    - Amount Due (BT-115): 48,000.00 EUR (full amount)
+    - Immediate payment: 45,600.00 EUR (95%)
+    - Withheld retention: 2,400.00 EUR (5%)
+
+    Source: XP Z12-014 Annexe A v1.3, Section 3.2.25
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>FR-INV-2026-026</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-03-15</cbc:IssueDate>
+    <!-- BT-9 Payment Due Date (for the 95% immediate portion) -->
+    <cbc:DueDate>2026-04-14</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
+    <!-- @name = S1: Services invoice (construction/renovation services) -->
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes (mandatory for France) -->
+    <cbc:Note>#REG#SARL au capital de 200000.00 EUR</cbc:Note>
+    <cbc:Note>#ABL#RCS Marseille B 234 567 890</cbc:Note>
+    <cbc:Note>#AAI#APE 4120A - Construction de bâtiments résidentiels</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!-- #AAB#: Early payment discount mention (mandatory) -->
+    <cbc:Note>#AAB#Pas d'escompte accordé</cbc:Note>
+    <!-- #ABU#: Contractual reservation clause (UC26 specific - MANDATORY) -->
+    <!-- BT-21 = ABU (UNTDID 4451 "Contract clause"), BT-22 = retention terms -->
+    <!-- This is the ONLY mechanism to express the retention - no structured payment schedule supported -->
+    <cbc:Note>#ABU#Retenue de garantie de 5% conformément à l'article 1er de la loi n°71-584 du 16 juillet 1971. Montant retenu : 2400.00 EUR TTC. Paiement immédiat : 45600.00 EUR TTC (95%). Le solde de 5% sera libéré à l'expiration du délai de garantie d'un an à compter de la réception des travaux, sauf mise en œuvre de la retenue.</cbc:Note>
+
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer Reference -->
+    <cbc:BuyerReference>BUYER-REF-2026-026</cbc:BuyerReference>
+
+    <!-- BT-13 Purchase Order Reference -->
+    <cac:OrderReference>
+        <cbc:ID>PO-2026-FR-026</cbc:ID>
+        <cbc:IssueDate>2026-01-10</cbc:IssueDate>
+    </cac:OrderReference>
+
+    <!-- BG-4 Seller Information (Construction company) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">23456789000030</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>BâtiRénov Méditerranée</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>25 Boulevard Michelet</cbc:StreetName>
+                <cbc:CityName>Marseille</cbc:CityName>
+                <cbc:PostalZone>13008</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR67234567890</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-27 Seller legal registration -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>BâtiRénov Méditerranée SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">234567890</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Service Facturation Chantiers</cbc:Name>
+                <cbc:Telephone>+33 4 91 00 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>facturation@batirenov-med.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information (Property developer / client) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-46 Buyer identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">12345678900034</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Immobilière du Sud</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>10 Cours Julien</cbc:StreetName>
+                <cbc:CityName>Marseille</cbc:CityName>
+                <cbc:PostalZone>13006</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR34123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-44 Buyer legal registration -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Immobilière du Sud SA</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">123456789</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Direction des Travaux</cbc:Name>
+                <cbc:Telephone>+33 4 91 50 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>travaux@immobiliere-sud.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment Instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7610096000201234567890134</cbc:ID>
+            <cbc:Name>BâtiRénov Méditerranée SARL</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>CMCIFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms describing the split payment arrangement -->
+        <cbc:Note>Paiement à 30 jours date de facture pour 95% du montant TTC (45600.00 EUR). Retenue de garantie de 5% (2400.00 EUR) libérable un an après réception des travaux.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount (on FULL amount) -->
+        <cbc:TaxAmount currencyID="EUR">8000.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">40000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">8000.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <!-- IMPORTANT: Invoice is for the FULL amount (100%) -->
+    <!-- BT-115 = full amount - retention is a PAYMENT TIMING arrangement, not a deduction -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">40000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">40000.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">48000.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115: Full amount due - NOT the 95% immediate portion -->
+        <cbc:PayableAmount currencyID="EUR">48000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice Line 1: Structural renovation -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">25000.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>1</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Description>Rénovation structurelle - Renforcement des murs porteurs et reprise des fondations, lot B du chantier Résidence Les Calanques</cbc:Description>
+            <cbc:Name>Rénovation structurelle bâtiment B</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">25000.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25 Invoice Line 2: Waterproofing and insulation -->
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">15000.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>2</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Description>Étanchéité et isolation thermique - Traitement des façades et toiture-terrasse, lot B du chantier Résidence Les Calanques</cbc:Description>
+            <cbc:Name>Étanchéité et isolation thermique</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">15000.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

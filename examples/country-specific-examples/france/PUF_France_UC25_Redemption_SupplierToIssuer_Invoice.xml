@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 25: Voucher Redemption - Supplier to Issuer Invoice (Three-Party Flow)
+
+    Business Scenario:
+    - A gift card ISSUER (retail network operator) previously sold multi-purpose vouchers (BUM)
+      or single-purpose vouchers (BUU) to end users
+    - An end user redeems a voucher at a SUPPLIER (restaurant) that is different from the ISSUER
+    - The SUPPLIER is deemed to have supplied the goods/services to the ISSUER (not the end user)
+    - The SUPPLIER invoices the ISSUER — the ISSUER becomes the BUYER in this invoice
+
+    Three-Party Flow (Issuer ≠ Supplier):
+    ┌──────────┐  ① Sells voucher  ┌──────────┐  ② Redeems voucher  ┌──────────┐
+    │  ISSUER  │ ───────────────▶  │ END USER │ ────────────────▶   │ SUPPLIER │
+    │(Émetteur)│                   │(Porteur) │                     │(Fourniss.)│
+    └────┬─────┘                   └──────────┘                     └─────┬────┘
+         │                                                                │
+         │◀──────── ③ This invoice (e-invoicing): Supplier → Issuer ─────┤
+         │         (Issuer = BUYER in this invoice)                       │
+         │                                                                │
+         │──────── ④ Commission invoice (separate): Issuer → Supplier ──▶│
+         │         (if applicable, see companion example)                 │
+
+    Key Party Role Inversion:
+    - The ISSUER who originally SOLD the voucher becomes the BUYER (AccountingCustomerParty)
+    - The SUPPLIER who accepted the voucher becomes the SELLER (AccountingSupplierParty)
+
+    VAT Treatment:
+    - For services: VAT chargeable at receipt of reimbursement from Issuer
+    - For goods: VAT chargeable at date supplier accepts the voucher
+    - Standard 20% VAT (restaurant services with known taxation)
+
+    Worked Example:
+    - End user redeemed a 150 EUR voucher at a restaurant
+    - Restaurant (SUPPLIER) invoices the gift card network (ISSUER) for 150 EUR HT + VAT
+
+    Source: XP Z12-014 Annexe A v1.3, Section 3.2.24
+    Note: This use case is still under discussion and subject to significant additions.
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>FR-INV-2026-025B</cbc:ID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2026-03-15</cbc:IssueDate>
+    <!-- BT-9 Payment Due Date -->
+    <cbc:DueDate>2026-04-14</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
+    <!-- @name = S1: Services invoice (restaurant services) -->
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes (mandatory for France) -->
+    <cbc:Note>#REG#SARL au capital de 50000.00 EUR</cbc:Note>
+    <cbc:Note>#ABL#RCS Paris B 345 678 901</cbc:Note>
+    <cbc:Note>#AAI#APE 5610A - Restauration traditionnelle</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!-- #AAB#: Early payment discount mention (mandatory) -->
+    <cbc:Note>#AAB#Pas d'escompte accordé</cbc:Note>
+
+    <!-- BT-5 Invoice Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer Reference -->
+    <cbc:BuyerReference>ISSUER-REF-2026-025</cbc:BuyerReference>
+
+    <!-- BG-4 Seller Information (SUPPLIER = restaurant that accepted the voucher) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">34567890100025</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Le Bistrot Parisien</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller Address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>15 Rue du Faubourg Saint-Honoré</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75008</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR45345678901</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-27 Seller legal registration -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Le Bistrot Parisien SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">345678901</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Service Comptabilité</cbc:Name>
+                <cbc:Telephone>+33 1 42 65 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>comptabilite@bistrot-parisien.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer Information -->
+    <!-- IMPORTANT: The ISSUER becomes the BUYER in this invoice (party role inversion) -->
+    <!-- The issuer is deemed to have received the goods/services from the supplier -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-46 Buyer identifier (ISSUER's SIRET) -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">67890123400042</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer Trading Name (ISSUER = gift card network) -->
+            <cac:PartyName>
+                <cbc:Name>CartesCadeaux France</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer Address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>100 Avenue des Champs-Élysées</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75008</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                    <cbc:Name>France</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT identifier (ISSUER's VAT number) -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR89678901234</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-44 Buyer legal registration -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>CartesCadeaux France SA</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">678901234</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Service Remboursements Partenaires</cbc:Name>
+                <cbc:Telephone>+33 1 53 00 00 00</cbc:Telephone>
+                <cbc:ElectronicMail>partenaires@cartescadeaux.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment Instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7630001007941234567890185</cbc:ID>
+            <cbc:Name>Le Bistrot Parisien SARL</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>SOGEFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment Terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Paiement à 30 jours date de facture. Remboursement suite à utilisation de bon cadeau.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <!-- Restaurant services: 10% reduced rate for on-premise consumption -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">13.64</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">136.36</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">13.64</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <!-- 10% reduced VAT rate for restaurant services (on-premise) -->
+                <cbc:Percent>10.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document Totals -->
+    <!-- Voucher face value = 150 EUR TTC; HT = 150 / 1.10 = 136.36 -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">136.36</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">136.36</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">150.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">150.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice Line: Services provided against voucher redemption -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">136.36</cbc:LineExtensionAmount>
+        <!-- BG-31 Item Information -->
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Prestation de restauration fournie en échange de bon cadeau n°GC-2026-00487 (CartesCadeaux France). Repas servi le 2026-03-12. Le fournisseur est réputé avoir fourni la prestation à l'émetteur du bon.</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Prestation restauration - Utilisation bon cadeau</cbc:Name>
+            <!-- BG-30 Line VAT Information -->
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>10.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- BG-29 Price Details -->
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">136.36</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

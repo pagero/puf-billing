@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC17b - Payment Intermediary / Marketplace with Billing Mandate
+    INVOICE F1: SELLER → BUYER (Already-Paid Goods Invoice, Created by Intermediary)
+
+    Use Case: Invoice Created by Payment Intermediary on Behalf of SELLER (Billing Mandate)
+    Country: France (EXTENDED-CTC-FR profile)
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B2 (Already-paid goods invoice)
+
+    Scenario Description:
+    Same wine sale scenario as UC17a, but the payment intermediary (GourmetMarché France SAS)
+    also acts as BILLING MANDATARY (tiers facturant), creating and transmitting F1 on behalf
+    of the SELLER (Domaine Viticole Château Bellevue SARL) under a formal billing mandate.
+
+    UC17b Key Distinction from UC17a:
+    - INTERMEDIARY creates F1 on behalf of SELLER (not SELLER themselves)
+    - Billing mandate (mandat de facturation) per UC19a rules
+    - EXT-FR-FE-BG-05 identifies the billing mandatary (ServiceProviderParty)
+    - BT-34 routes to facturant's PA-T (not SELLER's PA-E)
+    - BT-81 can use actual payment method (intermediary collected payment)
+    - Intermediary must transmit F1 information to SELLER
+
+    Billing Mandate (UC19a rules):
+    - Written agreement between SELLER and intermediary
+    - SELLER retains VAT liability
+    - F1 is legally the SELLER's invoice
+    - Intermediary identified via EXT-FR-FE-BG-05 (ServiceProviderParty with role "II")
+    - Mandate declaration in BT-22 notes (#DCL#)
+
+    Already-Paid Invoice Rules:
+    - BT-113 (Paid amount) = BT-112 (Total with VAT) = 2,400.00 EUR
+    - BT-115 (Amount due) = 0.00 EUR
+    - BT-81: Actual payment method used (intermediary collected payment, so knows method)
+
+    Key Characteristics:
+    - Invoice type 380, Business process B2 (already-paid)
+    - BG-4 SELLER: Wine producer (Domaine Viticole Château Bellevue SARL)
+    - EXT-FR-FE-BG-05 BILLING MANDATARY: Marketplace (GourmetMarché France SAS)
+    - BG-7 BUYER: Restaurant (Restaurant Le Grand Véfour SA)
+    - BT-34: Routes to facturant's PA-T address
+    - BT-81 = 48 (Bank card) - actual payment method known by intermediary
+    - Total: 2,000.00 EUR HT + 400.00 EUR VAT = 2,400.00 EUR TTC
+
+    Companion Invoice:
+    - F2: PUF_France_UC17a_PaymentIntermediary_F2_ServiceFee_Invoice.xml
+      (F2 is identical for both UC17a and UC17b)
+
+    French Text Codes Used:
+    - #REG# Registration information (SELLER's details)
+    - #ABL# Trade register number (RCS)
+    - #AAI# Additional info (billing mandate and marketplace explanation)
+    - #DCL# Mandate declaration (billing agent disclosure)
+    - #PMD# Late payment penalties
+    - #PMT# Fixed collection costs
+    - #BAR# Treatment type (B2B)
+
+    Date: 2026-03-05
+    Reference: XP Z12-014 Annexe A, Section 3.2.16 - Cas n°17b
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- UBL Version -->
+    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+
+    <!-- BT-1: Invoice number -->
+    <cbc:ID>DVCB-2026-0412</cbc:ID>
+
+    <!-- BT-2: Invoice issue date -->
+    <cbc:IssueDate>2026-03-05</cbc:IssueDate>
+
+    <!-- BT-9: Payment due date - historical (payment already made on 2026-03-01) -->
+    <cbc:DueDate>2026-03-01</cbc:DueDate>
+
+    <!-- BT-3: Invoice type code = 380 (Standard commercial invoice)
+         @name = B2 (Already-paid goods invoice) -->
+    <cbc:InvoiceTypeCode name="B2">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-21/BT-22: Invoice notes with French text codes -->
+    <!-- #REG#: SELLER's company legal form and share capital -->
+    <cbc:Note>#REG#SARL au capital de 150 000 EUR</cbc:Note>
+    <!-- #ABL#: SELLER's trade register number (RCS) -->
+    <cbc:Note>#ABL#RCS Bordeaux B 222 333 444</cbc:Note>
+    <!-- #AAI#: Additional info - billing mandate and marketplace explanation -->
+    <cbc:Note>#AAI#FACTURE DÉJÀ PAYÉE - ÉMISE PAR MANDATAIRE FACTURANT (MARKETPLACE): Cette facture est émise par GourmetMarché France SAS agissant en qualité de mandataire facturant (tiers facturant) au nom et pour le compte du vendeur Domaine Viticole Château Bellevue SARL, conformément au mandat de facturation conclu entre les parties. Le paiement intégral de 2 400,00 EUR TTC a été collecté par le marketplace le 01/03/2026 par carte bancaire. Le montant net (déduction faite de la commission marketplace F2) a été reversé au vendeur. Le mandataire facturant gère le cycle de vie de cette facture sur la plateforme PA-T et transmet les informations au vendeur.</cbc:Note>
+    <!-- #DCL#: Mandate declaration (RECOMMENDED per UC19a) -->
+    <cbc:Note>#DCL#Facture établie par GourmetMarché France SAS (SIREN 555 666 777, SIRET 55566677700011) au nom et pour le compte de Domaine Viticole Château Bellevue SARL (SIREN 222 333 444, SIRET 22233344400011), conformément au contrat de mandat de facturation conclu entre les parties. Le mandataire facturant agit en qualité d'intermédiaire de paiement et de tiers facturant. Tous les droits et obligations liés à la vente restent attachés au VENDEUR. Référence: BOI-TVA-DECLA-30-20-10-30 (§210).</cbc:Note>
+    <!-- #PMD#: Late payment penalties -->
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <!-- #PMT#: Fixed collection costs -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <!-- #BAR#: Treatment type - B2B -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5: Invoice currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-8: Tax point date code - 35: Delivery date -->
+    <cac:InvoicePeriod>
+        <cbc:DescriptionCode>35</cbc:DescriptionCode>
+    </cac:InvoicePeriod>
+
+    <!-- BT-13: Purchase order reference (Marketplace order ID) -->
+    <cac:OrderReference>
+        <cbc:ID>GM-ORD-2026-03-18745</cbc:ID>
+    </cac:OrderReference>
+
+    <!-- BG-4: SELLER (Accounting Supplier Party) - Wine Producer
+         CRITICAL: The SELLER is the wine producer. The billing mandatary (marketplace)
+         creates this invoice ON BEHALF of the SELLER, but the SELLER remains the supplier. -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34: Seller electronic address - ROUTES TO FACTURANT'S PA-T
+                 In UC17b, BT-34 must be an address where the facturant has access
+                 for receiving lifecycle statuses. Routes to marketplace's PA-T platform.
+                 SchemeID "0009" = SIRET-based addressing -->
+            <cbc:EndpointID schemeID="0009">55566677700011</cbc:EndpointID>
+
+            <!-- BT-29: SIRET identifier (SELLER's SIRET) -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">22233344400011</cbc:ID>
+            </cac:PartyIdentification>
+
+            <!-- BT-28: Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>Domaine Viticole Château Bellevue</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5: Seller postal address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>Lieu-dit Château Bellevue, Route des Vignobles</cbc:StreetName>
+                <cbc:CityName>Saint-Émilion</cbc:CityName>
+                <cbc:PostalZone>33330</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-31: Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR22222333444</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27: Seller legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Domaine Viticole Château Bellevue SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">222333444</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-6: Seller contact -->
+            <cac:Contact>
+                <cbc:Name>Philippe Moreau - Propriétaire Viticulteur</cbc:Name>
+                <cbc:Telephone>+33 5 57 74 00 11</cbc:Telephone>
+                <cbc:ElectronicMail>contact@chateau-bellevue.fr</cbc:ElectronicMail>
+            </cac:Contact>
+
+            <!-- EXT-FR-FE-BG-05: BILLING MANDATARY (Tiers Facturant / Invoicer)
+                 The marketplace acts as billing mandatary under UC19a rules.
+                 Role Code "II" = Invoicer (UNTDID 3035)
+
+                 The billing mandatary (GourmetMarché France SAS):
+                 - Creates and transmits F1 on behalf of SELLER
+                 - Manages document lifecycle on PA-T platform
+                 - Transmits lifecycle status updates to SELLER
+                 - Posts "Encaissée" status if VAT on cash basis
+
+                 The SELLER retains:
+                 - VAT liability
+                 - Legal ownership of the invoice
+                 - Right to refuse invoice before transmission -->
+            <cac:ServiceProviderParty>
+                <cac:Party>
+                    <!-- EXT-FR-FE-113: Billing Mandatary Role Code: II (Invoicer) -->
+                    <ext:UBLExtensions>
+                        <ext:UBLExtension>
+                            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                            <ext:ExtensionContent>
+                                <puf:PageroExtension>
+                                    <puf:PartyExtension>
+                                        <puf:RoleCode>
+                                            <cbc:ID>II</cbc:ID>
+                                        </puf:RoleCode>
+                                    </puf:PartyExtension>
+                                </puf:PageroExtension>
+                            </ext:ExtensionContent>
+                        </ext:UBLExtension>
+                    </ext:UBLExtensions>
+
+                    <!-- Billing Mandatary Electronic Address -->
+                    <cbc:EndpointID schemeID="0009">55566677700011</cbc:EndpointID>
+
+                    <!-- Billing Mandatary Trading Name -->
+                    <cac:PartyName>
+                        <cbc:Name>GourmetMarché France</cbc:Name>
+                    </cac:PartyName>
+
+                    <!-- Billing Mandatary Postal Address -->
+                    <cac:PostalAddress>
+                        <cbc:StreetName>50 Avenue des Champs-Élysées</cbc:StreetName>
+                        <cbc:CityName>Paris</cbc:CityName>
+                        <cbc:PostalZone>75008</cbc:PostalZone>
+                        <cac:Country>
+                            <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                        </cac:Country>
+                    </cac:PostalAddress>
+
+                    <!-- Billing Mandatary VAT Identifier -->
+                    <cac:PartyTaxScheme>
+                        <cbc:CompanyID>FR55555666777</cbc:CompanyID>
+                        <cac:TaxScheme>
+                            <cbc:ID>VAT</cbc:ID>
+                        </cac:TaxScheme>
+                    </cac:PartyTaxScheme>
+
+                    <!-- Billing Mandatary Legal Entity -->
+                    <cac:PartyLegalEntity>
+                        <cbc:RegistrationName>GourmetMarché France SAS</cbc:RegistrationName>
+                        <cbc:CompanyID schemeID="0002">555666777</cbc:CompanyID>
+                    </cac:PartyLegalEntity>
+
+                    <!-- Billing Mandatary Contact -->
+                    <cac:Contact>
+                        <cbc:Name>Service Facturation Vendeurs</cbc:Name>
+                        <cbc:Telephone>+33 1 80 00 55 67</cbc:Telephone>
+                        <cbc:ElectronicMail>facturation-vendeurs@gourmetmarche.fr</cbc:ElectronicMail>
+                    </cac:Contact>
+                </cac:Party>
+            </cac:ServiceProviderParty>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7: BUYER (Accounting Customer Party) - Restaurant -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49: Buyer electronic address -->
+            <cbc:EndpointID schemeID="0009">33344455500022</cbc:EndpointID>
+
+            <!-- BT-46: Buyer identifier (SIRET) -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">33344455500022</cbc:ID>
+            </cac:PartyIdentification>
+
+            <!-- BT-45: Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Restaurant Le Grand Véfour</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-8: Buyer postal address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>17 Rue de Beaujolais</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75001</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!-- BT-48: Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR33333444555</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-44: Buyer legal name -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Restaurant Le Grand Véfour SA</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">333444555</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+
+            <!-- BG-9: Buyer contact -->
+            <cac:Contact>
+                <cbc:Name>Antoine Lefèvre - Chef Sommelier</cbc:Name>
+                <cbc:Telephone>+33 1 42 96 56 27</cbc:Telephone>
+                <cbc:ElectronicMail>cave@legrandvefour.fr</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-13: Delivery information -->
+    <cac:Delivery>
+        <!-- BT-72: Actual delivery date -->
+        <cbc:ActualDeliveryDate>2026-02-28</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+
+    <!-- BG-16: Payment Means
+         In UC17b, the intermediary/facturant collected the payment and knows the method.
+         BT-81 = 48 (Bank card) - actual method used by BUYER at marketplace -->
+    <cac:PaymentMeans>
+        <!-- BT-81: Payment means type code (48 = Bank card) -->
+        <cbc:PaymentMeansCode>48</cbc:PaymentMeansCode>
+
+        <!-- BT-83: Payment reference -->
+        <cbc:PaymentID>DVCB-2026-0412</cbc:PaymentID>
+
+        <!-- BG-19: SELLER's IBAN (for reference) -->
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7622233344400011223344556677</cbc:ID>
+            <cbc:Name>Domaine Viticole Château Bellevue SARL</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>AGRIFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20: Payment terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Facture déjà payée le 01/03/2026 par carte bancaire via la plateforme marketplace GourmetMarché France. Paiement collecté par le mandataire facturant (intermédiaire de paiement). Le montant net de 2 208,00 EUR (après déduction de la commission marketplace de 192,00 EUR TTC - voir facture F2 GM-FEE-2026-03-07821) a été reversé au vendeur le 03/03/2026. Cette facture a été émise par le mandataire facturant au nom et pour le compte du vendeur conformément au contrat de mandat de facturation.</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23: VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110: Invoice total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">400.00</cbc:TaxAmount>
+
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">2000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">400.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22: Document totals - ALREADY PAID PATTERN
+         BT-113 (PrepaidAmount) = BT-112 (TaxInclusiveAmount) = 2,400.00
+         BT-115 (PayableAmount) = 0.00 -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">2000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">2000.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">2400.00</cbc:TaxInclusiveAmount>
+        <!-- BT-113: Paid amount -->
+        <cbc:PrepaidAmount currencyID="EUR">2400.00</cbc:PrepaidAmount>
+        <!-- BT-115: Amount due = 0 -->
+        <cbc:PayableAmount currencyID="EUR">0.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25: INVOICE LINE 1 - Saint-Émilion Grand Cru -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">12</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">1080.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Saint-Émilion Grand Cru 2019 - Domaine Château Bellevue. Assemblage Merlot 80% / Cabernet Franc 20%. Élevage 18 mois en barriques de chêne français (30% neuves). Notes de cassis, mûre, vanille et épices douces. Apte à la garde 10-15 ans. Médaille d'or Concours de Bordeaux 2021. Bouteille 75cl.</cbc:Description>
+            <cbc:Name>Saint-Émilion Grand Cru 2019 - Château Bellevue (75cl)</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">90.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 2 - Pomerol -->
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">6</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">540.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Pomerol 2020 - Domaine Château Bellevue. 100% Merlot. Élevage 14 mois en barriques de chêne. Robe rubis intense, notes de cerise noire, truffe et réglisse. Tanins soyeux, finale élégante. Bouteille 75cl.</cbc:Description>
+            <cbc:Name>Pomerol 2020 - Château Bellevue (75cl)</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">90.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25: INVOICE LINE 3 - Bordeaux Blanc -->
+    <cac:InvoiceLine>
+        <cbc:ID>3</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">12</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">380.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Bordeaux Blanc Sec 2022 - Domaine Château Bellevue. Assemblage Sauvignon Blanc 70% / Sémillon 30%. Fermentation en cuves inox thermorégulées. Notes d'agrumes, fleurs blanches et minéralité. Fraîcheur et vivacité. Idéal en apéritif ou avec fruits de mer. Bouteille 75cl.</cbc:Description>
+            <cbc:Name>Bordeaux Blanc Sec 2022 - Château Bellevue (75cl)</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">31.67</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>
