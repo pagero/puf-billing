@@ -693,13 +693,14 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_croatia">5.3. Croatia</a>
 <ul class="sectlevel3">
 <li><a href="#_invoice_type_code_and_invoice_subtype">5.3.1. Invoice type code and invoice subtype</a></li>
-<li><a href="#_oib_croatian_tax_number">5.3.2. OIB (Croatian Tax Number)</a></li>
-<li><a href="#_operator_information_fiscalization_actor">5.3.3. Operator Information (Fiscalization Actor)</a></li>
-<li><a href="#_issue_time">5.3.4. Issue Time</a></li>
-<li><a href="#_croatian_tax_categories">5.3.5. Croatian Tax Categories</a></li>
-<li><a href="#_item_classification">5.3.6. Item Classification</a></li>
-<li><a href="#_line_level_references">5.3.7. Line-Level References</a></li>
-<li><a href="#_billing_reference_description">5.3.8. Billing Reference Description</a></li>
+<li><a href="#_self_billing">5.3.2. Self-billing</a></li>
+<li><a href="#_oib_croatian_tax_number">5.3.3. OIB (Croatian Tax Number)</a></li>
+<li><a href="#_operator_information_fiscalization_actor">5.3.4. Operator Information (Fiscalization Actor)</a></li>
+<li><a href="#_issue_time">5.3.5. Issue Time</a></li>
+<li><a href="#_croatian_tax_categories">5.3.6. Croatian Tax Categories</a></li>
+<li><a href="#_item_classification">5.3.7. Item Classification</a></li>
+<li><a href="#_line_level_references">5.3.8. Line-Level References</a></li>
+<li><a href="#_billing_reference_description">5.3.9. Billing Reference Description</a></li>
 </ul>
 </li>
 <li><a href="#_france">5.4. France</a>
@@ -11383,7 +11384,61 @@ This information is also shown to any recipients of the invoice.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_oib_croatian_tax_number"><a class="anchor" href="#_oib_croatian_tax_number"></a><a class="link" href="#_oib_croatian_tax_number">5.3.2. OIB (Croatian Tax Number)</a></h4>
+<h4 id="_self_billing"><a class="anchor" href="#_self_billing"></a><a class="link" href="#_self_billing">5.3.2. Self-billing</a></h4>
+<div class="paragraph">
+<p>Croatia supports self-billing where the buyer issues the invoice on behalf of the seller. Self-billing uses the Croatian process type P12.</p>
+</div>
+<div class="paragraph">
+<p>To indicate self-billing in PUF, use the <code>puf:SelfBilled</code> extension set to <code>true</code> combined with the standard type code and the process type <code>P12</code> in the <code>@name</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example Self-billing Invoice</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:SelfBilled&gt;</span>true<span class="tag">&lt;/puf:SelfBilled&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">P12</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example Self-billing Credit Note</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;CreditNote&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:SelfBilled&gt;</span>true<span class="tag">&lt;/puf:SelfBilled&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;cbc:CreditNoteTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">P12</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>381<span class="tag">&lt;/cbc:CreditNoteTypeCode&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/CreditNote&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ensure the <code>ext:UBLExtensions</code> block is placed as the first element in the document.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_oib_croatian_tax_number"><a class="anchor" href="#_oib_croatian_tax_number"></a><a class="link" href="#_oib_croatian_tax_number">5.3.3. OIB (Croatian Tax Number)</a></h4>
 <div class="paragraph">
 <p>Croatia requires the use of OIB (Osobni identifikacijski broj) - an 11-digit Croatian tax identification number.</p>
 </div>
@@ -11446,7 +11501,7 @@ This information is also shown to any recipients of the invoice.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_operator_information_fiscalization_actor"><a class="anchor" href="#_operator_information_fiscalization_actor"></a><a class="link" href="#_operator_information_fiscalization_actor">5.3.3. Operator Information (Fiscalization Actor)</a></h4>
+<h4 id="_operator_information_fiscalization_actor"><a class="anchor" href="#_operator_information_fiscalization_actor"></a><a class="link" href="#_operator_information_fiscalization_actor">5.3.4. Operator Information (Fiscalization Actor)</a></h4>
 <div class="paragraph">
 <p>Croatian fiscalization requires mandatory operator details under SellerContact:</p>
 </div>
@@ -11481,7 +11536,7 @@ This information is also shown to any recipients of the invoice.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_issue_time"><a class="anchor" href="#_issue_time"></a><a class="link" href="#_issue_time">5.3.4. Issue Time</a></h4>
+<h4 id="_issue_time"><a class="anchor" href="#_issue_time"></a><a class="link" href="#_issue_time">5.3.5. Issue Time</a></h4>
 <div class="paragraph">
 <p>Issue time is mandatory in Croatia and must include the time component:</p>
 </div>
@@ -11499,7 +11554,7 @@ This information is also shown to any recipients of the invoice.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_croatian_tax_categories"><a class="anchor" href="#_croatian_tax_categories"></a><a class="link" href="#_croatian_tax_categories">5.3.5. Croatian Tax Categories</a></h4>
+<h4 id="_croatian_tax_categories"><a class="anchor" href="#_croatian_tax_categories"></a><a class="link" href="#_croatian_tax_categories">5.3.6. Croatian Tax Categories</a></h4>
 <div class="paragraph">
 <p>Croatia uses specific tax category labels that must be mapped appropriately.
 See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croatia" target="_blank" rel="noopener">Tax category codes Croatia</a>. for the list of valid codes.</p>
@@ -11617,7 +11672,7 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 </div>
 </div>
 <div class="sect3">
-<h4 id="_item_classification"><a class="anchor" href="#_item_classification"></a><a class="link" href="#_item_classification">5.3.6. Item Classification</a></h4>
+<h4 id="_item_classification"><a class="anchor" href="#_item_classification"></a><a class="link" href="#_item_classification">5.3.7. Item Classification</a></h4>
 <div class="paragraph">
 <p>Every invoice line must include CPA/KPD classification with listID="CG" (except for advance invoices):</p>
 </div>
@@ -11644,7 +11699,7 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 </div>
 </div>
 <div class="sect3">
-<h4 id="_line_level_references"><a class="anchor" href="#_line_level_references"></a><a class="link" href="#_line_level_references">5.3.7. Line-Level References</a></h4>
+<h4 id="_line_level_references"><a class="anchor" href="#_line_level_references"></a><a class="link" href="#_line_level_references">5.3.8. Line-Level References</a></h4>
 <div class="paragraph">
 <p>Croatia supports line-level references for purchase orders, despatch advice, and receipt advice, but these are mutually exclusive with header-level references:</p>
 </div>
@@ -11719,7 +11774,7 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 </div>
 </div>
 <div class="sect3">
-<h4 id="_billing_reference_description"><a class="anchor" href="#_billing_reference_description"></a><a class="link" href="#_billing_reference_description">5.3.8. Billing Reference Description</a></h4>
+<h4 id="_billing_reference_description"><a class="anchor" href="#_billing_reference_description"></a><a class="link" href="#_billing_reference_description">5.3.9. Billing Reference Description</a></h4>
 <div class="paragraph">
 <p>For previous invoice references, Croatia allows providing additional description:</p>
 </div>
