@@ -33,6 +33,52 @@ Supported types and subtype codes can be found here: https://pagero.github.io/pu
 </Invoice>
 ----
 
+==== Self-billing
+
+Croatia supports self-billing where the buyer issues the invoice on behalf of the seller. Self-billing uses the Croatian process type P12.
+
+To indicate self-billing in PUF, use the `puf:SelfBilled` extension set to `true` combined with the standard type code and the process type `P12` in the `@name` attribute.
+
+*Example Self-billing Invoice*
+[source,xml]
+----
+<Invoice>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:SelfBilled>true</puf:SelfBilled>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:InvoiceTypeCode name="P12">380</cbc:InvoiceTypeCode>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+*Example Self-billing Credit Note*
+[source,xml]
+----
+<CreditNote>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:SelfBilled>true</puf:SelfBilled>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:CreditNoteTypeCode name="P12">381</cbc:CreditNoteTypeCode>
+    <!-- Code omitted for clarity -->
+</CreditNote>
+----
+
+Ensure the `ext:UBLExtensions` block is placed as the first element in the document.
+
 ==== OIB (Croatian Tax Number)
 
 Croatia requires the use of OIB (Osobni identifikacijski broj) - an 11-digit Croatian tax identification number.

@@ -100,6 +100,27 @@ Demonstrates:
 
 ---
 
+### 5. PUF_Croatia_Invoice_P12_SelfBilling.xml
+
+**Self-Billing Invoice (P12)**
+
+Demonstrates:
+
+- Invoice type P12 (Self-billing invoice)
+- PUF SelfBilled extension set to true (buyer issues invoice on behalf of seller)
+- Mandatory issue time and operator information
+- Croatian OIB for both seller and buyer
+- Standard 25% VAT rate (HR:PDV25)
+- Item classification with CPA/KPD codes
+
+**Key Features:**
+
+- Document type: 380 with name="P12" and PUF SelfBilled extension
+- Self-billing scenario: buyer (Kupac Split d.o.o.) issues invoice on behalf of seller (Dobavljač Rijeka d.o.o.)
+- Self-billing indicated via puf:SelfBilled extension element set to true
+
+---
+
 ### 5. PUF_Croatia_CreditNote_P9.xml
 
 **Credit Note (P9)**
