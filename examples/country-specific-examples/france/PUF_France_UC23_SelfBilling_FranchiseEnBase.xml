@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC23 - Self-Billing for Individual Photovoltaic Producer
+                                 (Franchise en Base)
+
+    Use Case: Self-billing by energy buyer for an individual solar energy producer
+              who benefits from the franchise en base regime (no VAT collected).
+
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 (Goods invoice — sale of electricity)
+
+    Scenario Description:
+    Jean-Pierre Beaumont is a private individual with a solar installation above 3 kWc
+    (144 kWc). He repeatedly sells electricity to the grid and is therefore considered a
+    habitual trader and VAT-subject. He benefits from the franchise en base regime
+    (Article 293 B CGI) — he does not collect VAT.
+
+    The energy supplier ÉnergieVert Réseaux SAS holds a billing mandate from Jean-Pierre
+    Beaumont and creates this self-billing invoice on his behalf for electricity injected
+    into the grid in January 2026.
+
+    Key Fields:
+    - SelfBilled = true extension (MANDATORY for self-billing in PUF)
+    - BT-3 = 380 (standard invoice; self-billing indicated by extension, not a separate code)
+    - BT-118 = Z (zero rated — franchise en base; no VAT charged)
+    - BT-119 = 0
+    - NO BT-31 (no VAT identification number for franchise en base seller)
+    - BT-21 = DCL, BT-22 = self-billing declaration + franchise en base mention
+    - BT-23 = B1 (electricity = goods)
+
+    Photovoltaic Exception: Only sellers with installations ABOVE 3 kWc are in scope.
+    Installations of 3 kWc or below are entirely outside e-invoicing and e-reporting scope.
+
+    Reference: XP Z12-014 Annexe A, Section 3.2.22 (Cas n°23), V1.3
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+
+    <!--
+        Self-Billing indicator — MANDATORY for UC23.
+        The BUYER (energy supplier) creates and transmits this invoice on behalf of
+        the SELLER (individual producer), as permitted under the formal billing mandate.
+    -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:SelfBilled>true</puf:SelfBilled>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (on InvoiceTypeCode/@name) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice number (created by BUYER) -->
+    <cbc:ID>EVR-AF-2026-00045</cbc:ID>
+    <!-- BT-2 Invoice issue date -->
+    <cbc:IssueDate>2026-02-05</cbc:IssueDate>
+    <!-- BT-9 Payment due date -->
+    <cbc:DueDate>2026-02-28</cbc:DueDate>
+    <!-- BT-3 Invoice type code = 380, BT-23 = B1 (Goods invoice — electricity) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22 / BT-21: French text codes and self-billing declaration -->
+    <!-- Franchise en base note — no VAT charged -->
+    <cbc:Note>#REG#Producteur individuel d'énergie solaire photovoltaïque — SIREN 444222111 — Franchise en base de TVA (Article 293 B du CGI) — Installation : 144 kWc (supérieure au seuil de 3 kWc)</cbc:Note>
+    <!-- #PMT#: Payment terms -->
+    <cbc:Note>#PMT#Virement bancaire à réception de la facture, sur le compte indiqué ci-dessous.</cbc:Note>
+    <!--
+        Self-billing mandate declaration (BT-21 = DCL)
+        Confirms the BUYER creates this invoice under a formal mandate from the SELLER.
+        Also notes that the SELLER benefits from franchise en base (no VAT).
+    -->
+    <cbc:Note>#DCL#AUTO-FACTURATION : La présente facture est établie par l'ACHETEUR ÉnergieVert Réseaux SAS (SIREN 888777666) pour le compte du VENDEUR Jean-Pierre Beaumont (SIREN 444222111), producteur individuel d'énergie photovoltaïque, conformément au contrat de mandat d'auto-facturation conclu entre les parties. Le VENDEUR bénéficie du régime de franchise en base de TVA (Art. 293 B CGI) — TVA non applicable. Aucun numéro de TVA intracommunautaire n'a été attribué au VENDEUR.</cbc:Note>
+    <!-- #BAR#: Treatment type qualification — B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5 Invoice currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference (BUYER's internal production site reference) -->
+    <cbc:BuyerReference>PROD-SITE-EVR-BEAUMONT-2026-JAN</cbc:BuyerReference>
+
+    <!-- BG-4 SELLER — Individual photovoltaic producer (receives this invoice for their own sale) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!--
+                BT-34 Seller electronic address.
+                Individual producers registered under SIREN use schemeID 0002.
+            -->
+            <cbc:EndpointID schemeID="0002">444222111</cbc:EndpointID>
+            <!-- BT-27 Seller name / individual name -->
+            <cac:PartyName>
+                <cbc:Name>Jean-Pierre Beaumont</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller postal address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>Les Grandes Terres</cbc:StreetName>
+                <cbc:AdditionalStreetName>Lieu-dit Le Moulin</cbc:AdditionalStreetName>
+                <cbc:CityName>Apt</cbc:CityName>
+                <cbc:PostalZone>84400</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!--
+                NO BT-31 Seller VAT identifier:
+                Jean-Pierre Beaumont benefits from the franchise en base regime (Art. 293 B CGI)
+                and has NOT been assigned a VAT identification number. Therefore BT-31 is absent.
+                BT-118 = Z signals zero-rated (franchise en base) throughout this invoice.
+            -->
+            <!-- BT-27 Seller legal name / BT-30 SIREN (individual registered as sole trader) -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Beaumont Jean-Pierre</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">444222111</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 BUYER — Energy supplier (creates this invoice under self-billing mandate) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49 Buyer electronic address -->
+            <cbc:EndpointID schemeID="0009">88877766655544</cbc:EndpointID>
+            <!-- BT-46 Buyer SIRET -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">88877766655544</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>ÉnergieVert Réseaux</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer postal address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>Tour Énergie, 30 Rue de la Paix</cbc:StreetName>
+                <cbc:CityName>Marseille</cbc:CityName>
+                <cbc:PostalZone>13001</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR88888777666</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-44 Buyer legal name / BT-47 SIREN -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>ÉnergieVert Réseaux SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">888777666</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment instructions — BUYER pays SELLER for the electricity purchased -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- SELLER's bank account — BUYER remits payment here -->
+            <cbc:ID>FR7630004000031234567890143</cbc:ID>
+            <cbc:Name>Jean-Pierre Beaumont</cbc:Name>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Total VAT — zero (franchise en base, no VAT charged) -->
+        <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- BT-116 VAT category taxable amount = total line amount -->
+            <cbc:TaxableAmount currencyID="EUR">150.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT amount = 0 (franchise en base) -->
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!--
+                    BT-118 VAT category code: Z = Zero rated goods or services.
+                    Used here to represent the franchise en base regime per G1.47.
+                    The seller has no VAT number and does not charge VAT.
+                -->
+                <cbc:ID>Z</cbc:ID>
+                <!-- BT-119 VAT rate = 0 -->
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">150.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Total excluding VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">150.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Total including VAT (= same as BT-109, no VAT charged) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">150.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">150.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice Line 1 — Electricity injected into grid, January 2026 -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-129 Quantity in kWh (KWH = kilowatt-hour) -->
+        <cbc:InvoicedQuantity unitCode="KWH">250</cbc:InvoicedQuantity>
+        <!-- BT-131 Line net amount (250 kWh × EUR 0.60) -->
+        <cbc:LineExtensionAmount currencyID="EUR">150.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Énergie solaire photovoltaïque injectée sur le réseau électrique en janvier 2026 — Installation PV 144 kWc — Site: Les Grandes Terres, Apt (84400)</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Énergie photovoltaïque injectée — Janvier 2026</cbc:Name>
+            <!-- BG-30 Line VAT: Z = Zero rated (franchise en base) -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category: Z -->
+                <cbc:ID>Z</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate = 0 -->
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price per kWh -->
+            <cbc:PriceAmount currencyID="EUR">0.60</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="KWH">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

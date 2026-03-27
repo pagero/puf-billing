@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC37 - Partnerships / SEP (Sociétés en Participation)
+                                 Purchase Invoice to SEP Manager
+
+    Use Case: A supplier invoices the Manager of an undisclosed partnership (SEP) for
+              services performed on a joint construction project. The Manager uses a
+              dedicated electronic reception address to separate SEP purchases from
+              their own company's purchases.
+
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: S1 (Standard services invoice)
+
+    Scenario Description:
+    BuildPro Structures SARL (supplier) performs structural engineering services for a
+    construction project jointly managed via a Société en Participation (SEP). The SEP's
+    Manager is Constructions Atlantique SA (SIREN 456789012). Suppliers must address
+    invoices to the Manager at the dedicated SEP reception address, not the Manager's
+    main business address/endpoint.
+
+    KEY FIELDS:
+    - BT-49 (Buyer electronic address): Manager's DEDICATED SEP endpoint
+      Format: [SIREN]_gestiontiers on schemeID 0225
+      e.g., 456789012_gestiontiers — routes to the SEP-specific PA inbox,
+      separating SEP purchases from the Manager's own business purchases.
+    - BT-10/BT-11/BT-13 (Buyer/contract/order reference): MANDATORY per spec so the
+      Manager can assign the invoice to the correct SEP project.
+    - Standard service invoice content — no special extensions required.
+
+    ROUTING LOGIC:
+    The suffix "_gestiontiers" signals to the routing infrastructure that this invoice
+    is destined for the Manager's SEP management inbox, not their main business inbox.
+    The Manager must manage separate routing configurations per SEP project.
+
+    VAT PRE-FILLING NOTE:
+    VAT pre-filling will be systematically misaligned for SEP operations because:
+    - The Manager declares only their share of VAT recovered from SEP purchases
+    - The individual members' actual VAT declarations differ from the pre-filled amounts
+    Tax authority acknowledgment: discrepancies are expected for SEP invoices.
+
+    Reference: XP Z12-014 Annexe A, Section 3.2.36 (Cas n°37), V1.3
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (on InvoiceTypeCode/@name) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice number -->
+    <cbc:ID>BPS-2026-0412</cbc:ID>
+    <!-- BT-2 Invoice issue date -->
+    <cbc:IssueDate>2026-02-25</cbc:IssueDate>
+    <!-- BT-9 Payment due date -->
+    <cbc:DueDate>2026-03-27</cbc:DueDate>
+    <!-- BT-3 Invoice type code = 380, BT-23 = S1 (standard services invoice) -->
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22/BT-21: French mandatory text codes -->
+    <cbc:Note>#REG#SARL au capital de 120 000 EUR — RCS Nantes B 789 012 345 — SIRET 78901234511233</cbc:Note>
+    <cbc:Note>#ABL#RCS Nantes B 789 012 345</cbc:Note>
+    <cbc:Note>#AAI#APE 7112B — Ingénierie, études techniques</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, pénalités au taux BCE + 10 points et indemnité forfaitaire de recouvrement de 40 EUR</cbc:Note>
+    <cbc:Note>#PMT#Paiement à 30 jours date de facture par virement bancaire</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!--
+        SEP reference note:
+        Supplier includes a note identifying the SEP project to help the Manager
+        allocate this purchase to the correct SEP accounts.
+    -->
+    <cbc:Note>#AAI#SEP PROJET: Présente facture relative à la Société en Participation «Ensemble Résidentiel Les Lilas» (SEP-ATL-2026-001). Facturation au Gérant (Constructions Atlantique SA — SIREN 456789012) à l'adresse de réception dédiée à la gestion de la SEP.</cbc:Note>
+
+    <!-- BT-5 Invoice currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!--
+        BT-10 Buyer reference — MANDATORY for SEP invoices.
+        Allows the Manager to assign this purchase to the correct SEP project
+        and correctly apportion costs between SEP members.
+    -->
+    <cbc:BuyerReference>SEP-ATL-2026-001</cbc:BuyerReference>
+
+    <!-- BT-13 Purchase order reference issued by Manager for SEP project work -->
+    <cac:OrderReference>
+        <cbc:ID>CA-SEP-CMD-2026-0045</cbc:ID>
+        <cbc:IssueDate>2026-01-30</cbc:IssueDate>
+    </cac:OrderReference>
+
+    <!-- BG-4 Seller — Structural engineering firm -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">78901234511233</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">78901234511233</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>BuildPro Structures</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>15 Quai Ernest Renaud</cbc:StreetName>
+                <cbc:CityName>Nantes</cbc:CityName>
+                <cbc:PostalZone>44100</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR78789012345</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>BuildPro Structures SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">789012345</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!--
+        BG-7 Buyer — SEP Manager (Constructions Atlantique SA)
+
+        The Manager acts as buyer for ALL SEP purchases. The dedicated SEP endpoint
+        (BT-49) separates SEP-related invoices from the Manager's own procurement inbox.
+    -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!--
+                BT-49 Buyer electronic address — DEDICATED SEP RECEPTION ADDRESS.
+                Format: [SIREN]_gestiontiers on schemeID 0225.
+                This routing address is specific to the SEP project management inbox
+                of Constructions Atlantique SA. It does NOT route to the Manager's
+                main business inbox. The Manager must configure this address with
+                their PA to receive SEP purchase invoices.
+            -->
+            <cbc:EndpointID schemeID="0225">456789012_gestiontiers</cbc:EndpointID>
+            <!-- BT-46 Buyer SIRET (Manager company's SIRET) -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">45678901266544</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Constructions Atlantique — Gestion SEP</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer postal address (Manager company's address) -->
+            <cac:PostalAddress>
+                <cbc:StreetName>33 Boulevard des Capucines</cbc:StreetName>
+                <cbc:CityName>Bordeaux</cbc:CityName>
+                <cbc:PostalZone>33000</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT identifier (Manager's VAT number) -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR45456789012</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-44 Buyer legal name / BT-47 Buyer SIREN (Manager's SIREN) -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Constructions Atlantique SA</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">456789012</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7617569000780901234500047</cbc:ID>
+            <cbc:Name>BuildPro Structures SARL</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>CMCIFRPP44A</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Paiement à 30 jours date de facture par virement bancaire</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">1040.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">5200.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">1040.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">5200.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">5200.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">6240.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">6240.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice Line 1 — Structural engineering phase 1 -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">32</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">4000.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>1</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Description>Étude de structure béton armé — Ensemble Résidentiel Les Lilas — Phase DCE (Dossier de Consultation des Entreprises) — Calculs planchers, voiles, poteaux — Note de calcul + plans d'exécution béton armé — Lot R+4 Bâtiment A — 32 heures ingénieur structure</cbc:Description>
+            <cbc:Name>Ingénierie structure béton armé — Phase DCE</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">125.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25 Invoice Line 2 — Site visits and technical supervision -->
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">12</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">1200.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>2</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Description>Visites de chantier et visa des situations de travaux — Ensemble Résidentiel Les Lilas — 3 réunions de chantier + visa plans béton entrepreneurs — Janvier/Février 2026 — 12 heures ingénieur</cbc:Description>
+            <cbc:Name>Supervision chantier et visa plans — Bâtiment A</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC31 - Mixed Invoice (Principal and Accessory Independent Operations)
+    
+    Use Case: Invoice combining independent goods AND services lines where neither operation
+              is accessory to the other. The "M" billing framework prefix is mandatory.
+
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: M1 (Mixed independent goods + services, B2B invoice)
+
+    Scenario Description:
+    IndustriTech Solutions SARL supplies both industrial equipment (goods) and
+    IT support services (services) to the same buyer on a single consolidated invoice.
+    The two types of operations are INDEPENDENT — neither is subordinate or accessory
+    to the other. Both lines use standard VAT rate (S, 20%).
+
+    CRITICAL — M1 vs B1/S1:
+    - BT-23 = B or S: One operation is accessory to the other (principal operation drives the code)
+    - BT-23 = M1: Goods and services are INDEPENDENT — both require separate e-reporting treatment
+    The "M" prefix signals to the tax authority and PA that e-reporting transaction data
+    and payment data must be split and reported separately per category (goods vs. services).
+
+    French M-prefix billing framework codes:
+    - M1: Mixed goods + services, standard B2B invoice (type 380)
+    - M2: Mixed goods + services, credit note (type 381)
+    - M4: Mixed goods + services, prepayment invoice (type 386)
+
+    VAT Note: All lines here use VAT category S at 20%. The M-prefix has no effect on
+    VAT treatment — it affects only e-reporting category routing.
+
+    Amounts:
+    - Goods lines (B category): 3000 + 1500 = 4500 EUR HT
+    - Service lines (S category): 2400 + 600 = 3000 EUR HT
+    - Total HT: 7500 EUR
+    - VAT (20%): 1500 EUR
+    - Total TTC: 9000 EUR
+
+    Reference: XP Z12-014 Annexe A, Section 3.2.30 (Cas n°31), V1.3
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (carried on InvoiceTypeCode/@name) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice number -->
+    <cbc:ID>ITS-2026-0561</cbc:ID>
+    <!-- BT-2 Invoice issue date -->
+    <cbc:IssueDate>2026-03-01</cbc:IssueDate>
+    <!-- BT-9 Payment due date -->
+    <cbc:DueDate>2026-04-01</cbc:DueDate>
+    <!--
+        BT-3 Invoice type code = 380
+        BT-23 = M1: MIXED independent goods + services invoice.
+        M1 is used because:
+        - Lines 1+2 are the supply of goods (industrial equipment) — B category
+        - Lines 3+4 are the supply of IT services — S category
+        - Neither set of lines is accessory/incidental to the other
+        - Both operations are equally principal and genuinely independent
+        The PA and PPF must split e-reporting (Flux 10.3/10.4) by category.
+    -->
+    <cbc:InvoiceTypeCode name="M1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22/BT-21: French mandatory text codes -->
+    <cbc:Note>#REG#SARL au capital de 200 000 EUR — RCS Bordeaux B 567 890 123 — SIRET 56789012311122</cbc:Note>
+    <cbc:Note>#ABL#RCS Bordeaux B 567 890 123</cbc:Note>
+    <cbc:Note>#AAI#APE 2829B — Fabrication d'autres machines d'usage général</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, pénalités au taux BCE + 10 points et indemnité forfaitaire de recouvrement de 40 EUR</cbc:Note>
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement : 40 EUR</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!--
+        Mixed invoice note explaining the M1 classification:
+        Lines 1-2 = goods (independent supply), Lines 3-4 = services (independent supply).
+        E-reporting must be declared separately per category.
+    -->
+    <cbc:Note>#AAI#FACTURE MIXTE — M1: La présente facture comporte des livraisons de biens (lignes 1-2) et des prestations de services (lignes 3-4) constituant des opérations indépendantes. Le code cadre de facturation M1 signale à l'administration fiscale que les données de transaction et de paiement doivent être ventilées par catégorie (B=biens, S=services) pour l'e-reporting.</cbc:Note>
+
+    <!-- BT-5 Invoice currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>MANUFACT-PO-2026-0892</cbc:BuyerReference>
+
+    <!-- BT-13 Purchase order reference -->
+    <cac:OrderReference>
+        <cbc:ID>MANUFACT-PO-2026-0892</cbc:ID>
+        <cbc:IssueDate>2026-02-20</cbc:IssueDate>
+    </cac:OrderReference>
+
+    <!-- BG-4 Seller — IndustriTech Solutions SARL -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">56789012311122</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">56789012311122</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>IndustriTech Solutions</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Zone Industrielle des Bassins, Bât. D</cbc:StreetName>
+                <cbc:CityName>Bordeaux</cbc:CityName>
+                <cbc:PostalZone>33300</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR56567890123</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>IndustriTech Solutions SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">567890123</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">22233344455566</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">22233344455566</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Manufacture Mécanique du Nord</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>88 Rue de l'Industrie</cbc:StreetName>
+                <cbc:CityName>Lille</cbc:CityName>
+                <cbc:PostalZone>59000</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR22222333444</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Manufacture Mécanique du Nord SA</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">222333444</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7617569000010567890123400</cbc:ID>
+            <cbc:Name>IndustriTech Solutions SARL</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>CMCIFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Paiement à 30 jours date de facture par virement bancaire</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown — single subtotal since all lines share rate S 20% -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">1500.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">7500.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">1500.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of line net amounts (4500 + 3000 = 7500) -->
+        <cbc:LineExtensionAmount currencyID="EUR">7500.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">7500.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">9000.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">9000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!--
+        GOODS lines (B category for e-reporting purposes)
+        These represent an independent supply of goods — not accessory to the service lines.
+    -->
+    <!-- BG-25 Invoice Line 1 — Goods: Industrial pump units -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="H87">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">3000.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>1</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Description>Pompe centrifuge industrielle à roue semi-ouverte, DN 100, débit max 120 m³/h, hauteur manométrique 45 m, moteur 15 kW</cbc:Description>
+            <!-- BT-153 B category for e-reporting: goods supply -->
+            <cbc:Name>Pompe centrifuge industrielle DN 100</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CPV">42122000</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">1500.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="H87">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25 Invoice Line 2 — Goods: Installation accessories kit -->
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="SET">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">1500.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>2</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Description>Kit raccordement bride DN 100 + joints EPDM + visserie inox A4 + vanne d'isolement quart de tour 2" (nécessaire pour montage pompe centrifuge)</cbc:Description>
+            <cbc:Name>Kit raccordement bride DN 100</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">750.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="SET">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!--
+        SERVICE lines (S category for e-reporting purposes)
+        These represent an independent supply of IT services — not accessory to the goods lines.
+    -->
+    <!-- BG-25 Invoice Line 3 — Services: Annual IT maintenance contract -->
+    <cac:InvoiceLine>
+        <cbc:ID>3</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="ANN">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">2400.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>3</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Description>Contrat de maintenance préventive et curative du système SCADA de supervision industrielle — couverture 8h/24h, 5j/7j, SLA réponse 4h — 1 an à compter du 01/03/2026</cbc:Description>
+            <!-- S category for e-reporting: services supply -->
+            <cbc:Name>Contrat maintenance SCADA annuel</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">2400.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="ANN">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- BG-25 Invoice Line 4 — Services: Technical support hours -->
+    <cac:InvoiceLine>
+        <cbc:ID>4</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">600.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>4</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Description>Assistance technique spécialisée PLC/automates — intervention sur site — formation opérateurs sur nouveau protocole de supervision — 10 heures</cbc:Description>
+            <!-- S category for e-reporting: services supply -->
+            <cbc:Name>Assistance technique PLC — heures sur site</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">60.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

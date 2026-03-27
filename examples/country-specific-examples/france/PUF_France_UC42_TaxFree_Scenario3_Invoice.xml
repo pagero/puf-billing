@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC42 - Tax Free / Refund (Detaxe) — Scenario 3
+                                 Merchant → Detax Operator (B2B Invoice)
+
+    Use Case (Scenario 3 of 4):
+    A tourist purchases goods from a French merchant and obtains a Bordereau de Vente
+    à l'Exportation (BVE). The BVE is validated (customs-stamped) when leaving the EU,
+    confirming the goods are exported. The tourist has already paid the full TTC price
+    including VAT. The detax operator processes the VAT refund to the tourist.
+
+    In this scenario:
+    - The TOURIST has already paid the full TTC price (including VAT) to the merchant
+    - The MERCHANT issues a B2B invoice to the DETAX OPERATOR to claim back the VAT
+      (or transfer the obligation to refund the tourist over to the operator)
+    - The FULL TTC amount is treated as a "prepayment" (BT-113) because the tourist
+      paid everything in cash at the point of sale
+    - The MERCHANT owes NOTHING further — BT-115 (PayableAmount) = 0
+    - The DETAX OPERATOR then refunds the tourist (minus their commission)
+
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B7 (Goods — detax/export regime)
+
+    KEY FRENCH E-INVOICING FIELDS:
+    - BT-23 = B7 (specific process type for tourist tax-free / détaxe goods)
+    - BT-112 (TaxInclusiveAmount) = 240.00 (full TTC paid by tourist)
+    - BT-113 (PrepaidAmount) = 240.00 (= BT-112; tourist paid everything at POS)
+    - BT-115 (PayableAmount) = 0.00 (merchant ows nothing to detax operator)
+    - BT-118 (Tax Category) = S (standard rate — VAT was collected, now to be refunded)
+    - BT-119 (Tax percent) = 20% (standard French VAT rate)
+    - BT-18 (Invoiced object identifier): Optional BVE reference with qualifier APT
+      Maps to AdditionalDocumentReference/ID[@schemeID="APT"], DocumentTypeCode=130
+
+    BVE REFERENCE (BT-18):
+    The BVE reference is factored in optionally via BT-18 with qualifier BT-18-1 = "APT".
+    Including it allows the tax authority to reconcile the detax with the validated BVE.
+    Format: cac:AdditionalDocumentReference/cbc:ID[@schemeID="APT"] with cbc:DocumentTypeCode=130
+
+    SCENARIO VARIANTS:
+    There are 4 scenarios for détaxe. This is scenario 3:
+    - Scenario 1: Merchant à Opérateur — no BVE yet (pending validation)
+    - Scenario 2: Merchant à Opérateur — BVE validated by another operator
+    - Scenario 3 (THIS FILE): Merchant → Opérateur — BVE validated (tourist paid TTC)
+    - Scenario 4: Merchant direct refund to tourist
+
+    Reference: XP Z12-014 Annexe A, Section 3.2.41 (Cas n°42 — Scenario 3), V1.3
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (on InvoiceTypeCode/@name) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice number -->
+    <cbc:ID>DX-2026-00892</cbc:ID>
+    <!-- BT-2 Invoice issue date -->
+    <cbc:IssueDate>2026-03-10</cbc:IssueDate>
+    <!-- BT-9 Payment due date — not applicable (BT-115 = 0) but required field -->
+    <cbc:DueDate>2026-03-10</cbc:DueDate>
+    <!--
+        BT-3 Invoice type code = 380
+        BT-23 = B7: Business process type "B7" identifies this as a detax/tourist
+        tax-free goods invoice. This signals to the tax authority that:
+        - VAT was collected from the tourist (at the standard French rate)
+        - The goods are being exported by a non-EU visitor
+        - The VAT is being reclaimed/transferred to the detax operator
+    -->
+    <cbc:InvoiceTypeCode name="B7">380</cbc:InvoiceTypeCode>
+
+    <!-- French mandatory text codes -->
+    <cbc:Note>#REG#SAS au capital de 500 000 EUR — RCS Paris B 123 456 789 — SIRET 12345678900015</cbc:Note>
+    <cbc:Note>#ABL#RCS Paris B 123 456 789</cbc:Note>
+    <cbc:Note>#AAI#APE 4771Z — Commerce de détail d'habillement en magasin spécialisé</cbc:Note>
+    <cbc:Note>#AAI#Détaxe touriste: Bordereau de Vente à l'Exportation (BVE) validé en douane. TVA collectée remboursée au touriste via l'opérateur de détaxe. Article 262 I et 147 CGI et Directive 2006/112/CE.</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5 Invoice currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>BVE-2026-00234</cbc:BuyerReference>
+
+    <!--
+        BT-18 Invoiced object identifier — BVE reference (OPTIONAL)
+        Qualifier BT-18-1 = "APT" (Application Product Type — detax-specific scheme)
+        DocumentTypeCode = 130 (per EN 16931 for invoiced object identifiers)
+        
+        Including the BVE reference allows the tax authority to reconcile:
+        - The merchant's invoice to the operator
+        - With the validated BVE on file at customs
+        - And the eventual tourist refund processed by the operator
+    -->
+    <cac:AdditionalDocumentReference>
+        <cbc:ID schemeID="APT">BVE-2026-00234</cbc:ID>
+        <cbc:DocumentTypeCode>130</cbc:DocumentTypeCode>
+        <cbc:DocumentDescription>Bordereau de Vente à l'Exportation — Validé douane Roissy CDG — 08/03/2026</cbc:DocumentDescription>
+    </cac:AdditionalDocumentReference>
+
+    <!-- BG-4 Seller — French luxury goods merchant -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">12345678900015</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">12345678900015</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Maison de Mode Élégante</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>28 Place Vendôme</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75001</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR12123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Maison de Mode Élégante SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">123456789</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer — Detax operator -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">98765432100123</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">98765432100123</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>GlobalDetax France</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Tour Espace, 9/11 Allée de l'Arche</cbc:StreetName>
+                <cbc:CityName>Paris La Défense</cbc:CityName>
+                <cbc:PostalZone>92400</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR98987654321</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>GlobalDetax France SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">987654321</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment instructions — zero amount invoice, no wire transfer needed -->
+    <cac:PaymentMeans>
+        <!-- 31 = Debit transfer (not actively used as BT-115=0) -->
+        <cbc:PaymentMeansCode>31</cbc:PaymentMeansCode>
+    </cac:PaymentMeans>
+
+    <!-- BG-23 VAT Breakdown — VAT collected at standard rate (to be refunded to tourist) -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">40.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!--
+                BT-116 VAT category taxable amount = net HT amount (EUR 200)
+                BT-117 VAT category tax amount = EUR 40 (20% of 200)
+                BT-118 VAT category code = S (standard rate)
+                BT-119 VAT rate = 20%
+                The VAT was collected from the tourist at POS; it is now assigned
+                to the detax operator who will refund it to the tourist.
+            -->
+            <cbc:TaxableAmount currencyID="EUR">200.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">40.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of invoice lines = HT amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">200.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">200.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT = tourist's total payment (TTC) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">240.00</cbc:TaxInclusiveAmount>
+        <!--
+            BT-113 PrepaidAmount = 240.00 = BT-112
+            The TOURIST paid the FULL TTC amount at point of sale.
+            The entire amount (HT + VAT) is therefore treated as "prepaid".
+            This leaves BT-115 (PayableAmount) = 0 — the merchant has nothing
+            further to collect from the detax operator (the operator will deduct
+            their commission when refunding the tourist separately).
+        -->
+        <cbc:PrepaidAmount currencyID="EUR">240.00</cbc:PrepaidAmount>
+        <!-- BT-115 Amount due for payment = EUR 0 (merchant is fully paid) -->
+        <cbc:PayableAmount currencyID="EUR">0.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice Line — tourist purchase of luxury fashion item -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">200.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Robe de soirée haute couture — Collection Automne-Hiver 2026 — Payée par client touristique non-résident UE — BVE n° BVE-2026-00234 — Sortie du territoire UE validée en douane (Roissy CDG, 08/03/2026) — Éligible remboursement TVA Art. 147 Directive 2006/112/CE</cbc:Description>
+            <cbc:Name>Robe de soirée HC — Réf. MME-AH26-R001</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">200.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

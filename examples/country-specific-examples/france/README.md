@@ -345,6 +345,26 @@ Demonstrates:
 
 ---
 
+#### UC16: PUF_France_UC16_Disbursement_Invoice.xml
+
+**Disbursement Invoice (Frais Débours)**
+
+Demonstrates:
+
+- Invoice combining seller's own fees (VAT category S) and disbursements paid on behalf of buyer (VAT category O)
+- French EXTENDED-CTC-FR profile permits O + S mixing (not allowed under EN 16931 alone)
+- BT-23 = S1 (services invoice with disbursements)
+- Architect or lawyer scenario: own professional fees + refundable expense advances
+
+**Key Features:**
+
+- Two TaxSubtotals: S @ 20% (professional fees) + O @ 0% (disbursements)
+- `#DEB#` text note identifying disbursement items per CGI obligations
+- EXTENDED-CTC-FR note confirming extended mixing is authorized by French profile
+- Disbursements are expenses advanced by seller strictly on buyer's behalf
+
+---
+
 #### UC17a: Payment Intermediary / Marketplace (F1 + F2)
 
 **PUF_France_UC17a_PaymentIntermediary_F1_Sale_Invoice.xml** — Sale Invoice (SELLER → BUYER)
@@ -511,6 +531,29 @@ Demonstrates:
 
 ---
 
+---
+
+#### UC23: PUF_France_UC23_SelfBilling_FranchiseEnBase.xml
+
+**Self-Billing for Franchise en Base (Individual Photovoltaic Producer)**
+
+Demonstrates:
+
+- Self-billing by energy aggregator for an individual solar producer exempt from VAT
+  (franchise en base — annual income above 3kWc threshold but VAT-exempt by law)
+- `<puf:SelfBilled>true</puf:SelfBilled>` document-level extension
+- BT-23 = B1 (goods invoice — electricity sale), BT-118 = Z (zero-rated for buyer)
+- `#DCL#` mandate declaration note referencing the self-billing agreement
+
+**Key Features:**
+
+- SelfBilled extension as first child before CustomizationID (document level)
+- NO BT-31 (seller has no VAT number — franchise en base individual)
+- SchemeID 0002 (SIREN) for individual without SIRET
+- BT-119 = 0 (zero VAT rate — seller VAT-exempt, buyer cannot recover)
+
+---
+
 #### UC25: PUF_France_UC25_BUU_Sale_Invoice.xml
 
 **Single-Purpose Voucher (BUU) Sale Invoice**
@@ -600,6 +643,28 @@ Demonstrates:
 
 ---
 
+---
+
+#### UC29: PUF_France_UC29_SingleVATEntity_Invoice.xml
+
+**Single VAT Entity Member Invoice (Assujetti Unique)**
+
+Demonstrates:
+
+- A member of a French Single VAT Entity (groupe TVA) invoicing an external third party
+- BT-29 with schemeID 0231 in seller party: the Entity's SIREN (grouped VAT identifier)
+- `<cac:TaxRepresentativeParty>` representing the Entity (name, VAT, address)
+- Mandatory note `#TXD#MEMBRE_ASSUJETTI_UNIQUE` identifying the VAT-group member
+
+**Key Features:**
+
+- TWO PartyIdentification entries for seller: schemeID 0009 (member SIRET) + schemeID 0231 (entity SIREN)
+- TaxRepresentativeParty carries BT-62 (entity name), BT-63 (`FR` + entity VAT), BG-12 (entity address)
+- BT-62/BT-63 represent the Entity, NOT the member company's own VAT details
+- Intra-entity B2B supplies between members are outside scope of French e-invoicing
+
+---
+
 #### UC30: PUF_France_UC30_VATAlreadyCollected.xml
 
 **VAT Already Collected**
@@ -615,6 +680,28 @@ Demonstrates:
 - VAT collection reference
 - Previous payment details
 - Corrective VAT treatment
+
+---
+
+---
+
+#### UC31: PUF_France_UC31_MixedInvoice.xml
+
+**Mixed Invoice — Independent Goods and Services (M1)**
+
+Demonstrates:
+
+- Invoice covering both goods and services that are independently provided (not accessory)
+- BT-23 = M1 (mixed independent operations — affects e-reporting routing, not VAT)
+- Both goods and services taxed at standard 20% S category
+- M-prefix signals to tax authority that both types are present and independently priced
+
+**Key Features:**
+
+- `<cbc:InvoiceTypeCode name="M1">380</cbc:InvoiceTypeCode>`
+- Four invoice lines: goods lines (B1 category) + service lines (S1 category)
+- All VAT at S 20% — the M1 prefix is a routing/reporting distinction only
+- Use M-series when neither goods nor services component is an accessory to the other
 
 ---
 
@@ -654,7 +741,69 @@ Demonstrates:
 
 ---
 
-#### UC40: PUF_France_UC40_Netting_Invoice1_CoopToFarmer.xml & Invoice2_FarmerToCoop.xml
+---
+
+#### UC33: PUF_France_UC33_MarginScheme_Invoice.xml
+
+**VAT Margin Scheme Invoice (Régime de la Marge — Biens d'Occasion)**
+
+Demonstrates:
+
+- Invoice for second-hand goods sold under VAT margin scheme (Article 297 A CGI)
+- Buyer CANNOT deduct VAT — all amounts are VAT-inclusive, no separate VAT shown
+- BT-118 = E (Exempt), BT-117 = 0, BT-119 = 0, BT-121 = `VATEX-FR-F`
+- BT-131 (net line amount) and BT-146 (unit price) hold VAT-inclusive values
+
+**Key Features:**
+
+- VATEX-FR code for specific margin regime: VATEX-FR-F (2nd-hand goods), VATEX-FR-I (art), VATEX-FR-J (antiques), VATEX-EU-D (travel agency)
+- BT-109 = BT-112 = TTC amount (no separate HT and VAT breakdown)
+- BT-110 (TaxAmount) = 0 — VAT is embedded in the price, not disclosed
+- BT-120 carries the human-readable exemption reason text
+
+---
+
+#### UC36: PUF_France_UC36_ProfessionalSecrecy_Invoice.xml
+
+**Professional Secrecy Invoice (Secret Professionnel — Avocats)**
+
+Demonstrates:
+
+- Legal services invoice where client confidentiality requires split between public/private content
+- BT-153 (ItemName): GENERIC description — sent to tax authority in Flux 1 (e-invoicing)
+- BT-154 (ItemDescription): CONFIDENTIAL detail — present in Flux 2 data sent only to buyer
+- Lawyer/legal services scenario; same structure applies to other regulated professions
+
+**Key Features:**
+
+- BT-153 = generic name (e.g., "Conseil juridique — Propriété industrielle") sent to PPF
+- BT-154 = full case/matter detail kept confidential from tax authority
+- Standard S1 invoice with 20% VAT — no special extensions; confidentiality is structural
+- Both BT-153 and BT-154 present on same line (PA selectively filters for Flux 1 transmission)
+
+---
+
+#### UC37: PUF_France_UC37_Partnership_SEP_Invoice.xml
+
+**Partnership Invoice — Société en Participation (SEP) Manager**
+
+Demonstrates:
+
+- Supplier invoice to the Manager of an undisclosed partnership (SEP) using a dedicated SEP reception address
+- BT-49 with schemeID 0225 and format `[SIREN]_gestiontiers` — SEP-specific routing endpoint
+- Separates SEP purchases from the Manager's own procurement inbox at the PA-R
+- BT-10 (buyer reference) carries the SEP project code for cost allocation
+
+**Key Features:**
+
+- `<cbc:EndpointID schemeID="0225">456789012_gestiontiers</cbc:EndpointID>` — dedicated SEP inbox
+- Manager's SIREN + `_gestiontiers` suffix routes to the SEP-specific receiving inbox
+- BT-11 (purchase order reference) from Manager for the SEP project work order
+- VAT pre-filling will be systematically misaligned for SEP (Manager declares only their share)
+
+---
+
+#### UC40: PUF_France_UC40_Netting_Invoice1_CoopToFarmer.xml &amp; Invoice2_FarmerToCoop.xml
 
 **Netting Invoices (Cooperative and Farmer)**
 
@@ -673,6 +822,48 @@ Demonstrates:
 
 ---
 
+---
+
+#### UC41: PUF_France_UC41_Barter_Invoice.xml
+
+**Barter Invoice (Échange — Compensation en Nature)**
+
+Demonstrates:
+
+- Invoice where HT consideration is settled in kind (barter exchange), only VAT paid in cash
+- BT-113 (PrepaidAmount) RE-PURPOSED: holds the HT value of the in-kind compensation
+- BT-115 (PayableAmount) = VAT only (the sole cash payment)
+- `#PAI#` note explaining the barter arrangement and convention reference
+
+**Key Features:**
+
+- BT-113 = EUR 10,000 HT (barter exchange amount — NOT a cash prepayment)
+- BT-115 = EUR 2,000 (VAT portion paid in cash)
+- BT-112 = EUR 12,000 TTC (full invoice value including in-kind exchange)
+- A companion Encaissée (puf-invoice-response UC41_Barter_Encaissee.xml) with dual MEN entries is required for correct tax pre-filling
+
+---
+
+#### UC42: PUF_France_UC42_TaxFree_Scenario3_Invoice.xml
+
+**Tourist Tax Refund — Détaxe Scenario 3 (Merchant → Detax Operator)**
+
+Demonstrates:
+
+- B2B invoice from merchant to detax operator after tourist's BVE is validated by customs
+- BT-23 = B7 (goods with VAT already collected via B2C e-reporting)
+- BT-113 = BT-112 (tourist paid full TTC at point of sale — entire amount is "prepaid")
+- BT-115 = 0 (nothing further owed by operator to merchant at this stage)
+
+**Key Features:**
+
+- BT-18 (Invoiced object identifier): optional BVE reference with schemeID="APT", DocumentTypeCode=130
+- BT-113 = BT-112 (all TTC treated as prepaid — tourist settlement at POS)
+- BT-115 = 0 (the detax operator settles with merchant via a separate fee/commission invoice)
+- BT-119 = 20% S category: VAT was collected at standard rate, now being transferred to operator for refund to tourist
+
+---
+
 ### E-Reporting Examples (Flux 10.1 — Invoice Reporting)
 
 Invoice e-reporting examples (UC43, UC44) are located in the **tax-data-report** directory:
@@ -683,14 +874,23 @@ Invoice e-reporting examples (UC43, UC44) are located in the **tax-data-report**
 
 ## French Text Codes Reference
 
-| Code | Description | Example |
-|------|-------------|---------|
-| **#REG#** | Company legal form and share capital | `SARL au capital de 100000.00 EUR` |
-| **#ABL#** | Trade register number (RCS) | `RCS Lyon B 987 654 321` |
-| **#AAI#** | APE business activity code | `APE 4651Z - Commerce de gros d'ordinateurs` |
-| **#PMD#** | Late payment penalties | `En cas de retard de paiement, application des pénalités...` |
-| **#PMT#** | Fixed collection costs indemnity | `Indemnité forfaitaire pour frais de recouvrement : 40 EUR` |
-| **#BAR#** | Treatment type qualification | `B2B` or `B2C` |
+| Code | Description | Usage | Required Note Text |
+|------|-------------|-------|--------------------|
+| **#REG#** | Registration data | Regulatory information, e.g. share capital | *(free text)* |
+| **#ABL#** | Legal information | Trade register number (RCS) or other legal registration information | *(free text)* |
+| **#AAI#** | General information | General elements typically found at the bottom of paper invoice pages | *(free text)* |
+| **#PMD#** | Late payment penalties | Payment terms regarding late payment penalties | *(free text)* |
+| **#PMT#** | Collection costs (€40) | Fixed €40 indemnity for collection costs in case of late payment | *(free text)* |
+| **#BAR#** | Treatment type qualification | Expected treatment type for the invoice. Only ONE BAR note per invoice. | `B2B`, `B2BINT`, `B2C`, `OUTOFSCOPE`, or `ARCHIVEONLY` |
+| **#AAB#** | Early payment discount | Statement whether customer can apply a discount for early payment. Does NOT correspond to the discount amount itself. | *(free text)* |
+| **#ABU#** | Contract clause | Contractual reservation clause / Retenue de garantie | *(free text)* |
+| **#ACC#** | Subrogation factoring clause | Factoring arrangement details and subrogation clauses | *(free text)* |
+| **#ADN#** | B2G indicator | Indicates if invoice is subject to B2G treatment (additional Chorus Pro rules apply) | *(free text)* |
+| **#BLU#** | Eco-participation / Eco-contribution | Eco-participation or Eco-contribution WEEE; also used for other eco-taxes | `Eco-participation (L. 541-10 du code de l'environnement)` or `Eco-contribution DEEE` |
+| **#CUS#** | Customs information | Customs-related details and information | *(free text)* |
+| **#PAI#** | Third party payment | Third party payment information (e.g. partial third-party payer or barter arrangement) | *(free text)* |
+| **#SUR#** | Supplier notes | Additional remarks from the supplier | *(free text)* |
+| **#TXD#** | Single taxable person member | Identifies a member of a single taxable person (assujetti unique) — for external transactions only | `Membre d'un assujetti unique` |
 
 ## Business Process Types
 
@@ -716,7 +916,7 @@ French e-invoicing uses business process types in the `InvoiceTypeCode/@name` at
 
 - **M1**: Mixed invoice (goods + services)
 - **M2**: Mixed invoice (already paid)
-- **M4**: Double final invoice (after down payment)
+- **M4**: Final invoice for mixed goods and services (after down payment)
 
 ## Identification Schemes
 

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC36 - Professional Secrecy and Sensitive Data
+
+    Use Case: Invoice for services subject to professional secrecy (Art. 226-13 Code pénal).
+              BT-153 (item name) is transmitted to the tax authority via Flux 1 — it must
+              contain only a GENERIC, non-revealing mention. BT-154 (item description) is
+              transmitted only in Flux 2 between seller and buyer — it may contain sensitive
+              details.
+
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: S1 (Standard services invoice)
+
+    Scenario Description:
+    Cabinet Juridique Beaumont & Associés (law firm) invoices Pharma Confidentiel SAS
+    for legal advice relating to sensitive pharmaceutical patent litigation. The law firm
+    is bound by professional secrecy (secret professionnel — Art. 226-13 Code pénal).
+
+    KEY MECHANISM — DUAL FLUX DISCLOSURE SPLIT:
+    | Field                     | Flux 1 (→ tax authority)      | Flux 2 (→ buyer)       |
+    | BT-153 (Item name)        | INCLUDED — generic mention    | INCLUDED               |
+    | BT-154 (Item description) | NOT INCLUDED — confidential   | INCLUDED — full detail |
+    | Other line-level data     | NOT INCLUDED                  | INCLUDED               |
+
+    The platform (PA) is responsible for extracting Flux 1 regulatory data without
+    BT-154. The seller must choose BT-153 values that disclose nothing confidential.
+
+    GDPR Reminder: Even data not transmitted to the tax authority must be handled
+    with care regarding personal data in invoices.
+
+    Reference: XP Z12-014 Annexe A, Section 3.2.35 (Cas n°36), V1.3
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (on InvoiceTypeCode/@name) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice number -->
+    <cbc:ID>CJB-2026-0234</cbc:ID>
+    <!-- BT-2 Invoice issue date -->
+    <cbc:IssueDate>2026-02-28</cbc:IssueDate>
+    <!-- BT-9 Payment due date -->
+    <cbc:DueDate>2026-03-30</cbc:DueDate>
+    <!-- BT-3 Invoice type code = 380, BT-23 = S1 (standard services invoice) -->
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22/BT-21: French mandatory text codes -->
+    <cbc:Note>#REG#SCP d'Avocats au capital de 10 000 EUR — SCP inscrite au Barreau de Paris — SIREN 212 345 678 — SIRET 21234567800019</cbc:Note>
+    <cbc:Note>#ABL#Barreau de Paris — Ordre des Avocats — N° Inscription : 12345</cbc:Note>
+    <cbc:Note>#AAI#APE 6910Z — Activités juridiques</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, pénalités au taux BCE + 10 points et indemnité forfaitaire de recouvrement de 40 EUR</cbc:Note>
+    <cbc:Note>#PMT#Paiement à 30 jours date de facture</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5 Invoice currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>PHARMA-LEGALREF-2026-112</cbc:BuyerReference>
+
+    <!-- BG-4 Seller — Law firm -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">21234567800019</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">21234567800019</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Cabinet Beaumont &amp; Associés</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>42 Avenue de la Grande Armée</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75017</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR21212345678</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Cabinet Juridique Beaumont &amp; Associés SCP</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">212345678</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer — Pharmaceutical company -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">93827165049382</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">93827165049382</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Pharma Confidentiel</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>10 Rue de la Santé</cbc:StreetName>
+                <cbc:CityName>Neuilly-sur-Seine</cbc:CityName>
+                <cbc:PostalZone>92200</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR93938271650</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Pharma Confidentiel SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">938271650</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7620041010012345678901343</cbc:ID>
+            <cbc:Name>Cabinet Juridique Beaumont &amp; Associés SCP</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>PSSTFRPPPAR</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Paiement à 30 jours date de facture par virement bancaire</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown: standard legal services at 20% -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">2500.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">12500.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">2500.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">12500.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">12500.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">15000.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">15000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!--
+        BG-25 Invoice Lines — Professional Secrecy Disclosure Split
+
+        RULE: BT-153 (Item name) IS sent to the tax authority in Flux 1.
+              BT-154 (Item description) is NOT sent to the tax authority — Flux 2 only.
+
+        The seller MUST craft BT-153 as a generic, non-revealing label.
+        The seller MAY populate BT-154 with full confidential detail for the buyer.
+    -->
+
+    <!-- Invoice Line 1 — Legal advisory services (confidential patent matter) -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">50</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">7500.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!--
+                BT-154 Item description — CONFIDENTIAL — Flux 2 only (buyer receives this,
+                tax authority does NOT).
+                Contains the full matter details subject to professional secrecy.
+            -->
+            <cbc:Description>Conseil juridique confidentiel — Procédure contentieuse brevets pharmaceutiques — Dossier n°CJB-2026-009 — Analyse de la brevetabilité du composé XR-2047, évaluation des risques de contrefaçon sur 3 marchés étrangers, rédaction de mémoire en défense, correspondances avec les conseils en brevet, préparation de la procédure d'opposition INPI — 50 heures d'honoraires partenaire A. Beaumont</cbc:Description>
+            <!--
+                BT-153 Item name — Transmitted to tax authority in Flux 1.
+                MUST contain only a GENERIC, non-revealing mention.
+                No client names, case references, or sensitive information here.
+            -->
+            <cbc:Name>Conseil juridique — Propriété industrielle</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">150.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!-- Invoice Line 2 — Expert fees (confidential regulatory strategy matter) -->
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">25</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">5000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!--
+                BT-154 — CONFIDENTIAL — Flux 2 only.
+                Full detail for buyer reference — not visible to tax authority.
+            -->
+            <cbc:Description>Conseil stratégique confidentiel — Stratégie réglementaire AMM européenne — Dossier n°CJB-2026-009 — Analyse de la procédure d'autorisation de mise sur le marché, interface avec les équipes affaires réglementaires, préparation de la documentation soumise à l'EMA — 25 heures conseillers spécialisés M. Dupont &amp; C. Martin</cbc:Description>
+            <!--
+                BT-153 — GENERIC — transmitted to tax authority.
+                No client or case details.
+            -->
+            <cbc:Name>Conseil juridique — Affaires réglementaires</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">200.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>
