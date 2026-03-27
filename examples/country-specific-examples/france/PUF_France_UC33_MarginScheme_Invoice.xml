@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC33 - Margin Scheme Operations (Régime de la Marge)
+
+    Use Case: Invoice for a sale subject to the VAT margin scheme (régime de la marge).
+              The VAT is calculated on the margin (sale price minus purchase price), not
+              on the invoice sale price. The VAT amount is NOT shown on the invoice.
+
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 (Goods invoice)
+
+    Scenario Description:
+    AutoOccasion Lyon SARL (a second-hand vehicle dealer) sells a used vehicle under the
+    VAT margin scheme (Article 297 A CGI). All amounts on the invoice are VAT-inclusive.
+    The dealer calculates VAT on the margin privately for their own VAT return — no VAT
+    amount appears on the invoice.
+
+    Legal Basis: Article 297 A CGI — Second-hand goods, works of art, collectors' items,
+    and antiques.
+
+    CRITICAL RULES FOR MARGIN SCHEME INVOICES:
+    - BT-151 = E (Exempt) for ALL margin lines
+    - BT-118 = E (Exempt) in VAT breakdown
+    - BT-119 = 0, BT-117 = 0 (no VAT shown on invoice)
+    - BT-121 = VATEX-FR-F (second-hand goods, Art. 297 A CGI)
+    - BT-120 = exemption reason text (mandatory when BT-118 = E per G1.41)
+    - ALL line amounts (BT-131, BT-146) are VAT-INCLUSIVE
+    - BT-109 (TaxExclusiveAmount) = VAT-inclusive total (both equal BT-112)
+    - BT-110 = 0, BT-112 = BT-109
+
+    VATEX codes for margin scheme:
+    - VATEX-FR-F: Second-hand goods (Article 297 A CGI)
+    - VATEX-FR-I: Works of art (Article 297 A CGI)
+    - VATEX-FR-J: Antiques (Article 297 A CGI)
+    - VATEX-EU-D: Travel agency operations (Article 266, 1(e) CGI)
+
+    Note: VAT pre-filling by PPF will be inaccurate for margin invoices — the seller
+    declares the correct margin VAT in their CA3/CA12 return.
+
+    Reference: XP Z12-014 Annexe A, Section 3.2.32 (Cas n°33), V1.3
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (on InvoiceTypeCode/@name) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice number -->
+    <cbc:ID>AOL-2026-0089</cbc:ID>
+    <!-- BT-2 Invoice issue date -->
+    <cbc:IssueDate>2026-02-10</cbc:IssueDate>
+    <!-- BT-9 Payment due date -->
+    <cbc:DueDate>2026-02-10</cbc:DueDate>
+    <!-- BT-3 Invoice type code = 380, BT-23 = B1 (second-hand goods sale) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22/BT-21: French mandatory text codes -->
+    <cbc:Note>#REG#SARL au capital de 80 000 EUR — RCS Lyon B 654 321 987 — SIRET 65432198711100</cbc:Note>
+    <cbc:Note>#ABL#RCS Lyon B 654 321 987</cbc:Note>
+    <cbc:Note>#AAI#APE 4511Z — Commerce de voitures et de véhicules automobiles légers</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, pénalités au taux BCE + 10 points et indemnité forfaitaire de recouvrement de 40 EUR</cbc:Note>
+    <cbc:Note>#PMT#Paiement comptant à la livraison du véhicule</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!--
+        Margin scheme notice — mandatory disclosure per Article 297 A CGI.
+        Informs the buyer that VAT is NOT deductible on this purchase
+        (the invoice does not show VAT).
+    -->
+    <cbc:Note>#AAI#RÉGIME DE LA MARGE — Article 297 A du CGI: La TVA calculée sur la marge bénéficiaire du vendeur ne figure pas sur la présente facture. Cette TVA n'est pas déductible par l'acheteur. Objet d'occasion soumis au régime particulier de la marge conformément à l'article 297 A du Code Général des Impôts.</cbc:Note>
+
+    <!-- BT-5 Invoice currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>FLEET-2026-VH-0032</cbc:BuyerReference>
+
+    <!-- BG-4 Seller — Second-hand vehicle dealer -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">65432198711100</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">65432198711100</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>AutoOccasion Lyon</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Route de Vienne, ZA Les Portes du Sud</cbc:StreetName>
+                <cbc:CityName>Vénissieux</cbc:CityName>
+                <cbc:PostalZone>69200</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR65654321987</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>AutoOccasion Lyon SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">654321987</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer — Fleet management company -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">31415926535897</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">31415926535897</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>FleetPro Gestion Véhicules</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>5 Rue de la Flotte</cbc:StreetName>
+                <cbc:CityName>Villeurbanne</cbc:CityName>
+                <cbc:PostalZone>69100</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR31314159265</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>FleetPro Gestion Véhicules SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">314159265</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7630002000981234500000067</cbc:ID>
+            <cbc:Name>AutoOccasion Lyon SARL</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>SOGEFRPP</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!--
+            BT-110 Total VAT = 0.
+            No VAT is shown on margin scheme invoices.
+            The seller privately declares the VAT on the margin in their CA3/CA12 return.
+        -->
+        <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!--
+                BT-116 VAT category taxable amount.
+                For margin scheme lines this equals the invoice line amount (BT-131),
+                which is effectively a VAT-INCLUSIVE total. The taxable base for the
+                seller's margin VAT return is calculated separately.
+            -->
+            <cbc:TaxableAmount currencyID="EUR">18000.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount = 0 (not shown on invoice) -->
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code: E = Exempt (used for margin scheme per French spec) -->
+                <cbc:ID>E</cbc:ID>
+                <!-- BT-119 VAT rate = 0 (no VAT rate disclosed) -->
+                <cbc:Percent>0.00</cbc:Percent>
+                <!--
+                    BT-121 VAT exemption reason code
+                    VATEX-FR-F = Second-hand goods subject to Article 297 A CGI margin scheme.
+                    Other margin scheme codes: VATEX-FR-I (works of art), VATEX-FR-J (antiques),
+                    VATEX-EU-D (travel agency operations per Art. 266, 1(e) CGI).
+                -->
+                <cbc:TaxExemptionReasonCode>VATEX-FR-F</cbc:TaxExemptionReasonCode>
+                <!--
+                    BT-120 VAT exemption reason text (mandatory when BT-118 = E per G1.41)
+                    This identifies the margin scheme type.
+                -->
+                <cbc:TaxExemptionReason>TVA non applicable — Régime particulier de la marge, Article 297 A du CGI (biens d'occasion)</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!--
+            BT-106 Sum of invoice line net amounts.
+            For a margin scheme invoice, this figure is VAT-inclusive in practice,
+            since all line amounts (BT-131) are expressed as VAT-inclusive totals.
+        -->
+        <cbc:LineExtensionAmount currencyID="EUR">18000.00</cbc:LineExtensionAmount>
+        <!--
+            BT-109 Invoice total amount without VAT.
+            Equals BT-106 for margin scheme invoices (there is no VAT to add or subtract).
+            Effectively a VAT-inclusive total — the "without VAT" field holds the invoice price.
+        -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">18000.00</cbc:TaxExclusiveAmount>
+        <!--
+            BT-110 Total VAT amount = 0.
+            BT-112 = BT-109 for a pure margin scheme invoice.
+        -->
+        <!-- BT-112 Invoice total amount with VAT (= BT-109 since BT-110 = 0) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">18000.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">18000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!--
+        BG-25 Invoice Line 1 — Margin scheme line: Used vehicle (second-hand goods)
+
+        IMPORTANT: BT-131 (LineExtensionAmount) = VAT-INCLUSIVE price per the specification.
+        The unit price (BT-146) is also VAT-inclusive for margin scheme lines.
+        The seller's actual margin and the VAT calculated thereon are NOT disclosed.
+    -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="H87">1</cbc:InvoicedQuantity>
+        <!--
+            BT-131 Line net amount = VAT-inclusive sale price under margin scheme.
+            Amount declared to tax authority in Flux 1. No separate VAT component.
+        -->
+        <cbc:LineExtensionAmount currencyID="EUR">18000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-154 Full vehicle description -->
+            <cbc:Description>Véhicule d'occasion: 2019 Renault Trafic Fourgon L2H1 dCi 145 Energy Twin Turbo — Immatriculation: AB-123-CD — Kilométrage: 87 500 km — Première mise en circulation: 15/03/2019 — Couleur: Blanc Nacré</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Renault Trafic Fourgon 2019 (occasion)</cbc:Name>
+            <!--
+                BG-30 Line VAT: E = Exempt (margin scheme)
+                BT-151 = E, BT-152 = 0
+            -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category: E = Exempt (margin scheme) -->
+                <cbc:ID>E</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate = 0 -->
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!--
+                BT-146 Item net price = VAT-INCLUSIVE sale price per margin scheme rules.
+                The "net price" here represents the full invoice price, as no VAT is separated out.
+            -->
+            <cbc:PriceAmount currencyID="EUR">18000.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="H87">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC16 - Disbursement Invoice (Facture de Débours)
+
+    Use Case: Mixed invoice with disbursement (VAT category O) lines and own service
+              (VAT category S) lines. The intermediary acts as mandataire, advancing
+              costs purely in the client's name, then seeks reimbursement.
+
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: S1 (standard services invoice — the intermediary's own fees determine BT-23)
+
+    Scenario Description:
+    Architecture firm Arc Conseil Paris SARL acts as agent (mandataire) for its client
+    Immo Développement France SA on a construction project. The firm:
+      - Advanced building permit fees of EUR 2,500 on the client's behalf (disbursement — O)
+      - Advanced expert consultation costs of EUR 800 on the client's behalf (disbursement — O)
+      - Invoices its own architectural design services of EUR 3,000 incl. 20% VAT (own — S)
+
+    CRITICAL — EXTENDED-CTC-FR PROFILE REQUIRED:
+    EN 16931 does not permit mixing VAT category "O" with other categories in one invoice.
+    The French EXTENDED-CTC-FR profile overrides this restriction and fully supports mixed
+    disbursement invoices (category O + category S). PUF supports EXTENDED-CTC-FR.
+
+    Key Fields:
+    - Disbursement lines: BT-151 = O, BT-118 = O, BT-117 = 0
+    - Own service lines: BT-151 = S, BT-118 = S, rate 20%
+    - BT-109 (TaxExclusiveAmount) = sum of ALL lines (3000 + 2500 + 800 = 6300)
+    - BT-110 (TotalVAT) = VAT on own service lines only (600)
+    - BT-112 (TaxInclusiveAmount) = 6900
+    - BT-115 (PayableAmount) = 6900
+    - BT-23 = S1 (services, driven by the intermediary's own invoice component)
+
+    Pure disbursement invoices (only O lines) are OUTSIDE the e-invoicing scope per G2.32.
+    This example is a MIXED invoice with taxable lines and therefore INSIDE e-invoicing scope.
+
+    Reference: XP Z12-014 Annexe A, Section 3.2.14 (Cas n°16), V1.3
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (ProfileID carries the process type URI; BT-23 is on InvoiceTypeCode/@name) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice number -->
+    <cbc:ID>ARC-2026-0312</cbc:ID>
+    <!-- BT-2 Invoice issue date -->
+    <cbc:IssueDate>2026-02-15</cbc:IssueDate>
+    <!-- BT-9 Payment due date -->
+    <cbc:DueDate>2026-03-17</cbc:DueDate>
+    <!-- BT-3 Invoice type code = 380, BT-23 = S1 (Standard services invoice) -->
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22 / BT-21: French mandatory text codes -->
+    <!-- #REG#: Company legal form and share capital -->
+    <cbc:Note>#REG#SARL au capital de 50 000 EUR - RCS Paris B 444 555 666 - SIRET 44455566677788</cbc:Note>
+    <!-- #ABL#: Trade register information -->
+    <cbc:Note>#ABL#RCS Paris B 444 555 666</cbc:Note>
+    <!-- #AAI#: APE code -->
+    <cbc:Note>#AAI#APE 7111Z - Activités d'architecture</cbc:Note>
+    <!-- #PMD#: Late payment penalties -->
+    <cbc:Note>#PMD#En cas de retard de paiement, pénalités au taux BCE + 10 points et indemnité forfaitaire de recouvrement de 40 EUR</cbc:Note>
+    <!-- #PMT#: Fixed indemnity -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard : 40 EUR</cbc:Note>
+    <!-- #BAR#: Treatment type qualification — B2B e-invoicing -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!--
+        DISBURSEMENT NOTICE (informational):
+        Lines 2 and 3 are debours (disbursements) advanced in the name and on behalf
+        of the client (Immo Développement France SA). These costs are outside the scope
+        of VAT per French tax law. All original invoices from third-party suppliers are
+        addressed directly to the client. VAT category O applies to these lines.
+    -->
+    <cbc:Note>#AAI#DÉBOURS: Les lignes 2 et 3 correspondent à des débours au sens de l'article 267-II-2 du CGI, avancés au nom et pour le compte de l'ACHETEUR. TVA catégorie O (hors champ).</cbc:Note>
+
+    <!-- BT-5 Invoice currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>IMMO-PROJ-2026-PERMIS-001</cbc:BuyerReference>
+
+    <!-- BG-4 Seller — Architecture firm (intermediary/mandataire) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller electronic address (SIRET) -->
+            <cbc:EndpointID schemeID="0009">44455566677788</cbc:EndpointID>
+            <!-- BT-29 Seller SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">44455566677788</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-28 Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>Arc Conseil Paris</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller postal address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>18 Rue du Faubourg Saint-Honoré</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75008</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR44444555666</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-27 Seller legal name / BT-30 SIREN -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Arc Conseil Paris SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">444555666</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49 Buyer electronic address -->
+            <cbc:EndpointID schemeID="0009">77788899900011</cbc:EndpointID>
+            <!-- BT-46 Buyer SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">77788899900011</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Immo Développement France</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer postal address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>55 Boulevard Haussmann</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75009</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR77777888999</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-44 Buyer legal name / BT-47 SIREN -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Immo Développement France SA</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">777888999</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7614508000000123456789012</cbc:ID>
+            <cbc:Name>Arc Conseil Paris SARL</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>CEPAFRPP751</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Paiement à 30 jours date de facture</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Total VAT — only from own service lines; disbursement lines contribute 0 -->
+        <cbc:TaxAmount currencyID="EUR">600.00</cbc:TaxAmount>
+
+        <!-- VAT subtotal — Own service lines (category S, 20%) -->
+        <cac:TaxSubtotal>
+            <!-- BT-116 VAT category taxable amount (own service lines only = 3000) -->
+            <cbc:TaxableAmount currencyID="EUR">3000.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT amount -->
+            <cbc:TaxAmount currencyID="EUR">600.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code: S = Standard rate -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+
+        <!--
+            VAT subtotal — Disbursement lines (category O = Out of scope of VAT)
+            BT-118 = O: These lines are pure cost pass-throughs advanced in the client's
+            name. No VAT is charged or collected on disbursement amounts.
+        -->
+        <cac:TaxSubtotal>
+            <!-- BT-116: Sum of disbursement line amounts (2500 + 800 = 3300) -->
+            <cbc:TaxableAmount currencyID="EUR">3300.00</cbc:TaxableAmount>
+            <!-- BT-117: VAT amount = 0 (no VAT on disbursements) -->
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code: O = Out of scope of VAT -->
+                <cbc:ID>O</cbc:ID>
+                <!-- BT-119 VAT rate = 0 -->
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106: Sum of all invoice line net amounts (3000 + 2500 + 800 = 6300) -->
+        <cbc:LineExtensionAmount currencyID="EUR">6300.00</cbc:LineExtensionAmount>
+        <!-- BT-109: Total excluding VAT = sum of all lines (6300) -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">6300.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112: Total including VAT (6300 + 600 VAT on own services = 6900) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">6900.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115: Amount due -->
+        <cbc:PayableAmount currencyID="EUR">6900.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice Line 1 — Own service: Architectural design fees -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="HUR">60</cbc:InvoicedQuantity>
+        <!-- BT-131 Line net amount -->
+        <cbc:LineExtensionAmount currencyID="EUR">3000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Étude architecturale et conception du projet de construction — Phase Avant-Projet Définitif (APD), 60 heures de prestation</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Honoraires d'architecture — APD</cbc:Name>
+            <!-- BG-30 Line VAT: Own service, standard rate S -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 VAT category: S = Standard -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 VAT rate -->
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price (per hour) -->
+            <cbc:PriceAmount currencyID="EUR">50.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!--
+        BG-25 Invoice Line 2 — DISBURSEMENT: Building permit fees
+        Advanced by Arc Conseil Paris SARL in the name of the buyer.
+        BT-151 = O: Out of scope of VAT (hors champ TVA — débours).
+    -->
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Line net amount = exact cost advanced (VAT-inclusive on original invoice) -->
+        <cbc:LineExtensionAmount currencyID="EUR">2500.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-154 Item description (full detail — Flux 2 only, not sent to tax authority) -->
+            <cbc:Description>Frais de dépôt de permis de construire auprès de la Mairie de Paris — Dossier n°75-2026-0312 — Avancé au nom et pour le compte de l'ACHETEUR (débours, Art. 267-II-2 CGI)</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Débours — Frais de permis de construire</cbc:Name>
+            <!-- BG-30 Line VAT: O = Out of scope -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 VAT category: O = Out of scope of VAT -->
+                <cbc:ID>O</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">2500.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+    <!--
+        BG-25 Invoice Line 3 — DISBURSEMENT: Expert consultation costs
+        Advanced by Arc Conseil Paris SARL in the name of the buyer.
+        BT-151 = O: Out of scope of VAT (hors champ TVA — débours).
+    -->
+    <cac:InvoiceLine>
+        <cbc:ID>3</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <!-- BT-131 Line net amount = exact cost advanced -->
+        <cbc:LineExtensionAmount currencyID="EUR">800.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Honoraires de l'expert géotechnicien (Bureau Études Sol Île-de-France) pour rapport de sondages — avancés au nom et pour le compte de l'ACHETEUR (débours, Art. 267-II-2 CGI)</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Débours — Honoraires expert géotechnicien</cbc:Name>
+            <!-- BG-30 Line VAT: O = Out of scope -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 VAT category: O = Out of scope of VAT -->
+                <cbc:ID>O</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">800.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

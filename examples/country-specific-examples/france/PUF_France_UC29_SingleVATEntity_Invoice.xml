@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC29 - Single VAT Entity (Assujetti Unique)
+
+    Use Case: A member of a VAT group (assujetti unique) invoices an external third party.
+              The invoice must carry both the member's own identifiers AND the Single VAT
+              Entity's identifiers in defined positions.
+
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 (Goods invoice)
+
+    Scenario Description:
+    Filiale Alpha SAS is a member of the Single VAT Entity "Groupe Fiscal Innovatech"
+    (assujetti unique). It sells IT equipment to an external buyer Acheteur Beta SARL.
+
+    The invoice MUST include:
+    1. Member's own SIREN in BT-30 (PartyLegalEntity/CompanyID schemeID=0002)
+    2. Member's own SIRET in BT-29 (PartyIdentification/ID schemeID=0009)
+    3. Single VAT Entity SIREN in BT-29 (PartyIdentification/ID schemeID=0231) — mandatory
+    4. Single VAT Entity's data in BG-11 (TaxRepresentativeParty):
+       - BT-62: Entity business name
+       - BT-63: Entity intra-community VAT number
+       - BG-12: Entity postal address
+    5. Mandatory invoice note: BT-21 = TXD, BT-22 = "MEMBRE_ASSUJETTI_UNIQUE"
+
+    Key Fields per Business Rule G1.76 (three cumulative requirements):
+    - BT-29 schemeID 0231: SIREN of the Single VAT Entity
+    - BT-63 in BG-11: Intra-community VAT number of the Single VAT Entity
+    - BT-22 containing "MEMBRE_ASSUJETTI_UNIQUE" (BT-21 = TXD)
+
+    Internal operations (between members of the same entity) are OUTSIDE mandatory
+    e-invoicing scope and must NOT generate Flux 1 to PPF.
+
+    Reference: XP Z12-014 Annexe A, Section 3.2.28 (Cas n°29), V1.3
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (carried on InvoiceTypeCode/@name) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice number -->
+    <cbc:ID>ALPHA-2026-0198</cbc:ID>
+    <!-- BT-2 Invoice issue date -->
+    <cbc:IssueDate>2026-02-20</cbc:IssueDate>
+    <!-- BT-9 Payment due date -->
+    <cbc:DueDate>2026-03-22</cbc:DueDate>
+    <!-- BT-3 Invoice type code = 380, BT-23 = B1 (Goods invoice) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+
+    <!-- BT-22 / BT-21: French text codes -->
+    <!-- #REG# Registration information -->
+    <cbc:Note>#REG#SAS au capital de 500 000 EUR — RCS Paris B 333 444 555 — SIRET 33344455566677 — Membre de l'assujetti unique Groupe Fiscal Innovatech (SIREN 888 999 000)</cbc:Note>
+    <!-- #ABL# Trade register -->
+    <cbc:Note>#ABL#RCS Paris B 333 444 555</cbc:Note>
+    <!-- #AAI# APE code -->
+    <cbc:Note>#AAI#APE 4651Z — Commerce de gros d'ordinateurs, d'équipements informatiques périphériques et de logiciels</cbc:Note>
+    <!-- #PMD# Late payment penalties -->
+    <cbc:Note>#PMD#En cas de retard de paiement, pénalités au taux BCE + 10 points et indemnité forfaitaire de recouvrement de 40 EUR</cbc:Note>
+    <!-- #PMT# Fixed indemnity -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement : 40 EUR</cbc:Note>
+    <!-- #BAR# Treatment type -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <!--
+        MANDATORY NOTE per G1.52:
+        BT-21 = TXD, BT-22 = "MEMBRE_ASSUJETTI_UNIQUE"
+        This note signals to the tax authority (PPF) that the invoice is issued by a member
+        of a Single VAT Entity. The VAT is declared and paid by the entity (BT-63 in BG-11),
+        not by the member individually.
+    -->
+    <cbc:Note>#TXD#MEMBRE_ASSUJETTI_UNIQUE</cbc:Note>
+
+    <!-- BT-5 Invoice currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>BETA-PO-2026-0445</cbc:BuyerReference>
+
+    <!-- BT-13 Purchase order reference -->
+    <cac:OrderReference>
+        <cbc:ID>BETA-PO-2026-0445</cbc:ID>
+        <cbc:IssueDate>2026-02-12</cbc:IssueDate>
+    </cac:OrderReference>
+
+    <!-- BG-4 Seller — Group MEMBER company (Filiale Alpha SAS) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller electronic address (member's own SIRET) -->
+            <cbc:EndpointID schemeID="0009">33344455566677</cbc:EndpointID>
+
+            <!--
+                BT-29 identifiers — TWO entries required per G1.76:
+                1. Member's own SIRET (schemeID 0009)
+                2. Single VAT Entity SIREN (schemeID 0231) — MANDATORY
+            -->
+            <!-- Entry 1: Member's own SIRET -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">33344455566677</cbc:ID>
+            </cac:PartyIdentification>
+            <!--
+                Entry 2: Single VAT Entity SIREN (schemeID 0231)
+                schemeID 0231 specifically qualifies this identifier as a Single VAT Entity SIREN.
+                This is one of the three cumulative requirements per G1.76.
+            -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0231">888999000</cbc:ID>
+            </cac:PartyIdentification>
+
+            <!-- BT-28 Seller trading name (member company trading name) -->
+            <cac:PartyName>
+                <cbc:Name>Filiale Alpha Informatique</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5 Seller postal address (member's own address) -->
+            <cac:PostalAddress>
+                <cbc:StreetName>14 Avenue de la Grande Armée</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75017</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!--
+                BT-31: Member's own VAT identifier.
+                Members of a Single VAT Entity are no longer individually liable for VAT,
+                but may retain an individual VAT number for identification purposes.
+                The VAT liable for this invoice is the entity's (BT-63 in BG-11).
+            -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR33333444555</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27 Seller legal name / BT-30 Member's own SIREN -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Filiale Alpha SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">333444555</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer — External third party -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49 Buyer electronic address (buyer's SIRET) -->
+            <cbc:EndpointID schemeID="0009">11122233344456</cbc:EndpointID>
+            <!-- BT-46 Buyer SIRET -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">11122233344456</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Acheteur Beta</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer postal address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>22 Rue de la Bourse</cbc:StreetName>
+                <cbc:CityName>Lyon</cbc:CityName>
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR11111222333</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-44 Buyer legal name / BT-47 SIREN -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Acheteur Beta SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">111222333</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!--
+        BG-11 Seller Tax Representative Party — Single VAT Entity data.
+        Since EN 16931 has no dedicated block for the Single VAT Entity, its data
+        (name, VAT number, address) must be placed here per French specification.
+
+        BT-62: Entity business name
+        BT-63: Entity intra-community VAT number (MANDATORY — one of G1.76's three requirements)
+        BG-12: Entity postal address
+    -->
+    <cac:TaxRepresentativeParty>
+        <!-- BT-62 Single VAT Entity business name -->
+        <cac:PartyName>
+            <cbc:Name>Groupe Fiscal Innovatech</cbc:Name>
+        </cac:PartyName>
+        <!-- BG-12 Single VAT Entity postal address -->
+        <cac:PostalAddress>
+            <cbc:StreetName>Tour Innovatech, 1 Parvis de la Défense</cbc:StreetName>
+            <cbc:CityName>Puteaux</cbc:CityName>
+            <cbc:PostalZone>92800</cbc:PostalZone>
+            <cac:Country>
+                <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+            </cac:Country>
+        </cac:PostalAddress>
+        <!--
+            BT-63 Single VAT Entity intra-community VAT number.
+            MANDATORY per G1.76 — this is the VAT identification used for all
+            transactions by all members of the group.
+        -->
+        <cac:PartyTaxScheme>
+            <cbc:CompanyID>FR88888999000</cbc:CompanyID>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:PartyTaxScheme>
+    </cac:TaxRepresentativeParty>
+
+    <!-- BG-19 Payment instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7630006000011122233440001</cbc:ID>
+            <cbc:Name>Filiale Alpha SAS</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>BNPAFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Paiement à 30 jours fin de mois</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">480.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">2400.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">480.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">2400.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">2400.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">2880.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">2880.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice Line 1 — IT equipment -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="H87">8</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">2400.00</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>1</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Description>Serveur rack 2U, Intel Xeon Silver 4310, 64 GB RAM, 4×480 GB SSD NVMe, alimentation redondante 800W</cbc:Description>
+            <cbc:Name>Serveur rack professionnel 2U</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CPV">48820000</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">300.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="H87">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>

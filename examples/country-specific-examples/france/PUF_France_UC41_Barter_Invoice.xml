@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF Invoice Example: UC41 - Barter (Échange) Invoice
+                                 Advertiser sells advertising rights to Barter Company
+
+    Use Case: A company exchanges goods or services without monetary compensation for
+              the main consideration — only VAT is settled in cash (since VAT cannot
+              be compensated). The HT value is recorded as a "compensation amount"
+              and only VAT (BT-115) is actually due for payment.
+
+    Country: France
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Standard Commercial Invoice (Type 380)
+    Business Process: B1 or S1 (depends on the goods/services exchanged)
+
+    Scenario Description:
+    Publicité Express SAS (advertiser) exchanges advertising airtime (valued at EUR 10,000 HT)
+    with Troc & Co SARL (barter intermediary). The barter agreement compensates the full HT
+    value in kind: Troc & Co provides equivalent advertising services in return. Only VAT of
+    EUR 2,000 (20% of EUR 10,000) is settled in cash by Troc & Co.
+
+    KEY FRENCH E-INVOICING FIELDS:
+    - BT-23 = S1 (service, advertising, standard regime)
+    - BT-112 (LegalMonetaryTotal/TaxInclusiveAmount) = 12,000.00 (full TTC)
+    - BT-113 (PrepaidAmount) = 10,000.00 (HT amount "compensated in kind" — the barter)
+      NOTE: PrepaidAmount is RE-PURPOSED here. This is NOT an actual advance payment.
+      It represents the portion of the invoice price that is settled through compensation
+      (in-kind exchange), not cash. The French spec describes this as "la valeur HT de 
+      l'échange compensé par la contrepartie en nature".
+    - BT-115 (PayableAmount) = 2,000.00 (VAT only — the ONLY cash payment)
+    - BT-21 (PaymentID) = PAI_COMP (or specific payment instruction codes)
+    - BT-22 (PaymentTermsNote) = explains the barter arrangement
+
+    BT-113 NOTE:
+    BT-113 = PrepaidAmount is used to represent the HT barter compensation amount.
+    The tax authority CAN reconcile this because:
+    - The corresponding barter company ALSO sends an invoice for their advertising
+      services for EUR 10,000 HT + EUR 2,000 VAT
+    - On that invoice, their BT-113 will also = EUR 10,000 HT
+    - Each party pays only VAT to the other in cash
+
+    ENCAISSEMENTS (Payment receipts for Flux 2):
+    A companion Document Status (ApplicationResponse) must be sent declaring:
+    - PAYMENT_RECEIVED for the full TTC EUR 12,000 with VAT% = 20 (representing the
+      in-kind + cash settlement)
+    - MINUS a compensation credit for EUR -10,000 at VAT% = 0 (the barter portion)
+    This nets to EUR 2,000 actual cash payment declared for VAT pre-filling.
+    See: PUF_France_UC41_Barter_Encaissee.xml in puf-invoice-response
+
+    Reference: XP Z12-014 Annexe A, Section 3.2.40 (Cas n°41), V1.3
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type (on InvoiceTypeCode/@name) -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice number -->
+    <cbc:ID>PE-2026-0115</cbc:ID>
+    <!-- BT-2 Invoice issue date -->
+    <cbc:IssueDate>2026-01-20</cbc:IssueDate>
+    <!-- BT-9 Payment due date — only VAT is due in cash -->
+    <cbc:DueDate>2026-02-20</cbc:DueDate>
+    <!-- BT-3 Invoice type code = 380, BT-23 = S1 (services) -->
+    <cbc:InvoiceTypeCode name="S1">380</cbc:InvoiceTypeCode>
+
+    <!-- French mandatory text codes -->
+    <cbc:Note>#REG#SAS au capital de 250 000 EUR — RCS Paris B 567 890 123 — SIRET 56789012311200</cbc:Note>
+    <cbc:Note>#ABL#RCS Paris B 567 890 123</cbc:Note>
+    <cbc:Note>#AAI#APE 7311Z — Activités des agences de publicité</cbc:Note>
+    <!--
+        BT-22 Payment terms — PAI note describing the barter arrangement.
+        The #PAI# (Paiement) prefix is used for payment-related annotations.
+
+        The note explains:
+        - The HT portion (EUR 10,000) is settled by in-kind compensation (barter)
+        - Only VAT (EUR 2,000) is settled in cash
+        This transparency is required for e-reporting / Flux 2 reconstruction.
+    -->
+    <cbc:Note>#PAI#ÉCHANGE: La créance HT de 10 000,00 EUR est compensée par la contrepartie en nature (prestations publicitaires de valeur équivalente accordées par Troc &amp; Co SARL, conformément à la convention de troc ref. TC-2026-001 du 15/01/2026). Seule la TVA (2 000,00 EUR) est réglée en numéraire. Délai de règlement TVA: 30 jours date de facture.</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement de la TVA, pénalités au taux BCE + 10 points et indemnité de recouvrement de 40 EUR</cbc:Note>
+    <cbc:Note>#BAR#B2B</cbc:Note>
+
+    <!-- BT-5 Invoice currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>TC-CMDE-2026-047</cbc:BuyerReference>
+
+    <!-- BG-4 Seller — Advertising agency -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">56789012311200</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">56789012311200</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Publicité Express</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>45 Avenue des Champs-Élysées</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75008</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR56567890123</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Publicité Express SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">567890123</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer — Barter intermediary company -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0009">34567890199011</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">34567890199011</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Troc &amp; Co</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>12 Rue du Commerce</cbc:StreetName>
+                <cbc:CityName>Lyon</cbc:CityName>
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR34345678901</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Troc &amp; Co SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">345678901</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!-- BG-19 Payment instructions — only VAT to be paid in cash -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7614508040010100000000693</cbc:ID>
+            <cbc:Name>Publicité Express SAS</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>BNPAFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-23 VAT breakdown — standard 20% rate on full HT amount -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">2000.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">10000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">2000.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of invoice lines -->
+        <cbc:LineExtensionAmount currencyID="EUR">10000.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">10000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT = 12,000 TTC -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">12000.00</cbc:TaxInclusiveAmount>
+        <!--
+            BT-113 PrepaidAmount — RE-PURPOSED FOR BARTER.
+            This represents the HT consideration settled IN KIND through compensation
+            (the barter exchange of equivalent advertising airtime).
+            This is NOT a cash advance payment but a contractual compensation (offset).
+            Value = EUR 10,000 = the full HT value of the invoice.
+            Combined with BT-115 = EUR 2,000 (VAT), the net cash payment is exactly
+            the VAT amount only.
+        -->
+        <cbc:PrepaidAmount currencyID="EUR">10000.00</cbc:PrepaidAmount>
+        <!-- BT-115 Amount due for payment — VAT ONLY -->
+        <cbc:PayableAmount currencyID="EUR">2000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Invoice Line 1 — Advertising airtime package -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">10000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Package publicitaire — 10 spots TV (30 secondes chacun) prime time sur chaîne nationale + 50 000 impressions numériques display sur réseau partenaires — Période de diffusion: 01/02/2026 au 28/02/2026 — Conformément à la convention de troc ref. TC-2026-001</cbc:Description>
+            <cbc:Name>Package publicitaire audiovisuel et numérique — Février 2026</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">10000.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:InvoiceLine>
+
+</Invoice>
