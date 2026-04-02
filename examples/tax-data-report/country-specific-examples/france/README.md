@@ -2,7 +2,7 @@
 
 Example files for French invoice e-reporting (Flux 10.1). These use the standard PUF Invoice format with reporting-specific extensions in `ext:UBLExtensions` for metadata like entry type, transaction type, and report period.
 
-> **Note**: For payment reporting (Flux 10.2 / 10.4), see [puf-tax-report/examples/country-specific-examples/france/](../../../../puf-tax-report/examples/country-specific-examples/france/).
+> **Note**: For payment reporting (Flux 10.2 / 10.4), see [puf-tax-report/examples/country-specific-examples/france/](https://github.com/pagero/puf-tax-report/tree/master/examples/country-specific-examples/france).
 
 ## Example Files
 
