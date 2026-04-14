@@ -4,8 +4,19 @@
     xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
     
     
-    <!-- Values in example are examples values only. Example of B2C recipttransactions in France reporting TLB1 (Deliveries of goods subject to value added tax)
-    and TSP1 (Services subject to value-added tax) -->
+    <!-- 
+        RECOMMENDATION: Where possible, B2C invoices should be reported as RECEIPTTRANSACTION 
+        entries, grouped together with other transactions on a daily basis under the correct 
+        transaction category.
+        
+        NOTE: Values in this example are for illustrative purposes only. This example demonstrates 
+        B2C RECEIPTTRANSACTION reporting in France, covering transaction categories TLB1 
+        (Deliveries of goods subject to value added tax) and TSP1 (Services subject to 
+        value-added tax).
+        
+        Each "InvoiceLine" in this example represents one transaction category group, aggregating 
+        all transactions for that category on a given day.
+    -->
     
     <ext:UBLExtensions>
         <ext:UBLExtension>
@@ -29,7 +40,7 @@
                     </puf:RestrictedInformation>
                     <puf:RestrictedInformation>
                         <puf:Key>reportPeriodEnd</puf:Key>
-                        <puf:Value>2025-02-28</puf:Value>
+                        <puf:Value>2025-02-10</puf:Value>
                     </puf:RestrictedInformation>
                 </puf:PageroExtension>
             </ext:ExtensionContent>
