@@ -18,14 +18,14 @@
     <!-- BT-9 Due Date -->
     <cbc:DueDate>2018-12-01</cbc:DueDate>
     <!-- BT-3 Invoice Type Code and KSA-2 Invoice transaction code in attribute @name -->
-    <cbc:InvoiceTypeCode name="0100000">386</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode name="010000000">386</cbc:InvoiceTypeCode>
     <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>SAR</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyIdentification>
                 <!-- BT-29 additional seller party id. Conditionally mandatory if applicable. See codelist: Identification scheme Saudi Arabia -->
-                <cbc:ID schemeID="SA:CRN">12222222</cbc:ID>
+                <cbc:ID schemeID="SA:CRN">1222222222</cbc:ID>
             </cac:PartyIdentification>
             <cac:PostalAddress>
                 <!--BT-35 Seller address street-->
