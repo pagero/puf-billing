@@ -14,7 +14,7 @@ _Example with InvoiceTypeCode and invoice subtypes provided for Saudi Arabia_
 ----
 <Invoice>
   <!-- Code omitted for clarity -->
-  <cbc:InvoiceTypeCode name="0100000">388</cbc:InvoiceTypeCode><!--1-->
+  <cbc:InvoiceTypeCode name="010000000">388</cbc:InvoiceTypeCode><!--1-->
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
