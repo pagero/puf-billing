@@ -76,55 +76,45 @@ Each text code must be provided in a separate `cbc:Note` element with the format
 |===
 |Code |Name |Description |Required Value (if applicable)
 
+|#AAB#
+|Early payment discount
+|Mention of early payment discount
+|
+
 |#ABL#
 |Legal information
-|Trade register number (RCS) or other legal registration information
-|
-
-|#PMD#
-|Late payment penalties
-|Payment terms regarding late payment penalties
-|
-
-|#PMT#
-|Collection costs (€40)
-|Fixed €40 indemnity for collection costs in case of late payment
+|Legal information such as trade register number (RCS) or other legal registration information
 |
 
 |#AAI#
 |General information
-|General elements typically found at the bottom of paper invoices (e.g., APE code, capital social)
+|General elements typically found at the bottom of paper invoice pages
+|
+
+|#ABU#
+|Contract clause
+|Contractual reservation clause or retenue de garantie
+|
+
+|#ACC#
+|Subrogation factoring clause
+|Factoring subrogation clause
+|
+
+|#ADN#
+|B2G indicator
+|Indicates whether the invoice is subject to B2G treatment
 |
 
 |#BAR#
 |Treatment type qualification
-|Expected treatment type for the invoice
+|Type of treatment expected for the invoice
 |*One of:* `B2B`, `B2BINT`, `B2C`, `OUTOFSCOPE`, `ARCHIVEONLY`
-
-|#TXD#
-|Single taxable person member
-|Indication that member is part of a single taxable person (for transactions external to the group)
-|*Required:* `Membre d'un assujetti unique`
 
 |#BLU#
 |Eco-participation/Eco-contribution
 |Eco-participation or Eco-contribution WEEE (can also be used for other taxes including eco-tax)
 |*Required:* `Eco-participation (L. 541-10 du code de l'environnement)` or `Eco-contribution DEEE`
-
-|#AAB#
-|Early payment discount
-|Statement whether customer can apply discount if paying before due date
-|
-
-|#ACC#
-|Subrogation factoring clause
-|Factoring arrangement details and subrogation clauses
-|
-
-|#SUR#
-|Supplier notes
-|Additional remarks from the supplier
-|
 
 |#CUS#
 |Customs information
@@ -133,13 +123,33 @@ Each text code must be provided in a separate `cbc:Note` element with the format
 
 |#PAI#
 |Third party payment
-|Information about third-party payment arrangements
+|Third party payment information
 |
 
-|#ADN#
-|B2G indicator
-|Indicates if invoice is subject to B2G treatment (additional CHORUS PRO rules apply)
+|#PMD#
+|Late payment penalties
+|Late payment penalties mention
 |
+
+|#PMT#
+|Collection costs (€40)
+|Fixed €40 indemnity for collection costs
+|
+
+|#REG#
+|Registration data
+|Regulatory information, for example share capital
+|
+
+|#SUR#
+|Supplier notes
+|Supplier notes
+|
+
+|#TXD#
+|Single taxable person member
+|Mention of the member of a single taxable person
+|*Required:* `Membre d'un assujetti unique`
 |===
 
 IMPORTANT: 
@@ -147,6 +157,7 @@ IMPORTANT:
 * The #PMT# fixed indemnity amount is legally set at €40.00 per Article L441-10 of the French Commercial Code
 * #BAR# is mandatory and must contain exactly ONE of the specified values: `B2B` (e-invoicing), `B2BINT` (B2B international e-reporting), `B2C` (B2C e-reporting), `OUTOFSCOPE` (outside reform scope), or `ARCHIVEONLY` (internal credit note - no transmission)
 * Only ONE #BAR# note is allowed per invoice
+* `#REG#` can be used for seller registration data such as share capital and other regulatory company information
 
 ===== Implementation Example
 
@@ -159,7 +170,8 @@ IMPORTANT:
     
     <!-- French text codes -->
     <cbc:Note>#ABL#RCS Lyon B 987 654 321</cbc:Note>
-    <cbc:Note>#AAI#SARL au capital de 100000.00 EUR - APE 4651Z - Commerce de gros d'ordinateurs</cbc:Note>
+    <cbc:Note>#REG#SARL au capital de 100000.00 EUR</cbc:Note>
+    <cbc:Note>#AAI#APE 4651Z - Commerce de gros d'ordinateurs</cbc:Note>
     <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
     <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
