@@ -10,6 +10,8 @@
     
     French Mandatory Elements:
     - BT-23: Business process type (B1 = Goods invoice/credit note)
+    - BT-34: Seller electronic address (schemeID 0225 = French e-invoicing annuaire address)
+    - BT-49: Buyer electronic address (schemeID 0225 = French e-invoicing annuaire address)
     - French text codes (BT-21/BT-22):
       * #REG#: Company legal form and share capital
       * #ABL#: Trade register number (RCS)
@@ -77,6 +79,11 @@
     <!-- BG-4 Seller Information -->
     <cac:AccountingSupplierParty>
         <cac:Party>
+            <!-- BT-34 Seller electronic address
+                 schemeID 0225 = French e-invoicing annuaire address scheme.
+                 Value is the SIREN; composite SIREN_SIRET or SIREN_SIRET_CODEROUTAGE also supported.
+                 Can be set in Pagero Online. -->
+            <cbc:EndpointID schemeID="0225">987654321</cbc:EndpointID>
             <!-- BT-29 SIRET identifier (mandatory for French entities) -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">98765432100012</cbc:ID>
@@ -123,6 +130,11 @@
     <!-- BG-7 Buyer Information -->
     <cac:AccountingCustomerParty>
         <cac:Party>
+            <!-- BT-49 Buyer electronic address
+                 schemeID 0225 = French e-invoicing annuaire address scheme.
+                 Value is the SIREN; composite SIREN_SIRET or SIREN_SIRET_CODEROUTAGE also supported.
+                 Can be set in Pagero Online. -->
+            <cbc:EndpointID schemeID="0225">123456789</cbc:EndpointID>
             <!-- BT-46 Buyer identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">12345678900034</cbc:ID>
