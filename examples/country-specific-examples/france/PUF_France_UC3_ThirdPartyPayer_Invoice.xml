@@ -148,18 +148,6 @@
         <cbc:IssueDate>2026-01-18</cbc:IssueDate>
     </cac:OrderReference>
 
-    <!-- BG-24 Additional supporting documents (contract reference) -->
-    <cac:AdditionalDocumentReference>
-        <!-- BT-122 Supporting document reference -->
-        <cbc:ID>CONTRAT-TRIPARTITE-2025-078</cbc:ID>
-        <!-- BT-122 Issue date -->
-        <cbc:IssueDate>2025-06-15</cbc:IssueDate>
-        <!-- BT-122 Document type code - 50: Price/sales catalogue -->
-        <cbc:DocumentTypeCode>916</cbc:DocumentTypeCode>
-        <!-- BT-123 Supporting document description -->
-        <cbc:DocumentDescription>Accord commercial tripartite avec centrale d'achat pour paiement centralisé</cbc:DocumentDescription>
-    </cac:AdditionalDocumentReference>
-
     <!-- BG-4 Seller Information -->
     <cac:AccountingSupplierParty>
         <cac:Party>
