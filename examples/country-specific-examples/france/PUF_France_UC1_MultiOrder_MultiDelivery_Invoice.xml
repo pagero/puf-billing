@@ -82,6 +82,8 @@
     <!-- BG-4 Seller Information -->
     <cac:AccountingSupplierParty>
         <cac:Party>
+            <!-- BT-34 Seller electronic address (mandatory for EXTENDED-CTC-FR) -->
+            <cbc:EndpointID schemeID="0009">12345678901234</cbc:EndpointID>
             <!-- BT-29 SIRET identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">12345678901234</cbc:ID>

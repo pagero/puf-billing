@@ -64,6 +64,8 @@
     <!-- BG-4 Seller Information (same construction company as original invoice) -->
     <cac:AccountingSupplierParty>
         <cac:Party>
+            <!-- BT-34 Seller electronic address (mandatory for EXTENDED-CTC-FR) -->
+            <cbc:EndpointID schemeID="0009">23456789000030</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">23456789000030</cbc:ID>
             </cac:PartyIdentification>
@@ -100,6 +102,8 @@
     <!-- BG-7 Buyer Information (same property developer as original invoice) -->
     <cac:AccountingCustomerParty>
         <cac:Party>
+            <!-- BT-49 Buyer electronic address (mandatory for EXTENDED-CTC-FR) -->
+            <cbc:EndpointID schemeID="0009">12345678900034</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">12345678900034</cbc:ID>
             </cac:PartyIdentification>

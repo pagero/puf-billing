@@ -210,8 +210,10 @@
             <cac:TaxCategory>
                 <!-- BT-118 VAT category code: O = Out of scope of VAT -->
                 <cbc:ID>O</cbc:ID>
-                <!-- BT-119 VAT rate = 0 -->
-                <cbc:Percent>0.00</cbc:Percent>
+                <!-- BT-121 VAT exemption reason code (BR-O-10) -->
+                <cbc:TaxExemptionReasonCode>VATEX-EU-O</cbc:TaxExemptionReasonCode>
+                <!-- BT-120 VAT exemption reason text (BR-O-10) -->
+                <cbc:TaxExemptionReason>Not subject to VAT</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -278,8 +280,11 @@
             <!-- BG-30 Line VAT: O = Out of scope -->
             <cac:ClassifiedTaxCategory>
                 <!-- BT-151 VAT category: O = Out of scope of VAT -->
+                <!-- BT-152 must NOT be present for category O (BR-O-05) -->
                 <cbc:ID>O</cbc:ID>
-                <cbc:Percent>0.00</cbc:Percent>
+                <!-- Exemption reason repeated at line level (BR-FREXT-O-08rev) -->
+                <cbc:TaxExemptionReasonCode>VATEX-EU-O</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>Not subject to VAT</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -309,8 +314,11 @@
             <!-- BG-30 Line VAT: O = Out of scope -->
             <cac:ClassifiedTaxCategory>
                 <!-- BT-151 VAT category: O = Out of scope of VAT -->
+                <!-- BT-152 must NOT be present for category O (BR-O-05) -->
                 <cbc:ID>O</cbc:ID>
-                <cbc:Percent>0.00</cbc:Percent>
+                <!-- Exemption reason repeated at line level (BR-FREXT-O-08rev) -->
+                <cbc:TaxExemptionReasonCode>VATEX-EU-O</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>Not subject to VAT</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>

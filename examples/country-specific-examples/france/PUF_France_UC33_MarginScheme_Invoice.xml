@@ -24,17 +24,17 @@
     - BT-151 = E (Exempt) for ALL margin lines
     - BT-118 = E (Exempt) in VAT breakdown
     - BT-119 = 0, BT-117 = 0 (no VAT shown on invoice)
-    - BT-121 = VATEX-FR-F (second-hand goods, Art. 297 A CGI)
+    - BT-121 = VATEX-EU-F (second-hand goods, Art. 297 A CGI)
     - BT-120 = exemption reason text (mandatory when BT-118 = E per G1.41)
     - ALL line amounts (BT-131, BT-146) are VAT-INCLUSIVE
     - BT-109 (TaxExclusiveAmount) = VAT-inclusive total (both equal BT-112)
     - BT-110 = 0, BT-112 = BT-109
 
     VATEX codes for margin scheme:
-    - VATEX-FR-F: Second-hand goods (Article 297 A CGI)
-    - VATEX-FR-I: Works of art (Article 297 A CGI)
-    - VATEX-FR-J: Antiques (Article 297 A CGI)
-    - VATEX-EU-D: Travel agency operations (Article 266, 1(e) CGI)
+    - VATEX-EU-F: Second-hand goods (Article 297 A CGI / EU VAT Directive Art. 314)
+    - VATEX-EU-I: Works of art (Article 297 A CGI / EU VAT Directive Art. 316)
+    - VATEX-EU-J: Collector items and antiques (Article 297 A CGI / EU VAT Directive Art. 316)
+    - VATEX-EU-D: Second-hand means of transport / travel agency (Art. 266, 1(e) CGI)
 
     Note: VAT pre-filling by PPF will be inaccurate for margin invoices — the seller
     declares the correct margin VAT in their CA3/CA12 return.
@@ -179,11 +179,11 @@
                 <cbc:Percent>0.00</cbc:Percent>
                 <!--
                     BT-121 VAT exemption reason code
-                    VATEX-FR-F = Second-hand goods subject to Article 297 A CGI margin scheme.
-                    Other margin scheme codes: VATEX-FR-I (works of art), VATEX-FR-J (antiques),
-                    VATEX-EU-D (travel agency operations per Art. 266, 1(e) CGI).
+                    VATEX-EU-F = Second-hand goods subject to Article 297 A CGI margin scheme
+                    (EU VAT Directive Art. 314). Other margin scheme codes: VATEX-EU-I (works of
+                    art), VATEX-EU-J (antiques), VATEX-EU-D (second-hand transport/travel agency).
                 -->
-                <cbc:TaxExemptionReasonCode>VATEX-FR-F</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReasonCode>VATEX-EU-F</cbc:TaxExemptionReasonCode>
                 <!--
                     BT-120 VAT exemption reason text (mandatory when BT-118 = E per G1.41)
                     This identifies the margin scheme type.
@@ -249,6 +249,9 @@
                 <cbc:ID>E</cbc:ID>
                 <!-- BT-152 Invoiced item VAT rate = 0 -->
                 <cbc:Percent>0.00</cbc:Percent>
+                <!-- Exemption reason repeated at line level (BR-FREXT-E-08rev) -->
+                <cbc:TaxExemptionReasonCode>VATEX-EU-F</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>TVA non applicable — Régime particulier de la marge, Article 297 A du CGI (biens d'occasion)</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>

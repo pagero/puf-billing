@@ -72,6 +72,8 @@
     <!-- BG-4 Seller Information (SUPPLIER = restaurant that accepted the voucher) -->
     <cac:AccountingSupplierParty>
         <cac:Party>
+            <!-- BT-34 Seller electronic address (mandatory for EXTENDED-CTC-FR) -->
+            <cbc:EndpointID schemeID="0009">34567890100025</cbc:EndpointID>
             <!-- BT-29 SIRET identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">34567890100025</cbc:ID>
@@ -115,6 +117,8 @@
     <!-- The issuer is deemed to have received the goods/services from the supplier -->
     <cac:AccountingCustomerParty>
         <cac:Party>
+            <!-- BT-49 Buyer electronic address (mandatory for EXTENDED-CTC-FR) -->
+            <cbc:EndpointID schemeID="0009">67890123400042</cbc:EndpointID>
             <!-- BT-46 Buyer identifier (ISSUER's SIRET) -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">67890123400042</cbc:ID>

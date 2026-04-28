@@ -380,15 +380,15 @@
 
     <!-- BG-23: VAT breakdown -->
     <cac:TaxTotal>
-        <!-- BT-110: Invoice total VAT amount -->
-        <cbc:TaxAmount currencyID="EUR">1200.00</cbc:TaxAmount>
+        <!-- BT-110: Invoice total VAT amount (20% × 7200.00 = 1440.00) -->
+        <cbc:TaxAmount currencyID="EUR">1440.00</cbc:TaxAmount>
 
         <!-- BG-23: VAT category taxable amount and VAT -->
         <cac:TaxSubtotal>
             <!-- BT-116: VAT category taxable amount -->
             <cbc:TaxableAmount currencyID="EUR">7200.00</cbc:TaxableAmount>
-            <!-- BT-117: VAT category tax amount -->
-            <cbc:TaxAmount currencyID="EUR">1200.00</cbc:TaxAmount>
+            <!-- BT-117: VAT category tax amount (20% × 7200.00 = 1440.00) -->
+            <cbc:TaxAmount currencyID="EUR">1440.00</cbc:TaxAmount>
             <!-- BT-118: VAT category code (S = Standard rate) -->
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
@@ -407,10 +407,10 @@
         <cbc:LineExtensionAmount currencyID="EUR">7200.00</cbc:LineExtensionAmount>
         <!-- BT-109: Invoice total amount without VAT -->
         <cbc:TaxExclusiveAmount currencyID="EUR">7200.00</cbc:TaxExclusiveAmount>
-        <!-- BT-112: Invoice total amount with VAT -->
-        <cbc:TaxInclusiveAmount currencyID="EUR">8400.00</cbc:TaxInclusiveAmount>
+        <!-- BT-112: Invoice total amount with VAT (7200.00 + 1440.00 = 8640.00) -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">8640.00</cbc:TaxInclusiveAmount>
         <!-- BT-115: Amount due for payment -->
-        <cbc:PayableAmount currencyID="EUR">8400.00</cbc:PayableAmount>
+        <cbc:PayableAmount currencyID="EUR">8640.00</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>
 
     <!-- BG-25: Invoice lines -->
