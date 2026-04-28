@@ -77,6 +77,8 @@
     <!-- BG-4 Seller Information -->
     <cac:AccountingSupplierParty>
         <cac:Party>
+            <!-- BT-34 Seller electronic address (mandatory for EXTENDED-CTC-FR) -->
+            <cbc:EndpointID schemeID="0009">45678901200015</cbc:EndpointID>
             <!-- BT-29 SIRET identifier (mandatory for French entities) -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">45678901200015</cbc:ID>
@@ -123,6 +125,8 @@
     <!-- BG-7 Buyer Information -->
     <cac:AccountingCustomerParty>
         <cac:Party>
+            <!-- BT-49 Buyer electronic address (mandatory for EXTENDED-CTC-FR) -->
+            <cbc:EndpointID schemeID="0009">12345678900034</cbc:EndpointID>
             <!-- BT-46 Buyer identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">12345678900034</cbc:ID>

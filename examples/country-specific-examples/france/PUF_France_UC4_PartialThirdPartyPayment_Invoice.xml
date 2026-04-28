@@ -149,6 +149,8 @@
     <!-- BG-4 Seller Information (Car repair shop) -->
     <cac:AccountingSupplierParty>
         <cac:Party>
+            <!-- BT-34 Seller electronic address (mandatory for EXTENDED-CTC-FR) -->
+            <cbc:EndpointID schemeID="0009">98765432109876</cbc:EndpointID>
             <!-- BT-29 SIRET identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">98765432109876</cbc:ID>
