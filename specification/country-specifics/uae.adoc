@@ -1,0 +1,348 @@
+This section contains information about special requirements concerning invoicing in the United Arab Emirates (UAE).
+
+PUF supports UAE billing through a combination of standard PUF elements and the existing PUF UBL extensions originally introduced for KSA.
+
+==== Invoice type code and transaction type
+
+Available invoice type code values to be used in the UAE can be found here: https://pagero.github.io/puf-code-lists/#_invoice_type_codes_united_arab_emirates[Invoice type codes United Arab Emirates^].
+
+In addition to the type code, every UAE invoice MUST carry an *invoice transaction type code* (BTAE-02). The value is a fixed 8-character string of `0` and `1` flags identifying which UAE business contexts apply, provided as the `name` attribute on `cbc:InvoiceTypeCode` (or `cbc:CreditNoteTypeCode` for credit notes).
+
+The position-by-position structure is documented here: https://pagero.github.io/puf-code-lists/#_invoice_transaction_type_code_united_arab_emirates[Invoice transaction type code United Arab Emirates^].
+
+*Example* +
+_Standard tax invoice in UAE without any of the special transaction contexts_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="00000000">380</cbc:InvoiceTypeCode><!--1-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> InvoiceTypeCode `380` for "Tax Invoice". Attribute `name` carries the UAE invoice transaction type code (BTAE-02).
+
+*Example* +
+_Free-trade-zone invoice (FTZ flag in position 1)_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="10000000">380</cbc:InvoiceTypeCode><!--1-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Position 1 = `1` indicates Free Trade Zone supply.
+
+==== Party identification
+
+The UAE Tax Registration Number (TRN) is provided as the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID` with the tax scheme code `VAT`. The TRN is 15 alphanumeric characters, starts with `1` and ends with `03` (e.g. `100000000000003`).
+
+When the supplier is not VAT-registered, the Tax Identification Number (TIN) is provided instead under `cac:PartyIdentification/cbc:ID`. The TIN is 10 numeric digits starting with `1` (e.g. `1000000000`).
+
+*Example* +
+_Seller TRN_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <!-- Code omitted for clarity -->
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>100000000000003</cbc:CompanyID><!--1-->
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <!-- Code omitted for clarity -->
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+</Invoice>
+----
+<1> UAE TRN provided in `cac:PartyTaxScheme/cbc:CompanyID` with `cac:TaxScheme/cbc:ID = 'VAT'`.
+
+==== Legal registration identifier
+
+UAE requires a legal registration identifier on both seller and buyer. PUF carries this through `cac:PartyLegalEntity/cbc:CompanyID` with the registration type expressed via the standard `@schemeID` attribute. PUF does not use the PINT-AE `@schemeAgencyID` / `@schemeAgencyName` syntax — every UAE identifier flavour has its own PUF-008 scheme code.
+
+The four primary types — Trade license, Emirates ID, Passport and Cabinet Decision — and the two supplementary identifiers (Legal Registration Authority, Passport issuing country) are documented here: https://pagero.github.io/puf-code-lists/#_identification_scheme_united_arab_emirates[Identification scheme United Arab Emirates^].
+
+*Example* +
+_Seller registered under a Trade License issued by the Department of Economic Development - Dubai_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <!-- Code omitted for clarity -->
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID><!--2-->
+      </cac:PartyIdentification>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Acme Trading LLC</cbc:RegistrationName>
+        <cbc:CompanyID schemeID="AE:TL">CN-1234567</cbc:CompanyID><!--1-->
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+</Invoice>
+----
+<1> Trade license number on `cac:PartyLegalEntity/cbc:CompanyID` with `schemeID="AE:TL"`.
+<2> Issuing authority (BTAE-12) carried as a separate `cac:PartyIdentification` entry with `schemeID="AE:LRA"`.
+
+*Example* +
+_Seller is a natural person identified by a UK passport_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <!-- Code omitted for clarity -->
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="AE:PASSPORT_COUNTRY">GB</cbc:ID><!--2-->
+      </cac:PartyIdentification>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Jane Doe</cbc:RegistrationName>
+        <cbc:CompanyID schemeID="AE:PASSPORT">P12345678</cbc:CompanyID><!--1-->
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+</Invoice>
+----
+<1> Passport number with `schemeID="AE:PASSPORT"`.
+<2> Passport issuing country (BTAE-18) as a separate `cac:PartyIdentification` entry with `schemeID="AE:PASSPORT_COUNTRY"`.
+
+==== Country subdivision (Emirates)
+
+Whenever a UAE address is provided (seller, buyer, delivery, tax representative), the country subdivision MUST be one of the seven Emirate codes:
+
+[%autowidth]
+|===
+|Code |Emirate
+
+|`AUH` |Abu Dhabi
+|`DXB` |Dubai
+|`SHJ` |Sharjah
+|`UAQ` |Umm Al Quwain
+|`FUJ` |Fujairah
+|`AJM` |Ajman
+|`RAK` |Ras Al Khaimah
+|===
+
+The Emirate code is provided in `cbc:CountrySubentity` and the country code in `cac:Country/cbc:IdentificationCode = 'AE'`.
+
+==== Currency and AED amounts
+
+The document currency code MUST be present (`cbc:DocumentCurrencyCode`). If the document currency is not AED, the tax accounting currency MUST be set to `AED` (`cbc:TaxCurrencyCode = 'AED'`) and the currency exchange rate MUST be provided.
+
+When the document currency is not AED, the following amounts MUST be additionally expressed in AED through the standard PUF extensions:
+
+[%autowidth.stretch]
+|===
+|Field |BT code |PUF extension
+
+|Tax category tax amount in AED (per VAT breakdown) |IBT-190 |`puf:TaxSubtotalExtension/puf:TaxCurrencyTaxAmount[@currencyID = 'AED']`
+|Invoice line VAT amount in AED |BTAE-08 |Second `cac:TaxTotal/cbc:TaxAmount[@currencyID = 'AED']` on the line
+|Invoice line amount with VAT in AED |BTAE-10 |`puf:LineExtension/puf:TaxCurrencyTaxInclusiveLineExtensionAmount[@currencyID = 'AED']`
+|Invoice (or CreditNote) total amount with VAT in AED |BTAE-20 |`puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxInclusiveAmount[@currencyID = 'AED']`
+|===
+
+==== Item type, classification and Service Accounting Code
+
+Every UAE invoice line MUST declare whether the item is goods, a service, or both, via the *item type* (BTAE-13). It is provided through the PUF item extension:
+
+[%autowidth]
+|===
+|Code |Meaning
+
+|`GOODS` |Goods
+|`SERVICES` |Services
+|`BOTH` |Mixed (both goods and services on the same line)
+|===
+
+The item type drives two further requirements:
+
+* When item type is `GOODS` (or `BOTH`), the *item classification* (IBT-158) MUST be present and the classification scheme identifier (`@listID`) MUST be `HS` (Harmonised Commodity Description and Coding System).
+* When item type is `SERVICES` (or `BOTH`), the *Service Accounting Code* (BTAE-17) MUST be present using `cac:AdditionalItemIdentification` with `@schemeID = 'SAC'`.
+
+*Example* +
+_Line for a service, carrying both the item type extension and the SAC code_
+[source,xml]
+----
+<cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+  <cac:Item>
+    <cbc:Name>Consulting services</cbc:Name>
+    <cbc:Description>Q1 advisory engagement</cbc:Description>
+    <cac:AdditionalItemIdentification>
+      <cbc:ID schemeID="SAC">9983.11</cbc:ID><!--1-->
+    </cac:AdditionalItemIdentification>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ItemExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:ItemExtension>
+              <puf:ItemType>SERVICES</puf:ItemType><!--2-->
+            </puf:ItemExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+  </cac:Item>
+</cac:InvoiceLine>
+----
+<1> Service Accounting Code with `schemeID="SAC"`.
+<2> Item type `SERVICES` provided through `puf:ItemExtension/puf:ItemType`.
+
+==== VAT category, rate and exemption
+
+UAE uses the EN/Peppol VAT category code set: `S` (Standard rated), `Z` (Zero rated), `E` (Exempt from VAT), `O` (Not subject to VAT), `AE` (Reverse charge) and `N` (Standard rate additional VAT).
+
+* Standard rated (`S`) VAT rate MUST be exactly `5.00`.
+* For category `E`, an exemption reason code MUST be present at the same level (line, document allowance/charge, or VAT breakdown) as the category code.
+* For category `AE` (reverse charge), the buyer's VAT identifier MUST be present, the line's VAT amount MUST be zero, and the *Type of goods or services* code (BTAE-09) — taken from the UAE Goods/Services subject to RCM list — MUST be carried on `cac:CommodityClassification/cbc:NatureCode` for the line.
+
+==== Profit Margin Scheme
+
+Supplies under the UAE VAT Profit Margin Scheme (Article 43 of the UAE VAT Decree-Law) use VAT category code `N` (_Standard rate additional VAT_ — standard VAT calculated for an additional taxable base when the additional taxable base is not included in the document totals). Under the scheme, VAT is assessed on the supplier's profit margin and settled directly with the FTA; it is not charged to the buyer and the VAT *amount* on the invoice is always zero. The statutory rate (`5.00`) MUST nevertheless be provided in the `cbc:Percent` field.
+
+The Profit Margin Scheme MUST be signalled with BTAE-02 position 3 set to `1` (e.g. `00100000`). This flag is required because the target format validates that every tax category uses code `N` when the margin-scheme bit is set.
+
+*Example* +
+_Profit Margin Scheme invoice — VAT amount 0, rate 5.00, BTAE-02 position 3 set_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="00100000">380</cbc:InvoiceTypeCode><!--1-->
+  <!-- Code omitted for clarity -->
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="AED">45000.00</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cbc:ID>N</cbc:ID><!--2-->
+        <cbc:Percent>5.00</cbc:Percent><!--3-->
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+</Invoice>
+----
+<1> BTAE-02 transaction type code with position 3 = `1` (Profit Margin Scheme).
+<2> Category code `N` for Profit Margin Scheme.
+<3> The statutory rate `5.00` MUST be present; VAT is settled on the supplier's margin outside the invoice.
+
+==== Reverse charge: standard item identifier
+
+When the line is reverse-charged (category `AE`), the line MUST carry an *item standard identifier* (`cac:StandardItemIdentification/cbc:ID`) with `@schemeID = "0160"` (GS1 GTIN).
+
+==== Free Trade Zone Beneficiary
+
+In free-trade-zone supplies (BTAE-02 transaction type code matching the FTZ flag, `1XXXXXXX`), the *Beneficiary ID* (BTAE-01) — the TRN or TIN of the FTZ beneficiary — is carried using the existing `puf:RestrictedInformationParty` extension with `Key = 'Beneficiary'`.
+
+*Example* +
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformationParty>
+            <puf:Key>Beneficiary</puf:Key><!--1-->
+            <cac:Party>
+              <cac:PartyIdentification>
+                <cbc:ID>100000000000003</cbc:ID><!--2-->
+              </cac:PartyIdentification>
+            </cac:Party>
+          </puf:RestrictedInformationParty>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> `Key` set to `Beneficiary`.
+<2> TRN of the free-trade-zone beneficiary.
+
+==== Disclosed Agent Principle
+
+In disclosed-agent billing (BTAE-02 transaction type code matching the disclosed-agent flag, `XXXXX1XX`), the *Principle ID* (BTAE-14) — the TRN of the principle — is carried using the same `puf:RestrictedInformationParty` extension with `Key = 'Principle'`. The Principle ID MUST be different from the Seller VAT identifier.
+
+==== Deemed Supply
+
+Deemed supplies (BTAE-02 position 2 set to `1`, e.g. `01000000`) are supplies made without consideration — typically gifts or samples above the FTA de-minimis threshold. Because no buyer exists, PUF uses a set of fixed FTA placeholder values:
+
+* Buyer endpoint ID MUST be `9900000097` (scheme `0235`).
+* Buyer VAT identifier MUST be the FTA dummy TRN: a 15-digit number that starts with `1` and ends with `03` (e.g. `100000000099903`).
+* Because the supply is free of charge, `cbc:PrepaidAmount` MUST equal `cbc:TaxInclusiveAmount`, making `cbc:PayableAmount = 0.00`.
+
+The due date (`cbc:DueDate`) SHOULD be omitted for deemed supplies since there is no payment obligation.
+
+==== Exports
+
+Export supplies (BTAE-02 position 8 set to `1`, e.g. `00000001`) are zero-rated supplies of goods or services delivered outside the UAE. Delivery information is mandatory.
+
+* Buyer endpoint ID MUST be the predefined non-UAE placeholder `9900000099` (scheme `0235`) when the buyer is not reachable on the Peppol network.
+* The buyer `cac:PostalAddress` country code MUST NOT be `AE`.
+* A `cac:Delivery` block with both `cac:DeliveryLocation/cac:Address` (including country code) and the actual delivery date MUST be present.
+* `cac:DeliveryTerms/cbc:ID` carrying the Incoterms code (BTAE-22) MUST be provided.
+* The applicable VAT category is `Z` (zero rated) — `cbc:Percent = 0.00`.
+
+==== Credit note reason code
+
+When the document is a credit note (`cbc:InvoiceTypeCode = 381` or `cbc:CreditNoteTypeCode = 81`), the credit note reason code (BTAE-03) MUST be provided. Supported values are:
+
+[%autowidth]
+|===
+|Code |Reason
+
+|`DL8.61.1.A` |Cancellation of supply
+|`DL8.61.1.B` |Reduction in price
+|`DL8.61.1.C` |Discount
+|`DL8.61.1.D` |Goods returned
+|`DL8.61.1.E` |Other
+|`VD` |Voided document
+|===
+
+The code is carried on `cac:BillingReference/cac:InvoiceDocumentReference` through the existing `puf:BillingReferenceExtension` (path `puf:BillingReferenceExtension/puf:Code`). When the reason code is `VD`, the preceding-document reference itself is not required.
+
+==== Out of scope of VAT and Credit-note related to goods or services
+
+When the invoice type code is `480` (Out of scope of VAT) or `81` (Credit note related to goods or services), the buyer's legal registration identifier (IBT-047) is mandatory regardless of whether the buyer is VAT-registered, and all VAT category codes used on the document MUST be one of `E` / `O` / `Z`. The seller VAT identifier is *not* required in these cases.
+
+==== Self-billing
+
+In PUF, self-billing is *not* signalled through a dedicated UBL document type code. Self-billed documents keep their original type code (`cbc:InvoiceTypeCode = 380` for a self-billed tax invoice, `cbc:CreditNoteTypeCode = 381` for a self-billed credit note) and are flagged through the standard `puf:SelfBilled` extension at document level. See `<<_selfbilled, Self-Billed extension>>` for the structure.
+
+*Example* +
+_Self-billed UAE tax invoice_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:SelfBilled>true</puf:SelfBilled><!--1-->
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="00000000">380</cbc:InvoiceTypeCode><!--2-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Self-billing flagged through the `puf:SelfBilled` extension.
+<2> Original tax-invoice type code `380` retained in PUF — UAE does not use a separate PUF self-billing type code.
