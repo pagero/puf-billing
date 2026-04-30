@@ -72,6 +72,10 @@ include::country-specifics/spain-verifactu.adoc[]
 
 include::country-specifics/turkiye.adoc[]
 
+=== United Arab Emirates
+
+include::country-specifics/uae.adoc[]
+
 === United States
 
 include::country-specifics/usa.adoc[]

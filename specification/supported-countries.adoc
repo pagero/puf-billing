@@ -252,6 +252,11 @@ Only support for invoice and credit/correction.
 |*Yes*
 |
 
+|United Arab Emirates
+|*Yes*
+|*Yes*
+|
+
 |United Kingdom
 |*Yes*
 |*No*

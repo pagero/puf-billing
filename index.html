@@ -832,16 +832,36 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_internet_sales">5.18.8. Internet Sales</a></li>
 </ul>
 </li>
-<li><a href="#_united_states">5.19. United States</a>
+<li><a href="#_united_arab_emirates">5.19. United Arab Emirates</a>
 <ul class="sectlevel3">
-<li><a href="#_tax_scheme_2">5.19.1. Tax scheme</a></li>
+<li><a href="#_invoice_type_code_and_transaction_type">5.19.1. Invoice type code and transaction type</a></li>
 <li><a href="#_party_identification_8">5.19.2. Party identification</a></li>
+<li><a href="#_legal_registration_identifier">5.19.3. Legal registration identifier</a></li>
+<li><a href="#_country_subdivision_emirates">5.19.4. Country subdivision (Emirates)</a></li>
+<li><a href="#_currency_and_aed_amounts">5.19.5. Currency and AED amounts</a></li>
+<li><a href="#_item_type_classification_and_service_accounting_code">5.19.6. Item type, classification and Service Accounting Code</a></li>
+<li><a href="#_vat_category_rate_and_exemption">5.19.7. VAT category, rate and exemption</a></li>
+<li><a href="#_profit_margin_scheme">5.19.8. Profit Margin Scheme</a></li>
+<li><a href="#_reverse_charge_standard_item_identifier">5.19.9. Reverse charge: standard item identifier</a></li>
+<li><a href="#_free_trade_zone_beneficiary">5.19.10. Free Trade Zone Beneficiary</a></li>
+<li><a href="#_disclosed_agent_principle">5.19.11. Disclosed Agent Principle</a></li>
+<li><a href="#_deemed_supply">5.19.12. Deemed Supply</a></li>
+<li><a href="#_exports">5.19.13. Exports</a></li>
+<li><a href="#_credit_note_reason_code">5.19.14. Credit note reason code</a></li>
+<li><a href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services">5.19.15. Out of scope of VAT and Credit-note related to goods or services</a></li>
+<li><a href="#_self_billing_2">5.19.16. Self-billing</a></li>
 </ul>
 </li>
-<li><a href="#_vietnam">5.20. Vietnam</a>
+<li><a href="#_united_states">5.20. United States</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_serial_and_sequence_number">5.20.1. Invoice, Serial and Sequence Number</a></li>
-<li><a href="#_invoice_type_code_2">5.20.2. Invoice Type Code</a></li>
+<li><a href="#_tax_scheme_2">5.20.1. Tax scheme</a></li>
+<li><a href="#_party_identification_9">5.20.2. Party identification</a></li>
+</ul>
+</li>
+<li><a href="#_vietnam">5.21. Vietnam</a>
+<ul class="sectlevel3">
+<li><a href="#_invoice_serial_and_sequence_number">5.21.1. Invoice, Serial and Sequence Number</a></li>
+<li><a href="#_invoice_type_code_2">5.21.2. Invoice Type Code</a></li>
 </ul>
 </li>
 </ul>
@@ -16239,12 +16259,646 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_united_states"><a class="anchor" href="#_united_states"></a><a class="link" href="#_united_states">5.19. United States</a></h3>
+<h3 id="_united_arab_emirates"><a class="anchor" href="#_united_arab_emirates"></a><a class="link" href="#_united_arab_emirates">5.19. United Arab Emirates</a></h3>
+<div class="paragraph">
+<p>This section contains information about special requirements concerning invoicing in the United Arab Emirates (UAE).</p>
+</div>
+<div class="paragraph">
+<p>PUF supports UAE billing through a combination of standard PUF elements and the existing PUF UBL extensions originally introduced for KSA.</p>
+</div>
+<div class="sect3">
+<h4 id="_invoice_type_code_and_transaction_type"><a class="anchor" href="#_invoice_type_code_and_transaction_type"></a><a class="link" href="#_invoice_type_code_and_transaction_type">5.19.1. Invoice type code and transaction type</a></h4>
+<div class="paragraph">
+<p>Available invoice type code values to be used in the UAE can be found here: <a href="https://pagero.github.io/puf-code-lists/#_invoice_type_codes_united_arab_emirates" target="_blank" rel="noopener">Invoice type codes United Arab Emirates</a>.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the type code, every UAE invoice MUST carry an <strong>invoice transaction type code</strong> (BTAE-02). The value is a fixed 8-character string of <code>0</code> and <code>1</code> flags identifying which UAE business contexts apply, provided as the <code>name</code> attribute on <code>cbc:InvoiceTypeCode</code> (or <code>cbc:CreditNoteTypeCode</code> for credit notes).</p>
+</div>
+<div class="paragraph">
+<p>The position-by-position structure is documented here: <a href="https://pagero.github.io/puf-code-lists/#_invoice_transaction_type_code_united_arab_emirates" target="_blank" rel="noopener">Invoice transaction type code United Arab Emirates</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Standard tax invoice in UAE without any of the special transaction contexts</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">00000000</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>InvoiceTypeCode <code>380</code> for "Tax Invoice". Attribute <code>name</code> carries the UAE invoice transaction type code (BTAE-02).</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Free-trade-zone invoice (FTZ flag in position 1)</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">10000000</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Position 1 = <code>1</code> indicates Free Trade Zone supply.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_party_identification_8"><a class="anchor" href="#_party_identification_8"></a><a class="link" href="#_party_identification_8">5.19.2. Party identification</a></h4>
+<div class="paragraph">
+<p>The UAE Tax Registration Number (TRN) is provided as the VAT identifier on <code>cac:PartyTaxScheme/cbc:CompanyID</code> with the tax scheme code <code>VAT</code>. The TRN is 15 alphanumeric characters, starts with <code>1</code> and ends with <code>03</code> (e.g. <code>100000000000003</code>).</p>
+</div>
+<div class="paragraph">
+<p>When the supplier is not VAT-registered, the Tax Identification Number (TIN) is provided instead under <code>cac:PartyIdentification/cbc:ID</code>. The TIN is 10 numeric digits starting with <code>1</code> (e.g. <code>1000000000</code>).</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Seller TRN</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+    <span class="tag">&lt;cac:Party&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+      <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+        <span class="tag">&lt;cbc:CompanyID&gt;</span>100000000000003<span class="tag">&lt;/cbc:CompanyID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="tag">&lt;cac:TaxScheme&gt;</span>
+          <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+      <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:Party&gt;</span>
+  <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>UAE TRN provided in <code>cac:PartyTaxScheme/cbc:CompanyID</code> with <code>cac:TaxScheme/cbc:ID = 'VAT'</code>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_legal_registration_identifier"><a class="anchor" href="#_legal_registration_identifier"></a><a class="link" href="#_legal_registration_identifier">5.19.3. Legal registration identifier</a></h4>
+<div class="paragraph">
+<p>UAE requires a legal registration identifier on both seller and buyer. PUF carries this through <code>cac:PartyLegalEntity/cbc:CompanyID</code> with the registration type expressed via the standard <code>@schemeID</code> attribute. PUF does not use the PINT-AE <code>@schemeAgencyID</code> / <code>@schemeAgencyName</code> syntax — every UAE identifier flavour has its own PUF-008 scheme code.</p>
+</div>
+<div class="paragraph">
+<p>The four primary types — Trade license, Emirates ID, Passport and Cabinet Decision — and the two supplementary identifiers (Legal Registration Authority, Passport issuing country) are documented here: <a href="https://pagero.github.io/puf-code-lists/#_identification_scheme_united_arab_emirates" target="_blank" rel="noopener">Identification scheme United Arab Emirates</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Seller registered under a Trade License issued by the Department of Economic Development - Dubai</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+    <span class="tag">&lt;cac:Party&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+      <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+        <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">AE:LRA</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Department of Economic Development - Dubai<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+      <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+      <span class="tag">&lt;cac:PartyLegalEntity&gt;</span>
+        <span class="tag">&lt;cbc:RegistrationName&gt;</span>Acme Trading LLC<span class="tag">&lt;/cbc:RegistrationName&gt;</span>
+        <span class="tag">&lt;cbc:CompanyID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">AE:TL</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>CN-1234567<span class="tag">&lt;/cbc:CompanyID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+      <span class="tag">&lt;/cac:PartyLegalEntity&gt;</span>
+    <span class="tag">&lt;/cac:Party&gt;</span>
+  <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Trade license number on <code>cac:PartyLegalEntity/cbc:CompanyID</code> with <code>schemeID="AE:TL"</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Issuing authority (BTAE-12) carried as a separate <code>cac:PartyIdentification</code> entry with <code>schemeID="AE:LRA"</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Seller is a natural person identified by a UK passport</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+    <span class="tag">&lt;cac:Party&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+      <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+        <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">AE:PASSPORT_COUNTRY</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>GB<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+      <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+      <span class="tag">&lt;cac:PartyLegalEntity&gt;</span>
+        <span class="tag">&lt;cbc:RegistrationName&gt;</span>Jane Doe<span class="tag">&lt;/cbc:RegistrationName&gt;</span>
+        <span class="tag">&lt;cbc:CompanyID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">AE:PASSPORT</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>P12345678<span class="tag">&lt;/cbc:CompanyID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+      <span class="tag">&lt;/cac:PartyLegalEntity&gt;</span>
+    <span class="tag">&lt;/cac:Party&gt;</span>
+  <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Passport number with <code>schemeID="AE:PASSPORT"</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Passport issuing country (BTAE-18) as a separate <code>cac:PartyIdentification</code> entry with <code>schemeID="AE:PASSPORT_COUNTRY"</code>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_country_subdivision_emirates"><a class="anchor" href="#_country_subdivision_emirates"></a><a class="link" href="#_country_subdivision_emirates">5.19.4. Country subdivision (Emirates)</a></h4>
+<div class="paragraph">
+<p>Whenever a UAE address is provided (seller, buyer, delivery, tax representative), the country subdivision MUST be one of the seven Emirate codes:</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Emirate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AUH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abu Dhabi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DXB</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dubai</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SHJ</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sharjah</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UAQ</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Umm Al Quwain</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FUJ</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fujairah</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AJM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ajman</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RAK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ras Al Khaimah</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Emirate code is provided in <code>cbc:CountrySubentity</code> and the country code in <code>cac:Country/cbc:IdentificationCode = 'AE'</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_currency_and_aed_amounts"><a class="anchor" href="#_currency_and_aed_amounts"></a><a class="link" href="#_currency_and_aed_amounts">5.19.5. Currency and AED amounts</a></h4>
+<div class="paragraph">
+<p>The document currency code MUST be present (<code>cbc:DocumentCurrencyCode</code>). If the document currency is not AED, the tax accounting currency MUST be set to <code>AED</code> (<code>cbc:TaxCurrencyCode = 'AED'</code>) and the currency exchange rate MUST be provided.</p>
+</div>
+<div class="paragraph">
+<p>When the document currency is not AED, the following amounts MUST be additionally expressed in AED through the standard PUF extensions:</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content stretch">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">BT code</th>
+<th class="tableblock halign-left valign-top">PUF extension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tax category tax amount in AED (per VAT breakdown)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IBT-190</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:TaxSubtotalExtension/puf:TaxCurrencyTaxAmount[@currencyID = 'AED']</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invoice line VAT amount in AED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BTAE-08</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Second <code>cac:TaxTotal/cbc:TaxAmount[@currencyID = 'AED']</code> on the line</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invoice line amount with VAT in AED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BTAE-10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:LineExtension/puf:TaxCurrencyTaxInclusiveLineExtensionAmount[@currencyID = 'AED']</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invoice (or CreditNote) total amount with VAT in AED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BTAE-20</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxInclusiveAmount[@currencyID = 'AED']</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_item_type_classification_and_service_accounting_code"><a class="anchor" href="#_item_type_classification_and_service_accounting_code"></a><a class="link" href="#_item_type_classification_and_service_accounting_code">5.19.6. Item type, classification and Service Accounting Code</a></h4>
+<div class="paragraph">
+<p>Every UAE invoice line MUST declare whether the item is goods, a service, or both, via the <strong>item type</strong> (BTAE-13). It is provided through the PUF item extension:</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GOODS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Goods</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SERVICES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Services</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BOTH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mixed (both goods and services on the same line)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The item type drives two further requirements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When item type is <code>GOODS</code> (or <code>BOTH</code>), the <strong>item classification</strong> (IBT-158) MUST be present and the classification scheme identifier (<code>@listID</code>) MUST be <code>HS</code> (Harmonised Commodity Description and Coding System).</p>
+</li>
+<li>
+<p>When item type is <code>SERVICES</code> (or <code>BOTH</code>), the <strong>Service Accounting Code</strong> (BTAE-17) MUST be present using <code>cac:AdditionalItemIdentification</code> with <code>@schemeID = 'SAC'</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Line for a service, carrying both the item type extension and the SAC code</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:Item&gt;</span>
+    <span class="tag">&lt;cbc:Name&gt;</span>Consulting services<span class="tag">&lt;/cbc:Name&gt;</span>
+    <span class="tag">&lt;cbc:Description&gt;</span>Q1 advisory engagement<span class="tag">&lt;/cbc:Description&gt;</span>
+    <span class="tag">&lt;cac:AdditionalItemIdentification&gt;</span>
+      <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">SAC</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>9983.11<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="tag">&lt;/cac:AdditionalItemIdentification&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:ItemExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+        <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+          <span class="tag">&lt;puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;puf:ItemExtension&gt;</span>
+              <span class="tag">&lt;puf:ItemType&gt;</span>SERVICES<span class="tag">&lt;/puf:ItemType&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+            <span class="tag">&lt;/puf:ItemExtension&gt;</span>
+          <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+        <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="tag">&lt;/cac:Item&gt;</span>
+<span class="tag">&lt;/cac:InvoiceLine&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Service Accounting Code with <code>schemeID="SAC"</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Item type <code>SERVICES</code> provided through <code>puf:ItemExtension/puf:ItemType</code>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_vat_category_rate_and_exemption"><a class="anchor" href="#_vat_category_rate_and_exemption"></a><a class="link" href="#_vat_category_rate_and_exemption">5.19.7. VAT category, rate and exemption</a></h4>
+<div class="paragraph">
+<p>UAE uses the EN/Peppol VAT category code set: <code>S</code> (Standard rated), <code>Z</code> (Zero rated), <code>E</code> (Exempt from VAT), <code>O</code> (Not subject to VAT), <code>AE</code> (Reverse charge) and <code>N</code> (Standard rate additional VAT).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Standard rated (<code>S</code>) VAT rate MUST be exactly <code>5.00</code>.</p>
+</li>
+<li>
+<p>For category <code>E</code>, an exemption reason code MUST be present at the same level (line, document allowance/charge, or VAT breakdown) as the category code.</p>
+</li>
+<li>
+<p>For category <code>AE</code> (reverse charge), the buyer&#8217;s VAT identifier MUST be present, the line&#8217;s VAT amount MUST be zero, and the <strong>Type of goods or services</strong> code (BTAE-09) — taken from the UAE Goods/Services subject to RCM list — MUST be carried on <code>cac:CommodityClassification/cbc:NatureCode</code> for the line.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_profit_margin_scheme"><a class="anchor" href="#_profit_margin_scheme"></a><a class="link" href="#_profit_margin_scheme">5.19.8. Profit Margin Scheme</a></h4>
+<div class="paragraph">
+<p>Supplies under the UAE VAT Profit Margin Scheme (Article 43 of the UAE VAT Decree-Law) use VAT category code <code>N</code> (<em>Standard rate additional VAT</em> — standard VAT calculated for an additional taxable base when the additional taxable base is not included in the document totals). Under the scheme, VAT is assessed on the supplier&#8217;s profit margin and settled directly with the FTA; it is not charged to the buyer and the VAT <strong>amount</strong> on the invoice is always zero. The statutory rate (<code>5.00</code>) MUST nevertheless be provided in the <code>cbc:Percent</code> field.</p>
+</div>
+<div class="paragraph">
+<p>The Profit Margin Scheme MUST be signalled with BTAE-02 position 3 set to <code>1</code> (e.g. <code>00100000</code>). This flag is required because the target format validates that every tax category uses code <code>N</code> when the margin-scheme bit is set.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Profit Margin Scheme invoice — VAT amount 0, rate 5.00, BTAE-02 position 3 set</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">00100000</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:TaxTotal&gt;</span>
+    <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">AED</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>0.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+    <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+      <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">AED</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>45000.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+      <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">AED</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>0.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+      <span class="tag">&lt;cac:TaxCategory&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>N<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="tag">&lt;cbc:Percent&gt;</span>5.00<span class="tag">&lt;/cbc:Percent&gt;</span><i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="tag">&lt;cac:TaxScheme&gt;</span>
+          <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+      <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+    <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+  <span class="tag">&lt;/cac:TaxTotal&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>BTAE-02 transaction type code with position 3 = <code>1</code> (Profit Margin Scheme).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Category code <code>N</code> for Profit Margin Scheme.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The statutory rate <code>5.00</code> MUST be present; VAT is settled on the supplier&#8217;s margin outside the invoice.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_reverse_charge_standard_item_identifier"><a class="anchor" href="#_reverse_charge_standard_item_identifier"></a><a class="link" href="#_reverse_charge_standard_item_identifier">5.19.9. Reverse charge: standard item identifier</a></h4>
+<div class="paragraph">
+<p>When the line is reverse-charged (category <code>AE</code>), the line MUST carry an <strong>item standard identifier</strong> (<code>cac:StandardItemIdentification/cbc:ID</code>) with <code>@schemeID = "0160"</code> (GS1 GTIN).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_free_trade_zone_beneficiary"><a class="anchor" href="#_free_trade_zone_beneficiary"></a><a class="link" href="#_free_trade_zone_beneficiary">5.19.10. Free Trade Zone Beneficiary</a></h4>
+<div class="paragraph">
+<p>In free-trade-zone supplies (BTAE-02 transaction type code matching the FTZ flag, <code>1XXXXXXX</code>), the <strong>Beneficiary ID</strong> (BTAE-01) — the TRN or TIN of the FTZ beneficiary — is carried using the existing <code>puf:RestrictedInformationParty</code> extension with <code>Key = 'Beneficiary'</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+      <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;puf:RestrictedInformationParty&gt;</span>
+            <span class="tag">&lt;puf:Key&gt;</span>Beneficiary<span class="tag">&lt;/puf:Key&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+            <span class="tag">&lt;cac:Party&gt;</span>
+              <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>100000000000003<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+              <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;/cac:Party&gt;</span>
+          <span class="tag">&lt;/puf:RestrictedInformationParty&gt;</span>
+        <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+      <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>Key</code> set to <code>Beneficiary</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>TRN of the free-trade-zone beneficiary.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_disclosed_agent_principle"><a class="anchor" href="#_disclosed_agent_principle"></a><a class="link" href="#_disclosed_agent_principle">5.19.11. Disclosed Agent Principle</a></h4>
+<div class="paragraph">
+<p>In disclosed-agent billing (BTAE-02 transaction type code matching the disclosed-agent flag, <code>XXXXX1XX</code>), the <strong>Principle ID</strong> (BTAE-14) — the TRN of the principle — is carried using the same <code>puf:RestrictedInformationParty</code> extension with <code>Key = 'Principle'</code>. The Principle ID MUST be different from the Seller VAT identifier.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deemed_supply"><a class="anchor" href="#_deemed_supply"></a><a class="link" href="#_deemed_supply">5.19.12. Deemed Supply</a></h4>
+<div class="paragraph">
+<p>Deemed supplies (BTAE-02 position 2 set to <code>1</code>, e.g. <code>01000000</code>) are supplies made without consideration — typically gifts or samples above the FTA de-minimis threshold. Because no buyer exists, PUF uses a set of fixed FTA placeholder values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Buyer endpoint ID MUST be <code>9900000097</code> (scheme <code>0235</code>).</p>
+</li>
+<li>
+<p>Buyer VAT identifier MUST be the FTA dummy TRN: a 15-digit number that starts with <code>1</code> and ends with <code>03</code> (e.g. <code>100000000099903</code>).</p>
+</li>
+<li>
+<p>Because the supply is free of charge, <code>cbc:PrepaidAmount</code> MUST equal <code>cbc:TaxInclusiveAmount</code>, making <code>cbc:PayableAmount = 0.00</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The due date (<code>cbc:DueDate</code>) SHOULD be omitted for deemed supplies since there is no payment obligation.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_exports"><a class="anchor" href="#_exports"></a><a class="link" href="#_exports">5.19.13. Exports</a></h4>
+<div class="paragraph">
+<p>Export supplies (BTAE-02 position 8 set to <code>1</code>, e.g. <code>00000001</code>) are zero-rated supplies of goods or services delivered outside the UAE. Delivery information is mandatory.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Buyer endpoint ID MUST be the predefined non-UAE placeholder <code>9900000099</code> (scheme <code>0235</code>) when the buyer is not reachable on the Peppol network.</p>
+</li>
+<li>
+<p>The buyer <code>cac:PostalAddress</code> country code MUST NOT be <code>AE</code>.</p>
+</li>
+<li>
+<p>A <code>cac:Delivery</code> block with both <code>cac:DeliveryLocation/cac:Address</code> (including country code) and the actual delivery date MUST be present.</p>
+</li>
+<li>
+<p><code>cac:DeliveryTerms/cbc:ID</code> carrying the Incoterms code (BTAE-22) MUST be provided.</p>
+</li>
+<li>
+<p>The applicable VAT category is <code>Z</code> (zero rated) — <code>cbc:Percent = 0.00</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_credit_note_reason_code"><a class="anchor" href="#_credit_note_reason_code"></a><a class="link" href="#_credit_note_reason_code">5.19.14. Credit note reason code</a></h4>
+<div class="paragraph">
+<p>When the document is a credit note (<code>cbc:InvoiceTypeCode = 381</code> or <code>cbc:CreditNoteTypeCode = 81</code>), the credit note reason code (BTAE-03) MUST be provided. Supported values are:</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.A</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cancellation of supply</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.B</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reduction in price</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.C</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Discount</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.D</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Goods returned</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.E</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Other</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Voided document</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The code is carried on <code>cac:BillingReference/cac:InvoiceDocumentReference</code> through the existing <code>puf:BillingReferenceExtension</code> (path <code>puf:BillingReferenceExtension/puf:Code</code>). When the reason code is <code>VD</code>, the preceding-document reference itself is not required.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services"><a class="anchor" href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services"></a><a class="link" href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services">5.19.15. Out of scope of VAT and Credit-note related to goods or services</a></h4>
+<div class="paragraph">
+<p>When the invoice type code is <code>480</code> (Out of scope of VAT) or <code>81</code> (Credit note related to goods or services), the buyer&#8217;s legal registration identifier (IBT-047) is mandatory regardless of whether the buyer is VAT-registered, and all VAT category codes used on the document MUST be one of <code>E</code> / <code>O</code> / <code>Z</code>. The seller VAT identifier is <strong>not</strong> required in these cases.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_self_billing_2"><a class="anchor" href="#_self_billing_2"></a><a class="link" href="#_self_billing_2">5.19.16. Self-billing</a></h4>
+<div class="paragraph">
+<p>In PUF, self-billing is <strong>not</strong> signalled through a dedicated UBL document type code. Self-billed documents keep their original type code (<code>cbc:InvoiceTypeCode = 380</code> for a self-billed tax invoice, <code>cbc:CreditNoteTypeCode = 381</code> for a self-billed credit note) and are flagged through the standard <code>puf:SelfBilled</code> extension at document level. See <code><a href="#_selfbilled">Self-Billed extension</a></code> for the structure.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Self-billed UAE tax invoice</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+      <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;puf:SelfBilled&gt;</span>true<span class="tag">&lt;/puf:SelfBilled&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+      <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">00000000</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>380<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Self-billing flagged through the <code>puf:SelfBilled</code> extension.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Original tax-invoice type code <code>380</code> retained in PUF — UAE does not use a separate PUF self-billing type code.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_united_states"><a class="anchor" href="#_united_states"></a><a class="link" href="#_united_states">5.20. United States</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in United States of America.</p>
 </div>
 <div class="sect3">
-<h4 id="_tax_scheme_2"><a class="anchor" href="#_tax_scheme_2"></a><a class="link" href="#_tax_scheme_2">5.19.1. Tax scheme</a></h4>
+<h4 id="_tax_scheme_2"><a class="anchor" href="#_tax_scheme_2"></a><a class="link" href="#_tax_scheme_2">5.20.1. Tax scheme</a></h4>
 <div class="paragraph">
 <p>Since taxes vary in different states and there are a number of local taxes as well, Pagero recommends to specify State and Local Tax in the following way:<br>
 - For State Tax use <code>cac:TaxScheme/cbc:ID</code> with value <code>STT</code>.<br>
@@ -16305,7 +16959,7 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_8"><a class="anchor" href="#_party_identification_8"></a><a class="link" href="#_party_identification_8">5.19.2. Party identification</a></h4>
+<h4 id="_party_identification_9"><a class="anchor" href="#_party_identification_9"></a><a class="link" href="#_party_identification_9">5.20.2. Party identification</a></h4>
 <div class="paragraph">
 <p>There is no party identifiers available in the ISO 6523 ICD list for USA at the moment.
 To specify Tax Identification Number please use 'cac:PartyTaxScheme/cbc:CompanyID'</p>
@@ -16338,12 +16992,12 @@ To specify Tax Identification Number please use 'cac:PartyTaxScheme/cbc:CompanyI
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vietnam"><a class="anchor" href="#_vietnam"></a><a class="link" href="#_vietnam">5.20. Vietnam</a></h3>
+<h3 id="_vietnam"><a class="anchor" href="#_vietnam"></a><a class="link" href="#_vietnam">5.21. Vietnam</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Vietnam.</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_serial_and_sequence_number"><a class="anchor" href="#_invoice_serial_and_sequence_number"></a><a class="link" href="#_invoice_serial_and_sequence_number">5.20.1. Invoice, Serial and Sequence Number</a></h4>
+<h4 id="_invoice_serial_and_sequence_number"><a class="anchor" href="#_invoice_serial_and_sequence_number"></a><a class="link" href="#_invoice_serial_and_sequence_number">5.21.1. Invoice, Serial and Sequence Number</a></h4>
 <div class="paragraph">
 <p>In Vietnam, each e-invoice is assigned a unique serial number, which serves as its identifier. Additionally, a sequence number is used, which increments with each new invoice issued.<br>
 An internally generated invoice number from an ERP system can be included in the 'cac:BillingReference' segment.<br>
@@ -16411,7 +17065,7 @@ For enhanced search functionality in Pagero Online, it is recommended to use a c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type_code_2"><a class="anchor" href="#_invoice_type_code_2"></a><a class="link" href="#_invoice_type_code_2">5.20.2. Invoice Type Code</a></h4>
+<h4 id="_invoice_type_code_2"><a class="anchor" href="#_invoice_type_code_2"></a><a class="link" href="#_invoice_type_code_2">5.21.2. Invoice Type Code</a></h4>
 <div class="paragraph">
 <p>In addition to Invoice Type Code the 'name' attribute is used to provide the Vietnameese invoice type.</p>
 </div>
@@ -17263,6 +17917,12 @@ Only support for invoice and credit/correction.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Türkiye</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">United Arab Emirates</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"></td>
