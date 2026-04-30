@@ -46,13 +46,13 @@ Demonstrates:
 
 - UAE credit note with reason code `DL8.61.1.D` (goods returned)
 - Mandatory BillingReference to the original invoice
-- `DiscrepancyResponseCode` RestrictedInformation extension (BTAE-03) alongside `BillingReferenceExtension`
+- BTAE-03 credit note reason code carried in `puf:BillingReferenceExtension/puf:Code`
 - BTAE-02 = `00000000`
 
 **Key Features:**
 
 - Document type: `381`, BTAE-02 `00000000`
-- BTAE-03 credit note reason code carried in both `puf:BillingReferenceExtension/puf:Code` and a `DiscrepancyResponseCode` RestrictedInformation extension
+- BTAE-03 credit note reason code carried in `puf:BillingReferenceExtension/puf:Code`
 - BillingReference to `INV-AE-2026-00001` with original issue date
 - 2 units returned; 5% VAT at line level
 
