@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <ext:UBLExtensions>
-        <!-- BTAE-02 Invoice Transaction Type Code (8 chars of 0/1) passed through to ProfileExecutionID -->
-        <ext:UBLExtension>
-            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
-            <ext:ExtensionContent>
-                <puf:PageroExtension>
-                    <puf:RestrictedInformation>
-                        <puf:Key>ProfileExecutionID</puf:Key>
-                        <puf:Value>00000100</puf:Value>
-                    </puf:RestrictedInformation>
-                </puf:PageroExtension>
-            </ext:ExtensionContent>
-        </ext:UBLExtension>
         <ext:UBLExtension>
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
             <ext:ExtensionContent>
