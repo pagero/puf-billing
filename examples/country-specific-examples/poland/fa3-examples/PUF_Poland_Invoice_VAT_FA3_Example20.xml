@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+  <!--
+        Values in this file are based on the KSeF FA(3) sample Fa_3_Przykład_20.xml.
+        VAT invoice in EUR with PLN-equivalent VAT (P_14_1W).
+        Same exchange rate (KursWaluty=4.5005) on all three lines.
+        PLN-equivalent VAT (P_14_1W=14036.16) carried in a second TaxTotal with currencyID="PLN".
+        Per-line exchange rates added as KursWaluty RestrictedInformation in LineExtension.
+        Per-line delivery dates (P_6A) and CN codes.
+        Factoring bank account (RachunekBankowyFaktora).
+        Buyer GLN (GLN=a → use schemeID="0088").
+        Order reference (Zamowienia) and WZ delivery note.
+        Seller: ABC AGD sp. z o. o.
+        Buyer: CDE sp. j.
+        Corresponding invoice type in FA (3): VAT.
+        In applicable cases the corresponding FA XML element is mentioned in parenthesis.
+    -->
+  <ext:UBLExtensions>
+    <!-- Place of issue (P_1M) -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>placeOfIssue</puf:Key>
+            <puf:Value>Warszawa</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+    <!-- Checkout method (P_16): value 2 = false -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>checkoutMethod</puf:Key>
+            <puf:Value>false</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+    <!-- Lot number (WarunkiTransakcji/NrPartiiTowaru) -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>NrPartiiTowaru</puf:Key>
+            <puf:Value>2312323/2026</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+  <!-- BT-1 Invoice number (P_2) -->
+  <cbc:ID>FV2026/02/150</cbc:ID>
+  <!-- BT-2 Invoice issue date (P_1) -->
+  <cbc:IssueDate>2026-02-15</cbc:IssueDate>
+  <!-- BT-3 Invoice type code: VAT -->
+  <cbc:InvoiceTypeCode name="VAT">380</cbc:InvoiceTypeCode>
+  <!-- BT-22 Footer note -->
+  <cbc:Note>Kapiał zakładowy 5 000 000</cbc:Note>
+  <!-- BT-5 Invoice document currency (KodWaluty=EUR) -->
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <!-- Tax currency (PLN) — required so the PUF-to-internal transform identifies the second TaxTotal as P_14_1W -->
+  <cbc:TaxCurrencyCode>PLN</cbc:TaxCurrencyCode>
+  <!-- Order reference (WarunkiTransakcji/Zamowienia) -->
+  <cac:OrderReference>
+    <cbc:ID>4354343</cbc:ID>
+    <cbc:IssueDate>2026-01-26</cbc:IssueDate>
+  </cac:OrderReference>
+  <!-- BG-4 Seller party (Podmiot1): ABC AGD sp. z o. o. -->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:REGON">999999999</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:KRS">0000099999</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:BDO">000099999</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PostalAddress>
+        <cbc:StreetName>ul. Kwiatowa 1 m. 2</cbc:StreetName>
+        <cbc:BuildingNumber>1</cbc:BuildingNumber>
+        <cbc:CityName>Warszawa</cbc:CityName>
+        <cbc:PostalZone>00-001</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>9999999999</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>ABC AGD sp. z o. o.</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+    <cac:AccountingContact>
+      <cbc:Telephone>667444555</cbc:Telephone>
+      <cbc:ElectronicMail>abc@abc.pl</cbc:ElectronicMail>
+    </cac:AccountingContact>
+  </cac:AccountingSupplierParty>
+  <!-- BG-7 Buyer party (Podmiot2): CDE sp. j. with GLN -->
+  <cac:AccountingCustomerParty>
+    <!-- Customer number (NrKlienta) -->
+    <cbc:SupplierAssignedAccountID>fdfd778343</cbc:SupplierAssignedAccountID>
+    <cac:Party>
+      <!-- GLN (Adres/GLN=a) -->
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="0088">a</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PostalAddress>
+        <cbc:StreetName>ul. Sadowa 1 lok. 3</cbc:StreetName>
+        <cbc:BuildingNumber>1</cbc:BuildingNumber>
+        <cbc:CityName>Kraków</cbc:CityName>
+        <cbc:PostalZone>00-002</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>1111111111</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>CDE sp. j.</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+    <cac:AccountingContact>
+      <cbc:Telephone>555777999</cbc:Telephone>
+      <cbc:ElectronicMail>cde@cde.pl</cbc:ElectronicMail>
+    </cac:AccountingContact>
+  </cac:AccountingCustomerParty>
+  <cac:Delivery>
+    <!-- Ship-to address (WysylkaDo) and cargo description (OpisLadunku=13=Pallet) -->
+    <cac:DeliveryLocation>
+      <cbc:Description>13</cbc:Description>
+      <cac:Address>
+        <cbc:StreetName>ul. Sadowa 1 lok. 3</cbc:StreetName>
+        <cbc:BuildingNumber>1</cbc:BuildingNumber>
+        <cbc:CityName>Kraków</cbc:CityName>
+        <cbc:PostalZone>00-002</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:DeliveryLocation>
+    <!-- Carrier party (Przewoznik) — name only; Przewoznik element is not output by the transform -->
+    <cac:CarrierParty>
+      <cac:PartyName>
+        <cbc:Name>Jan Nowak Transport</cbc:Name>
+      </cac:PartyName>
+    </cac:CarrierParty>
+    <!-- WysylkaZ (ship-from) is not supported via header-level Delivery; delivererLocation
+         is only populated from line-level cac:Delivery/cac:Despatch/cac:DespatchLocation -->
+    <cac:Shipment>
+      <cbc:ID>1</cbc:ID>
+      <cac:ShipmentStage>
+        <!-- Transport mode (RodzajTransportu): 3 = Road transport -->
+        <cbc:TransportModeCode>3</cbc:TransportModeCode>
+      </cac:ShipmentStage>
+    </cac:Shipment>
+  </cac:Delivery>
+  <!-- Delivery conditions / Incoterms (WarunkiDostawy) — must use SpecialTerms, not ID -->
+  <cac:DeliveryTerms>
+    <cbc:SpecialTerms>CIP</cbc:SpecialTerms>
+  </cac:DeliveryTerms>
+  <!-- Payment means with factoring bank account (RachunekBankowyFaktora) -->
+  <cac:PaymentMeans>
+    <!-- Payment means code (FormaPlatnosci): 42 = bank transfer → FormaPlatnosci=6 -->
+    <cbc:PaymentMeansCode>42</cbc:PaymentMeansCode>
+    <cbc:PaymentDueDate>2026-03-15</cbc:PaymentDueDate>
+    <!-- Factoring bank account (RachunekBankowyFaktora/NrRB) -->
+    <cac:PayeeFinancialAccount>
+      <cbc:ID>73111111111111111111111111</cbc:ID>
+      <!-- Bank account currency (OpisRachunku) -->
+      <cbc:CurrencyCode>PLN</cbc:CurrencyCode>
+      <cac:FinancialInstitutionBranch>
+        <!-- Bank name (NazwaBanku) -->
+        <cbc:Name>Bank Bankowości Bankowej S. A.</cbc:Name>
+      </cac:FinancialInstitutionBranch>
+    </cac:PayeeFinancialAccount>
+  </cac:PaymentMeans>
+  <!-- Exchange rate EUR→PLN, same on all lines (KursWaluty=4.5005) -->
+  <cac:TaxExchangeRate>
+    <cbc:SourceCurrencyCode>EUR</cbc:SourceCurrencyCode>
+    <cbc:TargetCurrencyCode>PLN</cbc:TargetCurrencyCode>
+    <cbc:CalculationRate>4.5005</cbc:CalculationRate>
+    <cbc:Date>2026-02-14</cbc:Date>
+  </cac:TaxExchangeRate>
+  <!--
+        BG-23 VAT breakdown in EUR (invoice currency).
+        P_13_1=13560 / P_14_1=3118.80 (23% @ EUR).
+        Total VAT EUR = 3118.80. Total invoice EUR = 16678.80.
+    -->
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="EUR">3118.80</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+          <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:TaxSubtotalExtension>
+                <!-- PLN-equivalent taxable amount (P_13_1W): 13560 × 4.5005 = 61026.78 -->
+                <puf:TaxCurrencyTaxableAmount currencyID="PLN">61026.78</puf:TaxCurrencyTaxableAmount>
+                <!-- PLN-equivalent VAT (P_14_1W): 3118.80 × 4.5005 = 14036.16 -->
+                <puf:TaxCurrencyTaxAmount currencyID="PLN">14036.16</puf:TaxCurrencyTaxAmount>
+              </puf:TaxSubtotalExtension>
+            </puf:PageroExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:TaxableAmount currencyID="EUR">13560.00</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="EUR">3118.80</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>23.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <!--
+        Second TaxTotal in PLN carrying the PLN-equivalent VAT (P_14_1W=14036.16).
+        TaxCurrencyCode=PLN above tells the transform to read this TaxTotal's TaxAmount
+        as vatCurrencyAmount → P_14_1W. No TaxSubtotal here: the transform reads only
+        cbc:TaxAmount from this second TaxTotal at header level.
+    -->
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="PLN">14036.16</cbc:TaxAmount>
+  </cac:TaxTotal>
+  <!-- BG-22 Document totals (in EUR) -->
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="EUR">13560.00</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="EUR">13560.00</cbc:TaxExclusiveAmount>
+    <!-- BT-112 Total with VAT (P_15=16678.80) -->
+    <cbc:TaxInclusiveAmount currencyID="EUR">16678.80</cbc:TaxInclusiveAmount>
+    <!-- BT-115 Amount due for payment (P_15=16678.80) -->
+    <cbc:PayableAmount currencyID="EUR">16678.80</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+  <!-- BG-25 Invoice lines -->
+  <!-- Line 1: lodówka Zimnotech mk1, 10 szt., EUR 406, P_6A=2026-02-20, CN 8418 21 91, KursWaluty=4.5005 -->
+  <cac:InvoiceLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:LineExtension>
+              <puf:RestrictedInformation>
+                <puf:Key>universalUniqueLineNumber</puf:Key>
+                <puf:Value>aaaa111133339990</puf:Value>
+              </puf:RestrictedInformation>
+
+              <puf:LineExclAllowanceChargeAmount currencyID="EUR">4060.00</puf:LineExclAllowanceChargeAmount>
+            </puf:LineExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">4060.00</cbc:LineExtensionAmount>
+    <!-- Per-line delivery date (P_6A) -->
+    <cac:Delivery>
+      <cbc:ActualDeliveryDate>2026-02-20</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+    <cac:Item>
+      <cbc:Name>lodówka Zimnotech mk1</cbc:Name>
+      <!-- CN code -->
+      <cac:CommodityClassification>
+        <cbc:ItemClassificationCode listID="TSP">8418 21 91</cbc:ItemClassificationCode>
+      </cac:CommodityClassification>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>23</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="EUR">406.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+  <!-- Line 2: zamrażarka Zimnotech mk2, 20 szt., EUR 250, P_6A=2026-02-25, CN 8418 40 20, KursWaluty=4.5005 -->
+  <cac:InvoiceLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:LineExtension>
+              <puf:RestrictedInformation>
+                <puf:Key>universalUniqueLineNumber</puf:Key>
+                <puf:Value>aaaa111133339991</puf:Value>
+              </puf:RestrictedInformation>
+              <puf:RestrictedInformation>
+                <puf:Key>KursWaluty</puf:Key>
+                <puf:Value>4.5005</puf:Value>
+              </puf:RestrictedInformation>
+              <puf:LineExclAllowanceChargeAmount currencyID="EUR">5000.00</puf:LineExclAllowanceChargeAmount>
+            </puf:LineExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:ID>2</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="EA">20</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">5000.00</cbc:LineExtensionAmount>
+    <cac:Delivery>
+      <cbc:ActualDeliveryDate>2026-02-25</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+    <cac:Item>
+      <cbc:Name>zamrażarka Zimnotech mk2</cbc:Name>
+      <cac:CommodityClassification>
+        <cbc:ItemClassificationCode listID="TSP">8418 40 20</cbc:ItemClassificationCode>
+      </cac:CommodityClassification>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>23</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="EUR">250.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+  <!-- Line 3: zmywarka Bryza 100, 15 szt., EUR 300, P_6A=2026-02-26, CN 8422 11 00, KursWaluty=4.5005 -->
+  <cac:InvoiceLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:LineExtension>
+              <puf:RestrictedInformation>
+                <puf:Key>universalUniqueLineNumber</puf:Key>
+                <puf:Value>aaaa111133339992</puf:Value>
+              </puf:RestrictedInformation>
+              <puf:RestrictedInformation>
+                <puf:Key>KursWaluty</puf:Key>
+                <puf:Value>4.5005</puf:Value>
+              </puf:RestrictedInformation>
+              <puf:LineExclAllowanceChargeAmount currencyID="EUR">4500.00</puf:LineExclAllowanceChargeAmount>
+            </puf:LineExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:ID>3</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="EA">15</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">4500.00</cbc:LineExtensionAmount>
+    <cac:Delivery>
+      <cbc:ActualDeliveryDate>2026-02-26</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+    <cac:Item>
+      <cbc:Name>zmywarka Bryza 100</cbc:Name>
+      <cac:CommodityClassification>
+        <cbc:ItemClassificationCode listID="TSP">8422 11 00</cbc:ItemClassificationCode>
+      </cac:CommodityClassification>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>23</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="EUR">300.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+</Invoice>

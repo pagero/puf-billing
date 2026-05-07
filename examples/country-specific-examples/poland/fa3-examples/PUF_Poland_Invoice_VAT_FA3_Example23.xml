@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+  <!--
+        Values in this file are based on the KSeF FA(3) sample FA_3_Przykład_23.xml.
+        VAT invoice in USD for export supply (EX).
+        Tax category G (EX), Name="0-EX", Percent=0, TaxAmount=0.
+        Buyer: non-EU entity, KodKraju=US + NrID=999999999 → PartyIdentification schemeID="US:TaxID".
+        P_13_6_3=8000 (EX base at 0%), P_15=8000.
+        Seller: ABC AGD sp. z o. o.
+        Buyer: EFG Ltd. (United States, Seattle).
+        Corresponding invoice type in FA (3): VAT.
+        In applicable cases the corresponding FA XML element is mentioned in parenthesis.
+    -->
+  <ext:UBLExtensions>
+    <!-- Place of issue (P_1M) -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>placeOfIssue</puf:Key>
+            <puf:Value>Warszawa</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+    <!-- Checkout method (P_16): value 2 = false -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>checkoutMethod</puf:Key>
+            <puf:Value>false</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+  <!-- BT-1 Invoice number (P_2) -->
+  <cbc:ID>FV2026/02/150</cbc:ID>
+  <!-- BT-2 Invoice issue date (P_1) -->
+  <cbc:IssueDate>2026-06-15</cbc:IssueDate>
+  <!-- BT-3 Invoice type code: VAT -->
+  <cbc:InvoiceTypeCode name="VAT">380</cbc:InvoiceTypeCode>
+  <!-- BT-22 Footer note -->
+  <cbc:Note>Kapiał zakładowy 5 000 000</cbc:Note>
+  <!-- BT-5 Invoice document currency (KodWaluty=USD) -->
+  <cbc:DocumentCurrencyCode>USD</cbc:DocumentCurrencyCode>
+  <!-- BG-4 Seller party (Podmiot1): ABC AGD sp. z o. o. -->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <!-- REGON/KRS/BDO from Stopka -->
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:REGON">999999999</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:KRS">0000099999</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:BDO">000099999</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PostalAddress>
+        <cbc:StreetName>ul. Kwiatowa 1 m. 2</cbc:StreetName>
+        <cbc:BuildingNumber>1</cbc:BuildingNumber>
+        <cbc:CityName>Warszawa</cbc:CityName>
+        <cbc:PostalZone>00-001</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>9999999999</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>ABC AGD sp. z o. o.</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+    <cac:AccountingContact>
+      <cbc:Telephone>667444555</cbc:Telephone>
+      <cbc:ElectronicMail>abc@abc.pl</cbc:ElectronicMail>
+    </cac:AccountingContact>
+  </cac:AccountingSupplierParty>
+  <!--
+        BG-7 Buyer party (Podmiot2): EFG Ltd. (United States).
+        Non-EU buyer: KodKraju=US + NrID=999999999.
+        Mapped as PartyIdentification with schemeID="US:TaxID" (country prefix + colon + "TaxID").
+        No EU VAT number, so no PartyTaxScheme CompanyID.
+    -->
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <!-- Non-EU identifier: KodKraju=US + NrID=999999999 -->
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="US:TaxID">999999999</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PostalAddress>
+        <cbc:StreetName>Flower (St) 1</cbc:StreetName>
+        <cbc:BuildingNumber>1</cbc:BuildingNumber>
+        <cbc:CityName>Seattle</cbc:CityName>
+        <cbc:PostalZone>WA 99999</cbc:PostalZone>
+        <cac:Country>
+          <!-- KodKraju=US -->
+          <cbc:IdentificationCode>US</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyLegalEntity>
+        <!-- BT-44 Buyer name (Nazwa=EFG Ltd.) -->
+        <cbc:RegistrationName>EFG Ltd.</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+    <cac:AccountingContact>
+      <cbc:Telephone>555777999</cbc:Telephone>
+      <cbc:ElectronicMail>john@smith.us</cbc:ElectronicMail>
+    </cac:AccountingContact>
+  </cac:AccountingCustomerParty>
+  <cac:PaymentMeans>
+    <cbc:PaymentMeansCode>48</cbc:PaymentMeansCode>
+  </cac:PaymentMeans>
+  <!--
+        BG-23 VAT breakdown: EX (P_13_6_3=8000, TaxAmount=0).
+        Category G = export supply at zero rate.
+        Name="0-EX" indicates the Polish export zero-rate type.
+    -->
+  <cac:TaxTotal>
+    <!-- BT-110 Total VAT = 0 (EX zero rate) -->
+    <cbc:TaxAmount currencyID="USD">0.00</cbc:TaxAmount>
+    <!-- EX subtotal (P_13_6_3=8000) -->
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="USD">8000.00</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="USD">0.00</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <!-- G = export supply (EX) -->
+        <cbc:ID>G</cbc:ID>
+        <!-- 0-EX: Polish tax code for export supply -->
+        <cbc:Name>0-EX</cbc:Name>
+        <cbc:Percent>0.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <!-- BG-22 Document totals -->
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="USD">8000.00</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="USD">8000.00</cbc:TaxExclusiveAmount>
+    <!-- BT-112 Total with VAT (P_15=8000) -->
+    <cbc:TaxInclusiveAmount currencyID="USD">8000.00</cbc:TaxInclusiveAmount>
+    <!-- BT-115 Amount due for payment (P_15=8000) -->
+    <cbc:PayableAmount currencyID="USD">8000.00</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+  <!-- BG-25 Invoice lines -->
+  <!-- Line 1 (NrWierszaFa=1): lodówka Zimnotech mk1, 20 szt., USD 400, P_6A=2026-01-03, P_12=0 EX -->
+  <cac:InvoiceLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:LineExtension>
+              <puf:RestrictedInformation>
+                <puf:Key>universalUniqueLineNumber</puf:Key>
+                <puf:Value>aaaa111133339990</puf:Value>
+              </puf:RestrictedInformation>
+              <puf:LineExclAllowanceChargeAmount currencyID="USD">8000.00</puf:LineExclAllowanceChargeAmount>
+            </puf:LineExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="EA">20</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="USD">8000.00</cbc:LineExtensionAmount>
+    <!-- Per-line delivery date (P_6A=2026-01-03) -->
+    <cac:Delivery>
+      <cbc:ActualDeliveryDate>2026-01-03</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+    <!-- Line-level tax: EX, G, 0%, TaxAmount=0 -->
+    <cac:Item>
+      <cbc:Name>lodówka Zimnotech mk1</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>G</cbc:ID>
+        <cbc:Name>0-EX</cbc:Name>
+        <cbc:Percent>0</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="USD">400.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+</Invoice>
