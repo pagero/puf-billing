@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+  <!--
+        Values in this file are based on the KSeF FA(3) sample FA_3_Przykład_1.xml.
+        PUF example file of a basic invoice producing a FA XML version 3 invoice. Corresponding invoice type in FA (3): VAT.
+        In applicable cases the corresponding FA XML element is mentioned in parenthesis.
+    -->
+  <ext:UBLExtensions>
+    <!-- Place of issue (P_1M) -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>placeOfIssue</puf:Key>
+            <puf:Value>Warszawa</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+    <!-- Checkout method (P_16): value 2 maps to false — no cash accounting -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>checkoutMethod</puf:Key>
+            <puf:Value>false</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+    <!-- Indicator: invoice referred to in Art. 109 sec. 3d of the Act (FP): value 1 = true -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>FP</puf:Key>
+            <puf:Value>true</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+    <!-- Fully paid indicator and date of full payment (Platnosc/Zaplacono + Platnosc/DataZaplaty) -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:FullPaymentExtension</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:FullPaymentDetails>
+            <puf:FullPaymentIndicator>true</puf:FullPaymentIndicator>
+            <puf:DateOfFullPayment>2026-01-27</puf:DateOfFullPayment>
+          </puf:FullPaymentDetails>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+  <!-- BT-1 Invoice number (P_2) -->
+  <cbc:ID>FV2026/02/150</cbc:ID>
+  <!-- BT-2 Invoice issue date (P_1) -->
+  <cbc:IssueDate>2026-02-15</cbc:IssueDate>
+  <!--
+        BT-3 Invoice type code (RodzajFaktury):
+        VAT  - Basic invoice              (380, name="VAT")
+        KOR  - Correction invoice         (384, name="KOR")
+        ZAL  - Advance payment invoice    (386, name="ZAL")
+        ROZ  - Settlement invoice         (380, name="ROZ")
+        UPR  - Simplified invoice         (380, name="UPR")
+    -->
+  <cbc:InvoiceTypeCode name="VAT">380</cbc:InvoiceTypeCode>
+  <!-- BT-22 Free text note (Fa/DodatkowyOpis: Klucz / Wartosc) -->
+  <cbc:Note>preferowane godziny dowozu: dni robocze 17:00 - 20:00</cbc:Note>
+  <!-- BT-22 Free text note (Stopka/Informacje/StopkaFaktury) -->
+  <cbc:Note>Kapiał zakładowy 5 000 000</cbc:Note>
+  <!-- BT-5 Invoice document currency (KodWaluty) -->
+  <cbc:DocumentCurrencyCode>PLN</cbc:DocumentCurrencyCode>
+  <!-- Order reference (Fa/WarunkiTransakcji/Zamowienia) -->
+  <cac:OrderReference>
+    <!-- Order number (NrZamowienia) -->
+    <cbc:ID>4354343</cbc:ID>
+    <!-- Order date (DataZamowienia) -->
+    <cbc:IssueDate>2026-01-26</cbc:IssueDate>
+  </cac:OrderReference>
+  <!-- BG-4 Seller party (Podmiot1) -->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <!-- Additional seller ID (REGON — Stopka/Rejestry/REGON) -->
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:REGON">999999999</cbc:ID>
+      </cac:PartyIdentification>
+      <!-- Additional seller ID (KRS — Stopka/Rejestry/KRS) -->
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:KRS">0000099999</cbc:ID>
+      </cac:PartyIdentification>
+      <!-- Additional seller ID (BDO — Stopka/Rejestry/BDO) -->
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:BDO">000099999</cbc:ID>
+      </cac:PartyIdentification>
+      <!-- BG-5 Seller address (Podmiot1/Adres) -->
+      <cac:PostalAddress>
+        <!-- BT-35 Seller street (Adres/AdresL1) -->
+        <cbc:StreetName>ul. Kwiatowa 1 m. 2</cbc:StreetName>
+        <!-- Building number (NrDomu) -->
+        <cbc:BuildingNumber>1</cbc:BuildingNumber>
+        <!-- BT-37 Seller city (Adres/AdresL2) -->
+        <cbc:CityName>Warszawa</cbc:CityName>
+        <!-- BT-38 Seller post code (Adres/AdresL2) -->
+        <cbc:PostalZone>00-001</cbc:PostalZone>
+        <cac:Country>
+          <!-- BT-40 Seller country code (Adres/KodKraju) -->
+          <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <!-- BT-31 Seller VAT number / NIP (Podmiot1/DaneIdentyfikacyjne/NIP) -->
+        <cbc:CompanyID>9999999999</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <!-- BT-27 Seller name (Podmiot1/DaneIdentyfikacyjne/Nazwa) -->
+        <cbc:RegistrationName>ABC AGD sp. z o. o.</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+    <cac:AccountingContact>
+      <!-- BT-42 Seller telephone (Podmiot1/DaneKontaktowe/Telefon) -->
+      <cbc:Telephone>667444555</cbc:Telephone>
+      <!-- BT-43 Seller email (Podmiot1/DaneKontaktowe/Email) -->
+      <cbc:ElectronicMail>abc@abc.pl</cbc:ElectronicMail>
+    </cac:AccountingContact>
+  </cac:AccountingSupplierParty>
+  <!-- BG-7 Buyer party (Podmiot2) -->
+  <cac:AccountingCustomerParty>
+    <!-- Customer number — used to route document to recipient in Pagero Online (Podmiot2/NrKlienta) -->
+    <cbc:SupplierAssignedAccountID>fdfd778343</cbc:SupplierAssignedAccountID>
+    <cac:Party>
+      <!-- BG-8 Buyer address (Podmiot2/Adres) -->
+      <cac:PostalAddress>
+        <!-- BT-50 Buyer street (Adres/AdresL1) -->
+        <cbc:StreetName>ul. Polna 1</cbc:StreetName>
+        <!-- Building number (NrDomu) -->
+        <cbc:BuildingNumber>1</cbc:BuildingNumber>
+        <!-- BT-52 Buyer city (Adres/AdresL2) -->
+        <cbc:CityName>Warszawa</cbc:CityName>
+        <!-- BT-53 Buyer post code (Adres/AdresL2) -->
+        <cbc:PostalZone>00-001</cbc:PostalZone>
+        <cac:Country>
+          <!-- BT-55 Buyer country code (Adres/KodKraju) -->
+          <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <!-- BT-48 Buyer VAT number / NIP (Podmiot2/DaneIdentyfikacyjne/NIP) -->
+        <cbc:CompanyID>1111111111</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <!-- BT-44 Buyer name (Podmiot2/DaneIdentyfikacyjne/Nazwa) -->
+        <cbc:RegistrationName>F.H.U. Jan Kowalski</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+    <cac:AccountingContact>
+      <!-- BT-57 Buyer telephone (Podmiot2/DaneKontaktowe/Telefon) -->
+      <cbc:Telephone>555777999</cbc:Telephone>
+      <!-- BT-58 Buyer email (Podmiot2/DaneKontaktowe/Email) -->
+      <cbc:ElectronicMail>jan@kowalski.pl</cbc:ElectronicMail>
+    </cac:AccountingContact>
+  </cac:AccountingCustomerParty>
+  <cac:Delivery>
+    <!-- BT-72 Delivery date (P_6) -->
+    <cbc:ActualDeliveryDate>2026-01-27</cbc:ActualDeliveryDate>
+  </cac:Delivery>
+  <!--
+        Payment means code (Platnosc/FormaPlatnosci).
+        KSeF value 6 (credit card) maps to PUF code 48 (bank card).
+        No bank account required for card payments.
+        See https://pagero.github.io/puf-code-lists/#_puf_010_paymentmeanscode for available codes.
+    -->
+  <cac:PaymentMeans>
+    <cbc:PaymentMeansCode>42</cbc:PaymentMeansCode>
+  </cac:PaymentMeans>
+  <!-- BG-23 VAT breakdown (P_13_x / P_14_x) -->
+  <cac:TaxTotal>
+    <!-- BT-110 Invoice total VAT amount -->
+    <cbc:TaxAmount currencyID="PLN">383.38</cbc:TaxAmount>
+    <!-- Standard 23% rate breakdown (P_13_1 / P_14_1) -->
+    <cac:TaxSubtotal>
+      <!-- BT-116 Tax category taxable amount (P_13_1) -->
+      <cbc:TaxableAmount currencyID="PLN">1666.66</cbc:TaxableAmount>
+      <!-- BT-117 Tax category tax amount (P_14_1) -->
+      <cbc:TaxAmount currencyID="PLN">383.33</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <!-- BT-118 Tax category code (P_12=23 → Standard rate) -->
+        <cbc:ID>S</cbc:ID>
+        <!-- BT-119 Tax category rate -->
+        <cbc:Percent>23.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+    <!-- Reduced 5% rate breakdown (P_13_3 / P_14_3) -->
+    <cac:TaxSubtotal>
+      <!-- BT-116 Tax category taxable amount (P_13_3) -->
+      <cbc:TaxableAmount currencyID="PLN">0.95</cbc:TaxableAmount>
+      <!-- BT-117 Tax category tax amount (P_14_3) -->
+      <cbc:TaxAmount currencyID="PLN">0.05</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <!-- BT-118 Tax category code (P_12=5 → Standard rate) -->
+        <cbc:ID>S</cbc:ID>
+        <!-- BT-119 Tax category rate -->
+        <cbc:Percent>5.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <!-- BG-22 Document totals -->
+  <cac:LegalMonetaryTotal>
+    <!-- BT-106 Sum of invoice line net amounts -->
+    <cbc:LineExtensionAmount currencyID="PLN">1667.61</cbc:LineExtensionAmount>
+    <!-- BT-109 Invoice total amount without VAT -->
+    <cbc:TaxExclusiveAmount currencyID="PLN">1667.61</cbc:TaxExclusiveAmount>
+    <!-- BT-112 Invoice total amount with VAT -->
+    <cbc:TaxInclusiveAmount currencyID="PLN">2051.00</cbc:TaxInclusiveAmount>
+    <!-- BT-115 Amount due for payment (P_15) -->
+    <cbc:PayableAmount currencyID="PLN">2051.00</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+  <!-- BG-25 Invoice lines (Fa/FaWiersz) -->
+  <!-- Line 1 (NrWierszaFa=1): lodówka Zimnotech mk1 -->
+  <cac:InvoiceLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:LineExtension>
+              <!-- Universal unique line number (UU_ID) -->
+              <puf:RestrictedInformation>
+                <puf:Key>universalUniqueLineNumber</puf:Key>
+                <puf:Value>aaaa111133339990</puf:Value>
+              </puf:RestrictedInformation>
+              <!-- Line subtotal excluding allowances/charges (P_11) -->
+              <puf:LineExclAllowanceChargeAmount currencyID="PLN">1626.01</puf:LineExclAllowanceChargeAmount>
+            </puf:LineExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- BT-126 Invoice line number (NrWierszaFa) -->
+    <cbc:ID>1</cbc:ID>
+    <!-- BT-129 Invoiced quantity (P_8B). Unit of measure in attribute unitCode (P_8A: szt. → EA) -->
+    <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+    <!-- BT-131 Invoice line net amount (P_11) -->
+    <cbc:LineExtensionAmount currencyID="PLN">1626.01</cbc:LineExtensionAmount>
+    <!-- Line-level tax (BT-151/BT-152) -->
+    <cac:Item>
+      <!-- BT-153 Item name (P_7) -->
+      <cbc:Name>lodówka Zimnotech mk1</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>23</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <!-- BT-146 Item net price (P_9A) -->
+      <cbc:PriceAmount currencyID="PLN">1626.01</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+  <!-- Line 2 (NrWierszaFa=2): wniesienie sprzętu -->
+  <cac:InvoiceLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:LineExtension>
+              <!-- Universal unique line number (UU_ID) -->
+              <puf:RestrictedInformation>
+                <puf:Key>universalUniqueLineNumber</puf:Key>
+                <puf:Value>aaaa111133339991</puf:Value>
+              </puf:RestrictedInformation>
+              <!-- Line subtotal excluding allowances/charges (P_11) -->
+              <puf:LineExclAllowanceChargeAmount currencyID="PLN">40.65</puf:LineExclAllowanceChargeAmount>
+            </puf:LineExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- BT-126 Invoice line number (NrWierszaFa) -->
+    <cbc:ID>2</cbc:ID>
+    <!-- BT-129 Invoiced quantity (P_8B). Unit of measure in attribute unitCode (P_8A: szt. → EA) -->
+    <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+    <!-- BT-131 Invoice line net amount (P_11) -->
+    <cbc:LineExtensionAmount currencyID="PLN">40.65</cbc:LineExtensionAmount>
+    <!-- Line-level tax (BT-151/BT-152) -->
+    <cac:Item>
+      <!-- BT-153 Item name (P_7) -->
+      <cbc:Name>wniesienie sprzętu</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>23</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <!-- BT-146 Item net price (P_9A) -->
+      <cbc:PriceAmount currencyID="PLN">40.65</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+  <!-- Line 3 (NrWierszaFa=3): promocja lodówka pełna mleka -->
+  <cac:InvoiceLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:LineExtension>
+              <!-- Universal unique line number (UU_ID) -->
+              <puf:RestrictedInformation>
+                <puf:Key>universalUniqueLineNumber</puf:Key>
+                <puf:Value>aaaa111133339992</puf:Value>
+              </puf:RestrictedInformation>
+              <!-- Line subtotal excluding allowances/charges (P_11) -->
+              <puf:LineExclAllowanceChargeAmount currencyID="PLN">0.95</puf:LineExclAllowanceChargeAmount>
+            </puf:LineExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- BT-126 Invoice line number (NrWierszaFa) -->
+    <cbc:ID>3</cbc:ID>
+    <!-- BT-129 Invoiced quantity (P_8B). Unit of measure in attribute unitCode (P_8A: szt. → EA) -->
+    <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+    <!-- BT-131 Invoice line net amount (P_11) -->
+    <cbc:LineExtensionAmount currencyID="PLN">0.95</cbc:LineExtensionAmount>
+    <!-- Line-level tax (BT-151/BT-152) -->
+    <cac:Item>
+      <!-- BT-153 Item name (P_7) -->
+      <cbc:Name>promocja lodówka pełna mleka</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>5</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <!-- BT-146 Item net price (P_9A) -->
+      <cbc:PriceAmount currencyID="PLN">0.95</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+</Invoice>

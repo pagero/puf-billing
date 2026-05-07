@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0"
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <!--
+        Values in this file are based on the KSeF FA(3) sample FA_3_Przykład_5.xml.
+        KOR correction invoice for a buyer name correction only (no financial changes).
+        The original invoice listed the buyer as "CeDeE s.c." — corrected to "CDE sp. j."
+        Podmiot2K (corrected buyer data) is represented as a RestrictedInformationParty
+        with key "correctedBuyerOrOtherPartyDetails". P_15=0, no invoice lines in FA(3).
+        Corresponding invoice type in FA (3): KOR.
+        TypKorekty=1: correction effective on the original invoice date.
+        In applicable cases the corresponding FA XML element is mentioned in parenthesis.
+    -->
+    <ext:UBLExtensions>
+        <!-- Place of issue (P_1M) -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>placeOfIssue</puf:Key>
+                        <puf:Value>Warszawa</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- Checkout method (P_16): value 2 = false -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>checkoutMethod</puf:Key>
+                        <puf:Value>false</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- Type of correction (TypKorekty): 1 = correction effective on original invoice date -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>correctionType</puf:Key>
+                        <puf:Value>1</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- Corrected buyer data (Podmiot2K): buyer name corrected from "CeDeE s.c." to "CDE sp. j." -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformationParty>
+                        <puf:Key>correctedBuyerOrOtherPartyDetails</puf:Key>
+                        <cac:Party>
+                            <cac:PartyIdentification>
+                                <!-- Buyer internal ID (IDNabywcy) -->
+                                <cbc:ID schemeID="PL:IDNabywcy">0001</cbc:ID>
+                            </cac:PartyIdentification>
+                            <cac:PostalAddress>
+                                <cbc:StreetName>ul. Sadowa 1 lok. 3</cbc:StreetName>
+                <!-- Building number (NrDomu) -->
+                <cbc:BuildingNumber>1</cbc:BuildingNumber>
+                                <cbc:CityName>Kraków</cbc:CityName>
+                                <cbc:PostalZone>00-002</cbc:PostalZone>
+                                <cac:Country>
+                                    <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+                                </cac:Country>
+                            </cac:PostalAddress>
+                            <cac:PartyTaxScheme>
+                                <cbc:CompanyID>1111111111</cbc:CompanyID>
+                                <cac:TaxScheme>
+                                    <cbc:ID>VAT</cbc:ID>
+                                </cac:TaxScheme>
+                            </cac:PartyTaxScheme>
+                            <cac:PartyLegalEntity>
+                                <!-- Corrected buyer name (Podmiot2K/DaneIdentyfikacyjne/Nazwa) -->
+                                <cbc:RegistrationName>CDE sp. j.</cbc:RegistrationName>
+                            </cac:PartyLegalEntity>
+                        </cac:Party>
+                    </puf:RestrictedInformationParty>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Correction invoice number (P_2) -->
+    <cbc:ID>FK2026/04/23</cbc:ID>
+    <!-- BT-2 Correction invoice issue date (P_1) -->
+    <cbc:IssueDate>2026-04-01</cbc:IssueDate>
+    <!-- BT-3 Invoice type code (RodzajFaktury): KOR - Correction invoice -->
+    <cbc:InvoiceTypeCode name="KOR">384</cbc:InvoiceTypeCode>
+    <!-- BT-22 Footer note (Stopka/Informacje/StopkaFaktury) -->
+    <cbc:Note>Kapiał zakładowy 5 000 000</cbc:Note>
+    <!-- BT-5 Invoice document currency (KodWaluty) -->
+    <cbc:DocumentCurrencyCode>PLN</cbc:DocumentCurrencyCode>
+    <!-- BG-3 Reference to invoice being corrected (DaneFaKorygowanej) -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:BillingReferenceExtension>
+                                <!-- KSeF reference number of corrected invoice (NrKSeFFaKorygowanej) -->
+                                <puf:ClearanceID>9999999999-20230908-8BEF280C8D35-4D</puf:ClearanceID>
+                                <!-- Reason for correction (PrzyczynaKorekty) -->
+                                <cbc:Note>błędna nazwa nabywcy</cbc:Note>
+                            </puf:BillingReferenceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- BT-25 Corrected invoice number (DaneFaKorygowanej/NrFaKorygowanej) -->
+            <cbc:ID>FV2026/02/150</cbc:ID>
+            <!-- BT-26 Date of issue of corrected invoice (DaneFaKorygowanej/DataWystFaKorygowanej) -->
+            <cbc:IssueDate>2026-02-15</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- BG-4 Seller party (Podmiot1) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="PL:REGON">999999999</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="PL:KRS">0000099999</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="PL:BDO">000099999</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>ul. Kwiatowa 1 m. 2</cbc:StreetName>
+                <!-- Building number (NrDomu) -->
+                <cbc:BuildingNumber>1</cbc:BuildingNumber>
+                <cbc:CityName>Warszawa</cbc:CityName>
+                <cbc:PostalZone>00-001</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>9999999999</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>ABC AGD sp. z o. o.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:Telephone>667444555</cbc:Telephone>
+            <cbc:ElectronicMail>abc@abc.pl</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingSupplierParty>
+    <!-- BG-7 Buyer party (Podmiot2) — original buyer as on the corrected invoice -->
+    <cac:AccountingCustomerParty>
+        <!-- Customer number (NrKlienta) -->
+        <cbc:SupplierAssignedAccountID>fdfd778343</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- Buyer internal identifier (IDNabywcy) -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="PL:IDNabywcy">0001</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>ul. Sadowa 1 lok. 3</cbc:StreetName>
+                <!-- Building number (NrDomu) -->
+                <cbc:BuildingNumber>1</cbc:BuildingNumber>
+                <cbc:CityName>Kraków</cbc:CityName>
+                <cbc:PostalZone>00-002</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>1111111111</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- Original (wrong) buyer name (Podmiot2/DaneIdentyfikacyjne/Nazwa) -->
+                <cbc:RegistrationName>CeDeE s.c.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:Telephone>555777999</cbc:Telephone>
+            <cbc:ElectronicMail>cde@cde.pl</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingCustomerParty>
+    <!-- BG-23 VAT breakdown — zero amounts (buyer name correction only, P_15=0) -->
+    <cac:TaxTotal>
+        <!-- BT-110 Total VAT amount -->
+        <cbc:TaxAmount currencyID="PLN">0.00</cbc:TaxAmount>
+    </cac:TaxTotal>
+    <!-- BG-22 Document totals — all zero (no financial change) -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="PLN">0.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="PLN">0.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="PLN">0.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment (P_15) -->
+        <cbc:PayableAmount currencyID="PLN">0.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <!-- BG-25 InvoiceLine is required by the PUF schema but the KSeF FA(3) sample has no FaWiersz
+         for this buyer-data-only correction. The transform will output a FaWiersz from this line,
+         which is an unavoidable mismatch: PUF requires at least one line; FA(3) requires none here. -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Line number -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-129 Invoiced quantity -->
+        <cbc:InvoicedQuantity unitCode="EA">0</cbc:InvoicedQuantity>
+        <!-- BT-131 Line amount (zero — no financial change) -->
+        <cbc:LineExtensionAmount currencyID="PLN">0.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-153 Item description -->
+            <cbc:Name>Korekta danych nabywcy</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>23.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="PLN">0.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

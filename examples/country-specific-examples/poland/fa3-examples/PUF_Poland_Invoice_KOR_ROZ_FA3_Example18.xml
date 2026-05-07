@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns:puf="urn:pagero:ExtensionComponent:1.0"
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <!--
+        Values in this file are based on the KSeF FA(3) sample Fa_3_Przykład_18.xml.
+        KOR_ROZ correction of settlement invoice FV2026/08/12 (Example 17).
+        Reason: błędne zafakturowanie kwoty pozostałej do zapłaty: było 300000, a powinno być 307635.
+        TypKorekty=1. PayableAmount=7635 (P_15=7635, the correction difference).
+        Before-state FaWiersz rows use stanPrzed=true (StanPrzed=1).
+        GTU_10 on before and after rows of Line 1.
+        P_15ZK=300000 (amount on corrected settlement invoice).
+        PrepaidPayment referencing advance invoice (different KSeF ID from Ex14/17).
+        Seller: ABC Developex S.A.
+        Corresponding invoice type in FA (3): KOR_ROZ.
+        In applicable cases the corresponding FA XML element is mentioned in parenthesis.
+    -->
+    <ext:UBLExtensions>
+        <!-- Place of issue (P_1M) -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>placeOfIssue</puf:Key>
+                        <puf:Value>Warszawa</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- Checkout method (P_16): value 2 = false -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>checkoutMethod</puf:Key>
+                        <puf:Value>false</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- Type of correction (TypKorekty=1) -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>correctionType</puf:Key>
+                        <puf:Value>1</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- Amount on corrected settlement invoice (P_15ZK=300000) -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>P_15ZK</puf:Key>
+                        <puf:Value>300000</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- Advance invoice KSeF reference — different ID from Ex14/17 (NrKSeFFaZaliczkowej) -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>NrKSeFFaZaliczkowej</puf:Key>
+                        <puf:Value>9999999999-20230908-76B2B580D4DC-80</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <!-- Additional purchaser (Podmiot3 Rola=4): F.H.U. Grażyna Kowalska, 50% share -->
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformationParty>
+                        <puf:Key>additionalBuyer</puf:Key>
+                        <cac:Party>
+                            <cac:PostalAddress>
+                                <cbc:StreetName>ul. Polna 1</cbc:StreetName>
+                                <cbc:BuildingNumber>1</cbc:BuildingNumber>
+                                <cbc:CityName>Warszawa</cbc:CityName>
+                                <cbc:PostalZone>00-001</cbc:PostalZone>
+                                <cac:Country>
+                                    <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+                                </cac:Country>
+                            </cac:PostalAddress>
+                            <cac:PartyTaxScheme>
+                                <cbc:CompanyID>3333333333</cbc:CompanyID>
+                                <cac:TaxScheme>
+                                    <cbc:ID>VAT</cbc:ID>
+                                </cac:TaxScheme>
+                            </cac:PartyTaxScheme>
+                            <cac:PartyLegalEntity>
+                                <cbc:RegistrationName>F.H.U. Grażyna Kowalska</cbc:RegistrationName>
+                            </cac:PartyLegalEntity>
+                            <cac:Contact>
+                                <cbc:Telephone>555777999</cbc:Telephone>
+                                <cbc:ElectronicMail>jan@kowalski.pl</cbc:ElectronicMail>
+                            </cac:Contact>
+                        </cac:Party>
+                        <cbc:Description>50</cbc:Description>
+                    </puf:RestrictedInformationParty>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Correction invoice number (P_2) -->
+    <cbc:ID>FK2026/09/1</cbc:ID>
+    <!-- BT-2 Correction invoice issue date (P_1) -->
+    <cbc:IssueDate>2026-08-17</cbc:IssueDate>
+    <!-- BT-3 Invoice type code: KOR_ROZ -->
+    <cbc:InvoiceTypeCode name="KOR_ROZ">384</cbc:InvoiceTypeCode>
+    <!-- BT-22 Footer note -->
+    <cbc:Note>Kapiał zakładowy 5 000 000</cbc:Note>
+    <!-- BT-5 Invoice document currency -->
+    <cbc:DocumentCurrencyCode>PLN</cbc:DocumentCurrencyCode>
+    <!-- BG-3 Reference to corrected settlement invoice (DaneFaKorygowanej) -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:BillingReferenceExtension>
+                                <!-- KSeF reference number of corrected invoice (NrKSeFFaKorygowanej) -->
+                                <puf:ClearanceID>9999999999-20230908-8BEF280C8D35-4D</puf:ClearanceID>
+                                <!-- Reason for correction (PrzyczynaKorekty) -->
+                                <cbc:Note>błędne zafakturowanie kwoty pozostałej do zapłaty: było 300000, a powinno być 307635</cbc:Note>
+                            </puf:BillingReferenceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- BT-25 Corrected invoice number (NrFaKorygowanej) -->
+            <cbc:ID>FV2026/08/12</cbc:ID>
+            <!-- BT-26 Date of corrected invoice (DataWystFaKorygowanej) -->
+            <cbc:IssueDate>2026-08-17</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- BG-4 Seller party (Podmiot1): ABC Developex S.A. -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="PL:REGON">999999999</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="PL:KRS">0000099999</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="PL:BDO">000099999</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>ul. Sadowa 1 lok. 3</cbc:StreetName>
+                <cbc:BuildingNumber>1</cbc:BuildingNumber>
+                <cbc:CityName>Kraków</cbc:CityName>
+                <cbc:PostalZone>00-002</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>9999999999</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>ABC Developex S.A.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:Telephone>667444555</cbc:Telephone>
+            <cbc:ElectronicMail>abc@abc.pl</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingSupplierParty>
+    <!-- BG-7 Buyer party (Podmiot2) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:PostalAddress>
+                <cbc:StreetName>ul. Polna 1</cbc:StreetName>
+                <cbc:BuildingNumber>1</cbc:BuildingNumber>
+                <cbc:CityName>Warszawa</cbc:CityName>
+                <cbc:PostalZone>00-001</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>1111111111</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>F.H.U. Jan Kowalski</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:Telephone>555777999</cbc:Telephone>
+            <cbc:ElectronicMail>jan@kowalski.pl</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingCustomerParty>
+    <cac:Delivery>
+        <cbc:ActualDeliveryDate>2026-09-17</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>48</cbc:PaymentMeansCode>
+    </cac:PaymentMeans>
+    <!-- Advance invoice reference: FakturaZaliczkowa with KSeF ID (NrKSeFFaZaliczkowej) -->
+    <cac:PrepaidPayment>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PrepaidPaymentExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:PrepaidPaymentExtension>
+                            <cac:DocumentReference>
+                                <ext:UBLExtensions>
+                                    <ext:UBLExtension>
+                                        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                                        <ext:ExtensionContent>
+                                            <puf:PageroExtension>
+                                                <puf:BillingReferenceExtension>
+                                                    <!-- KSeF reference of advance invoice (NrKSeFFaZaliczkowej) -->
+                                                    <puf:ClearanceID>9999999999-20230908-76B2B580D4DC-80</puf:ClearanceID>
+                                                </puf:BillingReferenceExtension>
+                                            </puf:PageroExtension>
+                                        </ext:ExtensionContent>
+                                    </ext:UBLExtension>
+                                </ext:UBLExtensions>
+                                <cbc:ID>9999999999-20230908-76B2B580D4DC-80</cbc:ID>
+                            </cac:DocumentReference>
+                        </puf:PrepaidPaymentExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+    </cac:PrepaidPayment>
+    <!--
+        BG-23 VAT breakdown — net change amounts.
+        P_13_1=101.76 / P_14_1=23.41 (23% — services portion of difference)
+        P_13_2=6953.54 / P_14_2=556.29 (8% — apartment portion of difference)
+        Total VAT change = 23.41 + 556.29 = 579.70
+        Total net change = 101.76 + 6953.54 = 7055.30
+        PayableAmount = P_15 = 7635
+    -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="PLN">579.70</cbc:TaxAmount>
+        <!-- 23% subtotal (P_13_1 / P_14_1) -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="PLN">101.76</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="PLN">23.41</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>23.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <!-- 8% subtotal (P_13_2 / P_14_2) -->
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="PLN">6953.54</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="PLN">556.29</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>8.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="PLN">7055.30</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="PLN">7055.30</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="PLN">7635.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment (P_15=7635) -->
+        <cbc:PayableAmount currencyID="PLN">7635.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <!-- BG-25 Invoice lines (FaWiersz — before/after pairs) -->
+    <!-- Line 1 before-state (NrWierszaFa=1, StanPrzed=1): mieszkanie 50m^2 @ 8%, GTU_10 -->
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:RestrictedInformation>
+                                <puf:Key>universalUniqueLineNumber</puf:Key>
+                                <puf:Value>aaaa111133339997</puf:Value>
+                            </puf:RestrictedInformation>
+                            <!-- StanPrzed=1: before-state FaWiersz row -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>originalLine</puf:Key>
+                                <puf:Value>true</puf:Value>
+                            </puf:RestrictedInformation>
+                            <!-- GTU_10 on before-state line -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>GTU</puf:Key>
+                                <puf:Value>GTU_10</puf:Value>
+                            </puf:RestrictedInformation>
+                            <puf:LineExclAllowanceChargeAmount currencyID="PLN">307500.00</puf:LineExclAllowanceChargeAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="PLN">307500.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>mieszkanie 50m^2</cbc:Name>
+            <!-- P_12: VAT rate -->
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>8</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="PLN">307500.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <!-- Line 1 after-state: mieszkanie 50m2 @ 8%, GTU_10 (same values — P_9A unchanged) -->
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:RestrictedInformation>
+                                <puf:Key>universalUniqueLineNumber</puf:Key>
+                                <puf:Value>aaaa111133339997</puf:Value>
+                            </puf:RestrictedInformation>
+                            <!-- GTU_10 on after-state line -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>GTU</puf:Key>
+                                <puf:Value>GTU_10</puf:Value>
+                            </puf:RestrictedInformation>
+                            <puf:LineExclAllowanceChargeAmount currencyID="PLN">307500.00</puf:LineExclAllowanceChargeAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="PLN">307500.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- Note: FA_3 after-state has "mieszkanie 50m2" (no caret) -->
+            <cbc:Name>mieszkanie 50m2</cbc:Name>
+            <!-- P_12: VAT rate -->
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>8</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="PLN">307500.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <!-- Line 2 before-state (NrWierszaFa=2, StanPrzed=1): usługi dodatkowe @ 23% -->
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:RestrictedInformation>
+                                <puf:Key>universalUniqueLineNumber</puf:Key>
+                                <puf:Value>aaaa111133339998</puf:Value>
+                            </puf:RestrictedInformation>
+                            <!-- StanPrzed=1 -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>originalLine</puf:Key>
+                                <puf:Value>true</puf:Value>
+                            </puf:RestrictedInformation>
+                            <puf:LineExclAllowanceChargeAmount currencyID="PLN">4500.00</puf:LineExclAllowanceChargeAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="PLN">4500.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>usługi dodatkowe</cbc:Name>
+            <!-- P_12: VAT rate -->
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>23</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="PLN">4500.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <!-- Line 2 after-state: usługi dodatkowe @ 23% — same values -->
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:RestrictedInformation>
+                                <puf:Key>universalUniqueLineNumber</puf:Key>
+                                <puf:Value>aaaa111133339998</puf:Value>
+                            </puf:RestrictedInformation>
+                            <puf:LineExclAllowanceChargeAmount currencyID="PLN">4500.00</puf:LineExclAllowanceChargeAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="PLN">4500.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Name>usługi dodatkowe</cbc:Name>
+            <!-- P_12: VAT rate -->
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>23</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="PLN">4500.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

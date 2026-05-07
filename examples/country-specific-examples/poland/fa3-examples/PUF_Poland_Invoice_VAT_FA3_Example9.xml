@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+  <!--
+        Values in this file are based on the KSeF FA(3) sample FA_3_Przykład_9.xml.
+        VAT invoice issued to a local government unit (JST=1): Gmina Bzdziszewo.
+        Podmiot3 with Rola=8 (JST-recipient = Szkoła Podstawowa w Bzdziszewie) is mapped
+        as a RestrictedInformationParty with key "JST-recipient".
+        Invoice covers a service period (OkresFa): 2026-01-01 to 2026-01-01.
+        Line 2 is VAT-exempt (P_12=zw, P_19=1, P_19A=art. 43 ust. 1 pkt 37 ustawy VAT).
+        DodatkowyOpis is carried as a document-level Note.
+        Corresponding invoice type in FA (3): VAT.
+        In applicable cases the corresponding FA XML element is mentioned in parenthesis.
+    -->
+  <ext:UBLExtensions>
+    <!-- Place of issue (P_1M) -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>placeOfIssue</puf:Key>
+            <puf:Value>Warszawa</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+    <!-- Checkout method (P_16): value 2 = false -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>checkoutMethod</puf:Key>
+            <puf:Value>false</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+    <!-- JST-recipient: school as the specific recipient entity (Podmiot3, Rola=8) -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformationParty>
+            <!-- Key "JST-recipient" identifies the Podmiot3 Rola=8 sub-entity -->
+            <puf:Key>JST-recipient</puf:Key>
+            <cac:Party>
+              <cac:PostalAddress>
+                <cbc:StreetName>ul. Akacjowa 200</cbc:StreetName>
+                <!-- Building number (NrDomu) -->
+                <cbc:BuildingNumber>200</cbc:BuildingNumber>
+                <cbc:CityName>Bzdziszewo</cbc:CityName>
+                <cbc:PostalZone>00-007</cbc:PostalZone>
+                <cac:Country>
+                  <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+                </cac:Country>
+              </cac:PostalAddress>
+              <cac:PartyTaxScheme>
+                <!-- NIP (NIP) -->
+                <cbc:CompanyID>2222222222</cbc:CompanyID>
+                <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+              </cac:PartyTaxScheme>
+              <cac:PartyLegalEntity>
+                <!-- Name (Nazwa) -->
+                <cbc:RegistrationName>Szkoła Podstawowa w Bzdziszewie</cbc:RegistrationName>
+              </cac:PartyLegalEntity>
+              <cac:Contact>
+                <cbc:Telephone>666888999</cbc:Telephone>
+                <cbc:ElectronicMail>sp@bzdziszewo.p</cbc:ElectronicMail>
+              </cac:Contact>
+            </cac:Party>
+          </puf:RestrictedInformationParty>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+  <!-- BT-1 Invoice number (P_2) -->
+  <cbc:ID>FV2026/02/150</cbc:ID>
+  <!-- BT-2 Invoice issue date (P_1) -->
+  <cbc:IssueDate>2026-02-15</cbc:IssueDate>
+  <!-- Due date (Platnosc/TerminPlatnosci/Termin) -->
+  <cbc:DueDate>2026-03-15</cbc:DueDate>
+  <!-- BT-3 Invoice type code (RodzajFaktury): VAT - Standard invoice -->
+  <cbc:InvoiceTypeCode name="VAT">380</cbc:InvoiceTypeCode>
+  <!-- BT-22 Footer note (Stopka/Informacje/StopkaFaktury) -->
+  <cbc:Note>Kapiał zakładowy 5 000 000</cbc:Note>
+  <!-- Additional description (DodatkowyOpis/Klucz + Wartosc) -->
+  <cbc:Note>część odsetkowa raty: netto 200, vat 46</cbc:Note>
+  <!-- BT-5 Invoice document currency (KodWaluty) -->
+  <cbc:DocumentCurrencyCode>PLN</cbc:DocumentCurrencyCode>
+  <!-- Service period (OkresFa/P_6_Od and P_6_Do) -->
+  <cac:InvoicePeriod>
+    <cbc:StartDate>2026-01-01</cbc:StartDate>
+    <cbc:EndDate>2026-01-01</cbc:EndDate>
+  </cac:InvoicePeriod>
+  <!-- BG-4 Seller party (Podmiot1) -->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:REGON">999999999</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:KRS">0000099999</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="PL:BDO">000099999</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PostalAddress>
+        <cbc:StreetName>ul. Kwiatowa 1 m. 2</cbc:StreetName>
+        <!-- Building number (NrDomu) -->
+        <cbc:BuildingNumber>1</cbc:BuildingNumber>
+        <cbc:CityName>Warszawa</cbc:CityName>
+        <cbc:PostalZone>00-001</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>9999999999</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>ABC Leasing S.A.</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+    <cac:AccountingContact>
+      <cbc:Telephone>667444555</cbc:Telephone>
+      <cbc:ElectronicMail>abc@abc.pl</cbc:ElectronicMail>
+    </cac:AccountingContact>
+  </cac:AccountingSupplierParty>
+  <!-- BG-7 Buyer party (Podmiot2): JST=1 — buyer is a local government unit -->
+  <cac:AccountingCustomerParty>
+    <!-- Customer number (NrKlienta) -->
+    <cbc:SupplierAssignedAccountID>fdfd778343</cbc:SupplierAssignedAccountID>
+    <cac:Party>
+      <cac:PostalAddress>
+        <cbc:StreetName>Bzdziszewo 1</cbc:StreetName>
+        <!-- Building number (NrDomu) -->
+        <cbc:BuildingNumber>1</cbc:BuildingNumber>
+        <cbc:CityName>Bzdziszewo</cbc:CityName>
+        <cbc:PostalZone>00-007</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>1111111111</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Gmina Bzdziszewo</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+    <cac:AccountingContact>
+      <cbc:Telephone>555777999</cbc:Telephone>
+      <cbc:ElectronicMail>bzdziszewo@tuwartoinwestowac.pl</cbc:ElectronicMail>
+    </cac:AccountingContact>
+  </cac:AccountingCustomerParty>
+  <!-- Payment means (Platnosc/FormaPlatnosci=6 → bank transfer) -->
+  <cac:PaymentMeans>
+    <!-- Payment means code (FormaPlatnosci): 42 = bank transfer → FormaPlatnosci=6 -->
+    <cbc:PaymentMeansCode>42</cbc:PaymentMeansCode>
+    <!-- Bank account (RachunekBankowy/NrRB) -->
+    <cac:PayeeFinancialAccount>
+      <cbc:ID>73111111111111111111111111</cbc:ID>
+      <cac:FinancialInstitutionBranch>
+        <!-- Bank name (NazwaBanku) -->
+        <cbc:Name>Bank Bankowości Bankowej S. A.</cbc:Name>
+      </cac:FinancialInstitutionBranch>
+    </cac:PayeeFinancialAccount>
+  </cac:PaymentMeans>
+  <!-- BG-23 VAT breakdown -->
+  <cac:TaxTotal>
+    <!-- BT-110 Total VAT amount -->
+    <cbc:TaxAmount currencyID="PLN">460.00</cbc:TaxAmount>
+    <!-- Standard rate subtotal (P_13_1 / P_14_1) -->
+    <cac:TaxSubtotal>
+      <!-- BT-116 Net at 23% (P_13_1) -->
+      <cbc:TaxableAmount currencyID="PLN">2000.00</cbc:TaxableAmount>
+      <!-- BT-117 VAT at 23% (P_14_1) -->
+      <cbc:TaxAmount currencyID="PLN">460.00</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>23.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+    <!-- VAT-exempt subtotal (P_13_7): P_12=zw, P_19=1 -->
+    <cac:TaxSubtotal>
+      <!-- BT-116 Net exempt (P_13_7) -->
+      <cbc:TaxableAmount currencyID="PLN">300.00</cbc:TaxableAmount>
+      <!-- BT-117 VAT = 0 for exempt supplies -->
+      <cbc:TaxAmount currencyID="PLN">0.00</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <!-- E = VAT exempt (P_12=zw) -->
+        <cbc:ID>E</cbc:ID>
+        <!-- ZW = Polish tax type indicator for VAT-exempt (P_12=zw) -->
+        <cbc:Name>ZW</cbc:Name>
+        <cbc:Percent>0.00</cbc:Percent>
+        <!-- Exemption reason code selects P_19A (national law); P_19B = EU directive; P_19C = other -->
+        <cbc:TaxExemptionReasonCode>P_19A</cbc:TaxExemptionReasonCode>
+        <!-- Exemption reason text (P_19A) -->
+        <cbc:TaxExemptionReason>art. 43 ust. 1 pkt 37 ustawy VAT</cbc:TaxExemptionReason>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <!-- BG-22 Document totals -->
+  <cac:LegalMonetaryTotal>
+    <!-- Sum of line net amounts (P_13_1 + P_13_7 = 2000 + 300) -->
+    <cbc:LineExtensionAmount currencyID="PLN">2300.00</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="PLN">2300.00</cbc:TaxExclusiveAmount>
+    <!-- BT-112 Total with VAT (2000 + 460 + 300) -->
+    <cbc:TaxInclusiveAmount currencyID="PLN">2760.00</cbc:TaxInclusiveAmount>
+    <!-- BT-115 Amount due for payment (P_15) -->
+    <cbc:PayableAmount currencyID="PLN">2760.00</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+  <!-- BG-25 Invoice lines -->
+  <!-- Line 1: rata leasingowa za 01/2026, VAT 23% -->
+  <cac:InvoiceLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:LineExtension>
+              <!-- Universal unique line number (UU_ID) -->
+              <puf:RestrictedInformation>
+                <puf:Key>universalUniqueLineNumber</puf:Key>
+                <puf:Value>aaaa111133339990</puf:Value>
+              </puf:RestrictedInformation>
+              <!-- Line subtotal (P_11) -->
+              <puf:LineExclAllowanceChargeAmount currencyID="PLN">2000.00</puf:LineExclAllowanceChargeAmount>
+            </puf:LineExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- BT-126 Line number (NrWierszaFa) -->
+    <cbc:ID>1</cbc:ID>
+    <!-- BT-129 Invoiced quantity (P_8B) -->
+    <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+    <!-- BT-131 Line net amount (P_11) -->
+    <cbc:LineExtensionAmount currencyID="PLN">2000.00</cbc:LineExtensionAmount>
+    <!-- Line-level tax (BT-151/BT-152) -->
+    <cac:Item>
+      <!-- BT-153 Item name (P_7) -->
+      <cbc:Name>rata leasingowa za 01/2026</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>23</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <!-- BT-146 Net unit price (P_9A) -->
+      <cbc:PriceAmount currencyID="PLN">2000.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+  <!-- Line 2: pakiet ubezpieczeń za 01/2026, VAT exempt (P_12=zw, P_19=1) -->
+  <cac:InvoiceLine>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:LineExtension>
+              <!-- Universal unique line number (UU_ID) -->
+              <puf:RestrictedInformation>
+                <puf:Key>universalUniqueLineNumber</puf:Key>
+                <puf:Value>aaaa111133339991</puf:Value>
+              </puf:RestrictedInformation>
+              <!-- Line subtotal (P_11) -->
+              <puf:LineExclAllowanceChargeAmount currencyID="PLN">300.00</puf:LineExclAllowanceChargeAmount>
+            </puf:LineExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- BT-126 Line number (NrWierszaFa) -->
+    <cbc:ID>2</cbc:ID>
+    <!-- BT-129 Invoiced quantity (P_8B) -->
+    <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+    <!-- BT-131 Line net amount (P_11) -->
+    <cbc:LineExtensionAmount currencyID="PLN">300.00</cbc:LineExtensionAmount>
+    <!-- Line-level tax (BT-151/BT-152): VAT exempt (P_12=zw) -->
+    <cac:Item>
+      <!-- BT-153 Item name (P_7) -->
+      <cbc:Name>pakiet ubezpieczeń za 01/2026</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>E</cbc:ID>
+        <cbc:Name>ZW</cbc:Name>
+        <cbc:Percent>0</cbc:Percent>
+        <cbc:TaxExemptionReason>art. 43 ust. 1 pkt 37 ustawy VAT</cbc:TaxExemptionReason>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <!-- BT-146 Net unit price (P_9A) -->
+      <cbc:PriceAmount currencyID="PLN">300.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+</Invoice>
