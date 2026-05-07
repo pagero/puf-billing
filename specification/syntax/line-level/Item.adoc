@@ -39,6 +39,10 @@ Value must be according to code list https://pagero.github.io/puf-code-lists/#_p
 |**Item country origin** +
 Country code from where the item origin.
 
+|`cac:CommodityClassification/cbc:NatureCode`
+|**Commodity Classification. Nature Code.** +
+A code defined by a specific maintenance agency signifying the high-level nature of the commodity.
+
 |`cac:CommodityClassification/cbc:ItemClassificationCode`
 |**Item classification code** +
 The items classification code.
