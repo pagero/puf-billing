@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="author" content="Copyright &copy; 2025, Pagero, Part of Thomson Reuters">
 <meta name="copyright" content="Pagero, Part of Thomson Reuters">
 <title>PUF Billing 2.0</title>
@@ -770,13 +770,17 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#_poland">5.11. Poland</a>
 <ul class="sectlevel3">
-<li><a href="#_full_payment_indicator_date">5.11.1. Full payment indicator &amp; date</a></li>
-<li><a href="#_document_types">5.11.2. Document types</a></li>
-<li><a href="#_tax_category_id">5.11.3. Tax category ID</a></li>
-<li><a href="#_tax_type">5.11.4. Tax type</a></li>
-<li><a href="#_original_line_indicator">5.11.5. Original line indicator</a></li>
-<li><a href="#_split_payment">5.11.6. Split payment</a></li>
-<li><a href="#_document_reference_in_corrected_invoice">5.11.7. Document reference in corrected invoice</a></li>
+<li><a href="#_document_types">5.11.1. Document types</a></li>
+<li><a href="#_restrictedinformation_document_level">5.11.2. RestrictedInformation (document level)</a></li>
+<li><a href="#_restrictedinformation_line_level">5.11.3. RestrictedInformation (line level)</a></li>
+<li><a href="#_multi_party_scenarios">5.11.4. Multi-party scenarios</a></li>
+<li><a href="#_full_payment_indicator_date">5.11.5. Full payment indicator &amp; date</a></li>
+<li><a href="#_tax_category_id_and_tax_type">5.11.6. Tax category ID and tax type</a></li>
+<li><a href="#_buyer_identifiers">5.11.7. Buyer identifiers</a></li>
+<li><a href="#_tsp_commodity_code">5.11.8. TSP commodity code</a></li>
+<li><a href="#_original_line_indicator">5.11.9. Original line indicator</a></li>
+<li><a href="#_split_payment">5.11.10. Split payment</a></li>
+<li><a href="#_document_reference_in_corrected_invoice">5.11.11. Document reference in corrected invoice</a></li>
 </ul>
 </li>
 <li><a href="#_portugal">5.12. Portugal</a>
@@ -14202,7 +14206,425 @@ Allowed values: 0 or 1.<br></p>
 <p>This section contains information about requirements and other data for invoicing in Poland.</p>
 </div>
 <div class="sect3">
-<h4 id="_full_payment_indicator_date"><a class="anchor" href="#_full_payment_indicator_date"></a><a class="link" href="#_full_payment_indicator_date">5.11.1. Full payment indicator &amp; date</a></h4>
+<h4 id="_document_types"><a class="anchor" href="#_document_types"></a><a class="link" href="#_document_types">5.11.1. Document types</a></h4>
+<div class="paragraph">
+<p>PUF supports the following KSeF invoice types for Poland:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Invoice type</th>
+<th class="tableblock halign-left valign-top"><code>cbc:InvoiceTypeCode</code></th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VAT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>380</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Standard VAT invoice.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KOR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>384</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Corrected invoice.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZAL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>380</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Advance payment invoice (<code>@name="ZAL"</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ROZ</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>380</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Settlement invoice for advance payments (<code>@name="ROZ"</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UPR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>380</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Simplified invoice (<code>@name="UPR"</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KOR_ZAL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>384</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correction of an advance payment invoice.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KOR_ROZ</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>384</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correction of a settlement invoice.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The document type Credit Note (<code>381</code>) is not accepted by KSeF.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_restrictedinformation_document_level"><a class="anchor" href="#_restrictedinformation_document_level"></a><a class="link" href="#_restrictedinformation_document_level">5.11.2. RestrictedInformation (document level)</a></h4>
+<div class="paragraph">
+<p>For Poland, multiple FA(3)-specific values are carried with document-level <code>puf:RestrictedInformation</code> extensions using:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ext:ExtensionURI = urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each key-value pair is sent as one <code>puf:RestrictedInformation</code> entry. Use multiple entries when multiple keys or values are required.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Usage notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>placeOfIssue</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Place of issue (<code>P_1M</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text value, e.g. <code>Warszawa</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>checkoutMethod</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cash accounting scheme indicator (<code>P_16</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean value <code>true</code> or <code>false</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NrPartiiTowaru</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Goods lot number (<code>WarunkiTransakcji/NrPartiiTowaru</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can occur multiple times. Can alternatively be sent at line level via <code>cac:Item/cac:ItemInstance/cac:LotIdentification/cbc:LotNumberID</code> and will be collected from all lines. The document-level approach takes precedence.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WartoscZamowienia</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Order value for advance invoice context (<code>Zamowienie/WartoscZamowienia</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for <code>ZAL</code>/<code>ROZ</code> scenarios.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>P_15ZK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total amount already paid in settled advance invoices (<code>P_15ZK</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used for <code>KOR_ZAL</code> scenarios.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NrKSeFFaZaliczkowej</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KSeF clearance ID of the referenced advance invoice.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used on <code>ROZ</code> and <code>KOR_ROZ</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>wz</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delivery note reference (<code>DaneFaKorygowanej/NrWZ</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text reference value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>simplifiedTriangularProcedure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Simplified triangular procedure indicator (<code>P_TTP</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean <code>true</code> or <code>false</code>. Required when the invoice is issued under the simplified procedure referred to in Art. 135 sec. 1 point 4 of the Act. If omitted, non-simplified procedure is assumed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicator if the invoice is referred to in Art. 109 sec. 3d of the Act.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean <code>true</code> or <code>false</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>marginScheme</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VAT margin scheme indicator (<code>P_PMarzy</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set to <code>true</code> when the invoice is issued under a VAT margin scheme (Art. 119 travel agents or Art. 120 second-hand goods/works of art). Must be accompanied by <code>marginSchemeType</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>marginSchemeType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VAT margin scheme type (<code>P_PMarzy</code> sub-type).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required when <code>marginScheme=true</code>. Valid values: <code>travelAgency</code> (Art. 119); <code>3</code> (Art. 120 sec. 4/5 — second-hand goods); <code>1</code> (Art. 120 — works of art); <code>2</code> (Art. 120 — collectors items and antiques).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Document-level RestrictedInformation entries</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                        <span class="tag">&lt;puf:Key&gt;</span>placeOfIssue<span class="tag">&lt;/puf:Key&gt;</span>
+                        <span class="tag">&lt;puf:Value&gt;</span>Warszawa<span class="tag">&lt;/puf:Value&gt;</span>
+                    <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                        <span class="tag">&lt;puf:Key&gt;</span>checkoutMethod<span class="tag">&lt;/puf:Key&gt;</span>
+                        <span class="tag">&lt;puf:Value&gt;</span>false<span class="tag">&lt;/puf:Value&gt;</span>
+                    <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                        <span class="tag">&lt;puf:Key&gt;</span>NrKSeFFaZaliczkowej<span class="tag">&lt;/puf:Key&gt;</span>
+                        <span class="tag">&lt;puf:Value&gt;</span>9999999999-20230908-76B2B580D4DC-80<span class="tag">&lt;/puf:Value&gt;</span>
+                    <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_restrictedinformation_line_level"><a class="anchor" href="#_restrictedinformation_line_level"></a><a class="link" href="#_restrictedinformation_line_level">5.11.3. RestrictedInformation (line level)</a></h4>
+<div class="paragraph">
+<p>Line-level keys are carried inside <code>puf:LineExtension</code> using:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ext:ExtensionURI = urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each key-value pair is sent as one <code>puf:RestrictedInformation</code> entry nested inside <code>puf:LineExtension</code>. Multiple keys can be combined as separate entries on the same line.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Usage notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>universalUniqueLineNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Universally unique line identifier (<code>UU_ID</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required by KSeF for certain invoice types.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GTU</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GTU goods and services designation code.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">See <a href="https://pagero.github.io/puf-code-lists/#_gtu_codes_poland" target="_blank" rel="noopener">GTU codes Poland</a> for valid values.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KursWaluty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Per-line exchange rate to PLN.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use when different exchange rates apply to individual lines. For a single rate across all lines, use <code>cac:TaxExchangeRate</code> at document level instead.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>originalLine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flags the line as the before-state of a corrected line (<code>StanPrzed</code> for KOR/KOR_ZAL/KOR_ROZ, <code>StanPrzedZ</code> for KOR_ZAL/KOR_ROZ order lines).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set to <code>true</code> on the original line. See <strong>Original line indicator</strong> for all correction methods.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Line-level RestrictedInformation entries</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+            <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                        <span class="tag">&lt;puf:LineExtension&gt;</span>
+                            <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                                <span class="tag">&lt;puf:Key&gt;</span>universalUniqueLineNumber<span class="tag">&lt;/puf:Key&gt;</span>
+                                <span class="tag">&lt;puf:Value&gt;</span>aaaa111133339990<span class="tag">&lt;/puf:Value&gt;</span>
+                            <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                            <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                                <span class="tag">&lt;puf:Key&gt;</span>GTU<span class="tag">&lt;/puf:Key&gt;</span>
+                                <span class="tag">&lt;puf:Value&gt;</span>GTU_10<span class="tag">&lt;/puf:Value&gt;</span>
+                            <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                        <span class="tag">&lt;/puf:LineExtension&gt;</span>
+                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_multi_party_scenarios"><a class="anchor" href="#_multi_party_scenarios"></a><a class="link" href="#_multi_party_scenarios">5.11.4. Multi-party scenarios</a></h4>
+<div class="paragraph">
+<p>Poland&#8217;s KSeF supports additional parties beyond the standard seller and buyer. These are mapped using <code>puf:RestrictedInformationParty</code> at document level. The following keys are supported:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">FA(3) party</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>factor</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The factoring company to which the receivable has been assigned. Payment is routed to this party&#8217;s bank account.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>recipient</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internal unit, branch, or division of the purchaser that is the actual recipient but does not qualify as a purchaser under the Act. Can also be sent via <code>cac:Delivery/cac:DeliveryParty</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primaryEntity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The original/primary entity in a multi-party transaction (e.g. the original contracting party when an additional buyer is present).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>additionalBuyer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional buyer party. Used when more than one legal entity is purchasing (e.g. joint procurement). A <code>GEN:SharePercentage</code> registration data entry may be added to indicate the ownership share.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>invoiceIssuer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Entity issuing the invoice on behalf of the taxpayer (self-billing agent).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>payer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Entity making the payment on behalf of the purchaser.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JST-issuer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A local government unit (JST) that is the issuer of the invoice (e.g. a municipal authority issuing on behalf of a subordinate unit).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>JST-recipient</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A local government unit (JST) that is the actual recipient of the goods or services (e.g. a school under a municipal authority).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GV-issuer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A VAT group member that is the issuer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GV-recipient</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A VAT group member that is the recipient.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>employee</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, Rola=11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An employee acting as a party in the transaction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>otherEntity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot3, RolaInna=1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any other party not covered by the roles above. A <code>partyDescription</code> restricted information value must be added to describe the role in free text.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>correctedBuyerOrOtherPartyDetails</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Podmiot2K</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The original buyer party as it appeared on the corrected invoice (KOR). Used when the buyer&#8217;s data has been corrected.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Example — additional buyer</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:RestrictedInformationParty&gt;</span>
+                        <span class="tag">&lt;puf:Key&gt;</span>additionalBuyer<span class="tag">&lt;/puf:Key&gt;</span>
+                        <span class="tag">&lt;cac:Party&gt;</span>
+                            <span class="tag">&lt;cac:PostalAddress&gt;</span>
+                                <span class="tag">&lt;cbc:StreetName&gt;</span>ul. Polna 1<span class="tag">&lt;/cbc:StreetName&gt;</span>
+                                <span class="tag">&lt;cbc:BuildingNumber&gt;</span>1<span class="tag">&lt;/cbc:BuildingNumber&gt;</span>
+                                <span class="tag">&lt;cbc:CityName&gt;</span>Warszawa<span class="tag">&lt;/cbc:CityName&gt;</span>
+                                <span class="tag">&lt;cbc:PostalZone&gt;</span>00-001<span class="tag">&lt;/cbc:PostalZone&gt;</span>
+                                <span class="tag">&lt;cac:Country&gt;</span>
+                                    <span class="tag">&lt;cbc:IdentificationCode&gt;</span>PL<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+                                <span class="tag">&lt;/cac:Country&gt;</span>
+                            <span class="tag">&lt;/cac:PostalAddress&gt;</span>
+                            <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+                                <span class="tag">&lt;cbc:CompanyID&gt;</span>3333333333<span class="tag">&lt;/cbc:CompanyID&gt;</span>
+                                <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                                    <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                                <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+                            <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+                            <span class="tag">&lt;cac:PartyLegalEntity&gt;</span>
+                                <span class="tag">&lt;cbc:RegistrationName&gt;</span>F.H.U. Grażyna Kowalska<span class="tag">&lt;/cbc:RegistrationName&gt;</span>
+                            <span class="tag">&lt;/cac:PartyLegalEntity&gt;</span>
+                        <span class="tag">&lt;/cac:Party&gt;</span>
+                    <span class="tag">&lt;/puf:RestrictedInformationParty&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_full_payment_indicator_date"><a class="anchor" href="#_full_payment_indicator_date"></a><a class="link" href="#_full_payment_indicator_date">5.11.5. Full payment indicator &amp; date</a></h4>
 <div class="paragraph">
 <p>Indicator that the invoice amount has been paid in full and the date the payment was made. Populate this field only if the full amount was paid in advance.</p>
 </div>
@@ -14232,24 +14654,12 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_document_types"><a class="anchor" href="#_document_types"></a><a class="link" href="#_document_types">5.11.2. Document types</a></h4>
+<h4 id="_tax_category_id_and_tax_type"><a class="anchor" href="#_tax_category_id_and_tax_type"></a><a class="link" href="#_tax_category_id_and_tax_type">5.11.6. Tax category ID and tax type</a></h4>
 <div class="paragraph">
-<p>Currently PUF has support for the docment types VAT (380 - Basic Invoice) and KOR (384 - Corrected Invoice). Please note that the document type Credit Note (381) is not accepted by KSef.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_tax_category_id"><a class="anchor" href="#_tax_category_id"></a><a class="link" href="#_tax_category_id">5.11.3. Tax category ID</a></h4>
-<div class="paragraph">
-<p>Tax category identifiers for Poland can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland" target="_blank" rel="noopener">Tax category codes Poland</a>.</p>
+<p>For Poland, both the tax category identifier (<code>cbc:ID</code>) and the tax type (<code>cbc:Name</code>) are required on non-standard tax categories. Valid values for both can be found in <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland" target="_blank" rel="noopener">Tax category codes Poland</a>.</p>
 </div>
 <div class="paragraph">
-<p>Please note that in addition to the tax identifier, the Poland-specific tax type is also required for non-standard taxes.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_tax_type"><a class="anchor" href="#_tax_type"></a><a class="link" href="#_tax_type">5.11.4. Tax type</a></h4>
-<div class="paragraph">
-<p>For non-standard tax categories, use the cbc:Name element in the tax section at both the header and line levels to convey the tax type. Tax type codes for Poland can be found in <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland" target="_blank" rel="noopener">Tax category codes Poland</a>.</p>
+<p>Use <code>cbc:Name</code> inside <code>cac:TaxCategory</code> (document level) and <code>cac:ClassifiedTaxCategory</code> (line level) to convey the Poland-specific tax type code.</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
@@ -14303,38 +14713,27 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_original_line_indicator"><a class="anchor" href="#_original_line_indicator"></a><a class="link" href="#_original_line_indicator">5.11.5. Original line indicator</a></h4>
+<h4 id="_buyer_identifiers"><a class="anchor" href="#_buyer_identifiers"></a><a class="link" href="#_buyer_identifiers">5.11.7. Buyer identifiers</a></h4>
+<div class="paragraph">
+<p>For non-EU buyers who do not have a Polish NIP or EU VAT number (e.g. export invoices), use <code>cac:PartyIdentification/cbc:ID</code> with a <code>schemeID</code> following the pattern <code>[CC]:TaxID</code>, where <code>[CC]</code> is the ISO 3166-1 alpha-2 country code of the buyer (e.g. <code>US:TaxID</code>, <code>GB:TaxID</code>).</p>
+</div>
+<div class="paragraph">
+<p>The supplier-assigned internal buyer identifier (<code>IDNabywcy</code>) can be sent using <code>schemeID="PL:IDNabywcy"</code> on the same element.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tsp_commodity_code"><a class="anchor" href="#_tsp_commodity_code"></a><a class="link" href="#_tsp_commodity_code">5.11.8. TSP commodity code</a></h4>
+<div class="paragraph">
+<p>The Combined Nomenclature commodity classification code (<code>TSP</code>) is set at line level using <code>cac:CommodityClassification/cbc:ItemClassificationCode</code> with <code>listID="TSP"</code>. Used when goods must be classified under the EU Combined Nomenclature (e.g. for intra-Community supply). Repeatable for multiple classifications.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_original_line_indicator"><a class="anchor" href="#_original_line_indicator"></a><a class="link" href="#_original_line_indicator">5.11.9. Original line indicator</a></h4>
 <div class="paragraph">
 <p>There are three ways to correct a line in Poland, and PUF supports all three. This element applies to Method 1, where an indicator flags the line being corrected. When set, the indicator voids the original line.</p>
 </div>
 <div class="paragraph">
-<p><strong>Example</strong><br>
-<em>The below key in puf:RestrictedInformation can be used to indicate an original line</em></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
-    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
-        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
-            <span class="tag">&lt;ext:UBLExtension&gt;</span>
-                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
-                <span class="tag">&lt;ext:ExtensionContent&gt;</span>
-                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
-                        <span class="tag">&lt;puf:LineExtension&gt;</span>
-                            <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
-                                <span class="tag">&lt;puf:Key&gt;</span>originalLine<span class="tag">&lt;/puf:Key&gt;</span>
-                                <span class="tag">&lt;puf:Value&gt;</span>true<span class="tag">&lt;/puf:Value&gt;</span>
-                            <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
-                        <span class="tag">&lt;/puf:LineExtension&gt;</span>
-                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
-                <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
-            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
-        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
-        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
-<span class="tag">&lt;/Invoice&gt;</span></code></pre>
-</div>
+<p>Method 1 uses key <code>originalLine</code> (value <code>true</code>) in <code>puf:RestrictedInformation</code> at line level — see <strong>RestrictedInformation (line level)</strong> above.</p>
 </div>
 <div class="paragraph">
 <p>For Methods 2 and 3, no indicator is required:</p>
@@ -14350,21 +14749,21 @@ Allowed values: 0 or 1.<br></p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Example (intended price $50, invoiced $100):</p>
+<p>Example (intended price 50 PLN, invoiced 100 PLN):</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Method 2: one line for -$100 and one line for $50.</p>
+<p>Method 2: one line for -100 PLN and one line for 50 PLN.</p>
 </li>
 <li>
-<p>Method 3: one line for -$50 (bringing the total to $50).</p>
+<p>Method 3: one line for -50 PLN (bringing the total to 50 PLN).</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_split_payment"><a class="anchor" href="#_split_payment"></a><a class="link" href="#_split_payment">5.11.6. Split payment</a></h4>
+<h4 id="_split_payment"><a class="anchor" href="#_split_payment"></a><a class="link" href="#_split_payment">5.11.10. Split payment</a></h4>
 <div class="paragraph">
 <p>To indicate a split payment, set the Tax Chargeability Code to:</p>
 </div>
@@ -14407,41 +14806,27 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_document_reference_in_corrected_invoice"><a class="anchor" href="#_document_reference_in_corrected_invoice"></a><a class="link" href="#_document_reference_in_corrected_invoice">5.11.7. Document reference in corrected invoice</a></h4>
+<h4 id="_document_reference_in_corrected_invoice"><a class="anchor" href="#_document_reference_in_corrected_invoice"></a><a class="link" href="#_document_reference_in_corrected_invoice">5.11.11. Document reference in corrected invoice</a></h4>
 <div class="paragraph">
-<p>To forward the details of the invoice being corrected, in a corrected invoice (KOR) the segments below can be used:</p>
+<p>To forward the details of the invoice being corrected, in a corrected invoice (KOR) the following fields can be used:</p>
 </div>
 <div class="paragraph">
-<p><strong>Correction type</strong>: Indicates the correction type and can be one of the values below:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>1 - Correction effective on the date of the original invoice.</p>
-</li>
-<li>
-<p>2 - Correction effective on the issue date of the correcting invoice.</p>
-</li>
-<li>
-<p>3 - Correction resulting in a different date, including when items on the correcting invoice have different dates.</p>
-</li>
-</ul>
+<p><strong>Correction type</strong>: Carried inside <code>puf:BillingReferenceExtension</code> as a <code>puf:RestrictedInformation</code> entry with key <code>correctionType</code>. Valid values: <code>1</code> — effective on the date of the original invoice; <code>2</code> — effective on the issue date of the correcting invoice; <code>3</code> — resulting in a different date.</p>
 </div>
 <div class="paragraph">
-<p><strong>KSeF reference number</strong>: The unique ID assigned to the original invoice by KSeF.</p>
+<p><strong>KSeF reference number</strong>: The unique ID assigned to the original invoice by KSeF. Carried in <code>puf:ClearanceID</code> inside <code>puf:BillingReferenceExtension</code>.</p>
 </div>
 <div class="paragraph">
-<p><strong>Original date sent to KSeF</strong>: Date when the referenced invoice was sent to KSeF.</p>
+<p><strong>Reason for correction</strong>: Textual note inside <code>puf:BillingReferenceExtension/cbc:Note</code>.</p>
 </div>
 <div class="paragraph">
-<p><strong>Reason for correction</strong>: Textual note describing the reason for issuing a correction.</p>
+<p><strong>Original invoice date</strong>: <code>cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueDate</code>.</p>
 </div>
 <div class="paragraph">
-<p><strong>Original invoice number</strong>: The invoice number of the original invoice to which the correction relates.</p>
+<p><strong>Original invoice number</strong>: <code>cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID</code>.</p>
 </div>
 <div class="paragraph">
-<p><strong>Example</strong><br>
-<em>The below keys in puf:RestrictedInformation can be used to to indlude the details</em></p>
+<p><strong>Example</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14455,17 +14840,12 @@ Allowed values: 0 or 1.<br></p>
                     <span class="tag">&lt;ext:ExtensionContent&gt;</span>
                         <span class="tag">&lt;puf:PageroExtension&gt;</span>
                             <span class="tag">&lt;puf:BillingReferenceExtension&gt;</span>
-                                <span class="comment">&lt;!-- KSeF reference number --&gt;</span>
+                                <span class="comment">&lt;!-- KSeF reference number of the corrected invoice --&gt;</span>
                                 <span class="tag">&lt;puf:ClearanceID&gt;</span>8375460033-20230829-F9E05396E2B1-FB<span class="tag">&lt;/puf:ClearanceID&gt;</span>
                                 <span class="comment">&lt;!-- Correction type --&gt;</span>
                                 <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
                                     <span class="tag">&lt;puf:Key&gt;</span>correctionType<span class="tag">&lt;/puf:Key&gt;</span>
                                     <span class="tag">&lt;puf:Value&gt;</span>1<span class="tag">&lt;/puf:Value&gt;</span>
-                                <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
-                                <span class="comment">&lt;!-- Date when referenced invoice was sent to KSeF --&gt;</span>
-                                <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
-                                    <span class="tag">&lt;puf:Key&gt;</span>sentToKSEFDate<span class="tag">&lt;/puf:Key&gt;</span>
-                                    <span class="tag">&lt;puf:Value&gt;</span>2023-08-29<span class="tag">&lt;/puf:Value&gt;</span>
                                 <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
                                 <span class="comment">&lt;!-- Reason for correction --&gt;</span>
                                 <span class="tag">&lt;cbc:Note&gt;</span>Textual note describing the reason for issuing a correction<span class="tag">&lt;/cbc:Note&gt;</span>
@@ -14476,6 +14856,8 @@ Allowed values: 0 or 1.<br></p>
             <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
             <span class="comment">&lt;!-- Original invoice number --&gt;</span>
             <span class="tag">&lt;cbc:ID&gt;</span>1234567<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="comment">&lt;!-- Original invoice date --&gt;</span>
+            <span class="tag">&lt;cbc:IssueDate&gt;</span>2023-08-29<span class="tag">&lt;/cbc:IssueDate&gt;</span>
         <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
     <span class="tag">&lt;/cac:BillingReference&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
@@ -16858,7 +17240,7 @@ Otherwise it is OK to omit the attribute.</td>
 <div class="sect3">
 <h4 id="_self_billing_2"><a class="anchor" href="#_self_billing_2"></a><a class="link" href="#_self_billing_2">5.19.16. Self-billing</a></h4>
 <div class="paragraph">
-<p>In PUF, self-billing is <strong>not</strong> signalled through a dedicated UBL document type code. Self-billed documents keep their original type code (<code>cbc:InvoiceTypeCode = 380</code> for a self-billed tax invoice, <code>cbc:CreditNoteTypeCode = 381</code> for a self-billed credit note) and are flagged through the standard <code>puf:SelfBilled</code> extension at document level. See <code><a href="#_selfbilled">Self-Billed extension</a></code> for the structure.</p>
+<p>In PUF, self-billing is <strong>not</strong> signalled through a dedicated UBL document type code. Self-billed documents keep their original type code (<code>cbc:InvoiceTypeCode = 380</code> for a self-billed tax invoice, <code>cbc:CreditNoteTypeCode = 381</code> for a self-billed credit note) and are flagged through the standard <code>puf:SelfBilled</code> extension at document level. See <code><a href="#_self_billing_indicator">Self-Billed extension</a></code> for the structure.</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>

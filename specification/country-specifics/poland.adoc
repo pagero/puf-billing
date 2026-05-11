@@ -1,5 +1,308 @@
 This section contains information about requirements and other data for invoicing in Poland.
 
+==== Document types
+
+PUF supports the following KSeF invoice types for Poland:
+
+|===
+|Invoice type |`cbc:InvoiceTypeCode` |Description
+
+|`VAT`
+|`380`
+|Standard VAT invoice.
+
+|`KOR`
+|`384`
+|Corrected invoice.
+
+|`ZAL`
+|`380`
+|Advance payment invoice (`@name="ZAL"`).
+
+|`ROZ`
+|`380`
+|Settlement invoice for advance payments (`@name="ROZ"`).
+
+|`UPR`
+|`380`
+|Simplified invoice (`@name="UPR"`).
+
+|`KOR_ZAL`
+|`384`
+|Correction of an advance payment invoice.
+
+|`KOR_ROZ`
+|`384`
+|Correction of a settlement invoice.
+
+|===
+
+NOTE: The document type Credit Note (`381`) is not accepted by KSeF.
+
+==== RestrictedInformation (document level)
+
+For Poland, multiple FA(3)-specific values are carried with document-level `puf:RestrictedInformation` extensions using:
+
+- `ext:ExtensionURI = urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation`
+
+Each key-value pair is sent as one `puf:RestrictedInformation` entry. Use multiple entries when multiple keys or values are required.
+
+|===
+|Key |Description |Usage notes
+
+|`placeOfIssue`
+|Place of issue (`P_1M`).
+|Text value, e.g. `Warszawa`.
+
+|`checkoutMethod`
+|Cash accounting scheme indicator (`P_16`).
+|Boolean value `true` or `false`.
+
+|`NrPartiiTowaru`
+|Goods lot number (`WarunkiTransakcji/NrPartiiTowaru`).
+|Can occur multiple times. Can alternatively be sent at line level via `cac:Item/cac:ItemInstance/cac:LotIdentification/cbc:LotNumberID` and will be collected from all lines. The document-level approach takes precedence.
+
+|`WartoscZamowienia`
+|Order value for advance invoice context (`Zamowienie/WartoscZamowienia`).
+|Used for `ZAL`/`ROZ` scenarios.
+
+|`P_15ZK`
+|Total amount already paid in settled advance invoices (`P_15ZK`).
+|Used for `KOR_ZAL` scenarios.
+
+|`NrKSeFFaZaliczkowej`
+|KSeF clearance ID of the referenced advance invoice.
+|Used on `ROZ` and `KOR_ROZ`.
+
+|`wz`
+|Delivery note reference (`DaneFaKorygowanej/NrWZ`).
+|Text reference value.
+
+|`simplifiedTriangularProcedure`
+|Simplified triangular procedure indicator (`P_TTP`).
+|Boolean `true` or `false`. Required when the invoice is issued under the simplified procedure referred to in Art. 135 sec. 1 point 4 of the Act. If omitted, non-simplified procedure is assumed.
+
+|`fp`
+|Indicator if the invoice is referred to in Art. 109 sec. 3d of the Act.
+|Boolean `true` or `false`.
+
+|`marginScheme`
+|VAT margin scheme indicator (`P_PMarzy`).
+|Set to `true` when the invoice is issued under a VAT margin scheme (Art. 119 travel agents or Art. 120 second-hand goods/works of art). Must be accompanied by `marginSchemeType`.
+
+|`marginSchemeType`
+|VAT margin scheme type (`P_PMarzy` sub-type).
+|Required when `marginScheme=true`. Valid values: `travelAgency` (Art. 119); `3` (Art. 120 sec. 4/5 — second-hand goods); `1` (Art. 120 — works of art); `2` (Art. 120 — collectors items and antiques).
+
+|===
+
+*Example* +
+_Document-level RestrictedInformation entries_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>placeOfIssue</puf:Key>
+                        <puf:Value>Warszawa</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>checkoutMethod</puf:Key>
+                        <puf:Value>false</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>NrKSeFFaZaliczkowej</puf:Key>
+                        <puf:Value>9999999999-20230908-76B2B580D4DC-80</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== RestrictedInformation (line level)
+
+Line-level keys are carried inside `puf:LineExtension` using:
+
+- `ext:ExtensionURI = urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension`
+
+Each key-value pair is sent as one `puf:RestrictedInformation` entry nested inside `puf:LineExtension`. Multiple keys can be combined as separate entries on the same line.
+
+|===
+|Key |Description |Usage notes
+
+|`universalUniqueLineNumber`
+|Universally unique line identifier (`UU_ID`).
+|Required by KSeF for certain invoice types.
+
+|`GTU`
+|GTU goods and services designation code.
+|See https://pagero.github.io/puf-code-lists/#_gtu_codes_poland[GTU codes Poland^] for valid values.
+
+|`KursWaluty`
+|Per-line exchange rate to PLN.
+|Use when different exchange rates apply to individual lines. For a single rate across all lines, use `cac:TaxExchangeRate` at document level instead.
+
+|`originalLine`
+|Flags the line as the before-state of a corrected line (`StanPrzed` for KOR/KOR_ZAL/KOR_ROZ, `StanPrzedZ` for KOR_ZAL/KOR_ROZ order lines).
+|Set to `true` on the original line. See *Original line indicator* for all correction methods.
+
+|===
+
+*Example* +
+_Line-level RestrictedInformation entries_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:RestrictedInformation>
+                                <puf:Key>universalUniqueLineNumber</puf:Key>
+                                <puf:Value>aaaa111133339990</puf:Value>
+                            </puf:RestrictedInformation>
+                            <puf:RestrictedInformation>
+                                <puf:Key>GTU</puf:Key>
+                                <puf:Value>GTU_10</puf:Value>
+                            </puf:RestrictedInformation>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- Code omitted for clarity -->
+    </cac:InvoiceLine>
+</Invoice>
+----
+
+==== Multi-party scenarios
+
+Poland's KSeF supports additional parties beyond the standard seller and buyer. These are mapped using `puf:RestrictedInformationParty` at document level. The following keys are supported:
+
+|===
+|Key |FA(3) party |Description
+
+|`factor`
+|Podmiot3, Rola=1
+|The factoring company to which the receivable has been assigned. Payment is routed to this party's bank account.
+
+|`recipient`
+|Podmiot3, Rola=2
+|Internal unit, branch, or division of the purchaser that is the actual recipient but does not qualify as a purchaser under the Act. Can also be sent via `cac:Delivery/cac:DeliveryParty`.
+
+|`primaryEntity`
+|Podmiot3, Rola=3
+|The original/primary entity in a multi-party transaction (e.g. the original contracting party when an additional buyer is present).
+
+|`additionalBuyer`
+|Podmiot3, Rola=4
+|Additional buyer party. Used when more than one legal entity is purchasing (e.g. joint procurement). A `GEN:SharePercentage` registration data entry may be added to indicate the ownership share.
+
+|`invoiceIssuer`
+|Podmiot3, Rola=5
+|Entity issuing the invoice on behalf of the taxpayer (self-billing agent).
+
+|`payer`
+|Podmiot3, Rola=6
+|Entity making the payment on behalf of the purchaser.
+
+|`JST-issuer`
+|Podmiot3, Rola=7
+|A local government unit (JST) that is the issuer of the invoice (e.g. a municipal authority issuing on behalf of a subordinate unit).
+
+|`JST-recipient`
+|Podmiot3, Rola=8
+|A local government unit (JST) that is the actual recipient of the goods or services (e.g. a school under a municipal authority).
+
+|`GV-issuer`
+|Podmiot3, Rola=9
+|A VAT group member that is the issuer.
+
+|`GV-recipient`
+|Podmiot3, Rola=10
+|A VAT group member that is the recipient.
+
+|`employee`
+|Podmiot3, Rola=11
+|An employee acting as a party in the transaction.
+
+|`otherEntity`
+|Podmiot3, RolaInna=1
+|Any other party not covered by the roles above. A `partyDescription` restricted information value must be added to describe the role in free text.
+
+|`correctedBuyerOrOtherPartyDetails`
+|Podmiot2K
+|The original buyer party as it appeared on the corrected invoice (KOR). Used when the buyer's data has been corrected.
+
+|===
+
+*Example — additional buyer*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformationParty>
+                        <puf:Key>additionalBuyer</puf:Key>
+                        <cac:Party>
+                            <cac:PostalAddress>
+                                <cbc:StreetName>ul. Polna 1</cbc:StreetName>
+                                <cbc:BuildingNumber>1</cbc:BuildingNumber>
+                                <cbc:CityName>Warszawa</cbc:CityName>
+                                <cbc:PostalZone>00-001</cbc:PostalZone>
+                                <cac:Country>
+                                    <cbc:IdentificationCode>PL</cbc:IdentificationCode>
+                                </cac:Country>
+                            </cac:PostalAddress>
+                            <cac:PartyTaxScheme>
+                                <cbc:CompanyID>3333333333</cbc:CompanyID>
+                                <cac:TaxScheme>
+                                    <cbc:ID>VAT</cbc:ID>
+                                </cac:TaxScheme>
+                            </cac:PartyTaxScheme>
+                            <cac:PartyLegalEntity>
+                                <cbc:RegistrationName>F.H.U. Grażyna Kowalska</cbc:RegistrationName>
+                            </cac:PartyLegalEntity>
+                        </cac:Party>
+                    </puf:RestrictedInformationParty>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
 ==== Full payment indicator & date
 
 Indicator that the invoice amount has been paid in full and the date the payment was made. Populate this field only if the full amount was paid in advance.
@@ -27,19 +330,11 @@ _Extension with the full payment indicator and date_
 
 ----
 
-==== Document types
+==== Tax category ID and tax type
 
-Currently PUF has support for the docment types VAT (380 - Basic Invoice) and KOR (384 - Corrected Invoice). Please note that the document type Credit Note (381) is not accepted by KSef. 
+For Poland, both the tax category identifier (`cbc:ID`) and the tax type (`cbc:Name`) are required on non-standard tax categories. Valid values for both can be found in https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland[Tax category codes Poland^].
 
-==== Tax category ID
-
-Tax category identifiers for Poland can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland[Tax category codes Poland^]. 
-
-Please note that in addition to the tax identifier, the Poland-specific tax type is also required for non-standard taxes.
-
-==== Tax type
-
-For non-standard tax categories, use the cbc:Name element in the tax section at both the header and line levels to convey the tax type. Tax type codes for Poland can be found in https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland[Tax category codes Poland^].
+Use `cbc:Name` inside `cac:TaxCategory` (document level) and `cac:ClassifiedTaxCategory` (line level) to convey the Poland-specific tax type code.
 
 *Example* +
 _Tax type Reverse Charge in cac:TaxTotal on document level_
@@ -89,37 +384,21 @@ _Tax type Exempt in cac:ClassifiedTaxCategory on line level_
 
 ----
 
+==== Buyer identifiers
+
+For non-EU buyers who do not have a Polish NIP or EU VAT number (e.g. export invoices), use `cac:PartyIdentification/cbc:ID` with a `schemeID` following the pattern `[CC]:TaxID`, where `[CC]` is the ISO 3166-1 alpha-2 country code of the buyer (e.g. `US:TaxID`, `GB:TaxID`).
+
+The supplier-assigned internal buyer identifier (`IDNabywcy`) can be sent using `schemeID="PL:IDNabywcy"` on the same element.
+
+==== TSP commodity code
+
+The Combined Nomenclature commodity classification code (`TSP`) is set at line level using `cac:CommodityClassification/cbc:ItemClassificationCode` with `listID="TSP"`. Used when goods must be classified under the EU Combined Nomenclature (e.g. for intra-Community supply). Repeatable for multiple classifications.
+
 ==== Original line indicator
 
 There are three ways to correct a line in Poland, and PUF supports all three. This element applies to Method 1, where an indicator flags the line being corrected. When set, the indicator voids the original line.
 
-*Example* +
-_The below key in puf:RestrictedInformation can be used to indicate an original line_
-[source,xml]
-----
-<Invoice>
-    <!-- Code omitted for clarity -->
-    <cac:InvoiceLine>
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
-                <ext:ExtensionContent>
-                    <puf:PageroExtension>
-                        <puf:LineExtension>
-                            <puf:RestrictedInformation>
-                                <puf:Key>originalLine</puf:Key>
-                                <puf:Value>true</puf:Value>
-                            </puf:RestrictedInformation>
-                        </puf:LineExtension>
-                    </puf:PageroExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
-        <!-- Code omitted for clarity -->
-    </cac:InvoiceLine>
-</Invoice>
-
-----
+Method 1 uses key `originalLine` (value `true`) in `puf:RestrictedInformation` at line level — see *RestrictedInformation (line level)* above.
 
 For Methods 2 and 3, no indicator is required:
 
@@ -127,11 +406,11 @@ For Methods 2 and 3, no indicator is required:
 
 - Method 3: send only the difference between the incorrect and corrected amounts.
 
-Example (intended price $50, invoiced $100):
+Example (intended price 50 PLN, invoiced 100 PLN):
 
-- Method 2: one line for -$100 and one line for $50.
+- Method 2: one line for -100 PLN and one line for 50 PLN.
 
-- Method 3: one line for -$50 (bringing the total to $50).
+- Method 3: one line for -50 PLN (bringing the total to 50 PLN).
 
 ==== Split payment
 
@@ -169,24 +448,19 @@ To indicate a split payment, set the Tax Chargeability Code to:
 
 ==== Document reference in corrected invoice
 
-To forward the details of the invoice being corrected, in a corrected invoice (KOR) the segments below can be used: 
+To forward the details of the invoice being corrected, in a corrected invoice (KOR) the following fields can be used:
 
-*Correction type*: Indicates the correction type and can be one of the values below:
+*Correction type*: Carried inside `puf:BillingReferenceExtension` as a `puf:RestrictedInformation` entry with key `correctionType`. Valid values: `1` — effective on the date of the original invoice; `2` — effective on the issue date of the correcting invoice; `3` — resulting in a different date.
 
-- 1 - Correction effective on the date of the original invoice.
-- 2 - Correction effective on the issue date of the correcting invoice.
-- 3 - Correction resulting in a different date, including when items on the correcting invoice have different dates.
+*KSeF reference number*: The unique ID assigned to the original invoice by KSeF. Carried in `puf:ClearanceID` inside `puf:BillingReferenceExtension`.
 
-*KSeF reference number*: The unique ID assigned to the original invoice by KSeF.
+*Reason for correction*: Textual note inside `puf:BillingReferenceExtension/cbc:Note`.
 
-*Original date sent to KSeF*: Date when the referenced invoice was sent to KSeF.
+*Original invoice date*: `cac:BillingReference/cac:InvoiceDocumentReference/cbc:IssueDate`.
 
-*Reason for correction*: Textual note describing the reason for issuing a correction.
+*Original invoice number*: `cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID`.
 
-*Original invoice number*: The invoice number of the original invoice to which the correction relates.
-
-*Example* +
-_The below keys in puf:RestrictedInformation can be used to to indlude the details_
+*Example*
 [source,xml]
 ----
 <Invoice>
@@ -199,17 +473,12 @@ _The below keys in puf:RestrictedInformation can be used to to indlude the detai
                     <ext:ExtensionContent>
                         <puf:PageroExtension>
                             <puf:BillingReferenceExtension>
-                                <!-- KSeF reference number -->
+                                <!-- KSeF reference number of the corrected invoice -->
                                 <puf:ClearanceID>8375460033-20230829-F9E05396E2B1-FB</puf:ClearanceID>
                                 <!-- Correction type -->
                                 <puf:RestrictedInformation>
                                     <puf:Key>correctionType</puf:Key>
                                     <puf:Value>1</puf:Value>
-                                </puf:RestrictedInformation>                                
-                                <!-- Date when referenced invoice was sent to KSeF -->
-                                <puf:RestrictedInformation>
-                                    <puf:Key>sentToKSEFDate</puf:Key>
-                                    <puf:Value>2023-08-29</puf:Value>
                                 </puf:RestrictedInformation>
                                 <!-- Reason for correction -->
                                 <cbc:Note>Textual note describing the reason for issuing a correction</cbc:Note>
@@ -220,6 +489,8 @@ _The below keys in puf:RestrictedInformation can be used to to indlude the detai
             </ext:UBLExtensions>
             <!-- Original invoice number -->
             <cbc:ID>1234567</cbc:ID>
+            <!-- Original invoice date -->
+            <cbc:IssueDate>2023-08-29</cbc:IssueDate>
         </cac:InvoiceDocumentReference>
     </cac:BillingReference>
     <!-- Code omitted for clarity -->
