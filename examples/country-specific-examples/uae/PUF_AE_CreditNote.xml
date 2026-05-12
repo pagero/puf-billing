@@ -20,8 +20,8 @@
                         <puf:PageroExtension>
                             <puf:BillingReferenceExtension>
                                 <!-- BTAE-03 Credit note reason code.
-                                     Supported: DL8.61.1.A (cancellation), DL8.61.1.B (price reduction),
-                                     DL8.61.1.C (discount), DL8.61.1.D (goods returned), DL8.61.1.E (other), VD (voided document) -->
+                                     Supported: DL8.61.1.A (supply cancelled), DL8.61.1.B (tax treatment changed),
+                                     DL8.61.1.C (consideration altered), DL8.61.1.D (goods/services returned), DL8.61.1.E (tax charged in error), VD (volume discount) -->
                                 <puf:Code>DL8.61.1.D</puf:Code>
                             </puf:BillingReferenceExtension>
                         </puf:PageroExtension>
