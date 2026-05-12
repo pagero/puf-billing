@@ -868,7 +868,7 @@ Demonstrates:
 
 Invoice e-reporting examples (UC43, UC44) are located in the **tax-data-report** directory:
 - **Invoice reporting**: [`examples/tax-data-report/country-specific-examples/france/`](../tax-data-report/country-specific-examples/france/)
-- **Payment reporting**: [`puf-tax-report/examples/country-specific-examples/france/`](../../../../puf-tax-report/examples/country-specific-examples/france/)
+- **Payment reporting**: [`puf-tax-report/examples/country-specific-examples/france/`](https://github.com/pagero/puf-tax-report/tree/master/examples/country-specific-examples/france/)
 
 ---
 
