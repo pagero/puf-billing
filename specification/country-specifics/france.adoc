@@ -204,6 +204,44 @@ IMPORTANT:
 
 NOTE: These text codes apply to both Invoice and CreditNote document types.
 
+==== Credit note for global discount (Code 262)
+
+Invoice type code `262` ("Avoir pour Remise Globale") is used for credit notes
+issued against one or more previously sent invoices to apply a global
+discount or rebate (commercial gesture, end-of-year volume rebate, etc.).
+
+When using code `262`, the following PUF fields are conditionally mandatory:
+
+* **BT-12** (Contract reference) — `cac:ContractDocumentReference/cbc:ID`
+* **BG-14** (Invoice period) — `cac:InvoicePeriod/cbc:StartDate` and
+  `cac:InvoicePeriod/cbc:EndDate`
+
+The PUF document itself carries `cbc:CreditNoteTypeCode>262`. Downstream
+transformation to the French target formats is flux-specific:
+
+* **Flux 1** (clearance / subset to PPF) and **Flux 10.1** (e-reporting):
+  the value is remapped to `381` and the BT-12 / BT-73 values are carried
+  into the preceding-invoice reference (BT-25 / BT-26).
+* **Flux 2** (invoice transmission): the value is preserved as `262` and
+  BT-12 / BT-73 remain in their normal locations.
+
+*Example*
+[source,xml]
+----
+<CreditNote>
+    <!-- Code omitted for clarity -->
+    <cbc:CreditNoteTypeCode name="B1">262</cbc:CreditNoteTypeCode>
+    <cac:InvoicePeriod>
+        <cbc:StartDate>2026-01-01</cbc:StartDate>
+        <cbc:EndDate>2026-03-31</cbc:EndDate>
+    </cac:InvoicePeriod>
+    <cac:ContractDocumentReference>
+        <cbc:ID>CONTRACT-2026-001</cbc:ID>
+    </cac:ContractDocumentReference>
+    <!-- Code omitted for clarity -->
+</CreditNote>
+----
+
 ==== Self-Billing Indicator
 
 Self-billing invoices can be indicated in two ways:

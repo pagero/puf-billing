@@ -708,11 +708,12 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_french_e_invoicing_mandate_2026">5.4.1. French E-Invoicing Mandate (2026)</a></li>
 <li><a href="#_invoice_type_code_and_business_process_type">5.4.2. Invoice Type Code and Business Process Type</a></li>
 <li><a href="#_french_text_codes_note_elements">5.4.3. French Text Codes (Note Elements)</a></li>
-<li><a href="#_self_billing_indicator_2">5.4.4. Self-Billing Indicator</a></li>
-<li><a href="#_business_and_vat_identification">5.4.5. Business and VAT Identification</a></li>
-<li><a href="#_mandate_scenarios_agent_parties">5.4.6. Mandate Scenarios - Agent Parties</a></li>
-<li><a href="#_service_code">5.4.7. Service code</a></li>
-<li><a href="#_legal_commitments">5.4.8. Legal commitments</a></li>
+<li><a href="#_credit_note_for_global_discount_code_262">5.4.4. Credit note for global discount (Code 262)</a></li>
+<li><a href="#_self_billing_indicator_2">5.4.5. Self-Billing Indicator</a></li>
+<li><a href="#_business_and_vat_identification">5.4.6. Business and VAT Identification</a></li>
+<li><a href="#_mandate_scenarios_agent_parties">5.4.7. Mandate Scenarios - Agent Parties</a></li>
+<li><a href="#_service_code">5.4.8. Service code</a></li>
+<li><a href="#_legal_commitments">5.4.9. Legal commitments</a></li>
 </ul>
 </li>
 <li><a href="#_greece">5.5. Greece</a>
@@ -12114,7 +12115,65 @@ These text codes apply to both Invoice and CreditNote document types.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_self_billing_indicator_2"><a class="anchor" href="#_self_billing_indicator_2"></a><a class="link" href="#_self_billing_indicator_2">5.4.4. Self-Billing Indicator</a></h4>
+<h4 id="_credit_note_for_global_discount_code_262"><a class="anchor" href="#_credit_note_for_global_discount_code_262"></a><a class="link" href="#_credit_note_for_global_discount_code_262">5.4.4. Credit note for global discount (Code 262)</a></h4>
+<div class="paragraph">
+<p>Invoice type code <code>262</code> ("Avoir pour Remise Globale") is used for credit notes
+issued against one or more previously sent invoices to apply a global
+discount or rebate (commercial gesture, end-of-year volume rebate, etc.).</p>
+</div>
+<div class="paragraph">
+<p>When using code <code>262</code>, the following PUF fields are conditionally mandatory:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>BT-12</strong> (Contract reference) — <code>cac:ContractDocumentReference/cbc:ID</code></p>
+</li>
+<li>
+<p><strong>BG-14</strong> (Invoice period) — <code>cac:InvoicePeriod/cbc:StartDate</code> and
+<code>cac:InvoicePeriod/cbc:EndDate</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The PUF document itself carries <code>cbc:CreditNoteTypeCode&gt;262</code>. Downstream
+transformation to the French target formats is flux-specific:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Flux 1</strong> (clearance / subset to PPF) and <strong>Flux 10.1</strong> (e-reporting):
+the value is remapped to <code>381</code> and the BT-12 / BT-73 values are carried
+into the preceding-invoice reference (BT-25 / BT-26).</p>
+</li>
+<li>
+<p><strong>Flux 2</strong> (invoice transmission): the value is preserved as <code>262</code> and
+BT-12 / BT-73 remain in their normal locations.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;CreditNote&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cbc:CreditNoteTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">B1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>262<span class="tag">&lt;/cbc:CreditNoteTypeCode&gt;</span>
+    <span class="tag">&lt;cac:InvoicePeriod&gt;</span>
+        <span class="tag">&lt;cbc:StartDate&gt;</span>2026-01-01<span class="tag">&lt;/cbc:StartDate&gt;</span>
+        <span class="tag">&lt;cbc:EndDate&gt;</span>2026-03-31<span class="tag">&lt;/cbc:EndDate&gt;</span>
+    <span class="tag">&lt;/cac:InvoicePeriod&gt;</span>
+    <span class="tag">&lt;cac:ContractDocumentReference&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>CONTRACT-2026-001<span class="tag">&lt;/cbc:ID&gt;</span>
+    <span class="tag">&lt;/cac:ContractDocumentReference&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/CreditNote&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_self_billing_indicator_2"><a class="anchor" href="#_self_billing_indicator_2"></a><a class="link" href="#_self_billing_indicator_2">5.4.5. Self-Billing Indicator</a></h4>
 <div class="paragraph">
 <p>Self-billing invoices can be indicated in two ways:</p>
 </div>
@@ -12166,7 +12225,7 @@ These text codes apply to both Invoice and CreditNote document types.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_business_and_vat_identification"><a class="anchor" href="#_business_and_vat_identification"></a><a class="link" href="#_business_and_vat_identification">5.4.5. Business and VAT Identification</a></h4>
+<h4 id="_business_and_vat_identification"><a class="anchor" href="#_business_and_vat_identification"></a><a class="link" href="#_business_and_vat_identification">5.4.6. Business and VAT Identification</a></h4>
 <div class="paragraph">
 <p>France uses SIRET (14-digit) and SIREN (9-digit) numbers for business identification.</p>
 </div>
@@ -12340,7 +12399,7 @@ SUFFIX and CODE ROUTAGE achieve similar functionality at different organizationa
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mandate_scenarios_agent_parties"><a class="anchor" href="#_mandate_scenarios_agent_parties"></a><a class="link" href="#_mandate_scenarios_agent_parties">5.4.6. Mandate Scenarios - Agent Parties</a></h4>
+<h4 id="_mandate_scenarios_agent_parties"><a class="anchor" href="#_mandate_scenarios_agent_parties"></a><a class="link" href="#_mandate_scenarios_agent_parties">5.4.7. Mandate Scenarios - Agent Parties</a></h4>
 <div class="paragraph">
 <p>France supports multiple mandate scenarios requiring agent party information. Party roles are indicated using the PUF RoleCode extension.</p>
 </div>
@@ -12522,7 +12581,7 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect3">
-<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.4.7. Service code</a></h4>
+<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.4.8. Service code</a></h4>
 <div class="paragraph">
 <p>Service code is a routing code required by some customers to identify the correct recipient in French Government Portal.</p>
 </div>
@@ -12573,7 +12632,7 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.4.8. Legal commitments</a></h4>
+<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.4.9. Legal commitments</a></h4>
 <div class="paragraph">
 <p>Entities behind French Government portal can set up validation of certain elements called legal commitments. Therefore it&#8217;s recommended to support the below values in order to fulfill the requirements of this validation.</p>
 </div>
