@@ -306,12 +306,12 @@ When the document is a credit note (`cbc:InvoiceTypeCode = 381` or `cbc:CreditNo
 |===
 |Code |Reason
 
-|`DL8.61.1.A` |Cancellation of supply
-|`DL8.61.1.B` |Reduction in price
-|`DL8.61.1.C` |Discount
-|`DL8.61.1.D` |Goods returned
-|`DL8.61.1.E` |Other
-|`VD` |Voided document
+|`DL8.61.1.A` |If the supply was cancelled.
+|`DL8.61.1.B` |If the tax treatment of the supply has changed due to a change in the nature of the supply.
+|`DL8.61.1.C` |If the previously agreed consideration for the supply was altered for any reason (i.e. bad debt relief).
+|`DL8.61.1.D` |If the recipient of goods or recipient of services returned them to the registrant in full or in part and the Consideration was returned in full or in part.
+|`DL8.61.1.E` |If the tax was charged or tax treatment was applied in error.
+|`VD` |Volume Discount.
 |===
 
 The code is carried on `cac:BillingReference/cac:InvoiceDocumentReference` through the existing `puf:BillingReferenceExtension` (path `puf:BillingReferenceExtension/puf:Code`). When the reason code is `VD`, the preceding-document reference itself is not required.

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <meta name="author" content="Copyright &copy; 2025, Pagero, Part of Thomson Reuters">
 <meta name="copyright" content="Pagero, Part of Thomson Reuters">
 <title>PUF Billing 2.0</title>
@@ -17203,27 +17203,27 @@ Otherwise it is OK to omit the attribute.</td>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.A</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cancellation of supply</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the supply was cancelled.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.B</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Reduction in price</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the tax treatment of the supply has changed due to a change in the nature of the supply.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.C</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Discount</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the previously agreed consideration for the supply was altered for any reason (i.e. bad debt relief).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.D</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Goods returned</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the recipient of goods or recipient of services returned them to the registrant in full or in part and the Consideration was returned in full or in part.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.E</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Other</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the tax was charged or tax treatment was applied in error.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>VD</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Voided document</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Volume Discount.</p></td>
 </tr>
 </tbody>
 </table>
@@ -17240,7 +17240,7 @@ Otherwise it is OK to omit the attribute.</td>
 <div class="sect3">
 <h4 id="_self_billing_2"><a class="anchor" href="#_self_billing_2"></a><a class="link" href="#_self_billing_2">5.19.16. Self-billing</a></h4>
 <div class="paragraph">
-<p>In PUF, self-billing is <strong>not</strong> signalled through a dedicated UBL document type code. Self-billed documents keep their original type code (<code>cbc:InvoiceTypeCode = 380</code> for a self-billed tax invoice, <code>cbc:CreditNoteTypeCode = 381</code> for a self-billed credit note) and are flagged through the standard <code>puf:SelfBilled</code> extension at document level. See <code><a href="#_self_billing_indicator">Self-Billed extension</a></code> for the structure.</p>
+<p>In PUF, self-billing is <strong>not</strong> signalled through a dedicated UBL document type code. Self-billed documents keep their original type code (<code>cbc:InvoiceTypeCode = 380</code> for a self-billed tax invoice, <code>cbc:CreditNoteTypeCode = 381</code> for a self-billed credit note) and are flagged through the standard <code>puf:SelfBilled</code> extension at document level. See <code><a href="#_selfbilled">Self-Billed extension</a></code> for the structure.</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
