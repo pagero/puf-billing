@@ -867,7 +867,7 @@ Demonstrates:
 ### E-Reporting Examples (Flux 10.1 — Invoice Reporting)
 
 Invoice e-reporting examples (UC43, UC44) are located in the **tax-data-report** directory:
-- **Invoice reporting**: [`examples/tax-data-report/country-specific-examples/france/`](../tax-data-report/country-specific-examples/france/)
+- **Invoice reporting**: [`examples/tax-data-report/country-specific-examples/france/`](https://github.com/pagero/puf-billing/tree/master/examples/tax-data-report/country-specific-examples/france/)
 - **Payment reporting**: [`puf-tax-report/examples/country-specific-examples/france/`](https://github.com/pagero/puf-tax-report/tree/master/examples/country-specific-examples/france/)
 
 ---
