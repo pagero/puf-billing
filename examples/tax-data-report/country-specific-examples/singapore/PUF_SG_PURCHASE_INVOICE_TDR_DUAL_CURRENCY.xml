@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+
+    <!-- Values in invoice are example values only. 
+         Example of reporting a purchase invoice in Singapore with dual currency for tax data reporting.
+         Invoice received in USD (document currency) with tax reported in SGD (local currency).
+         Seller is an SG GST-registered company billing in USD (common in international trade).
+         Exchange rate USD to SGD = 1.35. Received outside Peppol network. DRAFT -->
+
+    <!-- Entry type. Type can be INVOICE or RECEIPTTRANSACTION -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>entryType</puf:Key>
+                        <puf:Value>INVOICE</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+
+    <!-- IBT-024 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- IBT-023 Business process type (purchase direction) -->
+    <cbc:ProfileID>urn:pagero.com:puf:purchase:1.0</cbc:ProfileID>
+    <!-- IBT-001 Invoice Number -->
+    <cbc:ID>VENDOR-INV-2025-789</cbc:ID>
+    <!-- BT-SG-003 An identifier that uniquely identifies the invoice document.
+         For purchasing invoices received outside Peppol Network, UUID should be populated with a generated UUID from the buyer side -->
+    <cbc:UUID>c3d4e5f6-a7b8-9012-cdef-123456789abc</cbc:UUID>
+    <!-- IBT-002 Invoice Issue Date -->
+    <cbc:IssueDate>2025-03-20</cbc:IssueDate>
+    <!-- IBT-009 Due Date -->
+    <cbc:DueDate>2025-04-20</cbc:DueDate>
+    <!-- IBT-003 Invoice Type Code -->
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <!-- IBT-005 Invoice Document Currency (foreign currency) -->
+    <cbc:DocumentCurrencyCode>USD</cbc:DocumentCurrencyCode>
+    <!-- IBT-006 Tax Currency Code (local Singapore currency for tax reporting) -->
+    <cbc:TaxCurrencyCode>SGD</cbc:TaxCurrencyCode>
+    <cac:OrderReference>
+        <!-- IBT-013 Purchase order reference -->
+        <cbc:ID>PO-2025-0088</cbc:ID>
+    </cac:OrderReference>
+    <!-- IBG-04 Seller (SG GST-registered company billing in USD) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0195">SGUEN2019876543</cbc:EndpointID>
+            <!-- IBT-028 Trading name -->
+            <cac:PartyName>
+                <cbc:Name>Global Components Asia Pte Ltd</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- IBT-035 Seller address street -->
+                <cbc:StreetName>500 Jurong West Street 42</cbc:StreetName>
+                <!-- IBT-037 Seller address City -->
+                <cbc:CityName>Singapore</cbc:CityName>
+                <!-- IBT-038 Seller address postal code -->
+                <cbc:PostalZone>649325</cbc:PostalZone>
+                <cac:Country>
+                    <!-- IBT-040 Seller address country code -->
+                    <cbc:IdentificationCode>SG</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- IBT-031 Seller GST Registration Number -->
+                <cbc:CompanyID>M12345678A</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- IBT-027 Seller Name -->
+                <cbc:RegistrationName>Global Components Asia Pte Ltd</cbc:RegistrationName>
+                <!-- IBT-030 Seller legal registration identifier (UEN) -->
+                <cbc:CompanyID schemeID="0195">201987654C</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- IBG-07 Buyer (Singapore company reporting) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- Buyer's Peppol ID -->
+            <cbc:EndpointID schemeID="0195">SGUEN1234567891</cbc:EndpointID>
+            <!-- IBT-045 Trading Name -->
+            <cac:PartyName>
+                <cbc:Name>Singapore Manufacturing Pte Ltd</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- IBT-050 Buyer address street -->
+                <cbc:StreetName>10 Tuas South Avenue 5</cbc:StreetName>
+                <!-- IBT-052 Buyer address City -->
+                <cbc:CityName>Singapore</cbc:CityName>
+                <!-- IBT-053 Buyer address postal code -->
+                <cbc:PostalZone>637601</cbc:PostalZone>
+                <cac:Country>
+                    <!-- IBT-055 Buyer address country code -->
+                    <cbc:IdentificationCode>SG</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- IBT-048 Buyer GST Registration Number -->
+                <cbc:CompanyID>M98765432B</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- IBT-044 Buyer Name -->
+                <cbc:RegistrationName>Singapore Manufacturing Pte Ltd</cbc:RegistrationName>
+                <!-- IBT-047 Buyer legal registration identifier (UEN) -->
+                <cbc:CompanyID schemeID="0195">201998765B</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Tax exchange rate: USD -> SGD -->
+    <cac:TaxExchangeRate>
+        <cbc:SourceCurrencyCode>USD</cbc:SourceCurrencyCode>
+        <cbc:TargetCurrencyCode>SGD</cbc:TargetCurrencyCode>
+        <cbc:CalculationRate>1.35</cbc:CalculationRate>
+        <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
+    </cac:TaxExchangeRate>
+    <cac:TaxTotal>
+        <!-- IBT-110 Invoice total TAX amount in document currency (IBT-005 = USD) -->
+        <cbc:TaxAmount currencyID="USD">450.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <!-- Tax amounts converted to SGD (tax currency) -->
+                                <puf:TaxCurrencyTaxableAmount currencyID="SGD">6750.00</puf:TaxCurrencyTaxableAmount>
+                                <puf:TaxCurrencyTaxAmount currencyID="SGD">607.50</puf:TaxCurrencyTaxAmount>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- IBT-116 Taxable amount in document currency (USD) -->
+            <cbc:TaxableAmount currencyID="USD">5000.00</cbc:TaxableAmount>
+            <!-- IBT-117 Tax amount in document currency (USD) -->
+            <cbc:TaxAmount currencyID="USD">450.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- IBT-118 TAX category code (SR = Standard Rate for SG GST) -->
+                <cbc:ID>TX</cbc:ID>
+                <!-- IBT-119 TAX category rate (9% GST) -->
+                <cbc:Percent>9.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- IBT-111 Invoice total TAX amount in tax/accounting currency (IBT-006 = SGD) -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="SGD">607.50</cbc:TaxAmount>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LegalMonetaryTotalExtension>
+                            <!-- Invoice total amount without TAX in tax currency (SGD) -->
+                            <puf:TaxCurrencyTaxExclusiveAmount currencyID="SGD">6750.00</puf:TaxCurrencyTaxExclusiveAmount>
+                            <!-- Invoice total amount with TAX in tax currency (SGD) -->
+                            <puf:TaxCurrencyTaxInclusiveAmount currencyID="SGD">7357.50</puf:TaxCurrencyTaxInclusiveAmount>
+                        </puf:LegalMonetaryTotalExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- IBT-106 Sum of all Invoice line net amounts without TAX (USD) -->
+        <cbc:LineExtensionAmount currencyID="USD">5000.00</cbc:LineExtensionAmount>
+        <!-- IBT-109 Invoice total amount without TAX (USD) -->
+        <cbc:TaxExclusiveAmount currencyID="USD">5000.00</cbc:TaxExclusiveAmount>
+        <!-- IBT-112 Invoice total amount with TAX (USD) -->
+        <cbc:TaxInclusiveAmount currencyID="USD">5450.00</cbc:TaxInclusiveAmount>
+        <!-- IBT-115 Amount due for payment (USD) -->
+        <cbc:PayableAmount currencyID="USD">5450.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <!-- IBT-126 Line ID -->
+        <cbc:ID>1</cbc:ID>
+        <!-- IBT-129 Invoiced Quantity -->
+        <cbc:InvoicedQuantity unitCode="C62">20</cbc:InvoicedQuantity>
+        <!-- IBT-131 Line extension amount (USD) -->
+        <cbc:LineExtensionAmount currencyID="USD">3000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- IBT-154 Item description -->
+            <cbc:Description>Semiconductor chips for manufacturing</cbc:Description>
+            <!-- IBT-153 Item name -->
+            <cbc:Name>Semiconductor Chip X100</cbc:Name>
+            <!-- BG-30 LINE TAX INFORMATION -->
+            <cac:ClassifiedTaxCategory>
+                <!-- IBT-151 Invoiced item TAX category code -->
+                <cbc:ID>TX</cbc:ID>
+                <!-- IBT-152 Invoiced item TAX rate -->
+                <cbc:Percent>9.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- IBG-29 PRICE DETAILS -->
+        <cac:Price>
+            <!-- IBT-146 Item net price (USD) -->
+            <cbc:PriceAmount currencyID="USD">150.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <!-- IBT-126 Line ID -->
+        <cbc:ID>2</cbc:ID>
+        <!-- IBT-129 Invoiced Quantity -->
+        <cbc:InvoicedQuantity unitCode="C62">10</cbc:InvoicedQuantity>
+        <!-- IBT-131 Line extension amount (USD) -->
+        <cbc:LineExtensionAmount currencyID="USD">2000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- IBT-154 Item description -->
+            <cbc:Description>Printed circuit boards for assembly</cbc:Description>
+            <!-- IBT-153 Item name -->
+            <cbc:Name>PCB Assembly Board Y200</cbc:Name>
+            <!-- BG-30 LINE TAX INFORMATION -->
+            <cac:ClassifiedTaxCategory>
+                <!-- IBT-151 Invoiced item TAX category code -->
+                <cbc:ID>TX</cbc:ID>
+                <!-- IBT-152 Invoiced item TAX rate -->
+                <cbc:Percent>9.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- IBG-29 PRICE DETAILS -->
+        <cac:Price>
+            <!-- IBT-146 Item net price (USD) -->
+            <cbc:PriceAmount currencyID="USD">200.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
