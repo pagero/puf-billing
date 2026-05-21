@@ -33,6 +33,10 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Jebel Ali Free Zone Authority</cbc:ID>
+            </cac:PartyIdentification>
             <cac:PostalAddress>
                 <cbc:StreetName>Jebel Ali Free Zone, Block A1</cbc:StreetName>
                 <cbc:CityName>Dubai</cbc:CityName>
@@ -57,6 +61,10 @@
         <cac:Party>
             <!-- Customer (contracting party) — distinct from the Beneficiary above -->
             <cbc:EndpointID schemeID="0235">100000000001003</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-11 Buyer legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Abu Dhabi Department of Economic Development</cbc:ID>
+            </cac:PartyIdentification>
             <cac:PostalAddress>
                 <cbc:StreetName>Khalifa Street, Tower 5</cbc:StreetName>
                 <cbc:CityName>Abu Dhabi</cbc:CityName>

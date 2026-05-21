@@ -2,22 +2,22 @@
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
-    <cbc:ID>INV-AE-MS-2026-001</cbc:ID>
+    <cbc:ID>INV-AE-NP-2026-001</cbc:ID>
+    <cbc:UUID>5fd17b21-9c8e-4a3a-9f3d-2a8e1f0b6c20</cbc:UUID>
     <cbc:IssueDate>2026-04-15</cbc:IssueDate>
     <cbc:DueDate>2026-05-15</cbc:DueDate>
-    <!-- BTAE-02 = 00100000 (Profit Margin Scheme flag in position 3) -->
-    <cbc:InvoiceTypeCode name="00100000">380</cbc:InvoiceTypeCode>
-    <cbc:Note>Margin scheme transaction per Article 43 of the UAE VAT Decree-Law. VAT amount displayed as zero — VAT is calculated on the supplier's margin and settled outside this invoice.</cbc:Note>
+    <cbc:InvoiceTypeCode name="00000000">380</cbc:InvoiceTypeCode>
     <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <!-- BTAE-18 Seller passport issuing country (mandatory when BTAE-15 legal-reg type is Passport).
+                 Carried on cac:PartyIdentification with schemeID="AE:PASSPORT_COUNTRY". -->
             <cac:PartyIdentification>
-                <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
-                <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
+                <cbc:ID schemeID="AE:PASSPORT_COUNTRY">GB</cbc:ID>
             </cac:PartyIdentification>
             <cac:PostalAddress>
-                <cbc:StreetName>Al Quoz Industrial Area 4</cbc:StreetName>
+                <cbc:StreetName>Marina Plaza, Floor 22</cbc:StreetName>
                 <cbc:CityName>Dubai</cbc:CityName>
                 <cbc:CountrySubentity>DXB</cbc:CountrySubentity>
                 <cac:Country>
@@ -25,14 +25,17 @@
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
+                <!-- BT-31 Seller VAT identifier — natural person is VAT-registered as a sole practitioner -->
                 <cbc:CompanyID>100000000000003</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:PartyTaxScheme>
             <cac:PartyLegalEntity>
-                <cbc:RegistrationName>Premier Pre-Owned Cars LLC</cbc:RegistrationName>
-                <cbc:CompanyID schemeID="AE:TL">CN-1234567</cbc:CompanyID>
+                <!-- BT-27 Natural-person legal name -->
+                <cbc:RegistrationName>Jane Doe</cbc:RegistrationName>
+                <!-- BT-30/BTAE-15 Passport number with @schemeID="AE:PASSPORT" -->
+                <cbc:CompanyID schemeID="AE:PASSPORT">P12345678</cbc:CompanyID>
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingSupplierParty>
@@ -68,15 +71,12 @@
         <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
     </cac:PaymentMeans>
     <cac:TaxTotal>
-        <!-- VAT amount forced to 0 for margin-scheme transactions -->
-        <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+        <cbc:TaxAmount currencyID="AED">100.00</cbc:TaxAmount>
         <cac:TaxSubtotal>
-            <cbc:TaxableAmount currencyID="AED">45000.00</cbc:TaxableAmount>
-            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+            <cbc:TaxableAmount currencyID="AED">2000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">100.00</cbc:TaxAmount>
             <cac:TaxCategory>
-                <!-- N = Margin scheme (ibr-116-ae). Rate is the statutory 5%; VAT is assessed on
-                     the supplier's profit margin and settled directly with the FTA (ibr-111-ae: N requires Percent > 0). -->
-                <cbc:ID>N</cbc:ID>
+                <cbc:ID>S</cbc:ID>
                 <cbc:Percent>5.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
@@ -85,19 +85,18 @@
         </cac:TaxSubtotal>
     </cac:TaxTotal>
     <cac:LegalMonetaryTotal>
-        <cbc:LineExtensionAmount currencyID="AED">45000.00</cbc:LineExtensionAmount>
-        <cbc:TaxExclusiveAmount currencyID="AED">45000.00</cbc:TaxExclusiveAmount>
-        <!-- Tax-inclusive equals tax-exclusive because VAT amount is 0 -->
-        <cbc:TaxInclusiveAmount currencyID="AED">45000.00</cbc:TaxInclusiveAmount>
-        <cbc:PayableAmount currencyID="AED">45000.00</cbc:PayableAmount>
+        <cbc:LineExtensionAmount currencyID="AED">2000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="AED">2000.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="AED">2100.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="AED">2100.00</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>
     <cac:InvoiceLine>
         <cbc:ID>1</cbc:ID>
-        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
-        <cbc:LineExtensionAmount currencyID="AED">45000.00</cbc:LineExtensionAmount>
+        <cbc:InvoicedQuantity unitCode="HUR">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="AED">2000.00</cbc:LineExtensionAmount>
+        <!-- BTAE-08 VAT line amount in AED (required per ibr-104-ae) -->
         <cac:TaxTotal>
-            <!-- Line VAT amount also forced to 0 -->
-            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+            <cbc:TaxAmount currencyID="AED">100.00</cbc:TaxAmount>
         </cac:TaxTotal>
         <cac:Item>
             <ext:UBLExtensions>
@@ -106,33 +105,34 @@
                     <ext:ExtensionContent>
                         <puf:PageroExtension>
                             <puf:ItemExtension>
-                                <puf:ItemType>GOODS</puf:ItemType>
+                                <puf:ItemType>SERVICES</puf:ItemType>
                             </puf:ItemExtension>
                         </puf:PageroExtension>
                     </ext:ExtensionContent>
                 </ext:UBLExtension>
             </ext:UBLExtensions>
-        <cbc:Description>Resold under the profit margin scheme — originally purchased from a non-Taxable individual. VIN 1HGCM82633A123456.</cbc:Description>
-            <cbc:Name>Used vehicle: 2022 Toyota Camry</cbc:Name>
-            <cac:CommodityClassification>
-                <cbc:ItemClassificationCode listID="HS">8703.23.10</cbc:ItemClassificationCode>
-            </cac:CommodityClassification>
+            <cbc:Description>Independent consulting advice delivered by a natural-person service provider</cbc:Description>
+            <cbc:Name>Q2 strategy consulting</cbc:Name>
+            <cac:AdditionalItemIdentification>
+                <!-- BTAE-17 Service Accounting Code (mandatory when item type is SERVICES or BOTH) -->
+                <cbc:ID schemeID="SAC">9983.11</cbc:ID>
+            </cac:AdditionalItemIdentification>
             <cac:ClassifiedTaxCategory>
-                <cbc:ID>N</cbc:ID>
+                <cbc:ID>S</cbc:ID>
                 <cbc:Percent>5.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
-            </cac:Item>
+        </cac:Item>
         <cac:Price>
-            <cbc:PriceAmount currencyID="AED">45000.00</cbc:PriceAmount>
-            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+            <cbc:PriceAmount currencyID="AED">200.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="HUR">1</cbc:BaseQuantity>
             <!-- IBT-148 Item gross price (required per ibr-126-ae; 0.00 discount = gross equals net) -->
             <cac:AllowanceCharge>
                 <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
                 <cbc:Amount currencyID="AED">0.00</cbc:Amount>
-                <cbc:BaseAmount currencyID="AED">45000.00</cbc:BaseAmount>
+                <cbc:BaseAmount currencyID="AED">200.00</cbc:BaseAmount>
             </cac:AllowanceCharge>
         </cac:Price>
     </cac:InvoiceLine>

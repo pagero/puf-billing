@@ -23,6 +23,10 @@
         <cac:Party>
             <!-- Supplier: the legal counterparty whose supply is being invoiced -->
             <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
+            </cac:PartyIdentification>
             <cac:PostalAddress>
                 <cbc:StreetName>Al Awir Truck Yard, Block 3</cbc:StreetName>
                 <cbc:CityName>Dubai</cbc:CityName>
@@ -47,6 +51,10 @@
         <cac:Party>
             <!-- Buyer: the party that ACTUALLY issues this self-billed invoice -->
             <cbc:EndpointID schemeID="0235">100000000001003</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-11 Buyer legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Sharjah Economic Development Department</cbc:ID>
+            </cac:PartyIdentification>
             <cac:PostalAddress>
                 <cbc:StreetName>Industrial Area 12, Plot 88</cbc:StreetName>
                 <cbc:CityName>Sharjah</cbc:CityName>
