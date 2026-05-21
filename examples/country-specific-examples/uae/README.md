@@ -58,25 +58,7 @@ Demonstrates:
 
 ---
 
-### 3. PUF_AE_DebitNote.xml
-
-**Debit Note — Undercharge Correction**
-
-Demonstrates:
-
-- Debit note using type code `383`
-- BillingReference to original invoice
-- Price escalation clause scenario
-
-**Key Features:**
-
-- Document type: `383`, BTAE-02 `00000000`
-- References original invoice `INV-AE-2026-00001` with price increase of AED 15.00/unit for 10 units
-- Free-text note explaining the contract price escalation basis
-
----
-
-### 4. PUF_AE_Invoice_ContinuousSupply.xml
+### 3. PUF_AE_Invoice_ContinuousSupply.xml
 
 **Continuous Supply Invoice**
 
@@ -96,7 +78,7 @@ Demonstrates:
 
 ---
 
-### 5. PUF_AE_Invoice_ECommerce.xml
+### 4. PUF_AE_Invoice_ECommerce.xml
 
 **E-Commerce Invoice**
 
@@ -116,7 +98,7 @@ Demonstrates:
 
 ---
 
-### 6. PUF_AE_Invoice_ReverseCharge.xml
+### 5. PUF_AE_Invoice_ReverseCharge.xml
 
 **Domestic Reverse Charge Invoice**
 
@@ -137,7 +119,7 @@ Demonstrates:
 
 ---
 
-### 7. PUF_AE_Invoice_SummaryInvoice.xml
+### 6. PUF_AE_Invoice_SummaryInvoice.xml
 
 **Summary Invoice**
 
@@ -157,7 +139,7 @@ Demonstrates:
 
 ---
 
-### 8. PUF_AE_Invoice_MarginScheme.xml
+### 7. PUF_AE_Invoice_MarginScheme.xml
 
 **Profit Margin Scheme Invoice**
 
@@ -177,7 +159,7 @@ Demonstrates:
 
 ---
 
-### 9. PUF_AE_Invoice_DeemedSupply.xml
+### 8. PUF_AE_Invoice_DeemedSupply.xml
 
 **Deemed Supply Invoice**
 
@@ -198,7 +180,7 @@ Demonstrates:
 
 ---
 
-### 10. PUF_AE_Invoice_Exports.xml
+### 9. PUF_AE_Invoice_Exports.xml
 
 **Export Supply Invoice**
 
@@ -219,7 +201,7 @@ Demonstrates:
 
 ---
 
-### 11. PUF_AE_Invoice_FreeTradeZone.xml
+### 10. PUF_AE_Invoice_FreeTradeZone.xml
 
 **Free Trade Zone Supply Invoice**
 
@@ -238,7 +220,7 @@ Demonstrates:
 
 ---
 
-### 12. PUF_AE_Invoice_DisclosedAgent.xml
+### 11. PUF_AE_Invoice_DisclosedAgent.xml
 
 **Disclosed Agent Invoice**
 
@@ -257,7 +239,7 @@ Demonstrates:
 
 ---
 
-### 13. PUF_AE_Invoice_Foreign_Currency.xml
+### 12. PUF_AE_Invoice_Foreign_Currency.xml
 
 **Foreign Currency Invoice (USD)**
 
@@ -279,7 +261,7 @@ Demonstrates:
 
 ---
 
-### 14. PUF_AE_SelfBilling_Invoice.xml
+### 13. PUF_AE_SelfBilling_Invoice.xml
 
 **Self-Billed Invoice**
 
