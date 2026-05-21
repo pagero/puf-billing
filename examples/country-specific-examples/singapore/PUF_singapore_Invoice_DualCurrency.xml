@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+
+    <!-- Values in invoice are example values only. 
+         Dual currency example: Invoice issued in USD (foreign currency) with tax reported in SGD (local currency).
+         Exchange rate USD to SGD = 1.35 -->
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Invoice Number -->
+    <cbc:ID>SG-DC-INV-2025-001</cbc:ID>
+    <!-- BT-SG-003 Unique invoice identifier -->
+    <cbc:UUID>a1b2c3d4-e5f6-7890-abcd-ef1234567890</cbc:UUID>
+    <!-- BT-2 Invoice Issue Date -->
+    <cbc:IssueDate>2025-03-15</cbc:IssueDate>
+    <!-- BT-9 Due Date -->
+    <cbc:DueDate>2025-04-15</cbc:DueDate>
+    <!-- BT-3 Invoice Type Code -->
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <!-- BT-5 Invoice Document Currency (foreign currency) -->
+    <cbc:DocumentCurrencyCode>USD</cbc:DocumentCurrencyCode>
+    <!-- BT-6 Tax Currency Code (local Singapore currency for tax reporting) -->
+    <cbc:TaxCurrencyCode>SGD</cbc:TaxCurrencyCode>
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>BUYER-REF-001</cbc:BuyerReference>
+    <cac:OrderReference>
+        <!-- BT-13 Purchase order reference -->
+        <cbc:ID>PO-2025-0042</cbc:ID>
+    </cac:OrderReference>
+    <!-- BG-4 Seller -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0195">SGUEN1234567891</cbc:EndpointID>
+            <cac:PartyName>
+                <cbc:Name>Singapore Export Trading Pte Ltd</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- BT-35 Seller address street -->
+                <cbc:StreetName>1 Raffles Place</cbc:StreetName>
+                <!-- BT-37 Seller address City -->
+                <cbc:CityName>Singapore</cbc:CityName>
+                <!-- BT-38 Seller address postal code -->
+                <cbc:PostalZone>048616</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Seller address country code -->
+                    <cbc:IdentificationCode>SG</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-31 Seller GST Registration Number -->
+                <cbc:CompanyID>M12345678A</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller Name -->
+                <cbc:RegistrationName>Singapore Export Trading Pte Ltd</cbc:RegistrationName>
+                <!-- BT-30 Seller legal registration identifier (UEN) -->
+                <cbc:CompanyID schemeID="0195">201812345A</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 SELLER CONTACT -->
+            <cac:Contact>
+                <!-- BT-41 Seller contact point -->
+                <cbc:Name>Accounting Department</cbc:Name>
+                <!-- BT-42 Seller contact telephone number -->
+                <cbc:Telephone>+65 6123 4567</cbc:Telephone>
+                <!-- BT-43 Seller contact email address -->
+                <cbc:ElectronicMail>accounts@sgexport.com.sg</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- BG-7 Buyer -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0195">SGUEN9876543210</cbc:EndpointID>
+            <cac:PartyName>
+                <cbc:Name>US Imports Inc</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- BT-50 Buyer address street -->
+                <cbc:StreetName>100 Broadway</cbc:StreetName>
+                <!-- BT-52 Buyer address City -->
+                <cbc:CityName>New York</cbc:CityName>
+                <!-- BT-53 Buyer address postal code -->
+                <cbc:PostalZone>10005</cbc:PostalZone>
+                <!-- BT-54 Buyer address province/state -->
+                <cbc:CountrySubentity>NY</cbc:CountrySubentity>
+                <cac:Country>
+                    <!-- BT-55 Buyer address country code -->
+                    <cbc:IdentificationCode>US</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer Name -->
+                <cbc:RegistrationName>US Imports Inc</cbc:RegistrationName>
+                <!-- BT-47 Buyer legal registration identifier -->
+                <cbc:CompanyID>US-EIN-123456789</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-9 BUYER CONTACT -->
+            <cac:Contact>
+                <!-- BT-56 Buyer contact point -->
+                <cbc:Name>Jane Smith</cbc:Name>
+                <!-- BT-57 Buyer contact telephone number -->
+                <cbc:Telephone>+1 212 555 1234</cbc:Telephone>
+                <!-- BT-58 Buyer contact email address -->
+                <cbc:ElectronicMail>jane.smith@usimports.com</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- BG-13 DELIVERY INFORMATION -->
+    <cac:Delivery>
+        <!-- BT-72 Actual delivery date -->
+        <cbc:ActualDeliveryDate>2025-03-10</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means code (Credit transfer) -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier -->
+            <cbc:ID>SG1234567890123</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 Payment service provider identifier (SWIFT/BIC) -->
+                <cbc:ID>DBSSSGSG</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BT-6/BT-5 Tax exchange rate: USD -> SGD -->
+    <cac:TaxExchangeRate>
+        <cbc:SourceCurrencyCode>USD</cbc:SourceCurrencyCode>
+        <cbc:TargetCurrencyCode>SGD</cbc:TargetCurrencyCode>
+        <cbc:CalculationRate>1.35</cbc:CalculationRate>
+        <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
+    </cac:TaxExchangeRate>
+    <!-- BG-23 VAT BREAKDOWN in document currency (USD) -->
+    <cac:TaxTotal>
+        <!-- BT-110 Invoice total VAT amount in document currency (BT-5 = USD) -->
+        <cbc:TaxAmount currencyID="USD">270.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <!-- Tax amounts converted to SGD (tax currency) -->
+                                <puf:TaxCurrencyTaxableAmount currencyID="SGD">4050.00</puf:TaxCurrencyTaxableAmount>
+                                <puf:TaxCurrencyTaxAmount currencyID="SGD">364.50</puf:TaxCurrencyTaxAmount>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- BT-116 Taxable amount in document currency (USD) -->
+            <cbc:TaxableAmount currencyID="USD">3000.00</cbc:TaxableAmount>
+            <!-- BT-117 Tax amount in document currency (USD) -->
+            <cbc:TaxAmount currencyID="USD">270.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code -->
+                <cbc:ID>SR</cbc:ID>
+                <!-- BT-119 VAT category rate (9% GST) -->
+                <cbc:Percent>9.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- BT-111 Invoice total VAT amount in tax/accounting currency (BT-6 = SGD) -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="SGD">364.50</cbc:TaxAmount>
+    </cac:TaxTotal>
+    <!-- BG-22 DOCUMENT TOTALS (all in document currency USD) -->
+    <cac:LegalMonetaryTotal>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LegalMonetaryTotalExtension>
+                            <!-- Invoice total amount without VAT in tax currency (SGD) -->
+                            <puf:TaxCurrencyTaxExclusiveAmount currencyID="SGD">4050.00</puf:TaxCurrencyTaxExclusiveAmount>
+                            <!-- Invoice total amount with VAT in tax currency (SGD) -->
+                            <puf:TaxCurrencyTaxInclusiveAmount currencyID="SGD">4414.50</puf:TaxCurrencyTaxInclusiveAmount>
+                        </puf:LegalMonetaryTotalExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- BT-106 Sum of all Invoice line net amounts -->
+        <cbc:LineExtensionAmount currencyID="USD">3000.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Invoice total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="USD">3000.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Invoice total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="USD">3270.00</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment -->
+        <cbc:PayableAmount currencyID="USD">3270.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <!-- BG-25 INVOICE LINE 1 -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Line ID -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-129 Invoiced Quantity. BT-130 unit of measure -->
+        <cbc:InvoicedQuantity unitCode="C62">10</cbc:InvoicedQuantity>
+        <!-- BT-131 Line extension amount (line net amount in document currency) -->
+        <cbc:LineExtensionAmount currencyID="USD">2000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>High-precision electronic components for industrial automation</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Electronic Component Module A</cbc:Name>
+            <!-- BG-30 LINE VAT INFORMATION -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code -->
+                <cbc:ID>SR</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>9.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- BG-29 PRICE DETAILS -->
+        <cac:Price>
+            <!-- BT-146 Item net price (in document currency USD) -->
+            <cbc:PriceAmount currencyID="USD">200.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <!-- BG-25 INVOICE LINE 2 -->
+    <cac:InvoiceLine>
+        <!-- BT-126 Line ID -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-129 Invoiced Quantity -->
+        <cbc:InvoicedQuantity unitCode="C62">5</cbc:InvoicedQuantity>
+        <!-- BT-131 Line extension amount -->
+        <cbc:LineExtensionAmount currencyID="USD">1000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-154 Item description -->
+            <cbc:Description>Connector cables for Module A integration</cbc:Description>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Integration Cable Set B</cbc:Name>
+            <!-- BG-30 LINE VAT INFORMATION -->
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code -->
+                <cbc:ID>SR</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>9.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>GST</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <!-- BG-29 PRICE DETAILS -->
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="USD">200.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
