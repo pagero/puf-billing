@@ -14,6 +14,10 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
+            </cac:PartyIdentification>
             <cac:PostalAddress>
                 <cbc:StreetName>Dubai South Logistics Hub, Warehouse 12</cbc:StreetName>
                 <cbc:CityName>Dubai</cbc:CityName>
@@ -37,6 +41,10 @@
     <cac:AccountingCustomerParty>
         <cac:Party>
             <cbc:EndpointID schemeID="0235">100000000001003</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-11 Buyer legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
+            </cac:PartyIdentification>
             <cac:PostalAddress>
                 <cbc:StreetName>Marina Walk, Apartment 502</cbc:StreetName>
                 <cbc:CityName>Dubai</cbc:CityName>
