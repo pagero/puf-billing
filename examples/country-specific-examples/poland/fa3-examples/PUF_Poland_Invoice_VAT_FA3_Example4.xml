@@ -370,6 +370,10 @@
     <cbc:InvoicedQuantity unitCode="EA">20</cbc:InvoicedQuantity>
     <!-- BT-131 Line net amount (P_11): qty 20 × (1000 − 100) = 18000 -->
     <cbc:LineExtensionAmount currencyID="PLN">18000.00</cbc:LineExtensionAmount>
+    <!-- Per-line delivery date (P_6A) -->
+    <cac:Delivery>
+      <cbc:ActualDeliveryDate>2026-01-10</cbc:ActualDeliveryDate>
+    </cac:Delivery>
     <!-- Per-unit price discount (P_10=100): line-level AllowanceCharge, total amount = qty 20 × 100 = 2000
          The transform divides netAmount by quantity to derive P_10. -->
     <cac:AllowanceCharge>
@@ -377,10 +381,6 @@
       <cbc:Amount currencyID="PLN">2000.00</cbc:Amount>
       <cbc:BaseAmount currencyID="PLN">20000.00</cbc:BaseAmount>
     </cac:AllowanceCharge>
-    <!-- Per-line delivery date (P_6A) -->
-    <cac:Delivery>
-      <cbc:ActualDeliveryDate>2026-01-10</cbc:ActualDeliveryDate>
-    </cac:Delivery>
     <!-- Line-level tax (BT-151/BT-152) -->
     <cac:Item>
       <!-- BT-153 Item name (P_7) -->

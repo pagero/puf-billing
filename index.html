@@ -665,8 +665,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_projectreference">4.2.7. ProjectReference</a></li>
 <li><a href="#_orderlinereference">4.2.8. OrderLineReference</a></li>
 <li><a href="#line-contract">4.2.9. ContractDocumentReference</a></li>
-<li><a href="#_item">4.2.10. Item</a></li>
-<li><a href="#_price">4.2.11. Price</a></li>
+<li><a href="#line-sublines">4.2.10. Sub-lines</a></li>
+<li><a href="#_item">4.2.11. Item</a></li>
+<li><a href="#_price">4.2.12. Price</a></li>
 </ul>
 </li>
 </ul>
@@ -709,11 +710,12 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_invoice_type_code_and_business_process_type">5.4.2. Invoice Type Code and Business Process Type</a></li>
 <li><a href="#_french_text_codes_note_elements">5.4.3. French Text Codes (Note Elements)</a></li>
 <li><a href="#_credit_note_for_global_discount_code_262">5.4.4. Credit note for global discount (Code 262)</a></li>
-<li><a href="#_self_billing_indicator_2">5.4.5. Self-Billing Indicator</a></li>
-<li><a href="#_business_and_vat_identification">5.4.6. Business and VAT Identification</a></li>
-<li><a href="#_mandate_scenarios_agent_parties">5.4.7. Mandate Scenarios - Agent Parties</a></li>
-<li><a href="#_service_code">5.4.8. Service code</a></li>
-<li><a href="#_legal_commitments">5.4.9. Legal commitments</a></li>
+<li><a href="#_sub_lines_and_line_groupings">5.4.5. Sub-lines and Line Groupings</a></li>
+<li><a href="#_self_billing_indicator_2">5.4.6. Self-Billing Indicator</a></li>
+<li><a href="#_business_and_vat_identification">5.4.7. Business and VAT Identification</a></li>
+<li><a href="#_mandate_scenarios_agent_parties">5.4.8. Mandate Scenarios - Agent Parties</a></li>
+<li><a href="#_service_code">5.4.9. Service code</a></li>
+<li><a href="#_legal_commitments">5.4.10. Legal commitments</a></li>
 </ul>
 </li>
 <li><a href="#_greece">5.5. Greece</a>
@@ -10662,7 +10664,132 @@ Issue date for the buyer referenced contract document, date should be formatted 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_item"><a class="anchor" href="#_item"></a><a class="link" href="#_item">4.2.10. Item</a></h4>
+<h4 id="line-sublines"><a class="anchor" href="#line-sublines"></a><a class="link" href="#line-sublines">4.2.10. Sub-lines</a></h4>
+<div class="paragraph">
+<p>Sub-lines let an invoice line carry a hierarchy of grouped, detail and informational lines while the lines stay <strong>flat</strong> in the document. The hierarchy is expressed by a parent pointer (<code>puf:ParentLineID</code>), not by XML nesting, so any nesting depth is supported without nested elements.</p>
+</div>
+<div class="paragraph">
+<p>The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/LineExtension</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 70. Sub-line elements</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:RowType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Line subtype.</strong> Valid values: <code>SUMMARY</code> (a group line carrying the subtotal of its children), <code>PLAIN</code> (a detail line that carries economic value), <code>INFO</code> (an informational line that carries no amount in the totals).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:ParentLineID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Parent line identifier.</strong> The <code>cbc:ID</code> of the parent <code>cac:InvoiceLine</code> in the same document. A group line may reference another group line, which expresses additional nesting levels.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Item/cbc:PackQuantity</code> (native UBL on <code>cac:Item</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Quantity per parent unit.</strong> The quantity of this line&#8217;s item contained in one unit of the parent line. This is a native UBL element on <code>cac:Item</code>, not a Pagero extension.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Group (<code>SUMMARY</code>) lines carry a subtotal of their children and informational (<code>INFO</code>) lines carry no amount, so neither contributes to the document totals — only detail (<code>PLAIN</code>) and standard lines are summed. How sub-lines are mapped to a target format, and whether group/informational lines are transmitted onwards, is defined per country profile. For France, see the sub-lines section under <a href="#_france">Country specifics</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>See example below as well as the URI to be used for this extension.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Group line with a detail sub-line</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="comment">&lt;!-- Group line (subtotal of its children) --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+      <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+          <span class="tag">&lt;ext:UBLExtension&gt;</span>
+              <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+              <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                  <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                      <span class="tag">&lt;puf:LineExtension&gt;</span>
+                          <span class="tag">&lt;puf:RowType&gt;</span>SUMMARY<span class="tag">&lt;/puf:RowType&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                      <span class="tag">&lt;/puf:LineExtension&gt;</span>
+                  <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+              <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+          <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;cbc:ID&gt;</span>10<span class="tag">&lt;/cbc:ID&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Detail line referencing the group line above --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+      <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+          <span class="tag">&lt;ext:UBLExtension&gt;</span>
+              <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+              <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                  <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                      <span class="tag">&lt;puf:LineExtension&gt;</span>
+                          <span class="tag">&lt;puf:RowType&gt;</span>PLAIN<span class="tag">&lt;/puf:RowType&gt;</span>
+                          <span class="tag">&lt;puf:ParentLineID&gt;</span>10<span class="tag">&lt;/puf:ParentLineID&gt;</span> <i class="conum" data-value="3"></i><b>(3)</b>
+                      <span class="tag">&lt;/puf:LineExtension&gt;</span>
+                  <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+              <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+          <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;cbc:ID&gt;</span>20<span class="tag">&lt;/cbc:ID&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+      <span class="tag">&lt;cac:Item&gt;</span>
+          <span class="tag">&lt;cbc:PackQuantity</span> <span class="attribute-name">unitCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">H87</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1<span class="tag">&lt;/cbc:PackQuantity&gt;</span> <i class="conum" data-value="4"></i><b>(4)</b>
+          <span class="tag">&lt;cbc:Name&gt;</span>Component<span class="tag">&lt;/cbc:Name&gt;</span>
+          <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+      <span class="tag">&lt;/cac:Item&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>URI to be used for the line extension.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Group line: <code>SUMMARY</code> marks a subtotal line excluded from the document totals.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Detail line: <code>ParentLineID</code> references the <code>cbc:ID</code> of the group line it belongs to.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Native UBL <code>cbc:PackQuantity</code> on <code>cac:Item</code>: quantity contained in one unit of the parent line.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_item"><a class="anchor" href="#_item"></a><a class="link" href="#_item">4.2.11. Item</a></h4>
 <div class="paragraph">
 <p>The UBL extension to be used for below elements can be found <a href="#_cacitem">here</a>.</p>
 </div>
@@ -10715,7 +10842,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 70. Elements added to puf:ItemExtension</caption>
+<caption class="title">Table 71. Elements added to puf:ItemExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10764,7 +10891,7 @@ Type of item, valid values are <code>GOODS</code> or <code>SERVICE</code>.</p></
 </div>
 </div>
 <div class="sect3">
-<h4 id="_price"><a class="anchor" href="#_price"></a><a class="link" href="#_price">4.2.11. Price</a></h4>
+<h4 id="_price"><a class="anchor" href="#_price"></a><a class="link" href="#_price">4.2.12. Price</a></h4>
 <div class="paragraph">
 <p>The Price segment has been extended with new elements.</p>
 </div>
@@ -10820,7 +10947,7 @@ Type of item, valid values are <code>GOODS</code> or <code>SERVICE</code>.</p></
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 71. Elements added to puf:PriceExtension</caption>
+<caption class="title">Table 72. Elements added to puf:PriceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -12173,7 +12300,150 @@ BT-12 / BT-73 remain in their normal locations.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_self_billing_indicator_2"><a class="anchor" href="#_self_billing_indicator_2"></a><a class="link" href="#_self_billing_indicator_2">5.4.5. Self-Billing Indicator</a></h4>
+<h4 id="_sub_lines_and_line_groupings"><a class="anchor" href="#_sub_lines_and_line_groupings"></a><a class="link" href="#_sub_lines_and_line_groupings">5.4.5. Sub-lines and Line Groupings</a></h4>
+<div class="paragraph">
+<p>France (EXTENDED-CTC-FR profile) supports hierarchical invoice lines - sub-lines and line groupings - for composite articles (kits, packs), multi-VAT-rate products, and parent lines with supplements. The lines stay flat; the hierarchy is carried by the generic <a href="#line-sublines">Sub-lines extension</a> (<code>puf:RowType</code> + <code>puf:ParentLineID</code>) together with the native <code>cac:Item/cbc:PackQuantity</code>.</p>
+</div>
+<div class="paragraph">
+<p>These map to the French line-grouping extensions as follows:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 42.8572%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">PUF</th>
+<th class="tableblock halign-left valign-top">France (EXTENDED-CTC-FR)</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:RowType</code> = <code>SUMMARY</code> / <code>PLAIN</code> / <code>INFO</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EXT-FR-FE-163 line subtype = <code>GROUP</code> / <code>DETAIL</code> / <code>INFORMATION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Qualifies the line as a grouping/subtotal line, a detail line, or an informational line.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:ParentLineID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EXT-FR-FE-162 parent line identifier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>cbc:ID</code> (BT-126) of the parent line. A <code>GROUP</code> may reference another <code>GROUP</code>, so multi-level nesting is supported.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:Item/cbc:PackQuantity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EXT-FR-FE-191 quantity per parent unit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quantity of the sub-line article contained in one unit of the parent line.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>IMPORTANT:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Only <code>DETAIL</code> and standard lines participate in the document totals (BT-106/BT-109) and the VAT breakdown (BG-23). <code>GROUP</code> and <code>INFORMATION</code> lines are excluded (XP Z12-014 §3.2.37).</p>
+</li>
+<li>
+<p>If a <code>GROUP</code> line carries BT-131 (line net amount), it must equal the sum of BT-131 of its direct <code>DETAIL</code>/<code>GROUP</code> children.</p>
+</li>
+<li>
+<p><code>GROUP</code> and <code>INFORMATION</code> lines are kept in the commercial invoice (Flux 2) but dropped from the clearance (Flux 1) and e-reporting (Flux 10) transmissions, which carry only <code>DETAIL</code> and standard lines.</p>
+</li>
+<li>
+<p>Sub-lines do not require a specific business process code; the standard B/S/M codes apply.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example - group line with two detail sub-lines</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="comment">&lt;!-- Group line: subtotal of its children, excluded from totals --&gt;</span>
+    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+            <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                        <span class="tag">&lt;puf:LineExtension&gt;</span>
+                            <span class="tag">&lt;puf:RowType&gt;</span>SUMMARY<span class="tag">&lt;/puf:RowType&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+                        <span class="tag">&lt;/puf:LineExtension&gt;</span>
+                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>10<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="tag">&lt;cbc:LineExtensionAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1000.00<span class="tag">&lt;/cbc:LineExtensionAmount&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+    <span class="comment">&lt;!-- Detail line: parent 10, with quantity per parent unit --&gt;</span>
+    <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+            <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                        <span class="tag">&lt;puf:LineExtension&gt;</span>
+                            <span class="tag">&lt;puf:RowType&gt;</span>PLAIN<span class="tag">&lt;/puf:RowType&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+                            <span class="tag">&lt;puf:ParentLineID&gt;</span>10<span class="tag">&lt;/puf:ParentLineID&gt;</span><i class="conum" data-value="3"></i><b>(3)</b>
+                        <span class="tag">&lt;/puf:LineExtension&gt;</span>
+                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;cbc:ID&gt;</span>20<span class="tag">&lt;/cbc:ID&gt;</span>
+        <span class="tag">&lt;cbc:LineExtensionAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>600.00<span class="tag">&lt;/cbc:LineExtensionAmount&gt;</span>
+        <span class="tag">&lt;cac:Item&gt;</span>
+            <span class="tag">&lt;cbc:PackQuantity</span> <span class="attribute-name">unitCode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">H87</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>6<span class="tag">&lt;/cbc:PackQuantity&gt;</span><i class="conum" data-value="4"></i><b>(4)</b>
+            <span class="tag">&lt;cbc:Name&gt;</span>Component<span class="tag">&lt;/cbc:Name&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Item&gt;</span>
+    <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>SUMMARY</code> &#8594; EXT-FR-FE-163 <code>GROUP</code>: a subtotal line excluded from the totals and from Flux 1 / Flux 10.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>PLAIN</code> &#8594; EXT-FR-FE-163 <code>DETAIL</code>: a line that participates in the totals.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>ParentLineID</code> &#8594; EXT-FR-FE-162: references the group line <code>cbc:ID</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><code>cac:Item/cbc:PackQuantity</code> &#8594; EXT-FR-FE-191: quantity contained in one unit of the parent line.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Reference examples are available under <code>examples/country-specific-examples/france/</code>: <code>PUF_France_Sublines_Invoice.xml</code> (single-level) and <code>PUF_France_Sublines_Multilevel_Invoice.xml</code> (multi-level GROUP-of-GROUP).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_self_billing_indicator_2"><a class="anchor" href="#_self_billing_indicator_2"></a><a class="link" href="#_self_billing_indicator_2">5.4.6. Self-Billing Indicator</a></h4>
 <div class="paragraph">
 <p>Self-billing invoices can be indicated in two ways:</p>
 </div>
@@ -12225,7 +12495,7 @@ BT-12 / BT-73 remain in their normal locations.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_business_and_vat_identification"><a class="anchor" href="#_business_and_vat_identification"></a><a class="link" href="#_business_and_vat_identification">5.4.6. Business and VAT Identification</a></h4>
+<h4 id="_business_and_vat_identification"><a class="anchor" href="#_business_and_vat_identification"></a><a class="link" href="#_business_and_vat_identification">5.4.7. Business and VAT Identification</a></h4>
 <div class="paragraph">
 <p>France uses SIRET (14-digit) and SIREN (9-digit) numbers for business identification.</p>
 </div>
@@ -12399,7 +12669,7 @@ SUFFIX and CODE ROUTAGE achieve similar functionality at different organizationa
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mandate_scenarios_agent_parties"><a class="anchor" href="#_mandate_scenarios_agent_parties"></a><a class="link" href="#_mandate_scenarios_agent_parties">5.4.7. Mandate Scenarios - Agent Parties</a></h4>
+<h4 id="_mandate_scenarios_agent_parties"><a class="anchor" href="#_mandate_scenarios_agent_parties"></a><a class="link" href="#_mandate_scenarios_agent_parties">5.4.8. Mandate Scenarios - Agent Parties</a></h4>
 <div class="paragraph">
 <p>France supports multiple mandate scenarios requiring agent party information. Party roles are indicated using the PUF RoleCode extension.</p>
 </div>
@@ -12581,7 +12851,7 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect3">
-<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.4.8. Service code</a></h4>
+<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.4.9. Service code</a></h4>
 <div class="paragraph">
 <p>Service code is a routing code required by some customers to identify the correct recipient in French Government Portal.</p>
 </div>
@@ -12632,7 +12902,7 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.4.9. Legal commitments</a></h4>
+<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.4.10. Legal commitments</a></h4>
 <div class="paragraph">
 <p>Entities behind French Government portal can set up validation of certain elements called legal commitments. Therefore it&#8217;s recommended to support the below values in order to fulfill the requirements of this validation.</p>
 </div>
@@ -17557,7 +17827,7 @@ For enhanced search functionality in Pagero Online, it is recommended to use a c
 <p>Below is a list of countries where PUF can be used as the source for tax data reporting with distribution solely to tax authorities.</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 72. Table of PUF supported countries for Tax data reporting</caption>
+<caption class="title">Table 73. Table of PUF supported countries for Tax data reporting</caption>
 <colgroup>
 <col>
 <col>
@@ -17712,7 +17982,7 @@ If no entry type is sent system will default to type Invoice.
 <div class="sect2">
 <h3 id="_code_lists_for_coded_elements"><a class="anchor" href="#_code_lists_for_coded_elements"></a><a class="link" href="#_code_lists_for_coded_elements">7.1. Code lists for coded elements</a></h3>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 73. Table of the code lists used</caption>
+<caption class="title">Table 74. Table of the code lists used</caption>
 <colgroup>
 <col>
 <col>
@@ -17893,7 +18163,7 @@ cbc:ItemClassificationCode/@listID</code></p></td>
 <p>The validation artefacts are also available on <a href="https://github.com/pagero/puf-billing/tree/master/validation-artefacts" target="_blank" rel="noopener">GitHub</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 74. Schematron rules in PUF</caption>
+<caption class="title">Table 75. Schematron rules in PUF</caption>
 <colgroup>
 <col>
 <col>
@@ -18073,7 +18343,7 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 </table>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 75. Table of supported countries</caption>
+<caption class="title">Table 76. Table of supported countries</caption>
 <colgroup>
 <col>
 <col>

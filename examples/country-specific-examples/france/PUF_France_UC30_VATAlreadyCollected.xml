@@ -149,6 +149,7 @@
     <cbc:Note>#PMD#En cas de retard de paiement, application de pénalités au taux BCE + 10 points et indemnité forfaitaire de 40 EUR (articles L. 441-6 et D. 441-5 Code de commerce).</cbc:Note>
     <cbc:Note>#PMT#PAIEMENT DÉJÀ ENCAISSÉ: Cette facture documente une transaction initialement réalisée en B2C le 15/01/2026 et payée par carte bancaire (1 020,00 EUR TTC). Le paiement a déjà été encaissé. Cette facture B2B est émise à la demande du client (EventPro Corporate SARL) qui a révélé ultérieurement son statut de société et souhaite récupérer la TVA déductible. Aucun paiement supplémentaire n'est requis. COMPTABILISATION CLIENT: Le client peut utiliser cette facture pour comptabiliser la charge en frais professionnels et récupérer la TVA de 170,00 EUR sur sa déclaration de TVA.</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5: Invoice currency code -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>

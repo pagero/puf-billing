@@ -75,6 +75,7 @@
     <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR. Payable à TechDistrib France SAS.</cbc:Note>
     <!-- BAR: Treatment type qualification - B2B e-invoicing -->
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- NOTE: NO ACC subrogation notice - this is NOT factoring, no legal transfer of receivable -->
     <!-- Payment terms explain distributor arrangement without Dailly law language -->

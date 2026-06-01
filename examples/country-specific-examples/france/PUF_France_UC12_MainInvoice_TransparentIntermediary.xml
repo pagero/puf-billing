@@ -128,6 +128,7 @@
     <cbc:Note>#PMT#Conditions de paiement: 50% d'acompte à la commande (déjà versé), solde à 30 jours fin de mois. En cas de retard de paiement, pénalités de 3 fois le taux d'intérêt légal + indemnité forfaitaire pour frais de recouvrement de 40 EUR.</cbc:Note>
     <cbc:Note>#AAI#GESTION PAR INTERMÉDIAIRE TRANSPARENT: Cette facture est destinée au client ACHETEUR (Manufacturing Pharmaceutique Lyon SAS) mais gérée par un intermédiaire transparent (Courtage Industriel Pro SARL) agissant au nom et pour le compte du client. Le routage vers l'intermédiaire est assuré par l'adresse électronique dédiée (SIREN_ACHATTR). L'intermédiaire traite les factures d'achat pour le compte de son commettant conformément au mandat établi. Le client ACHETEUR reste légalement responsable du paiement. Une facture d'entremise séparée sera émise par l'intermédiaire au client pour les services de courtage (BOI-TVA-CHAMP-10-10-40-40).</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
     <!-- BT-5: Invoice currency code -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
 

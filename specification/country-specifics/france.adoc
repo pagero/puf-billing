@@ -242,6 +242,93 @@ transformation to the French target formats is flux-specific:
 </CreditNote>
 ----
 
+==== Sub-lines and Line Groupings
+
+France (EXTENDED-CTC-FR profile) supports hierarchical invoice lines - sub-lines and line groupings - for composite articles (kits, packs), multi-VAT-rate products, and parent lines with supplements. The lines stay flat; the hierarchy is carried by the generic <<line-sublines, Sub-lines extension>> (`puf:RowType` + `puf:ParentLineID`) together with the native `cac:Item/cbc:PackQuantity`.
+
+These map to the French line-grouping extensions as follows:
+
+[cols="2,2,3", options="header"]
+|===
+|PUF |France (EXTENDED-CTC-FR) |Description
+
+|`puf:RowType` = `SUMMARY` / `PLAIN` / `INFO`
+|EXT-FR-FE-163 line subtype = `GROUP` / `DETAIL` / `INFORMATION`
+|Qualifies the line as a grouping/subtotal line, a detail line, or an informational line.
+
+|`puf:ParentLineID`
+|EXT-FR-FE-162 parent line identifier
+|The `cbc:ID` (BT-126) of the parent line. A `GROUP` may reference another `GROUP`, so multi-level nesting is supported.
+
+|`cac:Item/cbc:PackQuantity`
+|EXT-FR-FE-191 quantity per parent unit
+|Quantity of the sub-line article contained in one unit of the parent line.
+|===
+
+IMPORTANT:
+
+* Only `DETAIL` and standard lines participate in the document totals (BT-106/BT-109) and the VAT breakdown (BG-23). `GROUP` and `INFORMATION` lines are excluded (XP Z12-014 §3.2.37).
+* If a `GROUP` line carries BT-131 (line net amount), it must equal the sum of BT-131 of its direct `DETAIL`/`GROUP` children.
+* `GROUP` and `INFORMATION` lines are kept in the commercial invoice (Flux 2) but dropped from the clearance (Flux 1) and e-reporting (Flux 10) transmissions, which carry only `DETAIL` and standard lines.
+* Sub-lines do not require a specific business process code; the standard B/S/M codes apply.
+
+*Example - group line with two detail sub-lines*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <!-- Group line: subtotal of its children, excluded from totals -->
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:RowType>SUMMARY</puf:RowType><!--1-->
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>10</cbc:ID>
+        <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+        <!-- Code omitted for clarity -->
+    </cac:InvoiceLine>
+    <!-- Detail line: parent 10, with quantity per parent unit -->
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:RowType>PLAIN</puf:RowType><!--2-->
+                            <puf:ParentLineID>10</puf:ParentLineID><!--3-->
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>20</cbc:ID>
+        <cbc:LineExtensionAmount currencyID="EUR">600.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:PackQuantity unitCode="H87">6</cbc:PackQuantity><!--4-->
+            <cbc:Name>Component</cbc:Name>
+            <!-- Code omitted for clarity -->
+        </cac:Item>
+    </cac:InvoiceLine>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+<1> `SUMMARY` -> EXT-FR-FE-163 `GROUP`: a subtotal line excluded from the totals and from Flux 1 / Flux 10.
+<2> `PLAIN` -> EXT-FR-FE-163 `DETAIL`: a line that participates in the totals.
+<3> `ParentLineID` -> EXT-FR-FE-162: references the group line `cbc:ID`.
+<4> `cac:Item/cbc:PackQuantity` -> EXT-FR-FE-191: quantity contained in one unit of the parent line.
+
+NOTE: Reference examples are available under `examples/country-specific-examples/france/`: `PUF_France_Sublines_Invoice.xml` (single-level) and `PUF_France_Sublines_Multilevel_Invoice.xml` (multi-level GROUP-of-GROUP).
+
 ==== Self-Billing Indicator
 
 Self-billing invoices can be indicated in two ways:
