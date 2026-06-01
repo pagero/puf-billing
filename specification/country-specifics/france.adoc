@@ -272,7 +272,7 @@ IMPORTANT:
 * `GROUP` and `INFORMATION` lines are kept in the commercial invoice (Flux 2) but dropped from the clearance (Flux 1) and e-reporting (Flux 10) transmissions, which carry only `DETAIL` and standard lines.
 * Sub-lines do not require a specific business process code; the standard B/S/M codes apply.
 
-*Example - group line with two detail sub-lines*
+*Example - group line with detail sub-line*
 [source,xml]
 ----
 <Invoice>
