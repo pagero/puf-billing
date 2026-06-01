@@ -139,6 +139,7 @@
     <cbc:Note>#PAI#Paiement partiel par Assurance Auto France SA à hauteur de 2500.00 EUR (montant HT hors franchise). Le client règle la franchise de 500.00 EUR et la TVA de 600.00 EUR, soit 1100.00 EUR. Dossier sinistre n° SIN-2026-AUTO-15478.</cbc:Note>
     <!-- BAR: Treatment type qualification - B2B e-invoicing -->
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>

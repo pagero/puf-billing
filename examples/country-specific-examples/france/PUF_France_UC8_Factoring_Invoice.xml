@@ -71,6 +71,7 @@
     <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR. Payable à France Affacturage Services SA, cessionnaire de la créance.</cbc:Note>
     <!-- BAR: Treatment type qualification - B2B e-invoicing -->
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- ACC: Subrogation/assignment legal notice (MANDATORY for factoring) -->
     <cbc:Note>#ACC#SUBROGATION LÉGALE - LOI DAILLY : La présente facture a fait l'objet d'une cession de créance professionnelle à France Affacturage Services SA (SIRET 22233344455667, SIREN 222333444) conformément aux articles L. 313-23 à L. 313-35 du Code monétaire et financier (Loi Dailly). Le paiement doit impérativement être effectué à l'ordre de France Affacturage Services SA sur le compte bancaire indiqué ci-dessous. Tout paiement effectué au vendeur initial ne sera pas libératoire.</cbc:Note>

@@ -113,6 +113,7 @@
     <cbc:Note>#PMT#Paiement à 30 jours fin de mois par virement bancaire. En cas de retard de paiement, pénalités de 3 fois le taux d'intérêt légal + indemnité forfaitaire pour frais de recouvrement de 40 EUR.</cbc:Note>
     <cbc:Note>#AAI#Cette facture est destinée à un client dont la gestion comptable est assurée par un centre de services partagés (CSP). Le routage vers le CSP est géré par l'adresse électronique du client (SIREN_SERVICECODE). Le CSP traite les factures pour le compte du client ACHETEUR conformément au mandat établi. Le client ACHETEUR reste légalement responsable du paiement.</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5: Invoice currency code -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>

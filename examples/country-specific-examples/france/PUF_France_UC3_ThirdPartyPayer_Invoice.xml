@@ -134,6 +134,7 @@
     <cbc:Note>#PAI#Paiement à effectuer par Centrale d'Achat Groupe Retail France SA conformément à l'accord commercial tripartite</cbc:Note>
     <!-- BAR: Treatment type qualification - B2B e-invoicing -->
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5 Invoice Document Currency -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>

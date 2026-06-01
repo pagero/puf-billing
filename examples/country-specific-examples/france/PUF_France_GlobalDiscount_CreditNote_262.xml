@@ -62,6 +62,7 @@
     <cbc:Note>#PMT#Indemnite forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
     <!-- #BAR#: Treatment type qualification - B2B e-invoicing -->
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
     <!-- Additional note explaining the global discount -->
     <cbc:Note>Avoir pour remise globale Q1 2026 - 5% sur le volume facture sur la periode au titre du contrat CONTRAT-FR-2026-001</cbc:Note>
 

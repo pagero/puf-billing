@@ -58,6 +58,7 @@
     <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
     <!-- #BAR#: Treatment type qualification - B2B e-invoicing -->
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
     <!-- Explanation of credit note reason -->
     <cbc:Note>Avoir d'escompte - Escompte de 3% appliqué pour paiement anticipé sous 15 jours conformément aux conditions de la facture FR-INV-2026-022B</cbc:Note>
 

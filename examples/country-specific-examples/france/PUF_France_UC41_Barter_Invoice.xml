@@ -84,6 +84,7 @@
     <cbc:Note>#PAI#ÉCHANGE: La créance HT de 10 000,00 EUR est compensée par la contrepartie en nature (prestations publicitaires de valeur équivalente accordées par Troc &amp; Co SARL, conformément à la convention de troc ref. TC-2026-001 du 15/01/2026). Seule la TVA (2 000,00 EUR) est réglée en numéraire. Délai de règlement TVA: 30 jours date de facture.</cbc:Note>
     <cbc:Note>#PMD#En cas de retard de paiement de la TVA, pénalités au taux BCE + 10 points et indemnité de recouvrement de 40 EUR</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5 Invoice currency -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>

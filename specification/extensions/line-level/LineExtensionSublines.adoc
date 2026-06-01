@@ -1,0 +1,78 @@
+Sub-lines let an invoice line carry a hierarchy of grouped, detail and informational lines while the lines stay *flat* in the document. The hierarchy is expressed by a parent pointer (`puf:ParentLineID`), not by XML nesting, so any nesting depth is supported without nested elements.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/LineExtension`.
+
+.Sub-line elements
+|===
+|Element |Description
+
+|`puf:RowType`
+|**Line subtype.** Valid values: `SUMMARY` (a group line carrying the subtotal of its children), `PLAIN` (a detail line that carries economic value), `INFO` (an informational line that carries no amount in the totals).
+
+|`puf:ParentLineID`
+|**Parent line identifier.** The `cbc:ID` of the parent `cac:InvoiceLine` in the same document. A group line may reference another group line, which expresses additional nesting levels.
+
+|`cac:Item/cbc:PackQuantity` (native UBL on `cac:Item`)
+|**Quantity per parent unit.** The quantity of this line's item contained in one unit of the parent line. This is a native UBL element on `cac:Item`, not a Pagero extension.
+|===
+
+[NOTE]
+====
+Group (`SUMMARY`) lines carry a subtotal of their children and informational (`INFO`) lines carry no amount, so neither contributes to the document totals — only detail (`PLAIN`) and standard lines are summed. How sub-lines are mapped to a target format, and whether group/informational lines are transmitted onwards, is defined per country profile. For France, see the sub-lines section under <<_france, Country specifics>>.
+====
+
+See example below as well as the URI to be used for this extension.
+
+*Example* +
+_Group line with a detail sub-line_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <!-- Group line (subtotal of its children) -->
+  <cac:InvoiceLine>
+      <ext:UBLExtensions>
+          <ext:UBLExtension>
+              <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI> <!--1-->
+              <ext:ExtensionContent>
+                  <puf:PageroExtension>
+                      <puf:LineExtension>
+                          <puf:RowType>SUMMARY</puf:RowType> <!--2-->
+                      </puf:LineExtension>
+                  </puf:PageroExtension>
+              </ext:ExtensionContent>
+          </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:ID>10</cbc:ID>
+      <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Detail line referencing the group line above -->
+  <cac:InvoiceLine>
+      <ext:UBLExtensions>
+          <ext:UBLExtension>
+              <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+              <ext:ExtensionContent>
+                  <puf:PageroExtension>
+                      <puf:LineExtension>
+                          <puf:RowType>PLAIN</puf:RowType>
+                          <puf:ParentLineID>10</puf:ParentLineID> <!--3-->
+                      </puf:LineExtension>
+                  </puf:PageroExtension>
+              </ext:ExtensionContent>
+          </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:ID>20</cbc:ID>
+      <!-- Code omitted for clarity -->
+      <cac:Item>
+          <cbc:PackQuantity unitCode="H87">1</cbc:PackQuantity> <!--4-->
+          <cbc:Name>Component</cbc:Name>
+          <!-- Code omitted for clarity -->
+      </cac:Item>
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used for the line extension.
+<2> Group line: `SUMMARY` marks a subtotal line excluded from the document totals.
+<3> Detail line: `ParentLineID` references the `cbc:ID` of the group line it belongs to.
+<4> Native UBL `cbc:PackQuantity` on `cac:Item`: quantity contained in one unit of the parent line.

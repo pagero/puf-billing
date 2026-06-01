@@ -143,6 +143,7 @@
         le paiement. Tous les droits et obligations liés à la vente restent attachés au VENDEUR
         (Ébénisterie Artisanale Dubois EURL). Référence juridique: BOI-TVA-DECLA-30-20-10-30 (§210).</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5: Invoice currency code -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>

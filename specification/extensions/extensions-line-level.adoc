@@ -40,6 +40,12 @@ include::line-level/LineExtensionOrderLineReference.adoc[]
 
 include::line-level/LineExtensionContractDocumentReference.adoc[]
 
+[#line-sublines]
+
+==== Sub-lines
+
+include::line-level/LineExtensionSublines.adoc[]
+
 ==== Item
 
 include::line-level/LineExtensionItemExtension.adoc[]
@@ -47,3 +53,4 @@ include::line-level/LineExtensionItemExtension.adoc[]
 ==== Price
 
 include::line-level/LineExtensionPriceExtension.adoc[]
+

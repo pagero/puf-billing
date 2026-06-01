@@ -62,6 +62,40 @@ Demonstrates:
 
 ---
 
+### Sub-line Examples (Line Groupings)
+
+Sub-lines let an invoice line carry a hierarchy of grouped/detail/informational lines while staying **flat** on the wire — the hierarchy is expressed by a parent pointer, not by XML nesting. France maps these via the EXTENDED-CTC-FR extensions:
+
+| PUF (line `puf:LineExtension`) | France wire | Meaning |
+|---|---|---|
+| `puf:RowType` = `SUMMARY` / `PLAIN` / `INFO` | EXT-FR-FE-163 `DocumentStatusCode` = GROUP / DETAIL / INFORMATION | Line subtype |
+| `puf:ParentLineID` | EXT-FR-FE-162 `BillingReferenceLine/ID` | Parent line `cbc:ID` (same document) |
+| `cac:Item/cbc:PackQuantity` (native UBL) | EXT-FR-FE-191 `PackQuantity` | Quantity per one parent unit |
+
+Totalling (XP Z12-014 §3.2.37): only DETAIL and standard lines feed BT-106; GROUP and INFORMATION lines are excluded from totals and dropped from the clearance (Flux 1) and e-reporting (Flux 10). The full structure is retained only in the commercial invoice (Flux 2).
+
+#### PUF_France_Sublines_Invoice.xml
+
+**Single-level GROUP + DETAIL (UC12 pattern)**
+
+Demonstrates:
+
+- One GROUP line (line 10) carrying the subtotal of two DETAIL children (lines 20, 30) plus one INFORMATION line (line 40)
+- `puf:RowType` / `puf:ParentLineID` on `puf:LineExtension`; `cbc:PackQuantity` on `cac:Item`
+- Document totals summing DETAIL lines only (600.00 + 400.00 = 1000.00)
+
+#### PUF_France_Sublines_Multilevel_Invoice.xml
+
+**Multi-level GROUP-of-GROUP (Figure 50)**
+
+Demonstrates:
+
+- A three-level tree (GROUP 10 → GROUP 20 → DETAIL 30/40; DETAIL 50 directly under GROUP 10)
+- The same flat parent-pointer mechanism — a GROUP's `puf:ParentLineID` points to another GROUP — so nesting depth is unlimited and needs no special handling
+- Each GROUP carries the subtotal of its direct children; only DETAIL lines feed BT-106 (350 + 250 + 400 = 1000.00)
+
+---
+
 ### Use Case Examples
 
 #### UC1: PUF_France_UC1_MultiOrder_MultiDelivery_Invoice.xml

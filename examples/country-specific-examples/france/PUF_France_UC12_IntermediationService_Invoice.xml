@@ -104,6 +104,7 @@
     <cbc:Note>#PMT#Paiement à 15 jours par virement bancaire. En cas de retard de paiement, pénalités de 3 fois le taux d'intérêt légal + indemnité forfaitaire pour frais de recouvrement de 40 EUR.</cbc:Note>
     <cbc:Note>#AAI#FACTURE D'ENTREMISE - INTERMÉDIAIRE TRANSPARENT: Conformément aux dispositions de l'article BOI-TVA-CHAMP-10-10-40-40 (§20 et §40) du Bulletin Officiel des Impôts, cette facture d'entremise facture les services de courtage rendus au client commettant (Manufacturing Pharmaceutique Lyon SAS) dans le cadre de l'achat de produits chimiques. Les opérations d'entremise sont considérées comme des prestations de service indépendantes de la prestation objet de l'entremise elle-même. Cette facture se rapporte à la transaction principale documentée par la facture UC12-CTI-2026-0456 (ChemTech Industries SA) d'un montant de 11 460,00 EUR TTC. Le courtier a agi au nom et pour le compte du client ACHETEUR conformément au mandat établi.</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5: Invoice currency code -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
