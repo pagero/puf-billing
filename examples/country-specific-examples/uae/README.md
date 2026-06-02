@@ -4,7 +4,7 @@ This directory contains example PUF invoice files demonstrating the United Arab 
 
 ## Overview
 
-UAE e-invoicing is mandated through the Federal Tax Authority (FTA) and transmitted via the Peppol network using the PINT BIS Billing AE 1.0.3 profile. These examples demonstrate key UAE requirements including:
+UAE e-invoicing is mandated through the Federal Tax Authority (FTA) and transmitted via the Peppol network using the PINT BIS Billing AE 1.0.4 profile. These examples demonstrate key UAE requirements including:
 
 - Invoice Transaction Type Code (BTAE-02) — 8-character flag string signalling the UAE business context
 - UAE Tax Registration Number (TRN) — 15-digit identifier starting with `1` and ending with `03`
@@ -281,6 +281,29 @@ Demonstrates:
 
 ---
 
+### 14. PUF_AE_Invoice_AdvancePayment.xml
+
+**Advance Payment — Final Invoice**
+
+Demonstrates:
+
+- Advance-payment handling per UAE Guidelines V1.1, Appendix 5: the advance is invoiced as a normal Tax Invoice (`380`) and the final invoice is likewise a Tax Invoice covering only the outstanding balance — there is no dedicated prepayment type code
+- `cac:BillingReference` to the preceding advance-payment invoice (IBT-25 preceding invoice number, IBT-26 preceding invoice issue date)
+- Advance reference also restated in a document note (BT-22 / IBT-022)
+- `cbc:PrepaidAmount` deliberately omitted — the final invoice already reflects only the remaining balance, so no further advance adjustment is applied
+- BTAE-02 = `00000000` (no special transaction context; there is no advance/prepayment flag)
+
+**Key Features:**
+
+- Document type: `380`, BTAE-02 `00000000`
+- Contract AED 10,000.00 + 5% VAT; an advance of AED 1,000.00 + VAT was invoiced earlier as `ADV-001` (2026-05-01)
+- This final invoice bills the remaining AED 9,000.00 net + AED 450.00 VAT; PayableAmount AED 9,450.00
+- BillingReference → `ADV-001`; HS code `7309.00.00` (steel storage tank)
+
+> **Retention:** UAE Guidelines V1.1, Appendix 5 also clarifies retention. Businesses may issue an Electronic Invoice for the amount payable after adjusting for the retained amount, then a separate Electronic Invoice for the retained amount once the buyer becomes liable to release it. Each is a standard Tax Invoice (`380`) and follows the same structure as this example, with the retained portion simply billed on the later invoice.
+
+---
+
 ## UAE-Specific Requirements Reference
 
 ### BTAE-02 Invoice Transaction Type Code
@@ -345,4 +368,4 @@ All examples validate against:
 - [PUF Code Lists — UAE Invoice Transaction Type Code](https://pagero.github.io/puf-code-lists/#_invoice_transaction_type_code_united_arab_emirates)
 - [PUF Code Lists — UAE Identification Schemes](https://pagero.github.io/puf-code-lists/#_identification_scheme_united_arab_emirates)
 - PUF Billing Specification — UAE section
-- Peppol PINT BIS Billing AE 1.0.3 specification
+- Peppol PINT BIS Billing AE 1.0.4 specification
