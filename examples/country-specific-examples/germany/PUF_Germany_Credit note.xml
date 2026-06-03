@@ -69,8 +69,6 @@
             <cac:PartyLegalEntity>
                 <!-- BT-27 Seller Name -->
                 <cbc:RegistrationName>Supplier Registration Name</cbc:RegistrationName>
-                <!-- BT-30 Seller legal registration identifier -->
-                <cbc:CompanyID>DE1234567891</cbc:CompanyID>
             </cac:PartyLegalEntity>
             <!-- BG-6 SELLER CONTACT -->
             <cac:Contact>
@@ -120,8 +118,6 @@
             <cac:PartyLegalEntity>
                 <!-- BT-44 Buyer Name -->
                 <cbc:RegistrationName>Buyer Registration Name</cbc:RegistrationName>
-                <!-- BT-47 Buyer legal registration identifier. The VAT number in this sample is a dummy value and is not valid -->
-                <cbc:CompanyID>DE4321567891</cbc:CompanyID>
             </cac:PartyLegalEntity>
             <!-- BG-9 BUYER CONTACT -->
             <cac:Contact>
