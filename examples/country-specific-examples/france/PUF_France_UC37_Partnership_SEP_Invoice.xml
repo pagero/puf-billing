@@ -95,7 +95,7 @@
     <!-- BG-4 Seller — Structural engineering firm -->
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0009">78901234511233</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">78901234511233</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">78901234511233</cbc:ID>
             </cac:PartyIdentification>

@@ -65,7 +65,7 @@
                                 </ext:UBLExtension>
                             </ext:UBLExtensions>
                             <!-- EXT-FR-FE-52: Electronic address (RECOMMENDED) -->
-                            <cbc:EndpointID schemeID="0009">77788899900112</cbc:EndpointID>
+                            <cbc:EndpointID schemeID="0225">77788899900112</cbc:EndpointID>
                             <!-- EXT-FR-FE-46: PAYER party identification (SIRET) -->
                             <cac:PartyIdentification>
                                 <cbc:ID schemeID="0009">77788899900112</cbc:ID>
@@ -151,7 +151,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34 Seller electronic address (mandatory for EXTENDED-CTC-FR) -->
-            <cbc:EndpointID schemeID="0009">98765432109876</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">98765432109876</cbc:EndpointID>
             <!-- BT-29 SIRET identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">98765432109876</cbc:ID>
@@ -205,7 +205,7 @@
         <cbc:SupplierAssignedAccountID>CLIENT-AUTO-3456</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- BT-46 Buyer Identifier - SIRET -->
-            <cbc:EndpointID schemeID="0009">33344455566778</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">33344455566778</cbc:EndpointID>
             <!-- BT-45 Buyer Trading Name -->
             <cac:PartyName>
                 <cbc:Name>Transport Express Rhône SARL</cbc:Name>

@@ -93,7 +93,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34 Seller electronic address (member's own SIRET) -->
-            <cbc:EndpointID schemeID="0009">33344455566677</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">33344455566677</cbc:EndpointID>
 
             <!--
                 BT-29 identifiers — TWO entries required per G1.76:
@@ -153,7 +153,7 @@
     <cac:AccountingCustomerParty>
         <cac:Party>
             <!-- BT-49 Buyer electronic address (buyer's SIRET) -->
-            <cbc:EndpointID schemeID="0009">11122233344456</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">11122233344456</cbc:EndpointID>
             <!-- BT-46 Buyer SIRET -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">11122233344456</cbc:ID>

@@ -60,7 +60,7 @@
                                 </ext:UBLExtension>
                             </ext:UBLExtensions>
                             <!-- EXT-FR-FE-52: Electronic address (RECOMMENDED) -->
-                            <cbc:EndpointID schemeID="0009">11122233344556</cbc:EndpointID>
+                            <cbc:EndpointID schemeID="0225">11122233344556</cbc:EndpointID>
                             <!-- EXT-FR-FE-46: PAYER party identification (SIRET) -->
                             <cac:PartyIdentification>
                                 <cbc:ID schemeID="0009">11122233344556</cbc:ID>
@@ -153,7 +153,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34 Seller electronic address (mandatory for EXTENDED-CTC-FR) -->
-            <cbc:EndpointID schemeID="0009">12345678901234</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">12345678901234</cbc:EndpointID>
             <!-- BT-29 SIRET identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">12345678901234</cbc:ID>
@@ -207,7 +207,7 @@
         <cbc:SupplierAssignedAccountID>CLIENT-MAG-5678</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- BT-46 Buyer Identifier - SIRET -->
-            <cbc:EndpointID schemeID="0009">55566677788990</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">55566677788990</cbc:EndpointID>
             <!-- BT-45 Buyer Trading Name -->
             <cac:PartyName>
                 <cbc:Name>Magasin Retail Paris Centre</cbc:Name>

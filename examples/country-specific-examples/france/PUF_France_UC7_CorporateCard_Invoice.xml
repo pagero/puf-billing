@@ -82,7 +82,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34 Seller electronic address (endpoint for e-invoicing) -->
-            <cbc:EndpointID schemeID="0009">55566677788990</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">55566677788990</cbc:EndpointID>
             <!-- BT-29 SIRET identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">55566677788990</cbc:ID>
@@ -135,7 +135,7 @@
         <cbc:SupplierAssignedAccountID>ENTREPRISE-7890</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- BT-49 Buyer electronic address -->
-            <cbc:EndpointID schemeID="0009">33344455566778</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">33344455566778</cbc:EndpointID>
             <!-- BT-46 Buyer Identifier - SIRET -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">33344455566778</cbc:ID>

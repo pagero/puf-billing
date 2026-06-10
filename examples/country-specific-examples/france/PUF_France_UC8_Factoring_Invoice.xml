@@ -91,7 +91,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34 Seller electronic address (endpoint for e-invoicing) -->
-            <cbc:EndpointID schemeID="0009">78912345678901</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">78912345678901</cbc:EndpointID>
             <!-- BT-29 SIRET identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">78912345678901</cbc:ID>
@@ -145,7 +145,7 @@
         <cbc:SupplierAssignedAccountID>CLIENT-IND-5678</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- BT-49 Buyer electronic address -->
-            <cbc:EndpointID schemeID="0009">44455566677889</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">44455566677889</cbc:EndpointID>
             <!-- BT-46 Buyer Identifier - SIRET -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">44455566677889</cbc:ID>
@@ -210,7 +210,7 @@
             </ext:UBLExtension>
         </ext:UBLExtensions>
         <!-- EXT-FR-FE-29 Payee electronic address (mandatory for EXTENDED-CTC-FR/Flux2) -->
-        <cbc:EndpointID schemeID="0009">22233344455667</cbc:EndpointID>
+        <cbc:EndpointID schemeID="0225">22233344455667</cbc:EndpointID>
         <!-- BT-60 Payee identifier (SIRET) -->
         <cac:PartyIdentification>
             <cbc:ID schemeID="0009">22233344455667</cbc:ID>

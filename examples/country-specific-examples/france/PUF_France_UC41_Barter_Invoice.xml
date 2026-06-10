@@ -95,7 +95,7 @@
     <!-- BG-4 Seller — Advertising agency -->
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0009">56789012311200</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">56789012311200</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">56789012311200</cbc:ID>
             </cac:PartyIdentification>
@@ -126,7 +126,7 @@
     <!-- BG-7 Buyer — Barter intermediary company -->
     <cac:AccountingCustomerParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0009">34567890199011</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">34567890199011</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">34567890199011</cbc:ID>
             </cac:PartyIdentification>

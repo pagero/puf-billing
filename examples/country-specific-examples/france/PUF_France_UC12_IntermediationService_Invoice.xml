@@ -123,7 +123,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34: Seller electronic address (SIRET) -->
-            <cbc:EndpointID schemeID="0009">55566677788899</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">55566677788899</cbc:EndpointID>
 
             <!-- BT-28: Seller trading name -->
             <cac:PartyName>
@@ -168,7 +168,7 @@
                  This is a service invoice FROM intermediary TO buyer.
                  BT-49 uses BUYER's standard electronic address, NOT SIREN_ACHATTR format
                  (that format is only for routing main purchase invoices TO intermediary). -->
-            <cbc:EndpointID schemeID="0009">78901234500011</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">78901234500011</cbc:EndpointID>
 
             <!-- BT-45: Buyer trading name -->
             <cac:PartyName>
