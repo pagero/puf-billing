@@ -205,7 +205,7 @@
                  
                  Under French VAT law, transparent intermediary acts "in name and on behalf"
                  of BUYER (commettant). BUYER is legal purchaser, intermediary is representative. -->
-            <cbc:EndpointID schemeID="0002">789012345_ACHATTR</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">789012345_ACHATTR</cbc:EndpointID>
 
             <!-- BT-45: Buyer trading name -->
             <cac:PartyName>

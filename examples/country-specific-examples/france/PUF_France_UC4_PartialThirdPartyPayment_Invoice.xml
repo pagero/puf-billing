@@ -234,6 +234,8 @@
             <cac:PartyLegalEntity>
                 <!-- BT-44 Buyer Legal Name -->
                 <cbc:RegistrationName>Transport Express Rhône SARL</cbc:RegistrationName>
+                <!-- BT-47 SIREN -->
+                <cbc:CompanyID schemeID="0002">333444555</cbc:CompanyID>
             </cac:PartyLegalEntity>
             <!-- BG-9 Buyer Contact -->
             <cac:Contact>

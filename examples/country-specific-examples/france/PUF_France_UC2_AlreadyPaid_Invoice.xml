@@ -227,6 +227,8 @@
             <cac:PartyLegalEntity>
                 <!-- BT-44 Buyer Legal Name -->
                 <cbc:RegistrationName>Magasins Bio Nature France SA</cbc:RegistrationName>
+                <!-- BT-47 SIREN -->
+                <cbc:CompanyID schemeID="0002">123123123</cbc:CompanyID>
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>

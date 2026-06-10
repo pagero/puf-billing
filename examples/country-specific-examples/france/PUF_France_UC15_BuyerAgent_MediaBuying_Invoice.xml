@@ -221,7 +221,7 @@
                  - Post lifecycle statuses
                  
                  BUYER accesses invoices via PA-TR or own PA acting as OD/SC. -->
-            <cbc:EndpointID schemeID="0002">234567890_ACHATPUB</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">234567890_ACHATPUB</cbc:EndpointID>
 
             <!-- BT-45: Buyer trading name -->
             <cac:PartyName>

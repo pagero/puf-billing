@@ -120,7 +120,7 @@
             <!-- BT-34: Seller electronic address - ROUTES TO FACTURANT'S PA-T
                  In UC17b, BT-34 must be an address where the facturant has access
                  for receiving lifecycle statuses. Routes to marketplace's PA-T platform.
-                 SchemeID "0009" = SIRET-based addressing -->
+                 SchemeID "0225" = French electronic addressing scheme -->
             <cbc:EndpointID schemeID="0225">55566677700011</cbc:EndpointID>
 
             <!-- BT-29: SIRET identifier (SELLER's SIRET) -->

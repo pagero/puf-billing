@@ -144,7 +144,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34: Seller electronic address -->
-            <cbc:EndpointID schemeID="0002">22233344455566</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">22233344455566</cbc:EndpointID>
 
             <!-- BT-27: Seller trading name -->
             <cac:PartyName>

@@ -188,7 +188,7 @@
             <!-- BT-34: Seller electronic address
                  Routes to SELLER's PA-R (reception platform).
                  SELLER receives invoice here and creates treatment statuses. -->
-            <cbc:EndpointID schemeID="0002">77766655544433</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">77766655544433</cbc:EndpointID>
 
             <!-- BT-27: Seller trading name -->
             <cac:PartyName>
@@ -255,7 +255,7 @@
             <!-- BT-49: Buyer electronic address
                  Routes to BUYER's PA-E (emission platform).
                  BUYER creates and emits invoice from here. -->
-            <cbc:EndpointID schemeID="0002">99988877766655</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">99988877766655</cbc:EndpointID>
 
             <!-- BT-45: Buyer trading name -->
             <cac:PartyName>

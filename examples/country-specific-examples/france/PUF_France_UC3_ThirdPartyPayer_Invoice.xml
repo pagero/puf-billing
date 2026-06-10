@@ -236,6 +236,8 @@
             <cac:PartyLegalEntity>
                 <!-- BT-44 Buyer Legal Name -->
                 <cbc:RegistrationName>Magasin Retail Paris Centre SARL</cbc:RegistrationName>
+                <!-- BT-47 SIREN -->
+                <cbc:CompanyID schemeID="0002">555666777</cbc:CompanyID>
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>

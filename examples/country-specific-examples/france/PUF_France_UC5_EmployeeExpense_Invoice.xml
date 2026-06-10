@@ -180,7 +180,7 @@
         <cbc:SupplierAssignedAccountID>ENTREPRISE-3456</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- BT-49 Buyer electronic address - Special routing for employee expenses -->
-            <cbc:EndpointID schemeID="0002">333444555_FRAISCOLLABORATEUR</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">333444555_FRAISCOLLABORATEUR</cbc:EndpointID>
             <!-- BT-46 Buyer Identifier - SIRET -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">33344455566778</cbc:ID>

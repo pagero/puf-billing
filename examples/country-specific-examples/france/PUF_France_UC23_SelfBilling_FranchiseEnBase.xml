@@ -98,7 +98,7 @@
                 BT-34 Seller electronic address.
                 Individual producers registered under SIREN use schemeID 0002.
             -->
-            <cbc:EndpointID schemeID="0002">444222111</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">444222111</cbc:EndpointID>
             <!-- BT-27 Seller name / individual name -->
             <cac:PartyName>
                 <cbc:Name>Jean-Pierre Beaumont</cbc:Name>

@@ -256,7 +256,7 @@
 
                  SchemeID "0002" = SIREN-based addressing
                  Service code "_ACHATIT" = Routes to BUYER AGENT's PA-TR (Achat IT) -->
-            <cbc:EndpointID schemeID="0002">456789012_ACHATIT</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">456789012_ACHATIT</cbc:EndpointID>
 
             <!-- BT-46: Buyer identifier (SIRET) -->
             <cac:PartyIdentification>
