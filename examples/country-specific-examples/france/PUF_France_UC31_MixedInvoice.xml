@@ -97,7 +97,7 @@
     <!-- BG-4 Seller — IndustriTech Solutions SARL -->
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0009">56789012311122</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">56789012311122</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">56789012311122</cbc:ID>
             </cac:PartyIdentification>
@@ -128,7 +128,7 @@
     <!-- BG-7 Buyer -->
     <cac:AccountingCustomerParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0009">22233344455566</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">22233344455566</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">22233344455566</cbc:ID>
             </cac:PartyIdentification>

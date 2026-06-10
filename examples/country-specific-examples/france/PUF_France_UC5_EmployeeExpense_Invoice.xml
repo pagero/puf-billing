@@ -127,7 +127,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34 Seller electronic address (endpoint for e-invoicing) -->
-            <cbc:EndpointID schemeID="0009">12345678901234</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">12345678901234</cbc:EndpointID>
             <!-- BT-29 SIRET identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">12345678901234</cbc:ID>
@@ -180,7 +180,7 @@
         <cbc:SupplierAssignedAccountID>ENTREPRISE-3456</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- BT-49 Buyer electronic address - Special routing for employee expenses -->
-            <cbc:EndpointID schemeID="0002">333444555_FRAISCOLLABORATEUR</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">333444555_FRAISCOLLABORATEUR</cbc:EndpointID>
             <!-- BT-46 Buyer Identifier - SIRET -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">33344455566778</cbc:ID>

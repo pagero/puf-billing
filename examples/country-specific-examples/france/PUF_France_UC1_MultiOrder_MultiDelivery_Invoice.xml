@@ -84,7 +84,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34 Seller electronic address (mandatory for EXTENDED-CTC-FR) -->
-            <cbc:EndpointID schemeID="0009">12345678901234</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">12345678901234</cbc:EndpointID>
             <!-- BT-29 SIRET identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">12345678901234</cbc:ID>
@@ -138,7 +138,7 @@
         <cbc:SupplierAssignedAccountID>CUST-FR-98765</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- BT-46 Buyer Identifier - SIRET -->
-            <cbc:EndpointID schemeID="0009">98765432109876</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">98765432109876</cbc:EndpointID>
             <!-- BT-45 Buyer Trading Name -->
             <cac:PartyName>
                 <cbc:Name>Chaîne Magasins Retail France</cbc:Name>
@@ -167,6 +167,8 @@
             <cac:PartyLegalEntity>
                 <!-- BT-44 Buyer Legal Name -->
                 <cbc:RegistrationName>Chaîne Magasins Retail France SA</cbc:RegistrationName>
+                <!-- BT-47 SIREN -->
+                <cbc:CompanyID schemeID="0002">987654321</cbc:CompanyID>
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>

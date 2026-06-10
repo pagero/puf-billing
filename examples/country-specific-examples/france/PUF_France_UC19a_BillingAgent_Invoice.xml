@@ -166,7 +166,7 @@
                  Routes to Billing Agent's PA-E (88877766655544) for lifecycle status
                  reception and management. The Agent manages statuses on behalf of SELLER.
                  
-                 SchemeID "0002" = SIRET-based addressing
+                 SchemeID "0225" = French electronic addressing scheme
                  
                  Platform Option 1 (Used Here): SELLER and Agent share same PA-E
                  - Both parties access same platform and see same invoices/statuses
@@ -178,7 +178,7 @@
                  - Agent must transmit created invoice to SELLER after emission
                  - Agent must share all lifecycle statuses with SELLER
                  - SELLER informs Agent of payment collection -->
-            <cbc:EndpointID schemeID="0002">88877766655544</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">88877766655544</cbc:EndpointID>
 
             <!-- BT-27: Seller trading name -->
             <cac:PartyName>
@@ -259,7 +259,7 @@
                     </ext:UBLExtensions>
 
                     <!-- Billing Agent Electronic Address (Status Reception) -->
-                    <cbc:EndpointID schemeID="0002">88877766655544</cbc:EndpointID>
+                    <cbc:EndpointID schemeID="0225">88877766655544</cbc:EndpointID>
 
                     <!-- Billing Agent Trading Name -->
                     <cac:PartyName>
@@ -306,7 +306,7 @@
     <cac:AccountingCustomerParty>
         <cac:Party>
             <!-- BT-49: Buyer electronic address -->
-            <cbc:EndpointID schemeID="0002">11122233344455</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">11122233344455</cbc:EndpointID>
 
             <!-- BT-45: Buyer trading name -->
             <cac:PartyName>

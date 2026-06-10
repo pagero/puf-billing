@@ -125,7 +125,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34: Seller electronic address (SIRET) -->
-            <cbc:EndpointID schemeID="0009">22233344455566</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">22233344455566</cbc:EndpointID>
 
             <!-- BT-28: Seller trading name -->
             <cac:PartyName>
@@ -178,7 +178,7 @@
                  
                  Third party created this address with BUYER's mandate authorization.
                  FNFE-MPE provides standard mandate template (www.fnfe-mpe.org). -->
-            <cbc:EndpointID schemeID="0002">456789012_CSPARA</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">456789012_CSPARA</cbc:EndpointID>
 
             <!-- BT-45: Buyer trading name -->
             <cac:PartyName>

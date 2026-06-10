@@ -84,7 +84,7 @@
     <!-- BG-4 Seller — Second-hand vehicle dealer -->
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0009">65432198711100</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">65432198711100</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">65432198711100</cbc:ID>
             </cac:PartyIdentification>
@@ -115,7 +115,7 @@
     <!-- BG-7 Buyer — Fleet management company -->
     <cac:AccountingCustomerParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0009">31415926535897</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">31415926535897</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">31415926535897</cbc:ID>
             </cac:PartyIdentification>

@@ -106,7 +106,7 @@
     <!-- BG-4 Seller — French luxury goods merchant -->
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0009">12345678900015</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">12345678900015</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">12345678900015</cbc:ID>
             </cac:PartyIdentification>
@@ -137,7 +137,7 @@
     <!-- BG-7 Buyer — Detax operator -->
     <cac:AccountingCustomerParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0009">98765432100123</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">98765432100123</cbc:EndpointID>
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">98765432100123</cbc:ID>
             </cac:PartyIdentification>

@@ -115,7 +115,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34: Seller electronic address (SIRET) -->
-            <cbc:EndpointID schemeID="0009">44455566600011</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">44455566600011</cbc:EndpointID>
 
             <!-- BT-29: SIRET identifier -->
             <cac:PartyIdentification>
@@ -192,7 +192,7 @@
                 </ext:UBLExtensions>
 
                 <!-- SELLER AGENT Electronic Address -->
-                <cbc:EndpointID schemeID="0009">77788899900011</cbc:EndpointID>
+                <cbc:EndpointID schemeID="0225">77788899900011</cbc:EndpointID>
 
                 <!-- SELLER AGENT Trading Name -->
                 <cac:PartyName>
@@ -231,7 +231,7 @@
     <cac:AccountingCustomerParty>
         <cac:Party>
             <!-- BT-49: Buyer electronic address -->
-            <cbc:EndpointID schemeID="0009">33344455500022</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">33344455500022</cbc:EndpointID>
 
             <!-- BT-46: Buyer identifier (SIRET) -->
             <cac:PartyIdentification>

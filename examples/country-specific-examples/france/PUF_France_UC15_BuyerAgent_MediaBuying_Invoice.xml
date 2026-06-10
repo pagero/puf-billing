@@ -160,7 +160,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34: Seller electronic address (SIRET) -->
-            <cbc:EndpointID schemeID="0009">11122233344455</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">11122233344455</cbc:EndpointID>
 
             <!-- BT-28: Seller trading name -->
             <cac:PartyName>
@@ -221,7 +221,7 @@
                  - Post lifecycle statuses
                  
                  BUYER accesses invoices via PA-TR or own PA acting as OD/SC. -->
-            <cbc:EndpointID schemeID="0002">234567890_ACHATPUB</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">234567890_ACHATPUB</cbc:EndpointID>
 
             <!-- BT-45: Buyer trading name -->
             <cac:PartyName>
@@ -300,7 +300,7 @@
                     </ext:UBLExtension>
                 </ext:UBLExtensions>
                 <!-- BUYER AGENT Electronic Address -->
-                <cbc:EndpointID schemeID="0009">99988877766655</cbc:EndpointID>
+                <cbc:EndpointID schemeID="0225">99988877766655</cbc:EndpointID>
 
                 <!-- BUYER AGENT Trading Name -->
                 <cac:PartyName>

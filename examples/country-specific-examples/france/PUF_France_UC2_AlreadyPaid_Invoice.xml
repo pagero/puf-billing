@@ -144,7 +144,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- BT-34 Seller electronic address (mandatory for EXTENDED-CTC-FR) -->
-            <cbc:EndpointID schemeID="0009">45678901234567</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">45678901234567</cbc:EndpointID>
             <!-- BT-29 SIRET identifier -->
             <cac:PartyIdentification>
                 <cbc:ID schemeID="0009">45678901234567</cbc:ID>
@@ -198,7 +198,7 @@
         <cbc:SupplierAssignedAccountID>CLIENT-BIO-5432</cbc:SupplierAssignedAccountID>
         <cac:Party>
             <!-- BT-46 Buyer Identifier - SIRET -->
-            <cbc:EndpointID schemeID="0009">12312312312312</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0225">12312312312312</cbc:EndpointID>
             <!-- BT-45 Buyer Trading Name -->
             <cac:PartyName>
                 <cbc:Name>Magasins Bio Nature France</cbc:Name>
@@ -227,6 +227,8 @@
             <cac:PartyLegalEntity>
                 <!-- BT-44 Buyer Legal Name -->
                 <cbc:RegistrationName>Magasins Bio Nature France SA</cbc:RegistrationName>
+                <!-- BT-47 SIREN -->
+                <cbc:CompanyID schemeID="0002">123123123</cbc:CompanyID>
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>
