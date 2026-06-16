@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CreditNote xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0">
+
+    <!-- Slovakia domestic B2B credit note for a partial return against invoice SK-2026-00042. All values are example/anonymised data. -->
+    <!-- VAT rates per Slovak VAT Act (amendment effective 1 Jan 2025): standard 23%, reduced 5% (books). -->
+
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Credit note number -->
+    <cbc:ID>SK-2026-CN-00007</cbc:ID>
+    <!-- BT-2 Credit note issue date -->
+    <cbc:IssueDate>2026-04-02</cbc:IssueDate>
+    <!-- BT-3 Credit note type code (381 = Credit note) -->
+    <cbc:CreditNoteTypeCode>381</cbc:CreditNoteTypeCode>
+    <!-- BT-22 Note (mandatory in SK BP) -->
+    <cbc:Note>Dobropis k fakture SK-2026-00042 - vratenie tovaru.</cbc:Note>
+    <!-- BT-5 Currency code -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>OBJ-2026-0789</cbc:BuyerReference>
+    <!-- BG-3 Preceding invoice reference (mandatory in credit scenarios) -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <!-- BT-25 Preceding invoice reference -->
+            <cbc:ID>SK-2026-00042</cbc:ID>
+            <!-- BT-26 Preceding invoice issue date -->
+            <cbc:IssueDate>2026-03-15</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- BG-4 Seller -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller electronic address (Peppol EAS 0158 = Slovak ICO) -->
+            <cbc:EndpointID schemeID="0158">36045612</cbc:EndpointID>
+            <!-- BT-28 Seller trading name -->
+            <cac:PartyName>
+                <cbc:Name>Dunaj Dodavatel s.r.o.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- BT-35 Seller address line 1 -->
+                <cbc:StreetName>Mlynske nivy 12</cbc:StreetName>
+                <!-- BT-37 Seller city -->
+                <cbc:CityName>Bratislava</cbc:CityName>
+                <!-- BT-38 Seller post code -->
+                <cbc:PostalZone>821 09</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Seller country code -->
+                    <cbc:IdentificationCode>SK</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-31 Seller VAT identifier (IC DPH, SK + 10 digits) -->
+                <cbc:CompanyID>SK2020317068</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller name (full legal name) -->
+                <cbc:RegistrationName>Dunaj Dodavatel s.r.o.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <!-- BT-41 Seller contact point -->
+                <cbc:Name>Jana Kovacova</cbc:Name>
+                <!-- BT-42 Seller contact telephone -->
+                <cbc:Telephone>+421 2 1234 5678</cbc:Telephone>
+                <!-- BT-43 Seller contact email -->
+                <cbc:ElectronicMail>fakturacia@dunaj-dodavatel.sk</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <!-- BG-7 Buyer -->
+    <cac:AccountingCustomerParty>
+        <cbc:SupplierAssignedAccountID>SK-CUST-001</cbc:SupplierAssignedAccountID>
+        <cac:Party>
+            <!-- BT-49 Buyer electronic address (Peppol EAS 0158 = Slovak ICO) -->
+            <cbc:EndpointID schemeID="0158">31654987</cbc:EndpointID>
+            <!-- BT-45 Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Karpaty Odberatel s.r.o.</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <!-- BT-50 Buyer address line 1 -->
+                <cbc:StreetName>Hlavna 25</cbc:StreetName>
+                <!-- BT-52 Buyer city -->
+                <cbc:CityName>Kosice</cbc:CityName>
+                <!-- BT-53 Buyer post code -->
+                <cbc:PostalZone>040 01</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-55 Buyer country code -->
+                    <cbc:IdentificationCode>SK</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer VAT identifier (IC DPH; CM, required if assigned) -->
+                <cbc:CompanyID>SK2023654987</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-44 Buyer name (full legal name) -->
+                <cbc:RegistrationName>Karpaty Odberatel s.r.o.</cbc:RegistrationName>
+                <!-- BT-47 Buyer legal registration identifier (ICO, 8 digits; CM per SK §3a Commercial Code) -->
+                <cbc:CompanyID schemeID="0158">31654987</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- BG-16 Payment instructions (credit note carries due date here, not at document level) -->
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means type code (30 = credit transfer) -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <!-- BT-9 Payment due date (in PaymentMeans for credit notes) -->
+        <cbc:PaymentDueDate>2026-04-16</cbc:PaymentDueDate>
+        <!-- BT-83 Remittance information -->
+        <cbc:PaymentID>2026CN00007</cbc:PaymentID>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (Slovak IBAN) -->
+            <cbc:ID>SK3112000000198742637541</cbc:ID>
+            <!-- BT-85 Payment account name -->
+            <cbc:Name>Dunaj Dodavatel s.r.o.</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 Payment service provider identifier (BIC) -->
+                <cbc:ID>SUBASKBX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BG-23 VAT breakdown -->
+    <cac:TaxTotal>
+        <!-- BT-110 Total VAT amount -->
+        <cbc:TaxAmount currencyID="EUR">45.15</cbc:TaxAmount>
+        <!-- Standard rate 23%: returned chairs -->
+        <cac:TaxSubtotal>
+            <!-- BT-116 VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">180.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">41.40</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT category rate (SK standard rate) -->
+                <cbc:Percent>23</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <!-- Reduced rate 5%: returned books -->
+        <cac:TaxSubtotal>
+            <!-- BT-116 VAT category taxable amount -->
+            <cbc:TaxableAmount currencyID="EUR">75.00</cbc:TaxableAmount>
+            <!-- BT-117 VAT category tax amount -->
+            <cbc:TaxAmount currencyID="EUR">3.75</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- BT-118 VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-119 VAT category rate (SK reduced rate for books) -->
+                <cbc:Percent>5</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <!-- BT-106 Sum of line net amounts -->
+        <cbc:LineExtensionAmount currencyID="EUR">255.00</cbc:LineExtensionAmount>
+        <!-- BT-109 Total amount without VAT -->
+        <cbc:TaxExclusiveAmount currencyID="EUR">255.00</cbc:TaxExclusiveAmount>
+        <!-- BT-112 Total amount with VAT -->
+        <cbc:TaxInclusiveAmount currencyID="EUR">300.15</cbc:TaxInclusiveAmount>
+        <!-- BT-115 Amount due for payment -->
+        <cbc:PayableAmount currencyID="EUR">300.15</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <!-- BG-25 Credit note line 1 (standard rate - returned chairs) -->
+    <cac:CreditNoteLine>
+        <!-- BT-126 Line identifier -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-129 Credited quantity / BT-130 unit of measure -->
+        <cbc:CreditedQuantity unitCode="EA">2</cbc:CreditedQuantity>
+        <!-- BT-131 Line net amount (2 x 90.00) -->
+        <cbc:LineExtensionAmount currencyID="EUR">180.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Kancelarska stolicka ergonomicka</cbc:Name>
+            <!-- BT-157 Item standard identifier (GTIN, GS1 scheme 0160) -->
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">8590112345672</cbc:ID>
+            </cac:StandardItemIdentification>
+            <!-- BT-158 Item classification identifier (CPV) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CPV">39112000</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate -->
+                <cbc:Percent>23</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">90.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:CreditNoteLine>
+    <!-- BG-25 Credit note line 2 (reduced rate 5% - returned books) -->
+    <cac:CreditNoteLine>
+        <!-- BT-126 Line identifier -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-129 Credited quantity / BT-130 unit of measure -->
+        <cbc:CreditedQuantity unitCode="EA">5</cbc:CreditedQuantity>
+        <!-- BT-131 Line net amount (5 x 15.00) -->
+        <cbc:LineExtensionAmount currencyID="EUR">75.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- BT-153 Item name -->
+            <cbc:Name>Odborna publikacia - Danovy sprievodca 2026</cbc:Name>
+            <!-- BT-157 Item standard identifier (GTIN, GS1 scheme 0160) -->
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">9788055512348</cbc:ID>
+            </cac:StandardItemIdentification>
+            <!-- BT-158 Item classification identifier (CPV - books) -->
+            <cac:CommodityClassification>
+                <cbc:ItemClassificationCode listID="CPV">22113000</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <!-- BT-151 Invoiced item VAT category code -->
+                <cbc:ID>S</cbc:ID>
+                <!-- BT-152 Invoiced item VAT rate (SK reduced rate for books) -->
+                <cbc:Percent>5</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- BT-146 Item net price -->
+            <cbc:PriceAmount currencyID="EUR">15.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:CreditNoteLine>
+</CreditNote>
