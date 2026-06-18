@@ -317,24 +317,24 @@ Demonstrates:
 
 ---
 
-#### UC13: PUF_France_UC13_SellerAgent_CoContractor_Invoice.xml
+#### UC13: PUF_France_UC13_Subcontracting_DirectPayment_Invoice.xml
 
-**Seller Agent - Co-Contractor Invoice**
+**Subcontracting with Direct Payment (Invoice F1)**
 
-Demonstrates:
+Demonstrates (XP Z12-014 §3.2.12.3 — Cas n°13):
 
-- Co-contractor invoice with seller agent (platform acting on behalf of seller)
-- Seller agent party (EXT-FR-FE-BG-03) with role code "SR"
-- Construction subcontractor as seller
-- Platform managing invoice lifecycle on behalf of seller
+- Subcontractor (SOUS-TRAITANT) invoice F1 to the main contractor (TITULAIRE)
+- Direct payment to the subcontractor by the final buyer (maître d'ouvrage) as third-party payer, by payment delegation (Law n°75-1334, art. 14)
+- Third-party PAYER block (EXT-FR-FE-BG-02) with role code "PR"
+- VAT reverse charge (autoliquidation) for construction subcontracting
 
 **Key Features:**
 
-- Business process S6 (Co-contractor services invoice)
-- Seller agent in `cac:AccountingSupplierParty/cac:Party/cac:AgentParty`
-- Role code "SR" (Seller's agent) per UNTDID 3035
-- Complete agent party details (SIREN/SIRET, VAT, address)
-- Co-contractor agreement reference
+- Business process **S5** (Subcontractor services invoice with direct payment) — NOT S6, which is the co-contractor code for UC14
+- BG-4 SELLER = subcontractor; BG-7 BUYER = main contractor (TITULAIRE)
+- EXT-FR-FE-BG-02 PAYEUR = final buyer (`puf:RestrictedInformationParty` with `puf:Key=payerParty`, role "PR")
+- BT-118 = AE, BT-110 = 0, BT-121 = `VATEX-FR-AE`, BT-120 = `AUTOLIQUIDATION`
+- BT-11 project reference (chantier) for grouping subcontractor invoices
 - Construction services scenario (structural reinforcement, waterproofing)
 
 ---
