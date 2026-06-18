@@ -5,3 +5,6 @@
 .github/copilot-test-instructions.md
 .github/copilot-instructions.md
 CLAUDE.md
+
+# Claude Code agent artifacts (worktrees, local config, scheduled task locks)
+.claude/
