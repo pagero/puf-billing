@@ -1,0 +1,47 @@
+[WARNING]
+====
+This extension is provided for specific integration scenarios; most integrations producing PUF for Pagero Online will not need it. Only use it if you are aware of the consequences for how Pagero Online processes, validates, clears, routes and delivers the document. If you are uncertain whether or how to use it, contact Pagero / Thomson Reuters before doing so.
+====
+
+This extension indicates that the document should be processed without standard Pagero routing and/or delivery, for example when the document is delivered to the recipient outside of Pagero Online.
+
+The UBL extension to be used for below element can be found <<_extublextensions, here>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/ExternalDeliveryType`.
+
+See example below as well as the URI to be used for this extension.
+
+*Example* +
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+      <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ExternalDeliveryType</ext:ExtensionURI> <!--1-->
+          <ext:ExtensionContent>
+              <puf:PageroExtension>
+                <puf:ExternalDeliveryType>PROCESS_WITHOUT_DELIVERY</puf:ExternalDeliveryType> <!--2-->
+              </puf:PageroExtension>
+          </ext:ExtensionContent>
+      </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table shows the definition of the element added to the extension.
+
+.Elements added to puf:PageroExtension/puf:ExternalDeliveryType
+|===
+|Element |Description
+
+|`puf:ExternalDeliveryType`
+|**External Delivery Type** +
+Indicates that the document should be processed without standard Pagero routing and/or delivery. +
+*One of:* +
+`PROCESS_WITHOUT_DELIVERY` (the document is processed but not delivered by Pagero) +
+`PROCESS_WITHOUT_ROUTING` (the document is processed but neither routed nor delivered by Pagero)
+
+|===

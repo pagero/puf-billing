@@ -1,0 +1,61 @@
+[WARNING]
+====
+This extension is provided for specific integration scenarios; most integrations producing PUF for Pagero Online will not need it. Only use it if you are aware of the consequences for how Pagero Online processes, validates, clears, routes and delivers the document. If you are uncertain whether or how to use it, contact Pagero / Thomson Reuters before doing so.
+====
+
+This extension carries compliance- and clearance-handling indicators for the document. +
+These indicators are generic and may apply to any market where compliance or clearance processing is relevant.
+
+The UBL extension to be used for below elements can be found <<_extublextensions, here>>.
+
+The structure used from `PUF-ExtensionComponent.xsd` is `PageroExtension/ComplianceExtension`.
+
+See example below as well as the URI to be used for this extension.
+
+*Example* +
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+      <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI> <!--1-->
+          <ext:ExtensionContent>
+              <puf:PageroExtension>
+                <puf:ComplianceExtension> <!--2-->
+                    <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    <puf:SkipClearanceIndicator>true</puf:SkipClearanceIndicator>
+                </puf:ComplianceExtension>
+              </puf:PageroExtension>
+          </ext:ExtensionContent>
+      </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> URI to be used if this extension is added.
+<2> Structure to be used if information from this extension will be used.
+
+Below table shows the definition of the elements added to the extension.
+
+.Elements added to puf:PageroExtension/puf:ComplianceExtension
+|===
+|Element |Description
+
+|`puf:ComplianceActivatedIndicator`
+|**Compliance Activated Indicator** +
+When set to *true*, this indicator triggers additional regulatory compliance checks on the document (where applicable), applied according to the rules defined for the specific flow it belongs to. +
+Can either be *true* or *false*. +
+**Note that if the element is missing Pagero Online treats it as false.**
+
+|`puf:SkipClearanceIndicator`
+|**Skip Clearance Indicator** +
+When set to *true*, the document must not be sent to a clearance authority, even if it would otherwise be eligible for the clearance process. +
+Can either be *true* or *false*. +
+**Note that if the element is missing Pagero Online treats it as false.**
+
+|===
+
+[NOTE]
+====
+`puf:ComplianceActivatedIndicator` is a generic indicator, intended to be reused across markets and expected to be expanded for additional markets over time. It is *currently only applied in France*, where it signals whether the document is processed *within* or *outside* the French e-invoicing reform: when *true*, Pagero — acting as the accredited platform (PDP/PA) — applies the stricter compliance checks and validations the reform requires; when *false*, the document is processed outside that stricter regime. See the France country-specifics for how these extensions relate to the France-specific `#BAR#` note.
+====

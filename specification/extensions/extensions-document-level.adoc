@@ -94,3 +94,11 @@ include::document-level/LanguageCode.adoc[]
 ==== Restricted Information Party
 
 include::document-level/RestrictedInformationParty.adoc[]
+
+==== Compliance
+
+include::document-level/ComplianceExtension.adoc[]
+
+==== ExternalDeliveryType
+
+include::document-level/ExternalDeliveryType.adoc[]

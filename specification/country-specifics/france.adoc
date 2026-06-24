@@ -64,7 +64,7 @@ The business process type (Cadre de facturation) indicates the nature of the tra
 
 ==== French Text Codes (Note Elements)
 
-France requires specific information to be provided in invoice notes using standardized text code prefixes. These text codes identify the type of legal, regulatory, or commercial information being provided.
+France requires specific information to be provided in invoice notes using standardized text code prefixes. These text codes identify the type of legal, regulatory, or commercial information being provided. The prefix is the note subject code (EN 16931 BT-21, a code from UNTDID 4451) and the text after it is the note content (BT-22). For example, `#BAR#` uses the UNTDID 4451 code `BAR` ("Processing Instructions"), which France uses to convey the document treatment type.
 
 ===== Text Code Format
 
@@ -203,6 +203,28 @@ IMPORTANT:
 ----
 
 NOTE: These text codes apply to both Invoice and CreditNote document types.
+
+==== Compliance and clearance handling extensions
+
+PUF provides three generic, document-level extensions — `puf:ComplianceExtension/puf:ComplianceActivatedIndicator`, `puf:ComplianceExtension/puf:SkipClearanceIndicator` and `puf:ExternalDeliveryType` (see the Extensions chapter) — that together express the processing semantics historically conveyed by the France-specific `#BAR#` note. They are generic (and expected to be reused by other markets), but in France they relate to the `#BAR#` values as follows.
+
+[%stretch,cols="1,2"]
+|===
+|Extension |France usage / relation to `#BAR#`
+
+|`puf:ComplianceActivatedIndicator`
+|Indicates whether the document is processed *within* or *outside* the French reform. `true` corresponds to `#BAR#B2B` — the document is within the reform, so Pagero (acting as PDP/PA) applies the stricter compliance checks and validations. `false` corresponds to the non e-invoicing categories `#BAR#B2BINT`, `#BAR#B2C` and `#BAR#OUTOFSCOPE`, which are not subject to those stricter in-reform checks.
+
+|`puf:ExternalDeliveryType`
+|Supports the `#BAR#ARCHIVEONLY` case: a value of `PROCESS_WITHOUT_DELIVERY` (or `PROCESS_WITHOUT_ROUTING`) tells Pagero Online to process/archive the document without transmitting it onward.
+
+|`puf:SkipClearanceIndicator`
+|Of limited use for billing documents in France. It is primarily relevant for PUF Invoice Response / Document Status (for example the _Encaissée_ / Payment Received status) — see the PUF Invoice Response specification.
+|===
+
+NOTE: Where both a `#BAR#` note and an explicit `puf:ComplianceExtension/puf:ComplianceActivatedIndicator` are present, the explicit indicator takes precedence and `#BAR#` is used only as the fallback.
+
+TIP: `#BAR#` (see the French text codes above) is the *French-specific* way of conveying this information, and remains fully supported for French invoices. Customers that are active in *multiple markets* may instead prefer the three generic extensions described here: they carry the same intent in a market-neutral way and are expected to be expanded to other applicable markets in future, whereas `#BAR#` remains France-only.
 
 ==== Credit note for global discount (Code 262)
 
