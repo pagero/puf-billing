@@ -22,6 +22,11 @@
                         <puf:Key>issuerAssignedReportId</puf:Key>
                         <puf:Value>Issuer assigned report id</puf:Value>
                     </puf:RestrictedInformation>
+                    <!-- Tax report id -> taxReport/taxReportId -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>taxReportId</puf:Key>
+                        <puf:Value>The id for the report</puf:Value>
+                    </puf:RestrictedInformation>
                     <!-- if a report period needs to be sent -->
                     <puf:RestrictedInformation>
                         <puf:Key>reportPeriodStart</puf:Key>

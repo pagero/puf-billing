@@ -16,6 +16,11 @@
                         <puf:Key>entryType</puf:Key>
                         <puf:Value>INVOICE</puf:Value>
                     </puf:RestrictedInformation>
+                    <!-- Tax report id -> taxReport/taxReportId -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>taxReportId</puf:Key>
+                        <puf:Value>The id for the report</puf:Value>
+                    </puf:RestrictedInformation>
                     <!-- if a issuer wants to send a issuerAssignedReportId -->
                     <puf:RestrictedInformation>
                         <puf:Key>issuerAssignedReportId</puf:Key>
