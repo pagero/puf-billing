@@ -11,6 +11,7 @@ Example files for French invoice e-reporting (Flux 10.1). These use the standard
 | `PUF_FR_SALES_INVOICE_TDR_CROSSBORDER_B2Bi_DRAFT.xml` | Sales (B2Bi) | INVOICE | Draft — Cross-border B2B sales invoice reporting. French seller, Italian buyer. Services invoice (S1). |
 | `PUF_FR_SALES_INVOICE_TDR_POS_TRANSACTIONS_DRAFT.xml` | Sales (B2C) | RECEIPTTRANSACTION | Draft — B2C POS receipt transaction reporting. Aggregated daily transactions with TLB1 (goods) and TPS1 (services) category codes. |
 | `PUF_FR_PURCHASE_INVOICE_TDR_CROSSBORDER_Bi2B_DRAFT.xml` | Purchase (Bi2B) | INVOICE | Draft — Cross-border B2B purchase invoice reporting. French buyer, German seller. ProfileID = `urn:pagero.com:puf:purchase:1.0`. |
+| `PUF_FR_PURCHASE_INVOICE_TDR_CROSSBORDER_Bi2B_DRAFT - RECTIFICATION.xml` | Purchase (Bi2B) | INVOICE | Draft — Rectification/replace-period scenario for the cross-border B2B purchase report. `transmissionType = RECTIFICATION` with `taxReportId` (id of the replacing report) and `referencedReportId` (id of the aggregated report being replaced). Report period (`reportPeriodStart`/`reportPeriodEnd`) MUST match the report being replaced, and all documents belonging to that period must be resent. |
 | `PUF_France_UC43_IntraCommunitySupply_InvoiceReport.xml` | Sales (B2Bi) | INVOICE | UC43 — Intra-community goods supply from France to Germany. VAT category K with `VATEX-EU-IC`. `#BAR#B2BINT` treatment type. Buyer identified with EU VAT number (schemeID `0223`). |
 | `PUF_France_UC44_DROM_GuadeloupeToGuyane_InvoiceReport.xml` | Sales (B2Bi) | INVOICE | UC44 — DROM transaction from Guadeloupe (Group 1) to French Guiana (Group 2). Demonstrates BR-FR-MAP-14 country code mapping (GP → FR, GF stays GF). VAT category G with `VATEX-EU-G`. |
 
@@ -26,6 +27,8 @@ Invoice e-reporting uses the standard PUF Invoice format with additional metadat
 | `reportPeriodStart` | Start of reporting period | YYYY-MM-DD |
 | `reportPeriodEnd` | End of reporting period | YYYY-MM-DD |
 | `transmissionType` | Report transmission type | `RECTIFICATION` (only if correction) |
+| `taxReportId` | Identifier of the (re-)report — maps to `taxReport/taxReportId` | Free text (set on rectification) |
+| `referencedReportId` | Reference to the previous tax report being replaced — for French rectification, the id of the aggregated report | Free text (set on rectification) |
 
 ## Classification via ProfileID
 
@@ -53,3 +56,4 @@ For B2C and transaction reporting, each invoice line may include a category code
 - **Country code mapping (BR-FR-MAP-14)**: Overseas territory codes (GP, MQ, RE) → `FR` in flux; Guyane (GF) and Mayotte (YT) stay as-is in Flux 10.1.
 - **Currency**: For B2B, any valid currency; if not EUR, BT-6 (tax currency code) is mandatory. For B2C/transaction, must be EUR.
 - **Phased rollout (G6.15)**: Header-level data from Sept 2026; line-level data + allowances/charges from Sept 2027.
+- **Rectification (replace period)**: `transmissionType = RECTIFICATION` replaces a whole previously submitted report period. The new report must keep the **same** `reportPeriodStart`/`reportPeriodEnd` as the report being replaced, carry a `taxReportId` for the replacing report, and reference the aggregated report being replaced via `referencedReportId`. All documents that belong in the period must be resent — the rectification supersedes the prior submission in full.
