@@ -14643,6 +14643,11 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 <td class="tableblock halign-left valign-top"><p class="tableblock">Boolean value <code>true</code> or <code>false</code>.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reverseCharge</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reverse charge indicator (<code>P_18</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean <code>true</code> or <code>false</code>. Set to <code>true</code> when the buyer is obliged to settle VAT under the reverse charge mechanism (renders <code>P_18</code> = 1); otherwise <code>P_18</code> = 2. This flag drives <code>P_18</code> directly — it is not inferred from the <code>AE</code> tax category alone, since not all <code>AE</code> supplies are domestic reverse charge.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>NrPartiiTowaru</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Goods lot number (<code>WarunkiTransakcji/NrPartiiTowaru</code>).</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Can occur multiple times. Can alternatively be sent at line level via <code>cac:Item/cac:ItemInstance/cac:LotIdentification/cbc:LotNumberID</code> and will be collected from all lines. The document-level approach takes precedence.</p></td>
