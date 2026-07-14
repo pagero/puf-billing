@@ -58,6 +58,10 @@ Each key-value pair is sent as one `puf:RestrictedInformation` entry. Use multip
 |Cash accounting scheme indicator (`P_16`).
 |Boolean value `true` or `false`.
 
+|`reverseCharge`
+|Reverse charge indicator (`P_18`).
+|Boolean `true` or `false`. Set to `true` when the buyer is obliged to settle VAT under the reverse charge mechanism (renders `P_18` = 1); otherwise `P_18` = 2. This flag drives `P_18` directly — it is not inferred from the `AE` tax category alone, since not all `AE` supplies are domestic reverse charge.
+
 |`NrPartiiTowaru`
 |Goods lot number (`WarunkiTransakcji/NrPartiiTowaru`).
 |Can occur multiple times. Can alternatively be sent at line level via `cac:Item/cac:ItemInstance/cac:LotIdentification/cbc:LotNumberID` and will be collected from all lines. The document-level approach takes precedence.
