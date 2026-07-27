@@ -10,7 +10,7 @@ UAE e-invoicing is mandated through the Federal Tax Authority (FTA) and transmit
 - UAE Tax Registration Number (TRN) — 15-digit identifier starting with `1` and ending with `03`
 - Legal registration identifiers — Trade License, Emirates ID, Passport (scheme codes `AE:TL`, `AE:EID`, `AE:PASSPORT`)
 - Emirate codes for country subdivision (`AUH`, `DXB`, `SHJ`, `UAQ`, `FUJ`, `AJM`, `RAK`)
-- Item type declaration (`GOODS`, `SERVICES`, `BOTH`) with HS classification and SAC codes
+- Item type declaration via `cac:CommodityClassification/cbc:CommodityCode` (`G`, `S`, `B`) with HS classification and SAC codes
 - UAE-specific supply scenarios: exports, Free Trade Zone, disclosed agent, deemed supply, profit margin scheme
 
 ---
@@ -26,7 +26,7 @@ Demonstrates:
 - Standard UAE tax invoice with 5% VAT (category `S`)
 - BTAE-02 = `00000000` (no special transaction context)
 - Seller TRN and trade license with Legal Registration Authority (LRA)
-- HS classification for goods (BTAE-13 = `GOODS`)
+- HS classification for goods (BTAE-13 = `G`)
 - UAE IBAN and BIC in PayeeFinancialAccount
 
 **Key Features:**
@@ -74,7 +74,7 @@ Demonstrates:
 - Document type: `380`, BTAE-02 `00001000`
 - InvoicePeriod: April 2026 (monthly advisory retainer)
 - ContractDocumentReference: MSA-2025-ACME-BURJ-007
-- Item type `SERVICES`, SAC code `9983.11` (Management consulting services)
+- Item type `S` (Services), SAC code `9983.11` (Management consulting services)
 
 ---
 
@@ -334,11 +334,11 @@ Eight-character flag string in `cbc:InvoiceTypeCode/@name` (or `cbc:CreditNoteTy
 
 ### Item Type and Classification
 
-| Scenario | `puf:ItemType` | Classification required | Code |
-|----------|---------------|------------------------|------|
-| Physical goods | `GOODS` | HS (`@listID = 'HS'`) | e.g. `8413.70.10` |
-| Services | `SERVICES` | SAC (`cac:AdditionalItemIdentification/@schemeID = 'SAC'`) | e.g. `9983.11` |
-| Mixed | `BOTH` | Both HS and SAC | — |
+| Scenario | `cbc:CommodityCode` | Classification required | Code |
+|----------|---------------------|------------------------|------|
+| Physical goods | `G` | HS (`@listID = 'HS'`) | e.g. `8413.70.10` |
+| Services | `S` | SAC (`cac:AdditionalItemIdentification/@schemeID = 'SAC'`) | e.g. `9983.11` |
+| Mixed | `B` | Both HS and SAC | — |
 
 ### Fixed Placeholder Endpoints
 

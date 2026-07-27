@@ -151,51 +151,46 @@ When the document currency is not AED, the following amounts MUST be additionall
 
 ==== Item type, classification and Service Accounting Code
 
-Every UAE invoice line MUST declare whether the item is goods, a service, or both, via the *item type* (BTAE-13). It is provided through the PUF item extension:
+Every UAE invoice line MUST declare whether the item is goods, a service, or both, via the *item type* (BTAE-13). It is provided through `cac:CommodityClassification/cbc:CommodityCode`:
 
 [%autowidth]
 |===
 |Code |Meaning
 
-|`GOODS` |Goods
-|`SERVICES` |Services
-|`BOTH` |Mixed (both goods and services on the same line)
+|`G` |Goods
+|`S` |Services
+|`B` |Both (goods and services on the same line)
 |===
 
 The item type drives two further requirements:
 
-* When item type is `GOODS` (or `BOTH`), the *item classification* (IBT-158) MUST be present and the classification scheme identifier (`@listID`) MUST be `HS` (Harmonised Commodity Description and Coding System).
-* When item type is `SERVICES` (or `BOTH`), the *Service Accounting Code* (BTAE-17) MUST be present using `cac:AdditionalItemIdentification` with `@schemeID = 'SAC'`.
+* When item type is `G` (or `B`), the *item classification* (IBT-158) MUST be present and the classification scheme identifier (`@listID`) MUST be `HS` (Harmonised Commodity Description and Coding System).
+* When item type is `S` (or `B`), the *Service Accounting Code* (BTAE-17) MUST be present using `cac:AdditionalItemIdentification` with `@schemeID = 'SAC'`.
+
+NOTE: Per the PINT-AE syntax, `cbc:ItemClassificationCode` (scheme `HS`) is mandatory (1..1) within every `cac:CommodityClassification`. A line that carries `cbc:CommodityCode` therefore also carries an `cbc:ItemClassificationCode`. A service line additionally provides the Service Accounting Code (BTAE-17) in `cac:AdditionalItemIdentification`.
 
 *Example* +
-_Line for a service, carrying both the item type extension and the SAC code_
+_Line for a service, carrying the item type, the item classification and the SAC code_
 [source,xml]
 ----
 <cac:InvoiceLine>
   <!-- Code omitted for clarity -->
   <cac:Item>
-    <cbc:Name>Consulting services</cbc:Name>
     <cbc:Description>Q1 advisory engagement</cbc:Description>
+    <cbc:Name>Consulting services</cbc:Name>
     <cac:AdditionalItemIdentification>
       <cbc:ID schemeID="SAC">9983.11</cbc:ID><!--1-->
     </cac:AdditionalItemIdentification>
-    <ext:UBLExtensions>
-      <ext:UBLExtension>
-        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ItemExtension</ext:ExtensionURI>
-        <ext:ExtensionContent>
-          <puf:PageroExtension>
-            <puf:ItemExtension>
-              <puf:ItemType>SERVICES</puf:ItemType><!--2-->
-            </puf:ItemExtension>
-          </puf:PageroExtension>
-        </ext:ExtensionContent>
-      </ext:UBLExtension>
-    </ext:UBLExtensions>
+    <cac:CommodityClassification>
+      <cbc:CommodityCode>S</cbc:CommodityCode><!--2-->
+      <cbc:ItemClassificationCode listID="HS">8523.49.00</cbc:ItemClassificationCode><!--3-->
+    </cac:CommodityClassification>
   </cac:Item>
 </cac:InvoiceLine>
 ----
-<1> Service Accounting Code with `schemeID="SAC"`.
-<2> Item type `SERVICES` provided through `puf:ItemExtension/puf:ItemType`.
+<1> Service Accounting Code with `schemeID="SAC"` (required for services, ibr-185-ae).
+<2> Item type `S` (Services) via `cac:CommodityClassification/cbc:CommodityCode`.
+<3> Item classification identifier, mandatory (1..1) within the `cac:CommodityClassification`; scheme `HS` (ibr-188-ae).
 
 ==== VAT category, rate and exemption
 
