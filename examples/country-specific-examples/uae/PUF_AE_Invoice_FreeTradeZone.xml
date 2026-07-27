@@ -12,10 +12,6 @@
                                 <!-- BTAE-01 Beneficiary ID: TRN of the ultimate beneficiary in the Free Zone -->
                                 <cbc:ID>100000000000777</cbc:ID>
                             </cac:PartyIdentification>
-                            <cac:PartyLegalEntity>
-                                <cbc:RegistrationName>JAFZA End-User FZE</cbc:RegistrationName>
-                                <cbc:CompanyID>100000000000777</cbc:CompanyID>
-                            </cac:PartyLegalEntity>
                         </cac:Party>
                     </puf:RestrictedInformationParty>
                 </puf:PageroExtension>
