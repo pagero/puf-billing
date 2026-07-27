@@ -1,4 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Export Supply
+
+    Use Case: Goods or services supplied to a customer outside the UAE. The Guidelines cite
+              a UAE wholesaler exporting cosmetics to a retailer in Kuwait as the worked
+              example. Exports are zero rated.
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 00000001 (position 8 = Exports)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Acme Cosmetics LLC (Dubai) exports 500 premium skincare sets at AED 30.00 each to
+    Gulf Beauty Retail W.L.L. in Salmiya, Kuwait. The supply is zero rated, so net and
+    gross are both AED 15,000.00.
+
+    CRITICAL - PLACEHOLDER ENDPOINT FOR NON-PEPPOL BUYERS:
+    The Guidelines state that for exports, if the buyer does not have a Peppol ID, the
+    predefined endpoint 0235:9900000099 must be included by the supplier on the Electronic
+    Invoice. A foreign buyer that does have a Peppol ID uses its own address instead.
+
+    Key Fields:
+    - BTAE-02 position 8 = 1 flags the export context
+    - BT-49 Buyer electronic address: predefined placeholder 9900000099 under scheme 0235
+    - BT-151 / BT-118 VAT category: Z (Zero rated) with rate 0.00
+    - BG-13 Delivery: deliver-to address line 1 (BT-75), city (BT-77) and country
+      subdivision (BT-79) are mandatory for exports where the delivery country is not AE
+      (ibr-152-ae)
+    - BTAE-22 Incoterms: carried on cac:DeliveryTerms/cbc:ID, maximum 3 characters.
+      When a DeliveryTerms block is present the Incoterms code is mandatory (ibr-196-ae)
+
+    Note: The Guidelines add that the Tax Invoice issued for an export should be the
+    Electronic Invoice, and the same document may be provided to Customs.
+
+    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 8
+               (Exports); Peppol PINT BIS Billing AE 1.0.4
+-->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
@@ -10,7 +49,7 @@
     <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
                 <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
@@ -80,6 +119,14 @@
     <cac:PaymentMeans>
         <!-- BT-81 Payment means type code: 30 = Credit transfer -->
         <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (IBAN). Mandatory when BT-81 is 30 (ibr-192-ae) -->
+            <cbc:ID>AE070331234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 BIC -->
+                <cbc:ID>EBILAEAD</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>
     <cac:TaxTotal>
         <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
@@ -124,7 +171,7 @@
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
-            </cac:Item>
+        </cac:Item>
         <cac:Price>
             <cbc:PriceAmount currencyID="AED">30.00</cbc:PriceAmount>
             <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>

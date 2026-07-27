@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Deemed Supply
+
+    Use Case: A supply made by a VAT-registered person that is deemed a taxable supply for
+              VAT purposes - typically supplies for no consideration such as free-of-charge
+              goods, gifts exceeding the prescribed threshold, or the private use of
+              business assets or inventory.
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 01000000 (position 2 = Deemed supply)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Acme Trading LLC (Dubai) distributes 5 promotional gift hampers valued at AED 100.00
+    each. No consideration is received, but VAT of AED 25.00 is accounted for on the
+    deemed supply.
+
+    CRITICAL - FIXED BUYER ENDPOINT:
+    The Guidelines state that for a deemed supply the buyer electronic address must always
+    be 0235:9900000097, and that this value does not change based on the identity of the
+    supplier. Where no invoice is issued to a recipient, there is no exchange of Electronic
+    Invoices at all - only reporting to the FTA by the supplier's ASP.
+
+    Key Fields:
+    - BTAE-02 position 2 = 1 flags the deemed supply context
+    - BT-49 Buyer electronic address: fixed placeholder 9900000097 under scheme 0235
+    - BT-48 Buyer TRN: FTA placeholder, still subject to the 15-digit format (ibr-132-ae)
+    - BT-113 PrepaidAmount equals BT-112 TaxInclusiveAmount, so BT-115 PayableAmount is 0.00
+    - BT-9 Payment due date is deliberately absent: deemed supplies are exempt from the
+      due date requirement (ibr-127-ae)
+    - BT-81 Payment means is likewise not required for deemed supplies (ibr-191-ae)
+
+    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 2
+               (Deemed supply); Articles 11 and 12 of the VAT Decree-Law;
+               Peppol PINT BIS Billing AE 1.0.4
+-->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
@@ -9,7 +47,7 @@
     <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
                 <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
@@ -59,10 +97,10 @@
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>
-    <cac:PaymentMeans>
-        <!-- BT-81 Payment means type code: 30 = Credit transfer -->
-        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
-    </cac:PaymentMeans>
+    <!-- BT-81 Payment means is deliberately omitted. A deemed supply carries no consideration
+         (PayableAmount 0.00), and ibr-191-ae exempts deemed supplies from requiring a payment
+         means type code. Declaring credit transfer here would also pull in a mandatory payee
+         account (ibr-192-ae) for an invoice that is never paid. -->
     <cac:TaxTotal>
         <cbc:TaxAmount currencyID="AED">25.00</cbc:TaxAmount>
         <cac:TaxSubtotal>
@@ -108,7 +146,7 @@
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
-            </cac:Item>
+        </cac:Item>
         <cac:Price>
             <cbc:PriceAmount currencyID="AED">100.00</cbc:PriceAmount>
             <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>

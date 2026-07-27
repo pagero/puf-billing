@@ -38,7 +38,7 @@ _Free-trade-zone invoice (FTZ flag in position 1)_
 
 The UAE Tax Registration Number (TRN) is provided as the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID` with the tax scheme code `VAT`. The TRN is 15 alphanumeric characters, starts with `1` and ends with `03` (e.g. `100000000000003`).
 
-When the supplier is not VAT-registered, the Tax Identification Number (TIN) is provided instead under `cac:PartyIdentification/cbc:ID`. The TIN is 10 numeric digits starting with `1` (e.g. `1000000000`).
+When the supplier is not VAT-registered, the Tax Identification Number (TIN) is provided instead under `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TIN'`. The TIN is 10 numeric digits starting with `1` (e.g. `1000000000`) and, for a VAT-registered party, is the first 10 digits of the TRN.
 
 *Example* +
 _Seller TRN_
@@ -61,6 +61,42 @@ _Seller TRN_
 </Invoice>
 ----
 <1> UAE TRN provided in `cac:PartyTaxScheme/cbc:CompanyID` with `cac:TaxScheme/cbc:ID = 'VAT'`.
+
+==== Electronic address (Participant Identifier)
+
+The seller and buyer electronic address (IBT-034 / IBT-049) is the Peppol *Participant Identifier* issued by the FTA. It MUST be the *10-digit TIN* under the Peppol EAS scheme `0235`.
+
+The TIN is the first 10 digits of the 15-character TRN. The full TRN MUST NOT be used as the electronic address — it belongs on `cac:PartyTaxScheme/cbc:CompanyID` (IBT-031 / IBT-048) only.
+
+[IMPORTANT]
+====
+The PUF-008 scheme code `AE:TIN` applies to `cac:PartyIdentification/cbc:ID`. It is *not* an endpoint scheme — `cbc:EndpointID/@schemeID` always carries the Peppol EAS code `0235`.
+====
+
+*Example* +
+_Seller with TRN `100000000000003` and the derived Participant Identifier_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID><!--1-->
+      <!-- Code omitted for clarity -->
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>100000000000003</cbc:CompanyID><!--2-->
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+</Invoice>
+----
+<1> Participant Identifier: scheme `0235` with the 10-digit TIN (the first 10 digits of the TRN).
+<2> The full 15-character TRN stays on `cac:PartyTaxScheme/cbc:CompanyID`.
+
+A party that is within scope of UAE e-invoicing but not registered for VAT has no TRN. It still has a TIN, obtained by registering with the FTA, and uses that TIN as its Participant Identifier.
 
 ==== Legal registration identifier
 
@@ -167,10 +203,10 @@ The item type drives two further requirements:
 * When item type is `G` (or `B`), the *item classification* (IBT-158) MUST be present and the classification scheme identifier (`@listID`) MUST be `HS` (Harmonised Commodity Description and Coding System).
 * When item type is `S` (or `B`), the *Service Accounting Code* (BTAE-17) MUST be present using `cac:AdditionalItemIdentification` with `@schemeID = 'SAC'`.
 
-NOTE: Per the PINT-AE syntax, `cbc:ItemClassificationCode` (scheme `HS`) is mandatory (1..1) within every `cac:CommodityClassification`. A line that carries `cbc:CommodityCode` therefore also carries an `cbc:ItemClassificationCode`. A service line additionally provides the Service Accounting Code (BTAE-17) in `cac:AdditionalItemIdentification`.
+NOTE: The PINT-AE syntax table shows `cbc:ItemClassificationCode` as 1..1 within `cac:CommodityClassification`, but the validation artefacts do not enforce this: `ibr-184-ae` requires the item classification only when the item type is `G` (or `B`), and `ibr-188-ae` constrains the scheme identifier only when a classification is actually present. A pure service line therefore carries `cbc:CommodityCode` alone and is classified by its Service Accounting Code (BTAE-17). Do not invent an HS code for a service — HS classifies goods, and a placeholder value would misreport the supply.
 
 *Example* +
-_Line for a service, carrying the item type, the item classification and the SAC code_
+_Line for a service, carrying the item type and the SAC code_
 [source,xml]
 ----
 <cac:InvoiceLine>
@@ -183,14 +219,12 @@ _Line for a service, carrying the item type, the item classification and the SAC
     </cac:AdditionalItemIdentification>
     <cac:CommodityClassification>
       <cbc:CommodityCode>S</cbc:CommodityCode><!--2-->
-      <cbc:ItemClassificationCode listID="HS">8523.49.00</cbc:ItemClassificationCode><!--3-->
     </cac:CommodityClassification>
   </cac:Item>
 </cac:InvoiceLine>
 ----
 <1> Service Accounting Code with `schemeID="SAC"` (required for services, ibr-185-ae).
-<2> Item type `S` (Services) via `cac:CommodityClassification/cbc:CommodityCode`.
-<3> Item classification identifier, mandatory (1..1) within the `cac:CommodityClassification`; scheme `HS` (ibr-188-ae).
+<2> Item type `S` (Services) via `cac:CommodityClassification/cbc:CommodityCode`. No `cbc:ItemClassificationCode` — services are not classified by HS.
 
 ==== VAT category, rate and exemption
 

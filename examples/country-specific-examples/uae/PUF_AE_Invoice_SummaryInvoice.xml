@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Summary Invoice
+
+    Use Case: Multiple transactions with the same customer over a defined invoicing period
+              consolidated onto a single summary invoice. The Guidelines cite a bank issuing
+              a monthly tax invoice summarising all supplies made as the worked example.
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 00010000 (position 4 = Summary invoice)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Emirates Premier Bank PJSC consolidates April 2026 banking fees for Burj Holdings PJSC
+    onto one invoice: the monthly account maintenance fee of AED 300.00 and 15 international
+    wire transfer fees totalling AED 450.00. Net AED 750.00 plus AED 37.50 VAT.
+
+    Key Fields:
+    - BTAE-02 position 4 = 1 flags the summary invoice context
+    - BG-14 InvoicePeriod: mandatory for summary invoices - it defines the consolidation
+      window (ibr-138-ae). This is the key structural requirement for this scenario
+    - Two service lines, each with its own SAC (BTAE-17): 9971.13 account maintenance,
+      9971.19 wire transfer fees
+    - BTAE-13 Item type S on both lines, which makes BTAE-17 mandatory (ibr-185-ae)
+
+    Note: If the consolidated total is negative (a net credit for the period), the
+    Guidelines require the transaction to be documented as an electronic Credit Note
+    rather than a summary invoice with a negative payable amount.
+
+    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 4
+               (Summary invoice); Peppol PINT BIS Billing AE 1.0.4
+-->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
@@ -16,7 +49,7 @@
     </cac:InvoicePeriod>
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
                 <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
@@ -43,7 +76,7 @@
     </cac:AccountingSupplierParty>
     <cac:AccountingCustomerParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0235">100000000001003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000100</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-11 Buyer legal registration authority (issuer of the trade license) -->
                 <cbc:ID schemeID="AE:LRA">Abu Dhabi Department of Economic Development</cbc:ID>
@@ -57,7 +90,7 @@
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
-                <cbc:CompanyID>100000000001003</cbc:CompanyID>
+                <cbc:CompanyID>100000010001003</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -71,6 +104,14 @@
     <cac:PaymentMeans>
         <!-- BT-81 Payment means type code: 30 = Credit transfer -->
         <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (IBAN). Mandatory when BT-81 is 30 (ibr-192-ae) -->
+            <cbc:ID>AE070331234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 BIC -->
+                <cbc:ID>EBILAEAD</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>
     <cac:TaxTotal>
         <cbc:TaxAmount currencyID="AED">37.50</cbc:TaxAmount>
@@ -108,16 +149,15 @@
             </cac:AdditionalItemIdentification>
             <cac:CommodityClassification>
                 <cbc:CommodityCode>S</cbc:CommodityCode>
-                <cbc:ItemClassificationCode listID="HS">8523.49.00</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
-        <cac:ClassifiedTaxCategory>
+            <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
                 <cbc:Percent>5.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
-            </cac:Item>
+        </cac:Item>
         <cac:Price>
             <cbc:PriceAmount currencyID="AED">300.00</cbc:PriceAmount>
             <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
@@ -145,16 +185,15 @@
             </cac:AdditionalItemIdentification>
             <cac:CommodityClassification>
                 <cbc:CommodityCode>S</cbc:CommodityCode>
-                <cbc:ItemClassificationCode listID="HS">8523.49.00</cbc:ItemClassificationCode>
             </cac:CommodityClassification>
-        <cac:ClassifiedTaxCategory>
+            <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
                 <cbc:Percent>5.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
-            </cac:Item>
+        </cac:Item>
         <cac:Price>
             <cbc:PriceAmount currencyID="AED">30.00</cbc:PriceAmount>
             <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>

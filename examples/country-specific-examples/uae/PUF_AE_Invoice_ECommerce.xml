@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Supply Through E-Commerce
+
+    Use Case: A supply made through an Electronic Commerce Medium as defined by Ministerial
+              Decision No. 26 of 2023. The Guidelines note that responsibility for issuing
+              the Electronic Invoice stays with the supplier even when the e-commerce
+              platform issues it on the supplier's behalf.
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 00000010 (position 7 = E-commerce)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Online Retail UAE LLC sells 3 pairs of wireless headphones at AED 140.00 each through
+    its website, shipped to a Burj Holdings PJSC address in Dubai Marina. Total AED 420.00
+    net plus AED 21.00 VAT.
+
+    Key Fields:
+    - BTAE-02 position 7 = 1 flags the e-commerce context
+    - BG-13 Delivery: for e-commerce supplies the deliver-to address line 1 (BT-75),
+      city (BT-77) and country subdivision (BT-79) are all mandatory (ibr-142-ae).
+      This is the main structural difference from the standard invoice
+    - BT-13 OrderReference: the web platform order number
+    - BT-79 Deliver-to emirate must be a valid UAE emirate code when the delivery
+      country is AE (ibr-128-ae)
+
+    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 7
+               (Supply through e-Commerce); Peppol PINT BIS Billing AE 1.0.4
+-->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
@@ -13,7 +44,7 @@
     </cac:OrderReference>
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
                 <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
@@ -40,7 +71,7 @@
     </cac:AccountingSupplierParty>
     <cac:AccountingCustomerParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0235">100000000001003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000100</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-11 Buyer legal registration authority (issuer of the trade license) -->
                 <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
@@ -54,7 +85,7 @@
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
-                <cbc:CompanyID>100000000001003</cbc:CompanyID>
+                <cbc:CompanyID>100000010001003</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -87,6 +118,14 @@
     <cac:PaymentMeans>
         <!-- BT-81 Payment means type code: 30 = Credit transfer -->
         <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (IBAN). Mandatory when BT-81 is 30 (ibr-192-ae) -->
+            <cbc:ID>AE070331234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 BIC -->
+                <cbc:ID>EBILAEAD</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>
     <cac:TaxTotal>
         <cbc:TaxAmount currencyID="AED">21.00</cbc:TaxAmount>
@@ -130,7 +169,7 @@
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
-            </cac:Item>
+        </cac:Item>
         <cac:Price>
             <cbc:PriceAmount currencyID="AED">140.00</cbc:PriceAmount>
             <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>

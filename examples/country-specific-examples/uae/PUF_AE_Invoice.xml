@@ -1,4 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Standard Tax Invoice
+
+    Use Case: A plain domestic B2B tax invoice between two VAT-registered UAE businesses,
+              with no special transaction context. This is the baseline example - every
+              other UAE example in this folder is this invoice plus one scenario feature.
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 00000000 (no special transaction context)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Acme Trading LLC (Dubai) sells 10 industrial water pumps to Burj Holdings PJSC
+    (Abu Dhabi) for AED 100.00 each. The supply is standard rated at 5% VAT, giving
+    AED 1,000.00 net, AED 50.00 VAT and AED 1,050.00 payable within 30 days.
+
+    Key Fields:
+    - BT-34 / BT-49 Electronic addresses: the 10-digit TIN under Peppol scheme 0235
+      (the TIN is the first 10 digits of the 15-character TRN - do not use the TRN here)
+    - BT-31 / BT-48 TRN: 15 digits, starts with 1, ends with 03 (ibr-132-ae)
+    - BT-30 Legal registration identifier: trade license with @schemeID="AE:TL"
+    - BTAE-12 / BTAE-11 Authority name: mandatory for a trade license (ibr-172-ae, ibr-101-ae)
+    - BT-39 / BT-54 Emirate code: DXB, AUH (ibr-128-ae)
+    - BTAE-13 Item type: G (Goods), with HS classification (ibr-184-ae, ibr-188-ae)
+    - IBT-148 Item gross price: mandatory, here equal to net price (ibr-126-ae)
+    - BTAE-08 / BTAE-10 Line VAT and line amount in AED (ibr-104-ae, ibr-194-ae)
+
+    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026);
+               Peppol PINT BIS Billing AE 1.0.4
+-->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
@@ -14,8 +46,8 @@
     <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <!-- BT-34 Seller electronic address. UAE TRN-as-routing-id uses Peppol scheme 0235 -->
-            <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <!-- BT-34 Seller electronic address. The Peppol Participant Identifier is the 10-digit TIN (first 10 digits of the TRN) under scheme 0235 -->
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
                 <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
@@ -53,7 +85,7 @@
     <cac:AccountingCustomerParty>
         <cac:Party>
             <!-- BT-49 Buyer electronic address -->
-            <cbc:EndpointID schemeID="0235">100000000001003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000100</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-11 Buyer legal registration authority -->
                 <cbc:ID schemeID="AE:LRA">Abu Dhabi Department of Economic Development</cbc:ID>
@@ -72,7 +104,7 @@
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
                 <!-- BT-48 Buyer VAT identifier -->
-                <cbc:CompanyID>100000000001003</cbc:CompanyID>
+                <cbc:CompanyID>100000010001003</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -158,7 +190,7 @@
             <!-- BT-158 Item classification code with BT-158-1 scheme (UAE requires HS for goods) -->
             <!-- BTAE-13 Item type (G goods / S services / B both).
                  Carried via cac:CommodityClassification/cbc:CommodityCode -->
-            </cac:Item>
+        </cac:Item>
         <cac:Price>
             <!-- BT-146 Item net price -->
             <cbc:PriceAmount currencyID="AED">100.00</cbc:PriceAmount>
