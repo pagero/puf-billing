@@ -8,10 +8,13 @@ UAE e-invoicing is mandated through the Federal Tax Authority (FTA) and transmit
 
 - Invoice Transaction Type Code (BTAE-02) — 8-character flag string signalling the UAE business context
 - UAE Tax Registration Number (TRN) — 15-digit identifier starting with `1` and ending with `03`
+- Peppol Participant Identifier — the 10-digit TIN (first 10 digits of the TRN) under scheme `0235`
 - Legal registration identifiers — Trade License, Emirates ID, Passport (scheme codes `AE:TL`, `AE:EID`, `AE:PASSPORT`)
 - Emirate codes for country subdivision (`AUH`, `DXB`, `SHJ`, `UAQ`, `FUJ`, `AJM`, `RAK`)
-- Item type declaration (`GOODS`, `SERVICES`, `BOTH`) with HS classification and SAC codes
+- Item type declaration via `cac:CommodityClassification/cbc:CommodityCode` (`G`, `S`, `B`) with HS classification and SAC codes
 - UAE-specific supply scenarios: exports, Free Trade Zone, disclosed agent, deemed supply, profit margin scheme
+
+> Each XML file opens with a header comment describing the use case, the scenario, the key fields and the governing rule references, so an example can be read on its own without this README. The sections below give the same information in summary form for scanning and comparison.
 
 ---
 
@@ -26,7 +29,7 @@ Demonstrates:
 - Standard UAE tax invoice with 5% VAT (category `S`)
 - BTAE-02 = `00000000` (no special transaction context)
 - Seller TRN and trade license with Legal Registration Authority (LRA)
-- HS classification for goods (BTAE-13 = `GOODS`)
+- HS classification for goods (BTAE-13 = `G`)
 - UAE IBAN and BIC in PayeeFinancialAccount
 
 **Key Features:**
@@ -74,7 +77,7 @@ Demonstrates:
 - Document type: `380`, BTAE-02 `00001000`
 - InvoicePeriod: April 2026 (monthly advisory retainer)
 - ContractDocumentReference: MSA-2025-ACME-BURJ-007
-- Item type `SERVICES`, SAC code `9983.11` (Management consulting services)
+- Item type `S` (Services), SAC code `9983.11` (Management consulting services)
 
 ---
 
@@ -304,6 +307,28 @@ Demonstrates:
 
 ---
 
+### 15. PUF_AE_Invoice_NaturalPerson.xml
+
+**Natural Person Seller (Passport Identification)**
+
+Demonstrates:
+
+- A seller who is a natural person rather than a company
+- Legal registration identifier is a passport number (`AE:PASSPORT`) instead of a trade license
+- Passport issuing country code (BTAE-18) required in place of the authority name (BTAE-12)
+- A natural person can still be VAT-registered as a sole practitioner and carry a TRN
+
+**Key Features:**
+
+- Document type: `380`, BTAE-02 `00000000`
+- Seller: Jane Doe (Dubai, DXB) — passport `P12345678` with `@schemeID="AE:PASSPORT"`
+- BTAE-18 passport issuing country `GB` on `cac:PartyIdentification` with `@schemeID="AE:PASSPORT_COUNTRY"` (ibr-012-ae)
+- 10 hours of consulting at AED 200.00/hour; item type `S`, SAC `9983.11`
+
+> **Which supplementary field applies:** when the legal registration identifier type (BTAE-15) is `AE:TL`, `AE:EID` or `AE:CD`, the authority name (BTAE-12) is required. When it is `AE:PASSPORT`, the passport issuing country (BTAE-18) is required instead. Compare this example with `PUF_AE_Invoice.xml`.
+
+---
+
 ## UAE-Specific Requirements Reference
 
 ### BTAE-02 Invoice Transaction Type Code
@@ -334,11 +359,13 @@ Eight-character flag string in `cbc:InvoiceTypeCode/@name` (or `cbc:CreditNoteTy
 
 ### Item Type and Classification
 
-| Scenario | `puf:ItemType` | Classification required | Code |
-|----------|---------------|------------------------|------|
-| Physical goods | `GOODS` | HS (`@listID = 'HS'`) | e.g. `8413.70.10` |
-| Services | `SERVICES` | SAC (`cac:AdditionalItemIdentification/@schemeID = 'SAC'`) | e.g. `9983.11` |
-| Mixed | `BOTH` | Both HS and SAC | — |
+| Scenario | `cbc:CommodityCode` | Classification required | Code |
+|----------|---------------------|------------------------|------|
+| Physical goods | `G` | HS (`@listID = 'HS'`) | e.g. `8413.70.10` |
+| Services | `S` | SAC (`cac:AdditionalItemIdentification/@schemeID = 'SAC'`) | e.g. `9983.11` |
+| Mixed | `B` | Both HS and SAC | — |
+
+> **Service lines carry no HS code.** The PINT AE syntax table shows `cbc:ItemClassificationCode` as 1..1 inside `cac:CommodityClassification`, but the schematron only requires it when the item type is `G` or `B` (`ibr-184-ae`), and `ibr-188-ae` constrains the scheme only when a classification is present. A pure service line therefore contains `cbc:CommodityCode` alone — verified end-to-end against PINT AE 1.0.4. HS classifies goods; putting a placeholder HS code on a service would misreport the supply.
 
 ### Fixed Placeholder Endpoints
 
@@ -346,6 +373,17 @@ Eight-character flag string in `cbc:InvoiceTypeCode/@name` (or `cbc:CreditNoteTy
 |----------|----------------------------------|
 | Deemed Supply | `9900000097` |
 | Export to non-Peppol buyer | `9900000099` |
+
+### Participant Identifier (EndpointID)
+
+The seller and buyer `cbc:EndpointID` is the Peppol Participant Identifier issued by the FTA: the **10-digit TIN** under scheme `0235`. The TIN is the first 10 digits of the 15-character TRN — the full TRN must **not** be used as the endpoint.
+
+| Party | TRN (`cac:PartyTaxScheme/cbc:CompanyID`) | EndpointID (scheme `0235`) |
+|-------|------------------------------------------|----------------------------|
+| Seller (Acme Trading LLC) | `100000000000003` | `1000000000` |
+| Buyer (Burj Holdings PJSC) | `100000010001003` | `1000000100` |
+
+The PUF-008 scheme code `AE:TIN` is used on `cac:PartyIdentification/cbc:ID`, not on `cbc:EndpointID`.
 
 ### TRN Format
 

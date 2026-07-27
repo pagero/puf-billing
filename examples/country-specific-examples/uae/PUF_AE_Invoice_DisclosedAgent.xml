@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Disclosed Agent Billing
+
+    Use Case: A person acting as a disclosed agent on behalf of a principal, issuing
+              invoices on the principal's behalf. The Guidelines cite an insurance broker
+              collecting premiums from a buyer on behalf of a VAT-registered insurance
+              company as the worked example. This scenario does NOT apply to undisclosed
+              agents.
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 00000100 (position 6 = Disclosed agent)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Premier Insurance Brokers LLC (Dubai) invoices Burj Holdings PJSC (Abu Dhabi) for an
+    annual general liability insurance premium of AED 2,500.00 plus 5% VAT, collected on
+    behalf of the principal National Insurance Co. PJSC.
+
+    Key Fields:
+    - BTAE-02 position 6 = 1 flags the disclosed agent context
+    - BTAE-14 Principle ID: mandatory whenever the disclosed agent flag is set (ibr-137-ae).
+      Carried in PUF as puf:RestrictedInformationParty with puf:Key = 'Principle'
+    - The Principle TRN MUST differ from the Seller VAT identifier BT-31 (ibr-176-ae)
+    - Either the seller TRN or the seller TIN must also be present in this scenario
+      (ibr-177-ae)
+    - BTAE-13 Item type S with SAC 9971.31 (insurance services)
+
+    Note: The Guidelines stress that responsibility for issuing the Electronic Invoice
+    remains with the supplier even when an agent issues one on its behalf.
+
+    Note on the target mapping: in the PINT AE output the Principle is emitted as
+    cac:SellerSupplierParty.
+
+    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 6
+               (Agent billing); Peppol PINT BIS Billing AE 1.0.4
+-->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <ext:UBLExtensions>
         <ext:UBLExtension>
@@ -13,6 +51,10 @@
                                      MUST differ from the Seller's VAT identifier (ibr-176-ae). -->
                                 <cbc:ID>100000000000555</cbc:ID>
                             </cac:PartyIdentification>
+                            <cac:PartyLegalEntity>
+                                <cbc:RegistrationName>National Insurance Co. PJSC</cbc:RegistrationName>
+                                <cbc:CompanyID>100000000000555</cbc:CompanyID>
+                            </cac:PartyLegalEntity>
                         </cac:Party>
                     </puf:RestrictedInformationParty>
                 </puf:PageroExtension>
@@ -30,7 +72,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <!-- The agent (broker) issuing the invoice on the principal's behalf -->
-            <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
                 <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
@@ -58,7 +100,7 @@
     </cac:AccountingSupplierParty>
     <cac:AccountingCustomerParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0235">100000000001003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000100</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-11 Buyer legal registration authority (issuer of the trade license) -->
                 <cbc:ID schemeID="AE:LRA">Abu Dhabi Department of Economic Development</cbc:ID>
@@ -72,7 +114,7 @@
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
-                <cbc:CompanyID>100000000001003</cbc:CompanyID>
+                <cbc:CompanyID>100000010001003</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -86,6 +128,14 @@
     <cac:PaymentMeans>
         <!-- BT-81 Payment means type code: 30 = Credit transfer -->
         <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (IBAN). Mandatory when BT-81 is 30 (ibr-192-ae) -->
+            <cbc:ID>AE070331234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 BIC -->
+                <cbc:ID>EBILAEAD</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>
     <cac:TaxTotal>
         <cbc:TaxAmount currencyID="AED">125.00</cbc:TaxAmount>
@@ -116,31 +166,22 @@
             <cbc:TaxAmount currencyID="AED">125.00</cbc:TaxAmount>
         </cac:TaxTotal>
         <cac:Item>
-            <ext:UBLExtensions>
-                <ext:UBLExtension>
-                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ItemExtension</ext:ExtensionURI>
-                    <ext:ExtensionContent>
-                        <puf:PageroExtension>
-                            <puf:ItemExtension>
-                                <puf:ItemType>SERVICES</puf:ItemType>
-                            </puf:ItemExtension>
-                        </puf:PageroExtension>
-                    </ext:ExtensionContent>
-                </ext:UBLExtension>
-            </ext:UBLExtensions>
             <cbc:Description>Premium collected on behalf of the principal (National Insurance Co. PJSC) — disclosed agent billing</cbc:Description>
             <cbc:Name>Annual general liability insurance premium</cbc:Name>
             <cac:AdditionalItemIdentification>
                 <cbc:ID schemeID="SAC">9971.31</cbc:ID>
             </cac:AdditionalItemIdentification>
-        <cac:ClassifiedTaxCategory>
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>S</cbc:CommodityCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
                 <cbc:Percent>5.00</cbc:Percent>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:ClassifiedTaxCategory>
-            </cac:Item>
+        </cac:Item>
         <cac:Price>
             <cbc:PriceAmount currencyID="AED">2500.00</cbc:PriceAmount>
             <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>

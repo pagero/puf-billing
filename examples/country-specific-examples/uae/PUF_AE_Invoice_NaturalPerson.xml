@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Natural Person Seller (Passport Identification)
+
+    Use Case: A seller who is a natural person rather than a company. Instead of a trade
+              licence, the legal registration identifier is a passport number, which in
+              turn changes which supplementary identifier is required.
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 00000000 (no special transaction context)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Jane Doe, an independent consultant VAT-registered as a sole practitioner in Dubai,
+    invoices Burj Holdings PJSC (Abu Dhabi) for 10 hours of strategy consulting at
+    AED 200.00 per hour. Net AED 2,000.00 plus AED 100.00 VAT.
+
+    CRITICAL - PASSPORT CHANGES WHICH SUPPLEMENTARY FIELD IS REQUIRED:
+    Where the legal registration identifier type (BTAE-15) is a trade licence, Emirates ID
+    or Cabinet Decision, the authority name (BTAE-12) is required. Where it is a passport,
+    the passport issuing country code (BTAE-18) is required instead. Compare this example
+    with PUF_AE_Invoice.xml, which uses AE:TL and therefore carries AE:LRA.
+
+    Key Fields:
+    - BT-27 Seller name: the natural person's name
+    - BT-30 / BTAE-15 Legal registration identifier: passport number with
+      @schemeID="AE:PASSPORT"
+    - BTAE-18 Passport issuing country: mandatory when the identifier type is a passport
+      (ibr-012-ae). ISO 3166-1 alpha-2, carried on cac:PartyIdentification with
+      @schemeID="AE:PASSPORT_COUNTRY"
+    - BT-31 TRN: still present - a natural person can be VAT-registered as a sole trader
+    - BTAE-13 Item type S with SAC 9983.11 (management consulting services)
+
+    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026);
+               PUF Code List PUF-008 Identification scheme United Arab Emirates;
+               Peppol PINT BIS Billing AE 1.0.4
+-->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
@@ -10,7 +48,7 @@
     <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0235">100000000000003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
             <!-- BTAE-18 Seller passport issuing country (mandatory when BTAE-15 legal-reg type is Passport).
                  Carried on cac:PartyIdentification with schemeID="AE:PASSPORT_COUNTRY". -->
             <cac:PartyIdentification>
@@ -41,7 +79,7 @@
     </cac:AccountingSupplierParty>
     <cac:AccountingCustomerParty>
         <cac:Party>
-            <cbc:EndpointID schemeID="0235">100000000001003</cbc:EndpointID>
+            <cbc:EndpointID schemeID="0235">1000000100</cbc:EndpointID>
             <cac:PartyIdentification>
                 <!-- BTAE-11 Buyer legal registration authority (issuer of the trade license) -->
                 <cbc:ID schemeID="AE:LRA">Abu Dhabi Department of Economic Development</cbc:ID>
@@ -55,7 +93,7 @@
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
-                <cbc:CompanyID>100000000001003</cbc:CompanyID>
+                <cbc:CompanyID>100000010001003</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -69,6 +107,14 @@
     <cac:PaymentMeans>
         <!-- BT-81 Payment means type code: 30 = Credit transfer -->
         <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (IBAN). Mandatory when BT-81 is 30 (ibr-192-ae) -->
+            <cbc:ID>AE070331234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 BIC -->
+                <cbc:ID>EBILAEAD</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>
     <cac:TaxTotal>
         <cbc:TaxAmount currencyID="AED">100.00</cbc:TaxAmount>
@@ -99,24 +145,16 @@
             <cbc:TaxAmount currencyID="AED">100.00</cbc:TaxAmount>
         </cac:TaxTotal>
         <cac:Item>
-            <ext:UBLExtensions>
-                <ext:UBLExtension>
-                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ItemExtension</ext:ExtensionURI>
-                    <ext:ExtensionContent>
-                        <puf:PageroExtension>
-                            <puf:ItemExtension>
-                                <puf:ItemType>SERVICES</puf:ItemType>
-                            </puf:ItemExtension>
-                        </puf:PageroExtension>
-                    </ext:ExtensionContent>
-                </ext:UBLExtension>
-            </ext:UBLExtensions>
             <cbc:Description>Independent consulting advice delivered by a natural-person service provider</cbc:Description>
             <cbc:Name>Q2 strategy consulting</cbc:Name>
             <cac:AdditionalItemIdentification>
                 <!-- BTAE-17 Service Accounting Code (mandatory when item type is SERVICES or BOTH) -->
                 <cbc:ID schemeID="SAC">9983.11</cbc:ID>
             </cac:AdditionalItemIdentification>
+            <!-- BTAE-13 Item type (G goods / S services / B both) carried via cac:CommodityClassification/cbc:CommodityCode -->
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>S</cbc:CommodityCode>
+            </cac:CommodityClassification>
             <cac:ClassifiedTaxCategory>
                 <cbc:ID>S</cbc:ID>
                 <cbc:Percent>5.00</cbc:Percent>
