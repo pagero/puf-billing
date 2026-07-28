@@ -51,6 +51,19 @@
     Reference: XP Z12-014 Annexe A, Section 3.2.15 - Cas n°17a
 -->
 <Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <!-- REGULATED (true) / NON_REGULATED (false); authoritative, equivalent to #BAR# -->
+                        <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
 
     <!-- UBL Version -->
     <cbc:UBLVersionID>2.1</cbc:UBLVersionID>

@@ -785,12 +785,12 @@ Demonstrates:
 
 - Invoice for second-hand goods sold under VAT margin scheme (Article 297 A CGI)
 - Buyer CANNOT deduct VAT — all amounts are VAT-inclusive, no separate VAT shown
-- BT-118 = E (Exempt), BT-117 = 0, BT-119 = 0, BT-121 = `VATEX-FR-F`
+- BT-118 = E (Exempt), BT-117 = 0, BT-119 = 0, BT-121 = `VATEX-EU-F`
 - BT-131 (net line amount) and BT-146 (unit price) hold VAT-inclusive values
 
 **Key Features:**
 
-- VATEX-FR code for specific margin regime: VATEX-FR-F (2nd-hand goods), VATEX-FR-I (art), VATEX-FR-J (antiques), VATEX-EU-D (travel agency)
+- VATEX-EU code for specific margin regime (v1.4 migration from VATEX-FR-*): VATEX-EU-F (2nd-hand goods), VATEX-EU-I (art), VATEX-EU-J (antiques), VATEX-EU-D (travel agency)
 - BT-109 = BT-112 = TTC amount (no separate HT and VAT breakdown)
 - BT-110 (TaxAmount) = 0 — VAT is embedded in the price, not disclosed
 - BT-120 carries the human-readable exemption reason text
@@ -834,6 +834,24 @@ Demonstrates:
 - Manager's SIREN + `_gestiontiers` suffix routes to the SEP-specific receiving inbox
 - BT-11 (purchase order reference) from Manager for the SEP project work order
 - VAT pre-filling will be systematically misaligned for SEP (Manager declares only their share)
+
+---
+
+#### UC38: PUF_France_UC38_Energy_Invoice.xml
+
+**Energy-Sector Invoice (UFE Data Harmonisation — §3.3.2)**
+
+Demonstrates:
+
+- Electricity supply invoice using the energy-sector bonne pratique (XP Z12-014 v1.4 §3.3.2)
+- BT-128 line object identifier with MULTIPLE UNTDID-1153 qualifiers (energy 0..n; EXTENDED-CTC-FR only)
+- BG-32 harmonised article attributes (BT-160/BT-161): NUMERO_COMPTEUR, INDEX_DEBUT, INDEX_FIN, PUISSANCE SOUSCRITE, COEFFICIENT_PTA
+
+**Key Features:**
+
+- Repeated `cac:DocumentReference` with schemeID ACD / AWA (reference / delivery-point PDL)
+- `cac:Item/cac:AdditionalItemProperty` name/value pairs for the harmonised meter attributes
+- Validates clean against the v1.4.0 EXTENDED-CTC-FR and Flux2 schematrons
 
 ---
 
@@ -895,6 +913,26 @@ Demonstrates:
 - BT-113 = BT-112 (all TTC treated as prepaid — tourist settlement at POS)
 - BT-115 = 0 (the detax operator settles with merchant via a separate fee/commission invoice)
 - BT-119 = 20% S category: VAT was collected at standard rate, now being transferred to operator for refund to tourist
+
+---
+
+#### UC44: PUF_France_UC44_OctroiDeMer_Invoice.xml
+
+**Octroi de mer — Overseas Territories Tax (§3.2.43.2)**
+
+Demonstrates:
+
+- B2B goods invoice delivered within a DROM (Réunion), subject to octroi de mer (XP Z12-014 v1.4 §3.2.43.2)
+- Line-level harmonised attributes BT-160 = OM_REFNC / OM_TAUX (value in BT-161)
+- Document-level non-VAT charge for octroi de mer (BT-104 = OCTROI_MER, category "O", tax scheme IMP / list 5153)
+- VAT breakdown with category O and VATEX-EU-O
+
+**Key Features:**
+
+- `cac:Item/cac:AdditionalItemProperty` OM_REFNC / OM_TAUX on the goods line
+- Document-level `cac:AllowanceCharge` (charge) carrying the octroi with `cac:TaxScheme/cbc:ID` = IMP
+- Requires the EXTENDED-CTC-FR profile
+- **Note:** this is the *billing invoice* octroi example; the separate UC44 DROM *e-reporting* variant lives in the tax-data-report directory (see below)
 
 ---
 

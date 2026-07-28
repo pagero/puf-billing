@@ -38,6 +38,17 @@
                         <puf:Key>payerParty</puf:Key>
                         <cac:Party>
                             <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <!-- REGULATED (true) / NON_REGULATED (false); authoritative, equivalent to #BAR# -->
+                        <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
                                 <ext:UBLExtension>
                                     <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
                                     <ext:ExtensionContent>

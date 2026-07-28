@@ -51,6 +51,17 @@
                         <puf:Key>payerParty</puf:Key>
                         <cac:Party>
                             <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <!-- REGULATED (true) / NON_REGULATED (false); authoritative, equivalent to #BAR# -->
+                        <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
                                 <ext:UBLExtension>
                                     <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
                                     <ext:ExtensionContent>
@@ -92,6 +103,8 @@
     <cbc:ID>REST-2026-0234</cbc:ID>
     <!-- BT-2 Invoice Issue Date -->
     <cbc:IssueDate>2026-01-29</cbc:IssueDate>
+    <!-- BT-9 Payment due date = payment date (cadre S2 "already paid" requires BT-9 per BR-FR-CO-09) -->
+    <cbc:DueDate>2026-01-29</cbc:DueDate>
     <!-- BT-3 Invoice Type Code - 380: Commercial invoice -->
     <cbc:InvoiceTypeCode name="S2">380</cbc:InvoiceTypeCode>
 

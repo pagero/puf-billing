@@ -204,6 +204,45 @@ IMPORTANT:
 
 NOTE: These text codes apply to both Invoice and CreditNote document types.
 
+==== Compliance and Regulated Status (Type de processus métier)
+
+Every French invoice / credit note is either *regulated* — processed *within* the French e-invoicing reform, with Pagero acting as the accredited platform (PA) and applying the stricter compliance checks and validations the reform requires — or *non-regulated*, processed *outside* that regime (for example B2C or cross-border documents). This corresponds to the *Type de processus métier* concept (MDG-2).
+
+The status is conveyed to Pagero Online in one of two ways:
+
+Explicit indicator (authoritative)::
+Set `puf:ComplianceExtension/puf:ComplianceActivatedIndicator` (see <<_compliance_extension>>) to `true` for *REGULATED* or `false` for *NON_REGULATED*. When present, this value takes precedence.
+
+`#BAR#` treatment-type note (fallback)::
+When the explicit indicator is absent, Pagero Online derives the status from the mandatory `#BAR#` note (see <<_french_text_codes_note_elements, French Text Codes>>): `#BAR#B2B` is treated as *REGULATED*; every other treatment type (`B2BINT`, `B2C`, `OUTOFSCOPE`, `ARCHIVEONLY`) is treated as *NON_REGULATED*.
+
+[IMPORTANT]
+====
+Declaring the regulated / non-regulated status is the *sender's responsibility*. The `#BAR#`-derived value is a best-effort fallback, provided for convenience only. If the sender does not supply the status explicitly and the fallback resolves it incorrectly, the sender remains responsible — the status should have been provided in the first place, ideally via `puf:ComplianceActivatedIndicator`.
+====
+
+*Example — explicitly marking an invoice as regulated*
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Equivalent fallback when the explicit indicator is omitted: <cbc:Note>#BAR#B2B</cbc:Note> -->
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
 ==== Credit note for global discount (Code 262)
 
 Invoice type code `262` ("Avoir pour Remise Globale") is used for credit notes

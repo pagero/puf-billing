@@ -51,6 +51,10 @@ include::document-level/Selfbilled.adoc[]
 
 include::document-level/Simplified.adoc[]
 
+==== Compliance Extension
+
+include::document-level/ComplianceExtension.adoc[]
+
 ==== OrderReference
 
 include::document-level/OrderReferenceExtension.adoc[]
