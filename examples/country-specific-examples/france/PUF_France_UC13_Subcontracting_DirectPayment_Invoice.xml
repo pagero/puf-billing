@@ -56,6 +56,17 @@
                         <puf:Key>payerParty</puf:Key>
                         <cac:Party>
                             <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <!-- REGULATED (true) / NON_REGULATED (false); authoritative, equivalent to #BAR# -->
+                        <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
                                 <ext:UBLExtension>
                                     <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
                                     <ext:ExtensionContent>
@@ -371,6 +382,9 @@
                 <cbc:ID>AE</cbc:ID>
                 <!-- BT-152: Invoiced item VAT rate -->
                 <cbc:Percent>0.00</cbc:Percent>
+                <!-- EXT-FR-FE-179 / EXT-FR-FE-178: line-level VAT exemption reason (reverse charge), consistent with the document-level BG-23 breakdown -->
+                <cbc:TaxExemptionReasonCode>VATEX-FR-AE</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>AUTOLIQUIDATION</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
@@ -411,6 +425,9 @@
                 <cbc:ID>AE</cbc:ID>
                 <!-- BT-152: Invoiced item VAT rate -->
                 <cbc:Percent>0.00</cbc:Percent>
+                <!-- EXT-FR-FE-179 / EXT-FR-FE-178: line-level VAT exemption reason (reverse charge), consistent with the document-level BG-23 breakdown -->
+                <cbc:TaxExemptionReasonCode>VATEX-FR-AE</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>AUTOLIQUIDATION</cbc:TaxExemptionReason>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>

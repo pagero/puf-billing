@@ -44,6 +44,19 @@
          xmlns:puf="urn:pagero:ExtensionComponent:1.0">
 
     <!-- BT-24 Specification identifier -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <!-- REGULATED (true) / NON_REGULATED (false); authoritative, equivalent to #BAR# -->
+                        <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <!-- BT-23 Business process type (ProfileID carries the process type URI; BT-23 is on InvoiceTypeCode/@name) -->
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>

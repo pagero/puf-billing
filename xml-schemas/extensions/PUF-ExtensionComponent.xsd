@@ -77,7 +77,7 @@
                 <xsd:element name="FullPaymentDetails" minOccurs="0" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:sequence>
-                            <xsd:element name="FullPaymentIndicator" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                            <xsd:element name="FullPaymentIndicator" type="PUFBooleanType" minOccurs="0" maxOccurs="1"/>
                             <xsd:element name="DateOfFullPayment" type="PUFDateType" minOccurs="0" maxOccurs="1"/>
                         </xsd:sequence>
                     </xsd:complexType>
@@ -93,8 +93,8 @@
                     </xsd:complexType>
                 </xsd:element>
                 <xsd:element ref="InvoiceSeries" minOccurs="0" maxOccurs="1"/>
-                <xsd:element name="SelfBilled" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
-                <xsd:element name="Simplified" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="SelfBilled" type="PUFBooleanType" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="Simplified" type="PUFBooleanType" minOccurs="0" maxOccurs="1"/>
                 <xsd:element name="OrderReferenceExtension" minOccurs="0" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:sequence>
@@ -324,6 +324,36 @@
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
+                <xsd:element name="ComplianceExtension" minOccurs="0" maxOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation>Compliance and clearance handling indicators for the document.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ComplianceActivatedIndicator" type="PUFBooleanType" minOccurs="0" maxOccurs="1">
+                                <xsd:annotation>
+                                    <xsd:documentation>When true, triggers additional regulatory compliance checks on the document (where applicable), applied according to the rules defined for the flow it belongs to.</xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:element>
+                            <xsd:element name="SkipClearanceIndicator" type="PUFBooleanType" minOccurs="0" maxOccurs="1">
+                                <xsd:annotation>
+                                    <xsd:documentation>When true, the document must not be sent to a clearance authority even if it would otherwise be eligible for clearance.</xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="ExternalDeliveryType" minOccurs="0" maxOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation>Indicates that the document should be processed without standard Pagero routing and/or delivery. Restricted subset of the platform external delivery types.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="PROCESS_WITHOUT_DELIVERY"/>
+                            <xsd:enumeration value="PROCESS_WITHOUT_ROUTING"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
                 <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
@@ -349,6 +379,14 @@
             <xsd:extension base="udt:IndicatorType"/>
         </xsd:simpleContent>
     </xsd:complexType>
+    <xsd:simpleType name="PUFBooleanType">
+        <xsd:annotation>
+            <xsd:documentation>Boolean restricted to the literals 'true'/'false' (excludes the xsd:boolean 1/0 forms).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:boolean">
+            <xsd:pattern value="true|false"/>
+        </xsd:restriction>
+    </xsd:simpleType>
     <xsd:complexType name="PUFDateType">
         <xsd:simpleContent>
             <xsd:extension base="udt:DateType"/>

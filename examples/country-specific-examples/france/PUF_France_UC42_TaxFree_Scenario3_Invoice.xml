@@ -54,6 +54,19 @@
          xmlns:puf="urn:pagero:ExtensionComponent:1.0">
 
     <!-- BT-24 Specification identifier -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <!-- REGULATED (true) / NON_REGULATED (false); authoritative, equivalent to #BAR# -->
+                        <puf:ComplianceActivatedIndicator>false</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
     <!-- BT-23 Business process type (on InvoiceTypeCode/@name) -->
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
@@ -78,7 +91,9 @@
     <cbc:Note>#ABL#RCS Paris B 123 456 789</cbc:Note>
     <cbc:Note>#AAI#APE 4771Z — Commerce de détail d'habillement en magasin spécialisé</cbc:Note>
     <cbc:Note>#AAI#Détaxe touriste: Bordereau de Vente à l'Exportation (BVE) validé en douane. TVA collectée remboursée au touriste via l'opérateur de détaxe. Article 262 I et 147 CGI et Directive 2006/112/CE.</cbc:Note>
-    <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
+    <cbc:Note>#BAR#B2C</cbc:Note>
     <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5 Invoice currency -->

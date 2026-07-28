@@ -48,6 +48,17 @@
     -->
     <ext:UBLExtensions>
         <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <!-- REGULATED (true) / NON_REGULATED (false); authoritative, equivalent to #BAR# -->
+                        <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+        <ext:UBLExtension>
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled</ext:ExtensionURI>
             <ext:ExtensionContent>
                 <puf:PageroExtension>
@@ -83,6 +94,7 @@
     <cbc:Note>#DCL#AUTO-FACTURATION : La présente facture est établie par l'ACHETEUR ÉnergieVert Réseaux SAS (SIREN 888777666) pour le compte du VENDEUR Jean-Pierre Beaumont (SIREN 444222111), producteur individuel d'énergie photovoltaïque, conformément au contrat de mandat d'auto-facturation conclu entre les parties. Le VENDEUR bénéficie du régime de franchise en base de TVA (Art. 293 B CGI) — TVA non applicable. Aucun numéro de TVA intracommunautaire n'a été attribué au VENDEUR.</cbc:Note>
     <!-- #BAR#: Treatment type qualification — B2B e-invoicing -->
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
     <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5 Invoice currency -->

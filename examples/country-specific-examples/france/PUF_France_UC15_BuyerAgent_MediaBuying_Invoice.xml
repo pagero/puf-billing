@@ -112,6 +112,19 @@
     Reference: XP Z12-014 Annexe A, Section 3.2.13 - Cas n°15
 -->
 <Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <!-- REGULATED (true) / NON_REGULATED (false); authoritative, equivalent to #BAR# -->
+                        <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
 
     <!-- UBL Version -->
     <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
@@ -138,6 +151,7 @@
     <cbc:Note>#PMT#Conditions de paiement: 30 jours fin de mois par virement bancaire. En cas de retard de paiement, pénalités de 3 fois le taux d'intérêt légal + indemnité forfaitaire pour frais de recouvrement de 40 EUR. PAIEMENT PAR AGENT D'ACHETEUR: Cette facture sera payée par l'agence média AgenceComm360 SARL (SIREN 999888777) agissant pour le compte de l'annonceur ACHETEUR (Cosmétiques Premium Paris SAS), conformément au contrat cadre établi entre la régie et l'agence. L'agence média dispose d'un mandat de représentation et de délégation de paiement pour cette catégorie d'achats publicitaires.</cbc:Note>
     <cbc:Note>#AAI#FACTURE GÉRÉE PAR AGENT D'ACHETEUR (AGENCE MÉDIA): Cette facture publicitaire est destinée au client ACHETEUR/annonceur (Cosmétiques Premium Paris SAS) mais gérée et payée par l'agence média AgenceComm360 SARL agissant en qualité d'AGENT d'ACHETEUR. L'agence média a passé commande pour le compte de l'annonceur, validé les emplacements publicitaires et la diffusion de la campagne, et procédera au paiement pour le compte de son client conformément au mandat établi. Le routage vers l'agence est assuré par l'adresse électronique dédiée aux achats publicitaires (SIREN_ACHATPUB). L'agence média opère sur la plateforme PA-TR choisie en accord avec l'annonceur. L'annonceur ACHETEUR conserve la responsabilité légale finale et accède aux factures via interopérabilité PA-TR/PA-R. Campagne digitale Q1 2026 pour lancement gamme soins anti-âge premium.</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
     <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5: Invoice currency code -->

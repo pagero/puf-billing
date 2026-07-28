@@ -78,6 +78,19 @@
     Reference: BOI-TVA-CHAMP-10-10-40-40, §20 and §40
 -->
 <Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <!-- REGULATED (true) / NON_REGULATED (false); authoritative, equivalent to #BAR# -->
+                        <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
 
     <!-- UBL Version -->
     <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
@@ -104,6 +117,7 @@
     <cbc:Note>#PMT#Paiement à 15 jours par virement bancaire. En cas de retard de paiement, pénalités de 3 fois le taux d'intérêt légal + indemnité forfaitaire pour frais de recouvrement de 40 EUR.</cbc:Note>
     <cbc:Note>#AAI#FACTURE D'ENTREMISE - INTERMÉDIAIRE TRANSPARENT: Conformément aux dispositions de l'article BOI-TVA-CHAMP-10-10-40-40 (§20 et §40) du Bulletin Officiel des Impôts, cette facture d'entremise facture les services de courtage rendus au client commettant (Manufacturing Pharmaceutique Lyon SAS) dans le cadre de l'achat de produits chimiques. Les opérations d'entremise sont considérées comme des prestations de service indépendantes de la prestation objet de l'entremise elle-même. Cette facture se rapporte à la transaction principale documentée par la facture UC12-CTI-2026-0456 (ChemTech Industries SA) d'un montant de 11 460,00 EUR TTC. Le courtier a agi au nom et pour le compte du client ACHETEUR conformément au mandat établi.</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
     <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
 
     <!-- BT-5: Invoice currency code -->
