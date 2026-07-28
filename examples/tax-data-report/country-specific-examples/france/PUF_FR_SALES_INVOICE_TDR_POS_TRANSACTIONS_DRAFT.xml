@@ -160,6 +160,11 @@
                                 <puf:Key>CategoryCode</puf:Key>
                                 <puf:Value>TPS1</puf:Value>
                             </puf:RestrictedInformation>
+                            <!-- TT-85 Number of transactions aggregated in this line -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>TransactionsCount</puf:Key>
+                                <puf:Value>1</puf:Value>
+                            </puf:RestrictedInformation>
                         </puf:LineExtension>
                     </puf:PageroExtension>
                 </ext:ExtensionContent>
