@@ -18,7 +18,7 @@
     - NO third-party PAYER block (purchase card is BUYER's payment means, not separate payer)
     - BT-87 (Card account number): Last 4-6 digits MANDATORY
     - BT-88 (Cardholder name): Optional
-    - Payment means code: 48 (Bank card)
+    - Payment means code: 54 (Card payment, permitted alongside 48 and 55)
     
     Financial Breakdown:
     - Hotel room: 180.00 EUR (net)
@@ -197,8 +197,8 @@
 
     <!-- BG-16 Payment Means (Corporate card) -->
     <cac:PaymentMeans>
-        <!-- BT-81 Payment means code - 48: Bank card -->
-        <cbc:PaymentMeansCode>48</cbc:PaymentMeansCode>
+        <!-- BT-81 Payment means code - 54: Card payment -->
+        <cbc:PaymentMeansCode>54</cbc:PaymentMeansCode>
         <!-- BT-83 Remittance information (transaction reference) -->
         <cbc:PaymentID>TXN-2026-01-28-15478</cbc:PaymentID>
         <!-- BG-18 Payment Card Information -->

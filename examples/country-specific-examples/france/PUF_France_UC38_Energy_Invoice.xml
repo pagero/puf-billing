@@ -10,9 +10,9 @@
         * BG-32 harmonised article attributes (BT-160 name / BT-161 value):
           NUMERO_COMPTEUR, INDEX_DEBUT, INDEX_FIN, PUISSANCE SOUSCRITE, COEFFICIENT_PTA
 
-    Known pipeline note (XP Z12-014 v1.4 technical impact):
-    - The internal->France EXTENDED transform currently caps BT-128 at 0..1 (first qualifier only).
-      This example intentionally carries several qualifiers to exercise that limit.
+        Pipeline support:
+        - The internal->France EXTENDED transform preserves all line-level BT-128 qualifiers.
+            This example exercises that 0..n mapping with multiple identifiers.
 -->
 <Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
 

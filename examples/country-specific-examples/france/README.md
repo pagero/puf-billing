@@ -188,6 +188,8 @@ Demonstrates:
 - Business process related to employee expenses
 - Employee information in party extensions
 - Expense category classification
+- Employee identifier carried as BT-160/BT-161 `MATRICULE`
+- Payment card code 55 with masked BT-87 and GDPR-safe BT-88
 
 ---
 
@@ -198,7 +200,7 @@ Demonstrates:
 Demonstrates:
 
 - Invoice paid via corporate card
-- Payment means code 48 (Card payment)
+- Payment means code 54 (Card payment)
 - Card issuer information
 
 **Key Features:**
@@ -797,6 +799,19 @@ Demonstrates:
 
 ---
 
+#### UC33b: PUF_France_UC33b_MarginScheme_Structured_Invoice.xml
+
+**Structured Travel-Agency Margin Disclosure (XP Z12-014 v1.4 §3.2.32.3 Option 2)**
+
+Demonstrates:
+
+- Two exempt travel-service lines totalling EUR 300 with VATEX-EU-D
+- `REPRISE MARGE BENEFICIAIRE TTC`: quantity -1 and line total -120
+- `MARGE BENEFICIAIRE HT`: category S, rate 20%, taxable base EUR 100
+- Totals: EUR 280 excluding VAT, EUR 20 VAT, EUR 300 including VAT
+
+---
+
 #### UC36: PUF_France_UC36_ProfessionalSecrecy_Invoice.xml
 
 **Professional Secrecy Invoice (Secret Professionnel — Avocats)**
@@ -871,6 +886,8 @@ Demonstrates:
 - Netting agreement reference
 - Cross-invoice references
 - Net settlement calculation
+- Demonstrates the supported XP Z12-014 v1.4 §3.2.39.1 two-invoice approach with BT-81 = 97
+- Does not represent the optional cadre-9 auto-invoice, whose PA-E extraction and lifecycle fan-out are not supported
 
 ---
 
@@ -924,13 +941,13 @@ Demonstrates:
 
 - B2B goods invoice delivered within a DROM (Réunion), subject to octroi de mer (XP Z12-014 v1.4 §3.2.43.2)
 - Line-level harmonised attributes BT-160 = OM_REFNC / OM_TAUX (value in BT-161)
-- Document-level non-VAT charge for octroi de mer (BT-104 = OCTROI_MER, category "O", tax scheme IMP / list 5153)
+- Document-level non-VAT charge for octroi de mer (BT-104 = OCTROI_MER, BT-177 = IMP, BT-177-1 = 5153, category O)
 - VAT breakdown with category O and VATEX-EU-O
 
 **Key Features:**
 
 - `cac:Item/cac:AdditionalItemProperty` OM_REFNC / OM_TAUX on the goods line
-- Document-level `cac:AllowanceCharge` (charge) carrying the octroi with `cac:TaxScheme/cbc:ID` = IMP
+- Document-level `cac:AllowanceCharge` carrying `cbc:AllowanceChargeReasonCode listID="5153"` = IMP, VATEX-EU-O, and an out-of-scope VAT category
 - Requires the EXTENDED-CTC-FR profile
 - **Note:** this is the *billing invoice* octroi example; the separate UC44 DROM *e-reporting* variant lives in the tax-data-report directory (see below)
 

@@ -8,10 +8,12 @@
     Document Type: Standard Commercial Invoice (Type 380)
     Business Process: B1 (Goods invoice)
     
-    CRITICAL PATTERN: Two Separate Invoices + Offset Payment
-    ========================================================
-    ❌ INCORRECT: Do NOT mix sales and purchases in single invoice using negative lines
-    ✅ CORRECT: Issue TWO separate invoices (one per direction), then net the payments
+    Supported Pattern: Two Separate Invoices + Offset Payment
+    =========================================================
+    This file demonstrates XP Z12-014 v1.4 section 3.2.39.1, the recommended
+    two-invoice approach. Section 3.2.39.2 also defines an optional cadre-9
+    bidirectional auto-invoice for previously accepted practices, but Pagero
+    PA-E emission does not support its unit-invoice extraction and lifecycle fan-out.
     
     This Document: INVOICE 2 of 2
     ============================
