@@ -55,6 +55,10 @@ include::document-level/Simplified.adoc[]
 
 include::document-level/ComplianceExtension.adoc[]
 
+==== External Delivery Type
+
+include::document-level/ExternalDeliveryType.adoc[]
+
 ==== OrderReference
 
 include::document-level/OrderReferenceExtension.adoc[]
