@@ -104,7 +104,7 @@ Each text code must be provided in a separate `cbc:Note` element with the format
 |#ADN#
 |B2G indicator
 |Indicates whether the invoice is subject to B2G treatment
-|
+|*Qualification value:* `B2G`
 
 |#BAR#
 |Treatment type qualification
@@ -152,10 +152,11 @@ Each text code must be provided in a separate `cbc:Note` element with the format
 |*Required:* `Membre d'un assujetti unique`
 |===
 
-IMPORTANT: 
+IMPORTANT:
 
 * The #PMT# fixed indemnity amount is legally set at €40.00 per Article L441-10 of the French Commercial Code
-* #BAR# is mandatory and must contain exactly ONE of the specified values: `B2B` (e-invoicing), `B2BINT` (B2B international e-reporting), `B2C` (B2C e-reporting), `OUTOFSCOPE` (outside reform scope), or `ARCHIVEONLY` (internal credit note - no transmission)
+* #BAR# is mandatory for every non-B2G France scenario and must contain exactly ONE of the specified values: `B2B` (e-invoicing), `B2BINT` (B2B international e-reporting), `B2C` (B2C e-reporting), `OUTOFSCOPE` (outside reform scope), or `ARCHIVEONLY` (internal credit note - no transmission)
+* #BAR# is not required for B2G. B2G examples use `#ADN#B2G` and should provide `puf:ComplianceActivatedIndicator` = `true`
 * Only ONE #BAR# note is allowed per invoice
 * `#REG#` can be used for seller registration data such as share capital and other regulatory company information
 
@@ -167,7 +168,7 @@ IMPORTANT:
 <Invoice>
     <!-- Code omitted for clarity -->
     <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
-    
+
     <!-- French text codes -->
     <cbc:Note>#ABL#RCS Lyon B 987 654 321</cbc:Note>
     <cbc:Note>#REG#SARL au capital de 100000.00 EUR</cbc:Note>
@@ -175,7 +176,7 @@ IMPORTANT:
     <cbc:Note>#PMD#En cas de retard de paiement, application des pénalités à un taux égal au taux d'intérêt appliqué par la BCE majoré de 10 points de pourcentage</cbc:Note>
     <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement en cas de retard de paiement : 40 EUR</cbc:Note>
     <cbc:Note>#BAR#B2B</cbc:Note>
-    
+
     <!-- Code omitted for clarity -->
 </Invoice>
 ----
@@ -213,8 +214,11 @@ The status is conveyed to Pagero Online in one of two ways:
 Explicit indicator (authoritative)::
 Set `puf:ComplianceExtension/puf:ComplianceActivatedIndicator` (see <<_compliance_extension>>) to `true` for *REGULATED* or `false` for *NON_REGULATED*. When present, this value takes precedence.
 
-`#BAR#` treatment-type note (fallback)::
-When the explicit indicator is absent, Pagero Online derives the status from the mandatory `#BAR#` note (see <<_french_text_codes_note_elements, French Text Codes>>): `#BAR#B2B` is treated as *REGULATED*; every other treatment type (`B2BINT`, `B2C`, `OUTOFSCOPE`, `ARCHIVEONLY`) is treated as *NON_REGULATED*.
+`#BAR#` treatment-type note (non-B2G fallback)::
+For non-B2G documents, when the explicit indicator is absent, Pagero Online derives the status from the mandatory `#BAR#` note (see <<_french_text_codes_note_elements, French Text Codes>>): `#BAR#B2B` is treated as *REGULATED*; every other treatment type (`B2BINT`, `B2C`, `OUTOFSCOPE`, `ARCHIVEONLY`) is treated as *NON_REGULATED*.
+
+B2G classification::
+For B2G, `#BAR#` is not required. `#ADN#B2G` is the invoice-level B2G indicator used by the Chorus Pro qualification examples. Pagero senders should also set `puf:ComplianceActivatedIndicator` to `true`; channel or directory context may independently identify the transaction as B2G.
 
 [IMPORTANT]
 ====
@@ -706,6 +710,31 @@ See example below, note that `cbc:Name` is not mandatory to send, but opens up t
     <!-- Code omitted for clarity -->
 </Invoice>
 ----
+
+==== B2G / public sector (Chorus Pro)
+
+French B2G invoices are subject to the additional `BR-FR-CPRO` rules. The rules are activated when the transaction is identified as B2G through `#ADN#B2G`, channel context, or public-buyer directory information.
+
+Key requirements include:
+
+* Seller private identifier (BT-29) and public buyer SIRET (BT-46) according to `BR-FR-CPRO-03`, `BR-FR-CPRO-09`, and `BR-FR-CPRO-10`.
+* Buyer service code in BT-46 with scheme `0224` when required by the public buyer's directory configuration (`BR-FR-CPRO-11`).
+* Commitment number (BT-13) when required by the public buyer's directory configuration (`BR-FR-CPRO-12` and `BR-FR-CPRO-13`).
+* Seller Agent details for B2G subcontracting framework `S3` (`BR-FR-CPRO-21` and `BR-FR-CPRO-23`). This differs from private-market subcontracting framework `S5`, which uses the Payer block.
+* Chorus Pro-specific cardinality and length constraints from the remaining `BR-FR-CPRO` rules.
+
+The AIFE qualification `0225` endpoints shown in the B2G example files are test values. They must not be treated as a general rule for constructing production electronic addresses.
+
+The following PUF files correspond to the eight AIFE invoice scenarios:
+
+* `PUF_France_B2G_Simple_Invoice.xml`
+* `PUF_France_B2G_CreditNote.xml`
+* `PUF_France_B2G_UC1_MultiOrder_MultiDelivery_Invoice.xml`
+* `PUF_France_B2G_UC7_PurchasingCard_Invoice.xml`
+* `PUF_France_B2G_UC13_Subcontracting_DirectPayment_Invoice.xml`
+* `PUF_France_B2G_UC17a_PaymentIntermediary_Invoice.xml`
+* `PUF_France_B2G_UC20_PrepaymentInvoice.xml`
+* `PUF_France_B2G_UC29_SingleVATEntity_Invoice.xml`
 
 ==== Legal commitments
 
