@@ -12,6 +12,7 @@ French e-invoicing requires specific mandatory elements regulated by the French 
 - RCS registration and APE codes
 - Late payment penalties and fixed indemnity (€40)
 - Treatment type qualification (B2B/B2C)
+- Chorus Pro B2G qualification scenarios
 - Complex use cases (factoring, third-party payment, self-billing, etc.)
 
 ## Example Files
@@ -59,6 +60,27 @@ Demonstrates:
 - BillingReference with preceding invoice details
 - Credit reason explanation in Note
 - Credited quantity and amounts
+
+---
+
+### Chorus Pro B2G Qualification Examples
+
+These examples are PUF source counterparts of the eight invoice fixtures in the AIFE Chorus Pro qualification kit. Each file carries the AIFE qualification `0225` endpoints directly; those values are test data and are not a general construction rule for French electronic addresses.
+
+For France, `#BAR#` is mandatory in every non-B2G scenario (`B2B`, `B2BINT`, `B2C`, `OUTOFSCOPE`, or `ARCHIVEONLY`). It is not required for B2G. These examples therefore omit `#BAR#`, carry `#ADN#B2G`, and set `puf:ComplianceActivatedIndicator` to `true`.
+
+| AIFE scenario | PUF example | Distinguishing coverage |
+|---|---|---|
+| 1.1 | `PUF_France_B2G_Simple_Invoice.xml` | M1, two line-level commitments and deliveries |
+| 1.2 | `PUF_France_B2G_CreditNote.xml` | M1 credit note and preceding invoice reference |
+| 1.5 | `PUF_France_B2G_UC1_MultiOrder_MultiDelivery_Invoice.xml` | UC1 multi-order and multi-delivery |
+| 1.6 | `PUF_France_B2G_UC7_PurchasingCard_Invoice.xml` | S2, purchasing-card code 48, single taxable person data |
+| 1.7 | `PUF_France_B2G_UC13_Subcontracting_DirectPayment_Invoice.xml` | S3, public buyer, correctly identified Seller Agent |
+| 1.8 | `PUF_France_B2G_UC17a_PaymentIntermediary_Invoice.xml` | S2, payment code 57, Payee role PE |
+| 1.9 | `PUF_France_B2G_UC20_PrepaymentInvoice.xml` | Type 386 with qualification framework M1 |
+| 1.10 | `PUF_France_B2G_UC29_SingleVATEntity_Invoice.xml` | M1, TXD, 0231 and tax representative |
+
+`cbc:BuyerReference` (`SERV_EXE` in the qualification data) and the PUF `FR:ServiceCode` are distinct fields. Neither should be inferred from the other.
 
 ---
 
@@ -970,11 +992,11 @@ Invoice e-reporting examples (UC43, UC44) are located in the **tax-data-report**
 | **#AAI#** | General information | General elements typically found at the bottom of paper invoice pages | *(free text)* |
 | **#PMD#** | Late payment penalties | Payment terms regarding late payment penalties | *(free text)* |
 | **#PMT#** | Collection costs (€40) | Fixed €40 indemnity for collection costs in case of late payment | *(free text)* |
-| **#BAR#** | Treatment type qualification | Expected treatment type for the invoice. Only ONE BAR note per invoice. | `B2B`, `B2BINT`, `B2C`, `OUTOFSCOPE`, or `ARCHIVEONLY` |
+| **#BAR#** | Treatment type qualification | Mandatory for every non-B2G France scenario. Only ONE BAR note per invoice. Not required for B2G. | `B2B`, `B2BINT`, `B2C`, `OUTOFSCOPE`, or `ARCHIVEONLY` |
 | **#AAB#** | Early payment discount | Statement whether customer can apply a discount for early payment. Does NOT correspond to the discount amount itself. | *(free text)* |
 | **#ABU#** | Contract clause | Contractual reservation clause / Retenue de garantie | *(free text)* |
 | **#ACC#** | Subrogation factoring clause | Factoring arrangement details and subrogation clauses | *(free text)* |
-| **#ADN#** | B2G indicator | Indicates if invoice is subject to B2G treatment (additional Chorus Pro rules apply) | *(free text)* |
+| **#ADN#** | B2G indicator | Use `B2G` for the Chorus Pro B2G qualification scenarios | `B2G` |
 | **#BLU#** | Eco-participation / Eco-contribution | Eco-participation or Eco-contribution WEEE; also used for other eco-taxes | `Eco-participation (L. 541-10 du code de l'environnement)` or `Eco-contribution DEEE` |
 | **#CUS#** | Customs information | Customs-related details and information | *(free text)* |
 | **#PAI#** | Third party payment | Third party payment information (e.g. partial third-party payer or barter arrangement) | *(free text)* |
