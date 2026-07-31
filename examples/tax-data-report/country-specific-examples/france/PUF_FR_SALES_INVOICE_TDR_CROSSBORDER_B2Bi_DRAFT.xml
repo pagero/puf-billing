@@ -62,8 +62,8 @@
         <cbc:StartDate>2025-12-01</cbc:StartDate>
         <!-- BT-74 - Invoicing period end date -->
         <cbc:EndDate>2026-01-31</cbc:EndDate>
-        <!-- BT-8 - TAX point date code -->
-        <cbc:Description>3</cbc:Description>
+        <!-- BT-8 - TAX point date code. UNCL2005 subset: 3 (invoice issue date), 35 (delivery date), 432 (paid to date) -->
+        <cbc:DescriptionCode>3</cbc:DescriptionCode>
     </cac:InvoicePeriod>
     <!-- BG-4 Seller -->
     <cac:AccountingSupplierParty>

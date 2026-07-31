@@ -56,7 +56,7 @@
     - BT-23: No special business process code (standard reconciliation)
     - BT-113: Prepaid amount = 1,080.00 EUR (sum of monthly payments)
     - BT-115: Amount due = 144.00 EUR (positive - additional payment required)
-    - BT-8: Value added tax point date = meter reading date (actual consumption date)
+    - BT-8: Value added tax point date code = 432 (Paid to date) - VAT sur les encaissements
     
     Business Context:
     SELLER: ÉnergieVerte Provence SAS (electricity supplier)
@@ -134,9 +134,6 @@
     <cbc:Note>#BAR#B2C</cbc:Note>
     <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
     
-    <!-- BT-7: Tax point date (Meter reading date - actual consumption determination) -->
-    <cbc:TaxPointDate>2026-01-05</cbc:TaxPointDate>
-    
     <!-- BT-5: Invoice currency code -->
     <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
     
@@ -146,6 +143,10 @@
         <cbc:StartDate>2025-01-01</cbc:StartDate>
         <!-- BT-74: Invoicing period end date -->
         <cbc:EndDate>2025-12-31</cbc:EndDate>
+        <!-- BT-8: Value added tax point date code = 432 (Paid to date) - seller has NOT opted for
+             "TVA sur les débits", so VAT is exigible on collection. BT-7 is not used in France
+             and is mutually exclusive with BT-8 (BR-CO-03). -->
+        <cbc:DescriptionCode>432</cbc:DescriptionCode>
     </cac:InvoicePeriod>
 
     <!-- BT-13: Contract reference -->
