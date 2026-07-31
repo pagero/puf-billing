@@ -4,6 +4,7 @@
 |`cbc:TaxPointDate`
 |**VAT point date** +
 This element should be filled in if the date when VAT become liable for seller and buyer is different from the invoice issue date. +
+Mutually exclusive with the VAT point date code `cac:InvoicePeriod/cbc:DescriptionCode` (BT-8). +
 _Format "YYYY-MM-DD"._
 
 |===

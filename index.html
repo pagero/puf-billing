@@ -1730,6 +1730,7 @@ Free text, the element can be iterated multiple times.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:TaxPointDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>VAT point date</strong><br>
 This element should be filled in if the date when VAT become liable for seller and buyer is different from the invoice issue date.<br>
+Mutually exclusive with the VAT point date code <code>cac:InvoicePeriod/cbc:DescriptionCode</code> (BT-8).<br>
 <em>Format "YYYY-MM-DD".</em></p></td>
 </tr>
 </tbody>
@@ -1918,6 +1919,13 @@ Reference assigned by the buyer for internal routing.</p></td>
 <em>Format "YYYY-MM-DD".</em></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:DescriptionCode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>VAT point date code</strong><br>
+The code of the date when VAT becomes accountable for the seller and for the buyer. Used when the VAT point date is not known when the document is issued.<br>
+Mutually exclusive with <code>cbc:TaxPointDate</code> (BT-7).<br>
+Valid values, a subset of UNTDID 2005: <code>3</code> (Invoice document issue date); <code>35</code> (Delivery date, actual); <code>432</code> (Paid to date).</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cbc:Description</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Invoicing period description</strong><br>
 Description of the billing period (free text).</p></td>
@@ -1935,6 +1943,7 @@ Description of the billing period (free text).</p></td>
   <span class="tag">&lt;cac:InvoicePeriod&gt;</span>
       <span class="tag">&lt;cbc:StartDate&gt;</span>2021-01-01<span class="tag">&lt;/cbc:StartDate&gt;</span>
       <span class="tag">&lt;cbc:EndDate&gt;</span>2021-01-31<span class="tag">&lt;/cbc:EndDate&gt;</span>
+      <span class="tag">&lt;cbc:DescriptionCode&gt;</span>35<span class="tag">&lt;/cbc:DescriptionCode&gt;</span>
       <span class="tag">&lt;cbc:Description&gt;</span>Description of invoice period<span class="tag">&lt;/cbc:Description&gt;</span>
   <span class="tag">&lt;/cac:InvoicePeriod&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
