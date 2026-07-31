@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!--
+        USE CASE 42 - TAX-FREE SALES (DETAXE), SCENARIO 1: B2C DOMESTIC CORRECTED AFTER BVE VALIDATION
+        Reference: XP Z12-014 Annexe A, Section 3.2.41.1 (Cas n°1)
+
+        A non-EU tourist buys goods from a French merchant, who records the sale as a
+        domestic B2C transaction with VAT (category TLB1). When the tourist validates the
+        Export Sales Voucher (BVE) at customs and the VAT is refunded, the merchant must
+        correct the B2C e-reporting from TLB1 (goods subject to VAT) to TNT1 (goods not
+        subject to VAT in France).
+
+        The correction is a pair of counter-entries reported for the period in which the
+        refund happens:
+          Line 1 - TLB1 reversal of the original taxable sale: negative net and negative VAT.
+          Line 2 - TNT1 non-taxable re-entry: positive net, VAT = 0.
+
+        This is a forward correction (a later event, not an error in an earlier filing), so it
+        is reported as ordinary receipt-transaction entries in the current period; it is not a
+        rectification of the original sales period.
+
+        NOTE: Values and party details in this example are illustrative only. Figures follow a
+        month with 50 tax-free refunds of 100.00 HT / 20.00 VAT each at the 20% standard rate:
+        TLB1 = -5000.00 HT / -1000.00 VAT, TNT1 = +5000.00 HT / 0.00 VAT.
+
+        As with all B2C reporting, each "InvoiceLine" represents one transaction category
+        group, aggregating all transactions for that category (see TransactionsCount).
+    -->
+
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <!-- Indication of type of tax reporting (can be INVOICE or RECEIPTTRANSACTION) -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>entryType</puf:Key>
+                        <puf:Value>RECEIPTTRANSACTION</puf:Value>
+                    </puf:RestrictedInformation>
+                    <!-- Issuer-assigned report id (optional) -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>issuerAssignedReportId</puf:Key>
+                        <puf:Value>BH-DETAXE-2026-06</puf:Value>
+                    </puf:RestrictedInformation>
+                    <!-- Tax report id -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>taxReportId</puf:Key>
+                        <puf:Value>DETAXE-2026-06</puf:Value>
+                    </puf:RestrictedInformation>
+                    <!-- Transmission type IN (initial). The correction is a forward counter-entry,
+                         not a rectification (RE) of the original period. -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>transmissionType</puf:Key>
+                        <puf:Value>IN</puf:Value>
+                    </puf:RestrictedInformation>
+                    <!-- Reporting period (the month the refunds were processed) -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>reportPeriodStart</puf:Key>
+                        <puf:Value>2026-06-01</puf:Value>
+                    </puf:RestrictedInformation>
+                    <puf:RestrictedInformation>
+                        <puf:Key>reportPeriodEnd</puf:Key>
+                        <puf:Value>2026-06-30</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+
+    <!-- BT-24 Specification identifier -->
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- Sales / income reporting -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Report / document number -->
+    <cbc:ID>DETAXE-2026-06</cbc:ID>
+    <!-- BT-2 Issue date (correction reported at period end) -->
+    <cbc:IssueDate>2026-06-30</cbc:IssueDate>
+    <!-- BT-3 Document type code - 380 Commercial invoice; @name BT-23 business process B1 (goods) -->
+    <cbc:InvoiceTypeCode name="B1">380</cbc:InvoiceTypeCode>
+    <!-- BT-5 Document currency (EUR for French e-reporting) -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BG-4 Seller / declaring merchant -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller electronic address (schemeID 0225 = French e-invoicing annuaire, value is the SIREN) -->
+            <cbc:EndpointID schemeID="0225">900456123</cbc:EndpointID>
+            <!-- BT-29 SIRET identifier -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">90045612300021</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Boutique Horizon Paris</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-5 Seller address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>8 Rue de Rivoli</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75004</cbc:PostalZone>
+                <cac:Country>
+                    <!-- BT-40 Seller address country code -->
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-31 Seller VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR40900456123</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- BT-27 Seller name -->
+                <cbc:RegistrationName>Boutique Horizon Paris SAS</cbc:RegistrationName>
+                <!-- BT-30 Seller legal registration identifier (SIREN) -->
+                <cbc:CompanyID schemeID="0002">900456123</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer (aggregated B2C consumers) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cac:PartyName>
+                <!-- BT-45 Buyer name -->
+                <cbc:Name>B2C</cbc:Name>
+            </cac:PartyName>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <cac:LegalMonetaryTotal>
+        <!-- BT-115 Amount for the reported period (net of the two counter-entries) -->
+        <cbc:PayableAmount currencyID="EUR">-1000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- Line 1: TLB1 reversal of the original taxable goods sale (negative net and VAT) -->
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <!-- Transaction category: TLB1 = deliveries of goods subject to VAT -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>CategoryCode</puf:Key>
+                                <puf:Value>TLB1</puf:Value>
+                            </puf:RestrictedInformation>
+                            <!-- TT-85 Number of transactions aggregated in this line -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>TransactionsCount</puf:Key>
+                                <puf:Value>50</puf:Value>
+                            </puf:RestrictedInformation>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- BT-126 Line ID -->
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-131 Line net amount (negative: reversal of the original sale) -->
+        <cbc:LineExtensionAmount currencyID="EUR">-5000.00</cbc:LineExtensionAmount>
+        <!-- Transaction date (B2C/POS date of the transactions being corrected) -->
+        <cac:Delivery>
+            <cbc:ActualDeliveryDate>2026-06-30</cbc:ActualDeliveryDate>
+        </cac:Delivery>
+        <cac:TaxTotal>
+            <!-- BT-110 Total VAT amount for the line (negative) -->
+            <cbc:TaxAmount currencyID="EUR">-1000.00</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <!-- BT-116 Taxable amount -->
+                <cbc:TaxableAmount currencyID="EUR">-5000.00</cbc:TaxableAmount>
+                <!-- BT-117 VAT amount -->
+                <cbc:TaxAmount currencyID="EUR">-1000.00</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <!-- BT-118 VAT category code - S standard rate -->
+                    <cbc:ID>S</cbc:ID>
+                    <!-- BT-119 VAT rate -->
+                    <cbc:Percent>20.00</cbc:Percent>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
+        <cac:Item>
+            <!-- BT-153 Item name -->
+            <cbc:Name>B2C</cbc:Name>
+        </cac:Item>
+    </cac:InvoiceLine>
+
+    <!-- Line 2: TNT1 non-taxable re-entry of the goods delivery (positive net, VAT 0) -->
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <!-- Transaction category: TNT1 = goods/services not subject to VAT in France -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>CategoryCode</puf:Key>
+                                <puf:Value>TNT1</puf:Value>
+                            </puf:RestrictedInformation>
+                            <!-- TT-85 Number of transactions aggregated in this line -->
+                            <puf:RestrictedInformation>
+                                <puf:Key>TransactionsCount</puf:Key>
+                                <puf:Value>50</puf:Value>
+                            </puf:RestrictedInformation>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <!-- BT-126 Line ID -->
+        <cbc:ID>2</cbc:ID>
+        <!-- BT-131 Line net amount (positive re-entry) -->
+        <cbc:LineExtensionAmount currencyID="EUR">5000.00</cbc:LineExtensionAmount>
+        <!-- Transaction date (B2C/POS date of the transactions being corrected) -->
+        <cac:Delivery>
+            <cbc:ActualDeliveryDate>2026-06-30</cbc:ActualDeliveryDate>
+        </cac:Delivery>
+        <cac:TaxTotal>
+            <!-- BT-110 Total VAT amount for the line (0, not subject to French VAT) -->
+            <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <!-- BT-116 Taxable amount -->
+                <cbc:TaxableAmount currencyID="EUR">5000.00</cbc:TaxableAmount>
+                <!-- BT-117 VAT amount -->
+                <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <!-- BT-118 VAT category code - Z zero-rated / not subject to French VAT -->
+                    <cbc:ID>Z</cbc:ID>
+                    <!-- BT-119 VAT rate -->
+                    <cbc:Percent>0.00</cbc:Percent>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
+        <cac:Item>
+            <!-- BT-153 Item name -->
+            <cbc:Name>B2C</cbc:Name>
+        </cac:Item>
+    </cac:InvoiceLine>
+
+</Invoice>
