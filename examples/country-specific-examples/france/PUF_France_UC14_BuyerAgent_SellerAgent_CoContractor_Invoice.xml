@@ -207,8 +207,7 @@
                 <!-- EXT-FR-FE-67: SELLER AGENT Role Code -->
                 <ext:UBLExtensions>
                     <ext:UBLExtension>
-                        <ext:ExtensionURI>
-                                urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
                         <ext:ExtensionContent>
                             <puf:PageroExtension>
                                 <puf:PartyExtension>
@@ -335,8 +334,7 @@
                 <!-- EXT-FR-FE-04: BUYER AGENT Role Code -->
                 <ext:UBLExtensions>
                     <ext:UBLExtension>
-                        <ext:ExtensionURI>
-                                urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
                         <ext:ExtensionContent>
                             <puf:PageroExtension>
                                 <puf:PartyExtension>
