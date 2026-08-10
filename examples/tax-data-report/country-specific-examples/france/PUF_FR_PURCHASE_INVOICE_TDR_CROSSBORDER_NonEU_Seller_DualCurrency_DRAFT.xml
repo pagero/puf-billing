@@ -30,6 +30,11 @@
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
             <ext:ExtensionContent>
                 <puf:PageroExtension>
+                    <!-- Best practice: always send the issuer-created tax report id -> taxReport/taxReportId -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>taxReportId</puf:Key>
+                        <puf:Value>INV-MX-2026-0001</puf:Value>
+                    </puf:RestrictedInformation>
                     <!-- Indication of type of taxreporting (can be INVOICE or RECEIPTTRANSACTION) -->
                     <puf:RestrictedInformation>
                         <puf:Key>entryType</puf:Key>
