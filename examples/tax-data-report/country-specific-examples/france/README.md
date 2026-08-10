@@ -10,7 +10,8 @@ Example files for French invoice e-reporting (Flux 10.1). These use the standard
 |------|-----------|------------|-------------|
 | `PUF_FR_SALES_INVOICE_TDR_CROSSBORDER_B2Bi_DRAFT.xml` | Sales (B2Bi) | INVOICE | Draft — Cross-border B2B sales invoice reporting. French seller, Italian buyer. Services invoice (S1). |
 | `PUF_FR_SALES_INVOICE_TDR_POS_TRANSACTIONS_DRAFT.xml` | Sales (B2C) | RECEIPTTRANSACTION | Draft — B2C POS receipt transaction reporting. Aggregated daily transactions with TLB1 (goods) and TPS1 (services) category codes. |
-| `PUF_FR_PURCHASE_INVOICE_TDR_CROSSBORDER_Bi2B_DRAFT.xml` | Purchase (Bi2B) | INVOICE | Draft — Cross-border B2B purchase invoice reporting. French buyer, German seller. ProfileID = `urn:pagero.com:puf:purchase:1.0`. |
+| `PUF_FR_PURCHASE_INVOICE_TDR_CROSSBORDER_Bi2B_DRAFT.xml` | Purchase (Bi2B) | INVOICE | Draft — Cross-border B2B purchase invoice reporting. French buyer, German (EU) seller. ProfileID = `urn:pagero.com:puf:purchase:1.0`. Seller identified with EU VAT (schemeID `0223`). |
+| `PUF_FR_PURCHASE_INVOICE_TDR_CROSSBORDER_NonEU_Seller_DualCurrency_DRAFT.xml` | Purchase (Bi2B) | INVOICE | Draft — Cross-border B2B purchase invoice reporting with a **non-EU seller** (Mexico), invoicing in its own currency. Demonstrates BR-FR-MAP-16 party identification for a non-EU party (schemeID `0227`, value passed through as-is) together with dual currency: BT-5 `DocumentCurrencyCode` = MXN, BT-6 `TaxCurrencyCode` = EUR (mandatory since BT-5 isn't EUR). VAT/monetary amounts reported in both MXN (document currency) and EUR (tax currency) via `TaxSubtotalExtension`/`LegalMonetaryTotalExtension`. Validated end-to-end through `PUF_as_TDR_Ext_to_Int.xslt` → `FE_e-reporting_France_Int_to_Ext.xsl` → `ereporting.xsd` + the AIFE-PPF Flux10 Schematron. |
 | `PUF_FR_PURCHASE_INVOICE_TDR_CROSSBORDER_Bi2B_DRAFT - RECTIFICATION.xml` | Purchase (Bi2B) | INVOICE | Draft — Rectification/replace-period scenario for the cross-border B2B purchase report. `transmissionType = RECTIFICATION` with `taxReportId` (id of the replacing report) and `referencedReportId` (id of the aggregated report being replaced). Report period (`reportPeriodStart`/`reportPeriodEnd`) MUST match the report being replaced, and all documents belonging to that period must be resent. |
 | `PUF_France_UC43_IntraCommunitySupply_InvoiceReport.xml` | Sales (B2Bi) | INVOICE | UC43 — Intra-community goods supply from France to Germany. VAT category K with `VATEX-EU-IC`. `#BAR#B2BINT` treatment type. Buyer identified with EU VAT number (schemeID `0223`). |
 | `PUF_France_UC44_DROM_GuadeloupeToGuyane_InvoiceReport.xml` | Sales (B2Bi) | INVOICE | UC44 — DROM transaction from Guadeloupe (Group 1) to French Guiana (Group 2). Demonstrates BR-FR-MAP-14 country code mapping (GP → FR, GF stays GF). VAT category G with `VATEX-EU-G`. |
@@ -53,7 +54,21 @@ For B2C and transaction reporting, each invoice line may include a category code
 
 - **Flux 10.1**: Invoice-level e-reporting for international B2B sales, international B2B acquisitions (excl. goods imports), and B2C transactions.
 - **BAR treatment type**: `#BAR#B2BINT` signals international B2B e-reporting (BR-FR-20).
-- **Party identification (BR-FR-MAP-16)**: France = SIREN (`0002`), EU = VAT number (`0223`), non-EU = country + name (`0227`), New Caledonia = RIDET (`0228`), French Polynesia = TAHITI (`0229`).
+- **Party identification (BR-FR-MAP-16)**: the seller/buyer legal registration identifier is carried in `cac:PartyLegalEntity/cbc:CompanyID` with a `@schemeID` from the AFNOR-approved list below. The **value is the party's own registration identifier, passed through as-is** — no special value construction (e.g. country + name) is required. Provide an approved `@schemeID` and the mapping carries it through to the report. All of the approved AFNOR schemes are allowed in PUF:
+
+  | schemeID | Party identifier | Typical use |
+  |----------|------------------|-------------|
+  | `0002` | SIREN | French company (9 digits) |
+  | `0009` | SIRET | French establishment (14 digits) |
+  | `0088` | GLN | GS1 Global Location Number |
+  | `0223` | Intra-community VAT number | EU party |
+  | `0226` | French natural person id | Individual (B2C) |
+  | `0227` | Non-EU identifier | Party established outside the EU |
+  | `0228` | RIDET | New Caledonia |
+  | `0229` | TAHITI | French Polynesia |
+  | `0231` | Single-taxable-company id | French VAT group / single taxable person |
+  | `0238` | PDP matricule | Accredited platform (PA/PDP) |
+
 - **Country code mapping (BR-FR-MAP-14)**: Overseas territory codes (GP, MQ, RE) → `FR` in flux; Guyane (GF) and Mayotte (YT) stay as-is in Flux 10.1.
 - **Currency**: For B2B, any valid currency; if not EUR, BT-6 (tax currency code) is mandatory. For B2C/transaction, must be EUR.
 - **Phased rollout (G6.15)**: Header-level data from Sept 2026; line-level data + allowances/charges from Sept 2027.
