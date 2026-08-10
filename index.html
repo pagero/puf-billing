@@ -817,6 +817,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_spain">5.16. Spain</a>
 <ul class="sectlevel3">
 <li><a href="#_routing_codes_dir3">5.16.1. Routing codes (DIR3)</a></li>
+<li><a href="#_correction_method_and_reason">5.16.2. Correction method and reason</a></li>
 </ul>
 </li>
 <li><a href="#_spain_verifactu">5.17. Spain VeriFactu</a>
@@ -7924,8 +7925,65 @@ Textual note describing the reason for issuing a credit/debit note.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:Code</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Billing reference code</strong><br>
-Code signifying the reason for credit.</p></td>
+Code qualifying the correction. The meaning is country dependent: in some regimes it identifies the correction <strong>method</strong> (how the corrected amounts are expressed), in others the correction <strong>reason</strong> (why the document is corrected). The values allowed per regime are listed in <a href="https://pagero.github.io/puf-code-lists/#_puf_023_correctioncode" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE</a>.</p></td>
 </tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 54. Values of <code>puf:Code</code> per regime</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Regime</th>
+<th class="tableblock halign-left valign-top">What the code expresses</th>
+<th class="tableblock halign-left valign-top">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spain (Facturae)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correction method</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://pagero.github.io/puf-code-lists/#_correction_method_codes_for_spain_facturae" target="_blank" rel="noopener"><code>01</code>, <code>02</code>, <code>03</code>, <code>04</code></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spain (VeriFactu)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correction method</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://pagero.github.io/puf-code-lists/#_correction_method_codes_for_spain_verifactu" target="_blank" rel="noopener"><code>I</code>, <code>S</code></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basque Country (TicketBAI)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correction reason</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_the_basque_country_ticketbai" target="_blank" rel="noopener"><code>R1</code>-<code>R5</code></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Philippines</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correction reason</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_philippines" target="_blank" rel="noopener"><code>01</code>-<code>05</code>, <code>09</code></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">United Arab Emirates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correction reason</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates" target="_blank" rel="noopener"><code>DL8.61.1.A</code>-<code>DL8.61.1.E</code>, <code>VD</code></a></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 55. Remaining elements added in puf:BillingReferenceExtension</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>puf:ClearanceID</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Clearance ID of the referenced document</strong><br>
@@ -8045,7 +8103,7 @@ The equivalence surcharge amount of the referenced document. Used in Spain for c
 </table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 54. Elements added in puf:ContractDocumentReferenceExtension</caption>
+<caption class="title">Table 56. Elements added in puf:ContractDocumentReferenceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8150,7 +8208,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 55. Elements added in puf:PartyExtension</caption>
+<caption class="title">Table 57. Elements added in puf:PartyExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8346,7 +8404,7 @@ The <code>puf:RoleCode</code> must be coded using the <a href="https://pagero.gi
 <p>Below table show the definition of the additional elements added to the delivery extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 56. Elements added in puf:DeliveryExtension</caption>
+<caption class="title">Table 58. Elements added in puf:DeliveryExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8484,7 +8542,7 @@ A code for the delivery method.</p></td>
 <p>Below table shows the definition of the extended element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 57. Elements added in puf:PaymentTermsExtension</caption>
+<caption class="title">Table 59. Elements added in puf:PaymentTermsExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -8586,7 +8644,7 @@ Penalty text due to late payment, if the need of explicitly stating a penalty te
 <p>Below table lists all additional elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 58. Elements added in puf:TaxSubtotalExtension</caption>
+<caption class="title">Table 60. Elements added in puf:TaxSubtotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9021,7 +9079,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 59. Elements added in puf:LegalMonetaryTotalExtension</caption>
+<caption class="title">Table 61. Elements added in puf:LegalMonetaryTotalExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9292,7 +9350,7 @@ Please note that tax has been excluded in above example.
 <p>Below table shows the definition of the extended element.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 60. Elements added in puf:PrepaidPaymentExtension</caption>
+<caption class="title">Table 62. Elements added in puf:PrepaidPaymentExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9515,7 +9573,7 @@ Please contact us to learn which languages are available.
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 61. Elements added to puf:PageroExtension/puf:LanguageCode</caption>
+<caption class="title">Table 63. Elements added to puf:PageroExtension/puf:LanguageCode</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9627,7 +9685,7 @@ If country specific information is available as restricted information party, th
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 62. Elements added to puf:PageroExtension/puf:RestrictedInformationParty</caption>
+<caption class="title">Table 64. Elements added to puf:PageroExtension/puf:RestrictedInformationParty</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9833,7 +9891,7 @@ If country specific information is available as restricted information value, th
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 63. Elements added in puf:RestrictedInformation</caption>
+<caption class="title">Table 65. Elements added in puf:RestrictedInformation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -9942,7 +10000,7 @@ Value relevant to the assigned key.</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 64. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 66. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10062,7 +10120,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 65. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 67. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10185,7 +10243,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 66. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 68. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10305,7 +10363,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 67. Elements added to puf:LineExtension</caption>
+<caption class="title">Table 69. Elements added to puf:LineExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10431,7 +10489,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 68. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
+<caption class="title">Table 70. Elements added to puf:LineExtension/puf:OriginatorDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10542,7 +10600,7 @@ Date of issue of the referenced tender, date should be formatted "yyyy-mm-dd".</
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 69. Elements added to puf:LineExtension/puf:ProjectReference</caption>
+<caption class="title">Table 71. Elements added to puf:LineExtension/puf:ProjectReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10653,7 +10711,7 @@ Identification of the project reference.</p></td>
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 70. Elements added in puf:OrderLineReference</caption>
+<caption class="title">Table 72. Elements added in puf:OrderLineReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10767,7 +10825,7 @@ Date of the sales order, date should be formatted "yyyy-mm-dd".</p></td>
 <p>Below table shows the definition of the new elements added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 71. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
+<caption class="title">Table 73. Elements added to puf:LineExtension/puf:ContractDocumentReference</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -10843,7 +10901,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>The structure used from <code>PUF-ExtensionComponent.xsd</code> is <code>PageroExtension/LineExtension</code>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 72. Sub-line elements</caption>
+<caption class="title">Table 74. Sub-line elements</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -11013,7 +11071,7 @@ Issue date for the buyer referenced contract document, date should be formatted 
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 73. Elements added to puf:ItemExtension</caption>
+<caption class="title">Table 75. Elements added to puf:ItemExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -11118,7 +11176,7 @@ Type of item, valid values are <code>GOODS</code> or <code>SERVICE</code>.</p></
 <p>Below table show the definition of the new element added to the extension.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 74. Elements added to puf:PriceExtension</caption>
+<caption class="title">Table 76. Elements added to puf:PriceExtension</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -11528,44 +11586,10 @@ This information is also shown to any recipients of the invoice.
 <p>When reporting a correction (Credit Note) to the Basque tax authorities, it is required to specify why the correction is being made.</p>
 </div>
 <div class="paragraph">
-<p>Below is a list of allowed values.</p>
+<p>The allowed values are <code>R1</code> through <code>R5</code>. See <a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_the_basque_country_ticketbai" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE (Basque Country)</a> for the definition of each code.</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>R1</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Error based on law and Art. 80 One, Two and Six of the VAT Regulation.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>R2</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Article 80 Three of the VAT Regulation.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>R3</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Article 80 Four of the VAT Regulation.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>R4</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Others.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>R5</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Corrective invoice for simplified invoice.</p></td>
-</tr>
-</tbody>
-</table>
 <div class="paragraph">
-<p>The value should be provided in the element <code>puf:Code</code> within the <a href="#_billingreference">BillingReference</a> structure.</p>
+<p>The value should be provided in the element <code>puf:Code</code> within the <a href="#_billingreference">BillingReference</a> structure. Note that in the Basque Country this element carries the correction <strong>reason</strong>; it does not set the correction method.</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
@@ -14499,49 +14523,8 @@ For more information on how to send compliant invoices in Philippines see <a hre
 <p>The unique id is returned in the <a href="https://pagero.github.io/puf-clearance-notification/#_pufresponseextension" target="_blank" rel="noopener">PUF Clearance Notification</a> as <code>puf:ClearanceReferenceID/cbc:ID</code>.<br></p>
 </div>
 <div class="paragraph">
-<p>Below is a list of reason codes.</p>
+<p>The supported reason codes are <code>01</code> (error), <code>02</code> (duplication), <code>03</code> (addition/reduction), <code>04</code> (cancellation), <code>05</code> (return) and <code>09</code> (others). See <a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_philippines" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE (Philippines)</a> for the full definition of each code. A code outside this list is not forwarded to the BIR.</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Code</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>01</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Error</strong> - In any mandatory field.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>02</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Duplication</strong> - Sales data transmitted more than once regardless of transaction period.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>03</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Addition/reduction</strong> - Addition/reduction of contracted volume or amount.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>04</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Cancellation</strong> - For sales data previously transmitted but transaction was subsequently cancelled or rescinded by buyer/seller for failure to consumate. Full return of goods without replacement is considered cancellation.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>05</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Return</strong> - For original goods supplied and returned for replacement.  Ex: Damaged, defective, wrong specifications, change item, or for any other reason.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>09</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Others</strong> - In one of the following cases:<br></p>
-<p class="tableblock">- If not covered by the aforementioned errors.<br>
-- If multiple documents are issued a single adjustment document and correction code cannot be specified.<br>
-- If the code of the adjustment document is not distinguished in the CAS.</p></td>
-</tr>
-</tbody>
-</table>
 <div class="paragraph">
 <p>The clearance id and the reason code should be provided within the <a href="#_billingreference">BillingReference</a> structure.</p>
 </div>
@@ -15843,6 +15826,193 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_correction_method_and_reason"><a class="anchor" href="#_correction_method_and_reason"></a><a class="link" href="#_correction_method_and_reason">5.16.2. Correction method and reason</a></h4>
+<div class="paragraph">
+<p>A Facturae corrective invoice reports both <strong>how</strong> the correction was made (the correction method) and <strong>why</strong> it was made (the reason code). The two are provided in different places.</p>
+</div>
+<div class="sect4">
+<h5 id="_correction_method"><a class="anchor" href="#_correction_method"></a><a class="link" href="#_correction_method">Correction method</a></h5>
+<div class="paragraph">
+<p>The correction method is provided in <code>puf:Code</code> within the <a href="#_billingreference">BillingReference</a> structure.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Facturae <code>CorrectionMethod</code></th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>01</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>01</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rectificación íntegra. All items to be corrected in the original invoice are reflected.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>02</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>02</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rectificación por diferencias. Only the items already corrected are noted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>03</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>03</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rectificación por descuento por volumen de operaciones durante un periodo.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>04</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>04</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Autorizadas por la Agencia Tributaria.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>S</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>01</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VeriFactu substitutive method, accepted as an alias for <code>01</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>I</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>02</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VeriFactu correction by differences, accepted as an alias for <code>02</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If <code>puf:Code</code> is not provided, or holds a value that is not in the list above, the correction method defaults to <code>01</code>.</p>
+</div>
+<div class="paragraph">
+<p>The matching <code>CorrectionMethodDescription</code> is derived from the code, so it does not need to be provided.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="https://pagero.github.io/puf-code-lists/#_correction_method_codes_for_spain_facturae" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE (Spain Facturae)</a> for the full code list.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When the correction method resolves to <code>01</code> or <code>02</code>, Facturae also requires the number and the issue date of the invoice being corrected. Provide these as <code>cac:InvoiceDocumentReference/cbc:ID</code> and <code>cac:InvoiceDocumentReference/cbc:IssueDate</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Corrective invoice using rectification by differences</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:BillingReference&gt;</span>
+        <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
+            <span class="tag">&lt;cbc:ID&gt;</span>INV-001<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+            <span class="tag">&lt;cbc:IssueDate&gt;</span>2025-01-15<span class="tag">&lt;/cbc:IssueDate&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+            <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+                <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                    <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                        <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                            <span class="tag">&lt;puf:BillingReferenceExtension&gt;</span>
+                                <span class="tag">&lt;puf:Code&gt;</span>02<span class="tag">&lt;/puf:Code&gt;</span><i class="conum" data-value="3"></i><b>(3)</b>
+                            <span class="tag">&lt;/puf:BillingReferenceExtension&gt;</span>
+                        <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
+    <span class="tag">&lt;/cac:BillingReference&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Number of the invoice being corrected, mandatory for correction methods <code>01</code> and <code>02</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Issue date of the invoice being corrected, mandatory for correction methods <code>01</code> and <code>02</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Correction method. <code>I</code> may be used instead and resolves to the same <code>02</code>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_correction_reason"><a class="anchor" href="#_correction_reason"></a><a class="link" href="#_correction_reason">Correction reason</a></h5>
+<div class="paragraph">
+<p>The reason for the correction is reported in the Facturae <code>ReasonCode</code> element. It is provided in the <a href="#_restrictedinformation">RestrictedInformation</a> structure with the key <code>facturaeReasonCode</code>.</p>
+</div>
+<div class="paragraph">
+<p>The allowed values are the Facturae reason codes <code>01</code>-<code>16</code> and <code>80</code>-<code>85</code>. The matching <code>ReasonDescription</code> is derived from the code, so it does not need to be provided.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If <code>facturaeReasonCode</code> is not provided, the reason code defaults to <code>01</code> (Número de la factura, "invoice number"). Provide the key explicitly whenever the correction was made for another reason.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Corrective invoice stating that the tax rate was the reason for correction</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                        <span class="tag">&lt;puf:Key&gt;</span>facturaeReasonCode<span class="tag">&lt;/puf:Key&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+                        <span class="tag">&lt;puf:Value&gt;</span>11<span class="tag">&lt;/puf:Value&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+                    <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Key identifying the Facturae reason code.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Reason code <code>11</code> - Porcentaje impositivo a aplicar (tax rate to be applied).</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_spain_verifactu"><a class="anchor" href="#_spain_verifactu"></a><a class="link" href="#_spain_verifactu">5.17. Spain VeriFactu</a></h3>
@@ -16154,6 +16324,9 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 <p><code>S</code> - Substitutive method (método sustitutivo)</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The Facturae correction method codes <code>01</code> and <code>02</code> are also accepted here and are treated as equivalent to <code>S</code> and <code>I</code> respectively. A sender that issues both Facturae and VeriFactu documents can therefore populate <code>puf:Code</code> once and have it resolve correctly in both flows. See <a href="https://pagero.github.io/puf-code-lists/#_correction_method_codes_for_spain_verifactu" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE (Spain VeriFactu)</a> and <a href="#_correction_method_and_reason">the Spain (Facturae) correction method section</a>.</p>
 </div>
 </div>
 <div class="sect4">
@@ -17884,46 +18057,8 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 <div class="sect3">
 <h4 id="_credit_note_reason_code"><a class="anchor" href="#_credit_note_reason_code"></a><a class="link" href="#_credit_note_reason_code">5.19.15. Credit note reason code</a></h4>
 <div class="paragraph">
-<p>When the document is a credit note (<code>cbc:InvoiceTypeCode = 381</code> or <code>cbc:CreditNoteTypeCode = 81</code>), the credit note reason code (BTAE-03) MUST be provided. Supported values are:</p>
+<p>When the document is a credit note (<code>cbc:InvoiceTypeCode = 381</code> or <code>cbc:CreditNoteTypeCode = 81</code>), the credit note reason code (BTAE-03) MUST be provided. The supported values are <code>DL8.61.1.A</code> through <code>DL8.61.1.E</code> and <code>VD</code> (volume discount). See <a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE (United Arab Emirates)</a> for the definition of each code.</p>
 </div>
-<table class="tableblock frame-all grid-all fit-content">
-<colgroup>
-<col>
-<col>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Code</th>
-<th class="tableblock halign-left valign-top">Reason</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.A</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If the supply was cancelled.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.B</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If the tax treatment of the supply has changed due to a change in the nature of the supply.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.C</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If the previously agreed consideration for the supply was altered for any reason (i.e. bad debt relief).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.D</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If the recipient of goods or recipient of services returned them to the registrant in full or in part and the Consideration was returned in full or in part.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DL8.61.1.E</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If the tax was charged or tax treatment was applied in error.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VD</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Volume Discount.</p></td>
-</tr>
-</tbody>
-</table>
 <div class="paragraph">
 <p>The code is carried on <code>cac:BillingReference/cac:InvoiceDocumentReference</code> through the existing <code>puf:BillingReferenceExtension</code> (path <code>puf:BillingReferenceExtension/puf:Code</code>). When the reason code is <code>VD</code>, the preceding-document reference itself is not required.</p>
 </div>
@@ -18195,7 +18330,7 @@ For enhanced search functionality in Pagero Online, it is recommended to use a c
 <p>Below is a list of countries where PUF can be used as the source for tax data reporting with distribution solely to tax authorities.</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 75. Table of PUF supported countries for Tax data reporting</caption>
+<caption class="title">Table 77. Table of PUF supported countries for Tax data reporting</caption>
 <colgroup>
 <col>
 <col>
@@ -18350,7 +18485,7 @@ If no entry type is sent system will default to type Invoice.
 <div class="sect2">
 <h3 id="_code_lists_for_coded_elements"><a class="anchor" href="#_code_lists_for_coded_elements"></a><a class="link" href="#_code_lists_for_coded_elements">7.1. Code lists for coded elements</a></h3>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 76. Table of the code lists used</caption>
+<caption class="title">Table 78. Table of the code lists used</caption>
 <colgroup>
 <col>
 <col>
@@ -18531,7 +18666,7 @@ cbc:ItemClassificationCode/@listID</code></p></td>
 <p>The validation artefacts are also available on <a href="https://github.com/pagero/puf-billing/tree/master/validation-artefacts" target="_blank" rel="noopener">GitHub</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 77. Schematron rules in PUF</caption>
+<caption class="title">Table 79. Schematron rules in PUF</caption>
 <colgroup>
 <col>
 <col>
@@ -18711,7 +18846,7 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 </table>
 </div>
 <table class="tableblock frame-all grid-all fit-content stretch">
-<caption class="title">Table 78. Table of supported countries</caption>
+<caption class="title">Table 80. Table of supported countries</caption>
 <colgroup>
 <col>
 <col>

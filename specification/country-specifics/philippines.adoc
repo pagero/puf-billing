@@ -6,34 +6,7 @@ When sending a corrective invoice it is required to specify the unique id of the
 
 The unique id is returned in the https://pagero.github.io/puf-clearance-notification/#_pufresponseextension[PUF Clearance Notification^] as `puf:ClearanceReferenceID/cbc:ID`. +
 
-Below is a list of reason codes. 
-
-|===
-|Code |Description
-
-|`01`
-|**Error** - In any mandatory field.
-
-|`02`
-|**Duplication** - Sales data transmitted more than once regardless of transaction period.
-
-|`03`
-|**Addition/reduction** - Addition/reduction of contracted volume or amount.
-
-|`04`
-|**Cancellation** - For sales data previously transmitted but transaction was subsequently cancelled or rescinded by buyer/seller for failure to consumate. Full return of goods without replacement is considered cancellation.
-
-|`05`
-|**Return** - For original goods supplied and returned for replacement.  Ex: Damaged, defective, wrong specifications, change item, or for any other reason.
-
-|`09`
-|**Others** - In one of the following cases: +
-
-- If not covered by the aforementioned errors. +
-- If multiple documents are issued a single adjustment document and correction code cannot be specified. +
-- If the code of the adjustment document is not distinguished in the CAS.
-
-|===
+The supported reason codes are `01` (error), `02` (duplication), `03` (addition/reduction), `04` (cancellation), `05` (return) and `09` (others). See https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_philippines[PUF-023-CORRECTIONCODE (Philippines)^] for the full definition of each code. A code outside this list is not forwarded to the BIR.
 
 The clearance id and the reason code should be provided within the <<_billingreference>> structure.
 
