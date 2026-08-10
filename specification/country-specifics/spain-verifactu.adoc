@@ -185,6 +185,8 @@ Spain VeriFactu requires specifying the correction method:
 * `I` - Correction by differences (corrección por diferencias)
 * `S` - Substitutive method (método sustitutivo)
 
+The Facturae correction method codes `01` and `02` are also accepted here and are treated as equivalent to `S` and `I` respectively. A sender that issues both Facturae and VeriFactu documents can therefore populate `puf:Code` once and have it resolve correctly in both flows. See https://pagero.github.io/puf-code-lists/#_correction_method_codes_for_spain_verifactu[PUF-023-CORRECTIONCODE (Spain VeriFactu)^] and <<_correction_method_and_reason, the Spain (Facturae) correction method section>>.
+
 ===== Billing Reference Structure
 
 The correction information is provided in the `cac:BillingReference` section with PUF extensions:

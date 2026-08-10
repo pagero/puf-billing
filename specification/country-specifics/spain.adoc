@@ -57,3 +57,118 @@ More information how to use ADAID can be found <<_additional_destination_address
     <!-- Code omitted for clarity -->
 </Invoice>
 ----
+
+==== Correction method and reason
+
+A Facturae corrective invoice reports both *how* the correction was made (the correction method) and *why* it was made (the reason code). The two are provided in different places.
+
+===== Correction method
+
+The correction method is provided in `puf:Code` within the <<_billingreference>> structure.
+
+|===
+|Value |Facturae `CorrectionMethod` |Description
+
+|`01`
+|`01`
+|Rectificación íntegra. All items to be corrected in the original invoice are reflected.
+
+|`02`
+|`02`
+|Rectificación por diferencias. Only the items already corrected are noted.
+
+|`03`
+|`03`
+|Rectificación por descuento por volumen de operaciones durante un periodo.
+
+|`04`
+|`04`
+|Autorizadas por la Agencia Tributaria.
+
+|`S`
+|`01`
+|VeriFactu substitutive method, accepted as an alias for `01`.
+
+|`I`
+|`02`
+|VeriFactu correction by differences, accepted as an alias for `02`.
+
+|===
+
+If `puf:Code` is not provided, or holds a value that is not in the list above, the correction method defaults to `01`.
+
+The matching `CorrectionMethodDescription` is derived from the code, so it does not need to be provided.
+
+See https://pagero.github.io/puf-code-lists/#_correction_method_codes_for_spain_facturae[PUF-023-CORRECTIONCODE (Spain Facturae)^] for the full code list.
+
+[IMPORTANT]
+====
+When the correction method resolves to `01` or `02`, Facturae also requires the number and the issue date of the invoice being corrected. Provide these as `cac:InvoiceDocumentReference/cbc:ID` and `cac:InvoiceDocumentReference/cbc:IssueDate`.
+====
+
+*Example* +
+_Corrective invoice using rectification by differences_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>INV-001</cbc:ID><!--1-->
+            <cbc:IssueDate>2025-01-15</cbc:IssueDate><!--2-->
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:BillingReferenceExtension>
+                                <puf:Code>02</puf:Code><!--3-->
+                            </puf:BillingReferenceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Number of the invoice being corrected, mandatory for correction methods `01` and `02`.
+<2> Issue date of the invoice being corrected, mandatory for correction methods `01` and `02`.
+<3> Correction method. `I` may be used instead and resolves to the same `02`.
+
+===== Correction reason
+
+The reason for the correction is reported in the Facturae `ReasonCode` element. It is provided in the <<_restrictedinformation>> structure with the key `facturaeReasonCode`.
+
+The allowed values are the Facturae reason codes `01`-`16` and `80`-`85`. The matching `ReasonDescription` is derived from the code, so it does not need to be provided.
+
+[NOTE]
+====
+If `facturaeReasonCode` is not provided, the reason code defaults to `01` (Número de la factura, "invoice number"). Provide the key explicitly whenever the correction was made for another reason.
+====
+
+*Example* +
+_Corrective invoice stating that the tax rate was the reason for correction_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>facturaeReasonCode</puf:Key><!--1-->
+                        <puf:Value>11</puf:Value><!--2-->
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Key identifying the Facturae reason code.
+<2> Reason code `11` - Porcentaje impositivo a aplicar (tax rate to be applied).

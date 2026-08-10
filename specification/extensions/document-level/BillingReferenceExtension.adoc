@@ -43,7 +43,39 @@ Textual note describing the reason for issuing a credit/debit note.
 
 |`puf:Code`
 |**Billing reference code** +
-Code signifying the reason for credit.
+Code qualifying the correction. The meaning is country dependent: in some regimes it identifies the correction *method* (how the corrected amounts are expressed), in others the correction *reason* (why the document is corrected). The values allowed per regime are listed in https://pagero.github.io/puf-code-lists/#_puf_023_correctioncode[PUF-023-CORRECTIONCODE^].
+
+|===
+
+.Values of `puf:Code` per regime
+|===
+|Regime |What the code expresses |Values
+
+|Spain (Facturae)
+|Correction method
+|https://pagero.github.io/puf-code-lists/#_correction_method_codes_for_spain_facturae[`01`, `02`, `03`, `04`^]
+
+|Spain (VeriFactu)
+|Correction method
+|https://pagero.github.io/puf-code-lists/#_correction_method_codes_for_spain_verifactu[`I`, `S`^]
+
+|Basque Country (TicketBAI)
+|Correction reason
+|https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_the_basque_country_ticketbai[`R1`-`R5`^]
+
+|Philippines
+|Correction reason
+|https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_philippines[`01`-`05`, `09`^]
+
+|United Arab Emirates
+|Correction reason
+|https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates[`DL8.61.1.A`-`DL8.61.1.E`, `VD`^]
+
+|===
+
+.Remaining elements added in puf:BillingReferenceExtension
+|===
+|Element |Description
 
 |`puf:ClearanceID`
 |**Clearance ID of the referenced document** +

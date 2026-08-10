@@ -216,31 +216,11 @@ _Transaction Type example_
 
 ==== Correction reason code
 
-When reporting a correction (Credit Note) to the Basque tax authorities, it is required to specify why the correction is being made. 
+When reporting a correction (Credit Note) to the Basque tax authorities, it is required to specify why the correction is being made.
 
-Below is a list of allowed values. 
+The allowed values are `R1` through `R5`. See https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_the_basque_country_ticketbai[PUF-023-CORRECTIONCODE (Basque Country)^] for the definition of each code.
 
-|===
-|Value |Description
-
-|`R1`
-|Error based on law and Art. 80 One, Two and Six of the VAT Regulation.
-
-|`R2`
-|Article 80 Three of the VAT Regulation.
-
-|`R3`
-|Article 80 Four of the VAT Regulation.
-
-|`R4`
-|Others.
-
-|`R5`
-|Corrective invoice for simplified invoice.
-
-|===
-
-The value should be provided in the element `puf:Code` within the <<_billingreference>> structure. 
+The value should be provided in the element `puf:Code` within the <<_billingreference>> structure. Note that in the Basque Country this element carries the correction *reason*; it does not set the correction method.
 
 *Example* +
 _Credit reason code example_
