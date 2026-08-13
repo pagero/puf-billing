@@ -23,7 +23,10 @@
     - BTAE-02 position 1 = 1 flags the free trade zone context
     - BTAE-01 Beneficiary ID: mandatory whenever the FTZ flag is set (ibr-007-ae).
       Carried in PUF as puf:RestrictedInformationParty with puf:Key = 'Beneficiary'.
-      The value is the beneficiary's TRN or TIN, distinct from the accounting buyer
+      The value is the beneficiary's TRN or TIN, distinct from the accounting buyer.
+      The beneficiary has no VAT accounting role here, so the TRN uses the PUF-008
+      scheme AE:TRN on cac:PartyIdentification/cbc:ID; a beneficiary that is not
+      registered for VAT would use AE:TIN and the 10-digit TIN instead
     - The beneficiary is separate from cac:AccountingCustomerParty, which remains the
       contracting party that receives and pays the invoice
 
@@ -45,12 +48,8 @@
                         <cac:Party>
                             <cac:PartyIdentification>
                                 <!-- BTAE-01 Beneficiary ID: TRN of the ultimate beneficiary in the Free Zone -->
-                                <cbc:ID>100000000000777</cbc:ID>
+                                <cbc:ID schemeID="AE:TRN">100000000000777</cbc:ID>
                             </cac:PartyIdentification>
-                            <cac:PartyLegalEntity>
-                                <cbc:RegistrationName>JAFZA End-User FZE</cbc:RegistrationName>
-                                <cbc:CompanyID>100000000000777</cbc:CompanyID>
-                            </cac:PartyLegalEntity>
                         </cac:Party>
                     </puf:RestrictedInformationParty>
                 </puf:PageroExtension>

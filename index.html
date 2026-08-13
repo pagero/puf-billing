@@ -17519,6 +17519,9 @@ Otherwise it is OK to omit the attribute.</td>
 <p>The UAE Tax Registration Number (TRN) is provided as the VAT identifier on <code>cac:PartyTaxScheme/cbc:CompanyID</code> with the tax scheme code <code>VAT</code>. The TRN is 15 alphanumeric characters, starts with <code>1</code> and ends with <code>03</code> (e.g. <code>100000000000003</code>).</p>
 </div>
 <div class="paragraph">
+<p>The TRN may alternatively be carried on <code>cac:PartyIdentification/cbc:ID</code> with <code>@schemeID = 'AE:TRN'</code>. Use that form for a party that has no VAT accounting role in the document and therefore no <code>cac:PartyTaxScheme</code> — in particular the free-trade-zone Beneficiary and the disclosed-agent Principle described below. Both forms resolve to the same TRN; when both are present on one party, <code>cac:PartyTaxScheme/cbc:CompanyID</code> takes precedence. A UAE identifier given on <code>cac:PartyIdentification/cbc:ID</code> <strong>without</strong> a scheme identifier is not processed.</p>
+</div>
+<div class="paragraph">
 <p>When the supplier is not VAT-registered, the Tax Identification Number (TIN) is provided instead under <code>cac:PartyIdentification/cbc:ID</code> with <code>@schemeID = 'AE:TIN'</code>. The TIN is 10 numeric digits starting with <code>1</code> (e.g. <code>1000000000</code>) and, for a VAT-registered party, is the first 10 digits of the TRN.</p>
 </div>
 <div class="paragraph">
@@ -17962,6 +17965,9 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 <p>In free-trade-zone supplies (BTAE-02 transaction type code matching the FTZ flag, <code>1XXXXXXX</code>), the <strong>Beneficiary ID</strong> (BTAE-01) — the TRN or TIN of the FTZ beneficiary — is carried using the existing <code>puf:RestrictedInformationParty</code> extension with <code>Key = 'Beneficiary'</code>.</p>
 </div>
 <div class="paragraph">
+<p>The beneficiary has no VAT accounting role in the document, so its TRN is carried on <code>cac:PartyIdentification/cbc:ID</code> with <code>@schemeID = 'AE:TRN'</code>. A beneficiary that is not registered for VAT uses <code>@schemeID = 'AE:TIN'</code> instead. A <code>cbc:ID</code> without a scheme identifier is not processed and the Beneficiary ID will be missing from the resulting invoice.</p>
+</div>
+<div class="paragraph">
 <p><strong>Example</strong><br></p>
 </div>
 <div class="listingblock">
@@ -17976,7 +17982,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
             <span class="tag">&lt;puf:Key&gt;</span>Beneficiary<span class="tag">&lt;/puf:Key&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
             <span class="tag">&lt;cac:Party&gt;</span>
               <span class="tag">&lt;cac:PartyIdentification&gt;</span>
-                <span class="tag">&lt;cbc:ID&gt;</span>100000000000003<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+                <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">AE:TRN</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100000000000003<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
               <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
             <span class="tag">&lt;/cac:Party&gt;</span>
           <span class="tag">&lt;/puf:RestrictedInformationParty&gt;</span>
@@ -17996,7 +18002,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>TRN of the free-trade-zone beneficiary.</td>
+<td>TRN of the free-trade-zone beneficiary. Use <code>@schemeID = "AE:TIN"</code> and the 10-digit TIN when the beneficiary is not registered for VAT.</td>
 </tr>
 </table>
 </div>
@@ -18005,6 +18011,48 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 <h4 id="_disclosed_agent_principle"><a class="anchor" href="#_disclosed_agent_principle"></a><a class="link" href="#_disclosed_agent_principle">5.19.12. Disclosed Agent Principle</a></h4>
 <div class="paragraph">
 <p>In disclosed-agent billing (BTAE-02 transaction type code matching the disclosed-agent flag, <code>XXXXX1XX</code>), the <strong>Principle ID</strong> (BTAE-14) — the TRN of the principle — is carried using the same <code>puf:RestrictedInformationParty</code> extension with <code>Key = 'Principle'</code>. The Principle ID MUST be different from the Seller VAT identifier.</p>
+</div>
+<div class="paragraph">
+<p>As for the Beneficiary above, the TRN is carried on <code>cac:PartyIdentification/cbc:ID</code> with <code>@schemeID = 'AE:TRN'</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+      <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;puf:RestrictedInformationParty&gt;</span>
+            <span class="tag">&lt;puf:Key&gt;</span>Principle<span class="tag">&lt;/puf:Key&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+            <span class="tag">&lt;cac:Party&gt;</span>
+              <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">AE:TRN</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100000000000555<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+              <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;/cac:Party&gt;</span>
+          <span class="tag">&lt;/puf:RestrictedInformationParty&gt;</span>
+        <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+      <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>Key</code> set to <code>Principle</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>TRN of the principle, different from the Seller VAT identifier.</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
