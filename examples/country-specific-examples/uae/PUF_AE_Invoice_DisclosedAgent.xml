@@ -22,7 +22,8 @@
     Key Fields:
     - BTAE-02 position 6 = 1 flags the disclosed agent context
     - BTAE-14 Principle ID: mandatory whenever the disclosed agent flag is set (ibr-137-ae).
-      Carried in PUF as puf:RestrictedInformationParty with puf:Key = 'Principle'
+      Carried in PUF as puf:RestrictedInformationParty with puf:Key = 'Principle', with the
+      TRN on cac:PartyIdentification/cbc:ID under the PUF-008 scheme AE:TRN
     - The Principle TRN MUST differ from the Seller VAT identifier BT-31 (ibr-176-ae)
     - Either the seller TRN or the seller TIN must also be present in this scenario
       (ibr-177-ae)
@@ -49,12 +50,8 @@
                             <cac:PartyIdentification>
                                 <!-- BTAE-14 Principle ID: TRN of the principal whose supply is being invoiced.
                                      MUST differ from the Seller's VAT identifier (ibr-176-ae). -->
-                                <cbc:ID>100000000000555</cbc:ID>
+                                <cbc:ID schemeID="AE:TRN">100000000000555</cbc:ID>
                             </cac:PartyIdentification>
-                            <cac:PartyLegalEntity>
-                                <cbc:RegistrationName>National Insurance Co. PJSC</cbc:RegistrationName>
-                                <cbc:CompanyID>100000000000555</cbc:CompanyID>
-                            </cac:PartyLegalEntity>
                         </cac:Party>
                     </puf:RestrictedInformationParty>
                 </puf:PageroExtension>

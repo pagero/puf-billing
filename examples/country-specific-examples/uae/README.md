@@ -212,7 +212,7 @@ Demonstrates:
 
 - FTZ flag in BTAE-02 position 1 (`10000000`)
 - Beneficiary ID (BTAE-01) in `puf:RestrictedInformationParty` with `Key = 'Beneficiary'`
-- FTZ beneficiary TRN (distinct from the accounting buyer)
+- FTZ beneficiary TRN on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'` (distinct from the accounting buyer)
 - JAFZA Free Zone scenario
 
 **Key Features:**
@@ -231,7 +231,7 @@ Demonstrates:
 
 - Disclosed Agent flag in BTAE-02 position 6 (`00000100`)
 - Principle ID (BTAE-14) in `puf:RestrictedInformationParty` with `Key = 'Principle'`
-- Principle TRN must differ from the seller's TRN
+- Principle TRN on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`, and it must differ from the seller's TRN
 - Agent billing on behalf of a principal
 
 **Key Features:**
@@ -388,6 +388,8 @@ The PUF-008 scheme code `AE:TIN` is used on `cac:PartyIdentification/cbc:ID`, no
 ### TRN Format
 
 UAE Tax Registration Numbers must be exactly 15 digits, start with `1`, and end with `03`. The FTA dummy TRN used for Deemed Supply is `100000000099903`.
+
+The TRN is normally the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID`. For a party with no VAT accounting role in the document — the FTZ Beneficiary (BTAE-01) and the disclosed-agent Principle (BTAE-14), both carried in `puf:RestrictedInformationParty` — it is provided on `cac:PartyIdentification/cbc:ID` with the PUF-008 scheme code `AE:TRN`. A UAE identifier given without a scheme identifier is not processed.
 
 ---
 

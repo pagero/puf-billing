@@ -38,6 +38,8 @@ _Free-trade-zone invoice (FTZ flag in position 1)_
 
 The UAE Tax Registration Number (TRN) is provided as the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID` with the tax scheme code `VAT`. The TRN is 15 alphanumeric characters, starts with `1` and ends with `03` (e.g. `100000000000003`).
 
+The TRN may alternatively be carried on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`. Use that form for a party that has no VAT accounting role in the document and therefore no `cac:PartyTaxScheme` — in particular the free-trade-zone Beneficiary and the disclosed-agent Principle described below. Both forms resolve to the same TRN; when both are present on one party, `cac:PartyTaxScheme/cbc:CompanyID` takes precedence. A UAE identifier given on `cac:PartyIdentification/cbc:ID` *without* a scheme identifier is not processed.
+
 When the supplier is not VAT-registered, the Tax Identification Number (TIN) is provided instead under `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TIN'`. The TIN is 10 numeric digits starting with `1` (e.g. `1000000000`) and, for a VAT-registered party, is the first 10 digits of the TRN.
 
 *Example* +
@@ -276,6 +278,8 @@ When the line is reverse-charged (category `AE`), the line MUST carry an *item s
 
 In free-trade-zone supplies (BTAE-02 transaction type code matching the FTZ flag, `1XXXXXXX`), the *Beneficiary ID* (BTAE-01) — the TRN or TIN of the FTZ beneficiary — is carried using the existing `puf:RestrictedInformationParty` extension with `Key = 'Beneficiary'`.
 
+The beneficiary has no VAT accounting role in the document, so its TRN is carried on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`. A beneficiary that is not registered for VAT uses `@schemeID = 'AE:TIN'` instead. A `cbc:ID` without a scheme identifier is not processed and the Beneficiary ID will be missing from the resulting invoice.
+
 *Example* +
 [source,xml]
 ----
@@ -289,7 +293,7 @@ In free-trade-zone supplies (BTAE-02 transaction type code matching the FTZ flag
             <puf:Key>Beneficiary</puf:Key><!--1-->
             <cac:Party>
               <cac:PartyIdentification>
-                <cbc:ID>100000000000003</cbc:ID><!--2-->
+                <cbc:ID schemeID="AE:TRN">100000000000003</cbc:ID><!--2-->
               </cac:PartyIdentification>
             </cac:Party>
           </puf:RestrictedInformationParty>
@@ -301,11 +305,40 @@ In free-trade-zone supplies (BTAE-02 transaction type code matching the FTZ flag
 </Invoice>
 ----
 <1> `Key` set to `Beneficiary`.
-<2> TRN of the free-trade-zone beneficiary.
+<2> TRN of the free-trade-zone beneficiary. Use `@schemeID = "AE:TIN"` and the 10-digit TIN when the beneficiary is not registered for VAT.
 
 ==== Disclosed Agent Principle
 
 In disclosed-agent billing (BTAE-02 transaction type code matching the disclosed-agent flag, `XXXXX1XX`), the *Principle ID* (BTAE-14) — the TRN of the principle — is carried using the same `puf:RestrictedInformationParty` extension with `Key = 'Principle'`. The Principle ID MUST be different from the Seller VAT identifier.
+
+As for the Beneficiary above, the TRN is carried on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`.
+
+*Example* +
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformationParty>
+            <puf:Key>Principle</puf:Key><!--1-->
+            <cac:Party>
+              <cac:PartyIdentification>
+                <cbc:ID schemeID="AE:TRN">100000000000555</cbc:ID><!--2-->
+              </cac:PartyIdentification>
+            </cac:Party>
+          </puf:RestrictedInformationParty>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> `Key` set to `Principle`.
+<2> TRN of the principle, different from the Seller VAT identifier.
 
 ==== Deemed Supply
 
