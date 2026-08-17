@@ -17,6 +17,13 @@ Indicates that the document should be processed without standard Pagero routing 
 
 |===
 
+[NOTE]
+====
+The two values differ in whether the recipient can see the document. With `PROCESS_WITHOUT_DELIVERY` the
+document is still routed, so a recipient who is also a Pagero customer will see it even though no file is
+delivered. `PROCESS_WITHOUT_ROUTING` keeps it with the issuing customer alone.
+====
+
 See example below as well as the URI to be used for this extension.
 
 *Example*
