@@ -712,14 +712,15 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_invoice_type_code_and_business_process_type">5.4.2. Invoice Type Code and Business Process Type</a></li>
 <li><a href="#_french_text_codes_note_elements">5.4.3. French Text Codes (Note Elements)</a></li>
 <li><a href="#_compliance_and_regulated_status_type_de_processus_métier">5.4.4. Compliance and Regulated Status (Type de processus métier)</a></li>
-<li><a href="#_credit_note_for_global_discount_code_262">5.4.5. Credit note for global discount (Code 262)</a></li>
-<li><a href="#_sub_lines_and_line_groupings">5.4.6. Sub-lines and Line Groupings</a></li>
-<li><a href="#_self_billing_indicator_2">5.4.7. Self-Billing Indicator</a></li>
-<li><a href="#_business_and_vat_identification">5.4.8. Business and VAT Identification</a></li>
-<li><a href="#_mandate_scenarios_agent_parties">5.4.9. Mandate Scenarios - Agent Parties</a></li>
-<li><a href="#_service_code">5.4.10. Service code</a></li>
-<li><a href="#_b2g_public_sector_chorus_pro">5.4.11. B2G / public sector (Chorus Pro)</a></li>
-<li><a href="#_legal_commitments">5.4.12. Legal commitments</a></li>
+<li><a href="#_archive_only_credit_notes_archiveonly">5.4.5. Archive-only credit notes (ARCHIVEONLY)</a></li>
+<li><a href="#_credit_note_for_global_discount_code_262">5.4.6. Credit note for global discount (Code 262)</a></li>
+<li><a href="#_sub_lines_and_line_groupings">5.4.7. Sub-lines and Line Groupings</a></li>
+<li><a href="#_self_billing_indicator_2">5.4.8. Self-Billing Indicator</a></li>
+<li><a href="#_business_and_vat_identification">5.4.9. Business and VAT Identification</a></li>
+<li><a href="#_mandate_scenarios_agent_parties">5.4.10. Mandate Scenarios - Agent Parties</a></li>
+<li><a href="#_service_code">5.4.11. Service code</a></li>
+<li><a href="#_b2g_public_sector_chorus_pro">5.4.12. B2G / public sector (Chorus Pro)</a></li>
+<li><a href="#_legal_commitments">5.4.13. Legal commitments</a></li>
 </ul>
 </li>
 <li><a href="#_greece">5.5. Greece</a>
@@ -7662,6 +7663,20 @@ When set to <code>true</code>, the document must not be sent to a clearance auth
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For France, <code>puf:ComplianceActivatedIndicator</code> takes precedence over the mandatory <code><mark>BAR</mark></code> treatment-type note. A <code>#BAR#ARCHIVEONLY</code> note additionally suppresses clearance and delivery; see <a href="#_france">France</a> for what Pagero Online does with that document.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>See example below as well as the URI to be used for this extension.</p>
 </div>
@@ -7729,6 +7744,22 @@ Indicates that the document should be processed without standard Pagero routing 
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The two values differ in whether the recipient can see the document. With <code>PROCESS_WITHOUT_DELIVERY</code> the
+document is still routed, so a recipient who is also a Pagero customer will see it even though no file is
+delivered. <code>PROCESS_WITHOUT_ROUTING</code> keeps it with the issuing customer alone.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>See example below as well as the URI to be used for this extension.</p>
 </div>
@@ -12301,7 +12332,7 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 <td class="tableblock halign-left valign-top"><p class="tableblock"><mark>BAR</mark></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Treatment type qualification</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Type of treatment expected for the invoice</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>One of:</strong> <code>B2B</code>, <code>B2BINT</code>, <code>B2C</code>, <code>OUTOFSCOPE</code>, <code>ARCHIVEONLY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>One of:</strong> <code>B2B</code>, <code>B2BINT</code>, <code>B2C</code>, <code>B2CINT</code>, <code>OUTOFSCOPE</code>, <code>ARCHIVEONLY</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><mark>BLU</mark></p></td>
@@ -12362,7 +12393,7 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 <p>The <mark>PMT</mark> fixed indemnity amount is legally set at €40.00 per Article L441-10 of the French Commercial Code</p>
 </li>
 <li>
-<p><mark>BAR</mark> is mandatory for every non-B2G France scenario and must contain exactly ONE of the specified values: <code>B2B</code> (e-invoicing), <code>B2BINT</code> (B2B international e-reporting), <code>B2C</code> (B2C e-reporting), <code>OUTOFSCOPE</code> (outside reform scope), or <code>ARCHIVEONLY</code> (internal credit note - no transmission)</p>
+<p><mark>BAR</mark> is mandatory for every non-B2G France scenario and must contain exactly ONE of the specified values: <code>B2B</code> (e-invoicing), <code>B2BINT</code> (B2B international e-reporting), <code>B2C</code> (B2C e-reporting), <code>B2CINT</code> (B2C international e-reporting), <code>OUTOFSCOPE</code> (outside reform scope), or <code>ARCHIVEONLY</code> (internal credit note, see <a href="#_archive_only_credit_notes_archiveonly">Archive-only credit notes</a>).</p>
 </li>
 <li>
 <p><mark>BAR</mark> is not required for B2G. B2G examples use <code>#ADN#B2G</code> and should provide <code>puf:ComplianceActivatedIndicator</code> = <code>true</code></p>
@@ -12455,7 +12486,7 @@ These text codes apply to both Invoice and CreditNote document types.
 </dd>
 <dt class="hdlist1"><code><mark>BAR</mark></code> treatment-type note (non-B2G fallback)</dt>
 <dd>
-<p>For non-B2G documents, when the explicit indicator is absent, Pagero Online derives the status from the mandatory <code><mark>BAR</mark></code> note (see <a href="#_french_text_codes_note_elements">French Text Codes</a>): <code>#BAR#B2B</code> is treated as <strong>REGULATED</strong>; every other treatment type (<code>B2BINT</code>, <code>B2C</code>, <code>OUTOFSCOPE</code>, <code>ARCHIVEONLY</code>) is treated as <strong>NON_REGULATED</strong>.</p>
+<p>For non-B2G documents, when the explicit indicator is absent, Pagero Online derives the status from the mandatory <code><mark>BAR</mark></code> note (see <a href="#_french_text_codes_note_elements">French Text Codes</a>): <code>#BAR#B2B</code> is treated as <strong>REGULATED</strong>; every other treatment type (<code>B2BINT</code>, <code>B2C</code>, <code>B2CINT</code>, <code>OUTOFSCOPE</code>, <code>ARCHIVEONLY</code>) is treated as <strong>NON_REGULATED</strong>.</p>
 </dd>
 <dt class="hdlist1">B2G classification</dt>
 <dd>
@@ -12503,7 +12534,41 @@ These text codes apply to both Invoice and CreditNote document types.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_credit_note_for_global_discount_code_262"><a class="anchor" href="#_credit_note_for_global_discount_code_262"></a><a class="link" href="#_credit_note_for_global_discount_code_262">5.4.5. Credit note for global discount (Code 262)</a></h4>
+<h4 id="_archive_only_credit_notes_archiveonly"><a class="anchor" href="#_archive_only_credit_notes_archiveonly"></a><a class="link" href="#_archive_only_credit_notes_archiveonly">5.4.5. Archive-only credit notes (ARCHIVEONLY)</a></h4>
+<div class="paragraph">
+<p><code>#BAR#ARCHIVEONLY</code> marks an <strong>internal credit note</strong> (AVOIR interne) reversing an invoice that was
+<strong>Rejetée</strong> or <strong>Refusée</strong>, submitted for archiving only. Per AFNOR XP Z12-012 rule BR-FR-20 such a
+document must not be subject to e-invoicing processing: no flux 1 and no transmission to the recipient.
+Pagero Online will neither clear it nor deliver it, so it never reaches the buyer.</p>
+</div>
+<div class="paragraph">
+<p>Send it as a credit note and reference the reversed invoice in BG-3, which is what XP Z12-014 §2.2
+scopes the behaviour to. Do not add <code>puf:ExternalDeliveryType</code>; it is not needed for this case.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example — archive-only credit note</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;CreditNote&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cbc:CreditNoteTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">B1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>381<span class="tag">&lt;/cbc:CreditNoteTypeCode&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#BAR#ARCHIVEONLY<span class="tag">&lt;/cbc:Note&gt;</span>
+
+    <span class="comment">&lt;!-- BG-3 reference to the reversed invoice --&gt;</span>
+    <span class="tag">&lt;cac:BillingReference&gt;</span>
+        <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
+            <span class="tag">&lt;cbc:ID&gt;</span>INV-2026-000123<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;cbc:IssueDate&gt;</span>2026-09-01<span class="tag">&lt;/cbc:IssueDate&gt;</span>
+        <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
+    <span class="tag">&lt;/cac:BillingReference&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/CreditNote&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_credit_note_for_global_discount_code_262"><a class="anchor" href="#_credit_note_for_global_discount_code_262"></a><a class="link" href="#_credit_note_for_global_discount_code_262">5.4.6. Credit note for global discount (Code 262)</a></h4>
 <div class="paragraph">
 <p>Invoice type code <code>262</code> ("Avoir pour Remise Globale") is used for credit notes
 issued against one or more previously sent invoices to apply a global
@@ -12561,7 +12626,7 @@ BT-12 / BT-73 remain in their normal locations.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sub_lines_and_line_groupings"><a class="anchor" href="#_sub_lines_and_line_groupings"></a><a class="link" href="#_sub_lines_and_line_groupings">5.4.6. Sub-lines and Line Groupings</a></h4>
+<h4 id="_sub_lines_and_line_groupings"><a class="anchor" href="#_sub_lines_and_line_groupings"></a><a class="link" href="#_sub_lines_and_line_groupings">5.4.7. Sub-lines and Line Groupings</a></h4>
 <div class="paragraph">
 <p>France (EXTENDED-CTC-FR profile) supports hierarchical invoice lines - sub-lines and line groupings - for composite articles (kits, packs), multi-VAT-rate products, and parent lines with supplements. The lines stay flat; the hierarchy is carried by the generic <a href="#line-sublines">Sub-lines extension</a> (<code>puf:RowType</code> + <code>puf:ParentLineID</code>) together with the native <code>cac:Item/cbc:PackQuantity</code>.</p>
 </div>
@@ -12704,7 +12769,7 @@ Reference examples are available under <code>examples/country-specific-examples/
 </div>
 </div>
 <div class="sect3">
-<h4 id="_self_billing_indicator_2"><a class="anchor" href="#_self_billing_indicator_2"></a><a class="link" href="#_self_billing_indicator_2">5.4.7. Self-Billing Indicator</a></h4>
+<h4 id="_self_billing_indicator_2"><a class="anchor" href="#_self_billing_indicator_2"></a><a class="link" href="#_self_billing_indicator_2">5.4.8. Self-Billing Indicator</a></h4>
 <div class="paragraph">
 <p>Self-billing invoices can be indicated in two ways:</p>
 </div>
@@ -12756,7 +12821,7 @@ Reference examples are available under <code>examples/country-specific-examples/
 </div>
 </div>
 <div class="sect3">
-<h4 id="_business_and_vat_identification"><a class="anchor" href="#_business_and_vat_identification"></a><a class="link" href="#_business_and_vat_identification">5.4.8. Business and VAT Identification</a></h4>
+<h4 id="_business_and_vat_identification"><a class="anchor" href="#_business_and_vat_identification"></a><a class="link" href="#_business_and_vat_identification">5.4.9. Business and VAT Identification</a></h4>
 <div class="paragraph">
 <p>France uses SIRET (14-digit) and SIREN (9-digit) numbers for business identification.</p>
 </div>
@@ -12930,7 +12995,7 @@ SUFFIX and CODE ROUTAGE achieve similar functionality at different organizationa
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mandate_scenarios_agent_parties"><a class="anchor" href="#_mandate_scenarios_agent_parties"></a><a class="link" href="#_mandate_scenarios_agent_parties">5.4.9. Mandate Scenarios - Agent Parties</a></h4>
+<h4 id="_mandate_scenarios_agent_parties"><a class="anchor" href="#_mandate_scenarios_agent_parties"></a><a class="link" href="#_mandate_scenarios_agent_parties">5.4.10. Mandate Scenarios - Agent Parties</a></h4>
 <div class="paragraph">
 <p>France supports multiple mandate scenarios requiring agent party information. Party roles are indicated using the PUF RoleCode extension.</p>
 </div>
@@ -13112,7 +13177,7 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect3">
-<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.4.10. Service code</a></h4>
+<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.4.11. Service code</a></h4>
 <div class="paragraph">
 <p>Service code is a routing code required by some customers to identify the correct recipient in French Government Portal.</p>
 </div>
@@ -13163,7 +13228,7 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect3">
-<h4 id="_b2g_public_sector_chorus_pro"><a class="anchor" href="#_b2g_public_sector_chorus_pro"></a><a class="link" href="#_b2g_public_sector_chorus_pro">5.4.11. B2G / public sector (Chorus Pro)</a></h4>
+<h4 id="_b2g_public_sector_chorus_pro"><a class="anchor" href="#_b2g_public_sector_chorus_pro"></a><a class="link" href="#_b2g_public_sector_chorus_pro">5.4.12. B2G / public sector (Chorus Pro)</a></h4>
 <div class="paragraph">
 <p>French B2G invoices are subject to the additional <code>BR-FR-CPRO</code> rules. The rules are activated when the transaction is identified as B2G through <code>#ADN#B2G</code>, channel context, or public-buyer directory information.</p>
 </div>
@@ -13225,7 +13290,7 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.4.12. Legal commitments</a></h4>
+<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.4.13. Legal commitments</a></h4>
 <div class="paragraph">
 <p>Entities behind French Government portal can set up validation of certain elements called legal commitments. Therefore it&#8217;s recommended to support the below values in order to fulfill the requirements of this validation.</p>
 </div>

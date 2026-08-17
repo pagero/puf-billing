@@ -109,7 +109,7 @@ Each text code must be provided in a separate `cbc:Note` element with the format
 |#BAR#
 |Treatment type qualification
 |Type of treatment expected for the invoice
-|*One of:* `B2B`, `B2BINT`, `B2C`, `OUTOFSCOPE`, `ARCHIVEONLY`
+|*One of:* `B2B`, `B2BINT`, `B2C`, `B2CINT`, `OUTOFSCOPE`, `ARCHIVEONLY`
 
 |#BLU#
 |Eco-participation/Eco-contribution
@@ -155,7 +155,7 @@ Each text code must be provided in a separate `cbc:Note` element with the format
 IMPORTANT:
 
 * The #PMT# fixed indemnity amount is legally set at €40.00 per Article L441-10 of the French Commercial Code
-* #BAR# is mandatory for every non-B2G France scenario and must contain exactly ONE of the specified values: `B2B` (e-invoicing), `B2BINT` (B2B international e-reporting), `B2C` (B2C e-reporting), `OUTOFSCOPE` (outside reform scope), or `ARCHIVEONLY` (internal credit note - no transmission)
+* #BAR# is mandatory for every non-B2G France scenario and must contain exactly ONE of the specified values: `B2B` (e-invoicing), `B2BINT` (B2B international e-reporting), `B2C` (B2C e-reporting), `B2CINT` (B2C international e-reporting), `OUTOFSCOPE` (outside reform scope), or `ARCHIVEONLY` (internal credit note, see <<_archive_only_credit_notes_archiveonly, Archive-only credit notes>>).
 * #BAR# is not required for B2G. B2G examples use `#ADN#B2G` and should provide `puf:ComplianceActivatedIndicator` = `true`
 * Only ONE #BAR# note is allowed per invoice
 * `#REG#` can be used for seller registration data such as share capital and other regulatory company information
@@ -215,7 +215,7 @@ Explicit indicator (authoritative)::
 Set `puf:ComplianceExtension/puf:ComplianceActivatedIndicator` (see <<_compliance_extension>>) to `true` for *REGULATED* or `false` for *NON_REGULATED*. When present, this value takes precedence.
 
 `#BAR#` treatment-type note (non-B2G fallback)::
-For non-B2G documents, when the explicit indicator is absent, Pagero Online derives the status from the mandatory `#BAR#` note (see <<_french_text_codes_note_elements, French Text Codes>>): `#BAR#B2B` is treated as *REGULATED*; every other treatment type (`B2BINT`, `B2C`, `OUTOFSCOPE`, `ARCHIVEONLY`) is treated as *NON_REGULATED*.
+For non-B2G documents, when the explicit indicator is absent, Pagero Online derives the status from the mandatory `#BAR#` note (see <<_french_text_codes_note_elements, French Text Codes>>): `#BAR#B2B` is treated as *REGULATED*; every other treatment type (`B2BINT`, `B2C`, `B2CINT`, `OUTOFSCOPE`, `ARCHIVEONLY`) is treated as *NON_REGULATED*.
 
 B2G classification::
 For B2G, `#BAR#` is not required. `#ADN#B2G` is the invoice-level B2G indicator used by the Chorus Pro qualification examples. Pagero senders should also set `puf:ComplianceActivatedIndicator` to `true`; channel or directory context may independently identify the transaction as B2G.
@@ -245,6 +245,35 @@ Declaring the regulated / non-regulated status is the *sender's responsibility*.
     <!-- Equivalent fallback when the explicit indicator is omitted: <cbc:Note>#BAR#B2B</cbc:Note> -->
     <!-- Code omitted for clarity -->
 </Invoice>
+----
+
+==== Archive-only credit notes (ARCHIVEONLY)
+
+`#BAR#ARCHIVEONLY` marks an *internal credit note* (AVOIR interne) reversing an invoice that was
+*Rejetée* or *Refusée*, submitted for archiving only. Per AFNOR XP Z12-012 rule BR-FR-20 such a
+document must not be subject to e-invoicing processing: no flux 1 and no transmission to the recipient.
+Pagero Online will neither clear it nor deliver it, so it never reaches the buyer.
+
+Send it as a credit note and reference the reversed invoice in BG-3, which is what XP Z12-014 §2.2
+scopes the behaviour to. Do not add `puf:ExternalDeliveryType`; it is not needed for this case.
+
+*Example — archive-only credit note*
+[source,xml]
+----
+<CreditNote>
+    <!-- Code omitted for clarity -->
+    <cbc:CreditNoteTypeCode name="B1">381</cbc:CreditNoteTypeCode>
+    <cbc:Note>#BAR#ARCHIVEONLY</cbc:Note>
+
+    <!-- BG-3 reference to the reversed invoice -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>INV-2026-000123</cbc:ID>
+            <cbc:IssueDate>2026-09-01</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- Code omitted for clarity -->
+</CreditNote>
 ----
 
 ==== Credit note for global discount (Code 262)

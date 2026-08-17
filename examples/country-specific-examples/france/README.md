@@ -63,11 +63,29 @@ Demonstrates:
 
 ---
 
+#### 3. PUF_France_ARCHIVEONLY_CreditNote.xml
+
+**Archive-Only Internal Credit Note (`#BAR#ARCHIVEONLY`)**
+
+Demonstrates:
+
+- Reversal of an invoice that carried the lifecycle status *Rejetee* and therefore never reached the buyer
+- `#BAR#ARCHIVEONLY` treatment type per AFNOR XP Z12-012 rule BR-FR-20
+- BG-3 reference to the rejected invoice, as scoped by XP Z12-014 section 2.2
+- Unprefixed notes placed before the `#BAR#` note, which BR-FR-20 requires in UBL
+
+**Key Features:**
+
+- Document type: 381 with name="B1"
+- Non-regulated. Pagero Online neither clears nor delivers the document, so it never reaches the buyer
+
+---
+
 ### Chorus Pro B2G Qualification Examples
 
 These examples are PUF source counterparts of the eight invoice fixtures in the AIFE Chorus Pro qualification kit. Each file carries the AIFE qualification `0225` endpoints directly; those values are test data and are not a general construction rule for French electronic addresses.
 
-For France, `#BAR#` is mandatory in every non-B2G scenario (`B2B`, `B2BINT`, `B2C`, `OUTOFSCOPE`, or `ARCHIVEONLY`). It is not required for B2G. These examples therefore omit `#BAR#`, carry `#ADN#B2G`, and set `puf:ComplianceActivatedIndicator` to `true`.
+For France, `#BAR#` is mandatory in every non-B2G scenario (`B2B`, `B2BINT`, `B2C`, `B2CINT`, `OUTOFSCOPE`, or `ARCHIVEONLY`). It is not required for B2G. These examples therefore omit `#BAR#`, carry `#ADN#B2G`, and set `puf:ComplianceActivatedIndicator` to `true`.
 
 | AIFE scenario | PUF example | Distinguishing coverage |
 |---|---|---|
@@ -992,7 +1010,7 @@ Invoice e-reporting examples (UC43, UC44) are located in the **tax-data-report**
 | **#AAI#** | General information | General elements typically found at the bottom of paper invoice pages | *(free text)* |
 | **#PMD#** | Late payment penalties | Payment terms regarding late payment penalties | *(free text)* |
 | **#PMT#** | Collection costs (€40) | Fixed €40 indemnity for collection costs in case of late payment | *(free text)* |
-| **#BAR#** | Treatment type qualification | Mandatory for every non-B2G France scenario. Only ONE BAR note per invoice. Not required for B2G. | `B2B`, `B2BINT`, `B2C`, `OUTOFSCOPE`, or `ARCHIVEONLY` |
+| **#BAR#** | Treatment type qualification | Mandatory for every non-B2G France scenario. Only ONE BAR note per invoice. Not required for B2G. | `B2B`, `B2BINT`, `B2C`, `B2CINT`, `OUTOFSCOPE`, or `ARCHIVEONLY` |
 | **#AAB#** | Early payment discount | Statement whether customer can apply a discount for early payment. Does NOT correspond to the discount amount itself. | *(free text)* |
 | **#ABU#** | Contract clause | Contractual reservation clause / Retenue de garantie | *(free text)* |
 | **#ACC#** | Subrogation factoring clause | Factoring arrangement details and subrogation clauses | *(free text)* |

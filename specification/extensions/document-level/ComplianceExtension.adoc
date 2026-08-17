@@ -27,6 +27,11 @@ When set to `true`, the document must not be sent to a clearance authority, even
 `puf:ComplianceActivatedIndicator` is a generic indicator, intended to be reused across markets and expected to be expanded for additional markets over time. It is *currently only applied in France*, where it signals whether the document is processed *within* or *outside* the French e-invoicing reform: when `true`, Pagero — acting as the accredited platform (PA) — applies the stricter compliance checks and validations the reform requires; when `false`, the document is processed outside that stricter regime. See the France country-specifics for how these extensions are used.
 ====
 
+[NOTE]
+====
+For France, `puf:ComplianceActivatedIndicator` takes precedence over the mandatory `#BAR#` treatment-type note. A `#BAR#ARCHIVEONLY` note additionally suppresses clearance and delivery; see <<_france, France>> for what Pagero Online does with that document.
+====
+
 See example below as well as the URI to be used for this extension.
 
 *Example*
