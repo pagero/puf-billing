@@ -4158,7 +4158,10 @@ Can be used to specify type of local tax.</p></td>
 <div class="sect3">
 <h4 id="_cacwithholdingtaxtotal"><a class="anchor" href="#_cacwithholdingtaxtotal"></a><a class="link" href="#_cacwithholdingtaxtotal">cac:WithholdingTaxTotal</a></h4>
 <div class="paragraph">
-<p>Below table show available fields in <code>cac:WithholdingTaxTotal/cac:TaxSubtotal</code>, note that additional elements has also been added to the extension available in <a href="#_taxsubtotal">cac:WithholdingTaxTotal/cac:TaxSubtotal</a>.</p>
+<p><code>cac:WithholdingTaxTotal</code> is available at document (header) level on both <code>Invoice</code> and <code>CreditNote</code>, with cardinality <code>0..n</code>. It must appear after all <code>cac:TaxTotal</code> elements and before <code>cac:LegalMonetaryTotal</code>. This section describes header-level withholding only. Line-level withholding remains available on <code>InvoiceLine</code>; <code>CreditNoteLine</code> does not support <code>cac:WithholdingTaxTotal</code>.</p>
+</div>
+<div class="paragraph">
+<p>The table below shows the available fields in <code>cac:WithholdingTaxTotal/cac:TaxSubtotal</code>. Additional elements are also available through the extension described in <a href="#_taxsubtotal">cac:WithholdingTaxTotal/cac:TaxSubtotal</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 23. Elements added in cac:WithholdingTaxTotal</caption>
@@ -4258,8 +4261,8 @@ Can be used to specify type of local tax.</p></td>
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Example</strong><br>
-<em>cac:WithholdingTaxTotal example</em></p>
+<p><strong>Examples</strong><br>
+<em>Header-level cac:WithholdingTaxTotal on an Invoice</em></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4281,6 +4284,31 @@ Can be used to specify type of local tax.</p></td>
   <span class="tag">&lt;/cac:WithholdingTaxTotal&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><em>Header-level cac:WithholdingTaxTotal on a CreditNote</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;CreditNote&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:WithholdingTaxTotal&gt;</span>
+    <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>6.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+    <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+        <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>100.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+        <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>6.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+        <span class="tag">&lt;cac:TaxCategory&gt;</span>
+            <span class="tag">&lt;cbc:ID&gt;</span>S<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;cbc:Percent&gt;</span>6<span class="tag">&lt;/cbc:Percent&gt;</span>
+            <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>INC<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+        <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+    <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+  <span class="tag">&lt;/cac:WithholdingTaxTotal&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/CreditNote&gt;</span></code></pre>
 </div>
 </div>
 </div>
