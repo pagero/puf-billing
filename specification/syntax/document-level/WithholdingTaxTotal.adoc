@@ -1,4 +1,6 @@
-Below table show available fields in `cac:WithholdingTaxTotal/cac:TaxSubtotal`, note that additional elements has also been added to the extension available in <<_taxsubtotal, cac:WithholdingTaxTotal/cac:TaxSubtotal>>.
+`cac:WithholdingTaxTotal` is available at document (header) level on both `Invoice` and `CreditNote`, with cardinality `0..n`. It must appear after all `cac:TaxTotal` elements and before `cac:LegalMonetaryTotal`. This section describes header-level withholding only. Line-level withholding remains available on `InvoiceLine`; `CreditNoteLine` does not support `cac:WithholdingTaxTotal`.
+
+The table below shows the available fields in `cac:WithholdingTaxTotal/cac:TaxSubtotal`. Additional elements are also available through the extension described in <<_taxsubtotal, cac:WithholdingTaxTotal/cac:TaxSubtotal>>.
 
 .Elements added in cac:WithholdingTaxTotal
 |===
@@ -74,8 +76,8 @@ Can be used to specify type of local tax.
 
 |===
 
-*Example* +
-_cac:WithholdingTaxTotal example_
+*Examples* +
+_Header-level cac:WithholdingTaxTotal on an Invoice_
 [source,xml]
 ----
 <Invoice>
@@ -96,4 +98,27 @@ _cac:WithholdingTaxTotal example_
   </cac:WithholdingTaxTotal>
   <!-- Code omitted for clarity -->
 </Invoice>
+----
+
+_Header-level cac:WithholdingTaxTotal on a CreditNote_
+[source,xml]
+----
+<CreditNote>
+  <!-- Code omitted for clarity -->
+  <cac:WithholdingTaxTotal>
+    <cbc:TaxAmount currencyID="EUR">6.00</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+        <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+        <cbc:TaxAmount currencyID="EUR">6.00</cbc:TaxAmount>
+        <cac:TaxCategory>
+            <cbc:ID>S</cbc:ID>
+            <cbc:Percent>6</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>INC</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:WithholdingTaxTotal>
+  <!-- Code omitted for clarity -->
+</CreditNote>
 ----
