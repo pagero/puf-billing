@@ -741,6 +741,26 @@ Demonstrates:
 
 ---
 
+#### UC29 (alt): PUF_France_UC29_SingleVATEntity_CreditNote.xml
+
+**Single VAT Entity Member Credit Note (Assujetti Unique)**
+
+Demonstrates:
+
+- The credit note counterpart of `PUF_France_UC29_SingleVATEntity_Invoice.xml`, crediting a partial return
+- The same three cumulative requirements on a credit note, since `BR-FR-CO-14` and `BR-FR-CO-15` have context `ubl:Invoice | cn:CreditNote`
+- BG-3 reference to the original invoice (ALPHA-2026-0198)
+- The unprefixed credit reason note placed before the `#BAR#` note, and `#TXD#MEMBRE_ASSUJETTI_UNIQUE` placed last
+
+**Key Features:**
+
+- Document type 381 (Credit note) with business process B1
+- 2 of the 8 invoiced servers returned: 600.00 HT + 120.00 VAT = 720.00 TTC
+- Entity SIREN in BT-29 schemeID 0231 (nine digits per `BR-FR-32`) differs from the member's own SIREN in BT-30 schemeID 0002
+- 0231 appears only once, only on the seller, and never on BT-34/BT-49, which stay on schemeID 0225
+
+---
+
 #### UC30: PUF_France_UC30_VATAlreadyCollected.xml
 
 **VAT Already Collected**
@@ -1019,7 +1039,13 @@ Invoice e-reporting examples (UC43, UC44) are located in the **tax-data-report**
 | **#CUS#** | Customs information | Customs-related details and information | *(free text)* |
 | **#PAI#** | Third party payment | Third party payment information (e.g. partial third-party payer or barter arrangement) | *(free text)* |
 | **#SUR#** | Supplier notes | Additional remarks from the supplier | *(free text)* |
-| **#TXD#** | Single taxable person member | Identifies a member of a single taxable person (assujetti unique) — for external transactions only | `Membre d'un assujetti unique` |
+| **#TXD#** | Single taxable person member | Identifies a member of a single taxable person (assujetti unique), for external transactions only. Mandatory whenever the seller party carries identification scheme `0231`. | `MEMBRE_ASSUJETTI_UNIQUE` |
+
+The `#CODE#` prefix is a text convention inside the note text. `cbc:Note` extends a bare text type with no note-code component, so neither the PUF schema nor PUF validation can check the prefix; it is split into the subject code (BT-21) and the note text (BT-22) when the document is transformed to the French target format.
+
+`#TXD#` must carry the literal value `MEMBRE_ASSUJETTI_UNIQUE`. The French phrase `Membre d'un assujetti unique` is the value BR-FR-MAP-06 and BR-FR-MAP-07 require in the downstream Flux 1 note text (BT-22) and Flux 10.1 report note (TT-27), and is never what a source document carries.
+
+The `#TXD#` note must be the last `cbc:Note` of the document, or the note that follows it must itself begin with a text code prefix. `BR-FR-CO-14` joins all document-level notes into one string with no separator and reads the value between the TXD prefix and the next hash character, so a following note without a text code prefix is absorbed into that value and the fatal rule fires.
 
 ## Business Process Types
 
