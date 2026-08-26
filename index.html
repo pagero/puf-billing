@@ -4504,7 +4504,8 @@ Identifier of the party.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyIdentification/cbc:ID/@schemeID</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Party Identifier Scheme</strong><br>
 Scheme identifier of party identifier.<br>
-Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.</p></td>
+Value must be according to code list <a href="https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme" target="_blank" rel="noopener">PUF-008-IDENTIFICATIONSCHEME</a>.<br>
+For France, scheme <code>0231</code> on <code>cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID</code> is the SIREN of the single taxable person (assujetti unique) that the seller is a member of. It is allowed on the seller only, exactly once, and must be exactly 9 digits. It is an ISO 6523 ICD value and not a CEF EAS value, so it must never be used as an electronic address in <code>cbc:EndpointID</code>. <code>cac:PartyLegalEntity/cbc:CompanyID</code> with scheme <code>0002</code> remains the seller&#8217;s own SIREN. Using <code>0231</code> also obliges the sender to provide the note <code>#TXD#MEMBRE_ASSUJETTI_UNIQUE</code> and a <code>cac:TaxRepresentativeParty</code> carrying the name, VAT number and postal address of the single taxable person.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cac:PartyName/cbc:Name</code></p></td>
@@ -12301,6 +12302,18 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 <div class="paragraph">
 <p>Each text code must be provided in a separate <code>cbc:Note</code> element with the format: <code>#CODE#value</code></p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>cbc:Note</code> is typed as <code>NoteType</code>, which extends a bare text type and has no note-code component. The subject code is therefore not carried as a code of its own, and the <code><mark>CODE</mark></code> prefix is a text convention inside the note text that neither the PUF schema nor PUF validation can check. The prefix is split into the subject code (BT-21) and the note text (BT-22) when the document is transformed to the French target format.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect4">
 <h5 id="_available_text_codes"><a class="anchor" href="#_available_text_codes"></a><a class="link" href="#_available_text_codes">Available Text Codes</a></h5>
@@ -12407,8 +12420,8 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><mark>TXD</mark></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Single taxable person member</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Mention of the member of a single taxable person</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required:</strong> <code>Membre d&#8217;un assujetti unique</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mention that the seller is a member of a single taxable person (assujetti unique). Mandatory whenever the seller party carries identification scheme <code>0231</code>, see <a href="#_single_taxable_person_identification_assujetti_unique">Single Taxable Person Identification</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Required:</strong> <code>MEMBRE_ASSUJETTI_UNIQUE</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -12431,6 +12444,12 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 </li>
 <li>
 <p><code><mark>REG</mark></code> can be used for seller registration data such as share capital and other regulatory company information</p>
+</li>
+<li>
+<p><code><mark>TXD</mark></code> must carry the literal value <code>MEMBRE_ASSUJETTI_UNIQUE</code>. The French phrase <code>Membre d&#8217;un assujetti unique</code> is the value BR-FR-MAP-06 and BR-FR-MAP-07 require in the downstream Flux 1 note text (BT-22) and Flux 10.1 report note (TT-27), and is never what a source document carries</p>
+</li>
+<li>
+<p>The <code><mark>TXD</mark></code> note must be the last <code>cbc:Note</code> of the document, or the note that follows it must itself begin with a text code prefix. <code>BR-FR-CO-14</code> joins all document-level notes into one string with no separator and reads the value between the TXD prefix and the next hash character, so a following note without a text code prefix is absorbed into that value and the fatal rule fires</p>
 </li>
 </ul>
 </div>
@@ -12465,7 +12484,7 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="tag">&lt;cbc:Note&gt;</span>#TXD#Membre d'un assujetti unique<span class="tag">&lt;/cbc:Note&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#TXD#MEMBRE_ASSUJETTI_UNIQUE<span class="tag">&lt;/cbc:Note&gt;</span>
     <span class="tag">&lt;cbc:Note&gt;</span>#BAR#B2B<span class="tag">&lt;/cbc:Note&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
@@ -13019,6 +13038,136 @@ SUFFIX and CODE ROUTAGE achieve similar functionality at different organizationa
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/Invoice&gt;</span></code></pre>
 </div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_single_taxable_person_identification_assujetti_unique"><a class="anchor" href="#_single_taxable_person_identification_assujetti_unique"></a><a class="link" href="#_single_taxable_person_identification_assujetti_unique">Single Taxable Person Identification (Assujetti Unique)</a></h5>
+<div class="paragraph">
+<p>Identification scheme <code>0231</code> carries the SIREN of the single taxable person (assujetti unique) that the seller is a member of. It identifies a legal entity other than the seller, and it is valid only as a seller private identifier (BT-29):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Provide it on <code>cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID</code> with <code>@schemeID</code> <code>0231</code>. Scheme <code>0231</code> must never be used on the buyer, on any other party, or on <code>cac:PartyLegalEntity/cbc:CompanyID</code>.</p>
+</li>
+<li>
+<p>Provide it exactly once. Only one identifier per scheme is allowed for a party (<code>BR-FR-CO-10</code>).</p>
+</li>
+<li>
+<p>The value must be exactly 9 digits (<code>BR-FR-32</code>).</p>
+</li>
+<li>
+<p><code>0231</code> is an ISO 6523 ICD value and not a CEF EAS value, so it must never be used as an electronic address in <code>cbc:EndpointID</code> (BT-34 and BT-49), which would breach <code>BR-CL-25</code>.</p>
+</li>
+<li>
+<p>The value must be the SIREN of a single taxable person registered in the PPF Annuaire (<code>BR-FR-CO-13</code>). This is a business rule verified by the PPF, with no Schematron implementation, and senders cannot pre-check it: the Annuaire data model has no representation of a single taxable person.</p>
+</li>
+<li>
+<p><code>cac:PartyLegalEntity/cbc:CompanyID</code> with scheme <code>0002</code> is unaffected and remains the seller&#8217;s own SIREN (BT-30).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Using scheme <code>0231</code> obliges the sender to provide two further elements in the same document:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The note <code>#TXD#MEMBRE_ASSUJETTI_UNIQUE</code> (<code>BR-FR-CO-14</code>), see <a href="#_french_text_codes_note_elements">French Text Codes</a>. Place it as the last <code>cbc:Note</code> of the document, or immediately before another note that begins with a text code prefix. <code>BR-FR-CO-14</code> joins all document-level notes into one string with no separator and reads the value between the TXD prefix and the next hash character, so a following note without a text code prefix is absorbed into that value and the fatal rule fires.</p>
+</li>
+<li>
+<p>A <code>cac:TaxRepresentativeParty</code> (BG-11) carrying the name, VAT number (BT-63) and postal address of the single taxable person (<code>BR-FR-CO-15</code>). The VAT for the invoice is declared by the single taxable person, not by the seller.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cbc:Note&gt;</span>#TXD#MEMBRE_ASSUJETTI_UNIQUE<span class="tag">&lt;/cbc:Note&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingSupplierParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="tag">&lt;cbc:EndpointID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0225</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>33344455566677<span class="tag">&lt;/cbc:EndpointID&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+            <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0009</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>33344455566677<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="3"></i><b>(3)</b>
+            <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0231</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>888999000<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="4"></i><b>(4)</b>
+            <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+            <span class="tag">&lt;cac:PartyLegalEntity&gt;</span>
+                <span class="tag">&lt;cbc:RegistrationName&gt;</span>Filiale Alpha SAS<span class="tag">&lt;/cbc:RegistrationName&gt;</span>
+                <span class="tag">&lt;cbc:CompanyID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0002</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>333444555<span class="tag">&lt;/cbc:CompanyID&gt;</span><i class="conum" data-value="5"></i><b>(5)</b>
+            <span class="tag">&lt;/cac:PartyLegalEntity&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingSupplierParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:TaxRepresentativeParty&gt;</span><i class="conum" data-value="6"></i><b>(6)</b>
+        <span class="tag">&lt;cac:PartyName&gt;</span>
+            <span class="tag">&lt;cbc:Name&gt;</span>Groupe Fiscal Innovatech<span class="tag">&lt;/cbc:Name&gt;</span>
+        <span class="tag">&lt;/cac:PartyName&gt;</span>
+        <span class="tag">&lt;cac:PostalAddress&gt;</span>
+            <span class="tag">&lt;cbc:StreetName&gt;</span>Tour Innovatech, 1 Parvis de la Défense<span class="tag">&lt;/cbc:StreetName&gt;</span>
+            <span class="tag">&lt;cbc:CityName&gt;</span>Puteaux<span class="tag">&lt;/cbc:CityName&gt;</span>
+            <span class="tag">&lt;cbc:PostalZone&gt;</span>92800<span class="tag">&lt;/cbc:PostalZone&gt;</span>
+            <span class="tag">&lt;cac:Country&gt;</span>
+                <span class="tag">&lt;cbc:IdentificationCode&gt;</span>FR<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+            <span class="tag">&lt;/cac:Country&gt;</span>
+        <span class="tag">&lt;/cac:PostalAddress&gt;</span>
+        <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+            <span class="tag">&lt;cbc:CompanyID&gt;</span>FR88888999000<span class="tag">&lt;/cbc:CompanyID&gt;</span>
+            <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+            <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+        <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+    <span class="tag">&lt;/cac:TaxRepresentativeParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Mandatory note when scheme 0231 is used</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Electronic address remains the seller&#8217;s own endpoint, never the single taxable person SIREN</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Seller&#8217;s own SIRET with schemeID 0009</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>SIREN of the single taxable person with schemeID 0231, one occurrence, 9 digits</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Seller&#8217;s own SIREN (BT-30) with schemeID 0002</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Single taxable person name, postal address and VAT number (BT-63) in BG-11</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Reference examples are available under <code>examples/country-specific-examples/france/</code>: <code>PUF_France_UC29_SingleVATEntity_Invoice.xml</code>, <code>PUF_France_UC29_SingleVATEntity_CreditNote.xml</code>, and <code>PUF_France_B2G_UC29_SingleVATEntity_Invoice.xml</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

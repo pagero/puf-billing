@@ -36,7 +36,8 @@ Identifier of the party.
 |`cac:PartyIdentification/cbc:ID/@schemeID`
 |**Party Identifier Scheme** +
 Scheme identifier of party identifier. +
-Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^].
+Value must be according to code list https://pagero.github.io/puf-code-lists/#_puf_008_identificationscheme[PUF-008-IDENTIFICATIONSCHEME^]. +
+For France, scheme `0231` on `cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID` is the SIREN of the single taxable person (assujetti unique) that the seller is a member of. It is allowed on the seller only, exactly once, and must be exactly 9 digits. It is an ISO 6523 ICD value and not a CEF EAS value, so it must never be used as an electronic address in `cbc:EndpointID`. `cac:PartyLegalEntity/cbc:CompanyID` with scheme `0002` remains the seller's own SIREN. Using `0231` also obliges the sender to provide the note `#TXD#MEMBRE_ASSUJETTI_UNIQUE` and a `cac:TaxRepresentativeParty` carrying the name, VAT number and postal address of the single taxable person.
 
 |`cac:PartyName/cbc:Name`
 |**Party name** +

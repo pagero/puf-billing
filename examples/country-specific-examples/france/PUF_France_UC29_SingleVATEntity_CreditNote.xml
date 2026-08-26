@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PUF France Use Case 29: Single VAT Entity (Assujetti Unique) - Credit Note
+
+    Business Scenario:
+    - Filiale Alpha SAS is a member of the single taxable entity "Groupe Fiscal Innovatech"
+    - It previously invoiced the external third party Acheteur Beta SARL with ALPHA-2026-0198
+      (8 rack servers, 2,400.00 HT + 480.00 VAT = 2,880.00 TTC)
+    - Two servers are returned, so the member issues a credit note to the same third party
+
+    Key UC29 Credit Note Concepts:
+    - The three cumulative single-taxable-entity requirements apply to the credit note exactly
+      as they apply to the invoice, because the fatal rules BR-FR-CO-14 and BR-FR-CO-15 have
+      context "ubl:Invoice | cn:CreditNote"
+    - BT-29 with scheme identifier 0231 carries the SIREN of the single taxable entity, which is
+      a different legal entity from the seller. The seller's own SIREN stays in BT-30 with scheme 0002
+    - BG-11 (TaxRepresentativeParty) carries the entity company name, intra-community VAT number
+      and postal address, because EN 16931 has no dedicated single-taxable-entity block
+    - A note with subject code TXD (BT-21) and text MEMBRE_ASSUJETTI_UNIQUE (BT-22) is mandatory
+    - 0231 is a seller private identifier only. It must never appear on the buyer, on BT-30,
+      or on an electronic address (BT-34/BT-49), which stay on scheme 0225
+
+    Worked Example:
+    - Original invoice: 8 x 300.00 = 2,400.00 HT + 480.00 VAT = 2,880.00 TTC
+    - Returned quantity: 2 servers
+    - Credit note HT: 600.00 EUR
+    - Credit note VAT @ 20%: 120.00 EUR
+    - Credit note TTC: 720.00 EUR
+
+    Source: XP Z12-014 Annexe A V1.4, Section 3.2.28 (Case No. 29)
+            BR-FR-Flux2-Schematron-UBL V1.4.0, patterns BR-FR-CO-14, BR-FR-CO-15, BR-FR-32
+-->
+<CreditNote xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0" xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+
+    <!-- BT-24 Specification identifier -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ComplianceExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:ComplianceExtension>
+                        <!-- REGULATED (true) / NON_REGULATED (false); authoritative, equivalent to #BAR# -->
+                        <puf:ComplianceActivatedIndicator>true</puf:ComplianceActivatedIndicator>
+                    </puf:ComplianceExtension>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <!-- BT-23 Business process type -->
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <!-- BT-1 Credit Note Number -->
+    <cbc:ID>ALPHA-2026-AV-0043</cbc:ID>
+    <!-- BT-2 Credit Note Issue Date -->
+    <cbc:IssueDate>2026-03-05</cbc:IssueDate>
+    <!-- BT-3 Credit Note Type Code - 381: Credit note -->
+    <!-- @name = B1: Goods credit note -->
+    <cbc:CreditNoteTypeCode name="B1">381</cbc:CreditNoteTypeCode>
+
+    <!-- BT-22 / BT-21: French text codes -->
+    <!-- #REG# Registration information -->
+    <cbc:Note>#REG#SAS au capital de 500 000 EUR — RCS Paris B 333 444 555 — SIRET 33344455566677 — Membre de l'assujetti unique Groupe Fiscal Innovatech (SIREN 888 999 000)</cbc:Note>
+    <!-- #ABL# Trade register -->
+    <cbc:Note>#ABL#RCS Paris B 333 444 555</cbc:Note>
+    <!-- #AAI# APE code -->
+    <cbc:Note>#AAI#APE 4651Z — Commerce de gros d'ordinateurs, d'équipements informatiques périphériques et de logiciels</cbc:Note>
+    <!-- #PMD# Late payment penalties -->
+    <cbc:Note>#PMD#En cas de retard de paiement, pénalités au taux BCE + 10 points et indemnité forfaitaire de recouvrement de 40 EUR</cbc:Note>
+    <!-- #PMT# Fixed indemnity -->
+    <cbc:Note>#PMT#Indemnité forfaitaire pour frais de recouvrement : 40 EUR</cbc:Note>
+    <!-- Explanation of credit note reason; unprefixed notes precede the #BAR# note in UBL per BR-FR-20 -->
+    <cbc:Note>Avoir pour retour de 2 serveurs rack sur la facture ALPHA-2026-0198</cbc:Note>
+    <!-- #BAR# Treatment type -->
+    <cbc:Note>#BAR#B2B</cbc:Note>
+    <cbc:Note>#AAB#Pas d'escompte pour paiement anticipé</cbc:Note>
+    <!--
+        MANDATORY NOTE per BR-FR-CO-14:
+        BT-21 = TXD, BT-22 = "MEMBRE_ASSUJETTI_UNIQUE"
+        The rule concatenates all notes and reads the text after #TXD# up to the next '#',
+        so this note is placed last.
+    -->
+    <cbc:Note>#TXD#MEMBRE_ASSUJETTI_UNIQUE</cbc:Note>
+
+    <!-- BT-5 Credit Note Document Currency -->
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>BETA-PO-2026-0445</cbc:BuyerReference>
+
+    <!-- BT-25 Preceding Invoice Reference (mandatory for credit notes) -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>ALPHA-2026-0198</cbc:ID>
+            <cbc:IssueDate>2026-02-20</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+
+    <!-- BG-4 Seller — Group MEMBER company (Filiale Alpha SAS) -->
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <!-- BT-34 Seller electronic address (member's own SIRET); 0231 is not an EAS value per BR-CL-25 -->
+            <cbc:EndpointID schemeID="0225">33344455566677</cbc:EndpointID>
+
+            <!--
+                BT-29 identifiers — TWO entries required for a single taxable entity member:
+                1. Member's own SIRET (schemeID 0009)
+                2. Single VAT Entity SIREN (schemeID 0231) — MANDATORY
+                BR-FR-CO-10 allows at most one identifier per schemeID, so 0231 appears exactly once.
+            -->
+            <!-- Entry 1: Member's own SIRET -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">33344455566677</cbc:ID>
+            </cac:PartyIdentification>
+            <!--
+                Entry 2: Single VAT Entity SIREN (schemeID 0231)
+                Exactly 9 digits per BR-FR-32, and different from the member's own SIREN in BT-30.
+            -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0231">888999000</cbc:ID>
+            </cac:PartyIdentification>
+
+            <!-- BT-28 Seller trading name (member company trading name) -->
+            <cac:PartyName>
+                <cbc:Name>Filiale Alpha Informatique</cbc:Name>
+            </cac:PartyName>
+
+            <!-- BG-5 Seller postal address (member's own address) -->
+            <cac:PostalAddress>
+                <cbc:StreetName>14 Avenue de la Grande Armée</cbc:StreetName>
+                <cbc:CityName>Paris</cbc:CityName>
+                <cbc:PostalZone>75017</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+
+            <!--
+                BT-31: Member's own VAT identifier.
+                The VAT liable for this credit note is the entity's (BT-63 in BG-11).
+            -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR33333444555</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+
+            <!-- BT-27 Seller legal name / BT-30 Member's own SIREN -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Filiale Alpha SAS</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">333444555</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+
+    <!-- BG-7 Buyer — External third party (no 0231 identifier per BR-FR-CO-11) -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49 Buyer electronic address (buyer's SIRET) -->
+            <cbc:EndpointID schemeID="0225">11122233344456</cbc:EndpointID>
+            <!-- BT-46 Buyer SIRET -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0009">11122233344456</cbc:ID>
+            </cac:PartyIdentification>
+            <!-- BT-45 Buyer trading name -->
+            <cac:PartyName>
+                <cbc:Name>Acheteur Beta</cbc:Name>
+            </cac:PartyName>
+            <!-- BG-8 Buyer postal address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>22 Rue de la Bourse</cbc:StreetName>
+                <cbc:CityName>Lyon</cbc:CityName>
+                <cbc:PostalZone>69002</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <!-- BT-48 Buyer VAT identifier -->
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>FR11111222333</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <!-- BT-44 Buyer legal name / BT-47 SIREN -->
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Acheteur Beta SARL</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0002">111222333</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+
+    <!--
+        BG-11 Seller Tax Representative Party — Single VAT Entity data.
+        MANDATORY per BR-FR-CO-15 whenever the seller carries a 0231 identifier.
+
+        BT-62: Entity business name
+        BT-63: Entity intra-community VAT number
+        BG-12: Entity postal address
+    -->
+    <cac:TaxRepresentativeParty>
+        <!-- BT-62 Single VAT Entity business name -->
+        <cac:PartyName>
+            <cbc:Name>Groupe Fiscal Innovatech</cbc:Name>
+        </cac:PartyName>
+        <!-- BG-12 Single VAT Entity postal address -->
+        <cac:PostalAddress>
+            <cbc:StreetName>Tour Innovatech, 1 Parvis de la Défense</cbc:StreetName>
+            <cbc:CityName>Puteaux</cbc:CityName>
+            <cbc:PostalZone>92800</cbc:PostalZone>
+            <cac:Country>
+                <cbc:IdentificationCode>FR</cbc:IdentificationCode>
+            </cac:Country>
+        </cac:PostalAddress>
+        <!-- BT-63 Single VAT Entity intra-community VAT number -->
+        <cac:PartyTaxScheme>
+            <cbc:CompanyID>FR88888999000</cbc:CompanyID>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:PartyTaxScheme>
+    </cac:TaxRepresentativeParty>
+
+    <!-- BG-19 Payment instructions -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>FR7630006000011122233440001</cbc:ID>
+            <cbc:Name>Filiale Alpha SAS</cbc:Name>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>BNPAFRPPXXX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+
+    <!-- BG-20 Payment terms -->
+    <cac:PaymentTerms>
+        <cbc:Note>Avoir à déduire de la prochaine facture</cbc:Note>
+    </cac:PaymentTerms>
+
+    <!-- BG-23 VAT Breakdown -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">120.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">600.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">120.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+
+    <!-- BG-22 Document totals -->
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">600.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">600.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">720.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">720.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+
+    <!-- BG-25 Credit Note Line 1 — 2 of the 8 invoiced servers returned -->
+    <cac:CreditNoteLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:CreditedQuantity unitCode="H87">2</cbc:CreditedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">600.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Retour de 2 serveurs rack 2U (facture ALPHA-2026-0198, ligne 1)</cbc:Description>
+            <cbc:Name>Serveur rack professionnel 2U</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>20.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">300.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="H87">1</cbc:BaseQuantity>
+        </cac:Price>
+    </cac:CreditNoteLine>
+
+</CreditNote>
