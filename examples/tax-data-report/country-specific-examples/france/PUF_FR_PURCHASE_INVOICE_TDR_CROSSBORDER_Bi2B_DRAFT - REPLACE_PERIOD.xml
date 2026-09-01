@@ -4,7 +4,7 @@
     xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
     
 
-    <!-- Example of a rectification scenario -->
+    <!-- Example of a REPLACE_PERIOD (Rectification/RE) scenario -->
     <ext:UBLExtensions>
         <ext:UBLExtension>
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
@@ -30,17 +30,17 @@
                         <puf:Key>reportPeriodEnd</puf:Key>
                         <puf:Value>2026-06-30</puf:Value>
                     </puf:RestrictedInformation>
-                    <!-- In an rectification/replace period scenario: transmission type. RE meaning to replace a whole period. NOTE all documents that should be in the report that will replace the old needs to be resent -->
+                    <!-- REPLACE_PERIOD: replaces the whole period. NOTE all documents that should be in the report that will replace the old needs to be resent -->
                     <puf:RestrictedInformation>
                         <puf:Key>transmissionType</puf:Key>
-                        <puf:Value>RECTIFICATION</puf:Value>
+                        <puf:Value>REPLACE_PERIOD</puf:Value>
                     </puf:RestrictedInformation>
                     <!-- Tax report id -> taxReport/taxReportId -->
                     <puf:RestrictedInformation>
                         <puf:Key>taxReportId</puf:Key>
-                        <puf:Value>The id for the RE-REPORT</puf:Value>
+                        <puf:Value>The id for the REPLACE_PERIOD-REPORT</puf:Value>
                     </puf:RestrictedInformation>
-                    <!-- In an rectification/replace period scenario: Reference to a previous tax report document. For french rectification scenario this must be the id of the aggregated report -->
+                    <!-- In a REPLACE_PERIOD scenario: Reference to a previous tax report document. For french rectification scenario this must be the id of the aggregated report -->
                     <puf:RestrictedInformation>
                         <puf:Key>referencedReportId</puf:Key>
                         <puf:Value>000000000000047</puf:Value>
