@@ -213,13 +213,14 @@
                         <puf:LineExtension>
                             <!-- Tax currency line total amount
                                     Total line amount, including tax, discount and charges in tax currency. -->
-                            <puf:TaxCurrencyTaxInclusiveLineExtensionAmount currencyID="HUF">114830.23</puf:TaxCurrencyTaxInclusiveLineExtensionAmount>
+                            <puf:TaxCurrencyTaxInclusiveLineExtensionAmount currencyID="HUF">1994.00</puf:TaxCurrencyTaxInclusiveLineExtensionAmount>
                             <!-- Tax currency line net amount
                                     Net amount in tax currency. -->
                             <puf:TaxCurrencyLineExtensionAmount currencyID="HUF">90417.50</puf:TaxCurrencyLineExtensionAmount>
                             <!-- Tax inclusive line total amount
                                     Total line amount, including tax, discount and charges. -->
-                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">317.50</puf:TaxInclusiveLineExtensionAmount>
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">19945.00</puf:TaxInclusiveLineExtensionAmount>
+                            
                         </puf:LineExtension>
                     </puf:PageroExtension>
                 </ext:ExtensionContent>
@@ -281,6 +282,18 @@
             <!-- Item net price
                 Net price of the item, this value must not be negative. -->
             <cbc:PriceAmount currencyID="EUR">250.00</cbc:PriceAmount>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PriceExtension>
+                                <puf:TaxCurrencyPriceAmount currencyID="HUF">250.00</puf:TaxCurrencyPriceAmount>
+                            </puf:PriceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
         </cac:Price>
     </cac:InvoiceLine>
 </Invoice>
