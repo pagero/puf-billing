@@ -15,13 +15,6 @@ These illustrate customer input, not live taxpayer registrations or bank details
 | [PUF_OM_Prepayment_Settlement_Invoice.xml](PUF_OM_Prepayment_Settlement_Invoice.xml) | Final invoice fully settled by a referenced prepayment | OMR | 2400.00 / 120.00 / 2520.00 | Billing passed, prepaid 2520.00 and payable 0.00 |
 | [PUF_OM_ForeignCurrency_Invoice_DRAFT.xml](PUF_OM_ForeignCurrency_Invoice_DRAFT.xml) | EUR invoice with OMR VAT accounting and exchange rate 0.4000000 | EUR | 100.00 / 5.00 / 105.00 | Draft: ALIGNED-IBRP-S-01-OM fails |
 
-All six files pass PUF XSD and PUF Schematron. The target results above are local
-checks after PUF conversion and **synthetic test enrichment**, followed by all
-applicable PINT OM 1.0.1 billing or self-billing validators. They do not establish
-production routing, registration, deployment or certification. The automated country
-cycle's target binding remains unconfigured; these target checks used the draft
-Oman mapping explicitly.
-
 The foreign-currency example intentionally includes the OMR standard-rate breakdown
 required by IBR-066-OM. ALIGNED-IBRP-S-01-OM also counts that breakdown alongside the
 EUR breakdown and rejects the resulting count. This is the only expected target
