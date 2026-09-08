@@ -36,6 +36,10 @@ include::country-specifics/italy.adoc[]
 
 include::country-specifics/malaysia.adoc[]
 
+=== Oman
+
+include::country-specifics/oman.adoc[]
+
 === Philippines
 
 include::country-specifics/philippines.adoc[]

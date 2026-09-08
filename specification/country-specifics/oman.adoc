@@ -1,0 +1,431 @@
+This section contains information about special requirements concerning invoicing in Oman.
+
+Oman e-invoicing follows the Oman Tax Authority *Fawtara* programme and is specified by the OpenPeppol Post Award Coordinating Community as *Peppol PINT OM*, in a billing and a self-billing variant. PUF supports Oman through standard PUF elements together with the existing PUF UBL extensions originally introduced for KSA and the UAE. No Oman-specific extension element is required.
+
+==== Invoice type code and transaction type
+
+Available invoice type code values to be used in Oman can be found here: https://pagero.github.io/puf-code-lists/#_invoice_type_codes_oman[Invoice type codes Oman^].
+
+In addition to the type code, every Oman document MUST carry an *invoice transaction type code* (BTOM-001). The value is a fixed 20-character string of `0` and `1` flags identifying which Oman business contexts apply, provided as the `name` attribute on `cbc:InvoiceTypeCode` (or `cbc:CreditNoteTypeCode` for credit notes).
+
+The position-by-position structure is documented here: https://pagero.github.io/puf-code-lists/#_invoice_transaction_type_code_oman[Invoice transaction type code Oman^].
+
+Exactly one of position 1 (Full Tax Invoice) and position 2 (Simplified Tax Invoice) MUST be set. Several of the remaining flags may be combined on the same document.
+
+*Example* +
+_Full tax invoice in Oman without any further transaction context_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="10000000000000000000">380</cbc:InvoiceTypeCode><!--1-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> InvoiceTypeCode `380` for a tax invoice. Attribute `name` carries the Oman invoice transaction type code (BTOM-001) with position 1 set for *Full Tax Invoice*.
+
+*Example* +
+_Full tax invoice for an export of goods_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="10000010000000000000">380</cbc:InvoiceTypeCode><!--1-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Positions 1 and 7 set: a full tax invoice that is also an export invoice.
+
+==== Document UUID
+
+Oman requires a document UUID (BTOM-002) that is a valid *version 5* UUID (RFC 4122). Pagero generates this UUID during processing, so no customer input is required and no PUF element needs to be populated for it.
+
+[NOTE]
+====
+The seller UUID (BTOM-004), required when the buyer electronic address is the placeholder `997770000099`, has no confirmed PUF input representation yet. It is not covered by this section.
+====
+
+==== Party identification
+
+Oman qualifies a party identifier with a scheme code from the PINT OM *Buyer/Seller Identifier* code list. In PUF the identifier value goes on `cac:PartyIdentification/cbc:ID` and the scheme goes on the standard `@schemeID` attribute using the `OM:` prefixed PUF-008 codes.
+
+The available codes are documented here: https://pagero.github.io/puf-code-lists/#_identification_scheme_oman[Identification scheme Oman^].
+
+An Oman identifier given on `cac:PartyIdentification/cbc:ID` *without* a scheme identifier is not processed and the identifier will be missing from the resulting invoice. Repeat `cac:PartyIdentification` to send more than one qualified identifier for the same party.
+
+The scheme is required in these cases in particular:
+
+* `OM:SZLN` (Special Zone License Number) for a special-zone supply when the party's country subdivision code is not `MO`.
+* `OM:ICID` (Importer Customs ID) on the buyer for an import of goods.
+
+Use `OM:TIN` for a seller's or buyer's *Tax Identification Number (TIN)* supplied as party identification (IBT-029 or IBT-046). The https://tms.taxoman.gov.om/portal/registration[Oman Tax Authority's registration guidance^] calls the income-tax identifier a _tax file number_. The https://www.oecd.org/content/dam/oecd/en/topics/policy-issue-focus/aeoi/oman-tin.pdf[Oman TIN information sheet^] lists the Tax Card as a place to find the TIN. The card is evidence of registration, not an additional identifier required by this mapping.
+
+Supply the party's VAT registration identifier (TRN/VATIN) on `cac:PartyTaxScheme/cbc:CompanyID` with `cac:TaxScheme/cbc:ID = 'VAT'`. A TIN supplied as a party identifier is not used to populate the VAT-registration field. Supply each identifier in its intended role rather than treating a TIN and a VAT registration as interchangeable.
+
+*Example* +
+_Seller identified by its Commercial Registration number, with its TRN as the VAT identifier_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <!-- Code omitted for clarity -->
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="OM:CR">1234567</cbc:ID><!--1-->
+      </cac:PartyIdentification>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>OM1100000000</cbc:CompanyID><!--2-->
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <!-- Code omitted for clarity -->
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+</Invoice>
+----
+<1> Commercial Registration number, qualified with the PUF-008 scheme `OM:CR`. The Oman target carries the qualifier as `@schemeName="CR"`.
+<2> The TRN stays on `cac:PartyTaxScheme/cbc:CompanyID` with `cac:TaxScheme/cbc:ID = 'VAT'`.
+
+==== Electronic address (Participant Identifier)
+
+The seller and buyer electronic address (IBT-034 / IBT-049) is provided on `cbc:EndpointID` and MUST have a scheme identifier. The Oman Peppol EAS code is `0248` (_Oman Value Added Tax Identification Number (VATIN)_).
+
+When there is no real receiver on the network, for example a B2C supply, the buyer electronic address is the predefined placeholder `997770000099`.
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="0248">1345678901</cbc:EndpointID><!--1-->
+      <!-- Code omitted for clarity -->
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+</Invoice>
+----
+<1> Participant Identifier under the Oman EAS scheme `0248`.
+
+==== Country subdivision (Special Zones)
+
+Whenever an Oman address is provided, the country subdivision code identifies whether the party sits in mainland Oman or in a designated zone. It is provided in `cbc:CountrySubentityCode` (BTOM-024 for the seller, BTOM-026 for the buyer) with the country code in `cac:Country/cbc:IdentificationCode = 'OM'`.
+
+[%autowidth]
+|===
+|Code |Subdivision
+
+|`MO` |Mainland Oman
+|`SEZAD` |Special Economic Zone at Duqm
+|`SLLFZ` |Salalah Free Zone
+|`SHRFZ` |Sohar Free Zone
+|`AFZ` |Al Mazunah Free Zone
+|`OTH` |Other
+|===
+
+This code drives the special-zone identifier requirement described under Party identification above: a special-zone supply from or to a party whose subdivision code is not `MO` requires that party's `OM:SZLN` licence number.
+
+==== Currency and OMR amounts
+
+The document currency code MUST be present (`cbc:DocumentCurrencyCode`). When the document currency is not OMR, the tax accounting currency MUST be `OMR` (`cbc:TaxCurrencyCode = 'OMR'`) and the currency exchange rate MUST be provided, with at most 7 decimal places.
+
+The exchange rate is provided through the standard UBL `cac:TaxExchangeRate` group:
+
+[%autowidth.stretch]
+|===
+|Field |BT code |PUF path
+
+|Source currency code |BTOM-028 |`cac:TaxExchangeRate/cbc:SourceCurrencyCode`, matching `cbc:DocumentCurrencyCode`
+|Target currency code |BTOM-029 |`cac:TaxExchangeRate/cbc:TargetCurrencyCode`, always `OMR`
+|Exchange rate |BTOM-003 |`cac:TaxExchangeRate/cbc:CalculationRate`
+|===
+
+When providing the exchange rate in PUF, also set `cac:TaxExchangeRate/cbc:MathematicOperatorCode` to `Multiply` (PUF-R006). This PUF input qualifier is not an additional Oman business term.
+
+Supply the invoice VAT total in invoice currency and, when applicable, a second VAT total in OMR. For a standard-rated accounting-currency VAT breakdown (IBR-066-OM), place `puf:TaxCurrencyTaxAmount` with `currencyID="OMR"` in the existing `puf:TaxSubtotalExtension` on the corresponding document-currency subtotal. Its category and rate supply IBT-192 and IBT-193; the extension amount supplies IBT-190.
+
+[WARNING]
+====
+PINT OM 1.0.1 rule IBR-066-OM requires an accounting-currency standard-rate breakdown, but ALIGNED-IBRP-S-01-OM counts standard-rate breakdowns across both currencies and permits only one per rate. Documents supplying both currently fail the latter rule. Do not remove the required accounting amount to bypass this conflict. The foreign-currency example is marked as a draft pending a publisher correction or clarification.
+====
+
+==== Invoice line amounts including VAT
+
+For non-simplified invoices, Oman requires line VAT (IBR-038-OM) and the line total including VAT (IBR-158-OM) in the invoice currency, including when that currency is OMR. These are distinct from accounting-currency amounts. Simplified invoices may omit line VAT under IBR-038-OM; IBR-158-OM exempts the line-total calculation when a simplified invoice has no line VAT.
+
+[%autowidth.stretch]
+|===
+|Field |BT code |PUF path
+
+|Invoice line VAT amount |BTOM-016 |`cac:InvoiceLine/cac:TaxTotal/cac:TaxSubtotal/cbc:TaxAmount`
+|Invoice line total including VAT |BTOM-017 |`puf:LineExtension/puf:TaxInclusiveLineExtensionAmount`
+|===
+
+The line total including VAT is normally the line net amount plus the line VAT. On a profit margin invoice it is the total sale value instead.
+
+==== Item type, classification and service type
+
+Non-simplified Oman invoices must identify each item as goods or a service (IBR-078-OM) and carry the applicable classification codes. All three inputs below use existing PUF elements. PUF item-type values differ from the single-letter codes in the Oman target.
+
+[%autowidth.stretch]
+|===
+|Field |BT code |PUF path |Values
+
+|Goods or services identification |BTOM-019 |`puf:ItemExtension/puf:ItemType` |`GOODS` or `SERVICE` in PUF, mapped to Oman `G` or `S` (CL-07-OM)
+|Industrial classification code |BTOM-033 |`cac:Item/cac:AdditionalItemIdentification/cbc:ID` with `@schemeID = 'CC'` |ISIC list published by the Omani Ministry of Commerce, Industry and Investment Promotion, rule `CL-08-OM-ISIC`
+|Service type code |BTOM-034 |`cac:Item/cac:AdditionalItemIdentification/cbc:ID` with `@schemeID = 'MP'` |Type of Services (UNGM) list, rule `CL-12-OM`
+|===
+
+The item type drives two further requirements:
+
+* When the PUF item type is `GOODS` (Oman `G`), the *item classification* (IBT-158) MUST be present with the classification scheme identifier (`@listID`) set to `HS`. Oman requires a 12-digit HS code from the list published by the Royal Oman Police (Directorate General of Customs).
+* The service type code is required when the service-type group is provided, and in particular for an export of services declared with the zero-rating reason `VATZR-OM-09`.
+
+The industrial classification code is required for every item *except* on a simplified tax invoice, an import of goods, an import of services under the reverse charge mechanism, or a profit margin self-invoice.
+
+*Example* +
+_Service line with the item type, the industrial classification and the service type_
+[source,xml]
+----
+<cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+  <cac:Item>
+    <ext:UBLExtensions>
+      <ext:UBLExtension>
+        <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:ItemExtension</ext:ExtensionURI>
+        <ext:ExtensionContent>
+          <puf:PageroExtension>
+            <puf:ItemExtension>
+              <puf:ItemType>SERVICE</puf:ItemType><!--1-->
+            </puf:ItemExtension>
+          </puf:PageroExtension>
+        </ext:ExtensionContent>
+      </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:Name>Consulting services</cbc:Name>
+    <cac:AdditionalItemIdentification>
+      <cbc:ID schemeID="CC">620202</cbc:ID><!--2-->
+    </cac:AdditionalItemIdentification>
+    <cac:AdditionalItemIdentification>
+      <cbc:ID schemeID="MP">81000000</cbc:ID><!--3-->
+    </cac:AdditionalItemIdentification>
+  </cac:Item>
+</cac:InvoiceLine>
+----
+<1> PUF item type `SERVICE`. The Oman target carries `S` on `cac:ItemSpecificationDocumentReference/cbc:DocumentTypeCode`.
+<2> Industrial classification (ISIC) code with `schemeID="CC"`.
+<3> Service type code with `schemeID="MP"`. For a goods line, the published Oman examples use `00000000` (Other) for this identifier alongside item type `G`; use `GOODS` for that item type in PUF.
+
+==== VAT category, exemption and zero rating
+
+Oman uses a restricted VAT category code set (rule `CL-04-OM`): `S` (Standard rate), `E` (Exempt from tax), `O` (Services outside scope of tax / not subject to tax) and `Z` (Zero rated). The Peppol categories `AE` and `N` are not used in Oman.
+
+A reason code is required whenever the category is `E` or `Z`, at the same level as the category code. The two code sets are separate and MUST NOT be mixed:
+
+* Category `E` requires an exemption reason code `VATEX-OM-01` to `VATEX-OM-12` (rule `CL-05-OM`).
+* Category `Z` requires a zero rating reason code `VATZR-OM-01` to `VATZR-OM-16` (rule `CL-10-OM`).
+
+Both sets are documented here: https://pagero.github.io/puf-code-lists/#_tax_exemption_codes_in_oman[Tax Exemption Codes in Oman^].
+
+==== Profit Margin Scheme
+
+An invoice issued under the Oman profit margin scheme sets position 10 of the transaction type code, and a profit margin self-invoice sets position 11.
+
+Every line of such a document MUST carry a *profit margin item type code* (BTOM-025), provided through the standard UBL `cac:AdditionalItemProperty/cbc:NameCode`. The values are set by rule `CL-11-OM`:
+
+[%autowidth]
+|===
+|Code |Item category
+
+|`VATPM-OM-01` |Tangible movable property
+|`VATPM-OM-02` |Antiques
+|`VATPM-OM-03` |Art works
+|`VATPM-OM-04` |Items of scientific, historical or archaeological importance
+|`VATPM-OM-05` |Assets of collectors
+|===
+
+[NOTE]
+====
+`cac:AdditionalItemProperty/cbc:NameCode` is a plain UBL element and is not governed by a PUF code list. The `puf:SpecialRegimeKey` extension is not used for this purpose: it sits on the VAT breakdown, whereas the Oman profit margin code is required per line.
+====
+
+The scheme also requires a document-level total amount due (BTOM-020) expressed in OMR. It is carried on a `cac:AdditionalDocumentReference` qualified by `cbc:DocumentTypeCode = 'PM_TOTAL'`, with the amount in `cbc:DocumentDescription` and the currency code `OMR` in `cbc:ID`.
+
+*Example* +
+_Profit margin total on a qualified additional document reference_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AdditionalDocumentReference>
+    <cbc:ID>OMR</cbc:ID><!--1-->
+    <cbc:DocumentTypeCode>PM_TOTAL</cbc:DocumentTypeCode><!--2-->
+    <cbc:DocumentDescription>4500.000</cbc:DocumentDescription><!--3-->
+  </cac:AdditionalDocumentReference>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Profit margin currency (BTOM-020-1), always `OMR`.
+<2> Qualifier `PM_TOTAL` (BTOM-020-2) identifying the reference as the profit margin total.
+<3> Total amount due under the profit margin scheme (BTOM-020).
+
+==== Third party invoicing
+
+An invoice created by an authorised third party on behalf of the supplier sets position 4 of the transaction type code, and then requires the third party's details exactly once (BGOM-01 and BGOM-02).
+
+PUF carries this through the existing *seller agent* representation: `cac:AccountingSupplierParty/cac:Party/cac:AgentParty`, with the role qualifier `SR` on `puf:PartyExtension/puf:RoleCode/cbc:ID`. No Oman-specific party key is needed.
+
+The required details are the third party name (BTOM-005), its VAT identifier (BTOM-006) under tax scheme `VAT`, and its address: street (BTOM-007), additional street (BTOM-008), building name (BTOM-009), city (BTOM-010), postal code (BTOM-011) and country code (BTOM-013).
+
+*Example*
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="10010000000000000000">380</cbc:InvoiceTypeCode><!--1-->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <!-- Code omitted for clarity -->
+      <cac:AgentParty>
+        <ext:UBLExtensions>
+          <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+            <ext:ExtensionContent>
+              <puf:PageroExtension>
+                <puf:PartyExtension>
+                  <puf:RoleCode>
+                    <cbc:ID>SR</cbc:ID><!--2-->
+                  </puf:RoleCode>
+                </puf:PartyExtension>
+              </puf:PageroExtension>
+            </ext:ExtensionContent>
+          </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cac:PartyName>
+          <cbc:Name>Muscat Billing Services LLC</cbc:Name><!--3-->
+        </cac:PartyName>
+        <cac:PostalAddress>
+          <cbc:StreetName>Al Khuwair Street</cbc:StreetName>
+          <cbc:AdditionalStreetName>Al Khuwair</cbc:AdditionalStreetName>
+          <cbc:BuildingName>Block 12</cbc:BuildingName><!--4-->
+          <cbc:CityName>Muscat</cbc:CityName>
+          <cbc:PostalZone>112</cbc:PostalZone>
+          <cac:Country>
+            <cbc:IdentificationCode>OM</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:PostalAddress>
+        <cac:PartyTaxScheme>
+          <cbc:CompanyID>OM1100000001</cbc:CompanyID><!--5-->
+          <cac:TaxScheme>
+            <cbc:ID>VAT</cbc:ID>
+          </cac:TaxScheme>
+        </cac:PartyTaxScheme>
+      </cac:AgentParty>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+</Invoice>
+----
+<1> Position 4 set for a third-party invoice.
+<2> Role qualifier `SR`, required for the agent party to be recognised as the seller's agent.
+<3> Third party name (BTOM-005).
+<4> Third address line (BTOM-009). Use `cbc:BuildingName` for building details, or `cbc:Postbox` for a PO box. Oman carries the third line as `cac:AddressLine/cbc:Line`.
+<5> Third party VAT identifier (BTOM-006).
+
+==== Preceding document reference and correction reason
+
+A credit note, a debit note or a self-billed credit note MUST reference the preceding document and state why it is being issued.
+
+The preceding document UUID (BTOM-031) is provided on the standard UBL `cbc:UUID` of the billing reference, alongside the document number and issue date:
+
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:BillingReference>
+    <cac:InvoiceDocumentReference>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+          <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:BillingReferenceExtension>
+                <puf:Code>VAL</puf:Code><!--2-->
+              </puf:BillingReferenceExtension>
+            </puf:PageroExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:ID>OM-INV-001</cbc:ID>
+      <cbc:UUID>e74a6f5d-79b7-5c4e-8f40-37a8b84d5058</cbc:UUID><!--1-->
+      <cbc:IssueDate>2026-09-01</cbc:IssueDate>
+    </cac:InvoiceDocumentReference>
+  </cac:BillingReference>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Preceding document UUID (BTOM-031), a version 5 UUID identifying the referenced document.
+<2> Credit or debit note reason code (BTOM-032). Oman carries it on `cac:InvoiceDocumentReference/cbc:DocumentStatusCode`.
+
+The supported reason codes are `CAN`, `VAT`, `VAL`, `QTY` and `OTH`. See https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_oman[PUF-023-CORRECTIONCODE (Oman)^] for the definition of each code. Do not use the United Arab Emirates correction codes on an Oman document.
+
+==== Prepayment references
+
+When a paid amount (IBT-113) is present, the prepayment invoice number (BTOM-027) and its UUID (BTOM-014) MUST be provided. Both go on the same `cac:AdditionalDocumentReference`, which Oman qualifies with `cbc:DocumentTypeCode = 'PDR'`:
+
+[source,xml]
+----
+<cac:AdditionalDocumentReference>
+  <cbc:ID>OM-PRE-001</cbc:ID><!--1-->
+  <cbc:UUID>1d5b8a52-8d3f-5f7a-9c21-6a4f9e2b7c11</cbc:UUID><!--2-->
+  <cbc:DocumentTypeCode>PDR</cbc:DocumentTypeCode><!--3-->
+</cac:AdditionalDocumentReference>
+----
+<1> Prepayment invoice number (BTOM-027).
+<2> Prepayment invoice UUID (BTOM-014).
+<3> Qualifier `PDR` (BTOM-014-1) identifying the reference as a prepayment document reference.
+
+==== Import of goods
+
+An invoice for an import of goods sets position 13 of the transaction type code, and then requires the Incoterms code (BTOM-022), the customs declaration number (BTOM-021) and the import date (BTOM-030).
+
+The Incoterms code is provided on the standard UBL `cac:DeliveryTerms/cbc:ID` and MUST be one of `EXW`, `FCA`, `CPT`, `CIP`, `DAP`, `DPU`, `DDP`, `FAS`, `FOB`, `CFR` or `CIF` (rule `CL-09-OM`).
+
+[WARNING]
+====
+The customs declaration number (BTOM-021) and the import date (BTOM-030) have no confirmed PUF input representation yet. Their handling is provisional and should not be relied on for an import-of-goods scenario.
+====
+
+==== Self-billing
+
+Self-billed documents keep their ordinary type code in PUF (`cbc:InvoiceTypeCode = 380`, `cbc:CreditNoteTypeCode = 381`) and are flagged through the standard `puf:SelfBilled` extension at document level. See <<_self_billing_indicator, Self Billing Indicator>> for the structure.
+
+The Oman target format then uses the UN/CEFACT self-billing type codes, `389` for a self-billed invoice and `261` for a self-billed credit note, and selects the PINT OM self-billing customisation. Position 3 of the transaction type code identifies the document as self-billed.
+
+*Example* +
+_Self-billed Oman tax invoice_
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:SelfBilled>true</puf:SelfBilled><!--1-->
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="10100000000000000000">380</cbc:InvoiceTypeCode><!--2-->
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Self-billing flagged through the `puf:SelfBilled` extension.
+<2> Ordinary tax-invoice code `380` retained in PUF, with position 3 of the transaction type code set for *Self-billed Invoice*. The target document carries type code `389`.
+
+==== Complete examples
+
+The https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/oman[Oman PUF examples^] include standard billing, a goods credit note, self-billing, third-party billing and settlement of a prepayment. The example index records their official source basis and local validation scope. The foreign-currency example is explicitly marked as a draft pending resolution of the accounting-currency rule conflict.

@@ -18,6 +18,11 @@ Scheme identifier of the referenced object/document. +
 When used it should be according to the list +
 https://pagero.github.io/puf-code-lists/#_puf_005_invoicedobjectidentifier[PUF-005-INVOICEDOBJECTIDENTIFIER^].
 
+|`cbc:UUID`
+|**Referenced document UUID** +
+The UUID assigned to the referenced or attached document, separate from its identifier in `cbc:ID` and from the UUID of the current Invoice or CreditNote. +
+Provide the value directly in this element.
+
 |`cbc:IssueDate`
 |**Referenced document issue date** +
 Issue Date for the referenced object/document.

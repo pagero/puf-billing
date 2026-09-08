@@ -372,7 +372,7 @@ When the invoice type code is `480` (Out of scope of VAT) or `81` (Credit note r
 
 ==== Self-billing
 
-In PUF, self-billing is *not* signalled through a dedicated UBL document type code. Self-billed documents keep their original type code (`cbc:InvoiceTypeCode = 380` for a self-billed tax invoice, `cbc:CreditNoteTypeCode = 381` for a self-billed credit note) and are flagged through the standard `puf:SelfBilled` extension at document level. See `<<_selfbilled, Self-Billed extension>>` for the structure.
+In PUF, self-billing is *not* signalled through a dedicated UBL document type code. Self-billed documents keep their original type code (`cbc:InvoiceTypeCode = 380` for a self-billed tax invoice, `cbc:CreditNoteTypeCode = 381` for a self-billed credit note) and are flagged through the standard `puf:SelfBilled` extension at document level. See <<_self_billing_indicator, Self Billing Indicator>> for the structure.
 
 *Example* +
 _Self-billed UAE tax invoice_
