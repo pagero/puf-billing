@@ -213,13 +213,14 @@
                         <puf:LineExtension>
                             <!-- Tax currency line total amount
                                     Total line amount, including tax, discount and charges in tax currency. -->
-                            <puf:TaxCurrencyTaxInclusiveLineExtensionAmount currencyID="HUF">114830.23</puf:TaxCurrencyTaxInclusiveLineExtensionAmount>
+                            <puf:TaxCurrencyTaxInclusiveLineExtensionAmount currencyID="HUF">1994.00</puf:TaxCurrencyTaxInclusiveLineExtensionAmount>
                             <!-- Tax currency line net amount
                                     Net amount in tax currency. -->
                             <puf:TaxCurrencyLineExtensionAmount currencyID="HUF">90417.50</puf:TaxCurrencyLineExtensionAmount>
                             <!-- Tax inclusive line total amount
                                     Total line amount, including tax, discount and charges. -->
-                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">317.50</puf:TaxInclusiveLineExtensionAmount>
+                            <puf:TaxInclusiveLineExtensionAmount currencyID="EUR">19945.00</puf:TaxInclusiveLineExtensionAmount>
+                            
                         </puf:LineExtension>
                     </puf:PageroExtension>
                 </ext:ExtensionContent>
