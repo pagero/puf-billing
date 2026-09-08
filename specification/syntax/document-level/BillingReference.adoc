@@ -12,6 +12,11 @@ Extension is added to provide additional information in the `cac:BillingReferenc
 |**Preceding invoice number** +
 Identifier of a previous issued invoice.
 
+|`cbc:UUID`
+|**Preceding invoice UUID** +
+The UUID assigned to the referenced invoice, separate from its invoice number in `cbc:ID` and from the UUID of the current document. +
+Provide the value directly in this element. No PUF extension is required.
+
 |`cbc:IssueDate`
 |**Issue date** +
 Issue date of previous issued invoice. +
@@ -32,6 +37,7 @@ _cbc:Note example_
     <cac:BillingReference>
         <cac:InvoiceDocumentReference>
             <cbc:ID>1144884</cbc:ID>
+            <cbc:UUID>00000000-0000-5000-8000-000000000011</cbc:UUID>
             <cbc:IssueDate>2021-01-01</cbc:IssueDate>
             <cbc:DocumentTypeCode>380</cbc:DocumentTypeCode>
         </cac:InvoiceDocumentReference>
