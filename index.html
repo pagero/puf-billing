@@ -769,20 +769,21 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel3">
 <li><a href="#_invoice_type_code_and_transaction_type">5.10.1. Invoice type code and transaction type</a></li>
 <li><a href="#_document_uuid">5.10.2. Document UUID</a></li>
-<li><a href="#_party_identification_5">5.10.3. Party identification</a></li>
-<li><a href="#_electronic_address_participant_identifier">5.10.4. Electronic address (Participant Identifier)</a></li>
-<li><a href="#_country_subdivision_special_zones">5.10.5. Country subdivision (Special Zones)</a></li>
-<li><a href="#_currency_and_omr_amounts">5.10.6. Currency and OMR amounts</a></li>
-<li><a href="#_invoice_line_amounts_including_vat">5.10.7. Invoice line amounts including VAT</a></li>
-<li><a href="#_item_type_classification_and_service_type">5.10.8. Item type, classification and service type</a></li>
-<li><a href="#_vat_category_exemption_and_zero_rating">5.10.9. VAT category, exemption and zero rating</a></li>
-<li><a href="#_profit_margin_scheme">5.10.10. Profit Margin Scheme</a></li>
-<li><a href="#_third_party_invoicing">5.10.11. Third party invoicing</a></li>
-<li><a href="#_preceding_document_reference_and_correction_reason">5.10.12. Preceding document reference and correction reason</a></li>
-<li><a href="#_prepayment_references">5.10.13. Prepayment references</a></li>
-<li><a href="#_import_of_goods">5.10.14. Import of goods</a></li>
-<li><a href="#_self_billing_2">5.10.15. Self-billing</a></li>
-<li><a href="#_complete_examples">5.10.16. Complete examples</a></li>
+<li><a href="#_seller_uuid">5.10.3. Seller UUID</a></li>
+<li><a href="#_party_identification_5">5.10.4. Party identification</a></li>
+<li><a href="#_electronic_address_participant_identifier">5.10.5. Electronic address (Participant Identifier)</a></li>
+<li><a href="#_country_subdivision_special_zones">5.10.6. Country subdivision (Special Zones)</a></li>
+<li><a href="#_currency_and_omr_amounts">5.10.7. Currency and OMR amounts</a></li>
+<li><a href="#_invoice_line_amounts_including_vat">5.10.8. Invoice line amounts including VAT</a></li>
+<li><a href="#_item_type_classification_and_service_type">5.10.9. Item type, classification and service type</a></li>
+<li><a href="#_vat_category_exemption_and_zero_rating">5.10.10. VAT category, exemption and zero rating</a></li>
+<li><a href="#_profit_margin_scheme">5.10.11. Profit Margin Scheme</a></li>
+<li><a href="#_third_party_invoicing">5.10.12. Third party invoicing</a></li>
+<li><a href="#_preceding_document_reference_and_correction_reason">5.10.13. Preceding document reference and correction reason</a></li>
+<li><a href="#_prepayment_references">5.10.14. Prepayment references</a></li>
+<li><a href="#_import_of_goods">5.10.15. Import of goods</a></li>
+<li><a href="#_self_billing_2">5.10.16. Self-billing</a></li>
+<li><a href="#_complete_examples">5.10.17. Complete examples</a></li>
 </ul>
 </li>
 <li><a href="#_philippines">5.11. Philippines</a>
@@ -14853,6 +14854,43 @@ The post code or PIN code as referred to in India must exist on all parties and 
 <div class="paragraph">
 <p>Oman requires a document UUID (BTOM-002) that is a valid <strong>version 5</strong> UUID (RFC 4122). Pagero generates this UUID during processing, so no customer input is required and no PUF element needs to be populated for it.</p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_seller_uuid"><a class="anchor" href="#_seller_uuid"></a><a class="link" href="#_seller_uuid">5.10.3. Seller UUID</a></h4>
+<div class="paragraph">
+<p>The seller UUID (BTOM-004) is the receipt UUID the seller generates for the document. It is required when the buyer electronic address (IBT-049) is the anonymous placeholder <code>997770000099</code>, and it must then be a valid version 5 UUID (IBR-173-OM).</p>
+</div>
+<div class="paragraph">
+<p>Supply it as a generic PUF restricted-information key-value pair with the key <code>OM_SELLER_UUID</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+      <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+            <span class="tag">&lt;puf:Key&gt;</span>OM_SELLER_UUID<span class="tag">&lt;/puf:Key&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+            <span class="tag">&lt;puf:Value&gt;</span>490f2bda-1b64-5c61-868c-1066f28651fc<span class="tag">&lt;/puf:Value&gt;</span>
+          <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+        <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+      <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The key is fixed. The value reaches the target on <code>cac:AccountingSupplierParty/cbc:AdditionalAccountID</code>.</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -14861,7 +14899,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The seller UUID (BTOM-004), required when the buyer electronic address is the placeholder <code>997770000099</code>, has no confirmed PUF input representation yet. It is not covered by this section.</p>
+<p>This value is per-document receipt data, not an identifier of the seller. Do not send it on <code>cac:PartyIdentification</code>: that element carries the seller identifier (IBT-029), whose qualifier is validated against the Buyer/Seller Identifier code list by CL-06-OM, and <code>UUID</code> is not a value in that list.</p>
 </div>
 </td>
 </tr>
@@ -14869,7 +14907,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_5"><a class="anchor" href="#_party_identification_5"></a><a class="link" href="#_party_identification_5">5.10.3. Party identification</a></h4>
+<h4 id="_party_identification_5"><a class="anchor" href="#_party_identification_5"></a><a class="link" href="#_party_identification_5">5.10.4. Party identification</a></h4>
 <div class="paragraph">
 <p>Oman qualifies a party identifier with a scheme code from the PINT OM <strong>Buyer/Seller Identifier</strong> code list. In PUF the identifier value goes on <code>cac:PartyIdentification/cbc:ID</code> and the scheme goes on the standard <code>@schemeID</code> attribute using the <code>OM:</code> prefixed PUF-008 codes.</p>
 </div>
@@ -14938,7 +14976,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_electronic_address_participant_identifier"><a class="anchor" href="#_electronic_address_participant_identifier"></a><a class="link" href="#_electronic_address_participant_identifier">5.10.4. Electronic address (Participant Identifier)</a></h4>
+<h4 id="_electronic_address_participant_identifier"><a class="anchor" href="#_electronic_address_participant_identifier"></a><a class="link" href="#_electronic_address_participant_identifier">5.10.5. Electronic address (Participant Identifier)</a></h4>
 <div class="paragraph">
 <p>The seller and buyer electronic address (IBT-034 / IBT-049) is provided on <code>cbc:EndpointID</code> and MUST have a scheme identifier. The Oman Peppol EAS code is <code>0248</code> (<em>Oman Value Added Tax Identification Number (VATIN)</em>).</p>
 </div>
@@ -14971,7 +15009,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_country_subdivision_special_zones"><a class="anchor" href="#_country_subdivision_special_zones"></a><a class="link" href="#_country_subdivision_special_zones">5.10.5. Country subdivision (Special Zones)</a></h4>
+<h4 id="_country_subdivision_special_zones"><a class="anchor" href="#_country_subdivision_special_zones"></a><a class="link" href="#_country_subdivision_special_zones">5.10.6. Country subdivision (Special Zones)</a></h4>
 <div class="paragraph">
 <p>Whenever an Oman address is provided, the country subdivision code identifies whether the party sits in mainland Oman or in a designated zone. It is provided in <code>cbc:CountrySubentityCode</code> (BTOM-024 for the seller, BTOM-026 for the buyer) with the country code in <code>cac:Country/cbc:IdentificationCode = 'OM'</code>.</p>
 </div>
@@ -15018,7 +15056,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_currency_and_omr_amounts"><a class="anchor" href="#_currency_and_omr_amounts"></a><a class="link" href="#_currency_and_omr_amounts">5.10.6. Currency and OMR amounts</a></h4>
+<h4 id="_currency_and_omr_amounts"><a class="anchor" href="#_currency_and_omr_amounts"></a><a class="link" href="#_currency_and_omr_amounts">5.10.7. Currency and OMR amounts</a></h4>
 <div class="paragraph">
 <p>The document currency code MUST be present (<code>cbc:DocumentCurrencyCode</code>). When the document currency is not OMR, the tax accounting currency MUST be <code>OMR</code> (<code>cbc:TaxCurrencyCode = 'OMR'</code>) and the currency exchange rate MUST be provided, with at most 7 decimal places.</p>
 </div>
@@ -15078,7 +15116,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_line_amounts_including_vat"><a class="anchor" href="#_invoice_line_amounts_including_vat"></a><a class="link" href="#_invoice_line_amounts_including_vat">5.10.7. Invoice line amounts including VAT</a></h4>
+<h4 id="_invoice_line_amounts_including_vat"><a class="anchor" href="#_invoice_line_amounts_including_vat"></a><a class="link" href="#_invoice_line_amounts_including_vat">5.10.8. Invoice line amounts including VAT</a></h4>
 <div class="paragraph">
 <p>For non-simplified invoices, Oman requires line VAT (IBR-038-OM) and the line total including VAT (IBR-158-OM) in the invoice currency, including when that currency is OMR. These are distinct from accounting-currency amounts. Simplified invoices may omit line VAT under IBR-038-OM; IBR-158-OM exempts the line-total calculation when a simplified invoice has no line VAT.</p>
 </div>
@@ -15113,7 +15151,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_item_type_classification_and_service_type"><a class="anchor" href="#_item_type_classification_and_service_type"></a><a class="link" href="#_item_type_classification_and_service_type">5.10.8. Item type, classification and service type</a></h4>
+<h4 id="_item_type_classification_and_service_type"><a class="anchor" href="#_item_type_classification_and_service_type"></a><a class="link" href="#_item_type_classification_and_service_type">5.10.9. Item type, classification and service type</a></h4>
 <div class="paragraph">
 <p>Non-simplified Oman invoices must identify each item as goods or a service (IBR-078-OM) and carry the applicable classification codes. All three inputs below use existing PUF elements. PUF item-type values differ from the single-letter codes in the Oman target.</p>
 </div>
@@ -15219,7 +15257,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_vat_category_exemption_and_zero_rating"><a class="anchor" href="#_vat_category_exemption_and_zero_rating"></a><a class="link" href="#_vat_category_exemption_and_zero_rating">5.10.9. VAT category, exemption and zero rating</a></h4>
+<h4 id="_vat_category_exemption_and_zero_rating"><a class="anchor" href="#_vat_category_exemption_and_zero_rating"></a><a class="link" href="#_vat_category_exemption_and_zero_rating">5.10.10. VAT category, exemption and zero rating</a></h4>
 <div class="paragraph">
 <p>Oman uses a restricted VAT category code set (rule <code>CL-04-OM</code>): <code>S</code> (Standard rate), <code>E</code> (Exempt from tax), <code>O</code> (Services outside scope of tax / not subject to tax) and <code>Z</code> (Zero rated). The Peppol categories <code>AE</code> and <code>N</code> are not used in Oman.</p>
 </div>
@@ -15241,7 +15279,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_profit_margin_scheme"><a class="anchor" href="#_profit_margin_scheme"></a><a class="link" href="#_profit_margin_scheme">5.10.10. Profit Margin Scheme</a></h4>
+<h4 id="_profit_margin_scheme"><a class="anchor" href="#_profit_margin_scheme"></a><a class="link" href="#_profit_margin_scheme">5.10.11. Profit Margin Scheme</a></h4>
 <div class="paragraph">
 <p>An invoice issued under the Oman profit margin scheme sets position 10 of the transaction type code, and a profit margin self-invoice sets position 11.</p>
 </div>
@@ -15334,7 +15372,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_third_party_invoicing"><a class="anchor" href="#_third_party_invoicing"></a><a class="link" href="#_third_party_invoicing">5.10.11. Third party invoicing</a></h4>
+<h4 id="_third_party_invoicing"><a class="anchor" href="#_third_party_invoicing"></a><a class="link" href="#_third_party_invoicing">5.10.12. Third party invoicing</a></h4>
 <div class="paragraph">
 <p>An invoice created by an authorised third party on behalf of the supplier sets position 4 of the transaction type code, and then requires the third party&#8217;s details exactly once (BGOM-01 and BGOM-02).</p>
 </div>
@@ -15421,7 +15459,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_preceding_document_reference_and_correction_reason"><a class="anchor" href="#_preceding_document_reference_and_correction_reason"></a><a class="link" href="#_preceding_document_reference_and_correction_reason">5.10.12. Preceding document reference and correction reason</a></h4>
+<h4 id="_preceding_document_reference_and_correction_reason"><a class="anchor" href="#_preceding_document_reference_and_correction_reason"></a><a class="link" href="#_preceding_document_reference_and_correction_reason">5.10.13. Preceding document reference and correction reason</a></h4>
 <div class="paragraph">
 <p>A credit note, a debit note or a self-billed credit note MUST reference the preceding document and state why it is being issued.</p>
 </div>
@@ -15472,7 +15510,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_prepayment_references"><a class="anchor" href="#_prepayment_references"></a><a class="link" href="#_prepayment_references">5.10.13. Prepayment references</a></h4>
+<h4 id="_prepayment_references"><a class="anchor" href="#_prepayment_references"></a><a class="link" href="#_prepayment_references">5.10.14. Prepayment references</a></h4>
 <div class="paragraph">
 <p>When a paid amount (IBT-113) is present, the prepayment invoice number (BTOM-027) and its UUID (BTOM-014) MUST be provided. Both go on the same <code>cac:AdditionalDocumentReference</code>, which Oman qualifies with <code>cbc:DocumentTypeCode = 'PDR'</code>:</p>
 </div>
@@ -15503,7 +15541,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_import_of_goods"><a class="anchor" href="#_import_of_goods"></a><a class="link" href="#_import_of_goods">5.10.14. Import of goods</a></h4>
+<h4 id="_import_of_goods"><a class="anchor" href="#_import_of_goods"></a><a class="link" href="#_import_of_goods">5.10.15. Import of goods</a></h4>
 <div class="paragraph">
 <p>An invoice for an import of goods sets position 13 of the transaction type code, and then requires the Incoterms code (BTOM-022), the customs declaration number (BTOM-021) and the import date (BTOM-030).</p>
 </div>
@@ -15526,7 +15564,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_self_billing_2"><a class="anchor" href="#_self_billing_2"></a><a class="link" href="#_self_billing_2">5.10.15. Self-billing</a></h4>
+<h4 id="_self_billing_2"><a class="anchor" href="#_self_billing_2"></a><a class="link" href="#_self_billing_2">5.10.16. Self-billing</a></h4>
 <div class="paragraph">
 <p>Self-billed documents keep their ordinary type code in PUF (<code>cbc:InvoiceTypeCode = 380</code>, <code>cbc:CreditNoteTypeCode = 381</code>) and are flagged through the standard <code>puf:SelfBilled</code> extension at document level. See <a href="#_self_billing_indicator">Self Billing Indicator</a> for the structure.</p>
 </div>
@@ -15570,7 +15608,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_complete_examples"><a class="anchor" href="#_complete_examples"></a><a class="link" href="#_complete_examples">5.10.16. Complete examples</a></h4>
+<h4 id="_complete_examples"><a class="anchor" href="#_complete_examples"></a><a class="link" href="#_complete_examples">5.10.17. Complete examples</a></h4>
 <div class="paragraph">
 <p>The <a href="https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/oman" target="_blank" rel="noopener">Oman PUF examples</a> include standard billing, a goods credit note, self-billing, third-party billing and settlement of a prepayment. The example index records their official source basis and local validation scope. The foreign-currency example is explicitly marked as a draft pending resolution of the accounting-currency rule conflict.</p>
 </div>

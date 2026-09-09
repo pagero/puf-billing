@@ -40,9 +40,36 @@ _Full tax invoice for an export of goods_
 
 Oman requires a document UUID (BTOM-002) that is a valid *version 5* UUID (RFC 4122). Pagero generates this UUID during processing, so no customer input is required and no PUF element needs to be populated for it.
 
+==== Seller UUID
+
+The seller UUID (BTOM-004) is the receipt UUID the seller generates for the document. It is required when the buyer electronic address (IBT-049) is the anonymous placeholder `997770000099`, and it must then be a valid version 5 UUID (IBR-173-OM).
+
+Supply it as a generic PUF restricted-information key-value pair with the key `OM_SELLER_UUID`.
+
+[source,xml]
+----
+<Invoice>
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:RestrictedInformation>
+            <puf:Key>OM_SELLER_UUID</puf:Key><!--1-->
+            <puf:Value>490f2bda-1b64-5c61-868c-1066f28651fc</puf:Value>
+          </puf:RestrictedInformation>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> The key is fixed. The value reaches the target on `cac:AccountingSupplierParty/cbc:AdditionalAccountID`.
+
 [NOTE]
 ====
-The seller UUID (BTOM-004), required when the buyer electronic address is the placeholder `997770000099`, has no confirmed PUF input representation yet. It is not covered by this section.
+This value is per-document receipt data, not an identifier of the seller. Do not send it on `cac:PartyIdentification`: that element carries the seller identifier (IBT-029), whose qualifier is validated against the Buyer/Seller Identifier code list by CL-06-OM, and `UUID` is not a value in that list.
 ====
 
 ==== Party identification
