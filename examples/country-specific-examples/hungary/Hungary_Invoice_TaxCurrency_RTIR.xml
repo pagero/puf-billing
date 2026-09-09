@@ -279,8 +279,20 @@
         </cac:Item>
         <cac:Price>
             <!-- Item net price
-                Net price of the item, this value must not be negative. -->
+                 Net price of the item, this value must not be negative. -->
             <cbc:PriceAmount currencyID="EUR">250.00</cbc:PriceAmount>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PriceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PriceExtension>
+                                <puf:TaxCurrencyPriceAmount currencyID="HUF">250.00</puf:TaxCurrencyPriceAmount>
+                            </puf:PriceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
         </cac:Price>
     </cac:InvoiceLine>
 </Invoice>
