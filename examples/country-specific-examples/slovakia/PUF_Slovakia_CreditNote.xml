@@ -58,6 +58,10 @@
             <cac:PartyLegalEntity>
                 <!-- BT-27 Seller name (full legal name) -->
                 <cbc:RegistrationName>Dunaj Dodavatel s.r.o.</cbc:RegistrationName>
+                <!-- BT-30/BT-30-1 Seller legal registration identifier (ICO; CM if IČO assigned, scheme from ISO/IEC 6523) -->
+                <cbc:CompanyID schemeID="0158">36045612</cbc:CompanyID>
+                <!-- BT-33 Seller additional legal information (CM per SK §3a Commercial Code) -->
+                <cbc:CompanyLegalForm>Dunaj Dodavatel s.r.o. registered in Commercial Register of the District Court Bratislava I, section Sro, file number 12345/B dated 03.02.2015</cbc:CompanyLegalForm>
             </cac:PartyLegalEntity>
             <cac:Contact>
                 <!-- BT-41 Seller contact point -->
