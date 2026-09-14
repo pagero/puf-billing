@@ -65,6 +65,11 @@ NOTE: The "Require ext:UBLExtensions"-column indicates whether or not the use of
 |*No*
 |
 
+|Egypt
+|*Yes*
+|*Yes*
+|
+
 |Estonia
 |*Yes*
 |*No*

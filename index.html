@@ -8,23 +8,21 @@
 <meta name="author" content="Copyright &copy; 2025, Pagero, Part of Thomson Reuters">
 <meta name="copyright" content="Pagero, Part of Thomson Reuters">
 <title>PUF Billing 2.0</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
-/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
-@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
-article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
-audio,canvas,video{display:inline-block}
-audio:not([controls]){display:none;height:0}
-[hidden],template{display:none}
-script{display:none!important}
-html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
-a{background:transparent}
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
 a:focus{outline:thin dotted}
 a:active,a:hover{outline:0}
 h1{font-size:2em;margin:.67em 0}
-abbr[title]{border-bottom:1px dotted}
 b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
 dfn{font-style:italic}
-hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+hr{height:0}
 mark{background:#ff0;color:#000}
 code,kbd,pre,samp{font-family:monospace;font-size:1em}
 pre{white-space:pre-wrap}
@@ -36,22 +34,22 @@ sub{bottom:-.25em}
 img{border:0}
 svg:not(:root){overflow:hidden}
 figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
 fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
 legend{border:0;padding:0}
 button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
 button,input{line-height:normal}
 button,select{text-transform:none}
-button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
 button[disabled],html input[disabled]{cursor:default}
-input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
-input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
-input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+input[type=checkbox],input[type=radio]{padding:0}
 button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
 textarea{overflow:auto;vertical-align:top}
 table{border-collapse:collapse;border-spacing:0}
-*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
-html,body{font-size:95%}
-body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
 a:hover{cursor:pointer}
 img,object,embed{max-width:100%;height:auto}
 object,embed{height:100%}
@@ -66,69 +64,65 @@ img{-ms-interpolation-mode:bicubic}
 img,object,svg{display:inline-block;vertical-align:middle}
 textarea{height:auto;min-height:50px}
 select{width:100%}
-.center{margin-left:auto;margin-right:auto}
-.spread{width:100%}
-.stretch{width:100%}
-p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
-.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#0d603d;font-weight:400;margin-top:0;margin-bottom:.25em}
-div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr;border-bottom: ;}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
 a{color:#2156a5;text-decoration:underline;line-height:inherit}
 a:hover,a:focus{color:#1d4b8f}
-a img{border:none}
-p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
 p aside{font-size:.875em;line-height:1.35;font-style:italic}
-h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#0d603d;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
-h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#0d603d;line-height:0}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
 h1{font-size:2.125em}
-h2{font-size:1.6875em;}
-h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em;border-top:1px solid #ddddd8}
-h4,h5{font-size:1.125em;border-top:1px solid #ddddd8}
-h6{font-size:1em;border-top:1px solid #ddddd8}
-hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
 em,i{font-style:italic;line-height:inherit}
 strong,b{font-weight:bold;line-height:inherit}
 small{font-size:60%;line-height:inherit}
 code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
-ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
-ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
-abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
-abbr{text-transform:none}
 blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
-blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
-blockquote cite:before{content:"\2014 \0020"}
-blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
 blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
-@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
 h1{font-size:2.75em}
 h2{font-size:2.3125em}
 h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
 h4{font-size:1.4375em}}
-table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
-table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
 table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
 table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
-table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
-table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
-h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em; padding: 2rem 0 1rem 0;}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
 h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
-.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
-.clearfix:after,.float-group:after{clear:both}
-*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
-*:not(pre)>code.nobreak{word-wrap:normal}
-*:not(pre)>code.nowrap{white-space:nowrap}
-pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
 em em{font-style:normal}
 strong strong{font-weight:400}
 .keyseq{color:rgba(51,51,51,.8)}
-kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
 .keyseq kbd:first-child{margin-left:0}
 .keyseq kbd:last-child{margin-right:0}
 .menuseq,.menuref{color:#000}
@@ -136,139 +130,151 @@ kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-bl
 .menuseq{word-spacing:-.02em}
 .menuseq b.caret{font-size:1.25em;line-height:.8}
 .menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
-b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
-b.button:before{content:"[";padding:0 3px 0 2px}
-b.button:after{content:"]";padding:0 2px 0 3px}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
 p a>code:hover{color:rgba(0,0,0,.9)}
-#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
-#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
-#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
 #content{margin-top:1.25em}
-#content:before{content:none}
+#content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
-#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
-#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
-details>summary:first-of-type{cursor:pointer;display:list-item;outline:none;margin-bottom:.75em}
-#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
 #header .details br{display:none}
-#header .details br+span:before{content:"\00a0\2013\00a0"}
-#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
-#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
 #header #revnumber{text-transform:capitalize}
-#header #revnumber:after{content:"\00a0"}
-#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
-#toc{background-color:#183c34;border-bottom:1px solid #efefed;padding-bottom:.5em}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
 #toc>ul{margin-left:.125em}
 #toc ul.sectlevel0>li>a{font-style:italic}
 #toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
 #toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
 #toc li{line-height:1.3334;margin-top:.3334em}
-#toc a{text-decoration:none;color:#dddddd}
+#toc a{text-decoration:none}
 #toc a:active{text-decoration:underline}
-#toctitle{color:#dddddd;font-size:1.2em;border-top:none!important;padding:0;}
-@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
-#toc.toc2{margin-top:0!important;background-color:#183c34;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
-#toc.toc2>ul{font-size:.9em;margin-bottom:0;}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
 #toc.toc2 ul ul{margin-left:0;padding-left:1em}
 #toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
 body.toc2.toc-right{padding-left:0;padding-right:15em}
-body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
-@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
-#toc.toc2{width:auto}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
 #toc.toc2 #toctitle{font-size:1.375em}
 #toc.toc2>ul{font-size:.95em}
 #toc.toc2 ul ul{padding-left:1.25em}
 body.toc2.toc-right{padding-left:0;padding-right:20em}}
-#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
 #content #toc>:first-child{margin-top:0}
 #content #toc>:last-child{margin-bottom:0}
-#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
-#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
 .sect1{padding-bottom:.625em}
-@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
-.sect1+.sect1{border-top:1px solid #efefed}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
 #content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
-#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em;color: #0d603d}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
 #content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
-#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#0d603d;text-decoration:none}
-#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#0d603d}
-.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
 .admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
-table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
-.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
-table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
 .admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
 .admonitionblock>table td.icon{text-align:center;width:80px}
-.admonitionblock>table td.icon img{max-width:initial}
+.admonitionblock>table td.icon img{max-width:none}
 .admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
-.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
-.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
-.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
-.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
-.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
-.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
-.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
-@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
-@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
-.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
-.listingblock pre.highlightjs{padding:0}
-.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
-.listingblock pre.prettyprint{border-width:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
 .listingblock>.content{position:relative}
-.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
-.listingblock:hover code[data-lang]:before{display:block}
-.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
-.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
-table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
-table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
-table.pyhltable td.code{padding-left:.75em;padding-right:0}
-pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
-pre.pygments .lineno{display:inline-block;margin-right:.25em}
-table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.listingblock pre>code{display:block}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
 .quoteblock{margin:0 1em 1.25em 1.5em;display:table}
-.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
-.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
 .quoteblock blockquote{margin:0;padding:0;border:0}
-.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
 .quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
-.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
-.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
-.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
-.quoteblock .quoteblock blockquote:before{display:none}
-.verseblock{margin:0 1em 1.25em 1em}
-.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
 .verseblock pre strong{font-weight:400}
 .verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
 .quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
 .quoteblock .attribution br,.verseblock .attribution br{display:none}
 .quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
-.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
-.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
-.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
-table.tableblock{max-width:100%;border-collapse:separate}
-table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
 table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
-table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
-table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
-table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
-table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px 0}
-table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0 0}
-table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
-table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
 table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
 table.frame-sides{border-width:0 1px}
-table.frame-topbot{border-width:1px 0}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
 th.halign-left,td.halign-left{text-align:left}
 th.halign-right,td.halign-right{text-align:right}
 th.halign-center,td.halign-center{text-align:center}
@@ -276,25 +282,24 @@ th.valign-top,td.valign-top{vertical-align:top}
 th.valign-bottom,td.valign-bottom{vertical-align:bottom}
 th.valign-middle,td.valign-middle{vertical-align:middle}
 table thead th,table tfoot th{font-weight:bold}
-tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th{background:#f7f8f7}
 tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
 p.tableblock>code:only-child{background:none;padding:0}
 p.tableblock{font-size:1em}
-td>div.verse{white-space:pre}
 ol{margin-left:1.75em}
 ul li ol{margin-left:1.5em}
 dl dd{margin-left:1.125em}
 dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
-ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
 ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
 ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
 ul.unstyled,ol.unstyled{margin-left:0}
-ul.checklist{margin-left:.625em}
-ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
-ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
-ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
-ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
-ul.inline>li>*{display:block}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
 .unstyled dl dt{font-weight:400;font-style:normal}
 ol.arabic{list-style-type:decimal}
 ol.decimal{list-style-type:decimal-leading-zero}
@@ -307,13 +312,14 @@ ol.lowergreek{list-style-type:lower-greek}
 .hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
 td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
 td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
 .literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
-.colist>table tr>td:first-of-type{padding:.4em .75em 0 .75em;line-height:1;vertical-align:top}
-.colist>table tr>td:first-of-type img{max-width:initial}
-.colist>table tr>td:last-of-type{padding:.25em 0}
-.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
-.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
-.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
 .imageblock>.title{margin-bottom:0}
 .imageblock.thumb,.imageblock.th{border-width:6px}
 .imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
@@ -324,15 +330,13 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
-#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
-#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
-#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
-.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
-.gist .file-data>table td.line-data{width:99%}
 div.unbreakable{page-break-inside:avoid}
 .big{font-size:larger}
 .small{font-size:smaller}
@@ -340,92 +344,96 @@ div.unbreakable{page-break-inside:avoid}
 .overline{text-decoration:overline}
 .line-through{text-decoration:line-through}
 .aqua{color:#00bfbf}
-.aqua-background{background-color:#00fafa}
+.aqua-background{background:#00fafa}
 .black{color:#000}
-.black-background{background-color:#000}
+.black-background{background:#000}
 .blue{color:#0000bf}
-.blue-background{background-color:#0000fa}
+.blue-background{background:#0000fa}
 .fuchsia{color:#bf00bf}
-.fuchsia-background{background-color:#fa00fa}
+.fuchsia-background{background:#fa00fa}
 .gray{color:#606060}
-.gray-background{background-color:#7d7d7d}
+.gray-background{background:#7d7d7d}
 .green{color:#006000}
-.green-background{background-color:#007d00}
+.green-background{background:#007d00}
 .lime{color:#00bf00}
-.lime-background{background-color:#00fa00}
+.lime-background{background:#00fa00}
 .maroon{color:#600000}
-.maroon-background{background-color:#7d0000}
+.maroon-background{background:#7d0000}
 .navy{color:#000060}
-.navy-background{background-color:#00007d}
+.navy-background{background:#00007d}
 .olive{color:#606000}
-.olive-background{background-color:#7d7d00}
+.olive-background{background:#7d7d00}
 .purple{color:#600060}
-.purple-background{background-color:#7d007d}
+.purple-background{background:#7d007d}
 .red{color:#bf0000}
-.red-background{background-color:#fa0000}
+.red-background{background:#fa0000}
 .silver{color:#909090}
-.silver-background{background-color:#bcbcbc}
+.silver-background{background:#bcbcbc}
 .teal{color:#006060}
-.teal-background{background-color:#007d7d}
+.teal-background{background:#007d7d}
 .white{color:#bfbfbf}
-.white-background{background-color:#fafafa}
+.white-background{background:#fafafa}
 .yellow{color:#bfbf00}
-.yellow-background{background-color:#fafa00}
+.yellow-background{background:#fafa00}
 span.icon>.fa{cursor:default}
 a span.icon>.fa{cursor:inherit}
 .admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
-.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
-.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
-.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
-.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
-.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
-.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
 .conum[data-value] *{color:#fff!important}
 .conum[data-value]+b{display:none}
-.conum[data-value]:after{content:attr(data-value)}
+.conum[data-value]::after{content:attr(data-value)}
 pre .conum[data-value]{position:relative;top:-.125em}
 b.conum *{color:inherit!important}
 .conum:not([data-value]):empty{display:none}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
-h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
-.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
 .print-only{display:none!important}
-@media print{@page{margin:1.25cm .75cm}
-*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
 a{color:inherit!important;text-decoration:underline!important}
 a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
-a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
-abbr[title]:after{content:" (" attr(title) ")"}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
 pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
 thead{display:table-header-group}
 svg{max-width:100%}
 p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
 h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
 #toc,.sidebarblock,.exampleblock>.content{background:none!important}
-#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
-.sect1{padding-bottom:0!important}
-.sect1+.sect1{border:0!important}
-#header>h1:first-child{margin-top:1.25rem}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
 body.book #header{text-align:center}
-body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
 body.book #header .details{border:0!important;display:block;padding:0!important}
 body.book #header .details span:first-child{margin-left:0!important}
 body.book #header .details br{display:block}
-body.book #header .details br+span:before{content:none!important}
+body.book #header .details br+span::before{content:none!important}
 body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
 body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
-.listingblock code[data-lang]:before{display:block}
-#footer{background:none!important;padding:0 .9375em}
-#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
 .hide-on-print{display:none!important}
 .print-only{display:block!important}
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
-
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -706,197 +714,208 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_billing_reference_description">5.3.9. Billing Reference Description</a></li>
 </ul>
 </li>
-<li><a href="#_france">5.4. France</a>
+<li><a href="#_egypt">5.4. Egypt</a>
 <ul class="sectlevel3">
-<li><a href="#_french_e_invoicing_mandate_2026">5.4.1. French E-Invoicing Mandate (2026)</a></li>
-<li><a href="#_invoice_type_code_and_business_process_type">5.4.2. Invoice Type Code and Business Process Type</a></li>
-<li><a href="#_french_text_codes_note_elements">5.4.3. French Text Codes (Note Elements)</a></li>
-<li><a href="#_compliance_and_regulated_status_type_de_processus_métier">5.4.4. Compliance and Regulated Status (Type de processus métier)</a></li>
-<li><a href="#_archive_only_credit_notes_archiveonly">5.4.5. Archive-only credit notes (ARCHIVEONLY)</a></li>
-<li><a href="#_credit_note_for_global_discount_code_262">5.4.6. Credit note for global discount (Code 262)</a></li>
-<li><a href="#_sub_lines_and_line_groupings">5.4.7. Sub-lines and Line Groupings</a></li>
-<li><a href="#_self_billing_indicator_2">5.4.8. Self-Billing Indicator</a></li>
-<li><a href="#_business_and_vat_identification">5.4.9. Business and VAT Identification</a></li>
-<li><a href="#_mandate_scenarios_agent_parties">5.4.10. Mandate Scenarios - Agent Parties</a></li>
-<li><a href="#_service_code">5.4.11. Service code</a></li>
-<li><a href="#_b2g_public_sector_chorus_pro">5.4.12. B2G / public sector (Chorus Pro)</a></li>
-<li><a href="#_legal_commitments">5.4.13. Legal commitments</a></li>
+<li><a href="#_party_identification_3">5.4.1. Party identification</a></li>
+<li><a href="#_address">5.4.2. Address</a></li>
+<li><a href="#_item_identification">5.4.3. Item identification</a></li>
+<li><a href="#_taxes">5.4.4. Taxes</a></li>
+<li><a href="#_withholding_tax">5.4.5. Withholding tax</a></li>
+<li><a href="#_currency">5.4.6. Currency</a></li>
+<li><a href="#_correction">5.4.7. Correction</a></li>
 </ul>
 </li>
-<li><a href="#_greece">5.5. Greece</a>
+<li><a href="#_france">5.5. France</a>
 <ul class="sectlevel3">
-<li><a href="#_mydata_xml_file_as_attachment">5.5.1. myDATA xml file as attachment</a></li>
+<li><a href="#_french_e_invoicing_mandate_2026">5.5.1. French E-Invoicing Mandate (2026)</a></li>
+<li><a href="#_invoice_type_code_and_business_process_type">5.5.2. Invoice Type Code and Business Process Type</a></li>
+<li><a href="#_french_text_codes_note_elements">5.5.3. French Text Codes (Note Elements)</a></li>
+<li><a href="#_compliance_and_regulated_status_type_de_processus_métier">5.5.4. Compliance and Regulated Status (Type de processus métier)</a></li>
+<li><a href="#_archive_only_credit_notes_archiveonly">5.5.5. Archive-only credit notes (ARCHIVEONLY)</a></li>
+<li><a href="#_credit_note_for_global_discount_code_262">5.5.6. Credit note for global discount (Code 262)</a></li>
+<li><a href="#_sub_lines_and_line_groupings">5.5.7. Sub-lines and Line Groupings</a></li>
+<li><a href="#_self_billing_indicator_2">5.5.8. Self-Billing Indicator</a></li>
+<li><a href="#_business_and_vat_identification">5.5.9. Business and VAT Identification</a></li>
+<li><a href="#_mandate_scenarios_agent_parties">5.5.10. Mandate Scenarios - Agent Parties</a></li>
+<li><a href="#_service_code">5.5.11. Service code</a></li>
+<li><a href="#_b2g_public_sector_chorus_pro">5.5.12. B2G / public sector (Chorus Pro)</a></li>
+<li><a href="#_legal_commitments">5.5.13. Legal commitments</a></li>
 </ul>
 </li>
-<li><a href="#_hungary">5.6. Hungary</a>
+<li><a href="#_greece">5.6. Greece</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_appearance">5.6.1. Invoice appearance</a></li>
-<li><a href="#_tax_number">5.6.2. Tax number</a></li>
-<li><a href="#_customer_vat_status">5.6.3. Customer VAT status</a></li>
-<li><a href="#_line_expression_indicator">5.6.4. Line expression indicator</a></li>
-<li><a href="#_modification">5.6.5. Modification</a></li>
-<li><a href="#_advance_payment">5.6.6. Advance Payment</a></li>
+<li><a href="#_mydata_xml_file_as_attachment">5.6.1. myDATA xml file as attachment</a></li>
 </ul>
 </li>
-<li><a href="#_india">5.7. India</a>
+<li><a href="#_hungary">5.7. Hungary</a>
 <ul class="sectlevel3">
-<li><a href="#_place_of_supply">5.7.1. Place of supply</a></li>
-<li><a href="#_party_identification_3">5.7.2. Party identification</a></li>
-<li><a href="#_party_address_information">5.7.3. Party address information</a></li>
-<li><a href="#_tax_type_scheme_2">5.7.4. Tax type scheme</a></li>
-<li><a href="#_hsn_code">5.7.5. HSN code</a></li>
-<li><a href="#_supply_type">5.7.6. Supply type</a></li>
-<li><a href="#_igst_on_intra_state_transaction">5.7.7. IGST on intra state transaction</a></li>
+<li><a href="#_invoice_appearance">5.7.1. Invoice appearance</a></li>
+<li><a href="#_tax_number">5.7.2. Tax number</a></li>
+<li><a href="#_customer_vat_status">5.7.3. Customer VAT status</a></li>
+<li><a href="#_line_expression_indicator">5.7.4. Line expression indicator</a></li>
+<li><a href="#_modification">5.7.5. Modification</a></li>
+<li><a href="#_advance_payment">5.7.6. Advance Payment</a></li>
 </ul>
 </li>
-<li><a href="#_italy">5.8. Italy</a>
+<li><a href="#_india">5.8. India</a>
 <ul class="sectlevel3">
-<li><a href="#_routing_code_codice_destinatario">5.8.1. Routing code (codice destinatario)</a></li>
-<li><a href="#_duty_stamp_dati_bollo">5.8.2. Duty stamp (dati bollo)</a></li>
-<li><a href="#_tax_chargeability_esigibilita_iva">5.8.3. Tax chargeability (esigibilita IVA)</a></li>
-<li><a href="#_vat_number_and_fiscal_code">5.8.4. VAT number and fiscal code</a></li>
-<li><a href="#_registration_data_2">5.8.5. Registration data</a></li>
+<li><a href="#_place_of_supply">5.8.1. Place of supply</a></li>
+<li><a href="#_party_identification_4">5.8.2. Party identification</a></li>
+<li><a href="#_party_address_information">5.8.3. Party address information</a></li>
+<li><a href="#_tax_type_scheme_2">5.8.4. Tax type scheme</a></li>
+<li><a href="#_hsn_code">5.8.5. HSN code</a></li>
+<li><a href="#_supply_type">5.8.6. Supply type</a></li>
+<li><a href="#_igst_on_intra_state_transaction">5.8.7. IGST on intra state transaction</a></li>
 </ul>
 </li>
-<li><a href="#_malaysia">5.9. Malaysia</a>
+<li><a href="#_italy">5.9. Italy</a>
 <ul class="sectlevel3">
-<li><a href="#_party_identification_4">5.9.1. Party identification</a></li>
-<li><a href="#_tax_details">5.9.2. Tax Details</a></li>
-<li><a href="#_unit_of_measure">5.9.3. Unit of Measure</a></li>
+<li><a href="#_routing_code_codice_destinatario">5.9.1. Routing code (codice destinatario)</a></li>
+<li><a href="#_duty_stamp_dati_bollo">5.9.2. Duty stamp (dati bollo)</a></li>
+<li><a href="#_tax_chargeability_esigibilita_iva">5.9.3. Tax chargeability (esigibilita IVA)</a></li>
+<li><a href="#_vat_number_and_fiscal_code">5.9.4. VAT number and fiscal code</a></li>
+<li><a href="#_registration_data_2">5.9.5. Registration data</a></li>
 </ul>
 </li>
-<li><a href="#_oman">5.10. Oman</a>
+<li><a href="#_malaysia">5.10. Malaysia</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_type_code_and_transaction_type">5.10.1. Invoice type code and transaction type</a></li>
-<li><a href="#_document_uuid">5.10.2. Document UUID</a></li>
-<li><a href="#_seller_uuid">5.10.3. Seller UUID</a></li>
-<li><a href="#_party_identification_5">5.10.4. Party identification</a></li>
-<li><a href="#_electronic_address_participant_identifier">5.10.5. Electronic address (Participant Identifier)</a></li>
-<li><a href="#_country_subdivision_special_zones">5.10.6. Country subdivision (Special Zones)</a></li>
-<li><a href="#_currency_and_omr_amounts">5.10.7. Currency and OMR amounts</a></li>
-<li><a href="#_invoice_line_amounts_including_vat">5.10.8. Invoice line amounts including VAT</a></li>
-<li><a href="#_item_type_classification_and_service_type">5.10.9. Item type, classification and service type</a></li>
-<li><a href="#_vat_category_exemption_and_zero_rating">5.10.10. VAT category, exemption and zero rating</a></li>
-<li><a href="#_profit_margin_scheme">5.10.11. Profit Margin Scheme</a></li>
-<li><a href="#_third_party_invoicing">5.10.12. Third party invoicing</a></li>
-<li><a href="#_preceding_document_reference_and_correction_reason">5.10.13. Preceding document reference and correction reason</a></li>
-<li><a href="#_prepayment_references">5.10.14. Prepayment references</a></li>
-<li><a href="#_import_of_goods">5.10.15. Import of goods</a></li>
-<li><a href="#_self_billing_2">5.10.16. Self-billing</a></li>
-<li><a href="#_complete_examples">5.10.17. Complete examples</a></li>
+<li><a href="#_party_identification_5">5.10.1. Party identification</a></li>
+<li><a href="#_tax_details">5.10.2. Tax Details</a></li>
+<li><a href="#_unit_of_measure">5.10.3. Unit of Measure</a></li>
 </ul>
 </li>
-<li><a href="#_philippines">5.11. Philippines</a>
+<li><a href="#_oman">5.11. Oman</a>
 <ul class="sectlevel3">
-<li><a href="#_corrective_invoice">5.11.1. Corrective Invoice</a></li>
-<li><a href="#_withholding_vat">5.11.2. Withholding VAT</a></li>
-<li><a href="#_permit_to_use_ptu">5.11.3. Permit To Use (PTU)</a></li>
-<li><a href="#_seller_tax_status">5.11.4. Seller Tax Status</a></li>
-<li><a href="#_party_branch_code">5.11.5. Party Branch Code</a></li>
-<li><a href="#_invoice_type">5.11.6. Invoice Type</a></li>
-<li><a href="#_allowance_reason_codes">5.11.7. Allowance reason codes</a></li>
+<li><a href="#_invoice_type_code_and_transaction_type">5.11.1. Invoice type code and transaction type</a></li>
+<li><a href="#_document_uuid">5.11.2. Document UUID</a></li>
+<li><a href="#_seller_uuid">5.11.3. Seller UUID</a></li>
+<li><a href="#_party_identification_6">5.11.4. Party identification</a></li>
+<li><a href="#_electronic_address_participant_identifier">5.11.5. Electronic address (Participant Identifier)</a></li>
+<li><a href="#_country_subdivision_special_zones">5.11.6. Country subdivision (Special Zones)</a></li>
+<li><a href="#_currency_and_omr_amounts">5.11.7. Currency and OMR amounts</a></li>
+<li><a href="#_invoice_line_amounts_including_vat">5.11.8. Invoice line amounts including VAT</a></li>
+<li><a href="#_item_type_classification_and_service_type">5.11.9. Item type, classification and service type</a></li>
+<li><a href="#_vat_category_exemption_and_zero_rating">5.11.10. VAT category, exemption and zero rating</a></li>
+<li><a href="#_profit_margin_scheme">5.11.11. Profit Margin Scheme</a></li>
+<li><a href="#_third_party_invoicing">5.11.12. Third party invoicing</a></li>
+<li><a href="#_preceding_document_reference_and_correction_reason">5.11.13. Preceding document reference and correction reason</a></li>
+<li><a href="#_prepayment_references">5.11.14. Prepayment references</a></li>
+<li><a href="#_import_of_goods">5.11.15. Import of goods</a></li>
+<li><a href="#_self_billing_2">5.11.16. Self-billing</a></li>
+<li><a href="#_complete_examples">5.11.17. Complete examples</a></li>
 </ul>
 </li>
-<li><a href="#_poland">5.12. Poland</a>
+<li><a href="#_philippines">5.12. Philippines</a>
 <ul class="sectlevel3">
-<li><a href="#_document_types">5.12.1. Document types</a></li>
-<li><a href="#_restrictedinformation_document_level">5.12.2. RestrictedInformation (document level)</a></li>
-<li><a href="#_restrictedinformation_line_level">5.12.3. RestrictedInformation (line level)</a></li>
-<li><a href="#_multi_party_scenarios">5.12.4. Multi-party scenarios</a></li>
-<li><a href="#_full_payment_indicator_date">5.12.5. Full payment indicator &amp; date</a></li>
-<li><a href="#_tax_category_id_and_tax_type">5.12.6. Tax category ID and tax type</a></li>
-<li><a href="#_buyer_identifiers">5.12.7. Buyer identifiers</a></li>
-<li><a href="#_tsp_commodity_code">5.12.8. TSP commodity code</a></li>
-<li><a href="#_original_line_indicator">5.12.9. Original line indicator</a></li>
-<li><a href="#_split_payment">5.12.10. Split payment</a></li>
-<li><a href="#_document_reference_in_corrected_invoice">5.12.11. Document reference in corrected invoice</a></li>
+<li><a href="#_corrective_invoice">5.12.1. Corrective Invoice</a></li>
+<li><a href="#_withholding_vat">5.12.2. Withholding VAT</a></li>
+<li><a href="#_permit_to_use_ptu">5.12.3. Permit To Use (PTU)</a></li>
+<li><a href="#_seller_tax_status">5.12.4. Seller Tax Status</a></li>
+<li><a href="#_party_branch_code">5.12.5. Party Branch Code</a></li>
+<li><a href="#_invoice_type">5.12.6. Invoice Type</a></li>
+<li><a href="#_allowance_reason_codes">5.12.7. Allowance reason codes</a></li>
 </ul>
 </li>
-<li><a href="#_portugal">5.13. Portugal</a>
+<li><a href="#_poland">5.13. Poland</a>
 <ul class="sectlevel3">
-<li><a href="#_billing_software_certification">5.13.1. Billing software certification</a></li>
-<li><a href="#_qr_code_and_atcud">5.13.2. QR code and ATCUD</a></li>
-<li><a href="#_tax_category_codes_2">5.13.3. Tax category codes</a></li>
+<li><a href="#_document_types">5.13.1. Document types</a></li>
+<li><a href="#_restrictedinformation_document_level">5.13.2. RestrictedInformation (document level)</a></li>
+<li><a href="#_restrictedinformation_line_level">5.13.3. RestrictedInformation (line level)</a></li>
+<li><a href="#_multi_party_scenarios">5.13.4. Multi-party scenarios</a></li>
+<li><a href="#_full_payment_indicator_date">5.13.5. Full payment indicator &amp; date</a></li>
+<li><a href="#_tax_category_id_and_tax_type">5.13.6. Tax category ID and tax type</a></li>
+<li><a href="#_buyer_identifiers">5.13.7. Buyer identifiers</a></li>
+<li><a href="#_tsp_commodity_code">5.13.8. TSP commodity code</a></li>
+<li><a href="#_original_line_indicator">5.13.9. Original line indicator</a></li>
+<li><a href="#_split_payment">5.13.10. Split payment</a></li>
+<li><a href="#_document_reference_in_corrected_invoice">5.13.11. Document reference in corrected invoice</a></li>
 </ul>
 </li>
-<li><a href="#_saudi_arabia">5.14. Saudi Arabia</a>
+<li><a href="#_portugal">5.14. Portugal</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_type_code_and_invoice_subtype_2">5.14.1. Invoice type code and invoice subtype</a></li>
-<li><a href="#_party_identification_6">5.14.2. Party identification</a></li>
+<li><a href="#_billing_software_certification">5.14.1. Billing software certification</a></li>
+<li><a href="#_qr_code_and_atcud">5.14.2. QR code and ATCUD</a></li>
+<li><a href="#_tax_category_codes_2">5.14.3. Tax category codes</a></li>
 </ul>
 </li>
-<li><a href="#_serbia">5.15. Serbia</a>
+<li><a href="#_saudi_arabia">5.15. Saudi Arabia</a>
 <ul class="sectlevel3">
-<li><a href="#_tax_category_codes_3">5.15.1. Tax category codes</a></li>
+<li><a href="#_invoice_type_code_and_invoice_subtype_2">5.15.1. Invoice type code and invoice subtype</a></li>
 <li><a href="#_party_identification_7">5.15.2. Party identification</a></li>
 </ul>
 </li>
-<li><a href="#_singapore">5.16. Singapore</a>
+<li><a href="#_serbia">5.16. Serbia</a>
 <ul class="sectlevel3">
-<li><a href="#_tax_category_codes_4">5.16.1. Tax category codes</a></li>
+<li><a href="#_tax_category_codes_3">5.16.1. Tax category codes</a></li>
+<li><a href="#_party_identification_8">5.16.2. Party identification</a></li>
 </ul>
 </li>
-<li><a href="#_spain">5.17. Spain</a>
+<li><a href="#_singapore">5.17. Singapore</a>
 <ul class="sectlevel3">
-<li><a href="#_routing_codes_dir3">5.17.1. Routing codes (DIR3)</a></li>
-<li><a href="#_correction_method_and_reason">5.17.2. Correction method and reason</a></li>
+<li><a href="#_tax_category_codes_4">5.17.1. Tax category codes</a></li>
 </ul>
 </li>
-<li><a href="#_spain_verifactu">5.18. Spain VeriFactu</a>
+<li><a href="#_spain">5.18. Spain</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_number_and_invoice_series">5.18.1. Invoice Number and Invoice Series</a></li>
-<li><a href="#_document_type_specification">5.18.2. Document Type Specification</a></li>
-<li><a href="#_simplified_invoice_indicator">5.18.3. Simplified Invoice Indicator</a></li>
-<li><a href="#_articles_7_27_3_qualification_facturasimplificadaart7273">5.18.4. Articles 7.2/7.3 Qualification (FacturaSimplificadaArt7273)</a></li>
-<li><a href="#_correction_information">5.18.5. Correction Information</a></li>
-<li><a href="#_party_identification_8">5.18.6. Party Identification</a></li>
-<li><a href="#_tax_details_2">5.18.7. Tax Details</a></li>
-<li><a href="#_related_resources">5.18.8. Related Resources</a></li>
+<li><a href="#_routing_codes_dir3">5.18.1. Routing codes (DIR3)</a></li>
+<li><a href="#_correction_method_and_reason">5.18.2. Correction method and reason</a></li>
 </ul>
 </li>
-<li><a href="#_türkiye">5.19. Türkiye</a>
+<li><a href="#_spain_verifactu">5.19. Spain VeriFactu</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_profile_id">5.19.1. Invoice profile id</a></li>
-<li><a href="#_invoice_type_code">5.19.2. Invoice type code</a></li>
-<li><a href="#_invoice_delivery_method">5.19.3. Invoice delivery method</a></li>
-<li><a href="#_first_name_and_surname">5.19.4. First name and surname</a></li>
-<li><a href="#_registered_tax_office">5.19.5. Registered tax office</a></li>
-<li><a href="#_tax_category_codes_5">5.19.6. Tax category codes</a></li>
-<li><a href="#_tax_scheme">5.19.7. Tax scheme</a></li>
-<li><a href="#_internet_sales">5.19.8. Internet Sales</a></li>
+<li><a href="#_invoice_number_and_invoice_series">5.19.1. Invoice Number and Invoice Series</a></li>
+<li><a href="#_document_type_specification">5.19.2. Document Type Specification</a></li>
+<li><a href="#_simplified_invoice_indicator">5.19.3. Simplified Invoice Indicator</a></li>
+<li><a href="#_articles_7_27_3_qualification_facturasimplificadaart7273">5.19.4. Articles 7.2/7.3 Qualification (FacturaSimplificadaArt7273)</a></li>
+<li><a href="#_correction_information">5.19.5. Correction Information</a></li>
+<li><a href="#_party_identification_9">5.19.6. Party Identification</a></li>
+<li><a href="#_tax_details_2">5.19.7. Tax Details</a></li>
+<li><a href="#_related_resources">5.19.8. Related Resources</a></li>
 </ul>
 </li>
-<li><a href="#_united_arab_emirates">5.20. United Arab Emirates</a>
+<li><a href="#_türkiye">5.20. Türkiye</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_type_code_and_transaction_type_2">5.20.1. Invoice type code and transaction type</a></li>
-<li><a href="#_party_identification_9">5.20.2. Party identification</a></li>
-<li><a href="#_electronic_address_participant_identifier_2">5.20.3. Electronic address (Participant Identifier)</a></li>
-<li><a href="#_legal_registration_identifier">5.20.4. Legal registration identifier</a></li>
-<li><a href="#_country_subdivision_emirates">5.20.5. Country subdivision (Emirates)</a></li>
-<li><a href="#_currency_and_aed_amounts">5.20.6. Currency and AED amounts</a></li>
-<li><a href="#_item_type_classification_and_service_accounting_code">5.20.7. Item type, classification and Service Accounting Code</a></li>
-<li><a href="#_vat_category_rate_and_exemption">5.20.8. VAT category, rate and exemption</a></li>
-<li><a href="#_profit_margin_scheme_2">5.20.9. Profit Margin Scheme</a></li>
-<li><a href="#_reverse_charge_standard_item_identifier">5.20.10. Reverse charge: standard item identifier</a></li>
-<li><a href="#_free_trade_zone_beneficiary">5.20.11. Free Trade Zone Beneficiary</a></li>
-<li><a href="#_disclosed_agent_principle">5.20.12. Disclosed Agent Principle</a></li>
-<li><a href="#_deemed_supply">5.20.13. Deemed Supply</a></li>
-<li><a href="#_exports">5.20.14. Exports</a></li>
-<li><a href="#_credit_note_reason_code">5.20.15. Credit note reason code</a></li>
-<li><a href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services">5.20.16. Out of scope of VAT and Credit-note related to goods or services</a></li>
-<li><a href="#_self_billing_3">5.20.17. Self-billing</a></li>
+<li><a href="#_invoice_profile_id">5.20.1. Invoice profile id</a></li>
+<li><a href="#_invoice_type_code">5.20.2. Invoice type code</a></li>
+<li><a href="#_invoice_delivery_method">5.20.3. Invoice delivery method</a></li>
+<li><a href="#_first_name_and_surname">5.20.4. First name and surname</a></li>
+<li><a href="#_registered_tax_office">5.20.5. Registered tax office</a></li>
+<li><a href="#_tax_category_codes_5">5.20.6. Tax category codes</a></li>
+<li><a href="#_tax_scheme">5.20.7. Tax scheme</a></li>
+<li><a href="#_internet_sales">5.20.8. Internet Sales</a></li>
 </ul>
 </li>
-<li><a href="#_united_states">5.21. United States</a>
+<li><a href="#_united_arab_emirates">5.21. United Arab Emirates</a>
 <ul class="sectlevel3">
-<li><a href="#_tax_scheme_2">5.21.1. Tax scheme</a></li>
+<li><a href="#_invoice_type_code_and_transaction_type_2">5.21.1. Invoice type code and transaction type</a></li>
 <li><a href="#_party_identification_10">5.21.2. Party identification</a></li>
+<li><a href="#_electronic_address_participant_identifier_2">5.21.3. Electronic address (Participant Identifier)</a></li>
+<li><a href="#_legal_registration_identifier">5.21.4. Legal registration identifier</a></li>
+<li><a href="#_country_subdivision_emirates">5.21.5. Country subdivision (Emirates)</a></li>
+<li><a href="#_currency_and_aed_amounts">5.21.6. Currency and AED amounts</a></li>
+<li><a href="#_item_type_classification_and_service_accounting_code">5.21.7. Item type, classification and Service Accounting Code</a></li>
+<li><a href="#_vat_category_rate_and_exemption">5.21.8. VAT category, rate and exemption</a></li>
+<li><a href="#_profit_margin_scheme_2">5.21.9. Profit Margin Scheme</a></li>
+<li><a href="#_reverse_charge_standard_item_identifier">5.21.10. Reverse charge: standard item identifier</a></li>
+<li><a href="#_free_trade_zone_beneficiary">5.21.11. Free Trade Zone Beneficiary</a></li>
+<li><a href="#_disclosed_agent_principle">5.21.12. Disclosed Agent Principle</a></li>
+<li><a href="#_deemed_supply">5.21.13. Deemed Supply</a></li>
+<li><a href="#_exports">5.21.14. Exports</a></li>
+<li><a href="#_credit_note_reason_code">5.21.15. Credit note reason code</a></li>
+<li><a href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services">5.21.16. Out of scope of VAT and Credit-note related to goods or services</a></li>
+<li><a href="#_self_billing_3">5.21.17. Self-billing</a></li>
 </ul>
 </li>
-<li><a href="#_vietnam">5.22. Vietnam</a>
+<li><a href="#_united_states">5.22. United States</a>
 <ul class="sectlevel3">
-<li><a href="#_invoice_serial_and_sequence_number">5.22.1. Invoice, Serial and Sequence Number</a></li>
-<li><a href="#_invoice_type_code_2">5.22.2. Invoice Type Code</a></li>
+<li><a href="#_tax_scheme_2">5.22.1. Tax scheme</a></li>
+<li><a href="#_party_identification_11">5.22.2. Party identification</a></li>
+</ul>
+</li>
+<li><a href="#_vietnam">5.23. Vietnam</a>
+<ul class="sectlevel3">
+<li><a href="#_invoice_serial_and_sequence_number">5.23.1. Invoice, Serial and Sequence Number</a></li>
+<li><a href="#_invoice_type_code_2">5.23.2. Invoice Type Code</a></li>
 </ul>
 </li>
 </ul>
@@ -4192,7 +4211,7 @@ Can be used to specify type of local tax.</p></td>
 <div class="sect3">
 <h4 id="_cacwithholdingtaxtotal"><a class="anchor" href="#_cacwithholdingtaxtotal"></a><a class="link" href="#_cacwithholdingtaxtotal">cac:WithholdingTaxTotal</a></h4>
 <div class="paragraph">
-<p><code>cac:WithholdingTaxTotal</code> is available at document (header) level on both <code>Invoice</code> and <code>CreditNote</code>, with cardinality <code>0..n</code>. It must appear after all <code>cac:TaxTotal</code> elements and before <code>cac:LegalMonetaryTotal</code>. This section describes header-level withholding only. Line-level withholding remains available on <code>InvoiceLine</code>; <code>CreditNoteLine</code> does not support <code>cac:WithholdingTaxTotal</code>.</p>
+<p><code>cac:WithholdingTaxTotal</code> is available at document (header) level on both <code>Invoice</code> and <code>CreditNote</code>, with cardinality <code>0..n</code>. It must appear after all <code>cac:TaxTotal</code> elements and before <code>cac:LegalMonetaryTotal</code>. This section describes header-level withholding only. Line-level withholding is available on both <code>InvoiceLine</code> and <code>CreditNoteLine</code>.</p>
 </div>
 <div class="paragraph">
 <p>The table below shows the available fields in <code>cac:WithholdingTaxTotal/cac:TaxSubtotal</code>. Additional elements are also available through the extension described in <a href="#_taxsubtotal">cac:WithholdingTaxTotal/cac:TaxSubtotal</a>.</p>
@@ -6037,8 +6056,11 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
 </div>
 <div class="sect3">
 <h4 id="_cacwithholdingtaxtotal_2"><a class="anchor" href="#_cacwithholdingtaxtotal_2"></a><a class="link" href="#_cacwithholdingtaxtotal_2">cac:WithholdingTaxTotal</a></h4>
+<div class="paragraph">
+<p><code>cac:WithholdingTaxTotal</code> is available at line level on both <code>InvoiceLine</code> and <code>CreditNoteLine</code>, with cardinality <code>0..n</code>. It must appear after all <code>cac:TaxTotal</code> elements on the line.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 36. Elements added in cac:InvoiceLine/cac:WithholdingTaxTotal</caption>
+<caption class="title">Table 36. Elements added in cac:InvoiceLine/cac:WithholdingTaxTotal and cac:CreditNoteLine/cac:WithholdingTaxTotal</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -6146,7 +6168,7 @@ For valid values see code list <a href="https://pagero.github.io/puf-code-lists/
               <span class="tag">&lt;/cac:TaxScheme&gt;</span>
           <span class="tag">&lt;/cac:TaxCategory&gt;</span>
       <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
-    <span class="tag">&lt;/cac:cac:WithholdingTaxTotal&gt;</span>
+    <span class="tag">&lt;/cac:WithholdingTaxTotal&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
   <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
@@ -12245,18 +12267,238 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 </div>
 </div>
 <div class="sect2">
-<h3 id="_france"><a class="anchor" href="#_france"></a><a class="link" href="#_france">5.4. France</a></h3>
+<h3 id="_egypt"><a class="anchor" href="#_egypt"></a><a class="link" href="#_egypt">5.4. Egypt</a></h3>
+<div class="paragraph">
+<p>This section contains information about special requirements concerning invoicing in Egypt.</p>
+</div>
+<div class="paragraph">
+<p>Egyptian e-invoicing is operated by the Egyptian Tax Authority (ETA) as a clearance model: a document is submitted to the ETA and becomes fiscally valid only once the ETA has assigned it a unique identifier. An Egyptian e-invoicing service provider must be accredited by the ETA, so a document created in PUF reaches the ETA through an accredited provider rather than directly.</p>
+</div>
+<div class="paragraph">
+<p>PUF supports Egypt through standard PUF elements together with the existing PUF UBL extensions. The ETA document model is not an EN 16931 profile, so several Egyptian concepts are carried differently from the European formats.</p>
+</div>
+<div class="sect3">
+<h4 id="_party_identification_3"><a class="anchor" href="#_party_identification_3"></a><a class="link" href="#_party_identification_3">5.4.1. Party identification</a></h4>
+<div class="paragraph">
+<p>An ETA document carries an explicit party type of business, natural person or foreigner. PUF has no field for that type, so it is resolved when the document is converted for the authority, and the scheme identifier on the party identifier is the input to that resolution.</p>
+</div>
+<div class="paragraph">
+<p>Provide the identifier on <code>cac:PartyIdentification/cbc:ID</code> and set <code>@schemeID</code> to <code>EG:TIN</code> for an Egyptian business or <code>EG:NIN</code> for a natural person. Available values can be found here: <a href="https://pagero.github.io/puf-code-lists/#_identification_scheme_egypt" target="_blank" rel="noopener">Identification scheme Egypt</a>.</p>
+</div>
+<div class="paragraph">
+<p>An Egyptian business also supplies its tax registration number on <code>cac:PartyTaxScheme/cbc:CompanyID</code> with <code>cac:TaxScheme/cbc:ID = 'VAT'</code>. That is the VAT-registration input and does not replace the party identifier. A natural person has no VAT registration, so an <code>EG:NIN</code> value is never placed on <code>cac:PartyTaxScheme</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Business buyer in Egypt</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+      <span class="tag">&lt;cac:Party&gt;</span>
+          <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+              <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EG:TIN</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>987654321<span class="tag">&lt;/cbc:ID&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+          <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+          <span class="tag">&lt;cac:PostalAddress&gt;</span>
+              <span class="tag">&lt;cbc:CityName&gt;</span>Maadi<span class="tag">&lt;/cbc:CityName&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+              <span class="tag">&lt;cbc:CountrySubentity&gt;</span>Cairo<span class="tag">&lt;/cbc:CountrySubentity&gt;</span> <i class="conum" data-value="3"></i><b>(3)</b>
+              <span class="tag">&lt;cac:Country&gt;</span>
+                  <span class="tag">&lt;cbc:IdentificationCode&gt;</span>EG<span class="tag">&lt;/cbc:IdentificationCode&gt;</span>
+              <span class="tag">&lt;/cac:Country&gt;</span>
+          <span class="tag">&lt;/cac:PostalAddress&gt;</span>
+          <span class="tag">&lt;cac:PartyTaxScheme&gt;</span>
+              <span class="tag">&lt;cbc:CompanyID&gt;</span>987654321<span class="tag">&lt;/cbc:CompanyID&gt;</span> <i class="conum" data-value="4"></i><b>(4)</b>
+              <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                  <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+              <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+          <span class="tag">&lt;/cac:PartyTaxScheme&gt;</span>
+      <span class="tag">&lt;/cac:Party&gt;</span>
+  <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Scheme <code>EG:TIN</code> identifies the party as an Egyptian business.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The city carries the ETA region and city information.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The country subentity carries the ETA governorate. Do not put the governorate in the city.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The tax registration number, supplied in addition to the party identifier.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_address"><a class="anchor" href="#_address"></a><a class="link" href="#_address">5.4.2. Address</a></h4>
+<div class="paragraph">
+<p>An Egyptian address separates the governorate from the region and city, and reports the building number as its own value.</p>
+</div>
+<div class="paragraph">
+<p>Provide the governorate in <code>cbc:CountrySubentity</code>, the region and city in <code>cbc:CityName</code>, and the building number in <code>cbc:BuildingNumber</code>, which is kept distinct from <code>cbc:StreetName</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_item_identification"><a class="anchor" href="#_item_identification"></a><a class="link" href="#_item_identification">5.4.3. Item identification</a></h4>
+<div class="paragraph">
+<p>Every line must carry a registered item code, coded either with GS1 or with the Egyptian goods and services scheme EGS. The two schemes use different carriers, and a line uses one or the other, never both.</p>
+</div>
+<div class="paragraph">
+<p>A GS1 code is carried on <code>cac:StandardItemIdentification/cbc:ID</code> with <code>@schemeID</code> set to <code>GS1</code>. An EGS code is carried on <code>cac:AdditionalItemIdentification/cbc:ID</code> with <code>@schemeID</code> set to <code>EGS</code>. Do not infer the scheme from the shape of the identifier.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Line coded with EGS</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+      <span class="tag">&lt;cac:Item&gt;</span>
+          <span class="tag">&lt;cbc:Name&gt;</span>Office chair<span class="tag">&lt;/cbc:Name&gt;</span>
+          <span class="tag">&lt;cac:AdditionalItemIdentification&gt;</span>
+              <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EGS</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>EG-1234567890123<span class="tag">&lt;/cbc:ID&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+          <span class="tag">&lt;/cac:AdditionalItemIdentification&gt;</span>
+      <span class="tag">&lt;/cac:Item&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A GS1-coded line would instead use <code>cac:StandardItemIdentification/cbc:ID</code> with <code>@schemeID</code> set to <code>GS1</code>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_taxes"><a class="anchor" href="#_taxes"></a><a class="link" href="#_taxes">5.4.4. Taxes</a></h4>
+<div class="paragraph">
+<p>The ETA identifies a tax with a tax type, and qualifies it with a subtype carrying the exemption or the special rate. The tax type is carried on <code>cac:TaxCategory/cbc:ID</code> and the subtype on <code>cac:TaxCategory/cbc:Name</code>. Available values can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_egypt" target="_blank" rel="noopener">Tax category codes Egypt</a>.</p>
+</div>
+<div class="paragraph">
+<p>A line may carry several taxes at once, for example value added tax together with a table tax and a fee. Repeat <code>cac:TaxSubtotal</code> once per tax type. The same tax type must not occur twice within one line.</p>
+</div>
+<div class="paragraph">
+<p>Exemption is expressed through the tax subtype rather than as free text.</p>
+</div>
+<div class="paragraph">
+<p><code>cac:TaxScheme/cbc:ID</code> is required by the syntax but carries no Egyptian meaning, because the tax type and subtype already identify the tax completely. Use <code>VAT</code> on every Egyptian tax entry, including the table taxes and the fees.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Line carrying value added tax and a stamping tax</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:InvoiceLine&gt;</span>
+      <span class="tag">&lt;cac:TaxTotal&gt;</span>
+          <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+              <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EGP</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1000.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+              <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EGP</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>140.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+              <span class="tag">&lt;cac:TaxCategory&gt;</span>
+                  <span class="tag">&lt;cbc:ID&gt;</span>T1<span class="tag">&lt;/cbc:ID&gt;</span> <i class="conum" data-value="1"></i><b>(1)</b>
+                  <span class="tag">&lt;cbc:Name&gt;</span>V009<span class="tag">&lt;/cbc:Name&gt;</span> <i class="conum" data-value="2"></i><b>(2)</b>
+                  <span class="tag">&lt;cbc:Percent&gt;</span>14<span class="tag">&lt;/cbc:Percent&gt;</span>
+                  <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                      <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span>
+                  <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+              <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+          <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+          <span class="tag">&lt;cac:TaxSubtotal&gt;</span>
+              <span class="tag">&lt;cbc:TaxableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EGP</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>1000.00<span class="tag">&lt;/cbc:TaxableAmount&gt;</span>
+              <span class="tag">&lt;cbc:TaxAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">EGP</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>20.00<span class="tag">&lt;/cbc:TaxAmount&gt;</span>
+              <span class="tag">&lt;cac:TaxCategory&gt;</span>
+                  <span class="tag">&lt;cbc:ID&gt;</span>T5<span class="tag">&lt;/cbc:ID&gt;</span> <i class="conum" data-value="3"></i><b>(3)</b>
+                  <span class="tag">&lt;cbc:Name&gt;</span>ST01<span class="tag">&lt;/cbc:Name&gt;</span>
+                  <span class="tag">&lt;cbc:Percent&gt;</span>2<span class="tag">&lt;/cbc:Percent&gt;</span>
+                  <span class="tag">&lt;cac:TaxScheme&gt;</span>
+                      <span class="tag">&lt;cbc:ID&gt;</span>VAT<span class="tag">&lt;/cbc:ID&gt;</span> <i class="conum" data-value="4"></i><b>(4)</b>
+                  <span class="tag">&lt;/cac:TaxScheme&gt;</span>
+              <span class="tag">&lt;/cac:TaxCategory&gt;</span>
+          <span class="tag">&lt;/cac:TaxSubtotal&gt;</span>
+      <span class="tag">&lt;/cac:TaxTotal&gt;</span>
+      <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;/cac:InvoiceLine&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Tax type for value added tax.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Tax subtype qualifying the value added tax. A subtype is required on every tax entry.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>A second tax on the same line, a percentage stamping tax, reported in its own subtotal.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><code>VAT</code> is used on every Egyptian tax entry. The tax scheme is required by the syntax but adds nothing here, since the tax type and subtype already identify the tax.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_withholding_tax"><a class="anchor" href="#_withholding_tax"></a><a class="link" href="#_withholding_tax">5.4.5. Withholding tax</a></h4>
+<div class="paragraph">
+<p>Withholding tax is one of the ETA tax types. The authority aggregates it in its document tax totals like any other tax type, and subtracts it when calculating the line total rather than adding it.</p>
+</div>
+<div class="paragraph">
+<p>In PUF it is carried separately on <code>cac:WithholdingTaxTotal</code>, which is available both at document level and on the line, for an invoice as well as a credit note. Keeping it out of <code>cac:TaxTotal</code> is a PUF convention that lets the converter apply the subtraction, and it also matches clearance channels that exclude withholding from their additive tax totals. It is not a statement that the authority omits withholding from its own totals.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_currency"><a class="anchor" href="#_currency"></a><a class="link" href="#_currency">5.4.6. Currency</a></h4>
+<div class="paragraph">
+<p>Amounts owed to the ETA are expressed in Egyptian pounds. When the document currency is not EGP, provide <code>cbc:TaxCurrencyCode</code> as EGP together with the exchange rate on <code>cac:TaxExchangeRate</code>, and supply the tax currency amounts so that the Egyptian pound values do not have to be recalculated further down the chain.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_correction"><a class="anchor" href="#_correction"></a><a class="link" href="#_correction">5.4.7. Correction</a></h4>
+<div class="paragraph">
+<p>Credit and debit notes are the only correction mechanism. A note identifies the original document through <code>cac:BillingReference</code>, and the clearance identifier assigned to the original by the authority is carried on the billing reference extension.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_france"><a class="anchor" href="#_france"></a><a class="link" href="#_france">5.5. France</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in France.</p>
 </div>
 <div class="sect3">
-<h4 id="_french_e_invoicing_mandate_2026"><a class="anchor" href="#_french_e_invoicing_mandate_2026"></a><a class="link" href="#_french_e_invoicing_mandate_2026">5.4.1. French E-Invoicing Mandate (2026)</a></h4>
+<h4 id="_french_e_invoicing_mandate_2026"><a class="anchor" href="#_french_e_invoicing_mandate_2026"></a><a class="link" href="#_french_e_invoicing_mandate_2026">5.5.1. French E-Invoicing Mandate (2026)</a></h4>
 <div class="paragraph">
 <p>France implemented a mandatory B2B/B2G e-invoicing system starting in 2026, requiring all invoices between French entities to be transmitted through certified platforms (Plateformes Agréées - PA).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type_code_and_business_process_type"><a class="anchor" href="#_invoice_type_code_and_business_process_type"></a><a class="link" href="#_invoice_type_code_and_business_process_type">5.4.2. Invoice Type Code and Business Process Type</a></h4>
+<h4 id="_invoice_type_code_and_business_process_type"><a class="anchor" href="#_invoice_type_code_and_business_process_type"></a><a class="link" href="#_invoice_type_code_and_business_process_type">5.5.2. Invoice Type Code and Business Process Type</a></h4>
 <div class="paragraph">
 <p>In addition to the standard invoice type code, France requires the business process type to be specified using the <code>@name</code> attribute on <code>cbc:InvoiceTypeCode</code>.</p>
 </div>
@@ -12327,7 +12569,7 @@ See <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_croati
 </div>
 </div>
 <div class="sect3">
-<h4 id="_french_text_codes_note_elements"><a class="anchor" href="#_french_text_codes_note_elements"></a><a class="link" href="#_french_text_codes_note_elements">5.4.3. French Text Codes (Note Elements)</a></h4>
+<h4 id="_french_text_codes_note_elements"><a class="anchor" href="#_french_text_codes_note_elements"></a><a class="link" href="#_french_text_codes_note_elements">5.5.3. French Text Codes (Note Elements)</a></h4>
 <div class="paragraph">
 <p>France requires specific information to be provided in invoice notes using standardized text code prefixes. These text codes identify the type of legal, regulatory, or commercial information being provided.</p>
 </div>
@@ -12552,7 +12794,7 @@ These text codes apply to both Invoice and CreditNote document types.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_compliance_and_regulated_status_type_de_processus_métier"><a class="anchor" href="#_compliance_and_regulated_status_type_de_processus_métier"></a><a class="link" href="#_compliance_and_regulated_status_type_de_processus_métier">5.4.4. Compliance and Regulated Status (Type de processus métier)</a></h4>
+<h4 id="_compliance_and_regulated_status_type_de_processus_métier"><a class="anchor" href="#_compliance_and_regulated_status_type_de_processus_métier"></a><a class="link" href="#_compliance_and_regulated_status_type_de_processus_métier">5.5.4. Compliance and Regulated Status (Type de processus métier)</a></h4>
 <div class="paragraph">
 <p>Every French invoice / credit note is either <strong>regulated</strong> — processed <strong>within</strong> the French e-invoicing reform, with Pagero acting as the accredited platform (PA) and applying the stricter compliance checks and validations the reform requires — or <strong>non-regulated</strong>, processed <strong>outside</strong> that regime (for example B2C or cross-border documents). This corresponds to the <strong>Type de processus métier</strong> concept (MDG-2).</p>
 </div>
@@ -12615,7 +12857,7 @@ These text codes apply to both Invoice and CreditNote document types.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_archive_only_credit_notes_archiveonly"><a class="anchor" href="#_archive_only_credit_notes_archiveonly"></a><a class="link" href="#_archive_only_credit_notes_archiveonly">5.4.5. Archive-only credit notes (ARCHIVEONLY)</a></h4>
+<h4 id="_archive_only_credit_notes_archiveonly"><a class="anchor" href="#_archive_only_credit_notes_archiveonly"></a><a class="link" href="#_archive_only_credit_notes_archiveonly">5.5.5. Archive-only credit notes (ARCHIVEONLY)</a></h4>
 <div class="paragraph">
 <p><code>#BAR#ARCHIVEONLY</code> marks an <strong>internal credit note</strong> (AVOIR interne) reversing an invoice that was
 <strong>Rejetée</strong> or <strong>Refusée</strong>, submitted for archiving only. Per AFNOR XP Z12-012 rule BR-FR-20 such a
@@ -12649,7 +12891,7 @@ scopes the behaviour to. Do not add <code>puf:ExternalDeliveryType</code>; it is
 </div>
 </div>
 <div class="sect3">
-<h4 id="_credit_note_for_global_discount_code_262"><a class="anchor" href="#_credit_note_for_global_discount_code_262"></a><a class="link" href="#_credit_note_for_global_discount_code_262">5.4.6. Credit note for global discount (Code 262)</a></h4>
+<h4 id="_credit_note_for_global_discount_code_262"><a class="anchor" href="#_credit_note_for_global_discount_code_262"></a><a class="link" href="#_credit_note_for_global_discount_code_262">5.5.6. Credit note for global discount (Code 262)</a></h4>
 <div class="paragraph">
 <p>Invoice type code <code>262</code> ("Avoir pour Remise Globale") is used for credit notes
 issued against one or more previously sent invoices to apply a global
@@ -12707,7 +12949,7 @@ BT-12 / BT-73 remain in their normal locations.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sub_lines_and_line_groupings"><a class="anchor" href="#_sub_lines_and_line_groupings"></a><a class="link" href="#_sub_lines_and_line_groupings">5.4.7. Sub-lines and Line Groupings</a></h4>
+<h4 id="_sub_lines_and_line_groupings"><a class="anchor" href="#_sub_lines_and_line_groupings"></a><a class="link" href="#_sub_lines_and_line_groupings">5.5.7. Sub-lines and Line Groupings</a></h4>
 <div class="paragraph">
 <p>France (EXTENDED-CTC-FR profile) supports hierarchical invoice lines - sub-lines and line groupings - for composite articles (kits, packs), multi-VAT-rate products, and parent lines with supplements. The lines stay flat; the hierarchy is carried by the generic <a href="#line-sublines">Sub-lines extension</a> (<code>puf:RowType</code> + <code>puf:ParentLineID</code>) together with the native <code>cac:Item/cbc:PackQuantity</code>.</p>
 </div>
@@ -12850,7 +13092,7 @@ Reference examples are available under <code>examples/country-specific-examples/
 </div>
 </div>
 <div class="sect3">
-<h4 id="_self_billing_indicator_2"><a class="anchor" href="#_self_billing_indicator_2"></a><a class="link" href="#_self_billing_indicator_2">5.4.8. Self-Billing Indicator</a></h4>
+<h4 id="_self_billing_indicator_2"><a class="anchor" href="#_self_billing_indicator_2"></a><a class="link" href="#_self_billing_indicator_2">5.5.8. Self-Billing Indicator</a></h4>
 <div class="paragraph">
 <p>Self-billing invoices can be indicated in two ways:</p>
 </div>
@@ -12902,7 +13144,7 @@ Reference examples are available under <code>examples/country-specific-examples/
 </div>
 </div>
 <div class="sect3">
-<h4 id="_business_and_vat_identification"><a class="anchor" href="#_business_and_vat_identification"></a><a class="link" href="#_business_and_vat_identification">5.4.9. Business and VAT Identification</a></h4>
+<h4 id="_business_and_vat_identification"><a class="anchor" href="#_business_and_vat_identification"></a><a class="link" href="#_business_and_vat_identification">5.5.9. Business and VAT Identification</a></h4>
 <div class="paragraph">
 <p>France uses SIRET (14-digit) and SIREN (9-digit) numbers for business identification.</p>
 </div>
@@ -13206,7 +13448,7 @@ Reference examples are available under <code>examples/country-specific-examples/
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mandate_scenarios_agent_parties"><a class="anchor" href="#_mandate_scenarios_agent_parties"></a><a class="link" href="#_mandate_scenarios_agent_parties">5.4.10. Mandate Scenarios - Agent Parties</a></h4>
+<h4 id="_mandate_scenarios_agent_parties"><a class="anchor" href="#_mandate_scenarios_agent_parties"></a><a class="link" href="#_mandate_scenarios_agent_parties">5.5.10. Mandate Scenarios - Agent Parties</a></h4>
 <div class="paragraph">
 <p>France supports multiple mandate scenarios requiring agent party information. Party roles are indicated using the PUF RoleCode extension.</p>
 </div>
@@ -13388,7 +13630,7 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect3">
-<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.4.11. Service code</a></h4>
+<h4 id="_service_code"><a class="anchor" href="#_service_code"></a><a class="link" href="#_service_code">5.5.11. Service code</a></h4>
 <div class="paragraph">
 <p>Service code is a routing code required by some customers to identify the correct recipient in French Government Portal.</p>
 </div>
@@ -13439,7 +13681,7 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect3">
-<h4 id="_b2g_public_sector_chorus_pro"><a class="anchor" href="#_b2g_public_sector_chorus_pro"></a><a class="link" href="#_b2g_public_sector_chorus_pro">5.4.12. B2G / public sector (Chorus Pro)</a></h4>
+<h4 id="_b2g_public_sector_chorus_pro"><a class="anchor" href="#_b2g_public_sector_chorus_pro"></a><a class="link" href="#_b2g_public_sector_chorus_pro">5.5.12. B2G / public sector (Chorus Pro)</a></h4>
 <div class="paragraph">
 <p>French B2G invoices are subject to the additional <code>BR-FR-CPRO</code> rules. The rules are activated when the transaction is identified as B2G through <code>#ADN#B2G</code>, channel context, or public-buyer directory information.</p>
 </div>
@@ -13501,7 +13743,7 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.4.13. Legal commitments</a></h4>
+<h4 id="_legal_commitments"><a class="anchor" href="#_legal_commitments"></a><a class="link" href="#_legal_commitments">5.5.13. Legal commitments</a></h4>
 <div class="paragraph">
 <p>Entities behind French Government portal can set up validation of certain elements called legal commitments. Therefore it&#8217;s recommended to support the below values in order to fulfill the requirements of this validation.</p>
 </div>
@@ -13595,12 +13837,12 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect2">
-<h3 id="_greece"><a class="anchor" href="#_greece"></a><a class="link" href="#_greece">5.5. Greece</a></h3>
+<h3 id="_greece"><a class="anchor" href="#_greece"></a><a class="link" href="#_greece">5.6. Greece</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Greece.</p>
 </div>
 <div class="sect3">
-<h4 id="_mydata_xml_file_as_attachment"><a class="anchor" href="#_mydata_xml_file_as_attachment"></a><a class="link" href="#_mydata_xml_file_as_attachment">5.5.1. myDATA xml file as attachment</a></h4>
+<h4 id="_mydata_xml_file_as_attachment"><a class="anchor" href="#_mydata_xml_file_as_attachment"></a><a class="link" href="#_mydata_xml_file_as_attachment">5.6.1. myDATA xml file as attachment</a></h4>
 <div class="paragraph">
 <p>In PUF you can attach the myDATA-xml reporting file as a separate attachment to the business document.</p>
 </div>
@@ -13638,12 +13880,12 @@ The role code for Invoicer MUST be exactly <code>II</code> as per French busines
 </div>
 </div>
 <div class="sect2">
-<h3 id="_hungary"><a class="anchor" href="#_hungary"></a><a class="link" href="#_hungary">5.6. Hungary</a></h3>
+<h3 id="_hungary"><a class="anchor" href="#_hungary"></a><a class="link" href="#_hungary">5.7. Hungary</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Hungary and Real-Time Invoice Reporting (RTIR)</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_appearance"><a class="anchor" href="#_invoice_appearance"></a><a class="link" href="#_invoice_appearance">5.6.1. Invoice appearance</a></h4>
+<h4 id="_invoice_appearance"><a class="anchor" href="#_invoice_appearance"></a><a class="link" href="#_invoice_appearance">5.7.1. Invoice appearance</a></h4>
 <div class="paragraph">
 <p>Each document must have a Invoice Apperance code, the value depends on how the documents is distributed between the issuer and receiver.</p>
 </div>
@@ -13724,7 +13966,7 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_number"><a class="anchor" href="#_tax_number"></a><a class="link" href="#_tax_number">5.6.2. Tax number</a></h4>
+<h4 id="_tax_number"><a class="anchor" href="#_tax_number"></a><a class="link" href="#_tax_number">5.7.2. Tax number</a></h4>
 <div class="paragraph">
 <p>The syntax of Hungarian tax IDs is 11 characters.</p>
 </div>
@@ -13773,7 +14015,7 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_customer_vat_status"><a class="anchor" href="#_customer_vat_status"></a><a class="link" href="#_customer_vat_status">5.6.3. Customer VAT status</a></h4>
+<h4 id="_customer_vat_status"><a class="anchor" href="#_customer_vat_status"></a><a class="link" href="#_customer_vat_status">5.7.3. Customer VAT status</a></h4>
 <div class="paragraph">
 <p>It&#8217;s mandatory to provide the customers VAT status, this determine allowed content and rules for the customer party.</p>
 </div>
@@ -13835,7 +14077,7 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_line_expression_indicator"><a class="anchor" href="#_line_expression_indicator"></a><a class="link" href="#_line_expression_indicator">5.6.4. Line expression indicator</a></h4>
+<h4 id="_line_expression_indicator"><a class="anchor" href="#_line_expression_indicator"></a><a class="link" href="#_line_expression_indicator">5.7.4. Line expression indicator</a></h4>
 <div class="paragraph">
 <p><code>lineExpressionIndicator</code> indicates whether the unit of the item can be expressed as a natural unit of measurement. The indicator must be provided on each line.</p>
 </div>
@@ -13903,7 +14145,7 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_modification"><a class="anchor" href="#_modification"></a><a class="link" href="#_modification">5.6.5. Modification</a></h4>
+<h4 id="_modification"><a class="anchor" href="#_modification"></a><a class="link" href="#_modification">5.7.5. Modification</a></h4>
 <div class="paragraph">
 <p>Hungary RTIR flow require a special handling regarding credit and modification of documents, below section will give brief information how this must be handled.</p>
 </div>
@@ -14110,7 +14352,7 @@ The code should match the defined distribution method, if this is unknown at the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_advance_payment"><a class="anchor" href="#_advance_payment"></a><a class="link" href="#_advance_payment">5.6.6. Advance Payment</a></h4>
+<h4 id="_advance_payment"><a class="anchor" href="#_advance_payment"></a><a class="link" href="#_advance_payment">5.7.6. Advance Payment</a></h4>
 <div class="paragraph">
 <p>Advance payment must be sent as a separate invoice line with a negative line extension amount. The <code>lineExpressionIndicator</code> needs to be set to false and the term "advance payment/eloleg" must be sent in the invoice line item name.
 Four advanced data fields are also required.</p>
@@ -14215,12 +14457,12 @@ Four advanced data fields are also required.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_india"><a class="anchor" href="#_india"></a><a class="link" href="#_india">5.7. India</a></h3>
+<h3 id="_india"><a class="anchor" href="#_india"></a><a class="link" href="#_india">5.8. India</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in India.</p>
 </div>
 <div class="sect3">
-<h4 id="_place_of_supply"><a class="anchor" href="#_place_of_supply"></a><a class="link" href="#_place_of_supply">5.7.1. Place of supply</a></h4>
+<h4 id="_place_of_supply"><a class="anchor" href="#_place_of_supply"></a><a class="link" href="#_place_of_supply">5.8.1. Place of supply</a></h4>
 <div class="paragraph">
 <p>Place of supply determines the place (the State) where the GST shall be received by the government treasury.</p>
 </div>
@@ -14253,7 +14495,7 @@ Four advanced data fields are also required.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_3"><a class="anchor" href="#_party_identification_3"></a><a class="link" href="#_party_identification_3">5.7.2. Party identification</a></h4>
+<h4 id="_party_identification_4"><a class="anchor" href="#_party_identification_4"></a><a class="link" href="#_party_identification_4">5.8.2. Party identification</a></h4>
 <div class="paragraph">
 <p>In India there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.</p>
 </div>
@@ -14292,7 +14534,7 @@ Four advanced data fields are also required.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_address_information"><a class="anchor" href="#_party_address_information"></a><a class="link" href="#_party_address_information">5.7.3. Party address information</a></h4>
+<h4 id="_party_address_information"><a class="anchor" href="#_party_address_information"></a><a class="link" href="#_party_address_information">5.8.3. Party address information</a></h4>
 <div class="paragraph">
 <p>The mandatory clearance platform IRP validate the below address information according to code lists.</p>
 </div>
@@ -14358,13 +14600,13 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_type_scheme_2"><a class="anchor" href="#_tax_type_scheme_2"></a><a class="link" href="#_tax_type_scheme_2">5.7.4. Tax type scheme</a></h4>
+<h4 id="_tax_type_scheme_2"><a class="anchor" href="#_tax_type_scheme_2"></a><a class="link" href="#_tax_type_scheme_2">5.8.4. Tax type scheme</a></h4>
 <div class="paragraph">
 <p>Tax type scheme codes for India can be found in <a href="https://pagero.github.io/puf-code-lists/#_puf_009_taxtypescheme" target="_blank" rel="noopener">PUF-009-TAXTYPESCHEME</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_hsn_code"><a class="anchor" href="#_hsn_code"></a><a class="link" href="#_hsn_code">5.7.5. HSN code</a></h4>
+<h4 id="_hsn_code"><a class="anchor" href="#_hsn_code"></a><a class="link" href="#_hsn_code">5.8.5. HSN code</a></h4>
 <div class="paragraph">
 <p>Each invoice line must contain a HSN code, IRP will validate that the provided HSN code correspond with relevant taxes for that goods or service.</p>
 </div>
@@ -14406,7 +14648,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_supply_type"><a class="anchor" href="#_supply_type"></a><a class="link" href="#_supply_type">5.7.6. Supply type</a></h4>
+<h4 id="_supply_type"><a class="anchor" href="#_supply_type"></a><a class="link" href="#_supply_type">5.8.6. Supply type</a></h4>
 <div class="paragraph">
 <p>In India it&#8217;s mandatory to define the type of supply relevant for the invoice, the available codes can be found below and must be stated in the Supply type element found <a href="#_supplytype">here</a>.</p>
 </div>
@@ -14450,19 +14692,19 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </table>
 </div>
 <div class="sect3">
-<h4 id="_igst_on_intra_state_transaction"><a class="anchor" href="#_igst_on_intra_state_transaction"></a><a class="link" href="#_igst_on_intra_state_transaction">5.7.7. IGST on intra state transaction</a></h4>
+<h4 id="_igst_on_intra_state_transaction"><a class="anchor" href="#_igst_on_intra_state_transaction"></a><a class="link" href="#_igst_on_intra_state_transaction">5.8.7. IGST on intra state transaction</a></h4>
 <div class="paragraph">
 <p>In some cases IGST is applicable on intra state supplies, in order to indicate this a true or false flag must be set in element <code>puf:IGSTOnIntra</code> which can be found <a href="#_igstonintra">here</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_italy"><a class="anchor" href="#_italy"></a><a class="link" href="#_italy">5.8. Italy</a></h3>
+<h3 id="_italy"><a class="anchor" href="#_italy"></a><a class="link" href="#_italy">5.9. Italy</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Italy.</p>
 </div>
 <div class="sect3">
-<h4 id="_routing_code_codice_destinatario"><a class="anchor" href="#_routing_code_codice_destinatario"></a><a class="link" href="#_routing_code_codice_destinatario">5.8.1. Routing code (codice destinatario)</a></h4>
+<h4 id="_routing_code_codice_destinatario"><a class="anchor" href="#_routing_code_codice_destinatario"></a><a class="link" href="#_routing_code_codice_destinatario">5.9.1. Routing code (codice destinatario)</a></h4>
 <div class="paragraph">
 <p>In order to send invoices in Italy a destination code must be provided called "Codice Destinatario".</p>
 </div>
@@ -14488,7 +14730,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_duty_stamp_dati_bollo"><a class="anchor" href="#_duty_stamp_dati_bollo"></a><a class="link" href="#_duty_stamp_dati_bollo">5.8.2. Duty stamp (dati bollo)</a></h4>
+<h4 id="_duty_stamp_dati_bollo"><a class="anchor" href="#_duty_stamp_dati_bollo"></a><a class="link" href="#_duty_stamp_dati_bollo">5.9.2. Duty stamp (dati bollo)</a></h4>
 <div class="paragraph">
 <p>In order to provide Dati Bollo (Duty Stamp) required on some invoices in Italy the value can be provided in the following element <a href="#_dutystamp">Duty Stamp</a>.</p>
 </div>
@@ -14517,7 +14759,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_chargeability_esigibilita_iva"><a class="anchor" href="#_tax_chargeability_esigibilita_iva"></a><a class="link" href="#_tax_chargeability_esigibilita_iva">5.8.3. Tax chargeability (esigibilita IVA)</a></h4>
+<h4 id="_tax_chargeability_esigibilita_iva"><a class="anchor" href="#_tax_chargeability_esigibilita_iva"></a><a class="link" href="#_tax_chargeability_esigibilita_iva">5.9.3. Tax chargeability (esigibilita IVA)</a></h4>
 <div class="paragraph">
 <p>To provide tax chargeability, the extension element <code>(Invoice|CreditNote)/cac:TaxTotal/cac:TaxSubtotal/ext:UBLExtensions</code> can be used.</p>
 </div>
@@ -14575,7 +14817,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_vat_number_and_fiscal_code"><a class="anchor" href="#_vat_number_and_fiscal_code"></a><a class="link" href="#_vat_number_and_fiscal_code">5.8.4. VAT number and fiscal code</a></h4>
+<h4 id="_vat_number_and_fiscal_code"><a class="anchor" href="#_vat_number_and_fiscal_code"></a><a class="link" href="#_vat_number_and_fiscal_code">5.9.4. VAT number and fiscal code</a></h4>
 <div class="paragraph">
 <p>It is possible to send a VAT number and/or a fiscal code (Codice Fiscale) in PUF, below is a description and example how to provide this.</p>
 </div>
@@ -14649,19 +14891,19 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_registration_data_2"><a class="anchor" href="#_registration_data_2"></a><a class="link" href="#_registration_data_2">5.8.5. Registration data</a></h4>
+<h4 id="_registration_data_2"><a class="anchor" href="#_registration_data_2"></a><a class="link" href="#_registration_data_2">5.9.5. Registration data</a></h4>
 <div class="paragraph">
 <p>To provide the registration data (Ufficio, NumeroREA, Capitale Sociale, Socio Unico and Stato Liquidazione) in the XML file please check the extension for <code>cac:AccountingSupplierParty</code> structure <a href="#_registration_data">here</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_malaysia"><a class="anchor" href="#_malaysia"></a><a class="link" href="#_malaysia">5.9. Malaysia</a></h3>
+<h3 id="_malaysia"><a class="anchor" href="#_malaysia"></a><a class="link" href="#_malaysia">5.10. Malaysia</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Malaysia.</p>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_4"><a class="anchor" href="#_party_identification_4"></a><a class="link" href="#_party_identification_4">5.9.1. Party identification</a></h4>
+<h4 id="_party_identification_5"><a class="anchor" href="#_party_identification_5"></a><a class="link" href="#_party_identification_5">5.10.1. Party identification</a></h4>
 <div class="paragraph">
 <p>In Malayia there is a requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.</p>
 </div>
@@ -14700,7 +14942,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_details"><a class="anchor" href="#_tax_details"></a><a class="link" href="#_tax_details">5.9.2. Tax Details</a></h4>
+<h4 id="_tax_details"><a class="anchor" href="#_tax_details"></a><a class="link" href="#_tax_details">5.10.2. Tax Details</a></h4>
 <div class="paragraph">
 <p>In order to provide the correct tax details in Malaysia the LHDN valid values must be provided in <code>cac:TaxScheme/cbc:Name</code> element.</p>
 </div>
@@ -14778,14 +15020,14 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_unit_of_measure"><a class="anchor" href="#_unit_of_measure"></a><a class="link" href="#_unit_of_measure">5.9.3. Unit of Measure</a></h4>
+<h4 id="_unit_of_measure"><a class="anchor" href="#_unit_of_measure"></a><a class="link" href="#_unit_of_measure">5.10.3. Unit of Measure</a></h4>
 <div class="paragraph">
 <p>LHDN is following the UN/ECE Recommendation 20, Revision 17 (2021). The Unit of Measure code sent in the invoice must be one of the accepted codes listed on the LHDN&#8217;s official webpage <a href="https://sdk.myinvois.hasil.gov.my/codes/unit-types/" target="_blank" rel="noopener">here</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_oman"><a class="anchor" href="#_oman"></a><a class="link" href="#_oman">5.10. Oman</a></h3>
+<h3 id="_oman"><a class="anchor" href="#_oman"></a><a class="link" href="#_oman">5.11. Oman</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Oman.</p>
 </div>
@@ -14793,7 +15035,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 <p>Oman e-invoicing follows the Oman Tax Authority <strong>Fawtara</strong> programme and is specified by the OpenPeppol Post Award Coordinating Community as <strong>Peppol PINT OM</strong>, in a billing and a self-billing variant. PUF supports Oman through standard PUF elements together with the existing PUF UBL extensions originally introduced for KSA and the UAE. No Oman-specific extension element is required.</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type_code_and_transaction_type"><a class="anchor" href="#_invoice_type_code_and_transaction_type"></a><a class="link" href="#_invoice_type_code_and_transaction_type">5.10.1. Invoice type code and transaction type</a></h4>
+<h4 id="_invoice_type_code_and_transaction_type"><a class="anchor" href="#_invoice_type_code_and_transaction_type"></a><a class="link" href="#_invoice_type_code_and_transaction_type">5.11.1. Invoice type code and transaction type</a></h4>
 <div class="paragraph">
 <p>Available invoice type code values to be used in Oman can be found here: <a href="https://pagero.github.io/puf-code-lists/#_invoice_type_codes_oman" target="_blank" rel="noopener">Invoice type codes Oman</a>.</p>
 </div>
@@ -14850,13 +15092,13 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_document_uuid"><a class="anchor" href="#_document_uuid"></a><a class="link" href="#_document_uuid">5.10.2. Document UUID</a></h4>
+<h4 id="_document_uuid"><a class="anchor" href="#_document_uuid"></a><a class="link" href="#_document_uuid">5.11.2. Document UUID</a></h4>
 <div class="paragraph">
 <p>Oman requires a document UUID (BTOM-002) that is a valid <strong>version 5</strong> UUID (RFC 4122). Pagero generates this UUID during processing, so no customer input is required and no PUF element needs to be populated for it.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_seller_uuid"><a class="anchor" href="#_seller_uuid"></a><a class="link" href="#_seller_uuid">5.10.3. Seller UUID</a></h4>
+<h4 id="_seller_uuid"><a class="anchor" href="#_seller_uuid"></a><a class="link" href="#_seller_uuid">5.11.3. Seller UUID</a></h4>
 <div class="paragraph">
 <p>The seller UUID (BTOM-004) is the receipt UUID the seller generates for the document. It is required when the buyer electronic address (IBT-049) is the anonymous placeholder <code>997770000099</code>, and it must then be a valid version 5 UUID (IBR-173-OM).</p>
 </div>
@@ -14907,7 +15149,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_5"><a class="anchor" href="#_party_identification_5"></a><a class="link" href="#_party_identification_5">5.10.4. Party identification</a></h4>
+<h4 id="_party_identification_6"><a class="anchor" href="#_party_identification_6"></a><a class="link" href="#_party_identification_6">5.11.4. Party identification</a></h4>
 <div class="paragraph">
 <p>Oman qualifies a party identifier with a scheme code from the PINT OM <strong>Buyer/Seller Identifier</strong> code list. In PUF the identifier value goes on <code>cac:PartyIdentification/cbc:ID</code> and the scheme goes on the standard <code>@schemeID</code> attribute using the <code>OM:</code> prefixed PUF-008 codes.</p>
 </div>
@@ -14976,7 +15218,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_electronic_address_participant_identifier"><a class="anchor" href="#_electronic_address_participant_identifier"></a><a class="link" href="#_electronic_address_participant_identifier">5.10.5. Electronic address (Participant Identifier)</a></h4>
+<h4 id="_electronic_address_participant_identifier"><a class="anchor" href="#_electronic_address_participant_identifier"></a><a class="link" href="#_electronic_address_participant_identifier">5.11.5. Electronic address (Participant Identifier)</a></h4>
 <div class="paragraph">
 <p>The seller and buyer electronic address (IBT-034 / IBT-049) is provided on <code>cbc:EndpointID</code> and MUST have a scheme identifier. The Oman Peppol EAS code is <code>0248</code> (<em>Oman Value Added Tax Identification Number (VATIN)</em>).</p>
 </div>
@@ -15009,7 +15251,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_country_subdivision_special_zones"><a class="anchor" href="#_country_subdivision_special_zones"></a><a class="link" href="#_country_subdivision_special_zones">5.10.6. Country subdivision (Special Zones)</a></h4>
+<h4 id="_country_subdivision_special_zones"><a class="anchor" href="#_country_subdivision_special_zones"></a><a class="link" href="#_country_subdivision_special_zones">5.11.6. Country subdivision (Special Zones)</a></h4>
 <div class="paragraph">
 <p>Whenever an Oman address is provided, the country subdivision code identifies whether the party sits in mainland Oman or in a designated zone. It is provided in <code>cbc:CountrySubentityCode</code> (BTOM-024 for the seller, BTOM-026 for the buyer) with the country code in <code>cac:Country/cbc:IdentificationCode = 'OM'</code>.</p>
 </div>
@@ -15056,7 +15298,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_currency_and_omr_amounts"><a class="anchor" href="#_currency_and_omr_amounts"></a><a class="link" href="#_currency_and_omr_amounts">5.10.7. Currency and OMR amounts</a></h4>
+<h4 id="_currency_and_omr_amounts"><a class="anchor" href="#_currency_and_omr_amounts"></a><a class="link" href="#_currency_and_omr_amounts">5.11.7. Currency and OMR amounts</a></h4>
 <div class="paragraph">
 <p>The document currency code MUST be present (<code>cbc:DocumentCurrencyCode</code>). When the document currency is not OMR, the tax accounting currency MUST be <code>OMR</code> (<code>cbc:TaxCurrencyCode = 'OMR'</code>) and the currency exchange rate MUST be provided, with at most 7 decimal places.</p>
 </div>
@@ -15116,7 +15358,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_line_amounts_including_vat"><a class="anchor" href="#_invoice_line_amounts_including_vat"></a><a class="link" href="#_invoice_line_amounts_including_vat">5.10.8. Invoice line amounts including VAT</a></h4>
+<h4 id="_invoice_line_amounts_including_vat"><a class="anchor" href="#_invoice_line_amounts_including_vat"></a><a class="link" href="#_invoice_line_amounts_including_vat">5.11.8. Invoice line amounts including VAT</a></h4>
 <div class="paragraph">
 <p>For non-simplified invoices, Oman requires line VAT (IBR-038-OM) and the line total including VAT (IBR-158-OM) in the invoice currency, including when that currency is OMR. These are distinct from accounting-currency amounts. Simplified invoices may omit line VAT under IBR-038-OM; IBR-158-OM exempts the line-total calculation when a simplified invoice has no line VAT.</p>
 </div>
@@ -15151,7 +15393,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_item_type_classification_and_service_type"><a class="anchor" href="#_item_type_classification_and_service_type"></a><a class="link" href="#_item_type_classification_and_service_type">5.10.9. Item type, classification and service type</a></h4>
+<h4 id="_item_type_classification_and_service_type"><a class="anchor" href="#_item_type_classification_and_service_type"></a><a class="link" href="#_item_type_classification_and_service_type">5.11.9. Item type, classification and service type</a></h4>
 <div class="paragraph">
 <p>Non-simplified Oman invoices must identify each item as goods or a service (IBR-078-OM) and carry the applicable classification codes. All three inputs below use existing PUF elements. PUF item-type values differ from the single-letter codes in the Oman target.</p>
 </div>
@@ -15257,7 +15499,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_vat_category_exemption_and_zero_rating"><a class="anchor" href="#_vat_category_exemption_and_zero_rating"></a><a class="link" href="#_vat_category_exemption_and_zero_rating">5.10.10. VAT category, exemption and zero rating</a></h4>
+<h4 id="_vat_category_exemption_and_zero_rating"><a class="anchor" href="#_vat_category_exemption_and_zero_rating"></a><a class="link" href="#_vat_category_exemption_and_zero_rating">5.11.10. VAT category, exemption and zero rating</a></h4>
 <div class="paragraph">
 <p>Oman uses a restricted VAT category code set (rule <code>CL-04-OM</code>): <code>S</code> (Standard rate), <code>E</code> (Exempt from tax), <code>O</code> (Services outside scope of tax / not subject to tax) and <code>Z</code> (Zero rated). The Peppol categories <code>AE</code> and <code>N</code> are not used in Oman.</p>
 </div>
@@ -15279,7 +15521,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_profit_margin_scheme"><a class="anchor" href="#_profit_margin_scheme"></a><a class="link" href="#_profit_margin_scheme">5.10.11. Profit Margin Scheme</a></h4>
+<h4 id="_profit_margin_scheme"><a class="anchor" href="#_profit_margin_scheme"></a><a class="link" href="#_profit_margin_scheme">5.11.11. Profit Margin Scheme</a></h4>
 <div class="paragraph">
 <p>An invoice issued under the Oman profit margin scheme sets position 10 of the transaction type code, and a profit margin self-invoice sets position 11.</p>
 </div>
@@ -15372,7 +15614,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_third_party_invoicing"><a class="anchor" href="#_third_party_invoicing"></a><a class="link" href="#_third_party_invoicing">5.10.12. Third party invoicing</a></h4>
+<h4 id="_third_party_invoicing"><a class="anchor" href="#_third_party_invoicing"></a><a class="link" href="#_third_party_invoicing">5.11.12. Third party invoicing</a></h4>
 <div class="paragraph">
 <p>An invoice created by an authorised third party on behalf of the supplier sets position 4 of the transaction type code, and then requires the third party&#8217;s details exactly once (BGOM-01 and BGOM-02).</p>
 </div>
@@ -15459,7 +15701,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_preceding_document_reference_and_correction_reason"><a class="anchor" href="#_preceding_document_reference_and_correction_reason"></a><a class="link" href="#_preceding_document_reference_and_correction_reason">5.10.13. Preceding document reference and correction reason</a></h4>
+<h4 id="_preceding_document_reference_and_correction_reason"><a class="anchor" href="#_preceding_document_reference_and_correction_reason"></a><a class="link" href="#_preceding_document_reference_and_correction_reason">5.11.13. Preceding document reference and correction reason</a></h4>
 <div class="paragraph">
 <p>A credit note, a debit note or a self-billed credit note MUST reference the preceding document and state why it is being issued.</p>
 </div>
@@ -15510,7 +15752,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_prepayment_references"><a class="anchor" href="#_prepayment_references"></a><a class="link" href="#_prepayment_references">5.10.14. Prepayment references</a></h4>
+<h4 id="_prepayment_references"><a class="anchor" href="#_prepayment_references"></a><a class="link" href="#_prepayment_references">5.11.14. Prepayment references</a></h4>
 <div class="paragraph">
 <p>When a paid amount (IBT-113) is present, the prepayment invoice number (BTOM-027) and its UUID (BTOM-014) MUST be provided. Both go on the same <code>cac:AdditionalDocumentReference</code>, which Oman qualifies with <code>cbc:DocumentTypeCode = 'PDR'</code>:</p>
 </div>
@@ -15541,7 +15783,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_import_of_goods"><a class="anchor" href="#_import_of_goods"></a><a class="link" href="#_import_of_goods">5.10.15. Import of goods</a></h4>
+<h4 id="_import_of_goods"><a class="anchor" href="#_import_of_goods"></a><a class="link" href="#_import_of_goods">5.11.15. Import of goods</a></h4>
 <div class="paragraph">
 <p>An invoice for an import of goods sets position 13 of the transaction type code, and then requires the Incoterms code (BTOM-022), the customs declaration number (BTOM-021) and the import date (BTOM-030).</p>
 </div>
@@ -15564,7 +15806,7 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_self_billing_2"><a class="anchor" href="#_self_billing_2"></a><a class="link" href="#_self_billing_2">5.10.16. Self-billing</a></h4>
+<h4 id="_self_billing_2"><a class="anchor" href="#_self_billing_2"></a><a class="link" href="#_self_billing_2">5.11.16. Self-billing</a></h4>
 <div class="paragraph">
 <p>Self-billed documents keep their ordinary type code in PUF (<code>cbc:InvoiceTypeCode = 380</code>, <code>cbc:CreditNoteTypeCode = 381</code>) and are flagged through the standard <code>puf:SelfBilled</code> extension at document level. See <a href="#_self_billing_indicator">Self Billing Indicator</a> for the structure.</p>
 </div>
@@ -15608,20 +15850,20 @@ The post code or PIN code as referred to in India must exist on all parties and 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_complete_examples"><a class="anchor" href="#_complete_examples"></a><a class="link" href="#_complete_examples">5.10.17. Complete examples</a></h4>
+<h4 id="_complete_examples"><a class="anchor" href="#_complete_examples"></a><a class="link" href="#_complete_examples">5.11.17. Complete examples</a></h4>
 <div class="paragraph">
 <p>The <a href="https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/oman" target="_blank" rel="noopener">Oman PUF examples</a> include standard billing, a goods credit note, self-billing, third-party billing and settlement of a prepayment. The example index records their official source basis and local validation scope. The foreign-currency example is explicitly marked as a draft pending resolution of the accounting-currency rule conflict.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_philippines"><a class="anchor" href="#_philippines"></a><a class="link" href="#_philippines">5.11. Philippines</a></h3>
+<h3 id="_philippines"><a class="anchor" href="#_philippines"></a><a class="link" href="#_philippines">5.12. Philippines</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Philippines.
 For more information on how to send compliant invoices in Philippines see <a href="https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/philippines" target="_blank" rel="noopener">example files</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="_corrective_invoice"><a class="anchor" href="#_corrective_invoice"></a><a class="link" href="#_corrective_invoice">5.11.1. Corrective Invoice</a></h4>
+<h4 id="_corrective_invoice"><a class="anchor" href="#_corrective_invoice"></a><a class="link" href="#_corrective_invoice">5.12.1. Corrective Invoice</a></h4>
 <div class="paragraph">
 <p>When sending a corrective invoice it is required to specify the unique id of the invoice being corrected as well as the reason code.<br></p>
 </div>
@@ -15690,7 +15932,7 @@ Sales Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_withholding_vat"><a class="anchor" href="#_withholding_vat"></a><a class="link" href="#_withholding_vat">5.11.2. Withholding VAT</a></h4>
+<h4 id="_withholding_vat"><a class="anchor" href="#_withholding_vat"></a><a class="link" href="#_withholding_vat">5.12.2. Withholding VAT</a></h4>
 <div class="paragraph">
 <p>Witholding Tax amount can be provided on <a href="#_cacwithholdingtaxtotal">header level</a> if one of the following <code>cac:TaxScheme/cbc:ID</code> is used.</p>
 </div>
@@ -15709,7 +15951,7 @@ Sales Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_permit_to_use_ptu"><a class="anchor" href="#_permit_to_use_ptu"></a><a class="link" href="#_permit_to_use_ptu">5.11.3. Permit To Use (PTU)</a></h4>
+<h4 id="_permit_to_use_ptu"><a class="anchor" href="#_permit_to_use_ptu"></a><a class="link" href="#_permit_to_use_ptu">5.12.3. Permit To Use (PTU)</a></h4>
 <div class="paragraph">
 <p>The PTU is the number issued by the Bureau of Internal Revenue allowing taxpayer&#8217;s use of  Computerized Accounting System (CAS) and must be provided in the <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>Ph_PTU</code>.</p>
 </div>
@@ -15740,7 +15982,7 @@ Sales Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_seller_tax_status"><a class="anchor" href="#_seller_tax_status"></a><a class="link" href="#_seller_tax_status">5.11.4. Seller Tax Status</a></h4>
+<h4 id="_seller_tax_status"><a class="anchor" href="#_seller_tax_status"></a><a class="link" href="#_seller_tax_status">5.12.4. Seller Tax Status</a></h4>
 <div class="paragraph">
 <p>Seller Tax Status or Seller Type can be either VAT registered or Non-VAT registered.<br>
 Allowed values: 0 or 1.<br></p>
@@ -15754,7 +15996,7 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_branch_code"><a class="anchor" href="#_party_branch_code"></a><a class="link" href="#_party_branch_code">5.11.5. Party Branch Code</a></h4>
+<h4 id="_party_branch_code"><a class="anchor" href="#_party_branch_code"></a><a class="link" href="#_party_branch_code">5.12.5. Party Branch Code</a></h4>
 <div class="paragraph">
 <p>The Party extension should be used to provide the code that identifies a headquarters or branch office.</p>
 </div>
@@ -15809,7 +16051,7 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type"><a class="anchor" href="#_invoice_type"></a><a class="link" href="#_invoice_type">5.11.6. Invoice Type</a></h4>
+<h4 id="_invoice_type"><a class="anchor" href="#_invoice_type"></a><a class="link" href="#_invoice_type">5.12.6. Invoice Type</a></h4>
 <div class="paragraph">
 <p>Available invoice type code values to be used in Philippines can be found here: <a href="https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_philippines" target="_blank" rel="noopener">Invoice type codes Philippines</a>.</p>
 </div>
@@ -15881,7 +16123,7 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_allowance_reason_codes"><a class="anchor" href="#_allowance_reason_codes"></a><a class="link" href="#_allowance_reason_codes">5.11.7. Allowance reason codes</a></h4>
+<h4 id="_allowance_reason_codes"><a class="anchor" href="#_allowance_reason_codes"></a><a class="link" href="#_allowance_reason_codes">5.12.7. Allowance reason codes</a></h4>
 <div class="paragraph">
 <p>The following codes are supported for discounts in Philippines.</p>
 </div>
@@ -15918,12 +16160,12 @@ Allowed values: 0 or 1.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_poland"><a class="anchor" href="#_poland"></a><a class="link" href="#_poland">5.12. Poland</a></h3>
+<h3 id="_poland"><a class="anchor" href="#_poland"></a><a class="link" href="#_poland">5.13. Poland</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other data for invoicing in Poland.</p>
 </div>
 <div class="sect3">
-<h4 id="_document_types"><a class="anchor" href="#_document_types"></a><a class="link" href="#_document_types">5.12.1. Document types</a></h4>
+<h4 id="_document_types"><a class="anchor" href="#_document_types"></a><a class="link" href="#_document_types">5.13.1. Document types</a></h4>
 <div class="paragraph">
 <p>PUF supports the following KSeF invoice types for Poland:</p>
 </div>
@@ -15992,7 +16234,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_restrictedinformation_document_level"><a class="anchor" href="#_restrictedinformation_document_level"></a><a class="link" href="#_restrictedinformation_document_level">5.12.2. RestrictedInformation (document level)</a></h4>
+<h4 id="_restrictedinformation_document_level"><a class="anchor" href="#_restrictedinformation_document_level"></a><a class="link" href="#_restrictedinformation_document_level">5.13.2. RestrictedInformation (document level)</a></h4>
 <div class="paragraph">
 <p>For Poland, multiple FA(3)-specific values are carried with document-level <code>puf:RestrictedInformation</code> extensions using:</p>
 </div>
@@ -16131,7 +16373,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_restrictedinformation_line_level"><a class="anchor" href="#_restrictedinformation_line_level"></a><a class="link" href="#_restrictedinformation_line_level">5.12.3. RestrictedInformation (line level)</a></h4>
+<h4 id="_restrictedinformation_line_level"><a class="anchor" href="#_restrictedinformation_line_level"></a><a class="link" href="#_restrictedinformation_line_level">5.13.3. RestrictedInformation (line level)</a></h4>
 <div class="paragraph">
 <p>Line-level keys are carried inside <code>puf:LineExtension</code> using:</p>
 </div>
@@ -16216,7 +16458,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_multi_party_scenarios"><a class="anchor" href="#_multi_party_scenarios"></a><a class="link" href="#_multi_party_scenarios">5.12.4. Multi-party scenarios</a></h4>
+<h4 id="_multi_party_scenarios"><a class="anchor" href="#_multi_party_scenarios"></a><a class="link" href="#_multi_party_scenarios">5.13.4. Multi-party scenarios</a></h4>
 <div class="paragraph">
 <p>Poland&#8217;s KSeF supports additional parties beyond the standard seller and buyer. These are mapped using <code>puf:RestrictedInformationParty</code> at document level. The following keys are supported:</p>
 </div>
@@ -16346,7 +16588,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_full_payment_indicator_date"><a class="anchor" href="#_full_payment_indicator_date"></a><a class="link" href="#_full_payment_indicator_date">5.12.5. Full payment indicator &amp; date</a></h4>
+<h4 id="_full_payment_indicator_date"><a class="anchor" href="#_full_payment_indicator_date"></a><a class="link" href="#_full_payment_indicator_date">5.13.5. Full payment indicator &amp; date</a></h4>
 <div class="paragraph">
 <p>Indicator that the invoice amount has been paid in full and the date the payment was made. Populate this field only if the full amount was paid in advance.</p>
 </div>
@@ -16376,7 +16618,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_id_and_tax_type"><a class="anchor" href="#_tax_category_id_and_tax_type"></a><a class="link" href="#_tax_category_id_and_tax_type">5.12.6. Tax category ID and tax type</a></h4>
+<h4 id="_tax_category_id_and_tax_type"><a class="anchor" href="#_tax_category_id_and_tax_type"></a><a class="link" href="#_tax_category_id_and_tax_type">5.13.6. Tax category ID and tax type</a></h4>
 <div class="paragraph">
 <p>For Poland, both the tax category identifier (<code>cbc:ID</code>) and the tax type (<code>cbc:Name</code>) are required on non-standard tax categories. Valid values for both can be found in <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland" target="_blank" rel="noopener">Tax category codes Poland</a>.</p>
 </div>
@@ -16435,7 +16677,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_buyer_identifiers"><a class="anchor" href="#_buyer_identifiers"></a><a class="link" href="#_buyer_identifiers">5.12.7. Buyer identifiers</a></h4>
+<h4 id="_buyer_identifiers"><a class="anchor" href="#_buyer_identifiers"></a><a class="link" href="#_buyer_identifiers">5.13.7. Buyer identifiers</a></h4>
 <div class="paragraph">
 <p>For non-EU buyers who do not have a Polish NIP or EU VAT number (e.g. export invoices), use <code>cac:PartyIdentification/cbc:ID</code> with a <code>schemeID</code> following the pattern <code>[CC]:TaxID</code>, where <code>[CC]</code> is the ISO 3166-1 alpha-2 country code of the buyer (e.g. <code>US:TaxID</code>, <code>GB:TaxID</code>).</p>
 </div>
@@ -16444,13 +16686,13 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tsp_commodity_code"><a class="anchor" href="#_tsp_commodity_code"></a><a class="link" href="#_tsp_commodity_code">5.12.8. TSP commodity code</a></h4>
+<h4 id="_tsp_commodity_code"><a class="anchor" href="#_tsp_commodity_code"></a><a class="link" href="#_tsp_commodity_code">5.13.8. TSP commodity code</a></h4>
 <div class="paragraph">
 <p>The Combined Nomenclature commodity classification code (<code>TSP</code>) is set at line level using <code>cac:CommodityClassification/cbc:ItemClassificationCode</code> with <code>listID="TSP"</code>. Used when goods must be classified under the EU Combined Nomenclature (e.g. for intra-Community supply). Repeatable for multiple classifications.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_original_line_indicator"><a class="anchor" href="#_original_line_indicator"></a><a class="link" href="#_original_line_indicator">5.12.9. Original line indicator</a></h4>
+<h4 id="_original_line_indicator"><a class="anchor" href="#_original_line_indicator"></a><a class="link" href="#_original_line_indicator">5.13.9. Original line indicator</a></h4>
 <div class="paragraph">
 <p>There are three ways to correct a line in Poland, and PUF supports all three. This element applies to Method 1, where an indicator flags the line being corrected. When set, the indicator voids the original line.</p>
 </div>
@@ -16485,7 +16727,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_split_payment"><a class="anchor" href="#_split_payment"></a><a class="link" href="#_split_payment">5.12.10. Split payment</a></h4>
+<h4 id="_split_payment"><a class="anchor" href="#_split_payment"></a><a class="link" href="#_split_payment">5.13.10. Split payment</a></h4>
 <div class="paragraph">
 <p>To indicate a split payment, set the Tax Chargeability Code to:</p>
 </div>
@@ -16528,7 +16770,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_document_reference_in_corrected_invoice"><a class="anchor" href="#_document_reference_in_corrected_invoice"></a><a class="link" href="#_document_reference_in_corrected_invoice">5.12.11. Document reference in corrected invoice</a></h4>
+<h4 id="_document_reference_in_corrected_invoice"><a class="anchor" href="#_document_reference_in_corrected_invoice"></a><a class="link" href="#_document_reference_in_corrected_invoice">5.13.11. Document reference in corrected invoice</a></h4>
 <div class="paragraph">
 <p>To forward the details of the invoice being corrected, in a corrected invoice (KOR) the following fields can be used:</p>
 </div>
@@ -16589,12 +16831,12 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_portugal"><a class="anchor" href="#_portugal"></a><a class="link" href="#_portugal">5.13. Portugal</a></h3>
+<h3 id="_portugal"><a class="anchor" href="#_portugal"></a><a class="link" href="#_portugal">5.14. Portugal</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Portugal.</p>
 </div>
 <div class="sect3">
-<h4 id="_billing_software_certification"><a class="anchor" href="#_billing_software_certification"></a><a class="link" href="#_billing_software_certification">5.13.1. Billing software certification</a></h4>
+<h4 id="_billing_software_certification"><a class="anchor" href="#_billing_software_certification"></a><a class="link" href="#_billing_software_certification">5.14.1. Billing software certification</a></h4>
 <div class="paragraph">
 <p>Invoices in Portugal must be issued via a certified software and in the extension <code>puf:BillingSoftware</code> it&#8217;s possible to provide the mandatory values.</p>
 </div>
@@ -16641,7 +16883,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_qr_code_and_atcud"><a class="anchor" href="#_qr_code_and_atcud"></a><a class="link" href="#_qr_code_and_atcud">5.13.2. QR code and ATCUD</a></h4>
+<h4 id="_qr_code_and_atcud"><a class="anchor" href="#_qr_code_and_atcud"></a><a class="link" href="#_qr_code_and_atcud">5.14.2. QR code and ATCUD</a></h4>
 <div class="paragraph">
 <p>In Portugal it can be required to provide a QR code and ATCUD.</p>
 </div>
@@ -16700,7 +16942,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_2"><a class="anchor" href="#_tax_category_codes_2"></a><a class="link" href="#_tax_category_codes_2">5.13.3. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_2"><a class="anchor" href="#_tax_category_codes_2"></a><a class="link" href="#_tax_category_codes_2">5.14.3. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Portugal can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_portugal" target="_blank" rel="noopener">Tax category codes Portugal</a>.</p>
 </div>
@@ -16710,12 +16952,12 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_saudi_arabia"><a class="anchor" href="#_saudi_arabia"></a><a class="link" href="#_saudi_arabia">5.14. Saudi Arabia</a></h3>
+<h3 id="_saudi_arabia"><a class="anchor" href="#_saudi_arabia"></a><a class="link" href="#_saudi_arabia">5.15. Saudi Arabia</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Saudi Arabia.</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type_code_and_invoice_subtype_2"><a class="anchor" href="#_invoice_type_code_and_invoice_subtype_2"></a><a class="link" href="#_invoice_type_code_and_invoice_subtype_2">5.14.1. Invoice type code and invoice subtype</a></h4>
+<h4 id="_invoice_type_code_and_invoice_subtype_2"><a class="anchor" href="#_invoice_type_code_and_invoice_subtype_2"></a><a class="link" href="#_invoice_type_code_and_invoice_subtype_2">5.15.1. Invoice type code and invoice subtype</a></h4>
 <div class="paragraph">
 <p>Available invoice type code values to be used in Saudi Arabia can be found here: <a href="https://pagero.github.io/puf-code-lists/#_invoice_type_codes_saudi_arabia" target="_blank" rel="noopener">Invoice type codes Saudi Arabia</a>.</p>
 </div>
@@ -16748,7 +16990,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_6"><a class="anchor" href="#_party_identification_6"></a><a class="link" href="#_party_identification_6">5.14.2. Party identification</a></h4>
+<h4 id="_party_identification_7"><a class="anchor" href="#_party_identification_7"></a><a class="link" href="#_party_identification_7">5.15.2. Party identification</a></h4>
 <div class="paragraph">
 <p>In Saudi Arabia there is a possible requirement to providing additional party identifiers that are not available in the ISO 6523 ICD list.</p>
 </div>
@@ -16788,18 +17030,18 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_serbia"><a class="anchor" href="#_serbia"></a><a class="link" href="#_serbia">5.15. Serbia</a></h3>
+<h3 id="_serbia"><a class="anchor" href="#_serbia"></a><a class="link" href="#_serbia">5.16. Serbia</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Serbia.</p>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_3"><a class="anchor" href="#_tax_category_codes_3"></a><a class="link" href="#_tax_category_codes_3">5.15.1. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_3"><a class="anchor" href="#_tax_category_codes_3"></a><a class="link" href="#_tax_category_codes_3">5.16.1. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Serbia can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_serbia" target="_blank" rel="noopener">Tax category codes Serbia</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_7"><a class="anchor" href="#_party_identification_7"></a><a class="link" href="#_party_identification_7">5.15.2. Party identification</a></h4>
+<h4 id="_party_identification_8"><a class="anchor" href="#_party_identification_8"></a><a class="link" href="#_party_identification_8">5.16.2. Party identification</a></h4>
 <div class="paragraph">
 <p>There is a possible requirement to provide additional party identifiers that are not available in the ISO 6523 ICD list.</p>
 </div>
@@ -16839,24 +17081,24 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_singapore"><a class="anchor" href="#_singapore"></a><a class="link" href="#_singapore">5.16. Singapore</a></h3>
+<h3 id="_singapore"><a class="anchor" href="#_singapore"></a><a class="link" href="#_singapore">5.17. Singapore</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Singapore.</p>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_4"><a class="anchor" href="#_tax_category_codes_4"></a><a class="link" href="#_tax_category_codes_4">5.16.1. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_4"><a class="anchor" href="#_tax_category_codes_4"></a><a class="link" href="#_tax_category_codes_4">5.17.1. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Singapore can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_singapore" target="_blank" rel="noopener">Tax category codes Singapore</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_spain"><a class="anchor" href="#_spain"></a><a class="link" href="#_spain">5.17. Spain</a></h3>
+<h3 id="_spain"><a class="anchor" href="#_spain"></a><a class="link" href="#_spain">5.18. Spain</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Spain.</p>
 </div>
 <div class="sect3">
-<h4 id="_routing_codes_dir3"><a class="anchor" href="#_routing_codes_dir3"></a><a class="link" href="#_routing_codes_dir3">5.17.1. Routing codes (DIR3)</a></h4>
+<h4 id="_routing_codes_dir3"><a class="anchor" href="#_routing_codes_dir3"></a><a class="link" href="#_routing_codes_dir3">5.18.1. Routing codes (DIR3)</a></h4>
 <div class="paragraph">
 <p>To send documents to the Spanish government you are required to provide DIR3 codes. These are used as routing codes, definition of the codes can be found below.</p>
 </div>
@@ -16933,7 +17175,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_correction_method_and_reason"><a class="anchor" href="#_correction_method_and_reason"></a><a class="link" href="#_correction_method_and_reason">5.17.2. Correction method and reason</a></h4>
+<h4 id="_correction_method_and_reason"><a class="anchor" href="#_correction_method_and_reason"></a><a class="link" href="#_correction_method_and_reason">5.18.2. Correction method and reason</a></h4>
 <div class="paragraph">
 <p>A Facturae corrective invoice reports both <strong>how</strong> the correction was made (the correction method) and <strong>why</strong> it was made (the reason code). The two are provided in different places.</p>
 </div>
@@ -17121,12 +17363,12 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_spain_verifactu"><a class="anchor" href="#_spain_verifactu"></a><a class="link" href="#_spain_verifactu">5.18. Spain VeriFactu</a></h3>
+<h3 id="_spain_verifactu"><a class="anchor" href="#_spain_verifactu"></a><a class="link" href="#_spain_verifactu">5.19. Spain VeriFactu</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning VeriFactu e-invoicing in Spain.</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_number_and_invoice_series"><a class="anchor" href="#_invoice_number_and_invoice_series"></a><a class="link" href="#_invoice_number_and_invoice_series">5.18.1. Invoice Number and Invoice Series</a></h4>
+<h4 id="_invoice_number_and_invoice_series"><a class="anchor" href="#_invoice_number_and_invoice_series"></a><a class="link" href="#_invoice_number_and_invoice_series">5.19.1. Invoice Number and Invoice Series</a></h4>
 <div class="paragraph">
 <p>VeriFactu requires both an invoice number and an invoice series to uniquely identify invoices.</p>
 </div>
@@ -17161,7 +17403,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_document_type_specification"><a class="anchor" href="#_document_type_specification"></a><a class="link" href="#_document_type_specification">5.18.2. Document Type Specification</a></h4>
+<h4 id="_document_type_specification"><a class="anchor" href="#_document_type_specification"></a><a class="link" href="#_document_type_specification">5.19.2. Document Type Specification</a></h4>
 <div class="paragraph">
 <p>VeriFactu distinguishes between different document types including standard invoices, simplified invoices, and corrective invoices. The document type is specified using the <code>cbc:InvoiceTypeCode</code> element with an additional <code>@name</code> attribute containing the Spanish invoice type identifier (F1-F3 for invoices, R1-R5 for rectifications).</p>
 </div>
@@ -17282,7 +17524,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_simplified_invoice_indicator"><a class="anchor" href="#_simplified_invoice_indicator"></a><a class="link" href="#_simplified_invoice_indicator">5.18.3. Simplified Invoice Indicator</a></h4>
+<h4 id="_simplified_invoice_indicator"><a class="anchor" href="#_simplified_invoice_indicator"></a><a class="link" href="#_simplified_invoice_indicator">5.19.3. Simplified Invoice Indicator</a></h4>
 <div class="paragraph">
 <p><code>puf:Simplified</code> is equivalent to using the F2 document type. Both mark the document as a simplified invoice (Factura simplificada).</p>
 </div>
@@ -17342,7 +17584,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_articles_7_27_3_qualification_facturasimplificadaart7273"><a class="anchor" href="#_articles_7_27_3_qualification_facturasimplificadaart7273"></a><a class="link" href="#_articles_7_27_3_qualification_facturasimplificadaart7273">5.18.4. Articles 7.2/7.3 Qualification (FacturaSimplificadaArt7273)</a></h4>
+<h4 id="_articles_7_27_3_qualification_facturasimplificadaart7273"><a class="anchor" href="#_articles_7_27_3_qualification_facturasimplificadaart7273"></a><a class="link" href="#_articles_7_27_3_qualification_facturasimplificadaart7273">5.19.4. Articles 7.2/7.3 Qualification (FacturaSimplificadaArt7273)</a></h4>
 <div class="paragraph">
 <p>VeriFactu has a separate indicator for invoices that qualify under Articles 7.2 and 7.3 of RD 1619/2012. This is <strong>distinct</strong> from the F2 simplified invoice type and is provided using a restricted information value.</p>
 </div>
@@ -17412,7 +17654,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_correction_information"><a class="anchor" href="#_correction_information"></a><a class="link" href="#_correction_information">5.18.5. Correction Information</a></h4>
+<h4 id="_correction_information"><a class="anchor" href="#_correction_information"></a><a class="link" href="#_correction_information">5.19.5. Correction Information</a></h4>
 <div class="paragraph">
 <p>When issuing corrective invoices (credit notes or corrections), VeriFactu requires specific information about the original invoice being corrected.</p>
 </div>
@@ -17554,7 +17796,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_8"><a class="anchor" href="#_party_identification_8"></a><a class="link" href="#_party_identification_8">5.18.6. Party Identification</a></h4>
+<h4 id="_party_identification_9"><a class="anchor" href="#_party_identification_9"></a><a class="link" href="#_party_identification_9">5.19.6. Party Identification</a></h4>
 <div class="sect4">
 <h5 id="_seller_information"><a class="anchor" href="#_seller_information"></a><a class="link" href="#_seller_information">Seller Information</a></h5>
 <div class="paragraph">
@@ -17645,7 +17887,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_details_2"><a class="anchor" href="#_tax_details_2"></a><a class="link" href="#_tax_details_2">5.18.7. Tax Details</a></h4>
+<h4 id="_tax_details_2"><a class="anchor" href="#_tax_details_2"></a><a class="link" href="#_tax_details_2">5.19.7. Tax Details</a></h4>
 <div class="paragraph">
 <p>Spain VeriFactu requires comprehensive tax information including tax type, tax category, special regime keys, and exemption codes.</p>
 </div>
@@ -18069,7 +18311,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_related_resources"><a class="anchor" href="#_related_resources"></a><a class="link" href="#_related_resources">5.18.8. Related Resources</a></h4>
+<h4 id="_related_resources"><a class="anchor" href="#_related_resources"></a><a class="link" href="#_related_resources">5.19.8. Related Resources</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -18092,12 +18334,12 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_türkiye"><a class="anchor" href="#_türkiye"></a><a class="link" href="#_türkiye">5.19. Türkiye</a></h3>
+<h3 id="_türkiye"><a class="anchor" href="#_türkiye"></a><a class="link" href="#_türkiye">5.20. Türkiye</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in Türkiye.</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_profile_id"><a class="anchor" href="#_invoice_profile_id"></a><a class="link" href="#_invoice_profile_id">5.19.1. Invoice profile id</a></h4>
+<h4 id="_invoice_profile_id"><a class="anchor" href="#_invoice_profile_id"></a><a class="link" href="#_invoice_profile_id">5.20.1. Invoice profile id</a></h4>
 <div class="paragraph">
 <p>For the UBL-TR format in Türkiye, it is mandatory to specify the invoice profile that&#8217;s used.</p>
 </div>
@@ -18161,7 +18403,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type_code"><a class="anchor" href="#_invoice_type_code"></a><a class="link" href="#_invoice_type_code">5.19.2. Invoice type code</a></h4>
+<h4 id="_invoice_type_code"><a class="anchor" href="#_invoice_type_code"></a><a class="link" href="#_invoice_type_code">5.20.2. Invoice type code</a></h4>
 <div class="paragraph">
 <p>In addition to the invoice profile, it is also required to indicate the invoice type. This should be indicated in the attribute <code>name`</code> belonging to the element <code>cbc:InvoiceTypeCode</code>.</p>
 </div>
@@ -18229,7 +18471,7 @@ can be provided. Note that in this scenario the QR string must be sent as plain 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_delivery_method"><a class="anchor" href="#_invoice_delivery_method"></a><a class="link" href="#_invoice_delivery_method">5.19.3. Invoice delivery method</a></h4>
+<h4 id="_invoice_delivery_method"><a class="anchor" href="#_invoice_delivery_method"></a><a class="link" href="#_invoice_delivery_method">5.20.3. Invoice delivery method</a></h4>
 <div class="paragraph">
 <p>If the invoice profile id is set as "EARSIVFATURA" it is mandatory to include how the invoice is being distributed.
 There are only two allowed values. If Pagero is to do the invoice distribution, you should always enter "ELEKTRONIK".
@@ -18284,7 +18526,7 @@ If an e-mail address for the buyer exists (see <code>cac:AccountingContact/cbc:E
 </div>
 </div>
 <div class="sect3">
-<h4 id="_first_name_and_surname"><a class="anchor" href="#_first_name_and_surname"></a><a class="link" href="#_first_name_and_surname">5.19.4. First name and surname</a></h4>
+<h4 id="_first_name_and_surname"><a class="anchor" href="#_first_name_and_surname"></a><a class="link" href="#_first_name_and_surname">5.20.4. First name and surname</a></h4>
 <div class="paragraph">
 <p>If the buyer is a private person (uses TCKN), the first name and surname of the buyer should be included in specific elements.</p>
 </div>
@@ -18337,7 +18579,7 @@ If an e-mail address for the buyer exists (see <code>cac:AccountingContact/cbc:E
 </div>
 </div>
 <div class="sect3">
-<h4 id="_registered_tax_office"><a class="anchor" href="#_registered_tax_office"></a><a class="link" href="#_registered_tax_office">5.19.5. Registered tax office</a></h4>
+<h4 id="_registered_tax_office"><a class="anchor" href="#_registered_tax_office"></a><a class="link" href="#_registered_tax_office">5.20.5. Registered tax office</a></h4>
 <div class="paragraph">
 <p>The specific tax office where the buyer or seller is registered for tax purposes.</p>
 </div>
@@ -18379,13 +18621,13 @@ If an e-mail address for the buyer exists (see <code>cac:AccountingContact/cbc:E
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_codes_5"><a class="anchor" href="#_tax_category_codes_5"></a><a class="link" href="#_tax_category_codes_5">5.19.6. Tax category codes</a></h4>
+<h4 id="_tax_category_codes_5"><a class="anchor" href="#_tax_category_codes_5"></a><a class="link" href="#_tax_category_codes_5">5.20.6. Tax category codes</a></h4>
 <div class="paragraph">
 <p>Tax category codes for Türkiye are numerous and can be found here: <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_türkiye" target="_blank" rel="noopener">Tax category codes Türkiye</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_scheme"><a class="anchor" href="#_tax_scheme"></a><a class="link" href="#_tax_scheme">5.19.7. Tax scheme</a></h4>
+<h4 id="_tax_scheme"><a class="anchor" href="#_tax_scheme"></a><a class="link" href="#_tax_scheme">5.20.7. Tax scheme</a></h4>
 <div class="paragraph">
 <p>In Türkiye there are various types of taxes in addition to the regular VAT (known as "KDV" in Türkiye).
 Another relatively common tax is what&#8217;s known as "ÖTV", or Special Consumption Tax. This applies to sales of products such as alcohol, mobile phones, cars, and tobacco. In the event an invoice is applicable for this Special Consumption Tax, it needs to be indicated in the <code>cac:TaxScheme/cbc:ID</code> element on both line and header level.</p>
@@ -18428,7 +18670,7 @@ Another relatively common tax is what&#8217;s known as "ÖTV", or Special Consum
 </div>
 </div>
 <div class="sect3">
-<h4 id="_internet_sales"><a class="anchor" href="#_internet_sales"></a><a class="link" href="#_internet_sales">5.19.8. Internet Sales</a></h4>
+<h4 id="_internet_sales"><a class="anchor" href="#_internet_sales"></a><a class="link" href="#_internet_sales">5.20.8. Internet Sales</a></h4>
 <div class="paragraph">
 <p>If the invoice is the result of an online sale, extra information needs to be included in the invoice, if applicable.</p>
 </div>
@@ -18558,7 +18800,7 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_united_arab_emirates"><a class="anchor" href="#_united_arab_emirates"></a><a class="link" href="#_united_arab_emirates">5.20. United Arab Emirates</a></h3>
+<h3 id="_united_arab_emirates"><a class="anchor" href="#_united_arab_emirates"></a><a class="link" href="#_united_arab_emirates">5.21. United Arab Emirates</a></h3>
 <div class="paragraph">
 <p>This section contains information about special requirements concerning invoicing in the United Arab Emirates (UAE).</p>
 </div>
@@ -18566,7 +18808,7 @@ Otherwise it is OK to omit the attribute.</td>
 <p>PUF supports UAE billing through a combination of standard PUF elements and the existing PUF UBL extensions originally introduced for KSA.</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type_code_and_transaction_type_2"><a class="anchor" href="#_invoice_type_code_and_transaction_type_2"></a><a class="link" href="#_invoice_type_code_and_transaction_type_2">5.20.1. Invoice type code and transaction type</a></h4>
+<h4 id="_invoice_type_code_and_transaction_type_2"><a class="anchor" href="#_invoice_type_code_and_transaction_type_2"></a><a class="link" href="#_invoice_type_code_and_transaction_type_2">5.21.1. Invoice type code and transaction type</a></h4>
 <div class="paragraph">
 <p>Available invoice type code values to be used in the UAE can be found here: <a href="https://pagero.github.io/puf-code-lists/#_invoice_type_codes_united_arab_emirates" target="_blank" rel="noopener">Invoice type codes United Arab Emirates</a>.</p>
 </div>
@@ -18620,7 +18862,7 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_9"><a class="anchor" href="#_party_identification_9"></a><a class="link" href="#_party_identification_9">5.20.2. Party identification</a></h4>
+<h4 id="_party_identification_10"><a class="anchor" href="#_party_identification_10"></a><a class="link" href="#_party_identification_10">5.21.2. Party identification</a></h4>
 <div class="paragraph">
 <p>The UAE Tax Registration Number (TRN) is provided as the VAT identifier on <code>cac:PartyTaxScheme/cbc:CompanyID</code> with the tax scheme code <code>VAT</code>. The TRN is 15 alphanumeric characters, starts with <code>1</code> and ends with <code>03</code> (e.g. <code>100000000000003</code>).</p>
 </div>
@@ -18663,7 +18905,7 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_electronic_address_participant_identifier_2"><a class="anchor" href="#_electronic_address_participant_identifier_2"></a><a class="link" href="#_electronic_address_participant_identifier_2">5.20.3. Electronic address (Participant Identifier)</a></h4>
+<h4 id="_electronic_address_participant_identifier_2"><a class="anchor" href="#_electronic_address_participant_identifier_2"></a><a class="link" href="#_electronic_address_participant_identifier_2">5.21.3. Electronic address (Participant Identifier)</a></h4>
 <div class="paragraph">
 <p>The seller and buyer electronic address (IBT-034 / IBT-049) is the Peppol <strong>Participant Identifier</strong> issued by the FTA. It MUST be the <strong>10-digit TIN</strong> under the Peppol EAS scheme <code>0235</code>.</p>
 </div>
@@ -18724,7 +18966,7 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_legal_registration_identifier"><a class="anchor" href="#_legal_registration_identifier"></a><a class="link" href="#_legal_registration_identifier">5.20.4. Legal registration identifier</a></h4>
+<h4 id="_legal_registration_identifier"><a class="anchor" href="#_legal_registration_identifier"></a><a class="link" href="#_legal_registration_identifier">5.21.4. Legal registration identifier</a></h4>
 <div class="paragraph">
 <p>UAE requires a legal registration identifier on both seller and buyer. PUF carries this through <code>cac:PartyLegalEntity/cbc:CompanyID</code> with the registration type expressed via the standard <code>@schemeID</code> attribute. PUF does not use the PINT-AE <code>@schemeAgencyID</code> / <code>@schemeAgencyName</code> syntax — every UAE identifier flavour has its own PUF-008 scheme code.</p>
 </div>
@@ -18803,7 +19045,7 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_country_subdivision_emirates"><a class="anchor" href="#_country_subdivision_emirates"></a><a class="link" href="#_country_subdivision_emirates">5.20.5. Country subdivision (Emirates)</a></h4>
+<h4 id="_country_subdivision_emirates"><a class="anchor" href="#_country_subdivision_emirates"></a><a class="link" href="#_country_subdivision_emirates">5.21.5. Country subdivision (Emirates)</a></h4>
 <div class="paragraph">
 <p>Whenever a UAE address is provided (seller, buyer, delivery, tax representative), the country subdivision MUST be one of the seven Emirate codes:</p>
 </div>
@@ -18854,7 +19096,7 @@ Otherwise it is OK to omit the attribute.</td>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_currency_and_aed_amounts"><a class="anchor" href="#_currency_and_aed_amounts"></a><a class="link" href="#_currency_and_aed_amounts">5.20.6. Currency and AED amounts</a></h4>
+<h4 id="_currency_and_aed_amounts"><a class="anchor" href="#_currency_and_aed_amounts"></a><a class="link" href="#_currency_and_aed_amounts">5.21.6. Currency and AED amounts</a></h4>
 <div class="paragraph">
 <p>The document currency code MUST be present (<code>cbc:DocumentCurrencyCode</code>). If the document currency is not AED, the tax accounting currency MUST be set to <code>AED</code> (<code>cbc:TaxCurrencyCode = 'AED'</code>) and the currency exchange rate MUST be provided.</p>
 </div>
@@ -18899,7 +19141,7 @@ Otherwise it is OK to omit the attribute.</td>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_item_type_classification_and_service_accounting_code"><a class="anchor" href="#_item_type_classification_and_service_accounting_code"></a><a class="link" href="#_item_type_classification_and_service_accounting_code">5.20.7. Item type, classification and Service Accounting Code</a></h4>
+<h4 id="_item_type_classification_and_service_accounting_code"><a class="anchor" href="#_item_type_classification_and_service_accounting_code"></a><a class="link" href="#_item_type_classification_and_service_accounting_code">5.21.7. Item type, classification and Service Accounting Code</a></h4>
 <div class="paragraph">
 <p>Every UAE invoice line MUST declare whether the item is goods, a service, or both, via the <strong>item type</strong> (BTAE-13). It is provided through <code>cac:CommodityClassification/cbc:CommodityCode</code>:</p>
 </div>
@@ -18989,7 +19231,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 </div>
 <div class="sect3">
-<h4 id="_vat_category_rate_and_exemption"><a class="anchor" href="#_vat_category_rate_and_exemption"></a><a class="link" href="#_vat_category_rate_and_exemption">5.20.8. VAT category, rate and exemption</a></h4>
+<h4 id="_vat_category_rate_and_exemption"><a class="anchor" href="#_vat_category_rate_and_exemption"></a><a class="link" href="#_vat_category_rate_and_exemption">5.21.8. VAT category, rate and exemption</a></h4>
 <div class="paragraph">
 <p>UAE uses the EN/Peppol VAT category code set: <code>S</code> (Standard rated), <code>Z</code> (Zero rated), <code>E</code> (Exempt from VAT), <code>O</code> (Not subject to VAT), <code>AE</code> (Reverse charge) and <code>N</code> (Standard rate additional VAT).</p>
 </div>
@@ -19008,7 +19250,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 </div>
 <div class="sect3">
-<h4 id="_profit_margin_scheme_2"><a class="anchor" href="#_profit_margin_scheme_2"></a><a class="link" href="#_profit_margin_scheme_2">5.20.9. Profit Margin Scheme</a></h4>
+<h4 id="_profit_margin_scheme_2"><a class="anchor" href="#_profit_margin_scheme_2"></a><a class="link" href="#_profit_margin_scheme_2">5.21.9. Profit Margin Scheme</a></h4>
 <div class="paragraph">
 <p>Supplies under the UAE VAT Profit Margin Scheme (Article 43 of the UAE VAT Decree-Law) use VAT category code <code>N</code> (<em>Standard rate additional VAT</em> — standard VAT calculated for an additional taxable base when the additional taxable base is not included in the document totals). Under the scheme, VAT is assessed on the supplier&#8217;s profit margin and settled directly with the FTA; it is not charged to the buyer and the VAT <strong>amount</strong> on the invoice is always zero. The statutory rate (<code>5.00</code>) MUST nevertheless be provided in the <code>cbc:Percent</code> field.</p>
 </div>
@@ -19060,13 +19302,13 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 </div>
 <div class="sect3">
-<h4 id="_reverse_charge_standard_item_identifier"><a class="anchor" href="#_reverse_charge_standard_item_identifier"></a><a class="link" href="#_reverse_charge_standard_item_identifier">5.20.10. Reverse charge: standard item identifier</a></h4>
+<h4 id="_reverse_charge_standard_item_identifier"><a class="anchor" href="#_reverse_charge_standard_item_identifier"></a><a class="link" href="#_reverse_charge_standard_item_identifier">5.21.10. Reverse charge: standard item identifier</a></h4>
 <div class="paragraph">
 <p>When the line is reverse-charged (category <code>AE</code>), the line MUST carry an <strong>item standard identifier</strong> (<code>cac:StandardItemIdentification/cbc:ID</code>) with <code>@schemeID = "0160"</code> (GS1 GTIN).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_free_trade_zone_beneficiary"><a class="anchor" href="#_free_trade_zone_beneficiary"></a><a class="link" href="#_free_trade_zone_beneficiary">5.20.11. Free Trade Zone Beneficiary</a></h4>
+<h4 id="_free_trade_zone_beneficiary"><a class="anchor" href="#_free_trade_zone_beneficiary"></a><a class="link" href="#_free_trade_zone_beneficiary">5.21.11. Free Trade Zone Beneficiary</a></h4>
 <div class="paragraph">
 <p>In free-trade-zone supplies (BTAE-02 transaction type code matching the FTZ flag, <code>1XXXXXXX</code>), the <strong>Beneficiary ID</strong> (BTAE-01) — the TRN or TIN of the FTZ beneficiary — is carried using the existing <code>puf:RestrictedInformationParty</code> extension with <code>Key = 'Beneficiary'</code>.</p>
 </div>
@@ -19114,7 +19356,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 </div>
 <div class="sect3">
-<h4 id="_disclosed_agent_principle"><a class="anchor" href="#_disclosed_agent_principle"></a><a class="link" href="#_disclosed_agent_principle">5.20.12. Disclosed Agent Principle</a></h4>
+<h4 id="_disclosed_agent_principle"><a class="anchor" href="#_disclosed_agent_principle"></a><a class="link" href="#_disclosed_agent_principle">5.21.12. Disclosed Agent Principle</a></h4>
 <div class="paragraph">
 <p>In disclosed-agent billing (BTAE-02 transaction type code matching the disclosed-agent flag, <code>XXXXX1XX</code>), the <strong>Principle ID</strong> (BTAE-14) — the TRN of the principle — is carried using the same <code>puf:RestrictedInformationParty</code> extension with <code>Key = 'Principle'</code>. The Principle ID MUST be different from the Seller VAT identifier.</p>
 </div>
@@ -19162,7 +19404,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 </div>
 <div class="sect3">
-<h4 id="_deemed_supply"><a class="anchor" href="#_deemed_supply"></a><a class="link" href="#_deemed_supply">5.20.13. Deemed Supply</a></h4>
+<h4 id="_deemed_supply"><a class="anchor" href="#_deemed_supply"></a><a class="link" href="#_deemed_supply">5.21.13. Deemed Supply</a></h4>
 <div class="paragraph">
 <p>Deemed supplies (BTAE-02 position 2 set to <code>1</code>, e.g. <code>01000000</code>) are supplies made without consideration — typically gifts or samples above the FTA de-minimis threshold. Because no buyer exists, PUF uses a set of fixed FTA placeholder values:</p>
 </div>
@@ -19184,7 +19426,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 </div>
 <div class="sect3">
-<h4 id="_exports"><a class="anchor" href="#_exports"></a><a class="link" href="#_exports">5.20.14. Exports</a></h4>
+<h4 id="_exports"><a class="anchor" href="#_exports"></a><a class="link" href="#_exports">5.21.14. Exports</a></h4>
 <div class="paragraph">
 <p>Export supplies (BTAE-02 position 8 set to <code>1</code>, e.g. <code>00000001</code>) are zero-rated supplies of goods or services delivered outside the UAE. Delivery information is mandatory.</p>
 </div>
@@ -19209,7 +19451,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 </div>
 <div class="sect3">
-<h4 id="_credit_note_reason_code"><a class="anchor" href="#_credit_note_reason_code"></a><a class="link" href="#_credit_note_reason_code">5.20.15. Credit note reason code</a></h4>
+<h4 id="_credit_note_reason_code"><a class="anchor" href="#_credit_note_reason_code"></a><a class="link" href="#_credit_note_reason_code">5.21.15. Credit note reason code</a></h4>
 <div class="paragraph">
 <p>When the document is a credit note (<code>cbc:InvoiceTypeCode = 381</code> or <code>cbc:CreditNoteTypeCode = 81</code>), the credit note reason code (BTAE-03) MUST be provided. The supported values are <code>DL8.61.1.A</code> through <code>DL8.61.1.E</code> and <code>VD</code> (volume discount). See <a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE (United Arab Emirates)</a> for the definition of each code.</p>
 </div>
@@ -19218,13 +19460,13 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 </div>
 <div class="sect3">
-<h4 id="_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services"><a class="anchor" href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services"></a><a class="link" href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services">5.20.16. Out of scope of VAT and Credit-note related to goods or services</a></h4>
+<h4 id="_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services"><a class="anchor" href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services"></a><a class="link" href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services">5.21.16. Out of scope of VAT and Credit-note related to goods or services</a></h4>
 <div class="paragraph">
 <p>When the invoice type code is <code>480</code> (Out of scope of VAT) or <code>81</code> (Credit note related to goods or services), the buyer&#8217;s legal registration identifier (IBT-047) is mandatory regardless of whether the buyer is VAT-registered, and all VAT category codes used on the document MUST be one of <code>E</code> / <code>O</code> / <code>Z</code>. The seller VAT identifier is <strong>not</strong> required in these cases.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_self_billing_3"><a class="anchor" href="#_self_billing_3"></a><a class="link" href="#_self_billing_3">5.20.17. Self-billing</a></h4>
+<h4 id="_self_billing_3"><a class="anchor" href="#_self_billing_3"></a><a class="link" href="#_self_billing_3">5.21.17. Self-billing</a></h4>
 <div class="paragraph">
 <p>In PUF, self-billing is <strong>not</strong> signalled through a dedicated UBL document type code. Self-billed documents keep their original type code (<code>cbc:InvoiceTypeCode = 380</code> for a self-billed tax invoice, <code>cbc:CreditNoteTypeCode = 381</code> for a self-billed credit note) and are flagged through the standard <code>puf:SelfBilled</code> extension at document level. See <a href="#_self_billing_indicator">Self Billing Indicator</a> for the structure.</p>
 </div>
@@ -19266,12 +19508,12 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 </div>
 <div class="sect2">
-<h3 id="_united_states"><a class="anchor" href="#_united_states"></a><a class="link" href="#_united_states">5.21. United States</a></h3>
+<h3 id="_united_states"><a class="anchor" href="#_united_states"></a><a class="link" href="#_united_states">5.22. United States</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in United States of America.</p>
 </div>
 <div class="sect3">
-<h4 id="_tax_scheme_2"><a class="anchor" href="#_tax_scheme_2"></a><a class="link" href="#_tax_scheme_2">5.21.1. Tax scheme</a></h4>
+<h4 id="_tax_scheme_2"><a class="anchor" href="#_tax_scheme_2"></a><a class="link" href="#_tax_scheme_2">5.22.1. Tax scheme</a></h4>
 <div class="paragraph">
 <p>Since taxes vary in different states and there are a number of local taxes as well, Pagero recommends to specify State and Local Tax in the following way:<br>
 - For State Tax use <code>cac:TaxScheme/cbc:ID</code> with value <code>STT</code>.<br>
@@ -19332,7 +19574,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_identification_10"><a class="anchor" href="#_party_identification_10"></a><a class="link" href="#_party_identification_10">5.21.2. Party identification</a></h4>
+<h4 id="_party_identification_11"><a class="anchor" href="#_party_identification_11"></a><a class="link" href="#_party_identification_11">5.22.2. Party identification</a></h4>
 <div class="paragraph">
 <p>There is no party identifiers available in the ISO 6523 ICD list for USA at the moment.
 To specify Tax Identification Number please use 'cac:PartyTaxScheme/cbc:CompanyID'</p>
@@ -19365,12 +19607,12 @@ To specify Tax Identification Number please use 'cac:PartyTaxScheme/cbc:CompanyI
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vietnam"><a class="anchor" href="#_vietnam"></a><a class="link" href="#_vietnam">5.22. Vietnam</a></h3>
+<h3 id="_vietnam"><a class="anchor" href="#_vietnam"></a><a class="link" href="#_vietnam">5.23. Vietnam</a></h3>
 <div class="paragraph">
 <p>This section contains information about requirements and other information concerning invoicing in Vietnam.</p>
 </div>
 <div class="sect3">
-<h4 id="_invoice_serial_and_sequence_number"><a class="anchor" href="#_invoice_serial_and_sequence_number"></a><a class="link" href="#_invoice_serial_and_sequence_number">5.22.1. Invoice, Serial and Sequence Number</a></h4>
+<h4 id="_invoice_serial_and_sequence_number"><a class="anchor" href="#_invoice_serial_and_sequence_number"></a><a class="link" href="#_invoice_serial_and_sequence_number">5.23.1. Invoice, Serial and Sequence Number</a></h4>
 <div class="paragraph">
 <p>In Vietnam, each e-invoice is assigned a unique serial number, which serves as its identifier. Additionally, a sequence number is used, which increments with each new invoice issued.<br>
 An internally generated invoice number from an ERP system can be included in the 'cac:BillingReference' segment.<br>
@@ -19438,7 +19680,7 @@ For enhanced search functionality in Pagero Online, it is recommended to use a c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type_code_2"><a class="anchor" href="#_invoice_type_code_2"></a><a class="link" href="#_invoice_type_code_2">5.22.2. Invoice Type Code</a></h4>
+<h4 id="_invoice_type_code_2"><a class="anchor" href="#_invoice_type_code_2"></a><a class="link" href="#_invoice_type_code_2">5.23.2. Invoice Type Code</a></h4>
 <div class="paragraph">
 <p>In addition to Invoice Type Code the 'name' attribute is used to provide the Vietnameese invoice type.</p>
 </div>
@@ -20068,6 +20310,12 @@ The "Require ext:UBLExtensions"-column indicates whether or not the use of UBL e
 <td class="tableblock halign-left valign-top"><p class="tableblock">Denmark</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>No</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Egypt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Yes</strong></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>

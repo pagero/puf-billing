@@ -12,6 +12,10 @@ include::country-specifics/canada.adoc[]
 
 include::country-specifics/croatia.adoc[]
 
+=== Egypt
+
+include::country-specifics/egypt.adoc[]
+
 === France
 
 include::country-specifics/france.adoc[]

@@ -1,0 +1,146 @@
+This section contains information about special requirements concerning invoicing in Egypt.
+
+Egyptian e-invoicing is operated by the Egyptian Tax Authority (ETA) as a clearance model: a document is submitted to the ETA and becomes fiscally valid only once the ETA has assigned it a unique identifier. An Egyptian e-invoicing service provider must be accredited by the ETA, so a document created in PUF reaches the ETA through an accredited provider rather than directly.
+
+PUF supports Egypt through standard PUF elements together with the existing PUF UBL extensions. The ETA document model is not an EN 16931 profile, so several Egyptian concepts are carried differently from the European formats.
+
+==== Party identification
+
+An ETA document carries an explicit party type of business, natural person or foreigner. PUF has no field for that type, so it is resolved when the document is converted for the authority, and the scheme identifier on the party identifier is the input to that resolution.
+
+Provide the identifier on `cac:PartyIdentification/cbc:ID` and set `@schemeID` to `EG:TIN` for an Egyptian business or `EG:NIN` for a natural person. Available values can be found here: https://pagero.github.io/puf-code-lists/#_identification_scheme_egypt[Identification scheme Egypt^].
+
+An Egyptian business also supplies its tax registration number on `cac:PartyTaxScheme/cbc:CompanyID` with `cac:TaxScheme/cbc:ID = 'VAT'`. That is the VAT-registration input and does not replace the party identifier. A natural person has no VAT registration, so an `EG:NIN` value is never placed on `cac:PartyTaxScheme`.
+
+*Example* +
+_Business buyer in Egypt_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+      <cac:Party>
+          <cac:PartyIdentification>
+              <cbc:ID schemeID="EG:TIN">987654321</cbc:ID> <!--1-->
+          </cac:PartyIdentification>
+          <cac:PostalAddress>
+              <cbc:CityName>Maadi</cbc:CityName> <!--2-->
+              <cbc:CountrySubentity>Cairo</cbc:CountrySubentity> <!--3-->
+              <cac:Country>
+                  <cbc:IdentificationCode>EG</cbc:IdentificationCode>
+              </cac:Country>
+          </cac:PostalAddress>
+          <cac:PartyTaxScheme>
+              <cbc:CompanyID>987654321</cbc:CompanyID> <!--4-->
+              <cac:TaxScheme>
+                  <cbc:ID>VAT</cbc:ID>
+              </cac:TaxScheme>
+          </cac:PartyTaxScheme>
+      </cac:Party>
+  </cac:AccountingCustomerParty>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Scheme `EG:TIN` identifies the party as an Egyptian business.
+<2> The city carries the ETA region and city information.
+<3> The country subentity carries the ETA governorate. Do not put the governorate in the city.
+<4> The tax registration number, supplied in addition to the party identifier.
+
+==== Address
+
+An Egyptian address separates the governorate from the region and city, and reports the building number as its own value.
+
+Provide the governorate in `cbc:CountrySubentity`, the region and city in `cbc:CityName`, and the building number in `cbc:BuildingNumber`, which is kept distinct from `cbc:StreetName`.
+
+==== Item identification
+
+Every line must carry a registered item code, coded either with GS1 or with the Egyptian goods and services scheme EGS. The two schemes use different carriers, and a line uses one or the other, never both.
+
+A GS1 code is carried on `cac:StandardItemIdentification/cbc:ID` with `@schemeID` set to `GS1`. An EGS code is carried on `cac:AdditionalItemIdentification/cbc:ID` with `@schemeID` set to `EGS`. Do not infer the scheme from the shape of the identifier.
+
+*Example* +
+_Line coded with EGS_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+      <cac:Item>
+          <cbc:Name>Office chair</cbc:Name>
+          <cac:AdditionalItemIdentification>
+              <cbc:ID schemeID="EGS">EG-1234567890123</cbc:ID> <!--1-->
+          </cac:AdditionalItemIdentification>
+      </cac:Item>
+      <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> A GS1-coded line would instead use `cac:StandardItemIdentification/cbc:ID` with `@schemeID` set to `GS1`.
+
+==== Taxes
+
+The ETA identifies a tax with a tax type, and qualifies it with a subtype carrying the exemption or the special rate. The tax type is carried on `cac:TaxCategory/cbc:ID` and the subtype on `cac:TaxCategory/cbc:Name`. Available values can be found here: https://pagero.github.io/puf-code-lists/#_tax_category_codes_egypt[Tax category codes Egypt^].
+
+A line may carry several taxes at once, for example value added tax together with a table tax and a fee. Repeat `cac:TaxSubtotal` once per tax type. The same tax type must not occur twice within one line.
+
+Exemption is expressed through the tax subtype rather than as free text.
+
+`cac:TaxScheme/cbc:ID` is required by the syntax but carries no Egyptian meaning, because the tax type and subtype already identify the tax completely. Use `VAT` on every Egyptian tax entry, including the table taxes and the fees.
+
+*Example* +
+_Line carrying value added tax and a stamping tax_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoiceLine>
+      <cac:TaxTotal>
+          <cac:TaxSubtotal>
+              <cbc:TaxableAmount currencyID="EGP">1000.00</cbc:TaxableAmount>
+              <cbc:TaxAmount currencyID="EGP">140.00</cbc:TaxAmount>
+              <cac:TaxCategory>
+                  <cbc:ID>T1</cbc:ID> <!--1-->
+                  <cbc:Name>V009</cbc:Name> <!--2-->
+                  <cbc:Percent>14</cbc:Percent>
+                  <cac:TaxScheme>
+                      <cbc:ID>VAT</cbc:ID>
+                  </cac:TaxScheme>
+              </cac:TaxCategory>
+          </cac:TaxSubtotal>
+          <cac:TaxSubtotal>
+              <cbc:TaxableAmount currencyID="EGP">1000.00</cbc:TaxableAmount>
+              <cbc:TaxAmount currencyID="EGP">20.00</cbc:TaxAmount>
+              <cac:TaxCategory>
+                  <cbc:ID>T5</cbc:ID> <!--3-->
+                  <cbc:Name>ST01</cbc:Name>
+                  <cbc:Percent>2</cbc:Percent>
+                  <cac:TaxScheme>
+                      <cbc:ID>VAT</cbc:ID> <!--4-->
+                  </cac:TaxScheme>
+              </cac:TaxCategory>
+          </cac:TaxSubtotal>
+      </cac:TaxTotal>
+      <!-- Code omitted for clarity -->
+  </cac:InvoiceLine>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Tax type for value added tax.
+<2> Tax subtype qualifying the value added tax. A subtype is required on every tax entry.
+<3> A second tax on the same line, a percentage stamping tax, reported in its own subtotal.
+<4> `VAT` is used on every Egyptian tax entry. The tax scheme is required by the syntax but adds nothing here, since the tax type and subtype already identify the tax.
+
+==== Withholding tax
+
+Withholding tax is one of the ETA tax types. The authority aggregates it in its document tax totals like any other tax type, and subtracts it when calculating the line total rather than adding it.
+
+In PUF it is carried separately on `cac:WithholdingTaxTotal`, which is available both at document level and on the line, for an invoice as well as a credit note. Keeping it out of `cac:TaxTotal` is a PUF convention that lets the converter apply the subtraction, and it also matches clearance channels that exclude withholding from their additive tax totals. It is not a statement that the authority omits withholding from its own totals.
+
+==== Currency
+
+Amounts owed to the ETA are expressed in Egyptian pounds. When the document currency is not EGP, provide `cbc:TaxCurrencyCode` as EGP together with the exchange rate on `cac:TaxExchangeRate`, and supply the tax currency amounts so that the Egyptian pound values do not have to be recalculated further down the chain.
+
+==== Correction
+
+Credit and debit notes are the only correction mechanism. A note identifies the original document through `cac:BillingReference`, and the clearance identifier assigned to the original by the authority is carried on the billing reference extension.

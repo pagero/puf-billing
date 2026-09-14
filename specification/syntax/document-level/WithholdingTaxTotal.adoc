@@ -1,4 +1,4 @@
-`cac:WithholdingTaxTotal` is available at document (header) level on both `Invoice` and `CreditNote`, with cardinality `0..n`. It must appear after all `cac:TaxTotal` elements and before `cac:LegalMonetaryTotal`. This section describes header-level withholding only. Line-level withholding remains available on `InvoiceLine`; `CreditNoteLine` does not support `cac:WithholdingTaxTotal`.
+`cac:WithholdingTaxTotal` is available at document (header) level on both `Invoice` and `CreditNote`, with cardinality `0..n`. It must appear after all `cac:TaxTotal` elements and before `cac:LegalMonetaryTotal`. This section describes header-level withholding only. Line-level withholding is available on both `InvoiceLine` and `CreditNoteLine`.
 
 The table below shows the available fields in `cac:WithholdingTaxTotal/cac:TaxSubtotal`. Additional elements are also available through the extension described in <<_taxsubtotal, cac:WithholdingTaxTotal/cac:TaxSubtotal>>.
 

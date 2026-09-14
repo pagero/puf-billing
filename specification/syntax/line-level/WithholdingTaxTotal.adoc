@@ -1,4 +1,6 @@
-.Elements added in cac:InvoiceLine/cac:WithholdingTaxTotal
+`cac:WithholdingTaxTotal` is available at line level on both `InvoiceLine` and `CreditNoteLine`, with cardinality `0..n`. It must appear after all `cac:TaxTotal` elements on the line.
+
+.Elements added in cac:InvoiceLine/cac:WithholdingTaxTotal and cac:CreditNoteLine/cac:WithholdingTaxTotal
 |===
 |Path |Description
 
@@ -84,7 +86,7 @@ _cac:InvoiceLine/cac:WithholdingTaxTotal example_
               </cac:TaxScheme>
           </cac:TaxCategory>
       </cac:TaxSubtotal>
-    </cac:cac:WithholdingTaxTotal>
+    </cac:WithholdingTaxTotal>
     <!-- Code omitted for clarity -->
   </cac:InvoiceLine>
   <!-- Code omitted for clarity -->
