@@ -65,6 +65,20 @@
         <cbc:ID>1</cbc:ID>
         <cbc:CreditedQuantity unitCode="EA">1</cbc:CreditedQuantity>
         <cbc:LineExtensionAmount currencyID="EUR">100.00</cbc:LineExtensionAmount>
+        <cac:WithholdingTaxTotal>
+            <cbc:TaxAmount currencyID="EUR">10.00</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <cbc:TaxableAmount currencyID="EUR">100.00</cbc:TaxableAmount>
+                <cbc:TaxAmount currencyID="EUR">10.00</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <cbc:ID>S</cbc:ID>
+                    <cbc:Percent>10</cbc:Percent>
+                    <cac:TaxScheme>
+                        <cbc:ID>INC</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:WithholdingTaxTotal>
         <cac:Item>
             <cbc:Name>Example service</cbc:Name>
             <cac:ClassifiedTaxCategory>
