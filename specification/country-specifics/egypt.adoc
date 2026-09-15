@@ -143,4 +143,4 @@ Amounts owed to the ETA are expressed in Egyptian pounds. When the document curr
 
 ==== Correction
 
-Credit and debit notes are the only correction mechanism. A note identifies the original document through `cac:BillingReference`, and the clearance identifier assigned to the original by the authority is carried on the billing reference extension.
+Credit and debit notes are the only correction mechanism. A note identifies the original document through `cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID`, which carries the original document number. The clearance channel is set up to submit that same number to the authority rather than a reference of its own, so one identifier follows the document end to end. The authority's own document identifier is reported back separately and is not supplied on the note.
