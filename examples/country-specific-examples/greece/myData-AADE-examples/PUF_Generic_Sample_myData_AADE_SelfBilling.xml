@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Customer: Generic
+Format type: PUF
+Direction: Ext to Int
+Case for build: Greece myData/AADE reporting data - self-billed invoice
+-->
+<Invoice xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:cac="urn:pagero:CommonAggregateComponents:1.0"
+         xmlns:puf="urn:pagero:ExtensionComponent:1.0">
+  <ext:UBLExtensions>
+
+    <!--
+      Self-billing flag: a dedicated PUF extension, separate from the myData/AADE
+      RestrictedInformation block below. Setting this to true means the invoice was
+      raised by the buyer on behalf of the seller.
+    -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:SelfBilled</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+          <puf:SelfBilled>true</puf:SelfBilled>
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+
+    <!-- Document-level myData/AADE header data (EG-1) -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+
+          <!-- Invoice series as registered with AADE (ET-30, myDATA field: series) -->
+          <puf:RestrictedInformation>
+            <puf:Key>myDATA_XML_series</puf:Key>
+            <puf:Value>0</puf:Value>
+          </puf:RestrictedInformation>
+
+          <!-- Invoice serial number within the series (ET-31, myDATA field: aa) -->
+          <puf:RestrictedInformation>
+            <puf:Key>myDATA_XML_aa</puf:Key>
+            <puf:Value>100005</puf:Value>
+          </puf:RestrictedInformation>
+
+          <!--
+            myDATA invoice type code (ET-8). Self-pricing (ET-1, see below) applies only to
+            a specific subset of AADE invoice types - 1.1 is one of them.
+          -->
+          <puf:RestrictedInformation>
+            <puf:Key>myDATA_XML_invoiceType</puf:Key>
+            <puf:Value>1.1</puf:Value>
+          </puf:RestrictedInformation>
+
+          <!-- myData payment method (EG-5): code and amount for the first payment method on the document -->
+          <puf:RestrictedInformation>
+            <puf:Key>myDATA_XML_paymentType_1</puf:Key>
+            <puf:Value>5</puf:Value>
+          </puf:RestrictedInformation>
+          <puf:RestrictedInformation>
+            <puf:Key>myDATA_XML_paymentAmount_1</puf:Key>
+            <puf:Value>1240.00</puf:Value>
+          </puf:RestrictedInformation>
+
+          <!-- myData document totals (EG-4): net value, VAT amount, gross value -->
+          <puf:RestrictedInformation>
+            <puf:Key>myDATA_XML_totalNetValue</puf:Key>
+            <puf:Value>1000.00</puf:Value>
+          </puf:RestrictedInformation>
+          <puf:RestrictedInformation>
+            <puf:Key>myDATA_XML_totalVatAmount</puf:Key>
+            <puf:Value>240.00</puf:Value>
+          </puf:RestrictedInformation>
+          <puf:RestrictedInformation>
+            <puf:Key>myDATA_XML_totalGrossValue</puf:Key>
+            <puf:Value>1240.00</puf:Value>
+          </puf:RestrictedInformation>
+
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+
+    <!-- Line-level myData/AADE reporting data (ET-39) -->
+    <ext:UBLExtension>
+      <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationLine</ext:ExtensionURI>
+      <ext:ExtensionContent>
+        <puf:PageroExtension>
+
+          <!-- cbc:ID matches the corresponding cac:InvoiceLine/cbc:ID (ET-37) -->
+          <puf:RestrictedInformationLine>
+            <puf:Key>myDATA_XML</puf:Key>
+            <cbc:ID>1</cbc:ID>
+            <!-- Line net amount -->
+            <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+            <cac:TaxTotal>
+              <!-- Line VAT amount (ET-36) -->
+              <cbc:TaxAmount currencyID="EUR">240.00</cbc:TaxAmount>
+              <cac:TaxSubtotal>
+                <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+                <cbc:TaxAmount currencyID="EUR">240.00</cbc:TaxAmount>
+                <cac:TaxCategory>
+                  <!-- Numeric AADE VAT category code (ET-29): 1 = 24% -->
+                  <cbc:ID>1</cbc:ID>
+                  <cbc:Percent>24</cbc:Percent>
+                  <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                  </cac:TaxScheme>
+                </cac:TaxCategory>
+              </cac:TaxSubtotal>
+            </cac:TaxTotal>
+            <!-- AADE income/expense classification omitted: AADE forbids incomeClassification on
+                 invoice details (and, correspondingly, the document-level summary below) whenever
+                 selfPricing/SelfBilled is true. -->
+          </puf:RestrictedInformationLine>
+
+        </puf:PageroExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+
+  </ext:UBLExtensions>
+
+  <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+  <!-- Invoice number (BT-1) -->
+  <cbc:ID>EXAMPLE-INV-0005</cbc:ID>
+  <!-- Issue date (BT-2) -->
+  <cbc:IssueDate>2026-09-01</cbc:IssueDate>
+  <!-- Payment due date (BT-9) -->
+  <cbc:DueDate>2026-10-01</cbc:DueDate>
+  <!-- Invoice type code (BT-3) -->
+  <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+  <!-- Value added tax point date (BT-7) -->
+  <cbc:TaxPointDate>2026-09-01</cbc:TaxPointDate>
+  <!-- Invoice currency code (BT-5) -->
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <!-- VAT accounting currency code (BT-6) -->
+  <cbc:TaxCurrencyCode>EUR</cbc:TaxCurrencyCode>
+
+  <!-- Seller (BG-4) -->
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <!-- Seller electronic address (BT-34) -->
+      <cbc:EndpointID schemeID="9933">100000000</cbc:EndpointID>
+      <cac:PartyIdentification>
+        <!-- Seller identifier (BT-29) -->
+        <cbc:ID schemeID="9933">100000000</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <!-- Seller trading name (BT-28) -->
+        <cbc:Name>Example Seller SA</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <!-- Seller address line 1 (BT-35) -->
+        <cbc:StreetName>Example Street 1</cbc:StreetName>
+        <!-- Seller city (BT-37) -->
+        <cbc:CityName>ATHENS</cbc:CityName>
+        <!-- Seller post code (BT-38) -->
+        <cbc:PostalZone>10000</cbc:PostalZone>
+        <cac:Country>
+          <!-- Seller country code (BT-40) -->
+          <cbc:IdentificationCode>GR</cbc:IdentificationCode>
+          <cbc:Name>Greece</cbc:Name>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <!-- Seller VAT identifier (BT-31) -->
+        <cbc:CompanyID>EL100000000</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <!-- Seller name (BT-27) -->
+        <cbc:RegistrationName>Example Seller SA</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+
+  <!-- Buyer (BG-7) - the party issuing this self-billed invoice -->
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <!-- Buyer electronic address (BT-49) -->
+      <cbc:EndpointID schemeID="9933">200000000</cbc:EndpointID>
+      <cac:PartyIdentification>
+        <!-- Buyer identifier (BT-46) -->
+        <cbc:ID schemeID="9933">200000000</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <!-- Buyer trading name (BT-45) -->
+        <cbc:Name>Example Buyer SA</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <!-- Buyer address line 1 (BT-50) -->
+        <cbc:StreetName>Example Avenue 2</cbc:StreetName>
+        <!-- Buyer city (BT-52) -->
+        <cbc:CityName>ATHENS</cbc:CityName>
+        <!-- Buyer post code (BT-53) -->
+        <cbc:PostalZone>11000</cbc:PostalZone>
+        <cac:Country>
+          <!-- Buyer country code (BT-55) -->
+          <cbc:IdentificationCode>GR</cbc:IdentificationCode>
+          <cbc:Name>Greece</cbc:Name>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <!-- Buyer VAT identifier (BT-48) -->
+        <cbc:CompanyID>EL200000000</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <!-- Buyer name (BT-44) -->
+        <cbc:RegistrationName>Example Buyer SA</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+
+  <!-- Payment instructions (BG-16) -->
+  <cac:PaymentMeans>
+    <!-- Payment means type code (BT-81) -->
+    <cbc:PaymentMeansCode>58</cbc:PaymentMeansCode>
+  </cac:PaymentMeans>
+
+  <!-- VAT breakdown (BG-23) -->
+  <cac:TaxTotal>
+    <!-- Invoice total VAT amount (BT-110) -->
+    <cbc:TaxAmount currencyID="EUR">240.00</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <!-- VAT category taxable amount (BT-116) -->
+      <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+      <!-- VAT category tax amount (BT-117) -->
+      <cbc:TaxAmount currencyID="EUR">240.00</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <!-- VAT category code (BT-118) -->
+        <cbc:ID>S</cbc:ID>
+        <!-- VAT category rate (BT-119) -->
+        <cbc:Percent>24</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+
+  <!-- Document totals (BG-22) -->
+  <cac:LegalMonetaryTotal>
+    <!-- Sum of Invoice line net amount (BT-106) -->
+    <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+    <!-- Invoice total amount without VAT (BT-109) -->
+    <cbc:TaxExclusiveAmount currencyID="EUR">1000.00</cbc:TaxExclusiveAmount>
+    <!-- Invoice total amount with VAT (BT-112) -->
+    <cbc:TaxInclusiveAmount currencyID="EUR">1240.00</cbc:TaxInclusiveAmount>
+    <!-- Amount due for payment (BT-115) -->
+    <cbc:PayableAmount currencyID="EUR">1240.00</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+
+  <!-- Invoice line (BG-25) -->
+  <cac:InvoiceLine>
+    <!-- Invoice line identifier (BT-126) -->
+    <cbc:ID>1</cbc:ID>
+    <!-- Invoiced quantity (BT-129), unit of measure code (BT-130) -->
+    <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+    <!-- Invoice line net amount (BT-131) -->
+    <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+    <cac:TaxTotal>
+      <cbc:TaxAmount currencyID="EUR">240.00</cbc:TaxAmount>
+      <cac:TaxSubtotal>
+        <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+        <cbc:TaxAmount currencyID="EUR">240.00</cbc:TaxAmount>
+        <cac:TaxCategory>
+          <cbc:ID>S</cbc:ID>
+          <cbc:Percent>24</cbc:Percent>
+          <cac:TaxScheme>
+            <cbc:ID>VAT</cbc:ID>
+          </cac:TaxScheme>
+        </cac:TaxCategory>
+      </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:Item>
+      <!-- Item description (BT-154) -->
+      <cbc:Description>Example self-billed line</cbc:Description>
+      <!-- Item name (BT-153) -->
+      <cbc:Name>GOODS-001</cbc:Name>
+      <cac:ClassifiedTaxCategory>
+        <!-- Invoiced item VAT category code (BT-151) -->
+        <cbc:ID>S</cbc:ID>
+        <!-- Invoiced item VAT rate (BT-152) -->
+        <cbc:Percent>24</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <!-- Item net price (BT-146) -->
+      <cbc:PriceAmount currencyID="EUR">1000.00</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+
+</Invoice>
