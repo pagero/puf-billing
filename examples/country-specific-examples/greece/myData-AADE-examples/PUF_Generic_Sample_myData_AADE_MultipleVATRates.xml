@@ -12,31 +12,31 @@ Case for build: Greece myData/AADE reporting data - invoice with multiple VAT ra
          xmlns:puf="urn:pagero:ExtensionComponent:1.0">
   <ext:UBLExtensions>
 
-    <!-- Document-level myData/AADE header data (EG-1) -->
+    <!-- Document-level myData/AADE header data (EL-BG-1) -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
       <ext:ExtensionContent>
         <puf:PageroExtension>
 
-          <!-- Invoice series as registered with AADE (ET-30, myDATA field: series) -->
+          <!-- Invoice series as registered with AADE (EL-BT-30, myDATA field: series) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_series</puf:Key>
             <puf:Value>0</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- Invoice serial number within the series (ET-31, myDATA field: aa) -->
+          <!-- Invoice serial number within the series (EL-BT-31, myDATA field: aa) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_aa</puf:Key>
             <puf:Value>100002</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myDATA invoice type code: 1.1 Sales Invoice (ET-8) -->
+          <!-- myDATA invoice type code: 1.1 Sales Invoice (EL-BT-8) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_invoiceType</puf:Key>
             <puf:Value>1.1</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myData payment method (EG-5): code and amount for the first payment method on the document -->
+          <!-- myData payment method (EL-BG-5): code and amount for the first payment method on the document -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_paymentType_1</puf:Key>
             <puf:Value>5</puf:Value>
@@ -46,7 +46,7 @@ Case for build: Greece myData/AADE reporting data - invoice with multiple VAT ra
             <puf:Value>1309.00</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myData document totals (EG-4): net value, VAT amount, gross value -->
+          <!-- myData document totals (EL-BG-4): net value, VAT amount, gross value -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_totalNetValue</puf:Key>
             <puf:Value>1100.00</puf:Value>
@@ -64,7 +64,7 @@ Case for build: Greece myData/AADE reporting data - invoice with multiple VAT ra
       </ext:ExtensionContent>
     </ext:UBLExtension>
 
-    <!-- Line-level myData/AADE reporting data (ET-39): one entry per invoice line -->
+    <!-- Line-level myData/AADE reporting data (EL-BT-39): one entry per invoice line -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationLine</ext:ExtensionURI>
       <ext:ExtensionContent>
@@ -81,7 +81,7 @@ Case for build: Greece myData/AADE reporting data - invoice with multiple VAT ra
                 <cbc:TaxableAmount currencyID="EUR">600.00</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="EUR">144.00</cbc:TaxAmount>
                 <cac:TaxCategory>
-                  <!-- Numeric AADE VAT category code (ET-29): 1 = 24% -->
+                  <!-- Numeric AADE VAT category code (EL-BT-29): 1 = 24% -->
                   <cbc:ID>1</cbc:ID>
                   <cbc:Percent>24</cbc:Percent>
                   <cac:TaxScheme>
@@ -109,7 +109,7 @@ Case for build: Greece myData/AADE reporting data - invoice with multiple VAT ra
                 <cbc:TaxableAmount currencyID="EUR">500.00</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="EUR">65.00</cbc:TaxAmount>
                 <cac:TaxCategory>
-                  <!-- Numeric AADE VAT category code (ET-29): 2 = 13% -->
+                  <!-- Numeric AADE VAT category code (EL-BT-29): 2 = 13% -->
                   <cbc:ID>2</cbc:ID>
                   <cbc:Percent>13</cbc:Percent>
                   <cac:TaxScheme>
@@ -130,7 +130,7 @@ Case for build: Greece myData/AADE reporting data - invoice with multiple VAT ra
       </ext:ExtensionContent>
     </ext:UBLExtension>
 
-    <!-- Document-level income/expense classification summary (ET-38 / ET-52) -->
+    <!-- Document-level income/expense classification summary (EL-BT-38 / EL-BT-52) -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Classification</ext:ExtensionURI>
       <ext:ExtensionContent>

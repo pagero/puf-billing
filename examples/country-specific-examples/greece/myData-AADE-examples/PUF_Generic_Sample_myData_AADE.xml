@@ -12,31 +12,31 @@ Case for build: Greece myData/AADE reporting data - standard sales/service invoi
          xmlns:puf="urn:pagero:ExtensionComponent:1.0">
   <ext:UBLExtensions>
 
-    <!-- Document-level myData/AADE header data (EG-1) -->
+    <!-- Document-level myData/AADE header data (EL-BG-1) -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
       <ext:ExtensionContent>
         <puf:PageroExtension>
 
-          <!-- Invoice series as registered with AADE (ET-30, myDATA field: series) -->
+          <!-- Invoice series as registered with AADE (EL-BT-30, myDATA field: series) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_series</puf:Key>
             <puf:Value>0</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- Invoice serial number within the series (ET-31, myDATA field: aa) -->
+          <!-- Invoice serial number within the series (EL-BT-31, myDATA field: aa) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_aa</puf:Key>
             <puf:Value>100001</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myDATA invoice type code, e.g. 1.1 Sales Invoice, 2.1 Service Invoice (ET-8) -->
+          <!-- myDATA invoice type code, e.g. 1.1 Sales Invoice, 2.1 Service Invoice (EL-BT-8) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_invoiceType</puf:Key>
             <puf:Value>2.1</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myDATA payment method (EG-5): code and amount for the first payment method on the document -->
+          <!-- myDATA payment method (EL-BG-5): code and amount for the first payment method on the document -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_paymentType_1</puf:Key>
             <puf:Value>5</puf:Value>
@@ -46,7 +46,7 @@ Case for build: Greece myData/AADE reporting data - standard sales/service invoi
             <puf:Value>1240.00</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myData document totals (EG-4): net value, VAT amount, gross value -->
+          <!-- myData document totals (EL-BG-4): net value, VAT amount, gross value -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_totalNetValue</puf:Key>
             <puf:Value>1000.00</puf:Value>
@@ -64,26 +64,26 @@ Case for build: Greece myData/AADE reporting data - standard sales/service invoi
       </ext:ExtensionContent>
     </ext:UBLExtension>
 
-    <!-- Line-level myData/AADE reporting data (ET-39): one entry per invoice line -->
+    <!-- Line-level myData/AADE reporting data (EL-BT-39): one entry per invoice line -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationLine</ext:ExtensionURI>
       <ext:ExtensionContent>
         <puf:PageroExtension>
 
-          <!-- cbc:ID matches the corresponding cac:InvoiceLine/cbc:ID (ET-37) -->
+          <!-- cbc:ID matches the corresponding cac:InvoiceLine/cbc:ID (EL-BT-37) -->
           <puf:RestrictedInformationLine>
             <puf:Key>myDATA_XML</puf:Key>
             <cbc:ID>1</cbc:ID>
             <!-- Line net amount -->
             <cbc:LineExtensionAmount currencyID="EUR">600.00</cbc:LineExtensionAmount>
             <cac:TaxTotal>
-              <!-- Line VAT amount (ET-36) -->
+              <!-- Line VAT amount (EL-BT-36) -->
               <cbc:TaxAmount currencyID="EUR">144.00</cbc:TaxAmount>
               <cac:TaxSubtotal>
                 <cbc:TaxableAmount currencyID="EUR">600.00</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="EUR">144.00</cbc:TaxAmount>
                 <cac:TaxCategory>
-                  <!-- Numeric AADE VAT category code (ET-29) - not the standard UBL letter code -->
+                  <!-- Numeric AADE VAT category code (EL-BT-29) - not the standard UBL letter code -->
                   <cbc:ID>1</cbc:ID>
                   <cbc:Percent>24</cbc:Percent>
                   <cac:TaxScheme>
@@ -92,7 +92,7 @@ Case for build: Greece myData/AADE reporting data - standard sales/service invoi
                 </cac:TaxCategory>
               </cac:TaxSubtotal>
             </cac:TaxTotal>
-            <!-- AADE income/expense classification for this line (ET-38 income / ET-52 expense) -->
+            <!-- AADE income/expense classification for this line (EL-BT-38 income / EL-BT-52 expense) -->
             <puf:Classification>
               <puf:Type>INCOME</puf:Type>
               <puf:ClassificationType>E3_561_001</puf:ClassificationType>
@@ -131,7 +131,7 @@ Case for build: Greece myData/AADE reporting data - standard sales/service invoi
       </ext:ExtensionContent>
     </ext:UBLExtension>
 
-    <!-- Document-level income/expense classification summary (ET-38 / ET-52): sum of the line-level classifications above -->
+    <!-- Document-level income/expense classification summary (EL-BT-38 / EL-BT-52): sum of the line-level classifications above -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Classification</ext:ExtensionURI>
       <ext:ExtensionContent>
