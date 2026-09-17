@@ -26,26 +26,26 @@ Case for build: Greece myData/AADE reporting data - self-billed invoice
       </ext:ExtensionContent>
     </ext:UBLExtension>
 
-    <!-- Document-level myData/AADE header data (EG-1) -->
+    <!-- Document-level myData/AADE header data (EL-BG-1) -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
       <ext:ExtensionContent>
         <puf:PageroExtension>
 
-          <!-- Invoice series as registered with AADE (ET-30, myDATA field: series) -->
+          <!-- Invoice series as registered with AADE (EL-BT-30, myDATA field: series) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_series</puf:Key>
             <puf:Value>0</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- Invoice serial number within the series (ET-31, myDATA field: aa) -->
+          <!-- Invoice serial number within the series (EL-BT-31, myDATA field: aa) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_aa</puf:Key>
             <puf:Value>100005</puf:Value>
           </puf:RestrictedInformation>
 
           <!--
-            myDATA invoice type code (ET-8). Self-pricing (ET-1, see below) applies only to
+            myDATA invoice type code (EL-BT-8). Self-pricing (EL-BT-1, see below) applies only to
             a specific subset of AADE invoice types - 1.1 is one of them.
           -->
           <puf:RestrictedInformation>
@@ -53,7 +53,7 @@ Case for build: Greece myData/AADE reporting data - self-billed invoice
             <puf:Value>1.1</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myData payment method (EG-5): code and amount for the first payment method on the document -->
+          <!-- myData payment method (EL-BG-5): code and amount for the first payment method on the document -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_paymentType_1</puf:Key>
             <puf:Value>5</puf:Value>
@@ -63,7 +63,7 @@ Case for build: Greece myData/AADE reporting data - self-billed invoice
             <puf:Value>1240.00</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myData document totals (EG-4): net value, VAT amount, gross value -->
+          <!-- myData document totals (EL-BG-4): net value, VAT amount, gross value -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_totalNetValue</puf:Key>
             <puf:Value>1000.00</puf:Value>
@@ -81,26 +81,26 @@ Case for build: Greece myData/AADE reporting data - self-billed invoice
       </ext:ExtensionContent>
     </ext:UBLExtension>
 
-    <!-- Line-level myData/AADE reporting data (ET-39) -->
+    <!-- Line-level myData/AADE reporting data (EL-BT-39) -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationLine</ext:ExtensionURI>
       <ext:ExtensionContent>
         <puf:PageroExtension>
 
-          <!-- cbc:ID matches the corresponding cac:InvoiceLine/cbc:ID (ET-37) -->
+          <!-- cbc:ID matches the corresponding cac:InvoiceLine/cbc:ID (EL-BT-37) -->
           <puf:RestrictedInformationLine>
             <puf:Key>myDATA_XML</puf:Key>
             <cbc:ID>1</cbc:ID>
             <!-- Line net amount -->
             <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
             <cac:TaxTotal>
-              <!-- Line VAT amount (ET-36) -->
+              <!-- Line VAT amount (EL-BT-36) -->
               <cbc:TaxAmount currencyID="EUR">240.00</cbc:TaxAmount>
               <cac:TaxSubtotal>
                 <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="EUR">240.00</cbc:TaxAmount>
                 <cac:TaxCategory>
-                  <!-- Numeric AADE VAT category code (ET-29): 1 = 24% -->
+                  <!-- Numeric AADE VAT category code (EL-BT-29): 1 = 24% -->
                   <cbc:ID>1</cbc:ID>
                   <cbc:Percent>24</cbc:Percent>
                   <cac:TaxScheme>

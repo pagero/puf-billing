@@ -122,7 +122,7 @@ Demonstrates:
 - Standard VAT category `AE` (Reverse Charge), numeric AADE VAT category 7
 - Buyer registered in another EU member state (Germany)
 - Numeric AADE VAT exemption cause code 14 ("Without VAT - article 28 of the VAT Code" — intra-community supply of goods), same mandatory-when-category-7 rule as the VAT exemption example
-- Confirms `vatPaidByBuyer` (ET-2) resolves to `true`
+- Confirms `vatPaidByBuyer` (EL-BT-2) resolves to `true`
 
 **Key Features:**
 
@@ -138,7 +138,7 @@ Demonstrates:
 Demonstrates:
 
 - `PageroExtension:SelfBilled` — a dedicated PUF extension, separate from the myDATA `RestrictedInformation` block, set to `true`
-- Self-pricing (myDATA ET-1) applies only to a subset of AADE invoice types (this example uses 1.1, which is in that subset)
+- Self-pricing (myDATA EL-BT-1) applies only to a subset of AADE invoice types (this example uses 1.1, which is in that subset)
 - AADE **forbids** income/expense classification on self-billed documents — neither the line-level `puf:Classification` nor the document-level classification summary extension is sent
 
 **Key Features:**
@@ -152,12 +152,12 @@ Demonstrates:
 
 | Group | Description | Examples |
 |---|---|---|
-| EG-1 | Header data: series, `aa`, invoice type code | All |
-| EG-4 | Document totals: net value, VAT amount, gross value | All |
-| EG-5 | Payment method: AADE payment code and amount | All |
-| ET-1 | Self-pricing (self-billed flag) | 7 |
-| ET-38 / ET-52 | Income/expense classification | 1–6 (omitted in 7) |
-| ET-39 | Line-level myDATA row detail | All |
+| EL-BG-1 | Header data: series, `aa`, invoice type code | All |
+| EL-BG-4 | Document totals: net value, VAT amount, gross value | All |
+| EL-BG-5 | Payment method: AADE payment code and amount | All |
+| EL-BT-1 | Self-pricing (self-billed flag) | 7 |
+| EL-BT-38 / EL-BT-52 | Income/expense classification | 1–6 (omitted in 7) |
+| EL-BT-39 | Line-level myDATA row detail | All |
 
 ## Invoice Type Codes Used
 
@@ -196,13 +196,13 @@ Mandatory whenever the line's AADE VAT category is 7 (error 217); only applicabl
 
 | Key | Description | Level | Examples |
 |---|---|---|---|
-| `myDATA_XML_series` | Invoice series (ET-30) | Document | All |
-| `myDATA_XML_aa` | Invoice serial number (ET-31) | Document | All |
-| `myDATA_XML_invoiceType` | AADE invoice type code (ET-8) | Document | All |
-| `myDATA_XML_paymentType_1` / `myDATA_XML_paymentAmount_1` | AADE payment method code/amount, first payment method only (ET-63/ET-65) | Document | All |
-| `myDATA_XML_totalNetValue` / `myDATA_XML_totalVatAmount` / `myDATA_XML_totalGrossValue` | Document totals (ET-46/ET-47/ET-25) | Document | All |
+| `myDATA_XML_series` | Invoice series (EL-BT-30) | Document | All |
+| `myDATA_XML_aa` | Invoice serial number (EL-BT-31) | Document | All |
+| `myDATA_XML_invoiceType` | AADE invoice type code (EL-BT-8) | Document | All |
+| `myDATA_XML_paymentType_1` / `myDATA_XML_paymentAmount_1` | AADE payment method code/amount, first payment method only (EL-BT-63/EL-BT-65) | Document | All |
+| `myDATA_XML_totalNetValue` / `myDATA_XML_totalVatAmount` / `myDATA_XML_totalGrossValue` | Document totals (EL-BT-46/EL-BT-47/EL-BT-25) | Document | All |
 | `myDATA_XML_correlatedInvoices` | Original invoice's myDATA serial number(s), for Associated (5.1) credit notes only | Document | 3 |
-| `myDATA_XML` (RestrictedInformationLine key) | Line-level myDATA row detail (ET-39) | Line | All |
+| `myDATA_XML` (RestrictedInformationLine key) | Line-level myDATA row detail (EL-BT-39) | Line | All |
 
 `SelfBilled` (Example 7) is sent via its own extension URI (`PageroExtension:SelfBilled`), not a `RestrictedInformation` key.
 

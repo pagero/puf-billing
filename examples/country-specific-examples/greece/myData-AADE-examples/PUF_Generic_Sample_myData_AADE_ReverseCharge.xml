@@ -12,31 +12,31 @@ Case for build: Greece myData/AADE reporting data - reverse charge / intra-commu
          xmlns:puf="urn:pagero:ExtensionComponent:1.0">
   <ext:UBLExtensions>
 
-    <!-- Document-level myData/AADE header data (EG-1) -->
+    <!-- Document-level myData/AADE header data (EL-BG-1) -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
       <ext:ExtensionContent>
         <puf:PageroExtension>
 
-          <!-- Invoice series as registered with AADE (ET-30, myDATA field: series) -->
+          <!-- Invoice series as registered with AADE (EL-BT-30, myDATA field: series) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_series</puf:Key>
             <puf:Value>0</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- Invoice serial number within the series (ET-31, myDATA field: aa) -->
+          <!-- Invoice serial number within the series (EL-BT-31, myDATA field: aa) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_aa</puf:Key>
             <puf:Value>100004</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myDATA invoice type code: 1.2 Sales Invoice / Intra-community Supplies (ET-8) -->
+          <!-- myDATA invoice type code: 1.2 Sales Invoice / Intra-community Supplies (EL-BT-8) -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_invoiceType</puf:Key>
             <puf:Value>1.2</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myData payment method (EG-5): code and amount for the first payment method on the document -->
+          <!-- myData payment method (EL-BG-5): code and amount for the first payment method on the document -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_paymentType_1</puf:Key>
             <puf:Value>5</puf:Value>
@@ -46,7 +46,7 @@ Case for build: Greece myData/AADE reporting data - reverse charge / intra-commu
             <puf:Value>1000.00</puf:Value>
           </puf:RestrictedInformation>
 
-          <!-- myData document totals (EG-4): net value, VAT amount, gross value -->
+          <!-- myData document totals (EL-BG-4): net value, VAT amount, gross value -->
           <puf:RestrictedInformation>
             <puf:Key>myDATA_XML_totalNetValue</puf:Key>
             <puf:Value>1000.00</puf:Value>
@@ -64,26 +64,26 @@ Case for build: Greece myData/AADE reporting data - reverse charge / intra-commu
       </ext:ExtensionContent>
     </ext:UBLExtension>
 
-    <!-- Line-level myData/AADE reporting data (ET-39) -->
+    <!-- Line-level myData/AADE reporting data (EL-BT-39) -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationLine</ext:ExtensionURI>
       <ext:ExtensionContent>
         <puf:PageroExtension>
 
-          <!-- cbc:ID matches the corresponding cac:InvoiceLine/cbc:ID (ET-37) -->
+          <!-- cbc:ID matches the corresponding cac:InvoiceLine/cbc:ID (EL-BT-37) -->
           <puf:RestrictedInformationLine>
             <puf:Key>myDATA_XML</puf:Key>
             <cbc:ID>1</cbc:ID>
             <!-- Line net amount -->
             <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
             <cac:TaxTotal>
-              <!-- Line VAT amount (ET-36): zero, reverse charge -->
+              <!-- Line VAT amount (EL-BT-36): zero, reverse charge -->
               <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
               <cac:TaxSubtotal>
                 <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="EUR">0.00</cbc:TaxAmount>
                 <cac:TaxCategory>
-                  <!-- Numeric AADE VAT category code (ET-29): 7 = Without VAT (0%) -->
+                  <!-- Numeric AADE VAT category code (EL-BT-29): 7 = Without VAT (0%) -->
                   <cbc:ID>7</cbc:ID>
                   <cbc:Percent>0</cbc:Percent>
                   <!-- Numeric AADE VAT exemption cause code: 14 = "Without VAT - article 28 of the VAT Code" (intra-community supply of goods). Mandatory whenever the AADE VAT category is 7. -->
@@ -94,7 +94,7 @@ Case for build: Greece myData/AADE reporting data - reverse charge / intra-commu
                 </cac:TaxCategory>
               </cac:TaxSubtotal>
             </cac:TaxTotal>
-            <!-- AADE income/expense classification for this line (ET-38 income / ET-52 expense) -->
+            <!-- AADE income/expense classification for this line (EL-BT-38 income / EL-BT-52 expense) -->
             <puf:Classification>
               <puf:Type>INCOME</puf:Type>
               <puf:ClassificationType>E3_561_005</puf:ClassificationType>
@@ -107,7 +107,7 @@ Case for build: Greece myData/AADE reporting data - reverse charge / intra-commu
       </ext:ExtensionContent>
     </ext:UBLExtension>
 
-    <!-- Document-level income/expense classification summary (ET-38 / ET-52) -->
+    <!-- Document-level income/expense classification summary (EL-BT-38 / EL-BT-52) -->
     <ext:UBLExtension>
       <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:Classification</ext:ExtensionURI>
       <ext:ExtensionContent>
@@ -241,7 +241,7 @@ Case for build: Greece myData/AADE reporting data - reverse charge / intra-commu
         <cbc:ID>AE</cbc:ID>
         <!-- VAT category rate (BT-119) -->
         <cbc:Percent>0</cbc:Percent>
-        <!-- VAT exemption reason code (BT-121): 14 = intra-community supply of goods, mandatory whenever the AADE VAT category (line-level, ET-29) is 7 -->
+        <!-- VAT exemption reason code (BT-121): 14 = intra-community supply of goods, mandatory whenever the AADE VAT category (line-level, EL-BT-29) is 7 -->
         <cbc:TaxExemptionReasonCode>14</cbc:TaxExemptionReasonCode>
         <!-- VAT exemption reason text (BT-120) -->
         <cbc:TaxExemptionReason>Without VAT - article 28 of the VAT Code (intra-community supply of goods)</cbc:TaxExemptionReason>
