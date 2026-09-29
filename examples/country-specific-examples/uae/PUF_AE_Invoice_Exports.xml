@@ -31,6 +31,8 @@
       (ibr-152-ae)
     - BTAE-22 Incoterms: carried on cac:DeliveryTerms/cbc:ID, maximum 3 characters.
       When a DeliveryTerms block is present the Incoterms code is mandatory (ibr-196-ae)
+    - BTAE-21 Customs reference number (optional): the export declaration, carried as
+      cac:AdditionalDocumentReference/cbc:ID with schemeID ED (UNCL1153, PUF-005)
 
     Note: The Guidelines add that the Tax Invoice issued for an export should be the
     Electronic Invoice, and the same document may be provided to Customs.
@@ -47,6 +49,10 @@
     <!-- BTAE-02 = 00000001 (Exports flag in position 8) -->
     <cbc:InvoiceTypeCode name="00000001">380</cbc:InvoiceTypeCode>
     <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
+    <cac:AdditionalDocumentReference>
+        <!-- BTAE-21 Customs reference number: export declaration (schemeID ED) -->
+        <cbc:ID schemeID="ED">EXP010101234</cbc:ID>
+    </cac:AdditionalDocumentReference>
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>

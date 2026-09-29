@@ -360,6 +360,22 @@ Export supplies (BTAE-02 position 8 set to `1`, e.g. `00000001`) are zero-rated 
 * `cac:DeliveryTerms/cbc:ID` carrying the Incoterms code (BTAE-22) MUST be provided.
 * The applicable VAT category is `Z` (zero rated) — `cbc:Percent = 0.00`.
 
+The customs reference number (BTAE-21) is optional. It is provided as a customs declaration reference, see <<_customs_declaration_reference, Customs declaration reference>>: `cbc:ID` with `@schemeID = 'ED'` (export declaration), or `'ABT'` (import declaration) when the value is an import declaration. PINT AE has a single customs reference field with no declaration type and no date, so only one value reaches the target: the first `ED` reference, otherwise the first `ABT` reference. `cbc:IssueDate` is not used.
+
+*Example* +
+_Customs reference number on an export_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AdditionalDocumentReference>
+    <cbc:ID schemeID="ED">EXP010101234</cbc:ID><!--1-->
+  </cac:AdditionalDocumentReference>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Customs reference number (BTAE-21), here an export declaration.
+
 ==== Credit note reason code
 
 When the document is a credit note (`cbc:InvoiceTypeCode = 381` or `cbc:CreditNoteTypeCode = 81`), the credit note reason code (BTAE-03) MUST be provided. The supported values are `DL8.61.1.A` through `DL8.61.1.E` and `VD` (volume discount). See https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates[PUF-023-CORRECTIONCODE (United Arab Emirates)^] for the definition of each code.

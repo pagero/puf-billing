@@ -193,13 +193,14 @@ Demonstrates:
 - Non-UAE buyer using the predefined non-Peppol placeholder endpoint `9900000099`
 - Mandatory `cac:Delivery` block with non-AE delivery country (ibr-152-ae)
 - `cac:DeliveryTerms/cbc:ID` carrying Incoterms code (BTAE-22)
+- Customs reference number (BTAE-21) as an export declaration: `cac:AdditionalDocumentReference/cbc:ID` with `schemeID="ED"`
 - Zero-rated supply (category `Z`, rate `0.00`)
 
 **Key Features:**
 
 - Document type: `380`, BTAE-02 `00000001`
 - Buyer: Gulf Beauty Retail W.L.L. (Kuwait, KW) — no Peppol registration, uses placeholder `9900000099`
-- Delivery to Salmiya, Kuwait (KW); Incoterms `FOB`
+- Delivery to Salmiya, Kuwait (KW); Incoterms `FOB`; export declaration `EXP010101234`
 - 500 × AED 30.00 skincare sets; HS code `3304.99.00`
 
 ---

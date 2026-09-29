@@ -415,14 +415,40 @@ When a paid amount (IBT-113) is present, the prepayment invoice number (BTOM-027
 
 ==== Import of goods
 
-An invoice for an import of goods sets position 13 of the transaction type code, and then requires the Incoterms code (BTOM-022), the customs declaration number (BTOM-021) and the import date (BTOM-030).
+An invoice for an import of goods sets position 13 of the transaction type code, and then requires the Incoterms code (BTOM-022), the customs declaration number (BTOM-021) and the import date (BTOM-030). Every item MUST also carry its country of origin (IBT-159) in `cac:Item/cac:OriginCountry/cbc:IdentificationCode` (rule `IBR-084-OM`).
 
 The Incoterms code is provided on the standard UBL `cac:DeliveryTerms/cbc:ID` and MUST be one of `EXW`, `FCA`, `CPT`, `CIP`, `DAP`, `DPU`, `DDP`, `FAS`, `FOB`, `CFR` or `CIF` (rule `CL-09-OM`).
 
-[WARNING]
-====
-The customs declaration number (BTOM-021) and the import date (BTOM-030) have no confirmed PUF input representation yet. Their handling is provisional and should not be relied on for an import-of-goods scenario.
-====
+The customs declaration number and the import date are provided together on a customs declaration reference, see <<_customs_declaration_reference, Customs declaration reference>>:
+
+* `cbc:ID` with `@schemeID = 'ABT'` (import declaration) carries the customs declaration number (BTOM-021).
+* `cbc:IssueDate` carries the import date (BTOM-030), formatted as YYYY-MM-DD (rule `IBR-156-OM`).
+
+*Example* +
+_Customs declaration reference for an import of goods_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cbc:InvoiceTypeCode name="10000000000010000000">380</cbc:InvoiceTypeCode><!--1-->
+  <!-- Code omitted for clarity -->
+  <cac:AdditionalDocumentReference>
+    <cbc:ID schemeID="ABT">123456789</cbc:ID><!--2-->
+    <cbc:IssueDate>2026-09-05</cbc:IssueDate><!--3-->
+  </cac:AdditionalDocumentReference>
+  <!-- Code omitted for clarity -->
+  <cac:DeliveryTerms>
+    <cbc:ID>CIF</cbc:ID><!--4-->
+  </cac:DeliveryTerms>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Position 13 of the transaction type code set for *Import of Goods*.
+<2> Customs declaration number (BTOM-021) with the scheme `ABT`.
+<3> Import date (BTOM-030).
+<4> Incoterms code (BTOM-022).
+
+PINT OM defines the import date as the date on which the goods were imported, delivered or cleared through customs. PUF carries it as the issue date of the declaration reference, so provide that date. PINT OM holds a single customs declaration, so only the first `ABT` reference is used. An `ED` reference has no place in PINT OM.
 
 ==== Self-billing
 
@@ -455,4 +481,4 @@ _Self-billed Oman tax invoice_
 
 ==== Complete examples
 
-The https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/oman[Oman PUF examples^] include standard billing, a goods credit note, self-billing, third-party billing and settlement of a prepayment. The example index records their official source basis and local validation scope. The foreign-currency example is explicitly marked as a draft pending resolution of the accounting-currency rule conflict.
+The https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/oman[Oman PUF examples^] include standard billing, a goods credit note, self-billing, third-party billing, settlement of a prepayment and an import of goods. The example index records their official source basis and local validation scope. The foreign-currency example is explicitly marked as a draft pending resolution of the accounting-currency rule conflict.

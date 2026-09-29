@@ -119,3 +119,47 @@ _Invoice with reference to an invoiced object with a document number_
 ----
 <1> The schemeID must be according to list https://pagero.github.io/puf-code-lists/#_puf_005_invoicedobjectidentifier[PUF-005-INVOICEDOBJECTIDENTIFIER^].
 <2> Document type code should be '130' to indicate invoiced object.
+
+===== Customs declaration reference
+
+A customs declaration reference identifies the customs declaration that covers the goods on the invoice, for example an import declaration or an export declaration. Some markets require or allow it, see the country specific chapters.
+
+It is provided as a `cac:AdditionalDocumentReference` where the scheme identifier tells the declaration type. `cbc:DocumentTypeCode` is not used, since a customs declaration is not an invoiced object.
+
+.Elements used for a customs declaration reference
+|===
+|Applicable XPath |Description
+
+|`cbc:ID`
+|**Customs declaration number** +
+The number of the customs declaration.
+
+|`cbc:ID/@schemeID`
+|**Declaration type** +
+`ABT` for an import declaration or `ED` for an export declaration, both values of the list +
+https://pagero.github.io/puf-code-lists/#_puf_005_invoicedobjectidentifier[PUF-005-INVOICEDOBJECTIDENTIFIER^].
+
+|`cbc:IssueDate`
+|**Declaration date** +
+The date of the customs declaration, when the target market has a place for it. +
+_Format YYYY-MM-DD._
+
+|===
+
+More than one declaration can be provided, each in its own `cac:AdditionalDocumentReference`. A target format with room for a single declaration uses the first one that fits, see the country specific chapters.
+
+*Example* +
+_Invoice with a reference to an import declaration_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AdditionalDocumentReference>
+      <cbc:ID schemeID="ABT">123456789</cbc:ID> <!--1-->
+      <cbc:IssueDate>2026-09-05</cbc:IssueDate> <!--2-->
+  </cac:AdditionalDocumentReference>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> `ABT` is an import declaration. An export declaration is `ED`.
+<2> The date of the declaration.
