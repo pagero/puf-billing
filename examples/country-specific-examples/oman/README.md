@@ -1,7 +1,7 @@
 # Oman PUF Examples
 
 Synthetic PUF Billing examples based on the published PINT OM 1.0.1 billing and
-self-billing specifications, released 2026-07-29. Reviewed 2026-09-07.
+self-billing specifications, released 2026-07-29. Reviewed 2026-09-07; import of goods added 2026-09-29.
 These illustrate customer input, not live taxpayer registrations or bank details.
 
 ## Examples
@@ -13,6 +13,7 @@ These illustrate customer input, not live taxpayer registrations or bank details
 | [PUF_OM_SelfBilled_Invoice.xml](PUF_OM_SelfBilled_Invoice.xml) | Buyer-issued invoice using SelfBilled and PUF type 380 | OMR | 2.00 / 0.10 / 2.10 | Self-billing passed, target type 389 |
 | [PUF_OM_ThirdParty_Invoice.xml](PUF_OM_ThirdParty_Invoice.xml) | Seller agent with SR role and a complete agent address | OMR | 100.00 / 5.00 / 105.00 | Billing passed |
 | [PUF_OM_Prepayment_Settlement_Invoice.xml](PUF_OM_Prepayment_Settlement_Invoice.xml) | Final invoice fully settled by a referenced prepayment | OMR | 2400.00 / 120.00 / 2520.00 | Billing passed, prepaid 2520.00 and payable 0.00 |
+| [PUF_OM_Import_of_Goods_Invoice.xml](PUF_OM_Import_of_Goods_Invoice.xml) | Import of goods (position 13) with customs declaration reference and import date, Incoterms, ICID buyer identifier and item country of origin | OMR | 100.00 / 5.00 / 105.00 | Billing passed |
 | [PUF_OM_ForeignCurrency_Invoice_DRAFT.xml](PUF_OM_ForeignCurrency_Invoice_DRAFT.xml) | EUR invoice with OMR VAT accounting and exchange rate 0.4000000 | EUR | 100.00 / 5.00 / 105.00 | Draft: ALIGNED-IBRP-S-01-OM fails |
 
 The foreign-currency example intentionally includes the OMR standard-rate breakdown
@@ -50,6 +51,7 @@ small and internally consistent. Source payload quirks are not reproduced as gui
 | Self-billing | Self-billing `trn-invoice/example/SB-INV-01-no-gap-exact-calculation.xml` | Retains 2.00 net and 0.10 VAT; correct PUF SelfBilled representation and service classification |
 | Third party | Billing `trn-invoice/example/ThirdParty.xml` | Keeps the third-party context and required agent fields; adds the existing PUF SR qualifier |
 | Prepayment settlement | Billing `trn-invoice/example/Prepayment-Final-Net.xml` | Retains 2400.00 net, 120.00 VAT and 2520.00 prepaid; native PDR reference with no duplicated payment amount |
+| Import of goods | Billing `trn-invoice/example/GoodsImport.xml` | One goods line with the official HS code; buyer identifier as `OM:ICID`; Incoterms `CIF`; the customs declaration number (BTOM-021) and import date (BTOM-030) as one PUF `ABT` document reference; country of origin added because IBR-084-OM requires it |
 | Foreign currency draft | PINT OM Billing BIS, "Dual Currency VAT Example", plus the full-tax invoice structure | Smaller EUR amounts and an illustrative 0.4000000 rate; both currency amounts supplied, conflict left visible |
 
 Authoritative packages retrieved 2026-09-02:
@@ -64,8 +66,11 @@ Authoritative packages retrieved 2026-09-02:
 Source locators: IBR-002-OM (UUID v5), IBR-015-OM (third party), IBR-023-OM and
 IBR-032-OM (correction reason and preceding reference), IBR-058-OM (prepayment),
 IBR-066-OM (accounting-currency breakdown), IBR-078-OM and IBR-081-OM (item type
-and industrial classification), and the package code lists `BuyerSellerIdentifier.gc`,
-`ISIC.gc`, `ServiceType.gc`, `HSCodes-1.gc` / `HSCodes-2.gc`, and `IssuanceReason.gc`.
+and industrial classification), IBR-084-OM, IBR-085-OM, IBR-153-OM and IBR-156-OM
+(import of goods: country of origin, customs declaration, Incoterms and import date,
+ICID buyer identifier, date format), and the package code lists `BuyerSellerIdentifier.gc`,
+`ISIC.gc`, `ServiceType.gc`, `HSCodes-1.gc` / `HSCodes-2.gc`, `Incoterms.gc`, and
+`IssuanceReason.gc`. The document reference scheme `ABT` is a value of UNCL1153.
 
 The specifications remain authoritative for obligations. These examples do not cover
-every Oman scenario, including customs, seller UUID input or simplified-invoice rules.
+every Oman scenario, including seller UUID input or simplified-invoice rules.
