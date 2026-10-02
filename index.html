@@ -19072,11 +19072,14 @@ Otherwise it is OK to omit the attribute.</td>
 <div class="paragraph">
 <p>A party that is within scope of UAE e-invoicing but not registered for VAT has no TRN. It still has a TIN, obtained by registering with the FTA, and uses that TIN as its Participant Identifier.</p>
 </div>
+<div class="paragraph">
+<p>Pagero sets the three predefined buyer endpoints under scheme <code>0235</code> itself, so they do not need to be sent: <code>9900000097</code> on a deemed supply, <code>9900000099</code> on an export to a buyer that is not reached over Peppol, and <code>9900000098</code> when a UAE buyer has no Participant Identifier on a document that is not an export. <code>9900000098</code> means that the buyer has not yet implemented Electronic Invoicing, and the supplier must then also issue a regular tax invoice, for example a PDF (UAE Electronic Invoicing Guidelines V1.1, p.23). A document with a predefined endpoint is reported to the FTA and is not exchanged over Peppol.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_legal_registration_identifier"><a class="anchor" href="#_legal_registration_identifier"></a><a class="link" href="#_legal_registration_identifier">5.21.4. Legal registration identifier</a></h4>
 <div class="paragraph">
-<p>UAE requires a legal registration identifier on both seller and buyer. PUF carries this through <code>cac:PartyLegalEntity/cbc:CompanyID</code> with the registration type expressed via the standard <code>@schemeID</code> attribute. PUF does not use the PINT-AE <code>@schemeAgencyID</code> / <code>@schemeAgencyName</code> syntax — every UAE identifier flavour has its own PUF-008 scheme code.</p>
+<p>PINT AE requires the seller&#8217;s legal registration identifier on every document (ibr-150-ae) and the buyer&#8217;s on a document of type <code>480</code> or <code>81</code> (ibr-136-ae). PUF carries this through <code>cac:PartyLegalEntity/cbc:CompanyID</code> with the registration type expressed via the standard <code>@schemeID</code> attribute. PUF does not use the PINT-AE <code>@schemeAgencyID</code> / <code>@schemeAgencyName</code> syntax — every UAE identifier flavour has its own PUF-008 scheme code.</p>
 </div>
 <div class="paragraph">
 <p>The four primary types — Trade license, Emirates ID, Passport and Cabinet Decision — and the two supplementary identifiers (Legal Registration Authority, Passport issuing country) are documented here: <a href="https://pagero.github.io/puf-code-lists/#_identification_scheme_united_arab_emirates" target="_blank" rel="noopener">Identification scheme United Arab Emirates</a>.</p>
@@ -19201,6 +19204,9 @@ Otherwise it is OK to omit the attribute.</td>
 </table>
 <div class="paragraph">
 <p>The Emirate code is provided in <code>cbc:CountrySubentity</code> and the country code in <code>cac:Country/cbc:IdentificationCode = 'AE'</code>.</p>
+</div>
+<div class="paragraph">
+<p>The country subdivision itself is mandatory in every seller and buyer address, whatever the country (ibr-143-ae, ibr-144-ae), and in every delivery address that is provided. For an address outside the UAE, give the region, state or province.</p>
 </div>
 </div>
 <div class="sect3">
@@ -19514,43 +19520,40 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 <div class="sect3">
 <h4 id="_deemed_supply"><a class="anchor" href="#_deemed_supply"></a><a class="link" href="#_deemed_supply">5.21.13. Deemed Supply</a></h4>
 <div class="paragraph">
-<p>Deemed supplies (BTAE-02 position 2 set to <code>1</code>, e.g. <code>01000000</code>) are supplies made without consideration — typically gifts or samples above the FTA de-minimis threshold. Because no buyer exists, PUF uses a set of fixed FTA placeholder values:</p>
+<p>Deemed supplies (BTAE-02 position 2 set to <code>1</code>, e.g. <code>01000000</code>) are supplies made without consideration — typically gifts or samples above the FTA de-minimis threshold.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Buyer endpoint ID MUST be <code>9900000097</code> (scheme <code>0235</code>).</p>
+<p>The buyer endpoint ID is always <code>9900000097</code> (scheme <code>0235</code>), whoever the buyer is (UAE Electronic Invoicing Guidelines V1.1, p.25). Pagero sets it, and any endpoint sent in PUF is replaced.</p>
 </li>
 <li>
-<p>Buyer VAT identifier MUST be the FTA dummy TRN: a 15-digit number that starts with <code>1</code> and ends with <code>03</code> (e.g. <code>100000000099903</code>).</p>
+<p>A buyer TIN (<code>cac:PartyIdentification/cbc:ID</code> with <code>@schemeID = 'AE:TIN'</code>) or buyer TRN (<code>cac:PartyTaxScheme/cbc:CompanyID</code>) is still required, because the predefined endpoint is not a TIN (ibr-135-ae). No placeholder value is published for a deemed supply without a recipient.</p>
 </li>
 <li>
-<p>Because the supply is free of charge, <code>cbc:PrepaidAmount</code> MUST equal <code>cbc:TaxInclusiveAmount</code>, making <code>cbc:PayableAmount = 0.00</code>.</p>
+<p>The payment due date (<code>cbc:DueDate</code>) and payment means are not required (ibr-127-ae, ibr-191-ae).</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The due date (<code>cbc:DueDate</code>) SHOULD be omitted for deemed supplies since there is no payment obligation.</p>
+<p>When no invoice is issued to a recipient, the document is only reported to the FTA and is not exchanged.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_exports"><a class="anchor" href="#_exports"></a><a class="link" href="#_exports">5.21.14. Exports</a></h4>
 <div class="paragraph">
-<p>Export supplies (BTAE-02 position 8 set to <code>1</code>, e.g. <code>00000001</code>) are zero-rated supplies of goods or services delivered outside the UAE. Delivery information is mandatory.</p>
+<p>Export supplies (BTAE-02 position 8 set to <code>1</code>, e.g. <code>00000001</code>) are zero-rated supplies of goods or services delivered outside the UAE.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Buyer endpoint ID MUST be the predefined non-UAE placeholder <code>9900000099</code> (scheme <code>0235</code>) when the buyer is not reachable on the Peppol network.</p>
+<p>When the buyer is not reached over Peppol, Pagero sets the buyer endpoint ID to the predefined value <code>9900000099</code> (scheme <code>0235</code>), so it does not need to be sent in PUF. A buyer that is reached over Peppol keeps its own Participant Identifier and scheme.</p>
 </li>
 <li>
-<p>The buyer <code>cac:PostalAddress</code> country code MUST NOT be <code>AE</code>.</p>
+<p>A <code>cac:Delivery/cac:DeliveryLocation/cac:Address</code> with street name, city, country subdivision and country code MUST be present, unless the delivery country is <code>AE</code> (ibr-152-ae).</p>
 </li>
 <li>
-<p>A <code>cac:Delivery</code> block with both <code>cac:DeliveryLocation/cac:Address</code> (including country code) and the actual delivery date MUST be present.</p>
-</li>
-<li>
-<p><code>cac:DeliveryTerms/cbc:ID</code> carrying the Incoterms code (BTAE-22) MUST be provided.</p>
+<p>The Incoterms code (BTAE-22) is optional. When <code>cac:DeliveryTerms</code> is sent, its <code>cbc:ID</code> MUST carry the Incoterms code (ibr-196-ae).</p>
 </li>
 <li>
 <p>The applicable VAT category is <code>Z</code> (zero rated) — <code>cbc:Percent = 0.00</code>.</p>
@@ -19587,10 +19590,53 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 <div class="sect3">
 <h4 id="_credit_note_reason_code"><a class="anchor" href="#_credit_note_reason_code"></a><a class="link" href="#_credit_note_reason_code">5.21.15. Credit note reason code</a></h4>
 <div class="paragraph">
-<p>When the document is a credit note (<code>cbc:InvoiceTypeCode = 381</code> or <code>cbc:CreditNoteTypeCode = 81</code>), the credit note reason code (BTAE-03) MUST be provided. The supported values are <code>DL8.61.1.A</code> through <code>DL8.61.1.E</code> and <code>VD</code> (volume discount). See <a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE (United Arab Emirates)</a> for the definition of each code.</p>
+<p>When the document is a credit note (<code>cbc:CreditNoteTypeCode</code> <code>381</code> or <code>81</code>, including a self-billed credit note), the credit note reason code (BTAE-03) MUST be provided. The supported values are <code>DL8.61.1.A</code> through <code>DL8.61.1.E</code> and <code>VD</code> (volume discount). See <a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE (United Arab Emirates)</a> for the definition of each code.</p>
 </div>
 <div class="paragraph">
-<p>The code is carried on <code>cac:BillingReference/cac:InvoiceDocumentReference</code> through the existing <code>puf:BillingReferenceExtension</code> (path <code>puf:BillingReferenceExtension/puf:Code</code>). When the reason code is <code>VD</code>, the preceding-document reference itself is not required.</p>
+<p>The code is carried on <code>cac:BillingReference/cac:InvoiceDocumentReference</code> through the existing <code>puf:BillingReferenceExtension</code> (path <code>puf:BillingReferenceExtension/puf:Code</code>). When the reason code is <code>VD</code>, the credit note MUST NOT reference a preceding invoice. Peppol PINT AE rule ibr-055-ae rejects a <code>VD</code> credit note that has one, and requires the reference for every other reason code, although the PINT AE text describes it as optional for <code>VD</code>. Because PUF carries the code inside <code>cac:BillingReference</code>, send <code>cac:BillingReference</code> for <code>VD</code> only as the carrier of the code: leave <code>cbc:ID</code> empty and send no <code>cbc:IssueDate</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Volume discount credit note without a preceding invoice reference</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;CreditNote&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cbc:CreditNoteTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">00000000</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>381<span class="tag">&lt;/cbc:CreditNoteTypeCode&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+  <span class="tag">&lt;cac:BillingReference&gt;</span>
+    <span class="tag">&lt;cac:InvoiceDocumentReference&gt;</span>
+      <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+          <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+          <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;puf:PageroExtension&gt;</span>
+              <span class="tag">&lt;puf:BillingReferenceExtension&gt;</span>
+                <span class="tag">&lt;puf:Code&gt;</span>VD<span class="tag">&lt;/puf:Code&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+              <span class="tag">&lt;/puf:BillingReferenceExtension&gt;</span>
+            <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+      <span class="tag">&lt;cbc:ID</span><span class="tag">/&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="tag">&lt;/cac:InvoiceDocumentReference&gt;</span>
+  <span class="tag">&lt;/cac:BillingReference&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/CreditNote&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Credit note reason code (BTAE-03) <code>VD</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Empty preceding document number, so no preceding invoice reference reaches the PINT AE document.</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">

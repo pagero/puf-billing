@@ -27,7 +27,9 @@
     Key Fields:
     - BTAE-02 position 2 = 1 flags the deemed supply context
     - BT-49 Buyer electronic address: fixed placeholder 9900000097 under scheme 0235
-    - BT-48 Buyer TRN: FTA placeholder, still subject to the 15-digit format (ibr-132-ae)
+    - BT-48 Buyer TRN: illustrative value. ibr-135-ae requires a buyer TIN or TRN because
+      the predefined endpoint is not a TIN, and the TRN follows the 15-digit format
+      (ibr-132-ae). No official placeholder TRN is published.
     - BT-113 PrepaidAmount equals BT-112 TaxInclusiveAmount, so BT-115 PayableAmount is 0.00
     - BT-9 Payment due date is deliberately absent: deemed supplies are exempt from the
       due date requirement (ibr-127-ae)
@@ -86,14 +88,14 @@
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
-                <!-- Placeholder TRN for FTA dummy recipient (ibr-132-ae: 15 digits, starts with 1, ends with 03) -->
+                <!-- Illustrative buyer TRN, required by ibr-135-ae; no official placeholder is published (ibr-132-ae: 15 digits, starts with 1, ends with 03) -->
                 <cbc:CompanyID>100000000099903</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>
                 </cac:TaxScheme>
             </cac:PartyTaxScheme>
             <cac:PartyLegalEntity>
-                <cbc:RegistrationName>FTA Deemed Supply Recipient</cbc:RegistrationName>
+                <cbc:RegistrationName>Example Gift Recipient LLC</cbc:RegistrationName>
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>
