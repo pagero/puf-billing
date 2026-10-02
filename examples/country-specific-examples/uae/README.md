@@ -169,15 +169,15 @@ Demonstrates:
 Demonstrates:
 
 - Deemed Supply flag in BTAE-02 position 2 (`01000000`)
-- Fixed FTA dummy buyer endpoint `9900000097` (scheme `0235`)
-- FTA placeholder TRN `100000000099903` (15 digits, starts with `1`, ends with `03`)
+- Predefined buyer endpoint `9900000097` (scheme `0235`), always used for a deemed supply (UAE Electronic Invoicing Guidelines V1.1, p.25)
+- Illustrative buyer TRN `100000000099903` (15 digits, starts with `1`, ends with `03`). ibr-135-ae requires a buyer TIN or TRN, and no official placeholder TRN is published
 - `PrepaidAmount` = `TaxInclusiveAmount` and `PayableAmount` = `0.00` (free-of-charge supply)
 - `DueDate` omitted — no payment obligation
 
 **Key Features:**
 
 - Document type: `380`, BTAE-02 `01000000`
-- Buyer: FTA Deemed Supply Recipient (dummy endpoint and TRN)
+- Buyer: Example Gift Recipient LLC (predefined endpoint, illustrative TRN)
 - 5 × AED 100.00 promotional gift hampers at 5% VAT; HS code `2106.90.99`
 - PrepaidAmount `525.00` = TaxInclusiveAmount; PayableAmount `0.00`
 
@@ -388,7 +388,7 @@ The PUF-008 scheme code `AE:TIN` is used on `cac:PartyIdentification/cbc:ID`, no
 
 ### TRN Format
 
-UAE Tax Registration Numbers must be exactly 15 digits, start with `1`, and end with `03`. The FTA dummy TRN used for Deemed Supply is `100000000099903`.
+UAE Tax Registration Numbers must be exactly 15 digits, start with `1`, and end with `03`. The Deemed Supply example uses the illustrative TRN `100000000099903`. No official placeholder TRN is published.
 
 The TRN is normally the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID`. For a party with no VAT accounting role in the document — the FTZ Beneficiary (BTAE-01) and the disclosed-agent Principle (BTAE-14), both carried in `puf:RestrictedInformationParty` — it is provided on `cac:PartyIdentification/cbc:ID` with the PUF-008 scheme code `AE:TRN`. A UAE identifier given without a scheme identifier is not processed.
 

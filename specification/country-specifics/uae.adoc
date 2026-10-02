@@ -100,9 +100,11 @@ _Seller with TRN `100000000000003` and the derived Participant Identifier_
 
 A party that is within scope of UAE e-invoicing but not registered for VAT has no TRN. It still has a TIN, obtained by registering with the FTA, and uses that TIN as its Participant Identifier.
 
+Pagero sets the three predefined buyer endpoints under scheme `0235` itself, so they do not need to be sent: `9900000097` on a deemed supply, `9900000099` on an export to a buyer that is not reached over Peppol, and `9900000098` when a UAE buyer has no Participant Identifier on a document that is not an export. `9900000098` means that the buyer has not yet implemented Electronic Invoicing, and the supplier must then also issue a regular tax invoice, for example a PDF (UAE Electronic Invoicing Guidelines V1.1, p.23). A document with a predefined endpoint is reported to the FTA and is not exchanged over Peppol.
+
 ==== Legal registration identifier
 
-UAE requires a legal registration identifier on both seller and buyer. PUF carries this through `cac:PartyLegalEntity/cbc:CompanyID` with the registration type expressed via the standard `@schemeID` attribute. PUF does not use the PINT-AE `@schemeAgencyID` / `@schemeAgencyName` syntax — every UAE identifier flavour has its own PUF-008 scheme code.
+PINT AE requires the seller's legal registration identifier on every document (ibr-150-ae) and the buyer's on a document of type `480` or `81` (ibr-136-ae). PUF carries this through `cac:PartyLegalEntity/cbc:CompanyID` with the registration type expressed via the standard `@schemeID` attribute. PUF does not use the PINT-AE `@schemeAgencyID` / `@schemeAgencyName` syntax — every UAE identifier flavour has its own PUF-008 scheme code.
 
 The four primary types — Trade license, Emirates ID, Passport and Cabinet Decision — and the two supplementary identifiers (Legal Registration Authority, Passport issuing country) are documented here: https://pagero.github.io/puf-code-lists/#_identification_scheme_united_arab_emirates[Identification scheme United Arab Emirates^].
 
@@ -170,6 +172,8 @@ Whenever a UAE address is provided (seller, buyer, delivery, tax representative)
 |===
 
 The Emirate code is provided in `cbc:CountrySubentity` and the country code in `cac:Country/cbc:IdentificationCode = 'AE'`.
+
+The country subdivision itself is mandatory in every seller and buyer address, whatever the country (ibr-143-ae, ibr-144-ae), and in every delivery address that is provided. For an address outside the UAE, give the region, state or province.
 
 ==== Currency and AED amounts
 
@@ -342,22 +346,21 @@ As for the Beneficiary above, the TRN is carried on `cac:PartyIdentification/cbc
 
 ==== Deemed Supply
 
-Deemed supplies (BTAE-02 position 2 set to `1`, e.g. `01000000`) are supplies made without consideration — typically gifts or samples above the FTA de-minimis threshold. Because no buyer exists, PUF uses a set of fixed FTA placeholder values:
+Deemed supplies (BTAE-02 position 2 set to `1`, e.g. `01000000`) are supplies made without consideration — typically gifts or samples above the FTA de-minimis threshold.
 
-* Buyer endpoint ID MUST be `9900000097` (scheme `0235`).
-* Buyer VAT identifier MUST be the FTA dummy TRN: a 15-digit number that starts with `1` and ends with `03` (e.g. `100000000099903`).
-* Because the supply is free of charge, `cbc:PrepaidAmount` MUST equal `cbc:TaxInclusiveAmount`, making `cbc:PayableAmount = 0.00`.
+* The buyer endpoint ID is always `9900000097` (scheme `0235`), whoever the buyer is (UAE Electronic Invoicing Guidelines V1.1, p.25). Pagero sets it, and any endpoint sent in PUF is replaced.
+* A buyer TIN (`cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TIN'`) or buyer TRN (`cac:PartyTaxScheme/cbc:CompanyID`) is still required, because the predefined endpoint is not a TIN (ibr-135-ae). No placeholder value is published for a deemed supply without a recipient.
+* The payment due date (`cbc:DueDate`) and payment means are not required (ibr-127-ae, ibr-191-ae).
 
-The due date (`cbc:DueDate`) SHOULD be omitted for deemed supplies since there is no payment obligation.
+When no invoice is issued to a recipient, the document is only reported to the FTA and is not exchanged.
 
 ==== Exports
 
-Export supplies (BTAE-02 position 8 set to `1`, e.g. `00000001`) are zero-rated supplies of goods or services delivered outside the UAE. Delivery information is mandatory.
+Export supplies (BTAE-02 position 8 set to `1`, e.g. `00000001`) are zero-rated supplies of goods or services delivered outside the UAE.
 
-* Buyer endpoint ID MUST be the predefined non-UAE placeholder `9900000099` (scheme `0235`) when the buyer is not reachable on the Peppol network.
-* The buyer `cac:PostalAddress` country code MUST NOT be `AE`.
-* A `cac:Delivery` block with both `cac:DeliveryLocation/cac:Address` (including country code) and the actual delivery date MUST be present.
-* `cac:DeliveryTerms/cbc:ID` carrying the Incoterms code (BTAE-22) MUST be provided.
+* When the buyer is not reached over Peppol, Pagero sets the buyer endpoint ID to the predefined value `9900000099` (scheme `0235`), so it does not need to be sent in PUF. A buyer that is reached over Peppol keeps its own Participant Identifier and scheme.
+* A `cac:Delivery/cac:DeliveryLocation/cac:Address` with street name, city, country subdivision and country code MUST be present, unless the delivery country is `AE` (ibr-152-ae).
+* The Incoterms code (BTAE-22) is optional. When `cac:DeliveryTerms` is sent, its `cbc:ID` MUST carry the Incoterms code (ibr-196-ae).
 * The applicable VAT category is `Z` (zero rated) — `cbc:Percent = 0.00`.
 
 The customs reference number (BTAE-21) is optional. It is provided as a customs declaration reference, see <<_customs_declaration_reference, Customs declaration reference>>: `cbc:ID` with `@schemeID = 'ED'` (export declaration), or `'ABT'` (import declaration) when the value is an import declaration. PINT AE has a single customs reference field with no declaration type and no date, so only one value reaches the target: the first `ED` reference, otherwise the first `ABT` reference. `cbc:IssueDate` is not used.
@@ -378,9 +381,40 @@ _Customs reference number on an export_
 
 ==== Credit note reason code
 
-When the document is a credit note (`cbc:InvoiceTypeCode = 381` or `cbc:CreditNoteTypeCode = 81`), the credit note reason code (BTAE-03) MUST be provided. The supported values are `DL8.61.1.A` through `DL8.61.1.E` and `VD` (volume discount). See https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates[PUF-023-CORRECTIONCODE (United Arab Emirates)^] for the definition of each code.
+When the document is a credit note (`cbc:CreditNoteTypeCode` `381` or `81`, including a self-billed credit note), the credit note reason code (BTAE-03) MUST be provided. The supported values are `DL8.61.1.A` through `DL8.61.1.E` and `VD` (volume discount). See https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates[PUF-023-CORRECTIONCODE (United Arab Emirates)^] for the definition of each code.
 
-The code is carried on `cac:BillingReference/cac:InvoiceDocumentReference` through the existing `puf:BillingReferenceExtension` (path `puf:BillingReferenceExtension/puf:Code`). When the reason code is `VD`, the preceding-document reference itself is not required.
+The code is carried on `cac:BillingReference/cac:InvoiceDocumentReference` through the existing `puf:BillingReferenceExtension` (path `puf:BillingReferenceExtension/puf:Code`). When the reason code is `VD`, the credit note MUST NOT reference a preceding invoice. Peppol PINT AE rule ibr-055-ae rejects a `VD` credit note that has one, and requires the reference for every other reason code, although the PINT AE text describes it as optional for `VD`. Because PUF carries the code inside `cac:BillingReference`, send `cac:BillingReference` for `VD` only as the carrier of the code: leave `cbc:ID` empty and send no `cbc:IssueDate`.
+
+*Example* +
+_Volume discount credit note without a preceding invoice reference_
+[source,xml]
+----
+<CreditNote>
+  <!-- Code omitted for clarity -->
+  <cbc:CreditNoteTypeCode name="00000000">381</cbc:CreditNoteTypeCode>
+  <!-- Code omitted for clarity -->
+  <cac:BillingReference>
+    <cac:InvoiceDocumentReference>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+          <ext:ExtensionContent>
+            <puf:PageroExtension>
+              <puf:BillingReferenceExtension>
+                <puf:Code>VD</puf:Code><!--1-->
+              </puf:BillingReferenceExtension>
+            </puf:PageroExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:ID/><!--2-->
+    </cac:InvoiceDocumentReference>
+  </cac:BillingReference>
+  <!-- Code omitted for clarity -->
+</CreditNote>
+----
+<1> Credit note reason code (BTAE-03) `VD`.
+<2> Empty preceding document number, so no preceding invoice reference reaches the PINT AE document.
 
 ==== Out of scope of VAT and Credit-note related to goods or services
 
