@@ -4,6 +4,8 @@ For more information on how to send compliant invoices in Philippines see https:
 ==== Corrective Invoice
 When sending a corrective invoice it is required to specify the unique id of the invoice being corrected as well as the reason code. +
 
+The `name` attribute of the invoice type code carries the BIR document type of the corrected document: `01` (Invoice), `02` (Debit Note) or `03` (Credit Note).
+
 The unique id is returned in the https://pagero.github.io/puf-clearance-notification/#_pufresponseextension[PUF Clearance Notification^] as `puf:ClearanceReferenceID/cbc:ID`. +
 
 The supported reason codes are `01` (error), `02` (duplication), `03` (addition/reduction), `04` (cancellation), `05` (return) and `09` (others). See https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_philippines[PUF-023-CORRECTIONCODE (Philippines)^] for the full definition of each code. A code outside this list is not forwarded to the BIR.
@@ -12,12 +14,12 @@ The clearance id and the reason code should be provided within the <<_billingref
 
 *Example* +
 _Correction example. +
-Sales Invoice being corrected for 'other' reason_
+Invoice being corrected for 'other' reason_
 [source,xml]
 ----
 <Invoice>
     <!-- Code omitted for clarity -->
-    <!-- Invoice Type Code 384 and Sales Invoice (SI) code in attribute @name -->
+    <!-- Invoice Type Code 384 and Invoice code in attribute @name -->
     <cbc:InvoiceTypeCode name="01">384</cbc:InvoiceTypeCode><!--1-->
     <!-- Code omitted for clarity -->
     <cac:BillingReference>
@@ -45,16 +47,18 @@ Sales Invoice being corrected for 'other' reason_
     <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> Invoice type code (384, Corrective) and type code attribute (01, Sales Invoice)
+<1> Invoice type code (384, Corrective) and type code attribute (01, Invoice)
 <2> The reason code provided.
 <3> Previous Unique ID (Clearance ID)
 
-==== Withholding VAT
-Witholding Tax amount can be provided on <<_cacwithholdingtaxtotal,header level>> if one of the following `cac:TaxScheme/cbc:ID` is used.
+==== Withholding Tax
+Withholding tax amounts can be provided on <<_cacwithholdingtaxtotal,header level>> if one of the following `cac:TaxScheme/cbc:ID` is used.
 
 * `VAT` (Withholding Tax-Business VAT)
 * `INC` (Withholding Tax-Income Tax)
 * `PER` (Withholding Tax-Business Percentage)
+
+The amount of creditable withholding tax, if applicable, must be shown as a separate item on the invoice (RR No. 6-2026). `cbc:PayableAmount` is the amount to be paid by the buyer after withholding.
 
 ==== Permit To Use (PTU)
 The PTU is the number issued by the Bureau of Internal Revenue allowing taxpayer's use of  Computerized Accounting System (CAS) and must be provided in the <<_restrictedinformation>> with key `Ph_PTU`.
@@ -83,11 +87,14 @@ _PTU example_
 ----
 
 ==== Seller Tax Status
-Seller Tax Status or Seller Type can be either VAT registered or Non-VAT registered. +
-Allowed values: 0 or 1. +
+Seller Tax Status or Seller Type can be VAT registered, Non-VAT registered or Registered Business Enterprise. +
+Allowed values: 0, 1 or 2. +
 
 0 = VAT Registered. +
 1 = Non VAT registered. +
+2 = Registered Business Enterprise. +
+
+Reporting local sales of Registered Business Enterprises as a separate transaction class is not yet supported.
 
 Use the <<_registration_data>> extension to provide this information. Example is provided in <<_party_branch_code>>
 
@@ -134,7 +141,7 @@ _Party Extension_
 ==== Invoice Type
 Available invoice type code values to be used in Philippines can be found here: https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_philippines[Invoice type codes Philippines^].
 
-In addition to providing the invoice type, it is also required to provide an additional code in the `name` attribute. The main reason for this is to enable Corrective Invoice for mulitple invoice types.
+In addition to providing the invoice type, it is also required to provide an additional code in the `name` attribute. The main reason for this is to enable Corrective Invoice for multiple invoice types. A debit note uses the `Invoice` root with type code `383` and `name` `02`.
 
 *Example* +
 _Sales Invoice_
@@ -146,7 +153,7 @@ _Sales Invoice_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> InvoiceTypeCode 380 for "Invoice" provided. Additional type code 01 for "Sales Invoice" in attribute name.
+<1> InvoiceTypeCode 380 for "Invoice" provided. Additional type code 01 for "Invoice" in attribute name.
 
 *Example* +
 _Credit Note_
@@ -154,11 +161,11 @@ _Credit Note_
 ----
 <CreditNote>
   <!-- Code omitted for clarity -->
-  <cbc:InvoiceTypeCode name="03">381</cbc:InvoiceTypeCode><!--1-->
+  <cbc:CreditNoteTypeCode name="03">381</cbc:CreditNoteTypeCode><!--1-->
   <!-- Code omitted for clarity -->
 </CreditNote>
 ----
-<1> InvoiceTypeCode 381 for "Credit Note" provided. Additional type code 03 for "Credit Note" in attribute name.
+<1> CreditNoteTypeCode 381 for "Credit Note" provided. Additional type code 03 for "Credit Note" in attribute name.
 
 *Example* +
 _Correction of Sales Invoice_
@@ -170,7 +177,13 @@ _Correction of Sales Invoice_
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> InvoiceTypeCode 384 for "Corrective Invoice" provided. Additional type code 01 for "Sales Invoice" in attribute name.
+<1> InvoiceTypeCode 384 for "Corrective Invoice" provided. Additional type code 01 for "Invoice" in attribute name.
+
+==== One VAT category per invoice
+An invoice can carry only one VAT category: `S` (VATable), `Z` (zero-rated) or `E` (VAT exempt). A source document that mixes them must be split into separate invoices, each with its own invoice number, before it is sent.
+
+==== Item description
+Provide an item description (`cac:Item/cbc:Description`) on every invoice line, for example size or color, or the nature of the service.
 
 ==== Allowance reason codes
 The following codes are supported for discounts in Philippines.
