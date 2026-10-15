@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <!-- VAT-exempt sale of agricultural food products in their original state. All values are synthetic. -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <!-- Permit To Use (PTU) number of the seller's Computerized Accounting System, issued by the BIR -->
+                    <puf:RestrictedInformation>
+                        <puf:Key>Ph_PTU</puf:Key>
+                        <puf:Value>FP123456-011-0123456-00001</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>PH-2026-000103</cbc:ID>
+    <cbc:IssueDate>2026-10-03</cbc:IssueDate>
+    <cbc:DueDate>2026-11-02</cbc:DueDate>
+    <!-- Invoice: type code 380, BIR document type 01 (Invoice) in @name -->
+    <cbc:InvoiceTypeCode name="01">380</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>PHP</cbc:DocumentCurrencyCode>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <!-- Seller Type: 0 = VAT registered, 1 = Non-VAT registered, 2 = Registered Business Enterprise -->
+                                <puf:RegistrationData>
+                                    <cbc:ID>0</cbc:ID>
+                                    <puf:IDType listID="PUF-001-REGISTRATIONDATA">PH:SellerType</puf:IDType>
+                                </puf:RegistrationData>
+                                <!-- Seller branch code, 5 digits, 00000 for the head office -->
+                                <puf:ADAID>
+                                    <cbc:ID>00000</cbc:ID>
+                                    <puf:IDType listID="PUF-002-ADAID">GEN:UnitCode</puf:IDType>
+                                </puf:ADAID>
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- Seller business or trade name, if any -->
+            <cac:PartyName>
+                <cbc:Name>Halcyon Office Supplies</cbc:Name>
+            </cac:PartyName>
+            <!-- Seller registered address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>Unit 1201, 88 Ayala Avenue</cbc:StreetName>
+                <cbc:CityName>Makati City</cbc:CityName>
+                <cbc:PostalZone>1226</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>PH</cbc:IdentificationCode>
+                    <cbc:Name>Philippines</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- Seller TIN: 9-digit TIN without the branch code -->
+                <cbc:CompanyID>123456789</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>TAX</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- Seller registered name, as registered with the BIR -->
+                <cbc:RegistrationName>Halcyon Trading Corporation</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:ElectronicMail>billing@halcyon.example</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:PartyExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:PartyExtension>
+                                <!-- Buyer branch code, 5 digits, 00000 for the head office -->
+                                <puf:ADAID>
+                                    <cbc:ID>00002</cbc:ID>
+                                    <puf:IDType listID="PUF-002-ADAID">GEN:UnitCode</puf:IDType>
+                                </puf:ADAID>
+                            </puf:PartyExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <!-- Buyer business or trade name, if any -->
+            <cac:PartyName>
+                <cbc:Name>Lakbay Logistics</cbc:Name>
+            </cac:PartyName>
+            <!-- Buyer registered address -->
+            <cac:PostalAddress>
+                <cbc:StreetName>45 Shaw Boulevard</cbc:StreetName>
+                <cbc:CityName>Mandaluyong City</cbc:CityName>
+                <cbc:PostalZone>1552</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>PH</cbc:IdentificationCode>
+                    <cbc:Name>Philippines</cbc:Name>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- Buyer TIN: 9-digit TIN without the branch code -->
+                <cbc:CompanyID>987654321</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>TAX</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <!-- Buyer registered name, as registered with the BIR -->
+                <cbc:RegistrationName>Lakbay Logistics Inc.</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+        <cac:AccountingContact>
+            <cbc:ElectronicMail>ap@lakbay.example</cbc:ElectronicMail>
+        </cac:AccountingContact>
+    </cac:AccountingCustomerParty>
+    <cac:PaymentMeans>
+        <!-- Payment means code: 30 = credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>001234567890</cbc:ID>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="PHP">0.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="PHP">24000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="PHP">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReason>Sale of agricultural food products in their original state (Tax Code Section 109(A))</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="PHP">24000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="PHP">24000.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="PHP">24000.00</cbc:TaxInclusiveAmount>
+        <!-- Amount to be paid by the buyer -->
+        <cbc:PayableAmount currencyID="PHP">24000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <!-- Sales amount before line discounts: quantity x unit price -->
+                            <puf:LineExclAllowanceChargeAmount currencyID="PHP">24000.00</puf:LineExclAllowanceChargeAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="KGM">200</cbc:InvoicedQuantity>
+        <!-- Line net amount after line discounts, without VAT -->
+        <cbc:LineExtensionAmount currencyID="PHP">24000.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <!-- Item description: for example size or color, or the nature of the service -->
+            <cbc:Description>Class A, 10 kg crates</cbc:Description>
+            <!-- Item name -->
+            <cbc:Name>Fresh Carabao mangoes</cbc:Name>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID schemeID="UNCL5305">E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReason>Sale of agricultural food products in their original state (Tax Code Section 109(A))</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <!-- Unit price without VAT -->
+            <cbc:PriceAmount currencyID="PHP">120.00</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

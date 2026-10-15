@@ -800,12 +800,14 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_philippines">5.12. Philippines</a>
 <ul class="sectlevel3">
 <li><a href="#_corrective_invoice">5.12.1. Corrective Invoice</a></li>
-<li><a href="#_withholding_vat">5.12.2. Withholding VAT</a></li>
+<li><a href="#_withholding_tax_2">5.12.2. Withholding Tax</a></li>
 <li><a href="#_permit_to_use_ptu">5.12.3. Permit To Use (PTU)</a></li>
 <li><a href="#_seller_tax_status">5.12.4. Seller Tax Status</a></li>
 <li><a href="#_party_branch_code">5.12.5. Party Branch Code</a></li>
 <li><a href="#_invoice_type">5.12.6. Invoice Type</a></li>
-<li><a href="#_allowance_reason_codes">5.12.7. Allowance reason codes</a></li>
+<li><a href="#_one_vat_category_per_invoice">5.12.7. One VAT category per invoice</a></li>
+<li><a href="#_item_description">5.12.8. Item description</a></li>
+<li><a href="#_allowance_reason_codes">5.12.9. Allowance reason codes</a></li>
 </ul>
 </li>
 <li><a href="#_poland">5.13. Poland</a>
@@ -15976,6 +15978,9 @@ For more information on how to send compliant invoices in Philippines see <a hre
 <p>When sending a corrective invoice it is required to specify the unique id of the invoice being corrected as well as the reason code.<br></p>
 </div>
 <div class="paragraph">
+<p>The <code>name</code> attribute of the invoice type code carries the BIR document type of the corrected document: <code>01</code> (Invoice), <code>02</code> (Debit Note) or <code>03</code> (Credit Note).</p>
+</div>
+<div class="paragraph">
 <p>The unique id is returned in the <a href="https://pagero.github.io/puf-clearance-notification/#_pufresponseextension" target="_blank" rel="noopener">PUF Clearance Notification</a> as <code>puf:ClearanceReferenceID/cbc:ID</code>.<br></p>
 </div>
 <div class="paragraph">
@@ -15987,13 +15992,13 @@ For more information on how to send compliant invoices in Philippines see <a hre
 <div class="paragraph">
 <p><strong>Example</strong><br>
 <em>Correction example.<br>
-Sales Invoice being corrected for 'other' reason</em></p>
+Invoice being corrected for 'other' reason</em></p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-    <span class="comment">&lt;!-- Invoice Type Code 384 and Sales Invoice (SI) code in attribute @name --&gt;</span>
+    <span class="comment">&lt;!-- Invoice Type Code 384 and Invoice code in attribute @name --&gt;</span>
     <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">01</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>384<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
     <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
     <span class="tag">&lt;cac:BillingReference&gt;</span>
@@ -16026,7 +16031,7 @@ Sales Invoice being corrected for 'other' reason</em></p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Invoice type code (384, Corrective) and type code attribute (01, Sales Invoice)</td>
+<td>Invoice type code (384, Corrective) and type code attribute (01, Invoice)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -16040,9 +16045,9 @@ Sales Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_withholding_vat"><a class="anchor" href="#_withholding_vat"></a><a class="link" href="#_withholding_vat">5.12.2. Withholding VAT</a></h4>
+<h4 id="_withholding_tax_2"><a class="anchor" href="#_withholding_tax_2"></a><a class="link" href="#_withholding_tax_2">5.12.2. Withholding Tax</a></h4>
 <div class="paragraph">
-<p>Witholding Tax amount can be provided on <a href="#_cacwithholdingtaxtotal">header level</a> if one of the following <code>cac:TaxScheme/cbc:ID</code> is used.</p>
+<p>Withholding tax amounts can be provided on <a href="#_cacwithholdingtaxtotal">header level</a> if one of the following <code>cac:TaxScheme/cbc:ID</code> is used.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -16056,6 +16061,9 @@ Sales Invoice being corrected for 'other' reason</em></p>
 <p><code>PER</code> (Withholding Tax-Business Percentage)</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The amount of creditable withholding tax, if applicable, must be shown as a separate item on the invoice (RR No. 6-2026). <code>cbc:PayableAmount</code> is the amount to be paid by the buyer after withholding.</p>
 </div>
 </div>
 <div class="sect3">
@@ -16092,12 +16100,16 @@ Sales Invoice being corrected for 'other' reason</em></p>
 <div class="sect3">
 <h4 id="_seller_tax_status"><a class="anchor" href="#_seller_tax_status"></a><a class="link" href="#_seller_tax_status">5.12.4. Seller Tax Status</a></h4>
 <div class="paragraph">
-<p>Seller Tax Status or Seller Type can be either VAT registered or Non-VAT registered.<br>
-Allowed values: 0 or 1.<br></p>
+<p>Seller Tax Status or Seller Type can be VAT registered, Non-VAT registered or Registered Business Enterprise.<br>
+Allowed values: 0, 1 or 2.<br></p>
 </div>
 <div class="paragraph">
 <p>0 = VAT Registered.<br>
-1 = Non VAT registered.<br></p>
+1 = Non VAT registered.<br>
+2 = Registered Business Enterprise.<br></p>
+</div>
+<div class="paragraph">
+<p>Reporting local sales of Registered Business Enterprises as a separate transaction class is not yet supported.</p>
 </div>
 <div class="paragraph">
 <p>Use the <a href="#_registration_data">Registration data</a> extension to provide this information. Example is provided in <a href="#_party_branch_code">Party Branch Code</a></p>
@@ -16164,7 +16176,7 @@ Allowed values: 0 or 1.<br></p>
 <p>Available invoice type code values to be used in Philippines can be found here: <a href="https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_philippines" target="_blank" rel="noopener">Invoice type codes Philippines</a>.</p>
 </div>
 <div class="paragraph">
-<p>In addition to providing the invoice type, it is also required to provide an additional code in the <code>name</code> attribute. The main reason for this is to enable Corrective Invoice for mulitple invoice types.</p>
+<p>In addition to providing the invoice type, it is also required to provide an additional code in the <code>name</code> attribute. The main reason for this is to enable Corrective Invoice for multiple invoice types. A debit note uses the <code>Invoice</code> root with type code <code>383</code> and <code>name</code> <code>02</code>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
@@ -16183,7 +16195,7 @@ Allowed values: 0 or 1.<br></p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>InvoiceTypeCode 380 for "Invoice" provided. Additional type code 01 for "Sales Invoice" in attribute name.</td>
+<td>InvoiceTypeCode 380 for "Invoice" provided. Additional type code 01 for "Invoice" in attribute name.</td>
 </tr>
 </table>
 </div>
@@ -16195,7 +16207,7 @@ Allowed values: 0 or 1.<br></p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;CreditNote&gt;</span>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
-  <span class="tag">&lt;cbc:InvoiceTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">03</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>381<span class="tag">&lt;/cbc:InvoiceTypeCode&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="tag">&lt;cbc:CreditNoteTypeCode</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">03</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>381<span class="tag">&lt;/cbc:CreditNoteTypeCode&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
   <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
 <span class="tag">&lt;/CreditNote&gt;</span></code></pre>
 </div>
@@ -16204,7 +16216,7 @@ Allowed values: 0 or 1.<br></p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>InvoiceTypeCode 381 for "Credit Note" provided. Additional type code 03 for "Credit Note" in attribute name.</td>
+<td>CreditNoteTypeCode 381 for "Credit Note" provided. Additional type code 03 for "Credit Note" in attribute name.</td>
 </tr>
 </table>
 </div>
@@ -16225,13 +16237,25 @@ Allowed values: 0 or 1.<br></p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>InvoiceTypeCode 384 for "Corrective Invoice" provided. Additional type code 01 for "Sales Invoice" in attribute name.</td>
+<td>InvoiceTypeCode 384 for "Corrective Invoice" provided. Additional type code 01 for "Invoice" in attribute name.</td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_allowance_reason_codes"><a class="anchor" href="#_allowance_reason_codes"></a><a class="link" href="#_allowance_reason_codes">5.12.7. Allowance reason codes</a></h4>
+<h4 id="_one_vat_category_per_invoice"><a class="anchor" href="#_one_vat_category_per_invoice"></a><a class="link" href="#_one_vat_category_per_invoice">5.12.7. One VAT category per invoice</a></h4>
+<div class="paragraph">
+<p>An invoice can carry only one VAT category: <code>S</code> (VATable), <code>Z</code> (zero-rated) or <code>E</code> (VAT exempt). A source document that mixes them must be split into separate invoices, each with its own invoice number, before it is sent.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_item_description"><a class="anchor" href="#_item_description"></a><a class="link" href="#_item_description">5.12.8. Item description</a></h4>
+<div class="paragraph">
+<p>Provide an item description (<code>cac:Item/cbc:Description</code>) on every invoice line, for example size or color, or the nature of the service.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_allowance_reason_codes"><a class="anchor" href="#_allowance_reason_codes"></a><a class="link" href="#_allowance_reason_codes">5.12.9. Allowance reason codes</a></h4>
 <div class="paragraph">
 <p>The following codes are supported for discounts in Philippines.</p>
 </div>
