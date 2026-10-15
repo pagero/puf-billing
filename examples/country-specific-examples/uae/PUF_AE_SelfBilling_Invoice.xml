@@ -30,10 +30,10 @@
     - BTAE-13 Item type G with HS 7204.49.00 (ferrous waste and scrap)
 
     Note on the target mapping: the transformation to PINT AE applies type code 389
-    (self-billed invoice) and the CustomizationID urn:peppol:pint:selfbilling-1@ae-1
-    automatically. The specification identifier must start with either
-    urn:peppol:pint:billing-1@ae-1 or urn:peppol:pint:selfbilling-1@ae-1
-    (aligned-ibrp-001-ae), so the correct value is chosen at transformation time.
+    (self-billed invoice) and the PINT AE self-billing specification identifier
+    automatically. The target specification identifier must be either the PINT AE
+    billing or the PINT AE self-billing value (aligned-ibrp-001-ae), so the correct
+    value is chosen at transformation time.
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026);
                Peppol PINT BIS Self-Billing AE 1.0.4
