@@ -19,8 +19,8 @@
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
     <cbc:ID>PH-2026-CN-000021</cbc:ID>
     <cbc:IssueDate>2026-10-09</cbc:IssueDate>
-    <!-- Credit note: type code 381, BIR document type 03 (Credit Memo / Credit Note) in @name -->
-    <cbc:CreditNoteTypeCode name="03">381</cbc:CreditNoteTypeCode>
+    <!-- Credit note: type code 381, reported to the BIR as document type 03 (Credit Memo / Credit Note) and as a correction -->
+    <cbc:CreditNoteTypeCode>381</cbc:CreditNoteTypeCode>
     <cbc:DocumentCurrencyCode>PHP</cbc:DocumentCurrencyCode>
     <!-- The invoice the credit note corrects. A credit note is a correction, so it carries the reason code and the unique ID of that invoice -->
     <cac:BillingReference>

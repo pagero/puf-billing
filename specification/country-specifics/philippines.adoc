@@ -6,8 +6,6 @@ A corrective invoice is a new invoice that corrects or adds to an issued invoice
 
 When sending a corrective invoice it is required to specify the unique id of the invoice being corrected as well as the reason code. +
 
-The `name` attribute of the invoice type code is `01` (Invoice).
-
 The unique id is returned in the https://pagero.github.io/puf-clearance-notification/#_pufresponseextension[PUF Clearance Notification^] as `puf:ClearanceReferenceID/cbc:ID`. If the corrected document is not managed in the Computerized Accounting System (CAS), provide 24 zeros (`000000000000000000000000`) as the unique id, as described for the `PrevUniqueId` field of the BIR EIS e-invoice JSON File Format v2.1. +
 
 The supported reason codes are `01` (error), `02` (duplication), `03` (addition/reduction), `04` (cancellation), `05` (return) and `09` (others). See https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_philippines[PUF-023-CORRECTIONCODE (Philippines)^] for the full definition of each code. A code outside this list is not forwarded to the BIR.
@@ -21,8 +19,8 @@ Invoice being corrected for 'other' reason_
 ----
 <Invoice>
     <!-- Code omitted for clarity -->
-    <!-- Invoice Type Code 384 and Invoice code in attribute @name -->
-    <cbc:InvoiceTypeCode name="01">384</cbc:InvoiceTypeCode><!--1-->
+    <!-- Invoice Type Code 384 (Corrective Invoice) -->
+    <cbc:InvoiceTypeCode>384</cbc:InvoiceTypeCode><!--1-->
     <!-- Code omitted for clarity -->
     <cac:BillingReference>
         <cac:InvoiceDocumentReference>
@@ -49,7 +47,7 @@ Invoice being corrected for 'other' reason_
     <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> Invoice type code (384, Corrective) and type code attribute (01, Invoice)
+<1> Invoice type code 384 (Corrective Invoice)
 <2> The reason code provided.
 <3> Previous Unique ID (Clearance ID)
 
@@ -62,7 +60,7 @@ _Credit note for returned goods_
 ----
 <CreditNote>
     <!-- Code omitted for clarity -->
-    <cbc:CreditNoteTypeCode name="03">381</cbc:CreditNoteTypeCode><!--1-->
+    <cbc:CreditNoteTypeCode>381</cbc:CreditNoteTypeCode><!--1-->
     <!-- Code omitted for clarity -->
     <cac:BillingReference>
         <cac:InvoiceDocumentReference>
@@ -87,7 +85,7 @@ _Credit note for returned goods_
     <!-- Code omitted for clarity -->
 </CreditNote>
 ----
-<1> Credit note type code (381) and type code attribute (03, Credit Note)
+<1> Credit note type code 381
 <2> The reason code provided, `05` (return).
 <3> Previous Unique ID (Clearance ID) of the invoice being corrected
 
@@ -179,47 +177,32 @@ _Party Extension_
 <2> Party Branch Code is specified in `puf:ADAID`
 
 ==== Invoice Type
-Available invoice type code values to be used in Philippines can be found here: https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_philippines[Invoice type codes Philippines^].
+The type code alone decides how a document is reported to the BIR. The `name` attribute of the type code is not used.
 
-In addition to providing the invoice type, it is also required to provide the BIR document type in the `name` attribute.
+|===
+|Document |Type code |BIR document type |Reported as a correction
+
+|Invoice
+|`380`
+|`01` (Invoice)
+|No
+
+|Credit Note
+|`381` (`CreditNote` root)
+|`03` (Credit Memo / Credit Note)
+|Yes
+
+|Corrective Invoice
+|`384`
+|`01` (Invoice)
+|Yes
+|===
+
+A document reported as a correction must carry the reason code and the unique id of the invoice it corrects, see <<_corrective_invoice>> and <<_credit_note>>. An invoice (`380`) with a negative total is reported as a credit note, so send a decrease as a credit note (`381`).
 
 The Debit Note is no longer a BIR document type: the BIR EIS e-invoice JSON File Format v2.1 removes it (Revision History, version 2.1, and the CAS document type list of 2026-09-26). An increase to an issued invoice is made with a new invoice that refers to it (RMC No. 098-2026, section IV.8), sent as a <<_corrective_invoice,corrective invoice>>.
 
-*Example* +
-_Sales Invoice_
-[source,xml]
-----
-<Invoice>
-  <!-- Code omitted for clarity -->
-  <cbc:InvoiceTypeCode name="01">380</cbc:InvoiceTypeCode><!--1-->
-  <!-- Code omitted for clarity -->
-</Invoice>
-----
-<1> InvoiceTypeCode 380 for "Invoice" provided. Additional type code 01 for "Invoice" in attribute name.
-
-*Example* +
-_Credit Note_
-[source,xml]
-----
-<CreditNote>
-  <!-- Code omitted for clarity -->
-  <cbc:CreditNoteTypeCode name="03">381</cbc:CreditNoteTypeCode><!--1-->
-  <!-- Code omitted for clarity -->
-</CreditNote>
-----
-<1> CreditNoteTypeCode 381 for "Credit Note" provided. Additional type code 03 for "Credit Note" in attribute name.
-
-*Example* +
-_Correction of Sales Invoice_
-[source,xml]
-----
-<Invoice>
-  <!-- Code omitted for clarity -->
-  <cbc:InvoiceTypeCode name="01">384</cbc:InvoiceTypeCode><!--1-->
-  <!-- Code omitted for clarity -->
-</Invoice>
-----
-<1> InvoiceTypeCode 384 for "Corrective Invoice" provided. Additional type code 01 for "Invoice" in attribute name.
+The codes are also listed in https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_philippines[Invoice type codes for Philippines^].
 
 ==== One VAT category per invoice
 An invoice can carry only one VAT category: `S` (VATable), `Z` (zero-rated) or `E` (VAT exempt). A source document that mixes them must be split into separate invoices, each with its own invoice number, before it is sent.

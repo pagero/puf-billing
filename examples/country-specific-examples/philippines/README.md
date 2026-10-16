@@ -8,19 +8,21 @@ bank details.
 
 ## Examples
 
-| File | Scenario | Document type (@name) | Net / VAT / Payable (PHP) |
+| File | Scenario | Type code: BIR document type, correction | Net / VAT / Payable (PHP) |
 |---|---|---|---|
-| [PUF_Philippines_Invoice.xml](PUF_Philippines_Invoice.xml) | VATable sale of goods with a line discount and a document-level regular discount | 380 (01) | 4200.00 / 504.00 / 4704.00 |
-| [PUF_Philippines_Invoice_Withholding.xml](PUF_Philippines_Invoice_Withholding.xml) | VATable services; the buyer withholds creditable income tax (`INC`) | 380 (01) | 50000.00 / 6000.00 / 55000.00 |
-| [PUF_Philippines_Invoice_Exempt.xml](PUF_Philippines_Invoice_Exempt.xml) | VAT-exempt sale of agricultural food products in their original state | 380 (01) | 24000.00 / 0.00 / 24000.00 |
-| [PUF_Philippines_Invoice_Export.xml](PUF_Philippines_Invoice_Export.xml) | Zero-rated export to a buyer not registered with the BIR, with airway bill, bill of lading and delivery address | 380 (01) | 500000.00 / 0.00 / 500000.00 |
-| [PUF_Philippines_CreditNote.xml](PUF_Philippines_CreditNote.xml) | Credit note for goods returned from PH-2026-000101, reason `05` (Return) | 381 (03) | 480.00 / 57.60 / 537.60 |
-| [PUF_Philippines_Corrective_Invoice.xml](PUF_Philippines_Corrective_Invoice.xml) | Corrective invoice for one filing cabinet delivered in addition to PH-2026-000101, reason `03` (Addition/reduction) | 384 (01) | 500.00 / 60.00 / 560.00 |
+| [PUF_Philippines_Invoice.xml](PUF_Philippines_Invoice.xml) | VATable sale of goods with a line discount and a document-level regular discount | 380: 01, no | 4200.00 / 504.00 / 4704.00 |
+| [PUF_Philippines_Invoice_Withholding.xml](PUF_Philippines_Invoice_Withholding.xml) | VATable services; the buyer withholds creditable income tax (`INC`) | 380: 01, no | 50000.00 / 6000.00 / 55000.00 |
+| [PUF_Philippines_Invoice_Exempt.xml](PUF_Philippines_Invoice_Exempt.xml) | VAT-exempt sale of agricultural food products in their original state | 380: 01, no | 24000.00 / 0.00 / 24000.00 |
+| [PUF_Philippines_Invoice_Export.xml](PUF_Philippines_Invoice_Export.xml) | Zero-rated export to a buyer not registered with the BIR, with airway bill, bill of lading and delivery address | 380: 01, no | 500000.00 / 0.00 / 500000.00 |
+| [PUF_Philippines_CreditNote.xml](PUF_Philippines_CreditNote.xml) | Credit note for goods returned from PH-2026-000101, reason `05` (Return) | 381: 03, yes | 480.00 / 57.60 / 537.60 |
+| [PUF_Philippines_Corrective_Invoice.xml](PUF_Philippines_Corrective_Invoice.xml) | Corrective invoice for one filing cabinet delivered in addition to PH-2026-000101, reason `03` (Addition/reduction) | 384: 01, yes | 500.00 / 60.00 / 560.00 |
 
 ## Input Conventions
 
-- The `name` attribute of the type code carries the BIR document type: `01` Invoice,
-  `03` Credit Note. A corrective invoice (384) is an invoice and carries `01`.
+- The type code alone decides how a document is reported to the BIR: 380 and 384 as
+  document type `01` (Invoice), 381 as `03` (Credit Memo / Credit Note). The credit note
+  and the corrective invoice are reported as corrections. The type code `name` attribute
+  is not used.
 - There is no debit note example. The BIR no longer lists the debit note as a document
   type. An increase to an issued invoice is a new invoice that refers to it, sent as a
   corrective invoice; a decrease is a credit note.

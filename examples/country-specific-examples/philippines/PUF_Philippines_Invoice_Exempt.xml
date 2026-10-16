@@ -20,8 +20,8 @@
     <cbc:ID>PH-2026-000103</cbc:ID>
     <cbc:IssueDate>2026-10-03</cbc:IssueDate>
     <cbc:DueDate>2026-11-02</cbc:DueDate>
-    <!-- Invoice: type code 380, BIR document type 01 (Invoice) in @name -->
-    <cbc:InvoiceTypeCode name="01">380</cbc:InvoiceTypeCode>
+    <!-- Invoice: type code 380, reported to the BIR as document type 01 (Invoice) -->
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
     <cbc:DocumentCurrencyCode>PHP</cbc:DocumentCurrencyCode>
     <cac:AccountingSupplierParty>
         <cac:Party>

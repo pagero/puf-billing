@@ -20,8 +20,8 @@
     <cbc:ID>PH-2026-000110</cbc:ID>
     <cbc:IssueDate>2026-10-10</cbc:IssueDate>
     <cbc:DueDate>2026-11-09</cbc:DueDate>
-    <!-- Corrective invoice: type code 384, BIR document type 01 (Invoice) in @name -->
-    <cbc:InvoiceTypeCode name="01">384</cbc:InvoiceTypeCode>
+    <!-- Corrective invoice: type code 384, reported to the BIR as document type 01 (Invoice) and as a correction -->
+    <cbc:InvoiceTypeCode>384</cbc:InvoiceTypeCode>
     <cbc:DocumentCurrencyCode>PHP</cbc:DocumentCurrencyCode>
     <!-- The invoice the additional sale adjusts -->
     <cac:BillingReference>
