@@ -15,15 +15,15 @@ bank details.
 | [PUF_Philippines_Invoice_Exempt.xml](PUF_Philippines_Invoice_Exempt.xml) | VAT-exempt sale of agricultural food products in their original state | 380 (01) | 24000.00 / 0.00 / 24000.00 |
 | [PUF_Philippines_Invoice_Export.xml](PUF_Philippines_Invoice_Export.xml) | Zero-rated export to a buyer not registered with the BIR, with airway bill, bill of lading and delivery address | 380 (01) | 500000.00 / 0.00 / 500000.00 |
 | [PUF_Philippines_CreditNote.xml](PUF_Philippines_CreditNote.xml) | Credit note for goods returned from PH-2026-000101, reason `05` (Return) | 381 (03) | 480.00 / 57.60 / 537.60 |
-| [PUF_Philippines_Corrective_Invoice.xml](PUF_Philippines_Corrective_Invoice.xml) | Corrective invoice re-issuing PH-2026-000101 with a corrected quantity, reason `01` (Error) | 384 (01) | 3700.00 / 444.00 / 4144.00 |
+| [PUF_Philippines_Corrective_Invoice.xml](PUF_Philippines_Corrective_Invoice.xml) | Corrective invoice for one filing cabinet delivered in addition to PH-2026-000101, reason `03` (Addition/reduction) | 384 (01) | 500.00 / 60.00 / 560.00 |
 
 ## Input Conventions
 
 - The `name` attribute of the type code carries the BIR document type: `01` Invoice,
-  `03` Credit Note. A corrective invoice (384) carries the type of the document it
-  corrects.
+  `03` Credit Note. A corrective invoice (384) is an invoice and carries `01`.
 - There is no debit note example. The BIR no longer lists the debit note as a document
-  type, and an increase to an issued invoice is made with a new invoice.
+  type. An increase to an issued invoice is a new invoice that refers to it, sent as a
+  corrective invoice; a decrease is a credit note.
 - Each example carries one VAT category. Split a source document with VATable,
   zero-rated and exempt sales into separate invoices with their own numbers.
 - The line sales amount before discounts (quantity x unit price) is in the
@@ -43,9 +43,10 @@ bank details.
 | Claim | Value in the examples | Authority | Locator |
 |---|---|---|---|
 | Document types | 01 Invoice and 03 Credit Memo / Credit Note; Debit Memo / Debit Note removed | BIR EIS e-invoice JSON File Format v2.1 (CAS sheet revised 2026-09-26) | CAS sheet, No. 4 Document Type; Revision History, version 2.1 ("Removed DM/DN") |
-| Increase to an issued invoice | Made with a new invoice, so no debit note example | RMC No. 098-2026 | Section IV.8 |
+| Increase to an issued invoice | A new invoice that refers to the original (the corrective invoice), so no debit note example | RMC No. 098-2026 | Section IV.8 |
+| Invoice for added sales | Flagged as a correction with reason 03 and the unique ID of the original | BIR EIS e-invoice JSON File Format v2.1 | Correction annex, hidden in v2.1, code 03 procedure (A) |
 | Credit note is a correction | The credit note refers to the invoice it reduces | RMC No. 098-2026 | Sections II.2 and IV.8 |
-| Correction reason and reference | Codes 01 (Error) and 05 (Return), 24-character unique ID of the corrected invoice | BIR EIS e-invoice JSON File Format v2.1 | CAS sheet, No. 3, 6, 7 and 8; Correction Scenarios sheet, hidden in v2.1 (every credit memo is sent as a correction) |
+| Correction reason and reference | Codes 03 (Addition/reduction) and 05 (Return), 24-character unique ID of the corrected invoice | BIR EIS e-invoice JSON File Format v2.1 | CAS sheet, No. 3, 6, 7 and 8; Correction Scenarios sheet, hidden in v2.1 (every credit memo is sent as a correction) |
 | Seller type | 0 VAT registered (1 Non-VAT registered and 2 Registered Business Enterprise also allowed) | Same | CAS sheet, No. 12 |
 | Branch code and TIN | 5-digit branch code, 9-digit TIN, `000000000` for an unregistered buyer | Same | CAS sheet, No. 10, 11 and 17 |
 | Item description | Provided on every line | Same | CAS sheet, No. 29 |

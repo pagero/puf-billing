@@ -2,9 +2,11 @@ This section contains information about special requirements concerning invoicin
 For more information on how to send compliant invoices in Philippines see https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/philippines[example files^].
 
 ==== Corrective Invoice
+A corrective invoice is a new invoice that corrects or adds to an issued invoice and refers to it, for example an increase in the invoiced amount (RMC No. 098-2026, section IV.8). A decrease is made with a credit note, see <<_credit_note>>.
+
 When sending a corrective invoice it is required to specify the unique id of the invoice being corrected as well as the reason code. +
 
-The `name` attribute of the invoice type code carries the BIR document type of the corrected document: `01` (Invoice) or `03` (Credit Note).
+The `name` attribute of the invoice type code is `01` (Invoice).
 
 The unique id is returned in the https://pagero.github.io/puf-clearance-notification/#_pufresponseextension[PUF Clearance Notification^] as `puf:ClearanceReferenceID/cbc:ID`. If the corrected document is not managed in the Computerized Accounting System (CAS), provide 24 zeros (`000000000000000000000000`) as the unique id, as described for the `PrevUniqueId` field of the BIR EIS e-invoice JSON File Format v2.1. +
 
@@ -179,9 +181,9 @@ _Party Extension_
 ==== Invoice Type
 Available invoice type code values to be used in Philippines can be found here: https://pagero.github.io/puf-code-lists/#_invoice_type_codes_for_philippines[Invoice type codes Philippines^].
 
-In addition to providing the invoice type, it is also required to provide an additional code in the `name` attribute. The main reason for this is to enable Corrective Invoice for multiple invoice types.
+In addition to providing the invoice type, it is also required to provide the BIR document type in the `name` attribute.
 
-The Debit Note is no longer a BIR document type: the BIR EIS e-invoice JSON File Format v2.1 removes it (Revision History, version 2.1, and the CAS document type list of 2026-09-26). An increase to an issued invoice is made with a new invoice (RMC No. 098-2026, section IV.8).
+The Debit Note is no longer a BIR document type: the BIR EIS e-invoice JSON File Format v2.1 removes it (Revision History, version 2.1, and the CAS document type list of 2026-09-26). An increase to an issued invoice is made with a new invoice that refers to it (RMC No. 098-2026, section IV.8), sent as a <<_corrective_invoice,corrective invoice>>.
 
 *Example* +
 _Sales Invoice_
