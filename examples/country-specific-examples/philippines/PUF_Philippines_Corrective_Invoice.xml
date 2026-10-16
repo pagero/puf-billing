@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
-    <!-- Corrective invoice re-issuing invoice PH-2026-000101, whose filing cabinet quantity was wrong. All values are synthetic. -->
+    <!-- Corrective invoice for one filing cabinet delivered in addition to invoice PH-2026-000101. An increase to an issued invoice is a new invoice that references it (RMC No. 098-2026 IV.8). All values are synthetic. -->
     <ext:UBLExtensions>
         <ext:UBLExtension>
             <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
@@ -20,10 +20,10 @@
     <cbc:ID>PH-2026-000110</cbc:ID>
     <cbc:IssueDate>2026-10-10</cbc:IssueDate>
     <cbc:DueDate>2026-11-09</cbc:DueDate>
-    <!-- Corrective invoice: type code 384, BIR document type of the corrected document (01 Invoice) in @name -->
-    <cbc:InvoiceTypeCode name="01">384</cbc:InvoiceTypeCode>
+    <!-- Corrective invoice: type code 384, reported to the BIR as document type 01 (Invoice) and as a correction -->
+    <cbc:InvoiceTypeCode>384</cbc:InvoiceTypeCode>
     <cbc:DocumentCurrencyCode>PHP</cbc:DocumentCurrencyCode>
-    <!-- The invoice being corrected -->
+    <!-- The invoice the additional sale adjusts -->
     <cac:BillingReference>
         <cac:InvoiceDocumentReference>
             <ext:UBLExtensions>
@@ -33,9 +33,9 @@
                         <puf:PageroExtension>
                             <puf:BillingReferenceExtension>
                                 <!-- Explanation of the correction -->
-                                <cbc:Note>Quantity of filing cabinets corrected from 4 to 3</cbc:Note>
-                                <!-- Correction reason code, see PUF-023-CORRECTIONCODE: 01 = Error -->
-                                <puf:Code>01</puf:Code>
+                                <cbc:Note>One additional filing cabinet delivered</cbc:Note>
+                                <!-- Correction reason code, see PUF-023-CORRECTIONCODE: 03 = Addition/reduction -->
+                                <puf:Code>03</puf:Code>
                                 <!-- 24-character BIR e-invoice unique ID of the invoice being corrected, as returned in the Clearance Notification -->
                                 <puf:ClearanceID>2026100120123456K7Q2M9X4</puf:ClearanceID>
                             </puf:BillingReferenceExtension>
@@ -155,25 +155,11 @@
             <cbc:ID>001234567890</cbc:ID>
         </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>
-    <!-- Document-level discount: 104 = Standard/Regular, 100 = Special, SC = Senior Citizen, PWD = Person With Disability -->
-    <cac:AllowanceCharge>
-        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
-        <cbc:AllowanceChargeReasonCode>104</cbc:AllowanceChargeReasonCode>
-        <cbc:AllowanceChargeReason>Volume discount</cbc:AllowanceChargeReason>
-        <cbc:Amount currencyID="PHP">200.00</cbc:Amount>
-        <cac:TaxCategory>
-            <cbc:ID>S</cbc:ID>
-            <cbc:Percent>12</cbc:Percent>
-            <cac:TaxScheme>
-                <cbc:ID>VAT</cbc:ID>
-            </cac:TaxScheme>
-        </cac:TaxCategory>
-    </cac:AllowanceCharge>
     <cac:TaxTotal>
-        <cbc:TaxAmount currencyID="PHP">444.00</cbc:TaxAmount>
+        <cbc:TaxAmount currencyID="PHP">60.00</cbc:TaxAmount>
         <cac:TaxSubtotal>
-            <cbc:TaxableAmount currencyID="PHP">3700.00</cbc:TaxableAmount>
-            <cbc:TaxAmount currencyID="PHP">444.00</cbc:TaxAmount>
+            <cbc:TaxableAmount currencyID="PHP">500.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="PHP">60.00</cbc:TaxAmount>
             <cac:TaxCategory>
                 <cbc:ID>S</cbc:ID>
                 <cbc:Percent>12</cbc:Percent>
@@ -184,12 +170,11 @@
         </cac:TaxSubtotal>
     </cac:TaxTotal>
     <cac:LegalMonetaryTotal>
-        <cbc:LineExtensionAmount currencyID="PHP">3900.00</cbc:LineExtensionAmount>
-        <cbc:TaxExclusiveAmount currencyID="PHP">3700.00</cbc:TaxExclusiveAmount>
-        <cbc:TaxInclusiveAmount currencyID="PHP">4144.00</cbc:TaxInclusiveAmount>
-        <cbc:AllowanceTotalAmount currencyID="PHP">200.00</cbc:AllowanceTotalAmount>
+        <cbc:LineExtensionAmount currencyID="PHP">500.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="PHP">500.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="PHP">560.00</cbc:TaxInclusiveAmount>
         <!-- Amount to be paid by the buyer -->
-        <cbc:PayableAmount currencyID="PHP">4144.00</cbc:PayableAmount>
+        <cbc:PayableAmount currencyID="PHP">560.00</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>
     <cac:InvoiceLine>
         <ext:UBLExtensions>
@@ -199,58 +184,16 @@
                     <puf:PageroExtension>
                         <puf:LineExtension>
                             <!-- Sales amount before line discounts: quantity x unit price -->
-                            <puf:LineExclAllowanceChargeAmount currencyID="PHP">2500.00</puf:LineExclAllowanceChargeAmount>
+                            <puf:LineExclAllowanceChargeAmount currencyID="PHP">500.00</puf:LineExclAllowanceChargeAmount>
                         </puf:LineExtension>
                     </puf:PageroExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
         </ext:UBLExtensions>
         <cbc:ID>1</cbc:ID>
-        <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
         <!-- Line net amount after line discounts, without VAT -->
-        <cbc:LineExtensionAmount currencyID="PHP">2400.00</cbc:LineExtensionAmount>
-        <!-- Line discount: 104 = Standard/Regular, 100 = Special -->
-        <cac:AllowanceCharge>
-            <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
-            <cbc:AllowanceChargeReasonCode>104</cbc:AllowanceChargeReasonCode>
-            <cbc:Amount currencyID="PHP">100.00</cbc:Amount>
-        </cac:AllowanceCharge>
-        <cac:Item>
-            <!-- Item description: for example size or color, or the nature of the service -->
-            <cbc:Description>Mesh back, black</cbc:Description>
-            <!-- Item name -->
-            <cbc:Name>ErgoPlus office chair</cbc:Name>
-            <cac:ClassifiedTaxCategory>
-                <cbc:ID schemeID="UNCL5305">S</cbc:ID>
-                <cbc:Percent>12</cbc:Percent>
-                <cac:TaxScheme>
-                    <cbc:ID>VAT</cbc:ID>
-                </cac:TaxScheme>
-            </cac:ClassifiedTaxCategory>
-        </cac:Item>
-        <cac:Price>
-            <!-- Unit price without VAT -->
-            <cbc:PriceAmount currencyID="PHP">250.00</cbc:PriceAmount>
-        </cac:Price>
-    </cac:InvoiceLine>
-    <cac:InvoiceLine>
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
-                <ext:ExtensionContent>
-                    <puf:PageroExtension>
-                        <puf:LineExtension>
-                            <!-- Sales amount before line discounts: quantity x unit price -->
-                            <puf:LineExclAllowanceChargeAmount currencyID="PHP">1500.00</puf:LineExclAllowanceChargeAmount>
-                        </puf:LineExtension>
-                    </puf:PageroExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
-        <cbc:ID>2</cbc:ID>
-        <cbc:InvoicedQuantity unitCode="EA">3</cbc:InvoicedQuantity>
-        <!-- Line net amount after line discounts, without VAT -->
-        <cbc:LineExtensionAmount currencyID="PHP">1500.00</cbc:LineExtensionAmount>
+        <cbc:LineExtensionAmount currencyID="PHP">500.00</cbc:LineExtensionAmount>
         <cac:Item>
             <!-- Item description: for example size or color, or the nature of the service -->
             <cbc:Description>Four drawers, grey</cbc:Description>

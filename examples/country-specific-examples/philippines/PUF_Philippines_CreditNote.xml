@@ -19,12 +19,29 @@
     <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
     <cbc:ID>PH-2026-CN-000021</cbc:ID>
     <cbc:IssueDate>2026-10-09</cbc:IssueDate>
-    <!-- Credit note: type code 381, BIR document type 03 (Credit Memo / Credit Note) in @name -->
-    <cbc:CreditNoteTypeCode name="03">381</cbc:CreditNoteTypeCode>
+    <!-- Credit note: type code 381, reported to the BIR as document type 03 (Credit Memo / Credit Note) and as a correction -->
+    <cbc:CreditNoteTypeCode>381</cbc:CreditNoteTypeCode>
     <cbc:DocumentCurrencyCode>PHP</cbc:DocumentCurrencyCode>
-    <!-- The invoice the credit note refers to -->
+    <!-- The invoice the credit note corrects. A credit note is a correction, so it carries the reason code and the unique ID of that invoice -->
     <cac:BillingReference>
         <cac:InvoiceDocumentReference>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:BillingReferenceExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:BillingReferenceExtension>
+                                <!-- Explanation of the correction -->
+                                <cbc:Note>Two chairs returned</cbc:Note>
+                                <!-- Correction reason code, see PUF-023-CORRECTIONCODE: 05 = Return -->
+                                <puf:Code>05</puf:Code>
+                                <!-- 24-character BIR e-invoice unique ID of the invoice being corrected, as returned in the Clearance Notification -->
+                                <puf:ClearanceID>2026100120123456K7Q2M9X4</puf:ClearanceID>
+                            </puf:BillingReferenceExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
             <cbc:ID>PH-2026-000101</cbc:ID>
             <cbc:IssueDate>2026-10-01</cbc:IssueDate>
         </cac:InvoiceDocumentReference>
