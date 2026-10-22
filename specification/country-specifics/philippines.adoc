@@ -1,6 +1,9 @@
 This section contains information about special requirements concerning invoicing in Philippines.
 For more information on how to send compliant invoices in Philippines see https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/philippines[example files^].
 
+==== E-Invoice Unique ID
+The unique id that identifies a document at the BIR is not sent in PUF. It is returned for each accepted document in the https://pagero.github.io/puf-clearance-notification/#_pufresponseextension[PUF Clearance Notification^] as `puf:ClearanceReferenceID/cbc:ID`. Keep it to refer to the document in a later credit note or corrective invoice.
+
 ==== Corrective Invoice
 A corrective invoice is a new invoice that corrects or adds to an issued invoice and refers to it, for example an increase in the invoiced amount (RMC No. 098-2026, section IV.8). A decrease is made with a credit note, see <<_credit_note>>.
 
@@ -207,11 +210,59 @@ The codes are also listed in https://pagero.github.io/puf-code-lists/#_invoice_t
 ==== One VAT category per invoice
 An invoice can carry only one VAT category: `S` (VATable), `Z` (zero-rated) or `E` (VAT exempt). A source document that mixes them must be split into separate invoices, each with its own invoice number, before it is sent.
 
+==== Foreign currency
+Every amount on the invoice is in Philippine pesos, so `cbc:DocumentCurrencyCode` is `PHP` also for a sale made in a foreign currency (BIR EIS e-invoice JSON File Format v2.1). For such a sale, also provide the foreign currency, the exchange rate and the total amount in the foreign currency as shown on the invoice:
+
+* `cbc:PaymentCurrencyCode`: the foreign currency.
+* `cac:PaymentExchangeRate`: the foreign currency in `cbc:SourceCurrencyCode`, `PHP` in `cbc:TargetCurrencyCode`, the rate shown on the invoice (pesos per unit of the foreign currency) in `cbc:CalculationRate` and `Multiply` in `cbc:MathematicOperatorCode`.
+* `puf:PaymentCurrencyTaxInclusiveAmount` in the <<_legalmonetarytotal,LegalMonetaryTotal extension>>: the total amount including VAT in the foreign currency, with `@currencyID` set to the foreign currency.
+
+*Example* +
+_Export of USD 9,000.00 at 56.00 pesos per US dollar_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cbc:DocumentCurrencyCode>PHP</cbc:DocumentCurrencyCode>
+    <cbc:PaymentCurrencyCode>USD</cbc:PaymentCurrencyCode><!--1-->
+    <!-- Code omitted for clarity -->
+    <cac:PaymentExchangeRate>
+        <cbc:SourceCurrencyCode>USD</cbc:SourceCurrencyCode>
+        <cbc:TargetCurrencyCode>PHP</cbc:TargetCurrencyCode>
+        <cbc:CalculationRate>56.00</cbc:CalculationRate><!--2-->
+        <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
+    </cac:PaymentExchangeRate>
+    <!-- Code omitted for clarity -->
+    <cac:LegalMonetaryTotal>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LegalMonetaryTotalExtension>
+                            <puf:PaymentCurrencyTaxInclusiveAmount currencyID="USD">9000.00</puf:PaymentCurrencyTaxInclusiveAmount><!--3-->
+                        </puf:LegalMonetaryTotalExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:LineExtensionAmount currencyID="PHP">504000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="PHP">504000.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="PHP">504000.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="PHP">504000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Foreign currency of the sale.
+<2> Exchange rate shown on the invoice.
+<3> Total amount including VAT in the foreign currency.
+
 ==== Item description
 Provide an item description (`cac:Item/cbc:Description`) on every invoice line, for example size or color, or the nature of the service.
 
 ==== Allowance reason codes
-The following codes are supported for discounts in Philippines.
+The following codes are supported for discounts in Philippines. See also https://pagero.github.io/puf-code-lists/#_allowance_reason_codes_philippines[Allowance reason codes Philippines^].
 
 |===
 |Value |Description
@@ -220,4 +271,38 @@ The following codes are supported for discounts in Philippines.
 |100 | Special Discount.
 |SC | Senior Citizen Discount.
 |PWD | Person With Disability Discount
+|NAAC | National Athletes and Coaches Discount.
+|SOLO_PARENT | Solo Parent Discount.
+|MOV | Medal of Valor Discount, for the awardee or a dependent.
 |===
+
+==== Discount holder ID number
+When a discount is given to a senior citizen, a person with disability, a national athlete or coach, a solo parent, or a Medal of Valor awardee or dependent, the invoice must show the buyer's ID number (RR No. 7-2024, Section 6(B)(18)). Provide it on the buyer's `cac:PartyIdentification/cbc:ID`, with `@schemeID` set to the matching code in https://pagero.github.io/puf-code-lists/#_identification_scheme_philippines[Identification scheme Philippines^].
+
+*Example* +
+_Sale to a senior citizen_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- Code omitted for clarity -->
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="PH:SC_ID">SC-2026-0012345</cbc:ID><!--1-->
+            </cac:PartyIdentification>
+            <!-- Code omitted for clarity -->
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Code omitted for clarity -->
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+        <cbc:AllowanceChargeReasonCode>SC</cbc:AllowanceChargeReasonCode><!--2-->
+        <cbc:AllowanceChargeReason>Senior citizen discount</cbc:AllowanceChargeReason>
+        <!-- Code omitted for clarity -->
+    </cac:AllowanceCharge>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> ID number of the senior citizen.
+<2> Reason code of the discount.
