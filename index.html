@@ -799,16 +799,19 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#_philippines">5.12. Philippines</a>
 <ul class="sectlevel3">
-<li><a href="#_corrective_invoice">5.12.1. Corrective Invoice</a></li>
-<li><a href="#_credit_note">5.12.2. Credit Note</a></li>
-<li><a href="#_withholding_tax_2">5.12.3. Withholding Tax</a></li>
-<li><a href="#_permit_to_use_ptu">5.12.4. Permit To Use (PTU)</a></li>
-<li><a href="#_seller_tax_status">5.12.5. Seller Tax Status</a></li>
-<li><a href="#_party_branch_code">5.12.6. Party Branch Code</a></li>
-<li><a href="#_invoice_type">5.12.7. Invoice Type</a></li>
-<li><a href="#_one_vat_category_per_invoice">5.12.8. One VAT category per invoice</a></li>
-<li><a href="#_item_description">5.12.9. Item description</a></li>
-<li><a href="#_allowance_reason_codes">5.12.10. Allowance reason codes</a></li>
+<li><a href="#_e_invoice_unique_id">5.12.1. E-Invoice Unique ID</a></li>
+<li><a href="#_corrective_invoice">5.12.2. Corrective Invoice</a></li>
+<li><a href="#_credit_note">5.12.3. Credit Note</a></li>
+<li><a href="#_withholding_tax_2">5.12.4. Withholding Tax</a></li>
+<li><a href="#_permit_to_use_ptu">5.12.5. Permit To Use (PTU)</a></li>
+<li><a href="#_seller_tax_status">5.12.6. Seller Tax Status</a></li>
+<li><a href="#_party_branch_code">5.12.7. Party Branch Code</a></li>
+<li><a href="#_invoice_type">5.12.8. Invoice Type</a></li>
+<li><a href="#_one_vat_category_per_invoice">5.12.9. One VAT category per invoice</a></li>
+<li><a href="#_foreign_currency">5.12.10. Foreign currency</a></li>
+<li><a href="#_item_description">5.12.11. Item description</a></li>
+<li><a href="#_allowance_reason_codes">5.12.12. Allowance reason codes</a></li>
+<li><a href="#_discount_holder_id_number">5.12.13. Discount holder ID number</a></li>
 </ul>
 </li>
 <li><a href="#_poland">5.13. Poland</a>
@@ -15974,7 +15977,13 @@ The post code or PIN code as referred to in India must exist on all parties and 
 For more information on how to send compliant invoices in Philippines see <a href="https://github.com/pagero/puf-billing/tree/master/examples/country-specific-examples/philippines" target="_blank" rel="noopener">example files</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="_corrective_invoice"><a class="anchor" href="#_corrective_invoice"></a><a class="link" href="#_corrective_invoice">5.12.1. Corrective Invoice</a></h4>
+<h4 id="_e_invoice_unique_id"><a class="anchor" href="#_e_invoice_unique_id"></a><a class="link" href="#_e_invoice_unique_id">5.12.1. E-Invoice Unique ID</a></h4>
+<div class="paragraph">
+<p>The unique id that identifies a document at the BIR is not sent in PUF. It is returned for each accepted document in the <a href="https://pagero.github.io/puf-clearance-notification/#_pufresponseextension" target="_blank" rel="noopener">PUF Clearance Notification</a> as <code>puf:ClearanceReferenceID/cbc:ID</code>. Keep it to refer to the document in a later credit note or corrective invoice.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_corrective_invoice"><a class="anchor" href="#_corrective_invoice"></a><a class="link" href="#_corrective_invoice">5.12.2. Corrective Invoice</a></h4>
 <div class="paragraph">
 <p>A corrective invoice is a new invoice that corrects or adds to an issued invoice and refers to it, for example an increase in the invoiced amount (RMC No. 098-2026, section IV.8). A decrease is made with a credit note, see <a href="#_credit_note">Credit Note</a>.</p>
 </div>
@@ -16046,7 +16055,7 @@ Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_credit_note"><a class="anchor" href="#_credit_note"></a><a class="link" href="#_credit_note">5.12.2. Credit Note</a></h4>
+<h4 id="_credit_note"><a class="anchor" href="#_credit_note"></a><a class="link" href="#_credit_note">5.12.3. Credit Note</a></h4>
 <div class="paragraph">
 <p>A credit note reduces or cancels an issued invoice and must refer to it (RMC No. 098-2026, sections II.2 and IV.8). It is a correction in the same way as a corrective invoice: provide the unique id of the invoice it corrects and the reason code within the <a href="#_billingreference">BillingReference</a> structure, as described above.</p>
 </div>
@@ -16102,7 +16111,7 @@ Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_withholding_tax_2"><a class="anchor" href="#_withholding_tax_2"></a><a class="link" href="#_withholding_tax_2">5.12.3. Withholding Tax</a></h4>
+<h4 id="_withholding_tax_2"><a class="anchor" href="#_withholding_tax_2"></a><a class="link" href="#_withholding_tax_2">5.12.4. Withholding Tax</a></h4>
 <div class="paragraph">
 <p>Withholding tax amounts can be provided on <a href="#_cacwithholdingtaxtotal">header level</a> if one of the following <code>cac:TaxScheme/cbc:ID</code> is used.</p>
 </div>
@@ -16124,7 +16133,7 @@ Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_permit_to_use_ptu"><a class="anchor" href="#_permit_to_use_ptu"></a><a class="link" href="#_permit_to_use_ptu">5.12.4. Permit To Use (PTU)</a></h4>
+<h4 id="_permit_to_use_ptu"><a class="anchor" href="#_permit_to_use_ptu"></a><a class="link" href="#_permit_to_use_ptu">5.12.5. Permit To Use (PTU)</a></h4>
 <div class="paragraph">
 <p>The PTU is the number issued by the Bureau of Internal Revenue allowing taxpayer&#8217;s use of  Computerized Accounting System (CAS) and must be provided in the <a href="#_restrictedinformation">RestrictedInformation</a> with key <code>Ph_PTU</code>.</p>
 </div>
@@ -16155,7 +16164,7 @@ Invoice being corrected for 'other' reason</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_seller_tax_status"><a class="anchor" href="#_seller_tax_status"></a><a class="link" href="#_seller_tax_status">5.12.5. Seller Tax Status</a></h4>
+<h4 id="_seller_tax_status"><a class="anchor" href="#_seller_tax_status"></a><a class="link" href="#_seller_tax_status">5.12.6. Seller Tax Status</a></h4>
 <div class="paragraph">
 <p>Seller Tax Status or Seller Type can be VAT registered, Non-VAT registered or Registered Business Enterprise.<br>
 Allowed values: 0, 1 or 2.<br></p>
@@ -16173,7 +16182,7 @@ Allowed values: 0, 1 or 2.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_party_branch_code"><a class="anchor" href="#_party_branch_code"></a><a class="link" href="#_party_branch_code">5.12.6. Party Branch Code</a></h4>
+<h4 id="_party_branch_code"><a class="anchor" href="#_party_branch_code"></a><a class="link" href="#_party_branch_code">5.12.7. Party Branch Code</a></h4>
 <div class="paragraph">
 <p>The Party extension should be used to provide the code that identifies a headquarters or branch office.</p>
 </div>
@@ -16228,7 +16237,7 @@ Allowed values: 0, 1 or 2.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_invoice_type"><a class="anchor" href="#_invoice_type"></a><a class="link" href="#_invoice_type">5.12.7. Invoice Type</a></h4>
+<h4 id="_invoice_type"><a class="anchor" href="#_invoice_type"></a><a class="link" href="#_invoice_type">5.12.8. Invoice Type</a></h4>
 <div class="paragraph">
 <p>The type code alone decides how a document is reported to the BIR. The <code>name</code> attribute of the type code is not used.</p>
 </div>
@@ -16279,21 +16288,96 @@ Allowed values: 0, 1 or 2.<br></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_one_vat_category_per_invoice"><a class="anchor" href="#_one_vat_category_per_invoice"></a><a class="link" href="#_one_vat_category_per_invoice">5.12.8. One VAT category per invoice</a></h4>
+<h4 id="_one_vat_category_per_invoice"><a class="anchor" href="#_one_vat_category_per_invoice"></a><a class="link" href="#_one_vat_category_per_invoice">5.12.9. One VAT category per invoice</a></h4>
 <div class="paragraph">
 <p>An invoice can carry only one VAT category: <code>S</code> (VATable), <code>Z</code> (zero-rated) or <code>E</code> (VAT exempt). A source document that mixes them must be split into separate invoices, each with its own invoice number, before it is sent.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_item_description"><a class="anchor" href="#_item_description"></a><a class="link" href="#_item_description">5.12.9. Item description</a></h4>
+<h4 id="_foreign_currency"><a class="anchor" href="#_foreign_currency"></a><a class="link" href="#_foreign_currency">5.12.10. Foreign currency</a></h4>
+<div class="paragraph">
+<p>Every amount on the invoice is in Philippine pesos, so <code>cbc:DocumentCurrencyCode</code> is <code>PHP</code> also for a sale made in a foreign currency (BIR EIS e-invoice JSON File Format v2.1). For such a sale, also provide the foreign currency, the exchange rate and the total amount in the foreign currency as shown on the invoice:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>cbc:PaymentCurrencyCode</code>: the foreign currency.</p>
+</li>
+<li>
+<p><code>cac:PaymentExchangeRate</code>: the foreign currency in <code>cbc:SourceCurrencyCode</code>, <code>PHP</code> in <code>cbc:TargetCurrencyCode</code>, the rate shown on the invoice (pesos per unit of the foreign currency) in <code>cbc:CalculationRate</code> and <code>Multiply</code> in <code>cbc:MathematicOperatorCode</code>.</p>
+</li>
+<li>
+<p><code>puf:PaymentCurrencyTaxInclusiveAmount</code> in the <a href="#_legalmonetarytotal">LegalMonetaryTotal extension</a>: the total amount including VAT in the foreign currency, with <code>@currencyID</code> set to the foreign currency.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Export of USD 9,000.00 at 56.00 pesos per US dollar</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cbc:DocumentCurrencyCode&gt;</span>PHP<span class="tag">&lt;/cbc:DocumentCurrencyCode&gt;</span>
+    <span class="tag">&lt;cbc:PaymentCurrencyCode&gt;</span>USD<span class="tag">&lt;/cbc:PaymentCurrencyCode&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:PaymentExchangeRate&gt;</span>
+        <span class="tag">&lt;cbc:SourceCurrencyCode&gt;</span>USD<span class="tag">&lt;/cbc:SourceCurrencyCode&gt;</span>
+        <span class="tag">&lt;cbc:TargetCurrencyCode&gt;</span>PHP<span class="tag">&lt;/cbc:TargetCurrencyCode&gt;</span>
+        <span class="tag">&lt;cbc:CalculationRate&gt;</span>56.00<span class="tag">&lt;/cbc:CalculationRate&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="tag">&lt;cbc:MathematicOperatorCode&gt;</span>Multiply<span class="tag">&lt;/cbc:MathematicOperatorCode&gt;</span>
+    <span class="tag">&lt;/cac:PaymentExchangeRate&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:LegalMonetaryTotal&gt;</span>
+        <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+            <span class="tag">&lt;ext:UBLExtension&gt;</span>
+                <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+                <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                    <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                        <span class="tag">&lt;puf:LegalMonetaryTotalExtension&gt;</span>
+                            <span class="tag">&lt;puf:PaymentCurrencyTaxInclusiveAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">USD</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>9000.00<span class="tag">&lt;/puf:PaymentCurrencyTaxInclusiveAmount&gt;</span><i class="conum" data-value="3"></i><b>(3)</b>
+                        <span class="tag">&lt;/puf:LegalMonetaryTotalExtension&gt;</span>
+                    <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+                <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+            <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;cbc:LineExtensionAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PHP</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>504000.00<span class="tag">&lt;/cbc:LineExtensionAmount&gt;</span>
+        <span class="tag">&lt;cbc:TaxExclusiveAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PHP</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>504000.00<span class="tag">&lt;/cbc:TaxExclusiveAmount&gt;</span>
+        <span class="tag">&lt;cbc:TaxInclusiveAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PHP</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>504000.00<span class="tag">&lt;/cbc:TaxInclusiveAmount&gt;</span>
+        <span class="tag">&lt;cbc:PayableAmount</span> <span class="attribute-name">currencyID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PHP</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>504000.00<span class="tag">&lt;/cbc:PayableAmount&gt;</span>
+    <span class="tag">&lt;/cac:LegalMonetaryTotal&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Foreign currency of the sale.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Exchange rate shown on the invoice.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Total amount including VAT in the foreign currency.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_item_description"><a class="anchor" href="#_item_description"></a><a class="link" href="#_item_description">5.12.11. Item description</a></h4>
 <div class="paragraph">
 <p>Provide an item description (<code>cac:Item/cbc:Description</code>) on every invoice line, for example size or color, or the nature of the service.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_allowance_reason_codes"><a class="anchor" href="#_allowance_reason_codes"></a><a class="link" href="#_allowance_reason_codes">5.12.10. Allowance reason codes</a></h4>
+<h4 id="_allowance_reason_codes"><a class="anchor" href="#_allowance_reason_codes"></a><a class="link" href="#_allowance_reason_codes">5.12.12. Allowance reason codes</a></h4>
 <div class="paragraph">
-<p>The following codes are supported for discounts in Philippines.</p>
+<p>The following codes are supported for discounts in Philippines. See also <a href="https://pagero.github.io/puf-code-lists/#_allowance_reason_codes_philippines" target="_blank" rel="noopener">Allowance reason codes Philippines</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -16323,8 +16407,66 @@ Allowed values: 0, 1 or 2.<br></p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PWD</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Person With Disability Discount</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NAAC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">National Athletes and Coaches Discount.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SOLO_PARENT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Solo Parent Discount.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medal of Valor Discount, for the awardee or a dependent.</p></td>
+</tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="_discount_holder_id_number"><a class="anchor" href="#_discount_holder_id_number"></a><a class="link" href="#_discount_holder_id_number">5.12.13. Discount holder ID number</a></h4>
+<div class="paragraph">
+<p>When a discount is given to a senior citizen, a person with disability, a national athlete or coach, a solo parent, or a Medal of Valor awardee or dependent, the invoice must show the buyer&#8217;s ID number (RR No. 7-2024, Section 6(B)(18)). Provide it on the buyer&#8217;s <code>cac:PartyIdentification/cbc:ID</code>, with <code>@schemeID</code> set to the matching code in <a href="https://pagero.github.io/puf-code-lists/#_identification_scheme_philippines" target="_blank" rel="noopener">Identification scheme Philippines</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Sale to a senior citizen</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AccountingCustomerParty&gt;</span>
+        <span class="tag">&lt;cac:Party&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+            <span class="tag">&lt;cac:PartyIdentification&gt;</span>
+                <span class="tag">&lt;cbc:ID</span> <span class="attribute-name">schemeID</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">PH:SC_ID</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>SC-2026-0012345<span class="tag">&lt;/cbc:ID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+            <span class="tag">&lt;/cac:PartyIdentification&gt;</span>
+            <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+        <span class="tag">&lt;/cac:Party&gt;</span>
+    <span class="tag">&lt;/cac:AccountingCustomerParty&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;cac:AllowanceCharge&gt;</span>
+        <span class="tag">&lt;cbc:ChargeIndicator&gt;</span>false<span class="tag">&lt;/cbc:ChargeIndicator&gt;</span>
+        <span class="tag">&lt;cbc:AllowanceChargeReasonCode&gt;</span>SC<span class="tag">&lt;/cbc:AllowanceChargeReasonCode&gt;</span><i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="tag">&lt;cbc:AllowanceChargeReason&gt;</span>Senior citizen discount<span class="tag">&lt;/cbc:AllowanceChargeReason&gt;</span>
+        <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;/cac:AllowanceCharge&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>ID number of the senior citizen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Reason code of the discount.</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect2">

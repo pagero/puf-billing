@@ -2,7 +2,7 @@
 
 Synthetic PUF Billing examples for invoices issued from a Computerized Accounting
 System (CAS) to the BIR Electronic Invoicing System (EIS), based on the BIR EIS e-invoice
-JSON File Format v2.1 (2026-07-30, CAS sheet revised 2026-09-26). Reviewed 2026-10-16.
+JSON File Format v2.1 (2026-07-30, CAS sheet revised 2026-09-26). Reviewed 2026-10-22.
 All parties, numbers and amounts are illustrative, not live taxpayer registrations or
 bank details.
 
@@ -14,6 +14,7 @@ bank details.
 | [PUF_Philippines_Invoice_Withholding.xml](PUF_Philippines_Invoice_Withholding.xml) | VATable services; the buyer withholds creditable income tax (`INC`) | 380: 01, no | 50000.00 / 6000.00 / 55000.00 |
 | [PUF_Philippines_Invoice_Exempt.xml](PUF_Philippines_Invoice_Exempt.xml) | VAT-exempt sale of agricultural food products in their original state | 380: 01, no | 24000.00 / 0.00 / 24000.00 |
 | [PUF_Philippines_Invoice_Export.xml](PUF_Philippines_Invoice_Export.xml) | Zero-rated export to a buyer not registered with the BIR, with airway bill, bill of lading and delivery address | 380: 01, no | 500000.00 / 0.00 / 500000.00 |
+| [PUF_Philippines_Invoice_ForeignCurrency.xml](PUF_Philippines_Invoice_ForeignCurrency.xml) | Zero-rated export priced in US dollars: USD 9000.00 at 56.00 pesos per US dollar, given as the payment currency, exchange rate and total in that currency | 380: 01, no | 504000.00 / 0.00 / 504000.00 |
 | [PUF_Philippines_CreditNote.xml](PUF_Philippines_CreditNote.xml) | Credit note for goods returned from PH-2026-000101, reason `05` (Return) | 381: 03, yes | 480.00 / 57.60 / 537.60 |
 | [PUF_Philippines_Corrective_Invoice.xml](PUF_Philippines_Corrective_Invoice.xml) | Corrective invoice for one filing cabinet delivered in addition to PH-2026-000101, reason `03` (Addition/reduction) | 384: 01, yes | 500.00 / 60.00 / 560.00 |
 
@@ -34,11 +35,15 @@ bank details.
   code (`GEN:UnitCode`, 5 digits, `00000` for the head office). A buyer not registered
   with the BIR uses TIN `000000000`.
 - `cbc:PayableAmount` is the amount the buyer pays after withholding.
+- Every amount is in PHP. A sale in a foreign currency also gives the foreign currency
+  (`cbc:PaymentCurrencyCode`), the rate shown on the invoice (`cac:PaymentExchangeRate`,
+  from the foreign currency to PHP) and the total including VAT in the foreign currency
+  (`puf:PaymentCurrencyTaxInclusiveAmount`).
 - The credit note and the corrective invoice are corrections. Both refer to the original
   by invoice number, issue date, reason code and the 24-character BIR e-invoice unique ID
   returned in the PUF Clearance Notification.
-- Not covered: local sales of Registered Business Enterprises, foreign-currency
-  invoices and CRM/POS documents.
+- Not covered: local sales of Registered Business Enterprises, discounts to senior
+  citizens and other discount holders, and CRM/POS documents.
 
 ## Source Basis
 
@@ -54,6 +59,7 @@ bank details.
 | Item description | Provided on every line | Same | CAS sheet, No. 29 |
 | Transport documents | Airway bill and bill of lading number and date, for exporters | Same | CAS sheet, No. 24 to 27 |
 | PTU number | Seller's Permit To Use number | Same | CAS sheet, No. 54 |
+| Currency | All amounts in PHP; a foreign currency sale adds the currency, the rate and the amount in that currency as shown on the invoice | Same | CAS sheet, item list note ("The monetary unit of all amounts on e-Invoices is Philippine peso") and No. 51 to 53 (Foreign Currency Information) |
 | VAT rate | 12% | National Internal Revenue Code, as amended | Sections 106(A) and 108(A) |
 | Zero-rated export | 0% on the sale and shipment of goods abroad | Same | Section 106(A)(2)(a) |
 | VAT exemption | Agricultural food products in their original state | Same | Section 109(A) |
@@ -71,7 +77,7 @@ Sources:
 
 ## Validation
 
-Checked 2026-10-16: every file passes the PUF XSD and the PUF Schematron. The BIR
-document type, transaction classification, withholding and totals derived from each
-example match the scenario above, and the amounts reconcile under the field definitions
-in the JSON File Format v2.1.
+Checked 2026-10-22: every file passes the PUF XSD and the PUF Schematron. The BIR
+document type, transaction classification, withholding, foreign currency and totals
+derived from each example match the scenario above, and the amounts reconcile under the
+field definitions in the JSON File Format v2.1.
