@@ -36,7 +36,7 @@ _Free-trade-zone invoice (FTZ flag in position 1)_
 
 ==== Party identification
 
-The UAE Tax Registration Number (TRN) is provided as the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID` with the tax scheme code `VAT`. The TRN is 15 alphanumeric characters, starts with `1` and ends with `03` (e.g. `100000000000003`).
+The UAE Tax Registration Number (TRN) is provided as the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID` with the tax scheme code `VAT`. The TRN is 15 numeric digits, starts with `1` and ends with `03` (e.g. `100000000000003`), as required by https://docs.peppol.eu/poac/ae/pint-ae/trn-invoice/rule/ibr-132-ae/[PINT AE 1.0.4 rule IBR-132-AE^].
 
 The TRN may alternatively be carried on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`. Use that form for a party that has no VAT accounting role in the document and therefore no `cac:PartyTaxScheme` — in particular the free-trade-zone Beneficiary and the disclosed-agent Principle described below. Both forms resolve to the same TRN; when both are present on one party, `cac:PartyTaxScheme/cbc:CompanyID` takes precedence. A UAE identifier given on `cac:PartyIdentification/cbc:ID` *without* a scheme identifier is not processed.
 

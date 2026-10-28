@@ -19174,7 +19174,7 @@ Otherwise it is OK to omit the attribute.</td>
 <div class="sect3">
 <h4 id="_party_identification_10"><a class="anchor" href="#_party_identification_10"></a><a class="link" href="#_party_identification_10">5.21.2. Party identification</a></h4>
 <div class="paragraph">
-<p>The UAE Tax Registration Number (TRN) is provided as the VAT identifier on <code>cac:PartyTaxScheme/cbc:CompanyID</code> with the tax scheme code <code>VAT</code>. The TRN is 15 alphanumeric characters, starts with <code>1</code> and ends with <code>03</code> (e.g. <code>100000000000003</code>).</p>
+<p>The UAE Tax Registration Number (TRN) is provided as the VAT identifier on <code>cac:PartyTaxScheme/cbc:CompanyID</code> with the tax scheme code <code>VAT</code>. The TRN is 15 numeric digits, starts with <code>1</code> and ends with <code>03</code> (e.g. <code>100000000000003</code>), as required by <a href="https://docs.peppol.eu/poac/ae/pint-ae/trn-invoice/rule/ibr-132-ae/" target="_blank" rel="noopener">PINT AE 1.0.4 rule IBR-132-AE</a>.</p>
 </div>
 <div class="paragraph">
 <p>The TRN may alternatively be carried on <code>cac:PartyIdentification/cbc:ID</code> with <code>@schemeID = 'AE:TRN'</code>. Use that form for a party that has no VAT accounting role in the document and therefore no <code>cac:PartyTaxScheme</code> — in particular the free-trade-zone Beneficiary and the disclosed-agent Principle described below. Both forms resolve to the same TRN; when both are present on one party, <code>cac:PartyTaxScheme/cbc:CompanyID</code> takes precedence. A UAE identifier given on <code>cac:PartyIdentification/cbc:ID</code> <strong>without</strong> a scheme identifier is not processed.</p>
