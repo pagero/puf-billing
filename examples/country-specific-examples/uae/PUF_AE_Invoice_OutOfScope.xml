@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Out of Scope of VAT (Commercial Invoice, Type 480)
+
+    Use Case: A supply that falls outside the scope of UAE VAT, invoiced with type code 480,
+              with a document level allowance and a document level charge in category O.
+              Counterpart of the PINT AE examples "Commercial invoice",
+              "Doc-level-allowance-O-category" and "Doc-level-charge-O-category".
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Out of scope of VAT (Type 480)
+    Transaction Type: BTAE-02 = 00000000 (no special transaction context)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Acme Trading LLC (Dubai) sells 600 metres of seamless line pipe at AED 75.00 per metre
+    to Burj Holdings PJSC (Abu Dhabi). The pipe is shipped from the manufacturer in China
+    directly to the buyer's project site in Oman and never enters the UAE. A 2% volume
+    discount of AED 900.00 is deducted and AED 1,500.00 sea freight is charged. Net
+    AED 45,600.00, no VAT.
+
+    CRITICAL - 480 IS ONLY FOR SUPPLIES THAT ARE ENTIRELY OUT OF SCOPE:
+    Guidelines V2.0 18.3.1 reserves type code 480 for a transaction that relates
+    exclusively to supplies outside the scope of VAT; exempt and zero-rated supplies keep
+    type code 380. 18.3.2 classifies goods supplied from outside the UAE to another location
+    outside the UAE, without entering the UAE, as an out-of-scope transaction rather than
+    an export.
+
+    Key Fields:
+    - BT-3 InvoiceTypeCode 480 (Out of scope of VAT, PUF-003)
+    - Every VAT category on the document must be E, O or Z (ibr-122-ae); this one uses O
+    - Category O carries no rate at any level: line, document level allowance and charge,
+      and VAT breakdown (aligned-ibrp-o-05, aligned-ibrp-o-06, aligned-ibrp-o-07,
+      aligned-ibrp-o-11-ae)
+    - BT-47 Buyer legal registration identifier: mandatory on type 480 (ibr-136-ae), with
+      its type and issuing authority (ibr-180-ae, ibr-101-ae)
+    - BT-31 Seller VAT identifier: not required on type 480 (ibr-134-ae). When every VAT
+      category on the document is O, Pagero does not report the VAT identifiers sent in
+      the document (BT-31, BT-48)
+    - BT-32 Seller tax registration identifier: send the seller's TIN with
+      @schemeID="AE:TIN". Either BT-31 or BT-32 shall be provided (Guidelines V2.0
+      18.1.1), so on an out-of-scope document the TIN identifies the seller
+    - BTAE-02 cannot flag summary invoice, deemed supply or margin scheme on type 480
+      (ibr-157-ae)
+    - BTAE-08 Line VAT amount: zero on the out-of-scope line (ibr-104-ae)
+
+    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 18.2.1, 18.3.1
+               and 18.3.2; Peppol PINT BIS Billing AE 1.0.4
+-->
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>INV-AE-OOS-2026-001</cbc:ID>
+    <cbc:IssueDate>2026-04-15</cbc:IssueDate>
+    <cbc:DueDate>2026-05-15</cbc:DueDate>
+    <!-- BT-3 InvoiceTypeCode 480 (Out of scope of VAT); @name carries BTAE-02 -->
+    <cbc:InvoiceTypeCode name="00000000">480</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BT-32 Seller tax registration identifier: the TIN, reported because BT-31 is not on an out-of-scope document -->
+                <cbc:ID schemeID="AE:TIN">1000000000</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyIdentification>
+                <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>Sheikh Zayed Road, Office 1201</cbc:StreetName>
+                <cbc:CityName>Dubai</cbc:CityName>
+                <cbc:CountrySubentity>DXB</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>100000000000003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Acme Trading LLC</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="AE:TL">CN-1234567</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0235">1000000100</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-11 Buyer legal registration authority: required with a trade license (ibr-101-ae) -->
+                <cbc:ID schemeID="AE:LRA">Abu Dhabi Department of Economic Development</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>Khalifa Street, Tower 5</cbc:StreetName>
+                <cbc:CityName>Abu Dhabi</cbc:CityName>
+                <cbc:CountrySubentity>AUH</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>100000010001003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Burj Holdings PJSC</cbc:RegistrationName>
+                <!-- BT-47 Buyer legal registration identifier: mandatory on type 480 (ibr-136-ae) -->
+                <cbc:CompanyID schemeID="AE:TL">CN-1001003</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:Delivery>
+        <cbc:ActualDeliveryDate>2026-04-10</cbc:ActualDeliveryDate>
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <cbc:StreetName>Sohar Industrial Estate, Plot 12</cbc:StreetName>
+                <cbc:CityName>Sohar</cbc:CityName>
+                <cbc:CountrySubentity>North Al Batinah</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>OM</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means type code: 30 = Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (IBAN). Mandatory when BT-81 is 30 (ibr-192-ae) -->
+            <cbc:ID>AE070331234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 BIC -->
+                <cbc:ID>EBILAEAD</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BG-20 Document level allowance in category O: no rate (aligned-ibrp-o-06) -->
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+        <cbc:AllowanceChargeReasonCode>95</cbc:AllowanceChargeReasonCode>
+        <cbc:AllowanceChargeReason>Volume discount</cbc:AllowanceChargeReason>
+        <!-- BT-94 Percentage; BT-92 amount = BT-93 base amount x BT-94 / 100 (ibr-131-ae) -->
+        <cbc:MultiplierFactorNumeric>2</cbc:MultiplierFactorNumeric>
+        <cbc:Amount currencyID="AED">900.00</cbc:Amount>
+        <cbc:BaseAmount currencyID="AED">45000.00</cbc:BaseAmount>
+        <cac:TaxCategory>
+            <cbc:ID>O</cbc:ID>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <!-- BG-21 Document level charge in category O: no rate (aligned-ibrp-o-07) -->
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+        <cbc:AllowanceChargeReasonCode>FC</cbc:AllowanceChargeReasonCode>
+        <cbc:AllowanceChargeReason>Sea freight Tianjin to Sohar</cbc:AllowanceChargeReason>
+        <cbc:Amount currencyID="AED">1500.00</cbc:Amount>
+        <cac:TaxCategory>
+            <cbc:ID>O</cbc:ID>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- BT-116 = line net 45,000.00 - allowance 900.00 + charge 1,500.00 (aligned-ibrp-o-08) -->
+            <cbc:TaxableAmount currencyID="AED">45600.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- No rate in a not-subject-to-VAT breakdown (aligned-ibrp-o-11-ae) -->
+                <cbc:ID>O</cbc:ID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="AED">45000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="AED">45600.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="AED">45600.00</cbc:TaxInclusiveAmount>
+        <cbc:AllowanceTotalAmount currencyID="AED">900.00</cbc:AllowanceTotalAmount>
+        <cbc:ChargeTotalAmount currencyID="AED">1500.00</cbc:ChargeTotalAmount>
+        <cbc:PayableAmount currencyID="AED">45600.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="MTR">600</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="AED">45000.00</cbc:LineExtensionAmount>
+        <!-- BTAE-08 VAT line amount: zero; BTAE-10 line amount in AED (ibr-104-ae / ibr-194-ae) -->
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Description>Seamless steel line pipe, 8 inch, shipped from Tianjin to Sohar</cbc:Description>
+            <cbc:Name>Seamless line pipe</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>G</cbc:CommodityCode>
+                <cbc:ItemClassificationCode listID="HS">7304.19.00</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <!-- Not subject to VAT: no rate (aligned-ibrp-o-05) -->
+                <cbc:ID>O</cbc:ID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="AED">75.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="MTR">1</cbc:BaseQuantity>
+            <!-- IBT-148 Item gross price (required per ibr-126-ae; 0.00 discount = gross equals net) -->
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="AED">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="AED">75.00</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Exempt Supply with Document Level Allowance and Charge
+
+    Use Case: A tax invoice that combines an exempt supply with a standard-rated one, and
+              adjusts the exempt part with a document level allowance and a document level
+              charge in category E. Counterpart of the PINT AE examples
+              "Doc-level-allowance-E-category" and "Doc-level-charge-E-category".
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 00000000 (no special transaction context)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Emirates Premier Bank PJSC (Dubai) invoices Burj Holdings PJSC (Abu Dhabi) for April
+    2026 interest of AED 18,500.00 on a term loan, which is an exempt financial service,
+    and a standard-rated arrangement fee of AED 4,000.00. An AED 500.00 interest rebate
+    for early repayment and AED 250.00 late payment interest adjust the exempt part.
+    Net AED 22,250.00 plus AED 200.00 VAT on the fee.
+
+    CRITICAL - WHY THIS INVOICE IS NOT EXEMPT ONLY:
+    An invoice whose lines are all exempt cannot currently be expressed. Guidelines V2.0
+    18.3.1 states that type code 480 should not be used for exempt supplies, and PINT AE
+    1.0.4 rule ibr-151-ae rejects type code 380 when every line is E or O. The PINT AE
+    examples for category E use type 480, which validates but does not follow 18.3.1.
+    A tax invoice may combine taxable and non-taxable supplies (Guidelines V2.0 10.2.2),
+    so this example adds a standard-rated line.
+
+    CRITICAL - THE VAT RATE AND EXEMPTION REASON DIFFER BY LEVEL FOR CATEGORY E:
+    - Line: no rate (aligned-ibrp-e-05) and an exemption reason code (ibr-167-ae)
+    - Document level allowance or charge: rate 0.00 (aligned-ibrp-e-06, aligned-ibrp-e-07),
+      its own exemption reason code (IBT-196 / IBT-198, PUF-013) and an allowance or
+      charge reason code (BT-98 / BT-105), which ibr-168-ae and ibr-169-ae test
+    - VAT breakdown: no rate (ibr-121-ae)
+
+    Key Fields:
+    - BT-121 / BT-120 Exemption reason code DL8.46.1 (Certain financial services) with its
+      text, from PUF-013 (PINT AE code list AE-Exempt)
+    - BTAE-08 Line VAT amount: not sent on the exempt line, where it must be absent
+      (ibr-163-ae)
+    - BTAE-13 Item type S with SAC 9971.13 (credit-granting) and 9971.19 (other
+      financial services)
+    - BG-21 Document level charge: reason code FI (Financing)
+
+    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 10.2.2 and
+               18.3.1; PUF Code List PUF-013 Tax exemption codes United Arab Emirates;
+               Peppol PINT BIS Billing AE 1.0.4
+-->
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>INV-AE-EX-2026-001</cbc:ID>
+    <cbc:IssueDate>2026-05-04</cbc:IssueDate>
+    <cbc:DueDate>2026-05-18</cbc:DueDate>
+    <cbc:InvoiceTypeCode name="00000000">380</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>DIFC Gate Building, Level 4</cbc:StreetName>
+                <cbc:CityName>Dubai</cbc:CityName>
+                <cbc:CountrySubentity>DXB</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>100000000000003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Emirates Premier Bank PJSC</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="AE:TL">CN-1234567</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0235">1000000100</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-11 Buyer legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Abu Dhabi Department of Economic Development</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>Khalifa Street, Tower 5</cbc:StreetName>
+                <cbc:CityName>Abu Dhabi</cbc:CityName>
+                <cbc:CountrySubentity>AUH</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>100000010001003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Burj Holdings PJSC</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="AE:TL">CN-1001003</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means type code: 30 = Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (IBAN). Mandatory when BT-81 is 30 (ibr-192-ae) -->
+            <cbc:ID>AE070331234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 BIC -->
+                <cbc:ID>EBILAEAD</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BG-20 Document level allowance in category E: rate 0.00 (aligned-ibrp-e-06) and a reason code (ibr-168-ae) -->
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+        <cbc:AllowanceChargeReasonCode>95</cbc:AllowanceChargeReasonCode>
+        <cbc:AllowanceChargeReason>Interest rebate for early repayment</cbc:AllowanceChargeReason>
+        <cbc:Amount currencyID="AED">500.00</cbc:Amount>
+        <cac:TaxCategory>
+            <cbc:ID>E</cbc:ID>
+            <cbc:Percent>0.00</cbc:Percent>
+            <cbc:TaxExemptionReasonCode>DL8.46.1</cbc:TaxExemptionReasonCode>
+            <cbc:TaxExemptionReason>Certain financial services</cbc:TaxExemptionReason>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <!-- BG-21 Document level charge in category E: rate 0.00 (aligned-ibrp-e-07) and a reason code (ibr-169-ae) -->
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+        <cbc:AllowanceChargeReasonCode>FI</cbc:AllowanceChargeReasonCode>
+        <cbc:AllowanceChargeReason>Late payment interest, March instalment</cbc:AllowanceChargeReason>
+        <cbc:Amount currencyID="AED">250.00</cbc:Amount>
+        <cac:TaxCategory>
+            <cbc:ID>E</cbc:ID>
+            <cbc:Percent>0.00</cbc:Percent>
+            <cbc:TaxExemptionReasonCode>DL8.46.1</cbc:TaxExemptionReasonCode>
+            <cbc:TaxExemptionReason>Certain financial services</cbc:TaxExemptionReason>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="AED">200.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="AED">4000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">200.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <!-- BT-116 = exempt line 18,500.00 - allowance 500.00 + charge 250.00 (aligned-ibrp-e-08) -->
+            <cbc:TaxableAmount currencyID="AED">18250.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- No rate in an exempt VAT breakdown (ibr-121-ae) -->
+                <cbc:ID>E</cbc:ID>
+                <cbc:TaxExemptionReasonCode>DL8.46.1</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>Certain financial services</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="AED">22500.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="AED">22250.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="AED">22450.00</cbc:TaxInclusiveAmount>
+        <cbc:AllowanceTotalAmount currencyID="AED">500.00</cbc:AllowanceTotalAmount>
+        <cbc:ChargeTotalAmount currencyID="AED">250.00</cbc:ChargeTotalAmount>
+        <cbc:PayableAmount currencyID="AED">22450.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="AED">18500.00</cbc:LineExtensionAmount>
+        <!-- No line cac:TaxTotal: BTAE-08 must be absent on an exempt line (ibr-163-ae) -->
+        <cac:Item>
+            <cbc:Description>Interest on term loan TL-2026-0042, 1 to 30 April 2026</cbc:Description>
+            <cbc:Name>Loan interest</cbc:Name>
+            <cac:AdditionalItemIdentification>
+                <cbc:ID schemeID="SAC">9971.13</cbc:ID>
+            </cac:AdditionalItemIdentification>
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>S</cbc:CommodityCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <!-- Exempt line: no rate (aligned-ibrp-e-05), exemption reason code mandatory (ibr-167-ae) -->
+                <cbc:ID>E</cbc:ID>
+                <cbc:TaxExemptionReasonCode>DL8.46.1</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>Certain financial services</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="AED">18500.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+            <!-- IBT-148 Item gross price (required per ibr-126-ae; 0.00 discount = gross equals net) -->
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="AED">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="AED">18500.00</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="AED">4000.00</cbc:LineExtensionAmount>
+        <!-- BTAE-08 VAT line amount in AED; BTAE-10 line amount in AED (both required per ibr-104-ae / ibr-194-ae) -->
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="AED">200.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Description>Arrangement fee, term loan TL-2026-0042</cbc:Description>
+            <cbc:Name>Loan arrangement fee</cbc:Name>
+            <cac:AdditionalItemIdentification>
+                <cbc:ID schemeID="SAC">9971.19</cbc:ID>
+            </cac:AdditionalItemIdentification>
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>S</cbc:CommodityCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="AED">4000.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+            <!-- IBT-148 Item gross price (required per ibr-126-ae; 0.00 discount = gross equals net) -->
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="AED">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="AED">4000.00</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

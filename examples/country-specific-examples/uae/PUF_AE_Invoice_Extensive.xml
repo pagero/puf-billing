@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Extensive Tax Invoice (Field Coverage Reference)
+
+    Use Case: A reference that shows where the optional PINT AE business terms go in PUF.
+              It combines three transaction types and the five VAT categories that can
+              appear together on a tax invoice, which is broader than a typical invoice.
+              Counterpart of the PINT AE examples "Standard invoice - Extensive" and
+              "Standard tax invoice".
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 10001010 (position 1 Free Trade Zone, position 5
+                      Continuous Supply, position 7 E-Commerce)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Acme Trading LLC (Dubai) bills Burj Holdings PJSC (Abu Dhabi) for April 2026 under a
+    12-month online supply agreement. The goods are delivered to a free zone end user in
+    Jebel Ali. The five lines cover the VAT categories S, E, O, AE and Z. The invoice has
+    line and document level allowances and charges, AED 5,000.00 charged to the buyer's
+    card at checkout and a rounding amount. Total AED 23,723.50; AED 18,724.00 is payable
+    and is charged to the same card on the due date.
+
+    Key Fields (in document order):
+    - IBT-168 Issue time; BT-22 note; BT-7 VAT point date, before the issue date
+      (ibr-141-ae); BT-19 buyer accounting reference; BT-10 buyer reference
+    - BG-14 Invoicing period; BT-13 / BT-14 purchase and sales order references; BG-3
+      preceding invoice; BT-16 despatch advice; BT-15 receiving advice; BT-17 tender
+      reference; BT-12 contract, with the contract value BTAE-05 in DocumentDescription;
+      BG-24 supporting documents by URI and embedded; BT-11 project reference
+    - BTAE-01 Free zone beneficiary in puf:RestrictedInformationParty (ibr-007-ae)
+    - BT-28 / BT-45 trading names; BT-36 / BT-51 address line 2; BT-33 seller
+      additional legal information; BG-6 / BG-9 contacts
+    - BG-10 Payee, identified by its TIN (AE:TIN); BG-11 seller tax representative with
+      its TRN (ibr-056)
+    - BG-13 Delivery: date, GLN location, address (ibr-142-ae for e-commerce) and the
+      delivery recipient's TRN as BTAE-23
+    - BG-16 Payment instruction with payment card information (BG-18, at most one per
+      invoice, ibr-066). PUF carries one payment means code per document, so send a
+      single cac:PaymentMeans; the other UAE examples show a credit transfer (BG-17)
+    - BG-20 / BG-21 document level allowance and charge; BG-27 / BG-28 line level ones
+    - BT-113 paid amount and BT-114 rounding amount
+    - Lines: BT-127 note, BT-133 accounting reference, BG-26 period, BT-132 order line
+      reference, BT-156 / BT-155 / BT-157 item identifiers, BT-159 country of origin,
+      BG-32 item attributes
+
+    Not shown: BTAE-06 Frequency of billing. The PINT AE 1.0.4 syntax binds it to
+    cac:InvoicePeriod/cbc:Description, while rules ibr-005-ae and ibr-160-ae validate
+    cac:InvoicePeriod/cbc:DescriptionCode.
+
+    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 10.2.2;
+               Peppol PINT BIS Billing AE 1.0.4
+-->
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformationParty>
+                        <!-- BTAE-01 Beneficiary ID: the free zone end user's TRN -->
+                        <puf:Key>Beneficiary</puf:Key>
+                        <cac:Party>
+                            <cac:PartyIdentification>
+                                <cbc:ID schemeID="AE:TRN">100000040004003</cbc:ID>
+                            </cac:PartyIdentification>
+                        </cac:Party>
+                    </puf:RestrictedInformationParty>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>INV-AE-EXT-2026-001</cbc:ID>
+    <cbc:IssueDate>2026-04-30</cbc:IssueDate>
+    <!-- IBT-168 Issue time -->
+    <cbc:IssueTime>10:15:00+04:00</cbc:IssueTime>
+    <cbc:DueDate>2026-05-30</cbc:DueDate>
+    <!-- BTAE-02 = 10001010: Free Trade Zone, Continuous Supply and E-Commerce -->
+    <cbc:InvoiceTypeCode name="10001010">380</cbc:InvoiceTypeCode>
+    <!-- BT-22 Invoice note -->
+    <cbc:Note>April 2026 instalment of the online supply agreement</cbc:Note>
+    <!-- BT-7 VAT point date: before the issue date (ibr-141-ae) -->
+    <cbc:TaxPointDate>2026-04-29</cbc:TaxPointDate>
+    <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
+    <!-- BT-19 Buyer accounting reference -->
+    <cbc:AccountingCost>CC-4100-ECOM</cbc:AccountingCost>
+    <!-- BT-10 Buyer reference -->
+    <cbc:BuyerReference>BR-2026-0412</cbc:BuyerReference>
+    <!-- BG-14 Invoicing period -->
+    <cac:InvoicePeriod>
+        <cbc:StartDate>2026-04-01</cbc:StartDate>
+        <cbc:EndDate>2026-04-30</cbc:EndDate>
+    </cac:InvoicePeriod>
+    <cac:OrderReference>
+        <!-- BT-13 Purchase order reference; BT-14 sales order reference -->
+        <cbc:ID>PO-2026-0412</cbc:ID>
+        <cbc:SalesOrderID>SO-2026-0877</cbc:SalesOrderID>
+    </cac:OrderReference>
+    <!-- BG-3 Preceding invoice: the March 2026 instalment -->
+    <cac:BillingReference>
+        <cac:InvoiceDocumentReference>
+            <cbc:ID>INV-AE-EXT-2026-000</cbc:ID>
+            <cbc:IssueDate>2026-03-31</cbc:IssueDate>
+        </cac:InvoiceDocumentReference>
+    </cac:BillingReference>
+    <!-- BT-16 Despatch advice reference -->
+    <cac:DespatchDocumentReference>
+        <cbc:ID>DN-2026-0412</cbc:ID>
+    </cac:DespatchDocumentReference>
+    <!-- BT-15 Receiving advice reference -->
+    <cac:ReceiptDocumentReference>
+        <cbc:ID>GRN-2026-0412</cbc:ID>
+    </cac:ReceiptDocumentReference>
+    <!-- BT-17 Tender or lot reference -->
+    <cac:OriginatorDocumentReference>
+        <cbc:ID>TENDER-2025-117</cbc:ID>
+    </cac:OriginatorDocumentReference>
+    <!-- BT-12 Contract reference; BTAE-05 contract value in DocumentDescription -->
+    <cac:ContractDocumentReference>
+        <cbc:ID>MSA-2025-ACME-BURJ-011</cbc:ID>
+        <cbc:DocumentDescription>AED 240000.00</cbc:DocumentDescription>
+    </cac:ContractDocumentReference>
+    <!-- BG-24 Supporting document referenced by URI (BT-124) -->
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>POD-2026-0412</cbc:ID>
+        <cbc:DocumentDescription>Proof of delivery</cbc:DocumentDescription>
+        <cac:Attachment>
+            <cac:ExternalReference>
+                <cbc:URI>https://www.example.ae/pod/POD-2026-0412.pdf</cbc:URI>
+            </cac:ExternalReference>
+        </cac:Attachment>
+    </cac:AdditionalDocumentReference>
+    <!-- BG-24 Supporting document embedded (BT-125) -->
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>DR-2026-04</cbc:ID>
+        <cbc:DocumentDescription>Delivery report April 2026</cbc:DocumentDescription>
+        <cac:Attachment>
+            <cbc:EmbeddedDocumentBinaryObject mimeCode="application/pdf" filename="Delivery_report_April_2026.pdf">JVBERi0xLjQKJSVFT0YK</cbc:EmbeddedDocumentBinaryObject>
+        </cac:Attachment>
+    </cac:AdditionalDocumentReference>
+    <!-- BT-11 Project reference -->
+    <cac:ProjectReference>
+        <cbc:ID>PRJ-2026-JAFZA-FITOUT</cbc:ID>
+    </cac:ProjectReference>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <!-- BT-28 Seller trading name -->
+                <cbc:Name>Acme Online</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Sheikh Zayed Road, Office 1201</cbc:StreetName>
+                <!-- BT-36 Seller address line 2 -->
+                <cbc:AdditionalStreetName>Trade Centre 1</cbc:AdditionalStreetName>
+                <cbc:CityName>Dubai</cbc:CityName>
+                <cbc:CountrySubentity>DXB</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>100000000000003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Acme Trading LLC</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="AE:TL">CN-1234567</cbc:CompanyID>
+                <!-- BT-33 Seller additional legal information -->
+                <cbc:CompanyLegalForm>Limited Liability Company</cbc:CompanyLegalForm>
+            </cac:PartyLegalEntity>
+            <!-- BG-6 Seller contact -->
+            <cac:Contact>
+                <cbc:Name>Accounts Receivable</cbc:Name>
+                <cbc:Telephone>+971 4 000 0000</cbc:Telephone>
+                <cbc:ElectronicMail>ar@acme-trading.example</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0235">1000000100</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-11 Buyer legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Abu Dhabi Department of Economic Development</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <!-- BT-45 Buyer trading name -->
+                <cbc:Name>Burj Retail</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Khalifa Street, Tower 5</cbc:StreetName>
+                <!-- BT-51 Buyer address line 2 -->
+                <cbc:AdditionalStreetName>Al Markaziyah</cbc:AdditionalStreetName>
+                <cbc:CityName>Abu Dhabi</cbc:CityName>
+                <cbc:CountrySubentity>AUH</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer VAT identifier: also required by the reverse-charge line (ibr-103-ae) -->
+                <cbc:CompanyID>100000010001003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Burj Holdings PJSC</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="AE:TL">CN-1001003</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+            <!-- BG-9 Buyer contact -->
+            <cac:Contact>
+                <cbc:Name>Procurement</cbc:Name>
+                <cbc:Telephone>+971 2 000 0000</cbc:Telephone>
+                <cbc:ElectronicMail>procurement@burj-holdings.example</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- BG-10 Payee: the group company that receives the card settlements -->
+    <cac:PayeeParty>
+        <cac:PartyIdentification>
+            <!-- BT-60 Payee identifier: the payee's TIN, reported under scheme 0235 -->
+            <cbc:ID schemeID="AE:TIN">1000000500</cbc:ID>
+        </cac:PartyIdentification>
+        <cac:PartyName>
+            <!-- BT-59 Payee name: reported only when it differs from the seller name -->
+            <cbc:Name>Acme Collections LLC</cbc:Name>
+        </cac:PartyName>
+        <cac:PartyLegalEntity>
+            <!-- BT-61 Payee legal registration identifier -->
+            <cbc:CompanyID>CN-5005005</cbc:CompanyID>
+        </cac:PartyLegalEntity>
+    </cac:PayeeParty>
+    <!-- BG-11 Seller tax representative: its TRN is mandatory (ibr-056) -->
+    <cac:TaxRepresentativeParty>
+        <cac:PartyName>
+            <cbc:Name>Gulf Tax Agents LLC</cbc:Name>
+        </cac:PartyName>
+        <cac:PostalAddress>
+            <cbc:StreetName>Al Bateen Street, Office 304</cbc:StreetName>
+            <cbc:CityName>Abu Dhabi</cbc:CityName>
+            <cbc:CountrySubentity>AUH</cbc:CountrySubentity>
+            <cac:Country>
+                <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+            </cac:Country>
+        </cac:PostalAddress>
+        <cac:PartyTaxScheme>
+            <!-- BT-63 Seller tax representative VAT identifier -->
+            <cbc:CompanyID>100000050005003</cbc:CompanyID>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:PartyTaxScheme>
+    </cac:TaxRepresentativeParty>
+    <!-- BG-13 Delivery: the address is mandatory for e-commerce (ibr-142-ae) -->
+    <cac:Delivery>
+        <!-- BT-72 Actual delivery date -->
+        <cbc:ActualDeliveryDate>2026-04-28</cbc:ActualDeliveryDate>
+        <cac:DeliveryLocation>
+            <!-- BT-71 Deliver to location identifier (GLN) -->
+            <cbc:ID schemeID="0088">6291041500213</cbc:ID>
+            <cac:Address>
+                <cbc:StreetName>Jebel Ali Free Zone, Warehouse LOB 14</cbc:StreetName>
+                <cbc:AdditionalStreetName>South Zone, Gate 5</cbc:AdditionalStreetName>
+                <cbc:CityName>Dubai</cbc:CityName>
+                <cbc:CountrySubentity>DXB</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+        <cac:DeliveryParty>
+            <cac:PartyIdentification>
+                <!-- BTAE-23 Deliver to party ID: the recipient's TRN (AE:TRN or AE:TIN) -->
+                <cbc:ID schemeID="AE:TRN">100000040004003</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <!-- BT-70 Deliver to party name -->
+                <cbc:Name>JAFZA End-User FZE</cbc:Name>
+            </cac:PartyName>
+        </cac:DeliveryParty>
+    </cac:Delivery>
+    <!-- BG-16 Payment instruction: BT-81 54 = Credit card, with the card details (BG-18) -->
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>54</cbc:PaymentMeansCode>
+        <!-- BT-83 Remittance information -->
+        <cbc:PaymentID>INV-AE-EXT-2026-001</cbc:PaymentID>
+        <cac:CardAccount>
+            <!-- BT-87 Payment card primary account number: masked, last digits only -->
+            <cbc:PrimaryAccountNumberID>XXXXXXXXXXXX4321</cbc:PrimaryAccountNumberID>
+            <cbc:NetworkID>VISA</cbc:NetworkID>
+            <!-- BT-88 Payment card holder name -->
+            <cbc:HolderName>Burj Holdings PJSC</cbc:HolderName>
+        </cac:CardAccount>
+    </cac:PaymentMeans>
+    <cac:PaymentTerms>
+        <!-- BT-20 Payment terms -->
+        <cbc:Note>AED 5,000.00 charged to the card at checkout; balance charged on the due date</cbc:Note>
+    </cac:PaymentTerms>
+    <!-- BG-20 Document level allowance: BT-92 amount = BT-93 base amount x BT-94 / 100 (ibr-131-ae) -->
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+        <cbc:AllowanceChargeReasonCode>95</cbc:AllowanceChargeReasonCode>
+        <cbc:AllowanceChargeReason>Loyalty discount</cbc:AllowanceChargeReason>
+        <cbc:MultiplierFactorNumeric>2</cbc:MultiplierFactorNumeric>
+        <cbc:Amount currencyID="AED">164.00</cbc:Amount>
+        <cbc:BaseAmount currencyID="AED">8200.00</cbc:BaseAmount>
+        <cac:TaxCategory>
+            <cbc:ID>S</cbc:ID>
+            <cbc:Percent>5.00</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <!-- BG-21 Document level charge -->
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+        <cbc:AllowanceChargeReasonCode>SAA</cbc:AllowanceChargeReasonCode>
+        <cbc:AllowanceChargeReason>Shipping and handling</cbc:AllowanceChargeReason>
+        <cbc:Amount currencyID="AED">64.00</cbc:Amount>
+        <cac:TaxCategory>
+            <cbc:ID>S</cbc:ID>
+            <cbc:Percent>5.00</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="AED">405.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- S: line 8,200.00 - allowance 164.00 + charge 64.00 -->
+            <cbc:TaxableAmount currencyID="AED">8100.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">405.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="AED">120.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:TaxExemptionReasonCode>DL8.46.1</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>Certain financial services</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="AED">900.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>O</cbc:ID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="AED">12000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>AE</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="AED">2198.50</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>Z</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="AED">23418.50</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="AED">23318.50</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="AED">23723.50</cbc:TaxInclusiveAmount>
+        <cbc:AllowanceTotalAmount currencyID="AED">164.00</cbc:AllowanceTotalAmount>
+        <cbc:ChargeTotalAmount currencyID="AED">64.00</cbc:ChargeTotalAmount>
+        <!-- BT-113 Paid amount; BT-114 rounding amount; BT-115 = 23,723.50 - 5,000.00 + 0.50 -->
+        <cbc:PrepaidAmount currencyID="AED">5000.00</cbc:PrepaidAmount>
+        <cbc:PayableRoundingAmount currencyID="AED">0.50</cbc:PayableRoundingAmount>
+        <cbc:PayableAmount currencyID="AED">18724.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <!-- Line 1: standard rated goods with every optional line field -->
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <!-- BT-127 Invoice line note -->
+        <cbc:Note>Assembly included</cbc:Note>
+        <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+        <!-- BT-131 = 10 x 850.00 - 425.00 + 125.00 (ibr-147-ae) -->
+        <cbc:LineExtensionAmount currencyID="AED">8200.00</cbc:LineExtensionAmount>
+        <!-- BT-133 Invoice line buyer accounting reference -->
+        <cbc:AccountingCost>CC-4100-FURN</cbc:AccountingCost>
+        <!-- BG-26 Invoice line period -->
+        <cac:InvoicePeriod>
+            <cbc:StartDate>2026-04-01</cbc:StartDate>
+            <cbc:EndDate>2026-04-30</cbc:EndDate>
+        </cac:InvoicePeriod>
+        <!-- BT-132 Referenced purchase order line reference -->
+        <cac:OrderLineReference>
+            <cbc:LineID>10</cbc:LineID>
+        </cac:OrderLineReference>
+        <!-- BG-27 Line allowance: BT-136 = BT-137 x BT-138 / 100 (ibr-131-ae) -->
+        <cac:AllowanceCharge>
+            <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+            <cbc:AllowanceChargeReasonCode>95</cbc:AllowanceChargeReasonCode>
+            <cbc:AllowanceChargeReason>Promotional discount</cbc:AllowanceChargeReason>
+            <cbc:MultiplierFactorNumeric>5</cbc:MultiplierFactorNumeric>
+            <cbc:Amount currencyID="AED">425.00</cbc:Amount>
+            <cbc:BaseAmount currencyID="AED">8500.00</cbc:BaseAmount>
+        </cac:AllowanceCharge>
+        <!-- BG-28 Line charge -->
+        <cac:AllowanceCharge>
+            <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+            <cbc:AllowanceChargeReasonCode>ABL</cbc:AllowanceChargeReasonCode>
+            <cbc:AllowanceChargeReason>Additional packaging</cbc:AllowanceChargeReason>
+            <cbc:Amount currencyID="AED">125.00</cbc:Amount>
+        </cac:AllowanceCharge>
+        <!-- BTAE-08 VAT line amount in AED; BTAE-10 line amount in AED (both required per ibr-104-ae / ibr-194-ae) -->
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="AED">410.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Description>Ergonomic office chair, mesh back, adjustable lumbar support</cbc:Description>
+            <cbc:Name>Ergonomic office chair</cbc:Name>
+            <!-- BT-156 Item buyer's identifier -->
+            <cac:BuyersItemIdentification>
+                <cbc:ID>BUR-CHR-001</cbc:ID>
+            </cac:BuyersItemIdentification>
+            <!-- BT-155 Item seller's identifier -->
+            <cac:SellersItemIdentification>
+                <cbc:ID>ACM-CHR-850</cbc:ID>
+            </cac:SellersItemIdentification>
+            <!-- BT-157 Item standard identifier (GS1 GTIN) -->
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">06291041500039</cbc:ID>
+            </cac:StandardItemIdentification>
+            <!-- BT-159 Item country of origin -->
+            <cac:OriginCountry>
+                <cbc:IdentificationCode>CN</cbc:IdentificationCode>
+            </cac:OriginCountry>
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>G</cbc:CommodityCode>
+                <cbc:ItemClassificationCode listID="HS">9401.39.00</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+            <!-- BG-32 Item attributes -->
+            <cac:AdditionalItemProperty>
+                <cbc:Name>Colour</cbc:Name>
+                <cbc:Value>Black</cbc:Value>
+            </cac:AdditionalItemProperty>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="AED">850.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+            <!-- IBT-148 Item gross price (required per ibr-126-ae; 0.00 discount = gross equals net) -->
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="AED">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="AED">850.00</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <!-- Line 2: exempt financial service; no line VAT amount on an exempt line (ibr-163-ae) -->
+    <cac:InvoiceLine>
+        <cbc:ID>2</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="C62">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="AED">120.00</cbc:LineExtensionAmount>
+        <cac:Item>
+            <cbc:Description>Interest on 12-month instalment plan, April 2026</cbc:Description>
+            <cbc:Name>Instalment plan interest</cbc:Name>
+            <cac:AdditionalItemIdentification>
+                <cbc:ID schemeID="SAC">9971.13</cbc:ID>
+            </cac:AdditionalItemIdentification>
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>S</cbc:CommodityCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:TaxExemptionReasonCode>DL8.46.1</cbc:TaxExemptionReasonCode>
+                <cbc:TaxExemptionReason>Certain financial services</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="AED">120.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="C62">1</cbc:BaseQuantity>
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="AED">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="AED">120.00</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <!-- Line 3: out of scope; goods sent from the Muscat warehouse to the buyer's Muscat branch -->
+    <cac:InvoiceLine>
+        <cbc:ID>3</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">20</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="AED">900.00</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Description>Replacement chair castors, shipped from the Muscat warehouse to the buyer's Muscat branch</cbc:Description>
+            <cbc:Name>Chair castors</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>G</cbc:CommodityCode>
+                <cbc:ItemClassificationCode listID="HS">8302.20.00</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>O</cbc:ID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="AED">45.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="AED">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="AED">45.00</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <!-- Line 4: domestic reverse charge (NatureCode, GTIN and buyer TRN required) -->
+    <cac:InvoiceLine>
+        <cbc:ID>4</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">5</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="AED">12000.00</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Description>Smartphone, 512 GB, dual SIM</cbc:Description>
+            <cbc:Name>Smartphone</cbc:Name>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">06291041500046</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:CommodityClassification>
+                <cbc:NatureCode>DL8.48.8.2</cbc:NatureCode>
+                <cbc:CommodityCode>G</cbc:CommodityCode>
+                <cbc:ItemClassificationCode listID="HS">8517.13.00</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>AE</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="AED">2400.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="AED">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="AED">2400.00</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <!-- Line 5: zero-rated medicines -->
+    <cac:InvoiceLine>
+        <cbc:ID>5</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="AED">2198.50</cbc:LineExtensionAmount>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Description>Insulin glargine 100 units/ml, pre-filled pen, pack of 5</cbc:Description>
+            <cbc:Name>Insulin pens</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>G</cbc:CommodityCode>
+                <cbc:ItemClassificationCode listID="HS">3004.31.00</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>Z</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="AED">219.85</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="AED">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="AED">219.85</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

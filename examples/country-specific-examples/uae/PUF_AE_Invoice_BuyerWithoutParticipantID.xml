@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Buyer Without a Participant Identifier (Predefined Endpoint 9900000098)
+
+    Use Case: A UAE buyer that has not yet implemented Electronic Invoicing and therefore has
+              no Participant Identifier. The invoice carries the predefined buyer electronic
+              address 0235:9900000098, is reported to the FTA and is not delivered over
+              Peppol. Counterpart of the PINT AE example "Standard tax invoice - predefined
+              endpoint".
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 00000000 (no special transaction context)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Acme Trading LLC (Dubai) sells 10 industrial water pumps at AED 100.00 each to Falcon
+    Engineering LLC (Sharjah). Falcon is VAT-registered but not yet on Electronic Invoicing.
+    Net AED 1,000.00 plus AED 50.00 VAT.
+
+    CRITICAL - THE SUPPLIER ALSO ISSUES A REGULAR TAX INVOICE:
+    The Guidelines state that when the buyer has not yet implemented Electronic Invoicing
+    and has no Participant Identifier, the supplier must include 0235:9900000098 on the
+    Electronic Invoice and must also issue a regular Tax Invoice, for example a PDF.
+
+    Key Fields:
+    - BT-49 Buyer electronic address: predefined value 9900000098 under scheme 0235. Pagero
+      also sets it whenever no Participant Identifier resolves for the buyer on a document
+      that is not an export
+    - BT-46 Buyer identifier: on this endpoint the buyer identifier (IBT-046) or the buyer
+      VAT identifier (IBT-048) is mandatory (ibr-135-ae). For a UAE buyer, IBT-046 is the
+      TIN under scheme 0235 (Guidelines V2.0 18.2.2), sent in PUF with @schemeID="AE:TIN"
+    - BT-48 Buyer VAT identifier: the buyer's TRN
+    - BT-47 Buyer legal registration identifier: not required on a predefined endpoint
+      (ibr-149-ae), except on type 480 or 81, where ibr-136-ae requires it
+
+    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 10.2.2 and
+               18.3.3; Peppol PINT BIS Billing AE 1.0.4
+-->
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>INV-AE-NOPID-2026-001</cbc:ID>
+    <cbc:IssueDate>2026-04-15</cbc:IssueDate>
+    <cbc:DueDate>2026-05-15</cbc:DueDate>
+    <cbc:InvoiceTypeCode name="00000000">380</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>Sheikh Zayed Road, Office 1201</cbc:StreetName>
+                <cbc:CityName>Dubai</cbc:CityName>
+                <cbc:CountrySubentity>DXB</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>100000000000003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Acme Trading LLC</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="AE:TL">CN-1234567</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49 Buyer electronic address: predefined value for a buyer without a Participant Identifier -->
+            <cbc:EndpointID schemeID="0235">9900000098</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BT-46 Buyer identifier: the buyer's 10-digit TIN, reported under scheme 0235 -->
+                <cbc:ID schemeID="AE:TIN">1000000300</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>Industrial Area 13, Warehouse 7</cbc:StreetName>
+                <cbc:CityName>Sharjah</cbc:CityName>
+                <cbc:CountrySubentity>SHJ</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer VAT identifier -->
+                <cbc:CompanyID>100000030003003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Falcon Engineering LLC</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means type code: 30 = Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (IBAN). Mandatory when BT-81 is 30 (ibr-192-ae) -->
+            <cbc:ID>AE070331234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 BIC -->
+                <cbc:ID>EBILAEAD</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="AED">50.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="AED">1000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">50.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="AED">1000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="AED">1000.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="AED">1050.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="AED">1050.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="AED">1000.00</cbc:LineExtensionAmount>
+        <!-- BTAE-08 VAT line amount in AED; BTAE-10 line amount in AED (both required per ibr-104-ae / ibr-194-ae) -->
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="AED">50.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Description>Industrial-grade centrifugal water pump, 5HP</cbc:Description>
+            <cbc:Name>Industrial pump</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>G</cbc:CommodityCode>
+                <cbc:ItemClassificationCode listID="HS">8413.70.10</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="AED">100.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+            <!-- IBT-148 Item gross price (required per ibr-126-ae; 0.00 discount = gross equals net) -->
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="AED">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="AED">100.00</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
