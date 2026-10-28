@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Reverse Charge with Document Level Allowance and Charge
+
+    Use Case: A domestic reverse-charge supply that also carries a document level
+              allowance and a document level charge in category AE. Counterpart of the
+              PINT AE examples "Doc-level-allowance-AE-category" and
+              "Doc-level-charge-AE-category".
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 00000000 (reverse charge is signalled by the VAT category,
+                      not by a BTAE-02 flag)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Acme Trading LLC (Dubai) supplies 50 tablet computers at AED 900.00 each to Burj
+    Holdings PJSC (Abu Dhabi) under the domestic reverse charge mechanism. A 2% volume
+    rebate of AED 900.00 is deducted and AED 450.00 insured freight is added at document
+    level. Taxable amount AED 44,550.00, VAT AED 0.00.
+
+    CRITICAL - THE VAT RATE DIFFERS BY LEVEL FOR CATEGORY AE:
+    The line and the VAT breakdown carry the statutory rate 5.00, but a document level
+    allowance or charge in category AE MUST carry rate 0.00 (aligned-ibrp-ae-06,
+    aligned-ibrp-ae-07). The allowance and the charge still adjust the AE taxable amount
+    (aligned-ibrp-ae-08-ae).
+
+    Key Fields:
+    - BG-20 Document level allowance: reason code 95 (Discount) with percentage and base
+      amount; the amount must equal base x percentage / 100 (ibr-131-ae)
+    - BG-21 Document level charge: reason code FC (Freight service)
+    - BT-95 / BT-102 Allowance and charge VAT category AE with rate 0.00
+    - BT-48 Buyer VAT identifier: mandatory with category AE (ibr-103-ae)
+    - BTAE-09 Type of goods or services DL8.48.8.2 (Electronic devices) on
+      cac:CommodityClassification/cbc:NatureCode (ibr-006-ae, ibr-166-ae)
+    - BT-157 GS1 GTIN with scheme 0160 on the reverse-charge line (ibr-174-ae)
+    - BTAE-08 Line VAT amount zero on the reverse-charge line (ibr-162-ae)
+
+    Reference: Peppol PINT BIS Billing AE 1.0.4
+-->
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>INV-AE-RCAC-2026-001</cbc:ID>
+    <cbc:IssueDate>2026-04-15</cbc:IssueDate>
+    <cbc:DueDate>2026-05-15</cbc:DueDate>
+    <cbc:InvoiceTypeCode name="00000000">380</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>Sheikh Zayed Road, Office 1201</cbc:StreetName>
+                <cbc:CityName>Dubai</cbc:CityName>
+                <cbc:CountrySubentity>DXB</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>100000000000003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Acme Trading LLC</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="AE:TL">CN-1234567</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0235">1000000100</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-11 Buyer legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Abu Dhabi Department of Economic Development</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>Khalifa Street, Tower 5</cbc:StreetName>
+                <cbc:CityName>Abu Dhabi</cbc:CityName>
+                <cbc:CountrySubentity>AUH</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <!-- BT-48 Buyer VAT identifier: mandatory with category AE (ibr-103-ae) -->
+                <cbc:CompanyID>100000010001003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Burj Holdings PJSC</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="AE:TL">CN-1001003</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means type code: 30 = Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (IBAN). Mandatory when BT-81 is 30 (ibr-192-ae) -->
+            <cbc:ID>AE070331234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 BIC -->
+                <cbc:ID>EBILAEAD</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BG-20 Document level allowance in category AE: the rate MUST be 0 (aligned-ibrp-ae-06) -->
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+        <!-- BT-98 Allowance reason code (UNCL5189) and BT-97 reason text -->
+        <cbc:AllowanceChargeReasonCode>95</cbc:AllowanceChargeReasonCode>
+        <cbc:AllowanceChargeReason>Volume rebate</cbc:AllowanceChargeReason>
+        <!-- BT-94 Percentage; BT-92 amount = BT-93 base amount x BT-94 / 100 (ibr-131-ae) -->
+        <cbc:MultiplierFactorNumeric>2</cbc:MultiplierFactorNumeric>
+        <cbc:Amount currencyID="AED">900.00</cbc:Amount>
+        <cbc:BaseAmount currencyID="AED">45000.00</cbc:BaseAmount>
+        <cac:TaxCategory>
+            <cbc:ID>AE</cbc:ID>
+            <cbc:Percent>0.00</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <!-- BG-21 Document level charge in category AE: the rate MUST be 0 (aligned-ibrp-ae-07) -->
+    <cac:AllowanceCharge>
+        <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+        <!-- BT-105 Charge reason code (UNCL7161) and BT-104 reason text -->
+        <cbc:AllowanceChargeReasonCode>FC</cbc:AllowanceChargeReasonCode>
+        <cbc:AllowanceChargeReason>Insured freight to buyer warehouse</cbc:AllowanceChargeReason>
+        <cbc:Amount currencyID="AED">450.00</cbc:Amount>
+        <cac:TaxCategory>
+            <cbc:ID>AE</cbc:ID>
+            <cbc:Percent>0.00</cbc:Percent>
+            <cac:TaxScheme>
+                <cbc:ID>VAT</cbc:ID>
+            </cac:TaxScheme>
+        </cac:TaxCategory>
+    </cac:AllowanceCharge>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- BT-116 = line net 45,000.00 - allowance 900.00 + charge 450.00 -->
+            <cbc:TaxableAmount currencyID="AED">44550.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>AE</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="AED">45000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="AED">44550.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="AED">44550.00</cbc:TaxInclusiveAmount>
+        <!-- BT-107 Sum of allowances; BT-108 sum of charges -->
+        <cbc:AllowanceTotalAmount currencyID="AED">900.00</cbc:AllowanceTotalAmount>
+        <cbc:ChargeTotalAmount currencyID="AED">450.00</cbc:ChargeTotalAmount>
+        <cbc:PayableAmount currencyID="AED">44550.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">50</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="AED">45000.00</cbc:LineExtensionAmount>
+        <!-- BTAE-08 VAT line amount: zero on a reverse-charge line (ibr-162-ae) -->
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Description>Tablet computer, 11 inch, 256 GB, Wi-Fi</cbc:Description>
+            <cbc:Name>Tablet computer</cbc:Name>
+            <!-- BT-157 GS1 GTIN, mandatory on reverse-charge lines (ibr-174-ae) -->
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">06291041500022</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:CommodityClassification>
+                <!-- BTAE-09 Type of goods or services subject to RCM: DL8.48.8.2 Electronic devices -->
+                <cbc:NatureCode>DL8.48.8.2</cbc:NatureCode>
+                <cbc:CommodityCode>G</cbc:CommodityCode>
+                <cbc:ItemClassificationCode listID="HS">8471.30.00</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <!-- Line rate stays 5.00 (aligned-ibrp-ae-05-ae) -->
+                <cbc:ID>AE</cbc:ID>
+                <cbc:Percent>5.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="AED">900.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+            <!-- IBT-148 Item gross price (required per ibr-126-ae; 0.00 discount = gross equals net) -->
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="AED">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="AED">900.00</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>

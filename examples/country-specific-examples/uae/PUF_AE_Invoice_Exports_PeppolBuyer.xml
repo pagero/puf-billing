@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    PUF Invoice Example: Export to a Buyer on Peppol (Foreign Currency)
+
+    Use Case: A zero-rated export, invoiced in US dollars, to a foreign buyer that is
+              registered in Peppol under its own participant identifier. Counterpart of the
+              PINT AE example "Exports". PUF_AE_Invoice_Exports.xml shows the same supply
+              to a buyer that is not on Peppol.
+
+    Country: United Arab Emirates
+    Format: PUF (Pagero Universal Format) 2.0
+    Document Type: Tax Invoice (Type 380)
+    Transaction Type: BTAE-02 = 00000001 (position 8 = Exports)
+    Target Format: Peppol PINT BIS Billing AE 1.0.4
+
+    Scenario Description:
+    Acme Aluminium Extrusions LLC (Dubai) exports 1,500 kg of aluminium extrusion profiles
+    at USD 6.00 per kg to Southern Cross Building Supplies Pty Ltd in Kewdale, Western
+    Australia. Net USD 9,000.00, zero rated. The AED equivalent at 1 USD = 3.6725 AED is
+    AED 33,052.50.
+
+    CRITICAL - THE BUYER ENDPOINT DEPENDS ON HOW THE BUYER IS REACHED:
+    The buyer's own Peppol participant identifier is sent in cbc:EndpointID, here an
+    Australian Business Number under scheme 0151. Pagero keeps it when the buyer is reached
+    over Peppol. When it is not, Pagero reports the predefined endpoint 0235:9900000099
+    instead (Guidelines V2.0 18.3.3), whatever the file contains. A test run without
+    Pagero Online routing therefore shows 9900000099.
+
+    Key Fields:
+    - BT-49 Buyer electronic address: the buyer's own Peppol identifier and scheme
+    - BT-5 USD with BT-6 tax accounting currency AED (ibr-140-ae) and the BTAE-04 exchange
+      rate (ibr-159-ae); AED amounts in the PUF extensions, as in
+      PUF_AE_Invoice_Foreign_Currency.xml
+    - BG-13 Delivery outside the UAE: address line 1, city and country subdivision
+      (ibr-152-ae)
+    - BTAE-22 Incoterms on cac:DeliveryTerms/cbc:ID (ibr-196-ae)
+    - BTAE-21 Customs reference number: the export declaration with schemeID ED
+    - BT-151 / BT-118 VAT category Z with rate 0.00
+
+    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 18.2.3 and
+               18.3.3; Peppol PINT BIS Billing AE 1.0.4
+-->
+<Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
+    <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:pagero.com:puf:billing:1.0</cbc:ProfileID>
+    <cbc:ID>INV-AE-EXPP-2026-001</cbc:ID>
+    <cbc:IssueDate>2026-04-15</cbc:IssueDate>
+    <cbc:DueDate>2026-05-15</cbc:DueDate>
+    <!-- BTAE-02 = 00000001 (Exports flag in position 8) -->
+    <cbc:InvoiceTypeCode name="00000001">380</cbc:InvoiceTypeCode>
+    <!-- IBT-005 Document currency = USD (foreign) -->
+    <cbc:DocumentCurrencyCode>USD</cbc:DocumentCurrencyCode>
+    <!-- IBT-006 Tax accounting currency MUST be AED when document currency is not AED (ibr-140-ae, ibr-175-ae) -->
+    <cbc:TaxCurrencyCode>AED</cbc:TaxCurrencyCode>
+    <cac:AdditionalDocumentReference>
+        <!-- BTAE-21 Customs reference number: export declaration (schemeID ED) -->
+        <cbc:ID schemeID="ED">EXP010105678</cbc:ID>
+    </cac:AdditionalDocumentReference>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <!-- BTAE-12 Seller legal registration authority (issuer of the trade license) -->
+                <cbc:ID schemeID="AE:LRA">Department of Economic Development - Dubai</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PostalAddress>
+                <cbc:StreetName>Jebel Ali Industrial Area 1, Street 12</cbc:StreetName>
+                <cbc:CityName>Dubai</cbc:CityName>
+                <cbc:CountrySubentity>DXB</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>100000000000003</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Acme Aluminium Extrusions LLC</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="AE:TL">CN-1234567</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <!-- BT-49 Buyer electronic address: the buyer's own Peppol identifier, here an
+                 Australian Business Number under scheme 0151 -->
+            <cbc:EndpointID schemeID="0151">98000000470</cbc:EndpointID>
+            <cac:PostalAddress>
+                <cbc:StreetName>12 Kewdale Road</cbc:StreetName>
+                <cbc:CityName>Kewdale</cbc:CityName>
+                <!-- BT-54 Buyer country subdivision: mandatory whatever the country (ibr-144-ae) -->
+                <cbc:CountrySubentity>WA</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AU</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Southern Cross Building Supplies Pty Ltd</cbc:RegistrationName>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <!-- Mandatory delivery details for exports per ibr-152-ae; deliver-to country MUST NOT be AE -->
+    <cac:Delivery>
+        <cbc:ActualDeliveryDate>2026-05-02</cbc:ActualDeliveryDate>
+        <cac:DeliveryLocation>
+            <cac:Address>
+                <cbc:StreetName>12 Kewdale Road</cbc:StreetName>
+                <cbc:CityName>Kewdale</cbc:CityName>
+                <cbc:CountrySubentity>WA</cbc:CountrySubentity>
+                <cac:Country>
+                    <cbc:IdentificationCode>AU</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+    </cac:Delivery>
+    <cac:DeliveryTerms>
+        <!-- Incoterms (BTAE-22) -->
+        <cbc:ID>CIF</cbc:ID>
+    </cac:DeliveryTerms>
+    <cac:PaymentMeans>
+        <!-- BT-81 Payment means type code: 30 = Credit transfer -->
+        <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+        <cac:PayeeFinancialAccount>
+            <!-- BT-84 Payment account identifier (IBAN). Mandatory when BT-81 is 30 (ibr-192-ae) -->
+            <cbc:ID>AE070331234567890123456</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <!-- BT-86 BIC -->
+                <cbc:ID>EBILAEAD</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <!-- BTAE-04 Currency exchange rate. Source must be document currency, target must be tax currency
+         (ibr-153-ae). Rate must contain at most 6 decimals (ibr-002-ae). -->
+    <cac:TaxExchangeRate>
+        <cbc:SourceCurrencyCode>USD</cbc:SourceCurrencyCode>
+        <cbc:TargetCurrencyCode>AED</cbc:TargetCurrencyCode>
+        <cbc:CalculationRate>3.6725</cbc:CalculationRate>
+        <cbc:MathematicOperatorCode>Multiply</cbc:MathematicOperatorCode>
+    </cac:TaxExchangeRate>
+    <!-- IBT-110 Total VAT amount in document currency (USD) -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="USD">0.00</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <!-- IBT-190 Per-category tax amount in accounting currency (AED) carried via PUF extension -->
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:TaxSubtotalExtension</ext:ExtensionURI>
+                    <ext:ExtensionContent>
+                        <puf:PageroExtension>
+                            <puf:TaxSubtotalExtension>
+                                <puf:TaxCurrencyTaxAmount currencyID="AED">0.00</puf:TaxCurrencyTaxAmount>
+                            </puf:TaxSubtotalExtension>
+                        </puf:PageroExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+            <cbc:TaxableAmount currencyID="USD">9000.00</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="USD">0.00</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <!-- Zero-rated export -->
+                <cbc:ID>Z</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <!-- IBT-111 Total VAT amount in tax accounting currency (AED), required by ibr-175-ae -->
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <!-- BTAE-20 Invoice total amount with VAT in AED, carried via PUF LegalMonetaryTotalExtension -->
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LegalMonetaryTotalExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LegalMonetaryTotalExtension>
+                            <puf:TaxCurrencyTaxInclusiveAmount currencyID="AED">33052.50</puf:TaxCurrencyTaxInclusiveAmount>
+                        </puf:LegalMonetaryTotalExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:LineExtensionAmount currencyID="USD">9000.00</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="USD">9000.00</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="USD">9000.00</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="USD">9000.00</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <!-- BTAE-10 Invoice line amount with VAT in AED, carried via PUF LineExtension -->
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:LineExtension</ext:ExtensionURI>
+                <ext:ExtensionContent>
+                    <puf:PageroExtension>
+                        <puf:LineExtension>
+                            <puf:TaxCurrencyTaxInclusiveLineExtensionAmount currencyID="AED">33052.50</puf:TaxCurrencyTaxInclusiveLineExtensionAmount>
+                        </puf:LineExtension>
+                    </puf:PageroExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+        <cbc:ID>1</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="KGM">1500</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="USD">9000.00</cbc:LineExtensionAmount>
+        <!-- BTAE-08 VAT line amount in AED: a second cac:TaxTotal with currencyID="AED" (ibr-104-ae) -->
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="USD">0.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="AED">0.00</cbc:TaxAmount>
+        </cac:TaxTotal>
+        <cac:Item>
+            <cbc:Description>Aluminium extrusion profiles, alloy 6063-T5, mill finish</cbc:Description>
+            <cbc:Name>Aluminium extrusion profiles</cbc:Name>
+            <cac:CommodityClassification>
+                <cbc:CommodityCode>G</cbc:CommodityCode>
+                <cbc:ItemClassificationCode listID="HS">7604.29.10</cbc:ItemClassificationCode>
+            </cac:CommodityClassification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>Z</cbc:ID>
+                <cbc:Percent>0.00</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="USD">6.00</cbc:PriceAmount>
+            <cbc:BaseQuantity unitCode="KGM">1</cbc:BaseQuantity>
+            <!-- IBT-148 Item gross price (required per ibr-126-ae; 0.00 discount = gross equals net) -->
+            <cac:AllowanceCharge>
+                <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                <cbc:Amount currencyID="USD">0.00</cbc:Amount>
+                <cbc:BaseAmount currencyID="USD">6.00</cbc:BaseAmount>
+            </cac:AllowanceCharge>
+        </cac:Price>
+    </cac:InvoiceLine>
+</Invoice>
