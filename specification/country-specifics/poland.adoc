@@ -98,6 +98,10 @@ Each key-value pair is sent as one `puf:RestrictedInformation` entry. Use multip
 |VAT margin scheme type (`P_PMarzy` sub-type).
 |Required when `marginScheme=true`. Valid values: `travelAgency` (Art. 119); `3` (Art. 120 sec. 4/5 — second-hand goods); `1` (Art. 120 — works of art); `2` (Art. 120 — collectors items and antiques).
 
+|`hashOfCorrectedInvoice`
+|SHA-256 hash of the rejected invoice file that is being technically corrected (KSeF `hashOfCorrectedInvoice`).
+|Required only when resending an invoice as a technical correction, see *Technical correction of a rejected offline invoice*. The value is the SHA-256 hash of the rejected XML file, Base64-encoded (44 characters). Omit for all other invoices.
+
 |===
 
 *Example* +
@@ -136,6 +140,37 @@ _Document-level RestrictedInformation entries_
                     <puf:RestrictedInformation>
                         <puf:Key>NrKSeFFaZaliczkowej</puf:Key>
                         <puf:Value>9999999999-20230908-76B2B580D4DC-80</puf:Value>
+                    </puf:RestrictedInformation>
+                </puf:PageroExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <!-- Code omitted for clarity -->
+</Invoice>
+----
+
+==== Technical correction of a rejected offline invoice
+
+KSeF allows a technical correction when an invoice issued in offline mode is rejected on submission, for example because it does not conform to the FA(3) logical structure. The sender fixes the file and resends it, declaring the hash of the rejected file so that the buyer can still verify the invoice in KSeF with the QR code already issued. A technical correction is a resubmission of the same invoice. It is not a corrective invoice (`KOR`).
+
+To declare it, send the hash of the rejected invoice file in the document-level `puf:RestrictedInformation` key `hashOfCorrectedInvoice`. The hash is not transformed into the FA(3) invoice XML. Instead, it is sent to KSeF as a parameter in the API call that submits the technical correction.
+
+NOTE: The hash of the rejected invoice can be found in the response from KSeF and in the clearance view in Pagero Online.
+
+*Example* +
+_Technical correction with the hash of the rejected invoice_
+[source,xml]
+----
+<Invoice>
+    <!-- Code omitted for clarity -->
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionURI>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation</ext:ExtensionURI>
+            <ext:ExtensionContent>
+                <puf:PageroExtension>
+                    <puf:RestrictedInformation>
+                        <puf:Key>hashOfCorrectedInvoice</puf:Key>
+                        <puf:Value>Zm9vYmFyn4bQgYhMfWWaL+qgxVrQFaO/TxsrC4Is0V1sFbDwCgg=</puf:Value>
                     </puf:RestrictedInformation>
                 </puf:PageroExtension>
             </ext:ExtensionContent>
