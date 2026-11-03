@@ -32,6 +32,8 @@ Invoice e-reporting uses the standard PUF Invoice format with additional metadat
 | `reportPeriodEnd` | End of reporting period | YYYY-MM-DD |
 | `transmissionType` | Report transmission type | `ADD`, `EDIT`, `REPLACE_PERIOD` (only if not a plain initial submission; `RECTIFICATION` is a legacy alias still accepted for `REPLACE_PERIOD`) |
 | `taxReportId` | Identifier of the (re-)report — maps to `taxReport/taxReportId` | Free text (set on ADD/EDIT/REPLACE_PERIOD) |
+| `TaxDueDateTypeCode` | Code for the date on which VAT becomes chargeable, for a transaction (receipt) report. Optional | `3`, `35`, `432` (UNTDID 2005) or `5`, `29`, `72` (UNTDID 2475) |
+| `sendingBusinessUnit` | Source system or department that sent the report — maps to `taxReport/sendingBusinessUnit` | Free text |
 | `referencedReportId` | Reference to the report/document being corrected. For `ADD`/`REPLACE_PERIOD`, the aggregatedId of the Approved aggregated report. For `EDIT`, the exact `taxReportId` of the specific previously sent document being corrected | Free text (set on ADD/EDIT/REPLACE_PERIOD) |
 
 ## Classification via ProfileID
