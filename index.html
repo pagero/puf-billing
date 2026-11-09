@@ -818,15 +818,16 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel3">
 <li><a href="#_document_types">5.13.1. Document types</a></li>
 <li><a href="#_restrictedinformation_document_level">5.13.2. RestrictedInformation (document level)</a></li>
-<li><a href="#_restrictedinformation_line_level">5.13.3. RestrictedInformation (line level)</a></li>
-<li><a href="#_multi_party_scenarios">5.13.4. Multi-party scenarios</a></li>
-<li><a href="#_full_payment_indicator_date">5.13.5. Full payment indicator &amp; date</a></li>
-<li><a href="#_tax_category_id_and_tax_type">5.13.6. Tax category ID and tax type</a></li>
-<li><a href="#_buyer_identifiers">5.13.7. Buyer identifiers</a></li>
-<li><a href="#_tsp_commodity_code">5.13.8. TSP commodity code</a></li>
-<li><a href="#_original_line_indicator">5.13.9. Original line indicator</a></li>
-<li><a href="#_split_payment">5.13.10. Split payment</a></li>
-<li><a href="#_document_reference_in_corrected_invoice">5.13.11. Document reference in corrected invoice</a></li>
+<li><a href="#_technical_correction_of_a_rejected_offline_invoice">5.13.3. Technical correction of a rejected offline invoice</a></li>
+<li><a href="#_restrictedinformation_line_level">5.13.4. RestrictedInformation (line level)</a></li>
+<li><a href="#_multi_party_scenarios">5.13.5. Multi-party scenarios</a></li>
+<li><a href="#_full_payment_indicator_date">5.13.6. Full payment indicator &amp; date</a></li>
+<li><a href="#_tax_category_id_and_tax_type">5.13.7. Tax category ID and tax type</a></li>
+<li><a href="#_buyer_identifiers">5.13.8. Buyer identifiers</a></li>
+<li><a href="#_tsp_commodity_code">5.13.9. TSP commodity code</a></li>
+<li><a href="#_original_line_indicator">5.13.10. Original line indicator</a></li>
+<li><a href="#_split_payment">5.13.11. Split payment</a></li>
+<li><a href="#_document_reference_in_corrected_invoice">5.13.12. Document reference in corrected invoice</a></li>
 </ul>
 </li>
 <li><a href="#_portugal">5.14. Portugal</a>
@@ -16618,7 +16619,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 <td class="tableblock halign-left valign-top"><p class="tableblock">Boolean <code>true</code> or <code>false</code>. Required when the invoice is issued under the simplified procedure referred to in Art. 135 sec. 1 point 4 of the Act. If omitted, non-simplified procedure is assumed.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FP</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Indicator if the invoice is referred to in Art. 109 sec. 3d of the Act.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Boolean <code>true</code> or <code>false</code>.</p></td>
 </tr>
@@ -16631,6 +16632,11 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>marginSchemeType</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">VAT margin scheme type (<code>P_PMarzy</code> sub-type).</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Required when <code>marginScheme=true</code>. Valid values: <code>travelAgency</code> (Art. 119); <code>3</code> (Art. 120 sec. 4/5 — second-hand goods); <code>1</code> (Art. 120 — works of art); <code>2</code> (Art. 120 — collectors items and antiques).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hashOfCorrectedInvoice</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SHA-256 hash of the rejected invoice file that is being technically corrected (KSeF <code>hashOfCorrectedInvoice</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Required only when resending an invoice as a technical correction, see <strong>Technical correction of a rejected offline invoice</strong>. The value is the SHA-256 hash of the rejected XML file, Base64-encoded (44 characters). Omit for all other invoices.</p></td>
 </tr>
 </tbody>
 </table>
@@ -16683,7 +16689,53 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_restrictedinformation_line_level"><a class="anchor" href="#_restrictedinformation_line_level"></a><a class="link" href="#_restrictedinformation_line_level">5.13.3. RestrictedInformation (line level)</a></h4>
+<h4 id="_technical_correction_of_a_rejected_offline_invoice"><a class="anchor" href="#_technical_correction_of_a_rejected_offline_invoice"></a><a class="link" href="#_technical_correction_of_a_rejected_offline_invoice">5.13.3. Technical correction of a rejected offline invoice</a></h4>
+<div class="paragraph">
+<p>KSeF allows a technical correction when an invoice issued in offline mode is rejected on submission, for example because it does not conform to the FA(3) logical structure. The sender fixes the file and resends it, declaring the hash of the rejected file so that the buyer can still verify the invoice in KSeF with the QR code already issued. A technical correction is a resubmission of the same invoice. It is not a corrective invoice (<code>KOR</code>).</p>
+</div>
+<div class="paragraph">
+<p>To declare it, send the hash of the rejected invoice file in the document-level <code>puf:RestrictedInformation</code> key <code>hashOfCorrectedInvoice</code>. The hash is not transformed into the FA(3) invoice XML. Instead, it is sent to KSeF as a parameter in the API call that submits the technical correction.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The hash of the rejected invoice can be found in the response from KSeF and in the clearance view in Pagero Online.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Technical correction with the hash of the rejected invoice</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+    <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+        <span class="tag">&lt;ext:UBLExtension&gt;</span>
+            <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformation<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+            <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+                <span class="tag">&lt;puf:PageroExtension&gt;</span>
+                    <span class="tag">&lt;puf:RestrictedInformation&gt;</span>
+                        <span class="tag">&lt;puf:Key&gt;</span>hashOfCorrectedInvoice<span class="tag">&lt;/puf:Key&gt;</span>
+                        <span class="tag">&lt;puf:Value&gt;</span>Zm9vYmFyn4bQgYhMfWWaL+qgxVrQFaO/TxsrC4Is0V1sFbDwCgg=<span class="tag">&lt;/puf:Value&gt;</span>
+                    <span class="tag">&lt;/puf:RestrictedInformation&gt;</span>
+                <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+            <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+    <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_restrictedinformation_line_level"><a class="anchor" href="#_restrictedinformation_line_level"></a><a class="link" href="#_restrictedinformation_line_level">5.13.4. RestrictedInformation (line level)</a></h4>
 <div class="paragraph">
 <p>Line-level keys are carried inside <code>puf:LineExtension</code> using:</p>
 </div>
@@ -16768,7 +16820,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_multi_party_scenarios"><a class="anchor" href="#_multi_party_scenarios"></a><a class="link" href="#_multi_party_scenarios">5.13.4. Multi-party scenarios</a></h4>
+<h4 id="_multi_party_scenarios"><a class="anchor" href="#_multi_party_scenarios"></a><a class="link" href="#_multi_party_scenarios">5.13.5. Multi-party scenarios</a></h4>
 <div class="paragraph">
 <p>Poland&#8217;s KSeF supports additional parties beyond the standard seller and buyer. These are mapped using <code>puf:RestrictedInformationParty</code> at document level. The following keys are supported:</p>
 </div>
@@ -16898,7 +16950,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_full_payment_indicator_date"><a class="anchor" href="#_full_payment_indicator_date"></a><a class="link" href="#_full_payment_indicator_date">5.13.5. Full payment indicator &amp; date</a></h4>
+<h4 id="_full_payment_indicator_date"><a class="anchor" href="#_full_payment_indicator_date"></a><a class="link" href="#_full_payment_indicator_date">5.13.6. Full payment indicator &amp; date</a></h4>
 <div class="paragraph">
 <p>Indicator that the invoice amount has been paid in full and the date the payment was made. Populate this field only if the full amount was paid in advance.</p>
 </div>
@@ -16928,7 +16980,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tax_category_id_and_tax_type"><a class="anchor" href="#_tax_category_id_and_tax_type"></a><a class="link" href="#_tax_category_id_and_tax_type">5.13.6. Tax category ID and tax type</a></h4>
+<h4 id="_tax_category_id_and_tax_type"><a class="anchor" href="#_tax_category_id_and_tax_type"></a><a class="link" href="#_tax_category_id_and_tax_type">5.13.7. Tax category ID and tax type</a></h4>
 <div class="paragraph">
 <p>For Poland, both the tax category identifier (<code>cbc:ID</code>) and the tax type (<code>cbc:Name</code>) are required on non-standard tax categories. Valid values for both can be found in <a href="https://pagero.github.io/puf-code-lists/#_tax_category_codes_poland" target="_blank" rel="noopener">Tax category codes Poland</a>.</p>
 </div>
@@ -16987,7 +17039,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_buyer_identifiers"><a class="anchor" href="#_buyer_identifiers"></a><a class="link" href="#_buyer_identifiers">5.13.7. Buyer identifiers</a></h4>
+<h4 id="_buyer_identifiers"><a class="anchor" href="#_buyer_identifiers"></a><a class="link" href="#_buyer_identifiers">5.13.8. Buyer identifiers</a></h4>
 <div class="paragraph">
 <p>For non-EU buyers who do not have a Polish NIP or EU VAT number (e.g. export invoices), use <code>cac:PartyIdentification/cbc:ID</code> with a <code>schemeID</code> following the pattern <code>[CC]:TaxID</code>, where <code>[CC]</code> is the ISO 3166-1 alpha-2 country code of the buyer (e.g. <code>US:TaxID</code>, <code>GB:TaxID</code>).</p>
 </div>
@@ -16996,13 +17048,13 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tsp_commodity_code"><a class="anchor" href="#_tsp_commodity_code"></a><a class="link" href="#_tsp_commodity_code">5.13.8. TSP commodity code</a></h4>
+<h4 id="_tsp_commodity_code"><a class="anchor" href="#_tsp_commodity_code"></a><a class="link" href="#_tsp_commodity_code">5.13.9. TSP commodity code</a></h4>
 <div class="paragraph">
 <p>The Combined Nomenclature commodity classification code (<code>TSP</code>) is set at line level using <code>cac:CommodityClassification/cbc:ItemClassificationCode</code> with <code>listID="TSP"</code>. Used when goods must be classified under the EU Combined Nomenclature (e.g. for intra-Community supply). Repeatable for multiple classifications.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_original_line_indicator"><a class="anchor" href="#_original_line_indicator"></a><a class="link" href="#_original_line_indicator">5.13.9. Original line indicator</a></h4>
+<h4 id="_original_line_indicator"><a class="anchor" href="#_original_line_indicator"></a><a class="link" href="#_original_line_indicator">5.13.10. Original line indicator</a></h4>
 <div class="paragraph">
 <p>There are three ways to correct a line in Poland, and PUF supports all three. This element applies to Method 1, where an indicator flags the line being corrected. When set, the indicator voids the original line.</p>
 </div>
@@ -17037,7 +17089,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_split_payment"><a class="anchor" href="#_split_payment"></a><a class="link" href="#_split_payment">5.13.10. Split payment</a></h4>
+<h4 id="_split_payment"><a class="anchor" href="#_split_payment"></a><a class="link" href="#_split_payment">5.13.11. Split payment</a></h4>
 <div class="paragraph">
 <p>To indicate a split payment, set the Tax Chargeability Code to:</p>
 </div>
@@ -17080,7 +17132,7 @@ The document type Credit Note (<code>381</code>) is not accepted by KSeF.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_document_reference_in_corrected_invoice"><a class="anchor" href="#_document_reference_in_corrected_invoice"></a><a class="link" href="#_document_reference_in_corrected_invoice">5.13.11. Document reference in corrected invoice</a></h4>
+<h4 id="_document_reference_in_corrected_invoice"><a class="anchor" href="#_document_reference_in_corrected_invoice"></a><a class="link" href="#_document_reference_in_corrected_invoice">5.13.12. Document reference in corrected invoice</a></h4>
 <div class="paragraph">
 <p>To forward the details of the invoice being corrected, in a corrected invoice (KOR) the following fields can be used:</p>
 </div>
