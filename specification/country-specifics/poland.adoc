@@ -86,7 +86,7 @@ Each key-value pair is sent as one `puf:RestrictedInformation` entry. Use multip
 |Simplified triangular procedure indicator (`P_TTP`).
 |Boolean `true` or `false`. Required when the invoice is issued under the simplified procedure referred to in Art. 135 sec. 1 point 4 of the Act. If omitted, non-simplified procedure is assumed.
 
-|`fp`
+|`FP`
 |Indicator if the invoice is referred to in Art. 109 sec. 3d of the Act.
 |Boolean `true` or `false`.
 
