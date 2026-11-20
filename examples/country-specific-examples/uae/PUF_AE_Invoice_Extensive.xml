@@ -13,7 +13,7 @@
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 10001010 (position 1 Free Trade Zone, position 5
                       Continuous Supply, position 7 E-Commerce)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Acme Trading LLC (Dubai) bills Burj Holdings PJSC (Abu Dhabi) for April 2026 under a
@@ -26,7 +26,9 @@
     Key Fields (in document order):
     - IBT-168 Issue time; BT-22 note; BT-7 VAT point date, before the issue date
       (ibr-141-ae); BT-19 buyer accounting reference; BT-10 buyer reference
-    - BG-14 Invoicing period; BT-13 / BT-14 purchase and sales order references; BG-3
+    - BG-14 Invoicing period with IBT-008 Frequency of billing MTH in
+      cac:InvoicePeriod/cbc:DescriptionCode (ibr-005-ae); BT-13 / BT-14 purchase and sales
+      order references; BG-3
       preceding invoice; BT-16 despatch advice; BT-15 receiving advice; BT-17 tender
       reference; BT-12 contract, with the contract value BTAE-05 in DocumentDescription;
       BG-24 supporting documents by URI and embedded; BT-11 project reference
@@ -46,12 +48,8 @@
       reference, BT-156 / BT-155 / BT-157 item identifiers, BT-159 country of origin,
       BG-32 item attributes
 
-    Not shown: BTAE-06 Frequency of billing. The PINT AE 1.0.4 syntax binds it to
-    cac:InvoicePeriod/cbc:Description, while rules ibr-005-ae and ibr-160-ae validate
-    cac:InvoicePeriod/cbc:DescriptionCode.
-
     Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 10.2.2;
-               Peppol PINT BIS Billing AE 1.0.4
+               Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <ext:UBLExtensions>
@@ -94,6 +92,8 @@
     <cac:InvoicePeriod>
         <cbc:StartDate>2026-04-01</cbc:StartDate>
         <cbc:EndDate>2026-04-30</cbc:EndDate>
+        <!-- IBT-008 Frequency of billing: MTH = Monthly (ibr-005-ae) -->
+        <cbc:DescriptionCode>MTH</cbc:DescriptionCode>
     </cac:InvoicePeriod>
     <cac:OrderReference>
         <!-- BT-13 Purchase order reference; BT-14 sales order reference -->
@@ -139,7 +139,7 @@
         <cbc:ID>DR-2026-04</cbc:ID>
         <cbc:DocumentDescription>Delivery report April 2026</cbc:DocumentDescription>
         <cac:Attachment>
-            <cbc:EmbeddedDocumentBinaryObject mimeCode="application/pdf" filename="Delivery_report_April_2026.pdf">JVBERi0xLjQKJSVFT0YK</cbc:EmbeddedDocumentBinaryObject>
+            <cbc:EmbeddedDocumentBinaryObject mimeCode="application/pdf" filename="Delivery_report_April_2026.pdf">JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA1OTUgODQyXSAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA0IDAgUiA+PiA+PiAvQ29udGVudHMgNSAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggMTUwID4+CnN0cmVhbQpCVCAvRjEgMTggVGYgNzIgNzcwIFRkIChEZWxpdmVyeSByZXBvcnQgQXByaWwgMjAyNikgVGogMCAtMjggVGQgL0YxIDExIFRmIChTeW50aGV0aWMgYXR0YWNobWVudCBmb3IgdGhlIFBVRiBCaWxsaW5nIFVBRSBleGFtcGxlcy4gTm8gcmVhbCBkYXRhLikgVGogRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMDA2NCAwMDAwMCBuIAowMDAwMDAwMTIxIDAwMDAwIG4gCjAwMDAwMDAyNDcgMDAwMDAgbiAKMDAwMDAwMDMxNyAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjUxOAolJUVPRgo=</cbc:EmbeddedDocumentBinaryObject>
         </cac:Attachment>
     </cac:AdditionalDocumentReference>
     <!-- BT-11 Project reference -->

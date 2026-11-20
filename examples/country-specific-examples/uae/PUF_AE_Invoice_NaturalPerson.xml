@@ -10,7 +10,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00000000 (no special transaction context)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Jane Doe, an independent consultant VAT-registered as a sole practitioner in Dubai,
@@ -31,11 +31,11 @@
       (ibr-012-ae). ISO 3166-1 alpha-2, carried on cac:PartyIdentification with
       @schemeID="AE:PASSPORT_COUNTRY"
     - BT-31 TRN: still present - a natural person can be VAT-registered as a sole trader
-    - BTAE-13 Item type S with SAC 9983.11 (management consulting services)
+    - BTAE-13 Item type S with an optional SAC; 9983.11 is an illustrative value
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026);
                PUF Code List PUF-008 Identification scheme United Arab Emirates;
-               Peppol PINT BIS Billing AE 1.0.4
+               Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
@@ -148,7 +148,7 @@
             <cbc:Description>Independent consulting advice delivered by a natural-person service provider</cbc:Description>
             <cbc:Name>Q2 strategy consulting</cbc:Name>
             <cac:AdditionalItemIdentification>
-                <!-- BTAE-17 Service Accounting Code (mandatory when item type is SERVICES or BOTH) -->
+                <!-- BTAE-17 Service Accounting Code: optional since PINT AE 1.0.5 (ibr-185-ae removed); illustrative value -->
                 <cbc:ID schemeID="SAC">9983.11</cbc:ID>
             </cac:AdditionalItemIdentification>
             <!-- BTAE-13 Item type (G goods / S services / B both) carried via cac:CommodityClassification/cbc:CommodityCode -->

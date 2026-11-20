@@ -12,7 +12,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00000100 (position 6 = Disclosed agent)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Premier Insurance Brokers LLC (Dubai) invoices Burj Holdings PJSC (Abu Dhabi) for an
@@ -21,22 +21,25 @@
 
     Key Fields:
     - BTAE-02 position 6 = 1 flags the disclosed agent context
-    - BTAE-14 Principle ID: mandatory whenever the disclosed agent flag is set (ibr-137-ae).
-      Carried in PUF as puf:RestrictedInformationParty with puf:Key = 'Principle', with the
-      TRN on cac:PartyIdentification/cbc:ID under the PUF-008 scheme AE:TRN
-    - The Principle TRN MUST differ from the Seller VAT identifier BT-31 (ibr-176-ae)
-    - Either the seller TRN or the seller TIN must also be present in this scenario
+    - BTAE-14 Principal ID: mandatory whenever the disclosed agent flag is set (ibr-137-ae).
+      Carried in PUF as puf:RestrictedInformationParty with puf:Key = 'Principal' (the
+      earlier key 'Principle' is still accepted), with the TRN on cac:PartyIdentification/cbc:ID
+      under the PUF-008 scheme AE:TRN
+    - The Principal TRN MUST be a valid TRN: 15 digits, starting with 1 and ending with 03
+      (ibr-132-ae from PINT AE 1.0.5), and MUST differ from the Seller VAT identifier BT-31
+      (ibr-176-ae)
+    - Either the seller TRN or the seller TIN must also be present, as on every document
       (ibr-177-ae)
-    - BTAE-13 Item type S with SAC 9971.31 (insurance services)
+    - BTAE-13 Item type S with an optional SAC; 9971.31 is an illustrative value
 
     Note: The Guidelines stress that responsibility for issuing the Electronic Invoice
     remains with the supplier even when an agent issues one on its behalf.
 
-    Note on the target mapping: in the PINT AE output the Principle is emitted as
+    Note on the target mapping: in the PINT AE output the Principal is emitted as
     cac:SellerSupplierParty.
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 6
-               (Agent billing); Peppol PINT BIS Billing AE 1.0.4
+               (Agent billing); Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <ext:UBLExtensions>
@@ -45,12 +48,12 @@
             <ext:ExtensionContent>
                 <puf:PageroExtension>
                     <puf:RestrictedInformationParty>
-                        <puf:Key>Principle</puf:Key>
+                        <puf:Key>Principal</puf:Key>
                         <cac:Party>
                             <cac:PartyIdentification>
-                                <!-- BTAE-14 Principle ID: TRN of the principal whose supply is being invoiced.
-                                     MUST differ from the Seller's VAT identifier (ibr-176-ae). -->
-                                <cbc:ID schemeID="AE:TRN">100000000000555</cbc:ID>
+                                <!-- BTAE-14 Principal ID: TRN of the principal whose supply is being invoiced.
+                                     A valid TRN (ibr-132-ae) that MUST differ from the Seller's VAT identifier (ibr-176-ae). -->
+                                <cbc:ID schemeID="AE:TRN">100000060006003</cbc:ID>
                             </cac:PartyIdentification>
                         </cac:Party>
                     </puf:RestrictedInformationParty>
@@ -83,7 +86,7 @@
                 </cac:Country>
             </cac:PostalAddress>
             <cac:PartyTaxScheme>
-                <!-- Agent's own TRN — distinct from the Principle ID above -->
+                <!-- Agent's own TRN — distinct from the Principal ID above -->
                 <cbc:CompanyID>100000000000003</cbc:CompanyID>
                 <cac:TaxScheme>
                     <cbc:ID>VAT</cbc:ID>

@@ -14,7 +14,8 @@ _Format "YYYY-MM-DD"._
 |**VAT point date code** +
 The code of the date when VAT becomes accountable for the seller and for the buyer. Used when the VAT point date is not known when the document is issued. +
 Mutually exclusive with `cbc:TaxPointDate` (BT-7). +
-Valid values, a subset of UNTDID 2005: `3` (Invoice document issue date); `35` (Delivery date, actual); `432` (Paid to date).
+Valid values, a subset of UNTDID 2005: `3` (Invoice document issue date); `35` (Delivery date, actual); `432` (Paid to date). +
+For the United Arab Emirates this element carries the frequency of billing (IBT-008) instead, with the UAE frequency codes, and it is not exclusive with `cbc:TaxPointDate`. See <<_frequency_of_billing>>.
 
 |`cbc:Description`
 |**Invoicing period description** + 

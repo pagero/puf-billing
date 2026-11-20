@@ -11,7 +11,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Out of scope of VAT (Type 480)
     Transaction Type: BTAE-02 = 00000000 (no special transaction context)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Acme Trading LLC (Dubai) sells 600 metres of seamless line pipe at AED 75.00 per metre
@@ -29,24 +29,26 @@
 
     Key Fields:
     - BT-3 InvoiceTypeCode 480 (Out of scope of VAT, PUF-003)
-    - Every VAT category on the document must be E, O or Z (ibr-122-ae); this one uses O
+    - Every VAT category on the document must be E or O (ibr-122-ae); this one uses O.
+      PINT AE 1.0.5 no longer accepts Z on type 480 or 81
     - Category O carries no rate at any level: line, document level allowance and charge,
       and VAT breakdown (aligned-ibrp-o-05, aligned-ibrp-o-06, aligned-ibrp-o-07,
       aligned-ibrp-o-11-ae)
     - BT-47 Buyer legal registration identifier: mandatory on type 480 (ibr-136-ae), with
       its type and issuing authority (ibr-180-ae, ibr-101-ae)
-    - BT-31 Seller VAT identifier: not required on type 480 (ibr-134-ae). When every VAT
-      category on the document is O, Pagero does not report the VAT identifiers sent in
-      the document (BT-31, BT-48)
-    - BT-32 Seller tax registration identifier: send the seller's TIN with
-      @schemeID="AE:TIN". Either BT-31 or BT-32 shall be provided (Guidelines V2.0
-      18.1.1), so on an out-of-scope document the TIN identifies the seller
+    - BT-31 Seller VAT identifier: not required on type 480 (ibr-134-ae), but either BT-31
+      or BT-32 must be provided on every document, including type 480 (ibr-177-ae from
+      PINT AE 1.0.5; Guidelines V2.0 18.1.1). This VAT-registered seller sends its TRN
+    - BT-32 Seller tax registration identifier: the seller's TIN with @schemeID="AE:TIN",
+      sent next to the TRN. A seller that is not registered for VAT sends the TIN alone
+    - BT-48 Buyer VAT identifier: when every VAT category on the document is O, Pagero
+      does not report the buyer's VAT identifier
     - BTAE-02 cannot flag summary invoice, deemed supply or margin scheme on type 480
       (ibr-157-ae)
     - BTAE-08 Line VAT amount: zero on the out-of-scope line (ibr-104-ae)
 
     Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 18.2.1, 18.3.1
-               and 18.3.2; Peppol PINT BIS Billing AE 1.0.4
+               and 18.3.2; Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
@@ -61,7 +63,7 @@
         <cac:Party>
             <cbc:EndpointID schemeID="0235">1000000000</cbc:EndpointID>
             <cac:PartyIdentification>
-                <!-- BT-32 Seller tax registration identifier: the TIN, reported because BT-31 is not on an out-of-scope document -->
+                <!-- BT-32 Seller tax registration identifier: the TIN, reported next to the seller TRN (BT-31) -->
                 <cbc:ID schemeID="AE:TIN">1000000000</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyIdentification>

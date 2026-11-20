@@ -12,7 +12,7 @@
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00000000 (no special transaction context; the export flag
                       is not set because the goods stay in the UAE)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Acme Medical Supplies LLC (Dubai) supplies 40 packs of insulin pens at AED 220.00 each
@@ -33,7 +33,7 @@
     - BG-21 Document level charge: reason code DL (Delivery)
 
     Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 18.3.1;
-               Peppol PINT BIS Billing AE 1.0.4
+               Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>

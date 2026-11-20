@@ -11,7 +11,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00000010 (position 7 = E-commerce)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Online Retail UAE LLC sells 3 pairs of wireless headphones at AED 140.00 each through
@@ -28,7 +28,7 @@
       country is AE (ibr-128-ae)
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 7
-               (Supply through e-Commerce); Peppol PINT BIS Billing AE 1.0.4
+               (Supply through e-Commerce); Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>

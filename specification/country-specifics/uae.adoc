@@ -36,11 +36,13 @@ _Free-trade-zone invoice (FTZ flag in position 1)_
 
 ==== Party identification
 
-The UAE Tax Registration Number (TRN) is provided as the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID` with the tax scheme code `VAT`. The TRN is 15 numeric digits, starts with `1` and ends with `03` (e.g. `100000000000003`), as required by https://docs.peppol.eu/poac/ae/pint-ae/trn-invoice/rule/ibr-132-ae/[PINT AE 1.0.4 rule IBR-132-AE^].
+The UAE Tax Registration Number (TRN) is provided as the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID` with the tax scheme code `VAT`. The TRN is 15 numeric digits, starts with `1` and ends with `03` (e.g. `100000000000003`), as required by https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/rule/ibr-132-ae/[PINT AE 1.0.5 rule ibr-132-ae^]. The rule checks the VAT identifier of the seller, the buyer and the seller tax representative when the party's country is `AE`, and the Principal ID (BTAE-14) of a disclosed agent invoice.
 
-The TRN may alternatively be carried on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`. Use that form for a party that has no VAT accounting role in the document and therefore no `cac:PartyTaxScheme` — in particular the free-trade-zone Beneficiary and the disclosed-agent Principle described below. Both forms resolve to the same TRN; when both are present on one party, `cac:PartyTaxScheme/cbc:CompanyID` takes precedence. A UAE identifier given on `cac:PartyIdentification/cbc:ID` *without* a scheme identifier is not processed.
+The TRN may alternatively be carried on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`. Use that form for a party that has no VAT accounting role in the document and therefore no `cac:PartyTaxScheme` — in particular the free-trade-zone Beneficiary and the disclosed-agent Principal described below. Both forms resolve to the same TRN; when both are present on one party, `cac:PartyTaxScheme/cbc:CompanyID` takes precedence. A UAE identifier given on `cac:PartyIdentification/cbc:ID` *without* a scheme identifier is not processed.
 
 When the supplier is not VAT-registered, the Tax Identification Number (TIN) is provided instead under `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TIN'`. The TIN is 10 numeric digits starting with `1` (e.g. `1000000000`) and, for a VAT-registered party, is the first 10 digits of the TRN.
+
+Every document, including type `480` and `81`, MUST carry the seller TRN or, for a seller that is not registered for VAT, the seller TIN (https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/rule/ibr-177-ae/[ibr-177-ae^], PINT AE 1.0.5). A VAT-registered seller MAY send both.
 
 *Example* +
 _Seller TRN_
@@ -100,7 +102,7 @@ _Seller with TRN `100000000000003` and the derived Participant Identifier_
 
 A party that is within scope of UAE e-invoicing but not registered for VAT has no TRN. It still has a TIN, obtained by registering with the FTA, and uses that TIN as its Participant Identifier.
 
-Pagero sets the three predefined buyer endpoints under scheme `0235` itself, so they do not need to be sent: `9900000097` on a deemed supply, `9900000099` on an export to a buyer that is not reached over Peppol, and `9900000098` when a UAE buyer has no Participant Identifier on a document that is not an export. `9900000098` means that the buyer has not yet implemented Electronic Invoicing, and the supplier must then also issue a regular tax invoice, for example a PDF (UAE Electronic Invoicing Guidelines V1.1, p.23). A document with a predefined endpoint is reported to the FTA and is not exchanged over Peppol.
+Pagero sets the three predefined buyer endpoints under scheme `0235` itself, so they do not need to be sent: `9900000097` on a deemed supply, `9900000099` on an export to a buyer that is not reached over Peppol, and `9900000098` when the buyer has no Participant Identifier on a document that is not an export. `9900000098` covers a UAE buyer that has not yet implemented Electronic Invoicing, for which the supplier must also issue a regular tax invoice, for example a PDF, and a buyer outside the UAE that is not subject to UAE Electronic Invoicing (UAE Electronic Invoicing Guidelines V2.0, 10.2.2 and 18.3.3). A document with a predefined endpoint is reported to the FTA and is not exchanged over Peppol.
 
 ==== Legal registration identifier
 
@@ -154,9 +156,32 @@ _Seller is a natural person identified by a UK passport_
 <1> Passport number with `schemeID="AE:PASSPORT"`.
 <2> Passport issuing country (BTAE-18) as a separate `cac:PartyIdentification` entry with `schemeID="AE:PASSPORT_COUNTRY"`.
 
+For the buyer, PINT AE requires the registration type (BTAE-16) whenever the buyer legal registration identifier (IBT-047) is sent and the buyer electronic address uses scheme `0235` (https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/rule/ibr-180-ae/[ibr-180-ae^]), and the issuing authority (BTAE-11, `AE:LRA`) with a trade license (ibr-101-ae). From PINT AE 1.0.5 neither is required when the buyer electronic address is one of the predefined endpoints `9900000098` or `9900000099`. The registration type is one of `AE:TL`, `AE:EID`, `AE:PASSPORT` and `AE:CD` (ibr-183-ae).
+
+No registration type is defined for a registration issued outside the UAE. For a buyer outside the UAE that has no UAE Participant Identifier, send its registration number in `cac:PartyLegalEntity/cbc:CompanyID` without `@schemeID`, and send no `AE:LRA` entry.
+
+*Example* +
+_Buyer outside the UAE without a Participant Identifier on an out-of-scope invoice (type `480`)_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <!-- Code omitted for clarity -->
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Example Pipeline Contracting LLC</cbc:RegistrationName>
+        <cbc:CompanyID>1234567</cbc:CompanyID><!--1-->
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+</Invoice>
+----
+<1> Registration number issued outside the UAE, without `@schemeID`. The buyer legal registration identifier is mandatory on type `480` and `81` (ibr-136-ae); with the predefined endpoint `9900000098` no registration type or issuing authority is required.
+
 ==== Country subdivision (Emirates)
 
-Whenever a UAE address is provided (seller, buyer, delivery, tax representative), the country subdivision MUST be one of the seven Emirate codes:
+Whenever a UAE address is provided (seller, buyer, delivery, tax representative), the country subdivision MUST be one of the seven Emirate codes (https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/rule/ibr-128-ae/[ibr-128-ae^], which from PINT AE 1.0.5 checks all four addresses):
 
 [%autowidth]
 |===
@@ -186,10 +211,50 @@ When the document currency is not AED, the following amounts MUST be additionall
 |Field |BT code |PUF extension
 
 |Tax category tax amount in AED (per VAT breakdown) |IBT-190 |`puf:TaxSubtotalExtension/puf:TaxCurrencyTaxAmount[@currencyID = 'AED']`
-|Invoice line VAT amount in AED |BTAE-08 |Second `cac:TaxTotal/cbc:TaxAmount[@currencyID = 'AED']` on the line
-|Invoice line amount with VAT in AED |BTAE-10 |`puf:LineExtension/puf:TaxCurrencyTaxInclusiveLineExtensionAmount[@currencyID = 'AED']`
+|Invoice line VAT amount in AED, except on a line with VAT category `E`, where it MUST NOT be sent (ibr-104-ae, ibr-163-ae) |BTAE-08 |Second `cac:TaxTotal/cbc:TaxAmount[@currencyID = 'AED']` on the line
+|Invoice line amount with VAT in AED, not required on a line with VAT category `E` (ibr-104-ae) |BTAE-10 |`puf:LineExtension/puf:TaxCurrencyTaxInclusiveLineExtensionAmount[@currencyID = 'AED']`
 |Invoice (or CreditNote) total amount with VAT in AED |BTAE-20 |`puf:LegalMonetaryTotalExtension/puf:TaxCurrencyTaxInclusiveAmount[@currencyID = 'AED']`
 |===
+
+==== Frequency of billing
+
+The frequency of billing (IBT-008) is a code from the PINT AE https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/codelist/FreqBilling/[Frequency of billing code list^], sent in `cac:InvoicePeriod/cbc:DescriptionCode` (ibr-005-ae):
+
+[%autowidth]
+|===
+|Code |Meaning
+
+|`DLY` |Daily
+|`WKY` |Weekly
+|`Q15` |Once in 15 days
+|`MTH` |Monthly
+|`Q45` |Once in 45 days
+|`Q60` |Once in 60 days
+|`QTR` |Quarterly
+|`YRL` |Yearly
+|`HYR` |Half-Yearly
+|`OTH` |Others
+|===
+
+With `OTH`, also describe the frequency in an invoice note (`cbc:Note`, IBT-022) (https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/rule/ibr-160-ae/[ibr-160-ae^]).
+
+Send the code only. Do not send a document level `cac:InvoicePeriod/cbc:Description` on a UAE document: PINT AE 1.0.5 removed the AE term Frequency of billing (BTAE-06) that was bound to it, and the frequency of billing is carried by the code alone.
+
+*Example* +
+_Monthly instalment of a continuous supply_
+[source,xml]
+----
+<Invoice>
+  <!-- Code omitted for clarity -->
+  <cac:InvoicePeriod>
+    <cbc:StartDate>2026-04-01</cbc:StartDate>
+    <cbc:EndDate>2026-04-30</cbc:EndDate>
+    <cbc:DescriptionCode>MTH</cbc:DescriptionCode><!--1-->
+  </cac:InvoicePeriod>
+  <!-- Code omitted for clarity -->
+</Invoice>
+----
+<1> Frequency of billing (IBT-008) `MTH`, Monthly.
 
 ==== Item type, classification and Service Accounting Code
 
@@ -204,15 +269,14 @@ Every UAE invoice line MUST declare whether the item is goods, a service, or bot
 |`B` |Both (goods and services on the same line)
 |===
 
-The item type drives two further requirements:
+When item type is `G` (or `B`), the *item classification* (IBT-158) MUST be present and the classification scheme identifier (`@listID`) MUST be `HS` (Harmonised Commodity Description and Coding System) (ibr-184-ae, ibr-186-ae, ibr-188-ae).
 
-* When item type is `G` (or `B`), the *item classification* (IBT-158) MUST be present and the classification scheme identifier (`@listID`) MUST be `HS` (Harmonised Commodity Description and Coding System).
-* When item type is `S` (or `B`), the *Service Accounting Code* (BTAE-17) MUST be present using `cac:AdditionalItemIdentification` with `@schemeID = 'SAC'`.
+The *Service Accounting Code* (BTAE-17) is optional. PINT AE 1.0.5 removed rule ibr-185-ae, which required it for item type `S`, and no longer requires it for item type `B` (ibr-186-ae), because the official Service accounting code list has not been finalized. When it is sent, use `cac:AdditionalItemIdentification` with `@schemeID = 'SAC'` (ibr-189-ae).
 
-NOTE: The PINT-AE syntax table shows `cbc:ItemClassificationCode` as 1..1 within `cac:CommodityClassification`, but the validation artefacts do not enforce this: `ibr-184-ae` requires the item classification only when the item type is `G` (or `B`), and `ibr-188-ae` constrains the scheme identifier only when a classification is actually present. A pure service line therefore carries `cbc:CommodityCode` alone and is classified by its Service Accounting Code (BTAE-17). Do not invent an HS code for a service — HS classifies goods, and a placeholder value would misreport the supply.
+NOTE: The PINT-AE syntax table shows `cbc:ItemClassificationCode` as 1..1 within `cac:CommodityClassification`, but the validation artefacts do not enforce this: `ibr-184-ae` requires the item classification only when the item type is `G` (or `B`), and `ibr-188-ae` constrains the scheme identifier only when a classification is actually present. A pure service line therefore carries `cbc:CommodityCode` alone, optionally with a Service Accounting Code (BTAE-17). Do not invent an HS code for a service — HS classifies goods, and a placeholder value would misreport the supply.
 
 *Example* +
-_Line for a service, carrying the item type and the SAC code_
+_Line for a service, carrying the item type and an optional SAC code_
 [source,xml]
 ----
 <cac:InvoiceLine>
@@ -229,7 +293,7 @@ _Line for a service, carrying the item type and the SAC code_
   </cac:Item>
 </cac:InvoiceLine>
 ----
-<1> Service Accounting Code with `schemeID="SAC"` (required for services, ibr-185-ae).
+<1> Optional Service Accounting Code with `schemeID="SAC"`. The value is illustrative: no official UAE Service accounting code list has been published.
 <2> Item type `S` (Services) via `cac:CommodityClassification/cbc:CommodityCode`. No `cbc:ItemClassificationCode` — services are not classified by HS.
 
 ==== VAT category, rate and exemption
@@ -237,8 +301,23 @@ _Line for a service, carrying the item type and the SAC code_
 UAE uses the EN/Peppol VAT category code set: `S` (Standard rated), `Z` (Zero rated), `E` (Exempt from VAT), `O` (Not subject to VAT), `AE` (Reverse charge) and `N` (Standard rate additional VAT).
 
 * Standard rated (`S`) VAT rate MUST be exactly `5.00`.
-* For category `E`, an exemption reason code MUST be present at the same level (line, document allowance/charge, or VAT breakdown) as the category code.
-* For category `AE` (reverse charge), the buyer's VAT identifier MUST be present, the line's VAT amount MUST be zero, and the *Type of goods or services* code (BTAE-09) — taken from the UAE Goods/Services subject to RCM list — MUST be carried on `cac:CommodityClassification/cbc:NatureCode` for the line.
+* For category `E`, the VAT exemption reason code MUST be present on each exempt invoice line, in `cac:Item/cac:ClassifiedTaxCategory/cbc:TaxExemptionReasonCode` (IBT-186, ibr-167-ae), and on each exempt document level allowance or charge, in `cac:TaxCategory/cbc:TaxExemptionReasonCode` (IBT-196, IBT-198, ibr-168-ae and ibr-169-ae, PINT AE 1.0.5). The VAT breakdown does not require one.
+* For category `AE` (reverse charge), the buyer's VAT identifier MUST be present, the line's VAT amount MUST be zero, and the *Type of goods or services* code (BTAE-09) — taken from the UAE Goods/Services subject to RCM list below — MUST be carried on `cac:CommodityClassification/cbc:NatureCode` for the line.
+* A document level allowance or charge in category `AE` MUST carry a VAT rate greater than zero, normally `5.00` (aligned-ibrp-ae-06, aligned-ibrp-ae-07, PINT AE 1.0.5). The VAT breakdown for category `AE` still has a VAT amount of zero.
+
+The *Type of goods or services* (BTAE-09) is a code from the PINT AE https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/codelist/GoodsType/[Goods or services subject to RCM code list^] (ibr-006-ae):
+
+[%autowidth]
+|===
+|Code |Meaning
+
+|`DL8.48.3.1` |Crude or refined oil
+|`DL8.48.3.2` |Unprocessed or processed natural gas
+|`DL8.48.3.3` |Pure hydrocarbons
+|`DL8.48.8.1` |Gold and Diamonds
+|`DL8.48.8.2` |Electronic Devices
+|`DL8.48.8.3` |Metal Scrap Trading (from PINT AE 1.0.5)
+|===
 
 ==== Profit Margin Scheme
 
@@ -311,11 +390,11 @@ The beneficiary has no VAT accounting role in the document, so its TRN is carrie
 <1> `Key` set to `Beneficiary`.
 <2> TRN of the free-trade-zone beneficiary. Use `@schemeID = "AE:TIN"` and the 10-digit TIN when the beneficiary is not registered for VAT.
 
-==== Disclosed Agent Principle
+==== Disclosed Agent Principal
 
-In disclosed-agent billing (BTAE-02 transaction type code matching the disclosed-agent flag, `XXXXX1XX`), the *Principle ID* (BTAE-14) — the TRN of the principle — is carried using the same `puf:RestrictedInformationParty` extension with `Key = 'Principle'`. The Principle ID MUST be different from the Seller VAT identifier.
+In disclosed-agent billing (BTAE-02 transaction type code matching the disclosed-agent flag, `XXXXX1XX`), the *Principal ID* (BTAE-14) — the TRN of the principal — is carried using the same `puf:RestrictedInformationParty` extension with `Key = 'Principal'`. Files that use the earlier key `Principle` are still accepted. The Principal ID MUST be different from the Seller VAT identifier.
 
-As for the Beneficiary above, the TRN is carried on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`.
+As for the Beneficiary above, the TRN is carried on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`. From PINT AE 1.0.5 the Principal ID MUST be a valid TRN: 15 digits, starting with `1` and ending with `03` (ibr-132-ae).
 
 *Example* +
 [source,xml]
@@ -327,10 +406,10 @@ As for the Beneficiary above, the TRN is carried on `cac:PartyIdentification/cbc
       <ext:ExtensionContent>
         <puf:PageroExtension>
           <puf:RestrictedInformationParty>
-            <puf:Key>Principle</puf:Key><!--1-->
+            <puf:Key>Principal</puf:Key><!--1-->
             <cac:Party>
               <cac:PartyIdentification>
-                <cbc:ID schemeID="AE:TRN">100000000000555</cbc:ID><!--2-->
+                <cbc:ID schemeID="AE:TRN">100000060006003</cbc:ID><!--2-->
               </cac:PartyIdentification>
             </cac:Party>
           </puf:RestrictedInformationParty>
@@ -341,8 +420,8 @@ As for the Beneficiary above, the TRN is carried on `cac:PartyIdentification/cbc
   <!-- Code omitted for clarity -->
 </Invoice>
 ----
-<1> `Key` set to `Principle`.
-<2> TRN of the principle, different from the Seller VAT identifier.
+<1> `Key` set to `Principal`.
+<2> TRN of the principal, different from the Seller VAT identifier.
 
 ==== Deemed Supply
 
@@ -383,7 +462,7 @@ _Customs reference number on an export_
 
 When the document is a credit note (`cbc:CreditNoteTypeCode` `381` or `81`, including a self-billed credit note), the credit note reason code (BTAE-03) MUST be provided. The supported values are `DL8.61.1.A` through `DL8.61.1.E` and `VD` (volume discount). See https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates[PUF-023-CORRECTIONCODE (United Arab Emirates)^] for the definition of each code.
 
-The code is carried on `cac:BillingReference/cac:InvoiceDocumentReference` through the existing `puf:BillingReferenceExtension` (path `puf:BillingReferenceExtension/puf:Code`). When the reason code is `VD`, the credit note MUST NOT reference a preceding invoice. Peppol PINT AE rule ibr-055-ae rejects a `VD` credit note that has one, and requires the reference for every other reason code, although the PINT AE text describes it as optional for `VD`. Because PUF carries the code inside `cac:BillingReference`, send `cac:BillingReference` for `VD` only as the carrier of the code: leave `cbc:ID` empty and send no `cbc:IssueDate`.
+The code is carried on `cac:BillingReference/cac:InvoiceDocumentReference` through the existing `puf:BillingReferenceExtension` (path `puf:BillingReferenceExtension/puf:Code`). A credit note has one reason code (https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-creditnote/rule/ibr-198-ae/[ibr-198-ae^], PINT AE 1.0.5): give it on the first `cac:BillingReference`, also when the credit note references several invoices. When the reason code is `VD`, the credit note MUST NOT reference a preceding invoice. Peppol PINT AE rule ibr-055-ae rejects a `VD` credit note that has one, and requires the reference for every other reason code, although the PINT AE text describes it as optional for `VD`. Because PUF carries the code inside `cac:BillingReference`, send `cac:BillingReference` for `VD` only as the carrier of the code: leave `cbc:ID` empty and send no `cbc:IssueDate`.
 
 *Example* +
 _Volume discount credit note without a preceding invoice reference_
@@ -418,7 +497,9 @@ _Volume discount credit note without a preceding invoice reference_
 
 ==== Out of scope of VAT and Credit-note related to goods or services
 
-When the invoice type code is `480` (Out of scope of VAT) or `81` (Credit note related to goods or services), the buyer's legal registration identifier (IBT-047) is mandatory regardless of whether the buyer is VAT-registered, and all VAT category codes used on the document MUST be one of `E` / `O` / `Z`. The seller VAT identifier is *not* required in these cases.
+When the invoice type code is `480` (Out of scope of VAT) or `81` (Credit note related to goods or services), the buyer's legal registration identifier (IBT-047) is mandatory regardless of whether the buyer is VAT-registered (ibr-136-ae), and every VAT category code used on the document, on lines, document level allowances and charges and the VAT breakdown, MUST be `E` or `O` (https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/rule/ibr-122-ae/[ibr-122-ae^]). PINT AE 1.0.5 no longer accepts `Z` on these documents.
+
+The seller VAT identifier is *not* required in these cases (ibr-134-ae), but the seller TRN or TIN is (ibr-177-ae): a VAT-registered seller sends its TRN as on any other document, and a seller that is not registered for VAT sends its TIN.
 
 ==== Self-billing
 

@@ -10,7 +10,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Invoice (Type 380) in PUF - see the note on the target format below
     Transaction Type: BTAE-02 = 00000000 (no special transaction context)
-    Target Format: Peppol PINT BIS Self-Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Self-Billing AE 1.0.5
 
     Scenario Description:
     Emirates Steel Recycling LLC (Sharjah) receives 7 tonnes of mixed ferrous scrap from
@@ -36,7 +36,7 @@
     value is chosen at transformation time.
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026);
-               Peppol PINT BIS Self-Billing AE 1.0.4
+               Peppol PINT BIS Self-Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <ext:UBLExtensions>
