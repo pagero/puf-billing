@@ -10,7 +10,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00010000 (position 4 = Summary invoice)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Emirates Premier Bank PJSC consolidates April 2026 banking fees for Burj Holdings PJSC
@@ -21,16 +21,18 @@
     - BTAE-02 position 4 = 1 flags the summary invoice context
     - BG-14 InvoicePeriod: mandatory for summary invoices - it defines the consolidation
       window (ibr-138-ae). This is the key structural requirement for this scenario
-    - Two service lines, each with its own SAC (BTAE-17): 9971.13 account maintenance,
-      9971.19 wire transfer fees
-    - BTAE-13 Item type S on both lines, which makes BTAE-17 mandatory (ibr-185-ae)
+    - Two service lines (BTAE-13 Item type S), each with an optional Service Accounting
+      Code (BTAE-17), which PINT AE 1.0.5 no longer requires (ibr-185-ae removed). The SAC
+      values 9971.13 and 9971.19 are illustrative
+    - No document level cbc:Description in the invoicing period: a UAE invoice carries only
+      the optional frequency of billing code (IBT-008, cbc:DescriptionCode) there
 
     Note: If the consolidated total is negative (a net credit for the period), the
     Guidelines require the transaction to be documented as an electronic Credit Note
     rather than a summary invoice with a negative payable amount.
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 4
-               (Summary invoice); Peppol PINT BIS Billing AE 1.0.4
+               (Summary invoice); Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
@@ -45,7 +47,6 @@
     <cac:InvoicePeriod>
         <cbc:StartDate>2026-04-01</cbc:StartDate>
         <cbc:EndDate>2026-04-30</cbc:EndDate>
-        <cbc:Description>April 2026 monthly fee consolidation</cbc:Description>
     </cac:InvoicePeriod>
     <cac:AccountingSupplierParty>
         <cac:Party>

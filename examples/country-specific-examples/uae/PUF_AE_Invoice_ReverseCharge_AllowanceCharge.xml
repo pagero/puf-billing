@@ -12,7 +12,7 @@
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00000000 (reverse charge is signalled by the VAT category,
                       not by a BTAE-02 flag)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Acme Trading LLC (Dubai) supplies 50 tablet computers at AED 900.00 each to Burj
@@ -20,24 +20,25 @@
     rebate of AED 900.00 is deducted and AED 450.00 insured freight is added at document
     level. Taxable amount AED 44,550.00, VAT AED 0.00.
 
-    CRITICAL - THE VAT RATE DIFFERS BY LEVEL FOR CATEGORY AE:
-    The line and the VAT breakdown carry the statutory rate 5.00, but a document level
-    allowance or charge in category AE MUST carry rate 0.00 (aligned-ibrp-ae-06,
-    aligned-ibrp-ae-07). The allowance and the charge still adjust the AE taxable amount
-    (aligned-ibrp-ae-08-ae).
+    CRITICAL - THE VAT RATE OF A CATEGORY AE ALLOWANCE OR CHARGE IS GREATER THAN ZERO:
+    The line, the document level allowance and charge, and the VAT breakdown all carry
+    the statutory rate 5.00. From PINT AE 1.0.5 a document level allowance or charge in
+    category AE MUST carry a rate greater than zero (aligned-ibrp-ae-06,
+    aligned-ibrp-ae-07); PINT AE 1.0.4 required 0.00. The VAT amount stays 0.00, and the
+    allowance and the charge still adjust the AE taxable amount (aligned-ibrp-ae-08-ae).
 
     Key Fields:
     - BG-20 Document level allowance: reason code 95 (Discount) with percentage and base
       amount; the amount must equal base x percentage / 100 (ibr-131-ae)
     - BG-21 Document level charge: reason code FC (Freight service)
-    - BT-95 / BT-102 Allowance and charge VAT category AE with rate 0.00
+    - BT-95 / BT-102 Allowance and charge VAT category AE with rate 5.00
     - BT-48 Buyer VAT identifier: mandatory with category AE (ibr-103-ae)
     - BTAE-09 Type of goods or services DL8.48.8.2 (Electronic devices) on
       cac:CommodityClassification/cbc:NatureCode (ibr-006-ae, ibr-166-ae)
     - BT-157 GS1 GTIN with scheme 0160 on the reverse-charge line (ibr-174-ae)
     - BTAE-08 Line VAT amount zero on the reverse-charge line (ibr-162-ae)
 
-    Reference: Peppol PINT BIS Billing AE 1.0.4
+    Reference: Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
@@ -114,7 +115,7 @@
             </cac:FinancialInstitutionBranch>
         </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>
-    <!-- BG-20 Document level allowance in category AE: the rate MUST be 0 (aligned-ibrp-ae-06) -->
+    <!-- BG-20 Document level allowance in category AE: the rate MUST be greater than zero (aligned-ibrp-ae-06) -->
     <cac:AllowanceCharge>
         <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
         <!-- BT-98 Allowance reason code (UNCL5189) and BT-97 reason text -->
@@ -126,13 +127,13 @@
         <cbc:BaseAmount currencyID="AED">45000.00</cbc:BaseAmount>
         <cac:TaxCategory>
             <cbc:ID>AE</cbc:ID>
-            <cbc:Percent>0.00</cbc:Percent>
+            <cbc:Percent>5.00</cbc:Percent>
             <cac:TaxScheme>
                 <cbc:ID>VAT</cbc:ID>
             </cac:TaxScheme>
         </cac:TaxCategory>
     </cac:AllowanceCharge>
-    <!-- BG-21 Document level charge in category AE: the rate MUST be 0 (aligned-ibrp-ae-07) -->
+    <!-- BG-21 Document level charge in category AE: the rate MUST be greater than zero (aligned-ibrp-ae-07) -->
     <cac:AllowanceCharge>
         <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
         <!-- BT-105 Charge reason code (UNCL7161) and BT-104 reason text -->
@@ -141,7 +142,7 @@
         <cbc:Amount currencyID="AED">450.00</cbc:Amount>
         <cac:TaxCategory>
             <cbc:ID>AE</cbc:ID>
-            <cbc:Percent>0.00</cbc:Percent>
+            <cbc:Percent>5.00</cbc:Percent>
             <cac:TaxScheme>
                 <cbc:ID>VAT</cbc:ID>
             </cac:TaxScheme>

@@ -11,7 +11,7 @@
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00000000 (reverse charge is signalled by the VAT category,
                       not by a BTAE-02 flag)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Acme Trading LLC (Dubai) supplies 25 smartphones at AED 200.00 each to Burj Holdings
@@ -30,7 +30,7 @@
     - A VAT breakdown with category AE must be present at document level (aligned-ibrp-ae-01-ae)
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026);
-               Peppol PINT BIS Billing AE 1.0.4
+               Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>

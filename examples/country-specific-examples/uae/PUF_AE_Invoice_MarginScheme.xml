@@ -11,7 +11,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00100000 (position 3 = Profit margin scheme)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Premier Pre-Owned Cars LLC (Dubai) sells a 2022 Toyota Camry to Burj Holdings PJSC
@@ -34,7 +34,7 @@
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 3
                (Margin scheme); Article 43 of the VAT Decree-Law on Charging Tax based on
-               Profit Margin; Peppol PINT BIS Billing AE 1.0.4
+               Profit Margin; Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>

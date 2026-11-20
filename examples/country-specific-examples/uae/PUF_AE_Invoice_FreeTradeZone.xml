@@ -12,7 +12,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 10000000 (position 1 = Free trade zone)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     JAFZA Logistics FZE (Dubai) invoices Burj Holdings PJSC (Abu Dhabi) as the contracting
@@ -35,7 +35,7 @@
     a dedicated party slot so the same construct can serve several jurisdictions.
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 1
-               (Free trade zone); Peppol PINT BIS Billing AE 1.0.4
+               (Free trade zone); Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <ext:UBLExtensions>

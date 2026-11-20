@@ -10,7 +10,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00001000 (position 5 = Continuous supply)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Acme Advisory LLC (Dubai) bills Burj Holdings PJSC (Abu Dhabi) for the April 2026
@@ -20,10 +20,14 @@
     Key Fields:
     - BTAE-02 position 5 = 1 flags the continuous supply context
     - BG-14 InvoicePeriod: states the supply window the instalment covers (April 2026)
+    - IBT-008 Frequency of billing: MTH (Monthly) in cac:InvoicePeriod/cbc:DescriptionCode,
+      from the PINT AE Frequency of billing code list (ibr-005-ae). Only the code is sent,
+      no document level cbc:Description
     - BT-12 ContractDocumentReference: links the instalment to the master agreement
-    - BTAE-13 Item type: S (Services), which makes the Service Accounting Code
-      BTAE-17 mandatory (ibr-185-ae); the SAC scheme identifier must be SAC (ibr-189-ae)
-    - BTAE-17 SAC 9983.11 = management consulting services
+    - BTAE-13 Item type: S (Services)
+    - BTAE-17 Service Accounting Code: optional since PINT AE 1.0.5, which removed
+      ibr-185-ae; when it is sent, its scheme identifier must be SAC (ibr-189-ae). The value
+      9983.11 is illustrative: no official UAE Service accounting code list has been published
 
     Note: Where a continuous supply involves retention amounts, the Guidelines require the
     retention calculation to be issued as a separate commercial document - it must not
@@ -31,7 +35,7 @@
     separately once that amount falls due.
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 5
-               (Continuous supply); Peppol PINT BIS Billing AE 1.0.4
+               (Continuous supply); Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
@@ -46,7 +50,8 @@
     <cac:InvoicePeriod>
         <cbc:StartDate>2026-04-01</cbc:StartDate>
         <cbc:EndDate>2026-04-30</cbc:EndDate>
-        <cbc:Description>April 2026 monthly advisory retainer</cbc:Description>
+        <!-- IBT-008 Frequency of billing: MTH = Monthly (ibr-005-ae) -->
+        <cbc:DescriptionCode>MTH</cbc:DescriptionCode>
     </cac:InvoicePeriod>
     <cac:ContractDocumentReference>
         <cbc:ID>MSA-2025-ACME-BURJ-007</cbc:ID>

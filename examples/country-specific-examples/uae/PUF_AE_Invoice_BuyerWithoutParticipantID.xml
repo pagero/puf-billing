@@ -12,7 +12,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00000000 (no special transaction context)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Acme Trading LLC (Dubai) sells 10 industrial water pumps at AED 100.00 each to Falcon
@@ -36,7 +36,7 @@
       (ibr-149-ae), except on type 480 or 81, where ibr-136-ae requires it
 
     Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 10.2.2 and
-               18.3.3; Peppol PINT BIS Billing AE 1.0.4
+               18.3.3; Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>

@@ -4,14 +4,14 @@ This directory contains example PUF invoice files demonstrating the United Arab 
 
 ## Overview
 
-UAE e-invoicing is mandated through the Federal Tax Authority (FTA) and transmitted via the Peppol network using the PINT BIS Billing AE 1.0.4 profile. These examples demonstrate key UAE requirements including:
+UAE e-invoicing is mandated through the Federal Tax Authority (FTA) and transmitted via the Peppol network using the PINT BIS Billing AE 1.0.5 profile. These examples demonstrate key UAE requirements including:
 
 - Invoice Transaction Type Code (BTAE-02) — 8-character flag string signalling the UAE business context
 - UAE Tax Registration Number (TRN) — 15-digit identifier starting with `1` and ending with `03`
 - Peppol Participant Identifier — the 10-digit TIN (first 10 digits of the TRN) under scheme `0235`
 - Legal registration identifiers — Trade License, Emirates ID, Passport (scheme codes `AE:TL`, `AE:EID`, `AE:PASSPORT`)
 - Emirate codes for country subdivision (`AUH`, `DXB`, `SHJ`, `UAQ`, `FUJ`, `AJM`, `RAK`)
-- Item type declaration via `cac:CommodityClassification/cbc:CommodityCode` (`G`, `S`, `B`) with HS classification and SAC codes
+- Item type declaration via `cac:CommodityClassification/cbc:CommodityCode` (`G`, `S`, `B`) with HS classification and optional SAC codes
 - UAE-specific supply scenarios: exports, Free Trade Zone, disclosed agent, deemed supply, profit margin scheme
 - Out-of-scope (type `480`), exempt and zero-rated supplies, and document level allowances and charges in each VAT category
 - Predefined buyer endpoints and the identifiers that replace a Participant Identifier
@@ -71,15 +71,16 @@ Demonstrates:
 
 - Continuous supply flag in BTAE-02 position 5 (`00001000`)
 - Mandatory invoicing period (`cac:InvoicePeriod`) covering the supply window
+- Frequency of billing (IBT-008) as a code in `cac:InvoicePeriod/cbc:DescriptionCode` (ibr-005-ae), with no document level `cbc:Description`
 - Contract document reference linking to the master agreement
-- Service item type with SAC code (BTAE-17)
+- Service item type with an optional SAC code (BTAE-17)
 
 **Key Features:**
 
 - Document type: `380`, BTAE-02 `00001000`
-- InvoicePeriod: April 2026 (monthly advisory retainer)
+- InvoicePeriod: April 2026 (monthly advisory retainer), frequency of billing `MTH`
 - ContractDocumentReference: MSA-2025-ACME-BURJ-007
-- Item type `S` (Services), SAC code `9983.11` (Management consulting services)
+- Item type `S` (Services), illustrative SAC code `9983.11`
 
 ---
 
@@ -132,7 +133,7 @@ Demonstrates:
 
 - Summary invoice flag in BTAE-02 position 4 (`00010000`)
 - Mandatory invoicing period as the consolidation window (ibr-138-ae)
-- Multiple service lines with SAC codes
+- Multiple service lines with optional SAC codes
 - Banking sector scenario
 
 **Key Features:**
@@ -233,15 +234,15 @@ Demonstrates:
 Demonstrates:
 
 - Disclosed Agent flag in BTAE-02 position 6 (`00000100`)
-- Principle ID (BTAE-14) in `puf:RestrictedInformationParty` with `Key = 'Principle'`
-- Principle TRN on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`, and it must differ from the seller's TRN
+- Principal ID (BTAE-14) in `puf:RestrictedInformationParty` with `Key = 'Principal'` (the earlier key `Principle` is still accepted)
+- Principal TRN on `cac:PartyIdentification/cbc:ID` with `@schemeID = 'AE:TRN'`: a valid TRN (ibr-132-ae, PINT AE 1.0.5) that must differ from the seller's TRN
 - Agent billing on behalf of a principal
 
 **Key Features:**
 
 - Document type: `380`, BTAE-02 `00000100`
-- Principle: National Insurance Co. PJSC — TRN carried in RestrictedInformationParty
-- In the PINT AE target output, the Principle maps to `cac:SellerSupplierParty`
+- Principal: National Insurance Co. PJSC — TRN `100000060006003` carried in RestrictedInformationParty
+- In the PINT AE target output, the Principal maps to `cac:SellerSupplierParty`
 
 ---
 
@@ -395,7 +396,7 @@ Demonstrates:
 Demonstrates:
 
 - Document level allowance (BG-20) and charge (BG-21) in VAT category `AE`
-- The allowance and the charge carry rate `0.00` (aligned-ibrp-ae-06, aligned-ibrp-ae-07), while the line and the VAT breakdown carry `5.00`
+- The allowance and the charge carry rate `5.00`, like the line and the VAT breakdown: from PINT AE 1.0.5 the rate must be greater than zero (aligned-ibrp-ae-06, aligned-ibrp-ae-07)
 - Allowance expressed as a percentage of a base amount (ibr-131-ae)
 
 **Key Features:**
@@ -413,7 +414,7 @@ Demonstrates:
 Demonstrates:
 
 - Exempt supply (category `E`) with exemption reason code `DL8.46.1` (Certain financial services, [PUF-013](https://pagero.github.io/puf-code-lists/#_tax_exemption_codes_in_united_arab_emirates))
-- Document level allowance and charge in category `E`: rate `0.00` (aligned-ibrp-e-06, aligned-ibrp-e-07), their own exemption reason code, and an allowance or charge reason code (ibr-168-ae, ibr-169-ae)
+- Document level allowance and charge in category `E`: rate `0.00` (aligned-ibrp-e-06, aligned-ibrp-e-07), their own VAT exemption reason code (IBT-196, IBT-198; ibr-168-ae, ibr-169-ae), and an allowance or charge reason code
 - No rate on the exempt line or in the exempt VAT breakdown, and no line VAT amount (BTAE-08) on the exempt line (ibr-163-ae)
 - An exempt supply combined with a standard-rated one on a tax invoice (Guidelines V2.0, 10.2.2)
 
@@ -423,7 +424,7 @@ Demonstrates:
 - Seller: Emirates Premier Bank PJSC — term loan interest AED 18,500.00 (`E`, SAC `9971.13`) and arrangement fee AED 4,000.00 (`S`, SAC `9971.19`)
 - Interest rebate of AED 500.00 (reason `95`) and late payment interest of AED 250.00 (reason `FI`) on the exempt part
 
-> **Why not exempt only:** an invoice whose lines are all exempt has no valid type code today. Guidelines V2.0, 18.3.1 states that type code `480` should not be used for exempt supplies, and PINT AE 1.0.4 rule ibr-151-ae rejects type code `380` when every line is `E` or `O`. The PINT AE examples for category E use `480`.
+> **Why not exempt only:** an invoice whose lines are all exempt has no valid type code today. Guidelines V2.0, 18.3.1 states that type code `480` should not be used for exempt supplies, and PINT AE rule ibr-151-ae, unchanged in 1.0.5, rejects type code `380` when every line is `E` or `O`. The PINT AE examples for category E use `480`.
 
 ---
 
@@ -453,9 +454,9 @@ Demonstrates:
 
 - Type code `480` for a transaction that relates exclusively to supplies outside the scope of VAT (Guidelines V2.0, 18.3.1)
 - Goods supplied from outside the UAE to another location outside the UAE without entering the UAE, classified as out of scope rather than export (Guidelines V2.0, 18.3.2)
-- Category `O` without a rate at any level, including a document level allowance and charge
+- Category `O` without a rate at any level, including a document level allowance and charge; only `E` and `O` are accepted on type `480` (ibr-122-ae, which no longer accepts `Z` from PINT AE 1.0.5)
 - Buyer legal registration identifier, mandatory on type `480` (ibr-136-ae)
-- Seller TIN (`AE:TIN`) as the seller tax registration identifier: when every VAT category is `O`, Pagero does not report the VAT identifiers sent in the document, and either IBT-031 or IBT-032 shall be provided (Guidelines V2.0, 18.1.1)
+- Seller TRN and TIN (`AE:TIN`): either IBT-031 or IBT-032 must be provided on every document, including type `480` (ibr-177-ae, PINT AE 1.0.5; Guidelines V2.0, 18.1.1)
 
 **Key Features:**
 
@@ -491,7 +492,7 @@ Demonstrates:
 
 Demonstrates:
 
-- Where the optional PINT AE business terms go in PUF: document references, trading names, contacts, payee, seller tax representative, delivery location and recipient, payment card, paid and rounding amounts, and line references and item details
+- Where the optional PINT AE business terms go in PUF: frequency of billing, document references, trading names, contacts, payee, seller tax representative, delivery location and recipient, payment card, paid and rounding amounts, and line references and item details
 - Three transaction types at once: BTAE-02 `10001010` (Free Trade Zone, Continuous Supply, E-Commerce)
 - The five VAT categories that can appear together on a tax invoice: `S`, `E`, `O`, `AE` and `Z`
 
@@ -500,14 +501,13 @@ Demonstrates:
 - Document type: `380`, BTAE-02 `10001010`; free zone beneficiary (BTAE-01) in `puf:RestrictedInformationParty`
 - Line and document level allowances and charges; total AED 23,723.50, paid AED 5,000.00, rounding AED 0.50, payable AED 18,724.00
 - One `cac:PaymentMeans` with payment card information (BG-18): PUF carries one payment means code per document
-
-> **BTAE-06 Frequency of billing is not shown:** the PINT AE 1.0.4 syntax binds it to `cac:InvoicePeriod/cbc:Description`, while rules ibr-005-ae and ibr-160-ae validate `cac:InvoicePeriod/cbc:DescriptionCode`.
+- Frequency of billing (IBT-008) `MTH` in `cac:InvoicePeriod/cbc:DescriptionCode`
 
 ---
 
 ## PINT AE Example Coverage
 
-Each example in the Peppol PINT BIS Billing AE 1.0.4 resources (`trn-invoice/example`) has a PUF counterpart in this folder:
+Each example in the Peppol PINT BIS Billing AE 1.0.5 resources (`trn-invoice/example`) has a PUF counterpart in this folder:
 
 | PINT AE example | PUF example |
 |-----------------|-------------|
@@ -517,7 +517,7 @@ Each example in the Peppol PINT BIS Billing AE 1.0.4 resources (`trn-invoice/exa
 | Standard tax invoice - predefined endpoint | `PUF_AE_Invoice_BuyerWithoutParticipantID.xml` |
 | Buyer-PAS-identifier | `PUF_AE_Invoice_BuyerPassport.xml` |
 | Seller-PAS-identifier | `PUF_AE_Invoice_NaturalPerson.xml` |
-| Seller-TIN-identifier | `PUF_AE_Invoice_SellerTIN.xml` |
+| Seller-TIN-identifier, Seller-TRN-and-TIN-identifiers | `PUF_AE_Invoice_SellerTIN.xml` |
 | Commercial invoice | `PUF_AE_Invoice_OutOfScope.xml` |
 | Zero rated supplies | `PUF_AE_Invoice_ZeroRated.xml` |
 | Doc-level-allowance-AE-category, Doc-level-charge-AE-category | `PUF_AE_Invoice_ReverseCharge_AllowanceCharge.xml` |
@@ -534,8 +534,6 @@ Each example in the Peppol PINT BIS Billing AE 1.0.4 resources (`trn-invoice/exa
 | Supply involving free trade zone | `PUF_AE_Invoice_FreeTradeZone.xml` |
 | Supply through e-commerce | `PUF_AE_Invoice_ECommerce.xml` |
 | Supply under Reverse charge mechanism | `PUF_AE_Invoice_ReverseCharge.xml` |
-
-> The PINT AE example "Supply through e-commerce" sets BTAE-02 to `00000001`, which is the Exports position. Rule ibr-142-ae reads E-Commerce from position 7, so `PUF_AE_Invoice_ECommerce.xml` uses `00000010`.
 
 ---
 
@@ -577,7 +575,7 @@ The rate a category carries depends on where it appears:
 | `Z` | `0.00` | `0.00` | `0.00` |
 | `E` | no rate | `0.00` | no rate |
 | `O` | no rate | no rate | no rate |
-| `AE` | `5.00` | `0.00` | `5.00` |
+| `AE` | `5.00` | `5.00` (greater than zero) | `5.00` |
 | `N` | `5.00` | not allowed (ibr-114-ae, ibr-115-ae) | `5.00` |
 
 Rules: ibr-190-ae; aligned-ibrp-z-05 to z-07 and ibr-120-ae; aligned-ibrp-e-05 to e-07 and ibr-121-ae; aligned-ibrp-o-05 to o-07 and aligned-ibrp-o-11-ae; aligned-ibrp-ae-05-ae to ae-07.
@@ -587,10 +585,12 @@ Rules: ibr-190-ae; aligned-ibrp-z-05 to z-07 and ibr-120-ae; aligned-ibrp-e-05 t
 | Scenario | `cbc:CommodityCode` | Classification required | Code |
 |----------|---------------------|------------------------|------|
 | Physical goods | `G` | HS (`@listID = 'HS'`) | e.g. `8413.70.10` |
-| Services | `S` | SAC (`cac:AdditionalItemIdentification/@schemeID = 'SAC'`) | e.g. `9983.11` |
-| Mixed | `B` | Both HS and SAC | — |
+| Services | `S` | None; SAC optional (`cac:AdditionalItemIdentification/@schemeID = 'SAC'`) | e.g. `9983.11` |
+| Mixed | `B` | HS; SAC optional | — |
 
-> **Service lines carry no HS code.** The PINT AE syntax table shows `cbc:ItemClassificationCode` as 1..1 inside `cac:CommodityClassification`, but the schematron only requires it when the item type is `G` or `B` (`ibr-184-ae`), and `ibr-188-ae` constrains the scheme only when a classification is present. A pure service line therefore contains `cbc:CommodityCode` alone — verified end-to-end against PINT AE 1.0.4. HS classifies goods; putting a placeholder HS code on a service would misreport the supply.
+> **Service lines carry no HS code.** The PINT AE syntax table shows `cbc:ItemClassificationCode` as 1..1 inside `cac:CommodityClassification`, but the schematron only requires it when the item type is `G` or `B` (`ibr-184-ae`, `ibr-186-ae`), and `ibr-188-ae` constrains the scheme only when a classification is present. A pure service line therefore contains `cbc:CommodityCode` alone, optionally with a SAC — verified end-to-end against PINT AE 1.0.5. HS classifies goods; putting a placeholder HS code on a service would misreport the supply.
+
+> **SAC is optional.** PINT AE 1.0.5 removed rule ibr-185-ae, which required the Service Accounting Code (BTAE-17) for services, because the official Service accounting code list has not been finalized. The SAC values in these examples are illustrative.
 
 ### Fixed Placeholder Endpoints
 
@@ -617,7 +617,7 @@ The PUF-008 scheme code `AE:TIN` is used on `cac:PartyIdentification/cbc:ID`, no
 
 UAE Tax Registration Numbers must be exactly 15 digits, start with `1`, and end with `03`. The Deemed Supply example uses the illustrative TRN `100000000099903`. No official placeholder TRN is published.
 
-The TRN is normally the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID`. For a party with no VAT accounting role in the document — the FTZ Beneficiary (BTAE-01) and the disclosed-agent Principle (BTAE-14), both carried in `puf:RestrictedInformationParty` — it is provided on `cac:PartyIdentification/cbc:ID` with the PUF-008 scheme code `AE:TRN`. A UAE identifier given without a scheme identifier is not processed.
+The TRN is normally the VAT identifier on `cac:PartyTaxScheme/cbc:CompanyID`. For a party with no VAT accounting role in the document — the FTZ Beneficiary (BTAE-01) and the disclosed-agent Principal (BTAE-14), both carried in `puf:RestrictedInformationParty` — it is provided on `cac:PartyIdentification/cbc:ID` with the PUF-008 scheme code `AE:TRN`. A UAE identifier given without a scheme identifier is not processed.
 
 ---
 
@@ -627,8 +627,8 @@ All examples validate against:
 
 - PUF UBL 2.1 XSD schemas
 - PUF-UBL.sch Schematron rules
-- Peppol PINT BIS Billing AE 1.0.4 (PINT-UBL-validation-preprocessed + PINT-jurisdiction-aligned-rules)
-- Peppol PINT BIS Self-Billing AE 1.0.4 (for `PUF_AE_SelfBilling_Invoice.xml`)
+- Peppol PINT BIS Billing AE 1.0.5 (PINT-UBL-validation-preprocessed + PINT-jurisdiction-aligned-rules)
+- Peppol PINT BIS Self-Billing AE 1.0.5 (for `PUF_AE_SelfBilling_Invoice.xml`)
 
 ## References
 
@@ -637,4 +637,4 @@ All examples validate against:
 - [PUF Code Lists — UAE Identification Schemes](https://pagero.github.io/puf-code-lists/#_identification_scheme_united_arab_emirates)
 - [PUF Code Lists — UAE Tax Exemption Codes](https://pagero.github.io/puf-code-lists/#_tax_exemption_codes_in_united_arab_emirates)
 - PUF Billing Specification — UAE section
-- Peppol PINT BIS Billing AE 1.0.4 specification
+- Peppol PINT BIS Billing AE 1.0.5 specification

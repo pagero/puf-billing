@@ -10,7 +10,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Credit Note (Type 381)
     Transaction Type: BTAE-02 = 00000000 (no special transaction context)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Burj Holdings PJSC returned 2 of the 10 industrial pumps invoiced on INV-AE-2026-00001.
@@ -19,15 +19,17 @@
 
     Key Fields:
     - BT-3 CreditNoteTypeCode 381; BTAE-02 carried in @name exactly as on an invoice
-    - BTAE-03 Credit note reason code: mandatory for type 381 (ibr-158-ae). Carried in
-      puf:BillingReferenceExtension/puf:Code. Value DL8.61.1.D = goods or services returned
+    - BTAE-03 Credit note reason code: mandatory for type 381 (ibr-158-ae) and at most one
+      per credit note (ibr-198-ae from PINT AE 1.0.5). Carried in
+      puf:BillingReferenceExtension/puf:Code on the first cac:BillingReference. Value
+      DL8.61.1.D = goods or services returned
     - BG-3 BillingReference: mandatory for a credit note unless the reason code is VD
       (volume discount) - ibr-055-ae. Points at INV-AE-2026-00001 with its issue date
     - BT-129 Quantity uses cbc:CreditedQuantity, not cbc:InvoicedQuantity
     - No BT-9 due date: a credit note is excluded from the payment due date rule (ibr-127-ae)
 
     Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026);
-               Peppol PINT BIS Billing AE 1.0.4
+               Peppol PINT BIS Billing AE 1.0.5
 -->
 <CreditNote xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>

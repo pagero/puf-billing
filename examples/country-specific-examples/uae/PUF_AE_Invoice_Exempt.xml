@@ -11,7 +11,7 @@
     Format: PUF (Pagero Universal Format) 2.0
     Document Type: Tax Invoice (Type 380)
     Transaction Type: BTAE-02 = 00000000 (no special transaction context)
-    Target Format: Peppol PINT BIS Billing AE 1.0.4
+    Target Format: Peppol PINT BIS Billing AE 1.0.5
 
     Scenario Description:
     Emirates Premier Bank PJSC (Dubai) invoices Burj Holdings PJSC (Abu Dhabi) for April
@@ -23,16 +23,18 @@
     CRITICAL - WHY THIS INVOICE IS NOT EXEMPT ONLY:
     An invoice whose lines are all exempt cannot currently be expressed. Guidelines V2.0
     18.3.1 states that type code 480 should not be used for exempt supplies, and PINT AE
-    1.0.4 rule ibr-151-ae rejects type code 380 when every line is E or O. The PINT AE
-    examples for category E use type 480, which validates but does not follow 18.3.1.
+    rule ibr-151-ae, unchanged in 1.0.5, rejects type code 380 when every line is E or O.
+    The PINT AE examples for category E use type 480, which validates but does not follow
+    18.3.1.
     A tax invoice may combine taxable and non-taxable supplies (Guidelines V2.0 10.2.2),
     so this example adds a standard-rated line.
 
     CRITICAL - THE VAT RATE AND EXEMPTION REASON DIFFER BY LEVEL FOR CATEGORY E:
     - Line: no rate (aligned-ibrp-e-05) and an exemption reason code (ibr-167-ae)
     - Document level allowance or charge: rate 0.00 (aligned-ibrp-e-06, aligned-ibrp-e-07),
-      its own exemption reason code (IBT-196 / IBT-198, PUF-013) and an allowance or
-      charge reason code (BT-98 / BT-105), which ibr-168-ae and ibr-169-ae test
+      its own VAT exemption reason code (IBT-196 / IBT-198, PUF-013), which ibr-168-ae and
+      ibr-169-ae test from PINT AE 1.0.5, and an allowance or charge reason code
+      (BT-98 / BT-105)
     - VAT breakdown: no rate (ibr-121-ae)
 
     Key Fields:
@@ -40,13 +42,12 @@
       text, from PUF-013 (PINT AE code list AE-Exempt)
     - BTAE-08 Line VAT amount: not sent on the exempt line, where it must be absent
       (ibr-163-ae)
-    - BTAE-13 Item type S with SAC 9971.13 (credit-granting) and 9971.19 (other
-      financial services)
+    - BTAE-13 Item type S with optional SACs; 9971.13 and 9971.19 are illustrative values
     - BG-21 Document level charge: reason code FI (Financing)
 
     Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 10.2.2 and
                18.3.1; PUF Code List PUF-013 Tax exemption codes United Arab Emirates;
-               Peppol PINT BIS Billing AE 1.0.4
+               Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
     <cbc:CustomizationID>urn:pagero.com:puf:billing:2.0</cbc:CustomizationID>
@@ -122,7 +123,7 @@
             </cac:FinancialInstitutionBranch>
         </cac:PayeeFinancialAccount>
     </cac:PaymentMeans>
-    <!-- BG-20 Document level allowance in category E: rate 0.00 (aligned-ibrp-e-06) and a reason code (ibr-168-ae) -->
+    <!-- BG-20 Document level allowance in category E: rate 0.00 (aligned-ibrp-e-06) and a VAT exemption reason code (ibr-168-ae) -->
     <cac:AllowanceCharge>
         <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
         <cbc:AllowanceChargeReasonCode>95</cbc:AllowanceChargeReasonCode>
@@ -138,7 +139,7 @@
             </cac:TaxScheme>
         </cac:TaxCategory>
     </cac:AllowanceCharge>
-    <!-- BG-21 Document level charge in category E: rate 0.00 (aligned-ibrp-e-07) and a reason code (ibr-169-ae) -->
+    <!-- BG-21 Document level charge in category E: rate 0.00 (aligned-ibrp-e-07) and a VAT exemption reason code (ibr-169-ae) -->
     <cac:AllowanceCharge>
         <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
         <cbc:AllowanceChargeReasonCode>FI</cbc:AllowanceChargeReasonCode>
