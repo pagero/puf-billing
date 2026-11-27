@@ -30,12 +30,12 @@
       that is not an export
     - BT-46 Buyer identifier: on this endpoint the buyer identifier (IBT-046) or the buyer
       VAT identifier (IBT-048) is mandatory (ibr-135-ae). For a UAE buyer, IBT-046 is the
-      TIN under scheme 0235 (Guidelines V2.0 18.2.2), sent in PUF with @schemeID="AE:TIN"
+      TIN under scheme 0235 (Guidelines V2.1 18.2.1, p.56), sent in PUF with @schemeID="AE:TIN"
     - BT-48 Buyer VAT identifier: the buyer's TRN
     - BT-47 Buyer legal registration identifier: not required on a predefined endpoint
       (ibr-149-ae), except on type 480 or 81, where ibr-136-ae requires it
 
-    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 10.2.2 and
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026), 10.2.2 and
                18.3.3; Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">

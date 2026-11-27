@@ -19332,7 +19332,7 @@ Otherwise it is OK to omit the attribute.</td>
 <p>A party that is within scope of UAE e-invoicing but not registered for VAT has no TRN. It still has a TIN, obtained by registering with the FTA, and uses that TIN as its Participant Identifier.</p>
 </div>
 <div class="paragraph">
-<p>Pagero sets the three predefined buyer endpoints under scheme <code>0235</code> itself, so they do not need to be sent: <code>9900000097</code> on a deemed supply, <code>9900000099</code> on an export to a buyer that is not reached over Peppol, and <code>9900000098</code> when the buyer has no Participant Identifier on a document that is not an export. <code>9900000098</code> covers a UAE buyer that has not yet implemented Electronic Invoicing, for which the supplier must also issue a regular tax invoice, for example a PDF, and a buyer outside the UAE that is not subject to UAE Electronic Invoicing (UAE Electronic Invoicing Guidelines V2.0, 10.2.2 and 18.3.3). A document with a predefined endpoint is reported to the FTA and is not exchanged over Peppol.</p>
+<p>Pagero sets the three predefined buyer endpoints under scheme <code>0235</code> itself, so they do not need to be sent: <code>9900000097</code> on a deemed supply, <code>9900000099</code> on an export to a buyer that is not reached over Peppol, and <code>9900000098</code> when the buyer has no Participant Identifier on a document that is not an export. <code>9900000098</code> covers a UAE buyer that has not yet implemented Electronic Invoicing, for which the supplier must also issue a regular tax invoice, for example a PDF, and a buyer outside the UAE that is not subject to UAE Electronic Invoicing (UAE Electronic Invoicing Guidelines V2.1, 10.2.2 and 18.3.3). A buyer outside the UAE that is registered on Peppol keeps its own Participant Identifier (18.2.2). A document with a predefined endpoint is reported to the FTA and is not exchanged over Peppol.</p>
 </div>
 </div>
 <div class="sect3">
@@ -19417,7 +19417,7 @@ Otherwise it is OK to omit the attribute.</td>
 <p>For the buyer, PINT AE requires the registration type (BTAE-16) whenever the buyer legal registration identifier (IBT-047) is sent and the buyer electronic address uses scheme <code>0235</code> (<a href="https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/rule/ibr-180-ae/" target="_blank" rel="noopener">ibr-180-ae</a>), and the issuing authority (BTAE-11, <code>AE:LRA</code>) with a trade license (ibr-101-ae). From PINT AE 1.0.5 neither is required when the buyer electronic address is one of the predefined endpoints <code>9900000098</code> or <code>9900000099</code>. The registration type is one of <code>AE:TL</code>, <code>AE:EID</code>, <code>AE:PASSPORT</code> and <code>AE:CD</code> (ibr-183-ae).</p>
 </div>
 <div class="paragraph">
-<p>No registration type is defined for a registration issued outside the UAE. For a buyer outside the UAE that has no UAE Participant Identifier, send its registration number in <code>cac:PartyLegalEntity/cbc:CompanyID</code> without <code>@schemeID</code>, and send no <code>AE:LRA</code> entry.</p>
+<p>The registration type is required only for a buyer registered in the UAE, and no type is defined for a registration issued outside the UAE other than a passport, which uses <code>AE:PASSPORT</code> with <code>AE:PASSPORT_COUNTRY</code> (UAE Electronic Invoicing Guidelines V2.1, 18.2.1). For a buyer outside the UAE that has no UAE TIN, send the registration number issued in its own country, such as a company registration number, in <code>cac:PartyLegalEntity/cbc:CompanyID</code> without <code>@schemeID</code>, and send no <code>AE:LRA</code> entry. A buyer outside the UAE that has a UAE TIN uses <code>AE:TL</code> with its issuing authority in <code>AE:LRA</code>. The Guidelines ask for this number for a buyer outside the UAE that is not subject to UAE Electronic Invoicing, also when the document is not of type <code>480</code> or <code>81</code> (18.2.2).</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br>
@@ -19845,10 +19845,10 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 <div class="sect3">
 <h4 id="_free_trade_zone_beneficiary"><a class="anchor" href="#_free_trade_zone_beneficiary"></a><a class="link" href="#_free_trade_zone_beneficiary">5.21.12. Free Trade Zone Beneficiary</a></h4>
 <div class="paragraph">
-<p>In free-trade-zone supplies (BTAE-02 transaction type code matching the FTZ flag, <code>1XXXXXXX</code>), the <strong>Beneficiary ID</strong> (BTAE-01) — the TRN or TIN of the FTZ beneficiary — is carried using the existing <code>puf:RestrictedInformationParty</code> extension with <code>Key = 'Beneficiary'</code>.</p>
+<p>In free-trade-zone supplies (BTAE-02 transaction type code matching the FTZ flag, <code>1XXXXXXX</code>), the <strong>Beneficiary ID</strong> (BTAE-01) is carried using the existing <code>puf:RestrictedInformationParty</code> extension with <code>Key = 'Beneficiary'</code>. It is the TRN or TIN of the FTZ beneficiary, or, for a beneficiary outside the UAE that has neither, a registration number issued in its own jurisdiction, such as a company registration number (UAE Electronic Invoicing Guidelines V2.1, 18.3.4). When the beneficiary is the buyer, the buyer&#8217;s identifier is given here as well (12.2 item 26).</p>
 </div>
 <div class="paragraph">
-<p>The beneficiary has no VAT accounting role in the document, so its TRN is carried on <code>cac:PartyIdentification/cbc:ID</code> with <code>@schemeID = 'AE:TRN'</code>. A beneficiary that is not registered for VAT uses <code>@schemeID = 'AE:TIN'</code> instead. A <code>cbc:ID</code> without a scheme identifier is not processed and the Beneficiary ID will be missing from the resulting invoice.</p>
+<p>The beneficiary has no VAT accounting role in the document, so its TRN is carried on <code>cac:PartyIdentification/cbc:ID</code> with <code>@schemeID = 'AE:TRN'</code>. A beneficiary that is not registered for VAT uses <code>@schemeID = 'AE:TIN'</code> instead. A registration number issued outside the UAE goes in <code>cac:PartyLegalEntity/cbc:CompanyID</code>, without <code>@schemeID</code>. A <code>cac:PartyIdentification/cbc:ID</code> without a scheme identifier is not processed and the Beneficiary ID will be missing from the resulting invoice.</p>
 </div>
 <div class="paragraph">
 <p><strong>Example</strong><br></p>
@@ -19886,6 +19886,43 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>TRN of the free-trade-zone beneficiary. Use <code>@schemeID = "AE:TIN"</code> and the 10-digit TIN when the beneficiary is not registered for VAT.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Example</strong><br>
+<em>Beneficiary outside the UAE without a TRN or TIN</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;Invoice&gt;</span>
+  <span class="tag">&lt;ext:UBLExtensions&gt;</span>
+    <span class="tag">&lt;ext:UBLExtension&gt;</span>
+      <span class="tag">&lt;ext:ExtensionURI&gt;</span>urn:pagero:ExtensionComponent:1.0:PageroExtension:RestrictedInformationParty<span class="tag">&lt;/ext:ExtensionURI&gt;</span>
+      <span class="tag">&lt;ext:ExtensionContent&gt;</span>
+        <span class="tag">&lt;puf:PageroExtension&gt;</span>
+          <span class="tag">&lt;puf:RestrictedInformationParty&gt;</span>
+            <span class="tag">&lt;puf:Key&gt;</span>Beneficiary<span class="tag">&lt;/puf:Key&gt;</span>
+            <span class="tag">&lt;cac:Party&gt;</span>
+              <span class="tag">&lt;cac:PartyLegalEntity&gt;</span>
+                <span class="tag">&lt;cbc:RegistrationName&gt;</span>Example Beneficiary GmbH<span class="tag">&lt;/cbc:RegistrationName&gt;</span>
+                <span class="tag">&lt;cbc:CompanyID&gt;</span>HRB 123456<span class="tag">&lt;/cbc:CompanyID&gt;</span><i class="conum" data-value="1"></i><b>(1)</b>
+              <span class="tag">&lt;/cac:PartyLegalEntity&gt;</span>
+            <span class="tag">&lt;/cac:Party&gt;</span>
+          <span class="tag">&lt;/puf:RestrictedInformationParty&gt;</span>
+        <span class="tag">&lt;/puf:PageroExtension&gt;</span>
+      <span class="tag">&lt;/ext:ExtensionContent&gt;</span>
+    <span class="tag">&lt;/ext:UBLExtension&gt;</span>
+  <span class="tag">&lt;/ext:UBLExtensions&gt;</span>
+  <span class="comment">&lt;!-- Code omitted for clarity --&gt;</span>
+<span class="tag">&lt;/Invoice&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Registration number issued in the beneficiary&#8217;s own jurisdiction, without <code>@schemeID</code>.</td>
 </tr>
 </table>
 </div>
@@ -19946,7 +19983,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 <div class="ulist">
 <ul>
 <li>
-<p>The buyer endpoint ID is always <code>9900000097</code> (scheme <code>0235</code>), whoever the buyer is (UAE Electronic Invoicing Guidelines V1.1, p.25). Pagero sets it, and any endpoint sent in PUF is replaced.</p>
+<p>The buyer endpoint ID is always <code>9900000097</code> (scheme <code>0235</code>), whoever the buyer is (UAE Electronic Invoicing Guidelines V2.1, 10.4 scenario 2). Pagero sets it, and any endpoint sent in PUF is replaced.</p>
 </li>
 <li>
 <p>A buyer TIN (<code>cac:PartyIdentification/cbc:ID</code> with <code>@schemeID = 'AE:TIN'</code>) or buyer TRN (<code>cac:PartyTaxScheme/cbc:CompanyID</code>) is still required, because the predefined endpoint is not a TIN (ibr-135-ae). No placeholder value is published for a deemed supply without a recipient.</p>
@@ -20011,7 +20048,7 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 <div class="sect3">
 <h4 id="_credit_note_reason_code"><a class="anchor" href="#_credit_note_reason_code"></a><a class="link" href="#_credit_note_reason_code">5.21.16. Credit note reason code</a></h4>
 <div class="paragraph">
-<p>When the document is a credit note (<code>cbc:CreditNoteTypeCode</code> <code>381</code> or <code>81</code>, including a self-billed credit note), the credit note reason code (BTAE-03) MUST be provided. The supported values are <code>DL8.61.1.A</code> through <code>DL8.61.1.E</code> and <code>VD</code> (volume discount). See <a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE (United Arab Emirates)</a> for the definition of each code.</p>
+<p>When the document is a credit note (<code>cbc:CreditNoteTypeCode</code> <code>381</code> or <code>81</code>, including a self-billed credit note), the credit note reason code (BTAE-03) MUST be provided. The supported values are <code>DL8.61.1.A</code> through <code>DL8.61.1.E</code> and <code>VD</code> (volume discount). See <a href="https://pagero.github.io/puf-code-lists/#_correction_reason_codes_for_united_arab_emirates" target="_blank" rel="noopener">PUF-023-CORRECTIONCODE (United Arab Emirates)</a> for the definition of each code. For a credit note that takes the retention amount off a tax invoice issued for the full certified amount, the Guidelines give <code>DL8.61.1.C</code> (UAE Electronic Invoicing Guidelines V2.1, 18.3.5).</p>
 </div>
 <div class="paragraph">
 <p>The code is carried on <code>cac:BillingReference/cac:InvoiceDocumentReference</code> through the existing <code>puf:BillingReferenceExtension</code> (path <code>puf:BillingReferenceExtension/puf:Code</code>). A credit note has one reason code (<a href="https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-creditnote/rule/ibr-198-ae/" target="_blank" rel="noopener">ibr-198-ae</a>, PINT AE 1.0.5): give it on the first <code>cac:BillingReference</code>, also when the credit note references several invoices. When the reason code is <code>VD</code>, the credit note MUST NOT reference a preceding invoice. Peppol PINT AE rule ibr-055-ae rejects a <code>VD</code> credit note that has one, and requires the reference for every other reason code, although the PINT AE text describes it as optional for <code>VD</code>. Because PUF carries the code inside <code>cac:BillingReference</code>, send <code>cac:BillingReference</code> for <code>VD</code> only as the carrier of the code: leave <code>cbc:ID</code> empty and send no <code>cbc:IssueDate</code>.</p>
@@ -20062,6 +20099,9 @@ The PINT-AE syntax table shows <code>cbc:ItemClassificationCode</code> as 1..1 w
 </div>
 <div class="sect3">
 <h4 id="_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services"><a class="anchor" href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services"></a><a class="link" href="#_out_of_scope_of_vat_and_credit_note_related_to_goods_or_services">5.21.17. Out of scope of VAT and Credit-note related to goods or services</a></h4>
+<div class="paragraph">
+<p>Use <code>480</code> or <code>81</code> when every supply on the document is exempt (<code>E</code>) or outside the scope of VAT (<code>O</code>), and <code>380</code> or <code>381</code> when it has a taxable supply, including a zero-rated one (UAE Electronic Invoicing Guidelines V2.1, 18.3.1; <a href="https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/rule/ibr-151-ae/" target="_blank" rel="noopener">ibr-151-ae</a>).</p>
+</div>
 <div class="paragraph">
 <p>When the invoice type code is <code>480</code> (Out of scope of VAT) or <code>81</code> (Credit note related to goods or services), the buyer&#8217;s legal registration identifier (IBT-047) is mandatory regardless of whether the buyer is VAT-registered (ibr-136-ae), and every VAT category code used on the document, on lines, document level allowances and charges and the VAT breakdown, MUST be <code>E</code> or <code>O</code> (<a href="https://docs.peppol.eu/poac/ae/v1.0.5/pint-ae/trn-invoice/rule/ibr-122-ae/" target="_blank" rel="noopener">ibr-122-ae</a>). PINT AE 1.0.5 no longer accepts <code>Z</code> on these documents.</p>
 </div>

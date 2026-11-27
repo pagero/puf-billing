@@ -20,12 +20,12 @@
     discount of AED 900.00 is deducted and AED 1,500.00 sea freight is charged. Net
     AED 45,600.00, no VAT.
 
-    CRITICAL - 480 IS ONLY FOR SUPPLIES THAT ARE ENTIRELY OUT OF SCOPE:
-    Guidelines V2.0 18.3.1 reserves type code 480 for a transaction that relates
-    exclusively to supplies outside the scope of VAT; exempt and zero-rated supplies keep
-    type code 380. 18.3.2 classifies goods supplied from outside the UAE to another location
-    outside the UAE, without entering the UAE, as an out-of-scope transaction rather than
-    an export.
+    CRITICAL - 480 IS FOR DOCUMENTS WHOSE SUPPLIES ARE ALL EXEMPT OR OUT OF SCOPE:
+    Guidelines V2.1 18.3.1 uses type code 480 for transactions outside the scope of VAT and
+    for invoices consisting entirely of VAT-exempt and/or non-VAT supplies. A document with
+    a taxable supply, zero-rated included, keeps type code 380. 18.3.2 classifies goods
+    supplied from outside the UAE to another location outside the UAE, without entering the
+    UAE, as an out-of-scope transaction rather than an export.
 
     Key Fields:
     - BT-3 InvoiceTypeCode 480 (Out of scope of VAT, PUF-003)
@@ -38,7 +38,7 @@
       its type and issuing authority (ibr-180-ae, ibr-101-ae)
     - BT-31 Seller VAT identifier: not required on type 480 (ibr-134-ae), but either BT-31
       or BT-32 must be provided on every document, including type 480 (ibr-177-ae from
-      PINT AE 1.0.5; Guidelines V2.0 18.1.1). This VAT-registered seller sends its TRN
+      PINT AE 1.0.5; Guidelines V2.1 18.1.1). This VAT-registered seller sends its TRN
     - BT-32 Seller tax registration identifier: the seller's TIN with @schemeID="AE:TIN",
       sent next to the TRN. A seller that is not registered for VAT sends the TIN alone
     - BT-48 Buyer VAT identifier: when every VAT category on the document is O, Pagero
@@ -47,7 +47,7 @@
       (ibr-157-ae)
     - BTAE-08 Line VAT amount: zero on the out-of-scope line (ibr-104-ae)
 
-    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 18.2.1, 18.3.1
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026), 18.2.1, 18.3.1
                and 18.3.2; Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">

@@ -20,14 +20,12 @@
     for early repayment and AED 250.00 late payment interest adjust the exempt part.
     Net AED 22,250.00 plus AED 200.00 VAT on the fee.
 
-    CRITICAL - WHY THIS INVOICE IS NOT EXEMPT ONLY:
-    An invoice whose lines are all exempt cannot currently be expressed. Guidelines V2.0
-    18.3.1 states that type code 480 should not be used for exempt supplies, and PINT AE
-    rule ibr-151-ae, unchanged in 1.0.5, rejects type code 380 when every line is E or O.
-    The PINT AE examples for category E use type 480, which validates but does not follow
-    18.3.1.
-    A tax invoice may combine taxable and non-taxable supplies (Guidelines V2.0 10.2.2),
-    so this example adds a standard-rated line.
+    CRITICAL - TYPE CODE FOR EXEMPT SUPPLIES:
+    An invoice whose supplies are all exempt, or only exempt and out of scope, is a type
+    480 (Guidelines V2.1 18.3.1), as the PINT AE examples for category E show, and PINT AE
+    rule ibr-151-ae rejects type code 380 for it. A tax invoice may combine taxable and
+    non-taxable supplies (Guidelines V2.1 10.2.2). This one adds a standard-rated line, so
+    it is a type 380.
 
     CRITICAL - THE VAT RATE AND EXEMPTION REASON DIFFER BY LEVEL FOR CATEGORY E:
     - Line: no rate (aligned-ibrp-e-05) and an exemption reason code (ibr-167-ae)
@@ -45,7 +43,7 @@
     - BTAE-13 Item type S with optional SACs; 9971.13 and 9971.19 are illustrative values
     - BG-21 Document level charge: reason code FI (Financing)
 
-    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 10.2.2 and
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026), 10.2.2 and
                18.3.1; PUF Code List PUF-013 Tax exemption codes United Arab Emirates;
                Peppol PINT BIS Billing AE 1.0.5
 -->

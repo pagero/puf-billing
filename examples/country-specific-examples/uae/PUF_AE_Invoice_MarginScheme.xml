@@ -32,7 +32,7 @@
     - Exactly one VAT breakdown with category N is required (ibr-105-ae)
     - The vehicle VIN is carried in the item description for traceability
 
-    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 3
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026), 10.4 scenario 3
                (Margin scheme); Article 43 of the VAT Decree-Law on Charging Tax based on
                Profit Margin; Peppol PINT BIS Billing AE 1.0.5
 -->

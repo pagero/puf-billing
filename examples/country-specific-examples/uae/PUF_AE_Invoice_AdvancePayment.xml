@@ -38,8 +38,8 @@
     retained amount once the buyer becomes liable to release it. Each is a standard Tax
     Invoice (380) following the same pattern as this example.
 
-    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), Appendix 5 -
-               Advance Payments and Retention Clarification;
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026), 17.1 (Appendix 5,
+               Advance Payments);
                Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
@@ -52,17 +52,17 @@
     <!-- BT-9 Payment due date -->
     <cbc:DueDate>2026-06-20</cbc:DueDate>
     <!-- BT-3 InvoiceTypeCode 380 (Tax invoice). In the UAE an advance payment is invoiced as a normal
-         Tax Invoice and the final invoice is likewise a Tax Invoice (Guidelines V1.1, Appendix 5) — there
+         Tax Invoice and the final invoice is likewise a Tax Invoice (Guidelines V2.1, 17.1) — there
          is no dedicated prepayment type code.
          @name carries BTAE-02 invoice transaction type code (8 chars, all 0 = standard tax invoice) -->
     <cbc:InvoiceTypeCode name="00000000">380</cbc:InvoiceTypeCode>
-    <!-- BT-22 Note. Per Guidelines V1.1 Appendix 5 the advance-payment reference may be carried in a note
+    <!-- BT-22 Note. Per Guidelines V2.1 17.1 the advance-payment reference may be carried in a note
          (IBT-022) in addition to, or instead of, the preceding invoice reference (IBT-25/IBT-26) below. -->
     <cbc:Note>Final invoice for the remaining balance. An advance payment of AED 1,000.00 plus 5% VAT was previously invoiced under ADV-001 (2026-05-01); this invoice covers only the outstanding amount.</cbc:Note>
     <!-- BT-5 Document currency -->
     <cbc:DocumentCurrencyCode>AED</cbc:DocumentCurrencyCode>
     <!-- BG-3 Preceding invoice reference: the advance-payment Tax Invoice already issued.
-         IBT-25 = preceding invoice number, IBT-26 = preceding invoice issue date (Guidelines V1.1, Appendix 5). -->
+         IBT-25 = preceding invoice number, IBT-26 = preceding invoice issue date (Guidelines V2.1, 17.1). -->
     <cac:BillingReference>
         <cac:InvoiceDocumentReference>
             <!-- BT-25 Preceding invoice number (the advance-payment invoice) -->
@@ -181,7 +181,7 @@
         <cbc:TaxInclusiveAmount currencyID="AED">9450.00</cbc:TaxInclusiveAmount>
         <!-- BT-113 Paid amount (cbc:PrepaidAmount) intentionally omitted: the final invoice already
              reflects only the outstanding balance, so no further advance adjustment is needed
-             (Guidelines V1.1, Appendix 5). -->
+             (Guidelines V2.1, 17.1). -->
         <!-- BT-115 Amount due for payment -->
         <cbc:PayableAmount currencyID="AED">9450.00</cbc:PayableAmount>
     </cac:LegalMonetaryTotal>

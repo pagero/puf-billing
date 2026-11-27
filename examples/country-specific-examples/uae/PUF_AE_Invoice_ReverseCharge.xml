@@ -29,7 +29,7 @@
       identifier BT-157-1 must be 0160 (GS1 GTIN) - ibr-174-ae
     - A VAT breakdown with category AE must be present at document level (aligned-ibrp-ae-01-ae)
 
-    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026);
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026);
                Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">

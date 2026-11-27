@@ -172,7 +172,7 @@ Demonstrates:
 Demonstrates:
 
 - Deemed Supply flag in BTAE-02 position 2 (`01000000`)
-- Predefined buyer endpoint `9900000097` (scheme `0235`), always used for a deemed supply (UAE Electronic Invoicing Guidelines V1.1, p.25)
+- Predefined buyer endpoint `9900000097` (scheme `0235`), always used for a deemed supply (UAE Electronic Invoicing Guidelines V2.1, 10.4 scenario 2)
 - Illustrative buyer TRN `100000000099903` (15 digits, starts with `1`, ends with `03`). ibr-135-ae requires a buyer TIN or TRN, and no official placeholder TRN is published
 - `PrepaidAmount` = `TaxInclusiveAmount` and `PayableAmount` = `0.00` (free-of-charge supply)
 - `DueDate` omitted — no payment obligation
@@ -294,7 +294,7 @@ Demonstrates:
 
 Demonstrates:
 
-- Advance-payment handling per UAE Guidelines V1.1, Appendix 5: the advance is invoiced as a normal Tax Invoice (`380`) and the final invoice is likewise a Tax Invoice covering only the outstanding balance — there is no dedicated prepayment type code
+- Advance-payment handling per UAE Electronic Invoicing Guidelines V2.1, 17.1: the advance is invoiced as a normal Tax Invoice (`380`) and the final invoice is likewise a Tax Invoice covering only the outstanding balance — there is no dedicated prepayment type code
 - `cac:BillingReference` to the preceding advance-payment invoice (IBT-25 preceding invoice number, IBT-26 preceding invoice issue date)
 - Advance reference also restated in a document note (BT-22 / IBT-022)
 - `cbc:PrepaidAmount` deliberately omitted — the final invoice already reflects only the remaining balance, so no further advance adjustment is applied
@@ -307,7 +307,7 @@ Demonstrates:
 - This final invoice bills the remaining AED 9,000.00 net + AED 450.00 VAT; PayableAmount AED 9,450.00
 - BillingReference → `ADV-001`; HS code `7309.00.00` (steel storage tank)
 
-> **Retention:** UAE Guidelines V1.1, Appendix 5 also clarifies retention. Businesses may issue an Electronic Invoice for the amount payable after adjusting for the retained amount, then a separate Electronic Invoice for the retained amount once the buyer becomes liable to release it. Each is a standard Tax Invoice (`380`) and follows the same structure as this example, with the retained portion simply billed on the later invoice.
+> **Retention:** UAE Electronic Invoicing Guidelines V2.1, 17.2 also clarifies retention. Businesses may issue an Electronic Invoice for the amount payable after adjusting for the retained amount, then a separate Electronic Invoice for the retained amount once the buyer becomes liable to release it. Each is a standard Tax Invoice (`380`) and follows the same structure as this example, with the retained portion simply billed on the later invoice. When a Tax Invoice was issued for the full certified amount and a Tax Credit Note is issued for the retention portion instead, the Guidelines give credit note reason code `DL8.61.1.C` (18.3.5).
 
 ---
 
@@ -367,7 +367,7 @@ Demonstrates:
 - Seller: Acme Trading LLC — TRN `100000000000003`, TIN `1000000000` (the first 10 digits of the TRN)
 - 2 × AED 2,500.00 industrial air compressors at 5% VAT; HS code `8414.80.11`
 
-> A seller that is not registered for VAT has no TRN. It sends the same `AE:TIN`, which is then the mandatory seller identifier (ibr-177-ae; UAE Electronic Invoicing Guidelines V2.0, 18.1.1).
+> A seller that is not registered for VAT has no TRN. It sends the same `AE:TIN`, which is then the mandatory seller identifier (ibr-177-ae; UAE Electronic Invoicing Guidelines V2.1, 18.1.1).
 
 ---
 
@@ -377,8 +377,8 @@ Demonstrates:
 
 Demonstrates:
 
-- Predefined buyer endpoint `9900000098` (scheme `0235`) for a UAE buyer that has not yet implemented Electronic Invoicing and has no Participant Identifier (Guidelines V2.0, 10.2.2)
-- Buyer TIN (`AE:TIN`) reported as the buyer identifier IBT-046 under scheme `0235`, which ibr-135-ae requires on this endpoint together with or instead of the TRN (Guidelines V2.0, 18.2.2)
+- Predefined buyer endpoint `9900000098` (scheme `0235`) for a UAE buyer that has not yet implemented Electronic Invoicing and has no Participant Identifier (Guidelines V2.1, 10.2.2)
+- Buyer TIN (`AE:TIN`) reported as the buyer identifier IBT-046 under scheme `0235`, which ibr-135-ae requires on this endpoint together with or instead of the TRN (Guidelines V2.1, 18.2.1, p.56)
 - The document is reported to the FTA and not delivered over Peppol, so the supplier also issues a regular tax invoice, for example a PDF
 
 **Key Features:**
@@ -416,7 +416,7 @@ Demonstrates:
 - Exempt supply (category `E`) with exemption reason code `DL8.46.1` (Certain financial services, [PUF-013](https://pagero.github.io/puf-code-lists/#_tax_exemption_codes_in_united_arab_emirates))
 - Document level allowance and charge in category `E`: rate `0.00` (aligned-ibrp-e-06, aligned-ibrp-e-07), their own VAT exemption reason code (IBT-196, IBT-198; ibr-168-ae, ibr-169-ae), and an allowance or charge reason code
 - No rate on the exempt line or in the exempt VAT breakdown, and no line VAT amount (BTAE-08) on the exempt line (ibr-163-ae)
-- An exempt supply combined with a standard-rated one on a tax invoice (Guidelines V2.0, 10.2.2)
+- An exempt supply combined with a standard-rated one on a tax invoice (Guidelines V2.1, 10.2.2)
 
 **Key Features:**
 
@@ -424,7 +424,7 @@ Demonstrates:
 - Seller: Emirates Premier Bank PJSC — term loan interest AED 18,500.00 (`E`, SAC `9971.13`) and arrangement fee AED 4,000.00 (`S`, SAC `9971.19`)
 - Interest rebate of AED 500.00 (reason `95`) and late payment interest of AED 250.00 (reason `FI`) on the exempt part
 
-> **Why not exempt only:** an invoice whose lines are all exempt has no valid type code today. Guidelines V2.0, 18.3.1 states that type code `480` should not be used for exempt supplies, and PINT AE rule ibr-151-ae, unchanged in 1.0.5, rejects type code `380` when every line is `E` or `O`. The PINT AE examples for category E use `480`.
+> **Exempt only:** an invoice whose lines are all exempt, or only exempt and out of scope, is a `480` (Guidelines V2.1, 18.3.1), and PINT AE rule ibr-151-ae rejects type code `380` for it. The PINT AE examples for category E use `480`. This example adds a standard-rated line, so it is a `380`.
 
 ---
 
@@ -436,7 +436,7 @@ Demonstrates:
 
 - A zero-rated supply (category `Z`) within the UAE, so BTAE-02 position 8 (Exports) stays `0`
 - Rate `0.00` at every level: line, document level allowance and charge, and VAT breakdown
-- Line VAT amount (BTAE-08) of zero (ibr-165-ae); type code `380`, because zero-rated supplies remain within the VAT framework (Guidelines V2.0, 18.3.1)
+- Line VAT amount (BTAE-08) of zero (ibr-165-ae); type code `380`, because a zero-rated supply is a taxable supply (Guidelines V2.1, 18.3.1)
 
 **Key Features:**
 
@@ -452,11 +452,11 @@ Demonstrates:
 
 Demonstrates:
 
-- Type code `480` for a transaction that relates exclusively to supplies outside the scope of VAT (Guidelines V2.0, 18.3.1)
-- Goods supplied from outside the UAE to another location outside the UAE without entering the UAE, classified as out of scope rather than export (Guidelines V2.0, 18.3.2)
+- Type code `480`, which applies when every supply on the document is exempt or outside the scope of VAT (Guidelines V2.1, 18.3.1); here every supply is out of scope
+- Goods supplied from outside the UAE to another location outside the UAE without entering the UAE, classified as out of scope rather than export (Guidelines V2.1, 18.3.2)
 - Category `O` without a rate at any level, including a document level allowance and charge; only `E` and `O` are accepted on type `480` (ibr-122-ae, which no longer accepts `Z` from PINT AE 1.0.5)
 - Buyer legal registration identifier, mandatory on type `480` (ibr-136-ae)
-- Seller TRN and TIN (`AE:TIN`): either IBT-031 or IBT-032 must be provided on every document, including type `480` (ibr-177-ae, PINT AE 1.0.5; Guidelines V2.0, 18.1.1)
+- Seller TRN and TIN (`AE:TIN`): either IBT-031 or IBT-032 must be provided on every document, including type `480` (ibr-177-ae, PINT AE 1.0.5; Guidelines V2.1, 18.1.1)
 
 **Key Features:**
 
@@ -473,7 +473,7 @@ Demonstrates:
 Demonstrates:
 
 - Export (BTAE-02 position 8) to a foreign buyer registered in Peppol with its own participant identifier, here an Australian Business Number under scheme `0151`
-- Pagero keeps the buyer's endpoint when the buyer is reached over Peppol and reports `9900000099` otherwise (Guidelines V2.0, 18.3.3)
+- Pagero keeps the buyer's endpoint when the buyer is reached over Peppol and reports `9900000099` otherwise (Guidelines V2.1, 18.3.3)
 - An export invoiced in USD, with the AED amounts in the PUF extensions
 
 **Key Features:**
@@ -561,7 +561,7 @@ Eight-character flag string in `cbc:InvoiceTypeCode/@name` (or `cbc:CreditNoteTy
 | `S` | Standard rated | 5.00% | Exact 5.00 required |
 | `Z` | Zero rated | 0.00% | Exports and domestic zero-rated supplies |
 | `E` | Exempt from VAT | no rate | Exemption reason code mandatory ([PUF-013](https://pagero.github.io/puf-code-lists/#_tax_exemption_codes_in_united_arab_emirates)) |
-| `O` | Not subject to VAT | no rate | Outside scope; the document is type `480` when every supply on it is out of scope |
+| `O` | Not subject to VAT | no rate | Outside scope; the document is type `480` when every supply on it is exempt or out of scope |
 | `AE` | Reverse charge | 5.00% | Buyer TRN mandatory; line VAT = 0; NatureCode and GTIN required |
 | `N` | Standard rate additional VAT | 5.00% | Used for Profit Margin Scheme; rate present; TaxAmount = 0; BTAE-02 position 3 must be set |
 
