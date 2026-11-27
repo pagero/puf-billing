@@ -23,7 +23,7 @@
     The buyer's own Peppol participant identifier is sent in cbc:EndpointID, here an
     Australian Business Number under scheme 0151. Pagero keeps it when the buyer is reached
     over Peppol. When it is not, Pagero reports the predefined endpoint 0235:9900000099
-    instead (Guidelines V2.0 18.3.3), whatever the file contains. A test run without
+    instead (Guidelines V2.1 18.3.3), whatever the file contains. A test run without
     Pagero Online routing therefore shows 9900000099.
 
     Key Fields:
@@ -37,7 +37,7 @@
     - BTAE-21 Customs reference number: the export declaration with schemeID ED
     - BT-151 / BT-118 VAT category Z with rate 0.00
 
-    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 18.2.3 and
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026), 18.2.2 and
                18.3.3; Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">

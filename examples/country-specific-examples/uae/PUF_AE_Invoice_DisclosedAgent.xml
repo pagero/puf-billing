@@ -38,7 +38,7 @@
     Note on the target mapping: in the PINT AE output the Principal is emitted as
     cac:SellerSupplierParty.
 
-    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026), transaction type 6
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026), 10.4 scenario 6
                (Agent billing); Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">

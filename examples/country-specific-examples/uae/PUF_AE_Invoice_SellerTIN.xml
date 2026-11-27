@@ -30,9 +30,9 @@
     - Only one of the seller's tax schemes may be VAT (ibr-178-ae)
     - A seller that is not registered for VAT has no TRN. It sends the same AE:TIN, which is
       then the mandatory seller identifier: either IBT-031 or IBT-032 must be provided
-      (ibr-177-ae; Guidelines V2.0 18.1.1)
+      (ibr-177-ae; Guidelines V2.1 18.1.1)
 
-    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 18.1.1;
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026), 18.1.1;
                PUF Code List PUF-008 Identification scheme United Arab Emirates;
                Peppol PINT BIS Billing AE 1.0.5
 -->

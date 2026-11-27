@@ -28,7 +28,7 @@
     - BT-129 Quantity uses cbc:CreditedQuantity, not cbc:InvoicedQuantity
     - No BT-9 due date: a credit note is excluded from the payment due date rule (ibr-127-ae)
 
-    Reference: UAE Electronic Invoicing Guidelines V1.1 (1 June 2026);
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026);
                Peppol PINT BIS Billing AE 1.0.5
 -->
 <CreditNote xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:CreditNote:1.0">
