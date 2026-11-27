@@ -416,7 +416,7 @@ Demonstrates:
 - Exempt supply (category `E`) with exemption reason code `DL8.46.1` (Certain financial services, [PUF-013](https://pagero.github.io/puf-code-lists/#_tax_exemption_codes_in_united_arab_emirates))
 - Document level allowance and charge in category `E`: rate `0.00` (aligned-ibrp-e-06, aligned-ibrp-e-07), their own VAT exemption reason code (IBT-196, IBT-198; ibr-168-ae, ibr-169-ae), and an allowance or charge reason code
 - No rate on the exempt line or in the exempt VAT breakdown, and no line VAT amount (BTAE-08) on the exempt line (ibr-163-ae)
-- An exempt supply combined with a standard-rated one on a tax invoice (Guidelines V2.0, 10.2.2)
+- An exempt supply combined with a standard-rated one on a tax invoice (Guidelines V2.1, 10.2.2)
 
 **Key Features:**
 
@@ -424,7 +424,7 @@ Demonstrates:
 - Seller: Emirates Premier Bank PJSC — term loan interest AED 18,500.00 (`E`, SAC `9971.13`) and arrangement fee AED 4,000.00 (`S`, SAC `9971.19`)
 - Interest rebate of AED 500.00 (reason `95`) and late payment interest of AED 250.00 (reason `FI`) on the exempt part
 
-> **Why not exempt only:** an invoice whose lines are all exempt has no valid type code today. Guidelines V2.0, 18.3.1 states that type code `480` should not be used for exempt supplies, and PINT AE rule ibr-151-ae, unchanged in 1.0.5, rejects type code `380` when every line is `E` or `O`. The PINT AE examples for category E use `480`.
+> **Exempt only:** an invoice whose lines are all exempt, or only exempt and out of scope, is a `480` (Guidelines V2.1, 18.3.1), and PINT AE rule ibr-151-ae rejects type code `380` for it. The PINT AE examples for category E use `480`. This example adds a standard-rated line, so it is a `380`.
 
 ---
 
@@ -436,7 +436,7 @@ Demonstrates:
 
 - A zero-rated supply (category `Z`) within the UAE, so BTAE-02 position 8 (Exports) stays `0`
 - Rate `0.00` at every level: line, document level allowance and charge, and VAT breakdown
-- Line VAT amount (BTAE-08) of zero (ibr-165-ae); type code `380`, because zero-rated supplies remain within the VAT framework (Guidelines V2.0, 18.3.1)
+- Line VAT amount (BTAE-08) of zero (ibr-165-ae); type code `380`, because a zero-rated supply is a taxable supply (Guidelines V2.1, 18.3.1)
 
 **Key Features:**
 
@@ -452,11 +452,11 @@ Demonstrates:
 
 Demonstrates:
 
-- Type code `480` for a transaction that relates exclusively to supplies outside the scope of VAT (Guidelines V2.0, 18.3.1)
-- Goods supplied from outside the UAE to another location outside the UAE without entering the UAE, classified as out of scope rather than export (Guidelines V2.0, 18.3.2)
+- Type code `480`, which applies when every supply on the document is exempt or outside the scope of VAT (Guidelines V2.1, 18.3.1); here every supply is out of scope
+- Goods supplied from outside the UAE to another location outside the UAE without entering the UAE, classified as out of scope rather than export (Guidelines V2.1, 18.3.2)
 - Category `O` without a rate at any level, including a document level allowance and charge; only `E` and `O` are accepted on type `480` (ibr-122-ae, which no longer accepts `Z` from PINT AE 1.0.5)
 - Buyer legal registration identifier, mandatory on type `480` (ibr-136-ae)
-- Seller TRN and TIN (`AE:TIN`): either IBT-031 or IBT-032 must be provided on every document, including type `480` (ibr-177-ae, PINT AE 1.0.5; Guidelines V2.0, 18.1.1)
+- Seller TRN and TIN (`AE:TIN`): either IBT-031 or IBT-032 must be provided on every document, including type `480` (ibr-177-ae, PINT AE 1.0.5; Guidelines V2.1, 18.1.1)
 
 **Key Features:**
 
@@ -561,7 +561,7 @@ Eight-character flag string in `cbc:InvoiceTypeCode/@name` (or `cbc:CreditNoteTy
 | `S` | Standard rated | 5.00% | Exact 5.00 required |
 | `Z` | Zero rated | 0.00% | Exports and domestic zero-rated supplies |
 | `E` | Exempt from VAT | no rate | Exemption reason code mandatory ([PUF-013](https://pagero.github.io/puf-code-lists/#_tax_exemption_codes_in_united_arab_emirates)) |
-| `O` | Not subject to VAT | no rate | Outside scope; the document is type `480` when every supply on it is out of scope |
+| `O` | Not subject to VAT | no rate | Outside scope; the document is type `480` when every supply on it is exempt or out of scope |
 | `AE` | Reverse charge | 5.00% | Buyer TRN mandatory; line VAT = 0; NatureCode and GTIN required |
 | `N` | Standard rate additional VAT | 5.00% | Used for Profit Margin Scheme; rate present; TaxAmount = 0; BTAE-02 position 3 must be set |
 

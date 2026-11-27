@@ -20,8 +20,8 @@
     discount of AED 176.00 is deducted and AED 150.00 is charged for cold-chain delivery.
     Taxable amount AED 8,774.00, VAT AED 0.00.
 
-    Zero-rated supplies remain within the VAT framework, so they are invoiced with type
-    code 380 and not 480 (Guidelines V2.0 18.3.1).
+    A zero-rated supply is a taxable supply, so it is invoiced with type code 380 and not
+    480 (Guidelines V2.1 18.3.1).
 
     Key Fields:
     - BT-151 / BT-95 / BT-102 / BT-118 VAT category Z with rate 0.00 at every level: line,
@@ -32,7 +32,7 @@
     - BTAE-08 Line VAT amount: zero on a zero-rated line (ibr-165-ae)
     - BG-21 Document level charge: reason code DL (Delivery)
 
-    Reference: UAE Electronic Invoicing Guidelines V2.0 (26 October 2026), 18.3.1;
+    Reference: UAE Electronic Invoicing Guidelines V2.1 (25 November 2026), 18.3.1;
                Peppol PINT BIS Billing AE 1.0.5
 -->
 <Invoice xmlns:cac="urn:pagero:CommonAggregateComponents:1.0" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:puf="urn:pagero:ExtensionComponent:1.0" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns="urn:pagero:PageroUniversalFormat:Invoice:1.0">
